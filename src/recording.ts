@@ -15,20 +15,34 @@ export const RecordingTag = z
   .string()
   .regex(TAG, 'tag must be uppercase letters/digits with a letter');
 
-export const Recording = z.object({
-  chapter: z.number().int().min(1).max(99),
-  segment: z.number().int().min(1).nullable(),
-  slug: z
-    .string()
-    .regex(/^[a-z0-9.]+(?:-[a-z0-9.]+)*$/, 'slug must be kebab-case (a-z, 0-9, periods, hyphens)'),
-  tags: z.array(RecordingTag),
-  ext: z
-    .string()
-    .regex(
-      /^[A-Za-z0-9]*[A-Za-z][A-Za-z0-9]*$/,
-      'ext must be letters/digits with a letter, without the dot',
-    ),
-});
+export const Recording = z
+  .object({
+    chapter: z.number().int().min(1).max(99),
+    segment: z.number().int().min(1).nullable(),
+    slug: z
+      .string()
+      .regex(
+        /^[a-z0-9.]+(?:-[a-z0-9.]+)*$/,
+        'slug must be kebab-case (a-z, 0-9, periods, hyphens)',
+      ),
+    tags: z.array(RecordingTag),
+    ext: z
+      .string()
+      .regex(
+        /^[A-Za-z0-9]*[A-Za-z][A-Za-z0-9]*$/,
+        'ext must be letters/digits with a letter, without the dot',
+      ),
+  })
+  .superRefine((recording, ctx) => {
+    // With no segment, a leading all-digit slug word would be read back as the segment: no round-trip (F6).
+    if (recording.segment === null && /^\d+$/.test(recording.slug.split('-')[0] ?? '')) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['slug'],
+        message: 'a slug starting with a number needs a segment',
+      });
+    }
+  });
 export type Recording = z.infer<typeof Recording>;
 
 /** `01-1-intro-CTA.mov` → `{ chapter: 1, segment: 1, slug: 'intro', tags: ['CTA'], ext: 'mov' }`. Not a recording → `null`. */

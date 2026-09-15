@@ -147,6 +147,18 @@ describe('parseRecording / recordingFileName (FliHub naming rules)', () => {
     }
   });
 
+  it('refuses a no-segment slug starting with a number, which would not round-trip (F6)', () => {
+    const numbered = { chapter: 1, segment: null, slug: '2-intro', tags: [], ext: 'mov' };
+    const bare = { chapter: 1, segment: null, slug: '5', tags: [], ext: 'mov' };
+    expect(thrown(() => recordingFileName(numbered)).issues).toEqual([
+      'slug: a slug starting with a number needs a segment',
+    ]);
+    expect(() => recordingFileName(bare)).toThrow(FliCoreError);
+    expect(recordingFileName({ ...numbered, segment: 3 })).toBe('01-3-2-intro.mov');
+    expect(parseRecording('01-3-2-intro.mov')).toEqual({ ...numbered, segment: 3 });
+    expect(recordingFileName({ ...numbered, slug: 'v2-intro' })).toBe('01-v2-intro.mov');
+  });
+
   it('refuses to build a bad name', () => {
     expect(() =>
       recordingFileName({ chapter: 0, segment: 1, slug: 'intro', tags: [], ext: 'mov' }),
