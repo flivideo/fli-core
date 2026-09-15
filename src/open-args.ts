@@ -1,0 +1,94 @@
+import { z } from 'zod';
+
+/**
+ * The open contract (open-contract §3, §5; D11): every app accepts the same context — brand, project, optional video —
+ * whichever door set it.
+ */
+
+/** The resolved context an app is pointed at. */
+export const OpenContext = z.object({
+  /** `brands.json` key. */
+  brand: z.string().min(1),
+  /** Absolute path of the project folder on this machine. */
+  projectDir: z.string().min(1),
+  /** `fli.studio.json` `id`. */
+  projectId: z.uuid(),
+  /** Video folder name, `<NN>-<name>`. */
+  video: z.string().min(1).optional(),
+});
+export type OpenContext = z.infer<typeof OpenContext>;
+
+/** What door 2 carries before resolution: names, not paths or ids. */
+export const OpenArgs = z.object({
+  brand: z.string().min(1),
+  /** Project folder name (or anything `resolveProject` accepts). */
+  project: z.string().min(1),
+  video: z.string().min(1).optional(),
+});
+export type OpenArgs = z.infer<typeof OpenArgs>;
+
+export type OpenArgName = 'brand' | 'project' | 'video';
+
+export const OPEN_ENV = {
+  brand: 'FLIVIDEO_BRAND',
+  project: 'FLIVIDEO_PROJECT',
+  video: 'FLIVIDEO_VIDEO',
+} as const satisfies Record<OpenArgName, string>;
+
+export interface ParseOpenArgsOptions {
+  /** Report `video` as missing when absent. Default `false`. */
+  requireVideo?: boolean;
+}
+
+export interface ParsedOpenArgs {
+  context: Partial<OpenArgs>;
+  /** Each missing argument, in `brand`, `project`, `video` order — each becomes a picker (R25). */
+  missing: OpenArgName[];
+}
+
+const NAMES: readonly OpenArgName[] = ['brand', 'project', 'video'];
+
+/**
+ * Parse `--brand <k>`, `--project <folder>`, `--video <NN-name>` (and `--name=value`) from `argv`, falling back to
+ * `FLIVIDEO_BRAND`, `FLIVIDEO_PROJECT`, `FLIVIDEO_VIDEO` in `env`. Argv wins over env; a repeated flag keeps its last
+ * value; an empty value counts as missing; parsing stops at `--`. Unknown arguments are ignored. Pure: no I/O.
+ */
+export function parseOpenArgs(
+  argv: readonly string[],
+  env: Readonly<Record<string, string | undefined>> = {},
+  options: ParseOpenArgsOptions = {},
+): ParsedOpenArgs {
+  const fromArgv: Partial<Record<OpenArgName, string>> = {};
+
+  for (let i = 0; i < argv.length; i++) {
+    const arg = argv[i] as string;
+    if (arg === '--') break;
+    const match = /^--(brand|project|video)(?:=(.*))?$/.exec(arg);
+    if (!match) continue;
+    const name = match[1] as OpenArgName;
+    if (match[2] !== undefined) {
+      fromArgv[name] = match[2];
+      continue;
+    }
+    const next = argv[i + 1];
+    if (next !== undefined && !next.startsWith('--')) {
+      fromArgv[name] = next;
+      i++;
+    } else {
+      fromArgv[name] = '';
+    }
+  }
+
+  const context: Partial<OpenArgs> = {};
+  const missing: OpenArgName[] = [];
+  for (const name of NAMES) {
+    const argValue = fromArgv[name];
+    const value = argValue !== undefined && argValue !== '' ? argValue : env[OPEN_ENV[name]];
+    if (value !== undefined && value !== '') {
+      context[name] = value;
+    } else if (name !== 'video' || options.requireVideo === true) {
+      missing.push(name);
+    }
+  }
+  return { context, missing };
+}
