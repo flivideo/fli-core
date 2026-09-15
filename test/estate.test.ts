@@ -105,7 +105,7 @@ describe('listProjects', () => {
     expect(listing.archived).toEqual({ state: 'scanned', scannedAt: listing.scannedAt, items: [] });
   });
 
-  it('marks an unreadable brand root as unscanned, distinct from empty (R12, spec §11 #4)', async () => {
+  it('marks an unreadable brand root as unscanned in all three collections, archive included (R12, §11 #4, F1)', async () => {
     const missing = path.join(await tempDir(), 'not-there');
     const listing = await listProjects(missing);
     expect(listing.members).toMatchObject({
@@ -114,6 +114,7 @@ describe('listProjects', () => {
       scannedAt: listing.scannedAt,
     });
     expect(listing.otherFolders).toMatchObject({ state: 'unscanned', path: missing });
+    expect(listing.archived).toMatchObject({ state: 'unscanned', path: missing });
     expect(listing.members.state === 'unscanned' && listing.members.message).toMatch(/ENOENT/);
   });
 

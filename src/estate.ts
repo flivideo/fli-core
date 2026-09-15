@@ -112,20 +112,29 @@ async function scanArchived(brandRoot: string, scannedAt: string): Promise<Scann
  */
 export async function listProjects(brandRoot: string): Promise<ProjectListing> {
   const scannedAt = new Date().toISOString();
-  const archived = await scanArchived(brandRoot, scannedAt);
 
   let folders: string[];
   try {
     folders = await listDirectories(brandRoot);
   } catch (error) {
+    // An unreadable root leaves every collection unscanned, the archive included (R12): an unmounted drive must never
+    // read as "0 archived".
     const unscanned = {
       state: 'unscanned',
       scannedAt,
       path: brandRoot,
       message: errorMessage(error),
     } as const;
-    return { brandRoot, scannedAt, members: unscanned, otherFolders: unscanned, archived };
+    return {
+      brandRoot,
+      scannedAt,
+      members: unscanned,
+      otherFolders: unscanned,
+      archived: unscanned,
+    };
   }
+
+  const archived = await scanArchived(brandRoot, scannedAt);
 
   const members: MemberProject[] = [];
   const otherFolders: OtherFolder[] = [];
