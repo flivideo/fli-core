@@ -2,7 +2,13 @@ import os from 'node:os';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { readBrandSettings } from '../src/brand-settings.js';
-import { brandsFilePath, readBrands, resolveBrandRoot, type Brand } from '../src/brands.js';
+import {
+  brandFolderName,
+  brandsFilePath,
+  readBrands,
+  resolveBrandRoot,
+  type Brand,
+} from '../src/brands.js';
 import { labPath } from '../src/lab-path.js';
 import { defaultLabRoot, machineSettingsPath, readMachineSettings } from '../src/machine.js';
 import { FliCoreError } from '../src/results.js';
@@ -153,6 +159,32 @@ describe('resolveBrandRoot (A5)', () => {
   });
 });
 
+describe('brandFolderName (F3)', () => {
+  const guy: Brand = {
+    key: 'guy-monroe',
+    name: 'Guy Monroe',
+    videoProjects: '/Users/davidcruwys/dev/video-projects/v-guy',
+  };
+
+  it('is the basename of the resolved root, not v-<key>', () => {
+    expect(brandFolderName(guy, null, { home: '/Users/jan' })).toBe('v-guy');
+    expect(
+      brandFolderName({ key: 'appydave', name: 'AppyDave', videoProjects: '/Users/x/v-appydave' }),
+    ).toBe('v-appydave');
+  });
+
+  it('follows a machine override, trailing separator stripped', () => {
+    expect(brandFolderName(guy, { brandRoots: { 'guy-monroe': '/Volumes/T7/v-guy/' } })).toBe(
+      'v-guy',
+    );
+  });
+
+  it('is null without a root, or for a root with no folder name', () => {
+    expect(brandFolderName({ key: 'nowhere', name: 'Nowhere' })).toBeNull();
+    expect(brandFolderName(guy, { brandRoots: { 'guy-monroe': '/' } })).toBeNull();
+  });
+});
+
 describe('readBrandSettings (O6)', () => {
   it('reads fli.brand.json', async () => {
     const root = await tempDir();
@@ -256,6 +288,29 @@ describe('labPath (spec §11 #14)', () => {
     const settings = machine.kind === 'valid' ? machine.value : undefined;
     expect(labPath(input, settings)).toBe(
       '/Volumes/Scratch/lab/v-appydave/a01-xmen/flicut/01-xmen/',
+    );
+  });
+
+  it('takes the brand folder from brandRoot: Guy Monroe lands in v-guy (F3)', () => {
+    const guy = { brand: 'guy-monroe', project: 'a01-x', app: 'flicut' };
+    expect(
+      labPath({ ...guy, brandRoot: '/Users/jan/dev/video-projects/v-guy' }, { labRoot: '/lab' }),
+    ).toBe('/lab/v-guy/a01-x/flicut/');
+    expect(
+      labPath(
+        { project: 'a01-x', app: 'flicut', brandRoot: '/Volumes/T7/v-guy/' },
+        { labRoot: '/lab' },
+      ),
+    ).toBe('/lab/v-guy/a01-x/flicut/');
+  });
+
+  it('refuses when neither brand nor brandRoot is given, or brandRoot is relative or has no folder', () => {
+    expect(() => labPath({ project: 'a01-x', app: 'flicut' })).toThrow(FliCoreError);
+    expect(() => labPath({ project: 'a01-x', app: 'flicut', brandRoot: 'v-guy' })).toThrow(
+      FliCoreError,
+    );
+    expect(() => labPath({ project: 'a01-x', app: 'flicut', brandRoot: '/' })).toThrow(
+      FliCoreError,
     );
   });
 

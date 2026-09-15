@@ -83,3 +83,17 @@ export function resolveBrandRoot(
   if (match) return path.normalize(path.join(home, match[1] as string));
   return path.normalize(brand.videoProjects);
 }
+
+/**
+ * The brand's folder name on this machine: the basename of `resolveBrandRoot` (`guy-monroe` → `v-guy`), or `null` when
+ * the brand has no root. Use it wherever a path is "addressed like the project" (roadmap §1.2b).
+ */
+export function brandFolderName(
+  brand: Brand,
+  machine?: Pick<MachineSettings, 'brandRoots'> | null,
+  options: ResolveBrandRootOptions = {},
+): string | null {
+  const root = resolveBrandRoot(brand, machine, options);
+  if (root === null) return null;
+  return path.basename(root) || null;
+}

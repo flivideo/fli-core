@@ -4,6 +4,7 @@ export { FliCoreError, InvalidFile, type ReadFileResult, type ValidFile } from '
 
 export {
   Brand,
+  brandFolderName,
   BrandsFile,
   brandsFilePath,
   readBrands,
