@@ -424,3 +424,226 @@ guy-monroe | /Users/davidcruwys/dev/video-projects/v-guy     (other 7 brands: ro
 - A type-level consumer (`tsc` in a consumer project) was not compiled. Only the runtime ESM import was proven.
 
 APPYNET: done — FINDINGS, 5 blocking, 6 minor
+
+---
+
+## Second pass (fix round 1)
+
+Verdict: FINDINGS (0 blocking, 3 minor): all of F1–F11 are fixed; the three new minors (S1–S3) can be fixed or deferred in writing without holding the gate.
+
+Scope: commits `bb59740..a4db474` (the 12 commits after `9bccece`), HEAD `a4db474`. `git pull --rebase` reported
+"Already up to date". Reviewer session `fli-core-w1-review`, 2026-09-15. No repo file other than this one was edited;
+nothing committed. Probes ran against a freshly rebuilt `dist/` in the session scratchpad.
+
+### Each finding
+
+| # | Status | Proven by (test name) |
+|---|---|---|
+| F1 | fixed-as-specified: root read first, all three collections `unscanned` (`src/estate.ts:136-158`) | `listProjects › marks an unreadable brand root as unscanned in all three collections, archive included (R12, §11 #4, F1)`; `result schemas match what the functions return (F4) › ProjectListing: unscanned root, and unscanned archive under a readable root` |
+| F2 | fixed-differently-but-acceptable: `link` exclusive create as specified, plus a `wx` fallback on volumes without hard links (ruled below) (`src/fs-utils.ts:32-54`, `src/identity.ts:74-104`) | `writeIdentity › two concurrent writes with different ids: exactly one wins, the other is refused (F2)` (25 rounds); `losing the create race (F2) ›` `to an unreadable file → existing-invalid, winner untouched`, `to the same id → written, replaced`, `to a file that then vanished → io-error, nothing written`; `volumes without hard links ›` 3 tests |
+| F3 | fixed-as-specified: `brandRoot` input wins, `brandFolderName` exported, key form kept for §11 #14 (`src/lab-path.ts:14-73`, `src/brands.ts:117-129`) | `labPath (spec §11 #14) › takes the brand folder from brandRoot: Guy Monroe lands in v-guy (F3)`; `refuses when neither brand nor brandRoot is given, or brandRoot is relative or has no folder`; `brandFolderName (F3) ›` 3 tests |
+| F4 | fixed-as-specified: every result shape is zod, and a new guard bans hand-written data interfaces | `public surface (spec §4) › exports every data shape as a zod schema under its type name (spec §10, F4)`; `src/ declares no hand-written interfaces for data shapes (only option bags)`; `result schemas match what the functions return (F4) ›` 7 tests that `.parse` real outputs |
+| F5 | fixed-as-specified: `resolveOpenContext` with the seven `kind`s from F5; `no-brand-root` also carries a `message`, and a relative root is refused (`src/open-context.ts`) | `resolveOpenContext (open contract §5, F5) ›` 13 tests incl. `resolved: a brand whose key is not its root name (guy-monroe → v-guy)`, `project-refused: %s → %s, never another project`, `video-not-found: no such folder, or a file where the folder should be`, `works end to end from launch arguments and env, and writes nothing`. Every result in that file goes through `OpenContextResult.parse` (`test/open-context.test.ts:56`) |
+| F6 | fixed-as-specified: `superRefine` on `Recording` (`src/recording.ts:34-44`) | `parseRecording / recordingFileName › refuses a no-segment slug starting with a number, which would not round-trip (F6)` |
+| F7 | fixed-as-specified: four cases pinned, and a README paragraph under the export table | `divergences from FliHub parseRecordingFilename (F7) ›` 4 tests |
+| F8 | fixed-as-specified: per-entry parse; `skipped: { key, issues }[]` in zod `BrandsRead` / `ReadBrandsResult`; an empty key is skipped too | `readBrands › skips one bad entry and keeps the rest (F8)` |
+| F9 | fixed-as-specified: `brand` is a reserved app name; `studio` takes no subject; `parseAppFile` validates through `AppFile` | `parseAppFile / appFileName › keeps the reserved names out of the app namespace (F9)`; `classifyProjectEntry › fli.brand.json → other`, `fli.studio.extra.json → other` |
+| F10 | fixed-as-specified: absolute `projectDir`; `video` uses the shared `VIDEO_FOLDER_PATTERN` / `VideoFolderName` in both schemas | `OpenContext and OpenArgs refuse unsafe values (F10) ›` 3 tests (7 bad video values) |
+| F11 | fixed-differently-but-acceptable: guard covers more than specified (promise **and** sync forms, 17 methods, `existsSync`, URL/Buffer paths, case-folded prefixes on darwin). Gaps remain (S2) | `isolate-home guard: tests cannot touch the live estate (F11) ›` 6 tests |
+
+### Departures, ruled
+
+**1 · `RawOpenArgs` (`src/open-args.ts:39-45`): accepted.** F10 tightened `OpenArgs.video` to `<NN>-<name>`, so a
+parser still returning `Partial<OpenArgs>` would claim `--video foo` was valid. `RawOpenArgs`:
+- keeps `parseOpenArgs` pure and lossless (present, non-empty strings, not validated)
+- leaves validation to `resolveOpenContext` (`video-invalid`), which also takes `RawOpenArgs`, so the output of one is
+  the input of the other with no cast
+
+This is the right split: the parser reports what was given, the resolver rules on it. It costs nothing, because the
+tag does not exist yet. README does not name `RawOpenArgs` (S3).
+
+**2 · `wx` fallback in `atomicCreate` (`src/fs-utils.ts:44-50`): accepted.** When `link` fails with
+`EPERM`/`ENOTSUP`/`EOPNOTSUPP`/`ENOSYS`/`EXDEV`, it creates the target with `flag: 'wx'`. `O_EXCL` is still an
+atomic exclusive create, so **the different-id refusal still bites**. The fallback test forces `EPERM` and a second
+id is refused.
+
+It matters because a `brandRoots` override can point at an external drive; exFAT, common on a T7, has no hard links
+`[inferred, not run on a real exFAT volume]`. Without the fallback, adopting a project there would always fail with
+`io-error`.
+
+`EXDEV` cannot happen when linking within one directory; listing it is harmless. The fallback loses only the
+never-a-partial-file guarantee (S1).
+
+**3 · Guard scope (`test/helpers/guard.ts`): accepted, with residual gaps (S2).** Measured with a scratch-only
+vitest config. It loads the repo's real `test/setup/isolate-home.ts` and aims each call at a non-existent child of
+`~/.fli`, so a miss reads nothing.
+
+| Call form | Result |
+|---|---|
+| `fs.promises.readdir` | `EFLICORE_GUARD` |
+| named `readdir` from `node:fs/promises` | `EFLICORE_GUARD` |
+| named `readdirSync` from `node:fs` | **`ENOENT`** (reached the disk) |
+| callback `fs.readdir` | **`ENOENT`** |
+| `fs.createReadStream` | **`ENOENT`** |
+| `fs.promises.realpath` | **`ENOENT`** |
+| `fs.promises.appendFile` | **`ENOENT`** |
+
+Every fs call `src/` makes today goes through `promises` from `node:fs` (`readdir`, `stat`, `readFile`, `writeFile`,
+`rename`, `link`, `rm`), and all of those are guarded. So the library cannot reach the live estate under test. The
+gaps are open only to a future test or source file using another form.
+
+### New findings
+
+#### S1 · `atomicCreate`'s `wx` fallback can leave a truncated `fli.studio.json` behind — MINOR
+
+`src/fs-utils.ts:49`.
+
+- **What is wrong**: if `writeFile(target, …, { flag: 'wx' })` opens the file and then fails mid-write (`ENOSPC`,
+  I/O error), the partial file stays. From then on every `writeIdentity` on that folder refuses `existing-invalid`,
+  and `listProjects` shows the folder as an other-folder with an invalid identity, until a person deletes the file.
+  A reader during a successful fallback write can also briefly see `not-json`.
+- **Why it matters**: A3/R8 membership hangs on this file. The failure is rare, but it needs manual repair on the
+  one volume type the fallback exists for.
+- **Fix**: wrap the fallback write:
+  `try { await fs.writeFile(target, content, { flag: 'wx' }); } catch (e) { if (errorCode(e) !== 'EEXIST') await fs.rm(target, { force: true }); throw e; }`
+  Test: mock `link` → `EPERM`, and make the `wx` write of the target reject after the file is created (spy
+  `writeFile` so the target call creates an empty file and then throws `ENOSPC`). Assert `io-error` and
+  `readdir(dir)` is `[]`.
+
+#### S2 · The live-estate guard misses callback, stream, `realpath`/`appendFile` and named sync-import forms, and its own test aims reads at the real estate — MINOR
+
+`test/helpers/guard.ts:73-110`; `test/isolation.test.ts:21-58`.
+
+- **What is wrong**: see the table above. Also, `test/isolation.test.ts` points `listProjects`, `readdir`, `readFile`
+  and `readIdentity` at the real `~/dev/video-projects/v-appydave`, `~/.config/appydave/brands.json` and `~/.fli`. If
+  the guard ever regressed, those tests would **read** the live estate before failing. The writes are built to hit
+  `ENOENT`; the reads are not.
+- **Why it matters**: brief §3 says "a test that does is a failed test". Today the protection is complete for `src/`'s
+  call forms, but not for the test code a future contributor writes.
+- **Fix**:
+  1. Add `realpath`, `readlink`, `appendFile`, `truncate`, `utimes`, `cp`, `createReadStream`, `createWriteStream`
+     (1 path) to the guard. Wrap the callback forms too: the same names on `fs` itself, without the `Sync` suffix.
+  2. Add an architecture test that `src/**/*.ts` and `test/**/*.ts` import `node:fs` only as the default import or
+     `promises`, never named sync functions. A named import is bound before the setup file patches `fs`, which is
+     why it escapes.
+  3. In `test/isolation.test.ts`, point every read at a non-existent child (for example
+     `path.join(estate, '__fli_core_guard_probe__')`), so a regressed guard yields `ENOENT` instead of a live read.
+     The assertions stay the same.
+
+#### S3 · README export table does not name `RawOpenArgs` or `ProjectRefusal`, and `BrandsFile` changed meaning silently — MINOR
+
+`README.md:53-55`; `src/brands.ts:28`.
+
+- **What is wrong**:
+  - The `parseOpenArgs` row still says "Returns `{ context, missing }`" without saying `context` is `RawOpenArgs`
+    (unvalidated).
+  - `ProjectRefusal` is what `project-refused.result` carries, but is not named.
+  - `BrandsFile` used to be the schema that transformed the file into `Brand[]`; it is now only the raw top level
+    (`{ brands: Record<string, unknown> }`). It is still exported, so a consumer who used `BrandsFile.parse(...)` to
+    get brands would now get the raw record.
+- **Why it matters**: README is the consumer contract for W3–W7 at v0.1.0. No tag exists yet, so no consumer breaks
+  today.
+- **Fix**:
+  - `parseOpenArgs` row: "Returns `{ context: RawOpenArgs, missing }` (values as given, validated by
+    `resolveOpenContext`)".
+  - Add `ProjectRefusal` to the `resolveOpenContext` row.
+  - Either stop exporting `BrandsFile` (consumers should call `readBrands`) or add a README line saying it is the raw
+    top level only. Stop exporting is preferred, with its name moved to the "does not leak internals" list in
+    `test/architecture.test.ts`.
+
+### Public surface: README vs `src/index.ts`
+
+- **Nothing removed**: every name exported at `9bccece` is still exported at HEAD.
+- **Added (16)**: `readFileResult`, `validFile`, `BrandsRead`, `ReadBrandsResult`, `SkippedBrand`, `brandFolderName`,
+  `ReadIdentityResult`, `VIDEO_FOLDER_PATTERN`, `VideoFolderName`, `ProjectRefusal`, `scanned`,
+  `ReadBrandSettingsResult`, `RawOpenArgs`, `OpenContextResult`, `resolveOpenContext`, and the type
+  `ResolveOpenContextOptions`.
+- **README → index**: every identifier the Exports section names is exported. The only non-matches are the env
+  variable names and prose words.
+- **index → README**: unnamed exports are covered by the table's "…" rows (constants, small schemas, option types).
+  The two that matter to consumers are S3.
+- **dist**: every value export from `src/index.ts` is defined at runtime in the rebuilt `dist/index.js`.
+
+### Checks run (second pass)
+
+```
+$ pwd && git pull --rebase
+/Users/davidcruwys/dev/ad/flivideo/fli-core
+Already up to date.
+
+$ git log --oneline 9bccece..HEAD
+a4db474 feat(open): F5 resolveOpenContext turns launch arguments into an OpenContext
+3133714 refactor(core): F4 declare every result shape once, in zod
+9a0a3e3 test(isolation): F11 guard fs calls into the live estate, not just HOME
+b0f43d8 fix(brands): F8 one bad registry entry no longer empties the brand list
+c6afd1a fix(open): F10 OpenContext requires an absolute projectDir and a video folder name
+d2209c7 fix(naming): F9 reserve fli.brand.json and fli.studio.<subject>.json
+a0ae96a docs(naming): F7 pin and document where parseRecording diverges from FliHub
+1c58bc6 fix(naming): F6 recordingFileName refuses names that would not round-trip
+0e125af test(identity): cover a same-id rewrite that cannot be written
+fbb5881 fix(lab): F3 lab path takes the brand folder from the brand root
+e03ed3b fix(identity): F2 different-id refusal holds under concurrent writes
+bb59740 fix(estate): F1 unreadable brand root leaves the archive unscanned too
+
+$ npm test
+ Test Files  10 passed (10)
+      Tests  265 passed (265)
+All files          |   99.79 |    98.05 |     100 |     100 |
+ estate.ts         |    99.2 |    96.92 |     100 |     100 | 265,305
+ fs-utils.ts       |     100 |    86.66 |     100 |     100 | 8-14
+ open-context.ts   |     100 |       96 |     100 |     100 | 73
+ recording.ts      |     100 |    96.15 |     100 |     100 | 38
+Lines        : 100% ( 416/416 )
+
+$ npm run typecheck    → tsc --noEmit (exit 0, no output)
+$ npm run lint         → eslint . --max-warnings 0 (exit 0, no output)
+$ npm run format:check → All matched files use Prettier code style!
+$ npm run build        → dist/ rebuilt
+
+# probes against the rebuilt dist/ (scratch temp dirs only)
+P1 missing root: unscanned unscanned archived= unscanned | schema ok: true
+P2 {"chapter":1,"segment":null,"slug":"2-intro","tags":[],"ext":"mov"} -> THROWS FliCoreError: Invalid recording: slug: a slug starting with a number needs a segment
+P2 {"chapter":1,"segment":null,"slug":"5","tags":[],"ext":"mov"} -> THROWS FliCoreError: Invalid recording: slug: a slug starting with a number needs a segment
+P3 root /Users/jan/dev/video-projects/v-guy | brandFolderName v-guy | labPath brandRoot /lab/v-guy/a01-x/flicut/ | labPath key-only /lab/v-guy-monroe/a01-x/flicut/ | §11#14 /h/fli/lab/v-appydave/a01-xmen/flicut/01-xmen/
+P5 parseAppFile(fli.brand.json) null | classify(fli.studio.extra.json) other | appFileName studio+x THROWS FliCoreError: Invalid app file: subject: fli.studio.json takes no subject: it is the identity file | fli.studio.json {"app":"studio"}
+P9 OpenContext relative+../ false | resolveOpenContext video ../../etc {"kind":"video-invalid","video":"../../etc"}
+P10 concurrent x50: {"refused:different-id, written | files=fli.studio.json":50}
+P11 {"kind":"valid","value":[{"key":"appydave","name":"AppyDave"}],"skipped":[{"key":"broken","issues":["name: Invalid input: expected string, received undefined"]}]} | schema ok: true
+
+# guard scope (scratch vitest config loading the repo's test/setup/isolate-home.ts; non-existent child of ~/.fli)
+fs.promises.readdir                          EFLICORE_GUARD
+named import readdir from node:fs/promises   EFLICORE_GUARD
+named import readdirSync from node:fs        ENOENT
+callback fs.readdir                          ENOENT
+fs.createReadStream                          ENOENT
+fs.promises.realpath                         ENOENT
+fs.promises.appendFile (parent missing)      ENOENT
+
+# surface diff (src/index.ts at 9bccece vs HEAD; README Exports section; dist runtime)
+removed since 9bccece: []
+README names not exported: only FLIVIDEO_* env names and prose words
+value exports missing at runtime in dist: []
+```
+
+**What these checks did not establish.**
+- P3's key-only line still prints `v-guy-monroe`. That is intended: F3 kept the key form for §11 #14, and it is
+  documented as correct only for `v-<key>` roots. The spec's §11 #14 wording still needs a Guy case (Swagger).
+- The `wx` fallback was exercised only through a mocked `link` error, not on a real exFAT volume.
+- P10 ran 50 in-process races on APFS. Cross-process races were not run. They rely on the same kernel-level `link`
+  `EEXIST` guarantee.
+- The GitHub-tag install and a type-level consumer compile are still not run (the tag does not exist).
+
+APPYNET: done — second pass FINDINGS, 0 blocking, 3 minor (F1–F11 all fixed)
+
+---
+
+## Swagger's gate ruling (2026-09-15 22:45)
+
+**W1 gate: PASSED** on `a4db474`, tagged `v0.1.0`. Reproduced by Swagger: 265 tests, 100% lines (threshold 90),
+typecheck, lint (import guard proven to bite), format, build; `github:flivideo/fli-core#v0.1.0` installs and imports
+from a throwaway consumer. F1–F11 fixed with named tests (second pass above).
+
+**Deferred in writing — S1, S2, S3 → `v0.1.1` batch** (reason: all three are MINOR, none changes the public contract
+W3–W7 pin at `v0.1.0`, and the run is sequential — re-opening W1 would hold W2–W8 for a truncated-file edge on exFAT
+(S1), a wider test-only guard (S2), and a README line (S3)). Roadmap §3.1 allows deferral with a reason. Ticket for
+the morning: apply S1–S3, bump to `0.1.1`, tag; consumers re-pin when they next touch `package.json`.
