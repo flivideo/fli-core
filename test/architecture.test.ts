@@ -2,6 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
+import { z } from 'zod';
 import * as core from '../src/index.js';
 
 const SRC = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'src');
@@ -112,6 +113,62 @@ describe('public surface (spec §4)', () => {
     ];
     const exported = core as Record<string, unknown>;
     expect(expected.filter((name) => exported[name] === undefined)).toEqual([]);
+  });
+
+  it('exports every data shape as a zod schema under its type name (spec §10, F4)', () => {
+    const schemas = [
+      'InvalidFile',
+      'Brand',
+      'BrandsFile',
+      'BrandsRead',
+      'ReadBrandsResult',
+      'SkippedBrand',
+      'ProjectIdentity',
+      'ReadIdentityResult',
+      'WriteIdentityResult',
+      'ProjectCode',
+      'ProjectFolder',
+      'Recording',
+      'VideoFile',
+      'UnknownVideoFile',
+      'ParsedVideoFile',
+      'VideoFolder',
+      'VideoFolderName',
+      'AppFile',
+      'ProjectZone',
+      'MemberProject',
+      'OtherFolder',
+      'ArchivedEntry',
+      'ProjectListing',
+      'ResolveProjectResult',
+      'NextCodeResult',
+      'BrandSettings',
+      'ReadBrandSettingsResult',
+      'MachineSettings',
+      'ResolvedMachineSettings',
+      'MachineSettingsResult',
+      'LabPathInput',
+      'OpenArgName',
+      'OpenArgs',
+      'RawOpenArgs',
+      'ParsedOpenArgs',
+      'OpenContext',
+    ];
+    const exported = core as Record<string, unknown>;
+    expect(schemas.filter((name) => !(exported[name] instanceof z.ZodType))).toEqual([]);
+    expect(core.scanned(z.string())).toBeInstanceOf(z.ZodType);
+    expect(core.validFile(z.string())).toBeInstanceOf(z.ZodType);
+    expect(core.readFileResult(z.string())).toBeInstanceOf(z.ZodType);
+  });
+
+  it('src/ declares no hand-written interfaces for data shapes (only option bags)', async () => {
+    const declared: string[] = [];
+    for (const file of await sourceFiles(SRC)) {
+      const source = await fs.readFile(file, 'utf8');
+      for (const match of source.matchAll(/export interface (\w+)/g))
+        declared.push(match[1] as string);
+    }
+    expect(declared.filter((name) => !name.endsWith('Options')).sort()).toEqual([]);
   });
 
   it('does not leak internals', () => {

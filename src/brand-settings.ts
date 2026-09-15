@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { z } from 'zod';
 import { readJsonFile } from './fs-utils.js';
-import type { ReadFileResult } from './results.js';
+import { readFileResult } from './results.js';
 
 export const BRAND_SETTINGS_FILE = 'fli.brand.json';
 
@@ -15,7 +15,10 @@ export const BrandSettings = z.object({
 });
 export type BrandSettings = z.infer<typeof BrandSettings>;
 
+export const ReadBrandSettingsResult = readFileResult(BrandSettings);
+export type ReadBrandSettingsResult = z.infer<typeof ReadBrandSettingsResult>;
+
 /** Read `<brandRoot>/fli.brand.json`. Missing → `null` (no strip, never an error); malformed → `invalid`. */
-export function readBrandSettings(brandRoot: string): Promise<ReadFileResult<BrandSettings>> {
+export function readBrandSettings(brandRoot: string): Promise<ReadBrandSettingsResult> {
   return readJsonFile(path.join(brandRoot, BRAND_SETTINGS_FILE), BrandSettings);
 }

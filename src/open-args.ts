@@ -33,7 +33,16 @@ export const OpenArgs = z.object({
 });
 export type OpenArgs = z.infer<typeof OpenArgs>;
 
-export type OpenArgName = 'brand' | 'project' | 'video';
+export const OpenArgName = z.enum(['brand', 'project', 'video']);
+export type OpenArgName = z.infer<typeof OpenArgName>;
+
+/** Door-2 values exactly as given (argv or env): present and non-empty, not yet validated or resolved. */
+export const RawOpenArgs = z.object({
+  brand: z.string().min(1).optional(),
+  project: z.string().min(1).optional(),
+  video: z.string().min(1).optional(),
+});
+export type RawOpenArgs = z.infer<typeof RawOpenArgs>;
 
 export const OPEN_ENV = {
   brand: 'FLIVIDEO_BRAND',
@@ -46,13 +55,14 @@ export interface ParseOpenArgsOptions {
   requireVideo?: boolean;
 }
 
-export interface ParsedOpenArgs {
-  context: Partial<OpenArgs>;
+export const ParsedOpenArgs = z.object({
+  context: RawOpenArgs,
   /** Each missing argument, in `brand`, `project`, `video` order — each becomes a picker (R25). */
-  missing: OpenArgName[];
-}
+  missing: z.array(OpenArgName),
+});
+export type ParsedOpenArgs = z.infer<typeof ParsedOpenArgs>;
 
-const NAMES: readonly OpenArgName[] = ['brand', 'project', 'video'];
+const NAMES = OpenArgName.options;
 
 /**
  * Parse `--brand <k>`, `--project <folder>`, `--video <NN-name>` (and `--name=value`) from `argv`, falling back to
@@ -85,7 +95,7 @@ export function parseOpenArgs(
     }
   }
 
-  const context: Partial<OpenArgs> = {};
+  const context: RawOpenArgs = {};
   const missing: OpenArgName[] = [];
   for (const name of NAMES) {
     const argValue = fromArgv[name];

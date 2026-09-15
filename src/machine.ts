@@ -2,7 +2,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { z } from 'zod';
 import { readJsonFile } from './fs-utils.js';
-import type { InvalidFile } from './results.js';
+import { InvalidFile } from './results.js';
 
 const AbsolutePath = z
   .string()
@@ -21,16 +21,24 @@ export const MachineSettings = z.object({
 export type MachineSettings = z.infer<typeof MachineSettings>;
 
 /** Machine settings with the defaults filled in. */
-export type ResolvedMachineSettings = MachineSettings & { labRoot: string };
+export const ResolvedMachineSettings = MachineSettings.extend({ labRoot: AbsolutePath });
+export type ResolvedMachineSettings = z.infer<typeof ResolvedMachineSettings>;
 
 export interface MachineSettingsOptions {
   /** Home directory; default `os.homedir()`. The file is `<home>/.fli/machine.json`. */
   home?: string;
 }
 
-export type MachineSettingsResult =
-  | { kind: 'valid'; path: string; source: 'file' | 'default'; value: ResolvedMachineSettings }
-  | InvalidFile;
+export const MachineSettingsResult = z.discriminatedUnion('kind', [
+  z.object({
+    kind: z.literal('valid'),
+    path: z.string(),
+    source: z.enum(['file', 'default']),
+    value: ResolvedMachineSettings,
+  }),
+  InvalidFile,
+]);
+export type MachineSettingsResult = z.infer<typeof MachineSettingsResult>;
 
 export function machineSettingsPath(options: MachineSettingsOptions = {}): string {
   return path.join(options.home ?? os.homedir(), '.fli', 'machine.json');

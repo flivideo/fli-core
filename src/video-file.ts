@@ -41,7 +41,8 @@ export const UnknownVideoFile = z.object({
 });
 export type UnknownVideoFile = z.infer<typeof UnknownVideoFile>;
 
-export type ParsedVideoFile = VideoFile | UnknownVideoFile;
+export const ParsedVideoFile = z.union([VideoFile, UnknownVideoFile]);
+export type ParsedVideoFile = z.infer<typeof ParsedVideoFile>;
 
 const VIDEO_FILE = /^(\d{2})-([a-z]+)(?:-([a-z0-9]+(?:-[a-z0-9]+)*))?\.([A-Za-z0-9]+)$/;
 

@@ -1,9 +1,10 @@
 import { promises as fs, type Dirent } from 'node:fs';
 import path from 'node:path';
 import { errorCode, errorMessage } from './fs-utils.js';
-import { readIdentity, type ProjectIdentity } from './identity.js';
-import { parseProjectFolder, type ProjectFolder } from './project-folder.js';
-import type { InvalidFile } from './results.js';
+import { z } from 'zod';
+import { ProjectIdentity, readIdentity } from './identity.js';
+import { ProjectCode, ProjectFolder, parseProjectFolder } from './project-folder.js';
+import { InvalidFile } from './results.js';
 
 /**
  * The estate of one brand root (spec R8–R15, R31): which folders are projects, which are not, what is archived, how a
@@ -13,43 +14,63 @@ import type { InvalidFile } from './results.js';
 export const ARCHIVED_FOLDER = 'archived';
 
 /** A collection that was read, or one that could not be (R12): empty and unscanned are never the same thing. */
-export type Scanned<T> =
-  | { state: 'scanned'; scannedAt: string; items: T[] }
-  | { state: 'unscanned'; scannedAt: string; path: string; message: string };
+export function scanned<S extends z.ZodType>(item: S) {
+  return z.discriminatedUnion('state', [
+    z.object({ state: z.literal('scanned'), scannedAt: z.iso.datetime(), items: z.array(item) }),
+    z.object({
+      state: z.literal('unscanned'),
+      scannedAt: z.iso.datetime(),
+      path: z.string(),
+      message: z.string(),
+    }),
+  ]);
+}
+export type Scanned<T> = z.infer<ReturnType<typeof scanned<z.ZodType<T>>>>;
 
 /** A folder holding a valid `fli.studio.json` (R8). */
-export interface MemberProject {
-  folder: string;
-  path: string;
+export const MemberProject = z.object({
+  folder: z.string(),
+  path: z.string(),
   /** The folder name parsed as `<code>-<slug>`, or `null` when it does not follow that shape. */
-  parsed: ProjectFolder | null;
-  identity: ProjectIdentity;
-}
+  parsed: ProjectFolder.nullable(),
+  identity: ProjectIdentity,
+});
+export type MemberProject = z.infer<typeof MemberProject>;
 
 /** Any other top-level folder (R9): shown as *other folder*, never as an error. */
-export interface OtherFolder {
-  folder: string;
-  path: string;
+export const OtherFolder = z.object({
+  folder: z.string(),
+  path: z.string(),
   /** Named like a project (`d02-cutty-audio-cleanup`) rather than a plain folder (`docs`). */
-  looksLikeProject: boolean;
-  parsed: ProjectFolder | null;
+  looksLikeProject: z.boolean(),
+  parsed: ProjectFolder.nullable(),
   /** `absent`, or the `invalid` result when a `fli.studio.json` is there but not valid. */
-  identity: 'absent' | InvalidFile;
-}
+  identity: z.union([z.literal('absent'), InvalidFile]),
+});
+export type OtherFolder = z.infer<typeof OtherFolder>;
 
 /** One folder directly under `<brandRoot>/archived/` (R13: listed, never descended into). */
-export type ArchivedEntry =
-  | { kind: 'range'; name: string; letter: string; from: number; to: number }
-  | { kind: 'project'; name: string; code: string; slug: string }
-  | { kind: 'other'; name: string };
+export const ArchivedEntry = z.discriminatedUnion('kind', [
+  z.object({
+    kind: z.literal('range'),
+    name: z.string(),
+    letter: z.string().regex(/^[a-z]$/),
+    from: z.number().int().min(0).max(99),
+    to: z.number().int().min(0).max(99),
+  }),
+  z.object({ kind: z.literal('project'), name: z.string(), code: ProjectCode, slug: z.string() }),
+  z.object({ kind: z.literal('other'), name: z.string() }),
+]);
+export type ArchivedEntry = z.infer<typeof ArchivedEntry>;
 
-export interface ProjectListing {
-  brandRoot: string;
-  scannedAt: string;
-  members: Scanned<MemberProject>;
-  otherFolders: Scanned<OtherFolder>;
-  archived: Scanned<ArchivedEntry>;
-}
+export const ProjectListing = z.object({
+  brandRoot: z.string(),
+  scannedAt: z.iso.datetime(),
+  members: scanned(MemberProject),
+  otherFolders: scanned(OtherFolder),
+  archived: scanned(ArchivedEntry),
+});
+export type ProjectListing = z.infer<typeof ProjectListing>;
 
 const RANGE = /^([a-z])(\d{2})-([a-z])(\d{2})$/;
 
@@ -165,12 +186,29 @@ export async function listProjects(brandRoot: string): Promise<ProjectListing> {
   };
 }
 
-export type ResolveProjectResult =
-  | { kind: 'found'; ref: string; matchedBy: 'folder' | 'id' | 'code'; project: MemberProject }
-  | { kind: 'ambiguous'; ref: string; matchedBy: 'id' | 'code'; candidates: MemberProject[] }
-  | { kind: 'not-a-project'; ref: string; folder: OtherFolder }
-  | { kind: 'not-found'; ref: string }
-  | { kind: 'unscanned'; ref: string; path: string; message: string };
+export const ResolveProjectResult = z.discriminatedUnion('kind', [
+  z.object({
+    kind: z.literal('found'),
+    ref: z.string(),
+    matchedBy: z.enum(['folder', 'id', 'code']),
+    project: MemberProject,
+  }),
+  z.object({
+    kind: z.literal('ambiguous'),
+    ref: z.string(),
+    matchedBy: z.enum(['id', 'code']),
+    candidates: z.array(MemberProject),
+  }),
+  z.object({ kind: z.literal('not-a-project'), ref: z.string(), folder: OtherFolder }),
+  z.object({ kind: z.literal('not-found'), ref: z.string() }),
+  z.object({
+    kind: z.literal('unscanned'),
+    ref: z.string(),
+    path: z.string(),
+    message: z.string(),
+  }),
+]);
+export type ResolveProjectResult = z.infer<typeof ResolveProjectResult>;
 
 /**
  * Resolve a project reference within a brand (R31): an exact folder name, an identity `id`, or a whole code (`a01`)
@@ -220,9 +258,15 @@ function unscannedRefusal(collection: { path: string; message: string }): NextCo
   };
 }
 
-export type NextCodeResult =
-  | { kind: 'allocated'; code: string }
-  | { kind: 'refused'; reason: 'invalid-letter' | 'unscanned' | 'exhausted'; message: string };
+export const NextCodeResult = z.discriminatedUnion('kind', [
+  z.object({ kind: z.literal('allocated'), code: ProjectCode }),
+  z.object({
+    kind: z.literal('refused'),
+    reason: z.enum(['invalid-letter', 'unscanned', 'exhausted']),
+    message: z.string(),
+  }),
+]);
+export type NextCodeResult = z.infer<typeof NextCodeResult>;
 
 /**
  * The next `<letter><NN>` after the highest code in use (A6, R15): member folders and identities, other folders, and

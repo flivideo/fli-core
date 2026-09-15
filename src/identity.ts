@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { IDENTITY_FILE } from './app-file.js';
 import { atomicCreate, atomicWrite, errorCode, errorMessage, readJsonFile } from './fs-utils.js';
 import { ProjectCode } from './project-folder.js';
-import { issuesOf, type ReadFileResult } from './results.js';
+import { issuesOf, readFileResult, type ReadFileResult } from './results.js';
 
 /** `fli.studio.json` (A3): the project's identity. Membership of a brand = this file exists and is valid (R8). */
 export const ProjectIdentity = z.object({
@@ -17,17 +17,30 @@ export const ProjectIdentity = z.object({
 });
 export type ProjectIdentity = z.infer<typeof ProjectIdentity>;
 
+export const ReadIdentityResult = readFileResult(ProjectIdentity);
+export type ReadIdentityResult = z.infer<typeof ReadIdentityResult>;
+
 /** Read `<dir>/fli.studio.json`. Absent → `null`; malformed → an `invalid` result. Never throws. */
-export function readIdentity(dir: string): Promise<ReadFileResult<ProjectIdentity>> {
+export function readIdentity(dir: string): Promise<ReadIdentityResult> {
   return readJsonFile(path.join(dir, IDENTITY_FILE), ProjectIdentity);
 }
 
-export type WriteIdentityResult =
-  | { kind: 'written'; path: string; replaced: boolean }
-  | { kind: 'refused'; reason: 'invalid-input'; path: string; message: string }
-  | { kind: 'refused'; reason: 'different-id'; path: string; existingId: string; message: string }
-  | { kind: 'refused'; reason: 'existing-invalid'; path: string; message: string }
-  | { kind: 'refused'; reason: 'io-error'; path: string; message: string };
+const Refused = <R extends string>(reason: R) =>
+  z.object({
+    kind: z.literal('refused'),
+    reason: z.literal(reason),
+    path: z.string(),
+    message: z.string(),
+  });
+
+export const WriteIdentityResult = z.union([
+  z.object({ kind: z.literal('written'), path: z.string(), replaced: z.boolean() }),
+  Refused('invalid-input'),
+  Refused('different-id').extend({ existingId: z.string() }),
+  Refused('existing-invalid'),
+  Refused('io-error'),
+]);
+export type WriteIdentityResult = z.infer<typeof WriteIdentityResult>;
 
 /**
  * Write `<dir>/fli.studio.json` atomically: an exclusive create (temp file + link) when none exists, a temp file +

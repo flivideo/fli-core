@@ -1,14 +1,22 @@
 // @flivideo/core — the public surface (spec §4). Everything else in src/ is internal.
+// Every shape is a zod schema exported under the same name as its inferred type.
 
-export { FliCoreError, InvalidFile, type ReadFileResult, type ValidFile } from './results.js';
+export {
+  FliCoreError,
+  InvalidFile,
+  readFileResult,
+  validFile,
+  type ReadFileResult,
+  type ValidFile,
+} from './results.js';
 
 export {
   Brand,
-  brandFolderName,
   BrandsFile,
   BrandsRead,
   ReadBrandsResult,
   SkippedBrand,
+  brandFolderName,
   brandsFilePath,
   readBrands,
   resolveBrandRoot,
@@ -18,9 +26,10 @@ export {
 
 export {
   ProjectIdentity,
+  ReadIdentityResult,
+  WriteIdentityResult,
   readIdentity,
   writeIdentity,
-  type WriteIdentityResult,
 } from './identity.js';
 
 export {
@@ -34,17 +43,17 @@ export {
 export { Recording, RecordingTag, parseRecording, recordingFileName } from './recording.js';
 
 export {
+  ParsedVideoFile,
   UnknownVideoFile,
+  VIDEO_FOLDER_PATTERN,
   VideoFile,
   VideoFileKind,
   VideoFolder,
+  VideoFolderName,
   parseVideoFile,
   parseVideoFolder,
-  VIDEO_FOLDER_PATTERN,
-  VideoFolderName,
   videoFileName,
   videoFolderName,
-  type ParsedVideoFile,
 } from './video-file.js';
 
 export {
@@ -60,38 +69,45 @@ export { LEGACY_FOLDERS, ProjectZone, classifyProjectEntry } from './classify.js
 
 export {
   ARCHIVED_FOLDER,
+  ArchivedEntry,
+  MemberProject,
+  NextCodeResult,
+  OtherFolder,
+  ProjectListing,
+  ResolveProjectResult,
   listProjects,
   nextCode,
   resolveProject,
-  type ArchivedEntry,
-  type MemberProject,
-  type NextCodeResult,
-  type OtherFolder,
-  type ProjectListing,
-  type ResolveProjectResult,
+  scanned,
   type Scanned,
 } from './estate.js';
 
-export { BRAND_SETTINGS_FILE, BrandSettings, readBrandSettings } from './brand-settings.js';
+export {
+  BRAND_SETTINGS_FILE,
+  BrandSettings,
+  ReadBrandSettingsResult,
+  readBrandSettings,
+} from './brand-settings.js';
 
 export {
   MachineSettings,
+  MachineSettingsResult,
+  ResolvedMachineSettings,
   defaultLabRoot,
   machineSettingsPath,
   readMachineSettings,
   type MachineSettingsOptions,
-  type MachineSettingsResult,
-  type ResolvedMachineSettings,
 } from './machine.js';
 
 export { LabPathInput, labPath } from './lab-path.js';
 
 export {
   OPEN_ENV,
+  OpenArgName,
   OpenArgs,
   OpenContext,
+  ParsedOpenArgs,
+  RawOpenArgs,
   parseOpenArgs,
-  type OpenArgName,
   type ParseOpenArgsOptions,
-  type ParsedOpenArgs,
 } from './open-args.js';
