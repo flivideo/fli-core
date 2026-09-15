@@ -2,7 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { z } from 'zod';
 import { IDENTITY_FILE } from './app-file.js';
-import { atomicWrite, errorMessage, readJsonFile } from './fs-utils.js';
+import { atomicCreate, atomicWrite, errorCode, errorMessage, readJsonFile } from './fs-utils.js';
 import { ProjectCode } from './project-folder.js';
 import { issuesOf, type ReadFileResult } from './results.js';
 
@@ -30,7 +30,8 @@ export type WriteIdentityResult =
   | { kind: 'refused'; reason: 'io-error'; path: string; message: string };
 
 /**
- * Write `<dir>/fli.studio.json` atomically (temp file + rename).
+ * Write `<dir>/fli.studio.json` atomically: an exclusive create (temp file + link) when none exists, a temp file +
+ * rename when rewriting the same `id`.
  * Refuses — as a typed result, never a throw — when the input is not a valid identity, when a file with a different
  * `id` is already there, when the existing file cannot be read as an identity, or when the write itself fails.
  * Rewriting the same `id` is allowed.
@@ -57,7 +58,48 @@ export async function writeIdentity(
     return { kind: 'refused', reason: 'io-error', path: file, message: errorMessage(error) };
   }
 
+  const content = `${JSON.stringify(parsed.data, null, 2)}\n`;
   const existing = await readIdentity(dir);
+  const refusal = refusalFor(existing, parsed.data.id, file);
+  if (refusal) return refusal;
+
+  if (existing === null) {
+    try {
+      // Exclusive create: of two concurrent adopts with different ids, exactly one wins (F2).
+      await atomicCreate(file, content);
+      return { kind: 'written', path: file, replaced: false };
+    } catch (error) {
+      if (errorCode(error) !== 'EEXIST') {
+        return { kind: 'refused', reason: 'io-error', path: file, message: errorMessage(error) };
+      }
+      const winner = await readIdentity(dir);
+      const lost = refusalFor(winner, parsed.data.id, file);
+      if (lost) return lost;
+      if (winner === null) {
+        return {
+          kind: 'refused',
+          reason: 'io-error',
+          path: file,
+          message: `${IDENTITY_FILE} appeared and vanished while being created; not written.`,
+        };
+      }
+      // Another writer created the same id first: rewrite it like any same-id write.
+    }
+  }
+
+  try {
+    await atomicWrite(file, content);
+  } catch (error) {
+    return { kind: 'refused', reason: 'io-error', path: file, message: errorMessage(error) };
+  }
+  return { kind: 'written', path: file, replaced: true };
+}
+
+function refusalFor(
+  existing: ReadFileResult<ProjectIdentity>,
+  id: string,
+  file: string,
+): WriteIdentityResult | null {
   if (existing?.kind === 'invalid') {
     return {
       kind: 'refused',
@@ -66,7 +108,7 @@ export async function writeIdentity(
       message: `An unreadable ${IDENTITY_FILE} is already there (${existing.reason}: ${existing.message}); it is not overwritten.`,
     };
   }
-  if (existing?.kind === 'valid' && existing.value.id !== parsed.data.id) {
+  if (existing?.kind === 'valid' && existing.value.id !== id) {
     return {
       kind: 'refused',
       reason: 'different-id',
@@ -75,11 +117,5 @@ export async function writeIdentity(
       message: `${IDENTITY_FILE} already holds a different project id (${existing.value.id}).`,
     };
   }
-
-  try {
-    await atomicWrite(file, `${JSON.stringify(parsed.data, null, 2)}\n`);
-  } catch (error) {
-    return { kind: 'refused', reason: 'io-error', path: file, message: errorMessage(error) };
-  }
-  return { kind: 'written', path: file, replaced: existing !== null };
+  return null;
 }

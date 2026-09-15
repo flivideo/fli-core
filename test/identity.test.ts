@@ -1,6 +1,6 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { atomicWrite } from '../src/fs-utils.js';
 import { ProjectIdentity, readIdentity, writeIdentity } from '../src/identity.js';
 import { buildTree, identity, tempDir } from './helpers/fixtures.js';
@@ -141,6 +141,124 @@ describe('writeIdentity', () => {
       expect(await fs.readdir(dir)).toEqual([]);
     },
   );
+
+  it('two concurrent writes with different ids: exactly one wins, the other is refused (F2)', async () => {
+    for (let round = 0; round < 25; round++) {
+      const dir = await tempDir();
+      const a = identity();
+      const b = identity();
+      const results = await Promise.all([writeIdentity(dir, a), writeIdentity(dir, b)]);
+      const written = results.filter((r) => r.kind === 'written');
+      const refused = results.filter((r) => r.kind === 'refused');
+      expect(written).toHaveLength(1);
+      expect(refused).toHaveLength(1);
+      expect(refused[0]).toMatchObject({ reason: 'different-id' });
+      const winnerId = results[0]?.kind === 'written' ? a.id : b.id;
+      expect(await readIdentity(dir)).toMatchObject({ kind: 'valid', value: { id: winnerId } });
+      expect(await fs.readdir(dir)).toEqual(['fli.studio.json']);
+    }
+  });
+
+  it('two concurrent writes of the same id both succeed', async () => {
+    const dir = await tempDir();
+    const id = identity();
+    const results = await Promise.all([writeIdentity(dir, id), writeIdentity(dir, id)]);
+    expect(results.map((r) => r.kind)).toEqual(['written', 'written']);
+    expect(await readIdentity(dir)).toMatchObject({ kind: 'valid', value: id });
+  });
+
+  describe('losing the create race (F2)', () => {
+    const eexist = (): Error =>
+      Object.assign(new Error('EEXIST: file already exists'), { code: 'EEXIST' });
+
+    async function raceWith(winnerContent: string | null): Promise<string> {
+      const dir = await tempDir();
+      vi.spyOn(fs, 'link').mockImplementationOnce(async (_tmp, target) => {
+        if (winnerContent !== null) await fs.writeFile(target, winnerContent);
+        throw eexist();
+      });
+      return dir;
+    }
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it('to an unreadable file → existing-invalid, winner untouched', async () => {
+      const dir = await raceWith('garbage');
+      expect(await writeIdentity(dir, identity())).toMatchObject({
+        kind: 'refused',
+        reason: 'existing-invalid',
+      });
+      expect(await fs.readFile(path.join(dir, 'fli.studio.json'), 'utf8')).toBe('garbage');
+      expect(await fs.readdir(dir)).toEqual(['fli.studio.json']);
+    });
+
+    it('to the same id → written, replaced', async () => {
+      const id = identity();
+      const dir = await raceWith(JSON.stringify(id));
+      expect(await writeIdentity(dir, { ...id, name: 'Mine' })).toMatchObject({
+        kind: 'written',
+        replaced: true,
+      });
+      expect(await readIdentity(dir)).toMatchObject({ value: { id: id.id, name: 'Mine' } });
+    });
+
+    it('to a file that then vanished → io-error, nothing written', async () => {
+      const dir = await raceWith(null);
+      expect(await writeIdentity(dir, identity())).toMatchObject({
+        kind: 'refused',
+        reason: 'io-error',
+      });
+      expect(await fs.readdir(dir)).toEqual([]);
+    });
+  });
+
+  describe('volumes without hard links', () => {
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it('falls back to an exclusive create and still refuses a different id', async () => {
+      const dir = await tempDir();
+      const perm = Object.assign(new Error('EPERM'), { code: 'EPERM' });
+      vi.spyOn(fs, 'link').mockRejectedValue(perm);
+      const first = identity();
+      expect(await writeIdentity(dir, first)).toMatchObject({ kind: 'written', replaced: false });
+      expect(await readIdentity(dir)).toMatchObject({ value: { id: first.id } });
+      expect(await fs.readdir(dir)).toEqual(['fli.studio.json']);
+      expect(await writeIdentity(dir, identity())).toMatchObject({
+        kind: 'refused',
+        reason: 'different-id',
+      });
+    });
+
+    it('in the fallback, a target created first still refuses', async () => {
+      const dir = await tempDir();
+      const winner = identity();
+      vi.spyOn(fs, 'link').mockImplementationOnce(async (_tmp, target) => {
+        await fs.writeFile(target, JSON.stringify(winner));
+        throw Object.assign(new Error('ENOTSUP'), { code: 'ENOTSUP' });
+      });
+      expect(await writeIdentity(dir, identity())).toMatchObject({
+        kind: 'refused',
+        reason: 'different-id',
+        existingId: winner.id,
+      });
+    });
+
+    it('any other link error is an io-error and leaves no temp file', async () => {
+      const dir = await tempDir();
+      vi.spyOn(fs, 'link').mockRejectedValueOnce(
+        Object.assign(new Error('EACCES'), { code: 'EACCES' }),
+      );
+      expect(await writeIdentity(dir, identity())).toMatchObject({
+        kind: 'refused',
+        reason: 'io-error',
+      });
+      expect(await fs.readdir(dir)).toEqual([]);
+    });
+  });
 
   it('strips unknown keys rather than writing them', async () => {
     const dir = await tempDir();
