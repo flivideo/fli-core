@@ -343,6 +343,17 @@ describe('parseAppFile / appFileName (D1, scheme D)', () => {
     expect(parseAppFile(name)).toBeNull();
   });
 
+  it('keeps the reserved names out of the app namespace (F9)', () => {
+    expect(parseAppFile('fli.brand.json')).toBeNull();
+    expect(parseAppFile('fli.brand.x.json')).toBeNull();
+    expect(parseAppFile('fli.studio.x.json')).toBeNull();
+    expect(parseAppFile('fli.studio.json')).toEqual({ app: 'studio' });
+    expect(() => appFileName({ app: 'brand' })).toThrow(FliCoreError);
+    expect(thrown(() => appFileName({ app: 'studio', subject: 'x' })).issues).toEqual([
+      'subject: fli.studio.json takes no subject: it is the identity file',
+    ]);
+  });
+
   it('refuses to build a bad name', () => {
     expect(() => appFileName({ app: 'Hub' })).toThrow(FliCoreError);
     expect(() => appFileName({ app: 'cut', subject: '../x' })).toThrow(FliCoreError);

@@ -12,6 +12,8 @@ describe('classifyProjectEntry', () => {
     ['project.json', 'other'],
     ['meta.json', 'other'],
     ['fli.json', 'other'],
+    ['fli.brand.json', 'other'],
+    ['fli.studio.extra.json', 'other'],
     ['recordings', 'recordings'],
     ['recordings/', 'recordings'],
     ['recordings/01-1-intro.mov', 'recordings'],
