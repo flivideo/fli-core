@@ -50,6 +50,11 @@ import { parseAppFile, labPath, listProjects } from '@flivideo/core';
 | `OpenContext`, `OpenArgs`, `parseOpenArgs(argv, env?, opts?)`                                                       | The open contract: `--brand`, `--project`, `--video` (and `--x=value`), then `FLIVIDEO_BRAND` / `FLIVIDEO_PROJECT` / `FLIVIDEO_VIDEO`; argv wins. Returns `{ context, missing }`. Pure                                                                  |
 | `FliCoreError`, `InvalidFile`, `ReadFileResult`, `ProjectZone`, `IDENTITY_FILE`, …                                  | Shared result and error types and constants                                                                                                                                                                                                             |
 
+**`parseRecording` is stricter than FliHub's `parseRecordingFilename`** (the working definition), in four places:
+it rejects segment `0` (`01-0-intro.mov`), an empty slug (`01-1.mov`) and uppercase in the slug (`01-1-Intro.mov`),
+and it reads a zero-padded segment as a number, so `01-01-intro.mov` rebuilds as `01-1-intro.mov`. Pinned in
+`test/naming.test.ts`.
+
 Name builders (`…FileName`, `…FolderName`) and `labPath` throw `FliCoreError` on input they must not turn into a
 name. Readers and resolvers never throw: they return typed results.
 

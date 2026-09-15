@@ -178,6 +178,28 @@ describe('parseRecording / recordingFileName (FliHub naming rules)', () => {
   });
 });
 
+describe('divergences from FliHub parseRecordingFilename (F7)', () => {
+  // FliHub shared/naming.ts is the working definition (spec §4). @flivideo/core is deliberately stricter; these pin the
+  // four known differences so W3 (FliHub adopting the library) decides knowingly. Listed in README.md too.
+  it('rejects segment 0 (FliHub parses 01-0-intro.mov)', () => {
+    expect(parseRecording('01-0-intro.mov')).toBeNull();
+  });
+
+  it('rejects an empty slug (FliHub parses 01-1.mov with name "")', () => {
+    expect(parseRecording('01-1.mov')).toBeNull();
+  });
+
+  it('rejects uppercase in the slug (FliHub parses 01-1-Intro.mov)', () => {
+    expect(parseRecording('01-1-Intro.mov')).toBeNull();
+  });
+
+  it('normalises a zero-padded segment (FliHub keeps "01"; core rebuilds 01-01-intro.mov as 01-1-intro.mov)', () => {
+    const parsed = parseRecording('01-01-intro.mov');
+    expect(parsed).toMatchObject({ chapter: 1, segment: 1, slug: 'intro' });
+    expect(recordingFileName(parsed as Recording)).toBe('01-1-intro.mov');
+  });
+});
+
 describe('parseVideoFile / videoFileName (L1)', () => {
   it('parses the four v1 kinds (spec §11 #5)', () => {
     expect(parseVideoFile('01-cut.mp4')).toEqual({
