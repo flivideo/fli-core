@@ -186,27 +186,46 @@ export async function listProjects(brandRoot: string): Promise<ProjectListing> {
   };
 }
 
+const ProjectFound = z.object({
+  kind: z.literal('found'),
+  ref: z.string(),
+  matchedBy: z.enum(['folder', 'id', 'code']),
+  project: MemberProject,
+});
+const ProjectAmbiguous = z.object({
+  kind: z.literal('ambiguous'),
+  ref: z.string(),
+  matchedBy: z.enum(['id', 'code']),
+  candidates: z.array(MemberProject),
+});
+const ProjectNotAProject = z.object({
+  kind: z.literal('not-a-project'),
+  ref: z.string(),
+  folder: OtherFolder,
+});
+const ProjectNotFound = z.object({ kind: z.literal('not-found'), ref: z.string() });
+const ProjectUnscanned = z.object({
+  kind: z.literal('unscanned'),
+  ref: z.string(),
+  path: z.string(),
+  message: z.string(),
+});
+
+/** Every `resolveProject` outcome except `found`: why a reference did not resolve (R31, C3). */
+export const ProjectRefusal = z.discriminatedUnion('kind', [
+  ProjectAmbiguous,
+  ProjectNotAProject,
+  ProjectNotFound,
+  ProjectUnscanned,
+]);
+export type ProjectRefusal = z.infer<typeof ProjectRefusal>;
+
 export const ResolveProjectResult = z.discriminatedUnion('kind', [
-  z.object({
-    kind: z.literal('found'),
-    ref: z.string(),
-    matchedBy: z.enum(['folder', 'id', 'code']),
-    project: MemberProject,
-  }),
-  z.object({
-    kind: z.literal('ambiguous'),
-    ref: z.string(),
-    matchedBy: z.enum(['id', 'code']),
-    candidates: z.array(MemberProject),
-  }),
-  z.object({ kind: z.literal('not-a-project'), ref: z.string(), folder: OtherFolder }),
-  z.object({ kind: z.literal('not-found'), ref: z.string() }),
-  z.object({
-    kind: z.literal('unscanned'),
-    ref: z.string(),
-    path: z.string(),
-    message: z.string(),
-  }),
+  ProjectFound,
+  ProjectAmbiguous,
+  ProjectNotAProject,
+  ProjectNotFound,
+  ProjectUnscanned,
 ]);
 export type ResolveProjectResult = z.infer<typeof ResolveProjectResult>;
 

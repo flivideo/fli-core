@@ -153,6 +153,8 @@ describe('public surface (spec §4)', () => {
       'RawOpenArgs',
       'ParsedOpenArgs',
       'OpenContext',
+      'OpenContextResult',
+      'ProjectRefusal',
     ];
     const exported = core as Record<string, unknown>;
     expect(schemas.filter((name) => !(exported[name] instanceof z.ZodType))).toEqual([]);

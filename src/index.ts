@@ -74,6 +74,7 @@ export {
   NextCodeResult,
   OtherFolder,
   ProjectListing,
+  ProjectRefusal,
   ResolveProjectResult,
   listProjects,
   nextCode,
@@ -111,3 +112,9 @@ export {
   parseOpenArgs,
   type ParseOpenArgsOptions,
 } from './open-args.js';
+
+export {
+  OpenContextResult,
+  resolveOpenContext,
+  type ResolveOpenContextOptions,
+} from './open-context.js';
