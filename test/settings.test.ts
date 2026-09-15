@@ -48,6 +48,7 @@ describe('readBrands', () => {
     await buildTree(dir, { 'brands.json': REGISTRY });
     const result = await readBrands({ path: path.join(dir, 'brands.json') });
     expect(result?.kind).toBe('valid');
+    expect(result?.kind === 'valid' && result.skipped).toEqual([]);
     expect(result?.kind === 'valid' && result.value).toEqual([
       {
         key: 'appydave',
@@ -81,13 +82,47 @@ describe('readBrands', () => {
     expect(await readBrands()).toBeNull();
   });
 
-  it('returns null when missing and invalid when malformed', async () => {
+  it('returns null when missing and invalid when there is no brands object', async () => {
     const dir = await tempDir();
     expect(await readBrands({ path: path.join(dir, 'brands.json') })).toBeNull();
-    await buildTree(dir, { 'bad.json': { brands: { appydave: { shortcut: 'ad' } } } });
-    expect(await readBrands({ path: path.join(dir, 'bad.json') })).toMatchObject({
-      kind: 'invalid',
-      reason: 'schema',
+    await buildTree(dir, {
+      'bad.json': { brands: ['appydave'] },
+      'none.json': { meta: {} },
+      'text.json': '{',
+    });
+    for (const [name, reason] of [
+      ['bad.json', 'schema'],
+      ['none.json', 'schema'],
+      ['text.json', 'not-json'],
+    ]) {
+      expect(await readBrands({ path: path.join(dir, name as string) })).toMatchObject({
+        kind: 'invalid',
+        reason,
+      });
+    }
+  });
+
+  it('skips one bad entry and keeps the rest (F8)', async () => {
+    const dir = await tempDir();
+    await buildTree(dir, {
+      'brands.json': {
+        brands: {
+          appydave: { name: 'AppyDave' },
+          broken: { shortcut: 'b' },
+          '': { name: 'No key' },
+          alsoBroken: 'not an object',
+        },
+      },
+    });
+    const result = await readBrands({ path: path.join(dir, 'brands.json') });
+    expect(result).toMatchObject({
+      kind: 'valid',
+      value: [{ key: 'appydave', name: 'AppyDave' }],
+      skipped: [
+        { key: 'broken', issues: [expect.stringMatching(/^name:/)] },
+        { key: '', issues: ['key: must not be empty'] },
+        { key: 'alsoBroken', issues: [expect.any(String)] },
+      ],
     });
   });
 });
