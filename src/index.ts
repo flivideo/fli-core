@@ -37,6 +37,8 @@ export {
   VideoFolder,
   parseVideoFile,
   parseVideoFolder,
+  VIDEO_FOLDER_PATTERN,
+  VideoFolderName,
   videoFileName,
   videoFolderName,
   type ParsedVideoFile,

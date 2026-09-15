@@ -1,4 +1,6 @@
+import path from 'node:path';
 import { z } from 'zod';
+import { VideoFolderName } from './video-file.js';
 
 /**
  * The open contract (open-contract §3, §5; D11): every app accepts the same context — brand, project, optional video —
@@ -9,12 +11,15 @@ import { z } from 'zod';
 export const OpenContext = z.object({
   /** `brands.json` key. */
   brand: z.string().min(1),
-  /** Absolute path of the project folder on this machine. */
-  projectDir: z.string().min(1),
+  /** Absolute path of the project folder on this machine (D4). */
+  projectDir: z
+    .string()
+    .min(1)
+    .refine((value) => path.isAbsolute(value), 'projectDir must be an absolute path'),
   /** `fli.studio.json` `id`. */
   projectId: z.uuid(),
   /** Video folder name, `<NN>-<name>`. */
-  video: z.string().min(1).optional(),
+  video: VideoFolderName.optional(),
 });
 export type OpenContext = z.infer<typeof OpenContext>;
 
@@ -23,7 +28,8 @@ export const OpenArgs = z.object({
   brand: z.string().min(1),
   /** Project folder name (or anything `resolveProject` accepts). */
   project: z.string().min(1),
-  video: z.string().min(1).optional(),
+  /** Video folder name, `<NN>-<name>`. */
+  video: VideoFolderName.optional(),
 });
 export type OpenArgs = z.infer<typeof OpenArgs>;
 

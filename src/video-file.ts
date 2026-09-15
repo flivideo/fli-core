@@ -82,13 +82,19 @@ export function videoFileName(file: z.input<typeof VideoFile>): string {
 export const VideoFolder = z.object({ video: VideoNumber, name: KebabSlug });
 export type VideoFolder = z.infer<typeof VideoFolder>;
 
+/** A video folder name, `<NN>-<name>` with `NN` 01–99 and a kebab-case name (`01-xmen`). */
+export const VIDEO_FOLDER_PATTERN = /^(0[1-9]|[1-9]\d)-([a-z0-9]+(?:-[a-z0-9]+)*)$/;
+
+/** The same rule as a string schema, for contexts that carry the folder name (`OpenContext.video`). */
+export const VideoFolderName = z
+  .string()
+  .regex(VIDEO_FOLDER_PATTERN, 'video must be a video folder name, <NN>-<kebab-name>');
+
 /** `01-xmen` → `{ video: 1, name: 'xmen' }`. Not a video folder → `null`. */
 export function parseVideoFolder(name: string): VideoFolder | null {
-  const match = /^(\d{2})-([a-z0-9]+(?:-[a-z0-9]+)*)$/.exec(name);
+  const match = VIDEO_FOLDER_PATTERN.exec(name);
   if (!match) return null;
-  const video = Number(match[1]);
-  if (video < 1) return null;
-  return { video, name: match[2] as string };
+  return { video: Number(match[1]), name: match[2] as string };
 }
 
 /** The inverse of `parseVideoFolder`. Throws `FliCoreError` on invalid input. */

@@ -86,6 +86,33 @@ describe('parseOpenArgs (open contract §3, §5)', () => {
   });
 });
 
+describe('OpenContext and OpenArgs refuse unsafe values (F10)', () => {
+  const ok = { brand: 'appydave', projectDir: '/x/v-appydave/a01-xmen', projectId: randomUUID() };
+
+  it('refuses a relative projectDir', () => {
+    const result = OpenContext.safeParse({ ...ok, projectDir: 'relative/path' });
+    expect(result.success).toBe(false);
+    expect(result.error?.issues[0]?.message).toBe('projectDir must be an absolute path');
+  });
+
+  it.each(['../../etc', '01', 'xmen', '1-xmen', '00-xmen', '01-Xmen', '01-xmen/'])(
+    'refuses video "%s" in both schemas',
+    (video) => {
+      expect(OpenContext.safeParse({ ...ok, video }).success).toBe(false);
+      expect(OpenArgs.safeParse({ brand: 'appydave', project: 'a01-xmen', video }).success).toBe(
+        false,
+      );
+    },
+  );
+
+  it('accepts a video folder name', () => {
+    expect(OpenContext.parse({ ...ok, video: '10-xmen-short' }).video).toBe('10-xmen-short');
+    expect(OpenArgs.parse({ brand: 'appydave', project: 'a01-xmen', video: '01-xmen' }).video).toBe(
+      '01-xmen',
+    );
+  });
+});
+
 describe('OpenContext schema', () => {
   it('accepts the resolved context and rejects a bad id', () => {
     const ok = { brand: 'appydave', projectDir: '/x/v-appydave/a01-xmen', projectId: randomUUID() };
