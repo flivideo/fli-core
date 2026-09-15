@@ -159,6 +159,26 @@ describe('writeIdentity', () => {
     }
   });
 
+  it.runIf(process.getuid?.() !== 0)(
+    'refuses with io-error when a same-id rewrite cannot be written — the file is untouched',
+    async () => {
+      const dir = await tempDir();
+      const id = identity();
+      await writeIdentity(dir, id);
+      const before = await fs.readFile(path.join(dir, 'fli.studio.json'), 'utf8');
+      await fs.chmod(dir, 0o500);
+      try {
+        expect(await writeIdentity(dir, { ...id, name: 'Renamed' })).toMatchObject({
+          kind: 'refused',
+          reason: 'io-error',
+        });
+      } finally {
+        await fs.chmod(dir, 0o700);
+      }
+      expect(await fs.readFile(path.join(dir, 'fli.studio.json'), 'utf8')).toBe(before);
+    },
+  );
+
   it('two concurrent writes of the same id both succeed', async () => {
     const dir = await tempDir();
     const id = identity();
