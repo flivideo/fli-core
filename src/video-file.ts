@@ -1,42 +1,37 @@
 import { z } from 'zod';
 import { KebabSlug } from './project-folder.js';
+import { LEGACY_FOLDERS } from './classify.js';
 import { parseOrThrow } from './results.js';
 
 /**
- * Video files and folders (spec §3 L1): `videos/<NN>-<video-name>/<NN>-<kind>[-<variant>].<ext>`.
- * Kinds in v1: `cut`, `final` (no variant), `audio-<treatment>`, `overlay-<variant>` (variant required).
+ * Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes the 09-09 numbered shape):
+ * `videos/<name>/<name>-<kind>[-<variant>].<ext>`, e.g. `videos/flivideo-tour/flivideo-tour-audio-a100.m4a`.
+ * No numbers. The video's name is on every file, so a file explains itself outside its folder.
+ * Kinds: `cut`, `final` (no variant), `audio-<treatment>`, `overlay-<variant>` (variant required).
  * Anything else is `unknown-kind`: shown, never hidden, and `parseVideoFile` never throws.
  */
 
-const VideoNumber = z.number().int().min(1).max(99);
 const Ext = z.string().regex(/^[A-Za-z0-9]+$/, 'ext must be letters/digits, without the dot');
 
 export const VideoFileKind = z.enum(['cut', 'audio', 'overlay', 'final']);
 export type VideoFileKind = z.infer<typeof VideoFileKind>;
 
 export const VideoFile = z.discriminatedUnion('kind', [
+  z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }),
   z.object({
-    video: VideoNumber,
-    kind: z.literal('cut'),
-    variant: z.null().default(null),
-    ext: Ext,
-  }),
-  z.object({
-    video: VideoNumber,
+    name: KebabSlug,
     kind: z.literal('final'),
     variant: z.null().default(null),
     ext: Ext,
   }),
-  z.object({ video: VideoNumber, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }),
-  z.object({ video: VideoNumber, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }),
+  z.object({ name: KebabSlug, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }),
+  z.object({ name: KebabSlug, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }),
 ]);
 export type VideoFile = z.infer<typeof VideoFile>;
 
 export const UnknownVideoFile = z.object({
   kind: z.literal('unknown-kind'),
   name: z.string(),
-  /** The `NN` prefix when the name has one, else `null`. */
-  video: VideoNumber.nullable(),
   ext: z.string().nullable(),
 });
 export type UnknownVideoFile = z.infer<typeof UnknownVideoFile>;
@@ -44,62 +39,67 @@ export type UnknownVideoFile = z.infer<typeof UnknownVideoFile>;
 export const ParsedVideoFile = z.union([VideoFile, UnknownVideoFile]);
 export type ParsedVideoFile = z.infer<typeof ParsedVideoFile>;
 
-const VIDEO_FILE = /^(\d{2})-([a-z]+)(?:-([a-z0-9]+(?:-[a-z0-9]+)*))?\.([A-Za-z0-9]+)$/;
+/** What follows `<name>-`: `<kind>[-<variant>].<ext>`. */
+const KIND_PART = /^([a-z]+)(?:-([a-z0-9]+(?:-[a-z0-9]+)*))?\.([A-Za-z0-9]+)$/;
 
-/** `01-audio-dfn100.m4a` → `{ video: 1, kind: 'audio', variant: 'dfn100', ext: 'm4a' }`. Never throws. */
-export function parseVideoFile(name: string): ParsedVideoFile {
-  const match = VIDEO_FILE.exec(name);
-  if (match) {
-    const video = Number(match[1]);
-    const kind = match[2] as string;
-    const variant = match[3] ?? null;
-    const ext = match[4] as string;
-    const candidate = { video, kind, variant, ext };
-    const parsed = VideoFile.safeParse(candidate);
-    if (parsed.success) return parsed.data;
+/**
+ * `flivideo-tour-audio-a100.m4a` in video `flivideo-tour` → `{ name: 'flivideo-tour', kind: 'audio', variant: 'a100',
+ * ext: 'm4a' }`. The video name is required: names are kebab and may contain kind words (`the-final-cut`), so a file
+ * name only splits once the name is known. Never throws.
+ */
+export function parseVideoFile(fileName: string, videoName: string): ParsedVideoFile {
+  const prefix = `${videoName}-`;
+  if (fileName.startsWith(prefix)) {
+    const match = KIND_PART.exec(fileName.slice(prefix.length));
+    if (match) {
+      const parsed = VideoFile.safeParse({
+        name: videoName,
+        kind: match[1],
+        variant: match[2] ?? null,
+        ext: match[3],
+      });
+      if (parsed.success) return parsed.data;
+    }
   }
-  return unknownKind(name);
-}
-
-function unknownKind(name: string): UnknownVideoFile {
-  const prefix = /^(\d{2})-/.exec(name);
-  const video = prefix ? Number(prefix[1]) : null;
-  const extMatch = /\.([A-Za-z0-9]+)$/.exec(name);
-  return {
-    kind: 'unknown-kind',
-    name,
-    video: video !== null && video >= 1 ? video : null,
-    ext: extMatch ? (extMatch[1] as string) : null,
-  };
+  const extMatch = /\.([A-Za-z0-9]+)$/.exec(fileName);
+  return { kind: 'unknown-kind', name: fileName, ext: extMatch ? (extMatch[1] as string) : null };
 }
 
 /** The inverse of `parseVideoFile`, so an agent never invents a name (CR-16). Throws `FliCoreError` on invalid input. */
 export function videoFileName(file: z.input<typeof VideoFile>): string {
-  const { video, kind, variant, ext } = parseOrThrow(VideoFile, file, 'video file');
-  const nn = String(video).padStart(2, '0');
-  return variant === null ? `${nn}-${kind}.${ext}` : `${nn}-${kind}-${variant}.${ext}`;
+  const { name, kind, variant, ext } = parseOrThrow(VideoFile, file, 'video file');
+  return variant === null ? `${name}-${kind}.${ext}` : `${name}-${kind}-${variant}.${ext}`;
 }
 
-export const VideoFolder = z.object({ video: VideoNumber, name: KebabSlug });
+export const VideoFolder = z.object({
+  name: KebabSlug.refine(
+    (name) => !LEGACY_FOLDERS.includes(name),
+    'a legacy layout name (first-edit, edits, …) is never a video',
+  ),
+});
 export type VideoFolder = z.infer<typeof VideoFolder>;
 
-/** A video folder name, `<NN>-<name>` with `NN` 01–99 and a kebab-case name (`01-xmen`). */
-export const VIDEO_FOLDER_PATTERN = /^(0[1-9]|[1-9]\d)-([a-z0-9]+(?:-[a-z0-9]+)*)$/;
+/** A video folder name: a kebab-case name (`flivideo-tour`). Read only inside `videos/`. */
+export const VIDEO_FOLDER_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 /** The same rule as a string schema, for contexts that carry the folder name (`OpenContext.video`). */
 export const VideoFolderName = z
   .string()
-  .regex(VIDEO_FOLDER_PATTERN, 'video must be a video folder name, <NN>-<kebab-name>');
+  .regex(
+    VIDEO_FOLDER_PATTERN,
+    'video must be a video folder name: a kebab-case name, e.g. flivideo-tour',
+  );
 
-/** `01-xmen` → `{ video: 1, name: 'xmen' }`. Not a video folder → `null`. */
+/**
+ * `flivideo-tour` → `{ name: 'flivideo-tour' }`. Not a kebab name, or a legacy layout name (`first-edit`, `edits`, …,
+ * or `-`-prefixed), → `null`: those never parse as videos.
+ */
 export function parseVideoFolder(name: string): VideoFolder | null {
-  const match = VIDEO_FOLDER_PATTERN.exec(name);
-  if (!match) return null;
-  return { video: Number(match[1]), name: match[2] as string };
+  const parsed = VideoFolder.safeParse({ name });
+  return parsed.success ? parsed.data : null;
 }
 
-/** The inverse of `parseVideoFolder`. Throws `FliCoreError` on invalid input. */
+/** The inverse of `parseVideoFolder`: the folder is the name. Throws `FliCoreError` on a name that is not kebab. */
 export function videoFolderName(folder: VideoFolder): string {
-  const { video, name } = parseOrThrow(VideoFolder, folder, 'video folder');
-  return `${String(video).padStart(2, '0')}-${name}`;
+  return parseOrThrow(VideoFolder, folder, 'video folder').name;
 }

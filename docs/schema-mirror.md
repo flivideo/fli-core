@@ -3,12 +3,12 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `0ce32bbe0b37` · **generated** 2026-09-22T05:07:01+00:00
+- **commit** `befafefaf4d3` · **generated** 2026-09-22T10:35:33+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`
 
 | shapes | declared sets | derived sets | gaps | findings |
 |---|---|---|---|---|
-| 81 | 21 | 2 | 4 | 2 |
+| 80 | 21 | 2 | 4 | 2 |
 
 > **Read the gaps before trusting the shape.** Derived sets have no declaring symbol and will drift silently the next time one changes. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -199,39 +199,39 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 | `valid` | `src/results.ts:14` |
 | `invalid` | `src/results.ts:5` |
 
-### `src/video-file.VideoFileKind` — `src/video-file.ts:14`
+### `src/video-file.VideoFileKind` — `src/video-file.ts:16`
 
 *`z.enum` `VideoFileKind` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `cut` | `src/video-file.ts:14` |
-| `audio` | `src/video-file.ts:14` |
-| `overlay` | `src/video-file.ts:14` |
-| `final` | `src/video-file.ts:14` |
+| `cut` | `src/video-file.ts:16` |
+| `audio` | `src/video-file.ts:16` |
+| `overlay` | `src/video-file.ts:16` |
+| `final` | `src/video-file.ts:16` |
 
-### `src/video-file.VideoFile.kind` — `src/video-file.ts:17-32`
+### `src/video-file.VideoFile.kind` — `src/video-file.ts:19-29`
 
 *the `kind` discriminator of `z.discriminatedUnion` `VideoFile` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
 | `cut` | `src/video-file.ts:20` |
-| `final` | `src/video-file.ts:26` |
-| `audio` | `src/video-file.ts:30` |
-| `overlay` | `src/video-file.ts:31` |
+| `final` | `src/video-file.ts:23` |
+| `audio` | `src/video-file.ts:27` |
+| `overlay` | `src/video-file.ts:28` |
 
-### `src/video-file.ParsedVideoFile.kind` — `src/video-file.ts:44`
+### `src/video-file.ParsedVideoFile.kind` — `src/video-file.ts:39`
 
 *the `kind` discriminator of the union `ParsedVideoFile` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
 | `cut` | `src/video-file.ts:20` |
-| `final` | `src/video-file.ts:26` |
-| `audio` | `src/video-file.ts:30` |
-| `overlay` | `src/video-file.ts:31` |
-| `unknown-kind` | `src/video-file.ts:36` |
+| `final` | `src/video-file.ts:23` |
+| `audio` | `src/video-file.ts:27` |
+| `overlay` | `src/video-file.ts:28` |
+| `unknown-kind` | `src/video-file.ts:33` |
 
 ## Closed sets — derived (no declaring symbol)
 
@@ -861,89 +861,83 @@ Absent → `null`; present and valid → `ValidFile`; present and unusable → `
 | `InvalidFile` | `InvalidFile → src/results.InvalidFile` | — | `src/results.ts:20` |
 | `null` | `z.null()` | — | `src/results.ts:20` |
 
-### `src/video-file.VideoNumber` — zod-scalar — `src/video-file.ts:11`
+### `src/video-file.Ext` — zod-scalar — `src/video-file.ts:14`
 
-Video files and folders (spec §3 L1): `videos/<NN>-<video-name>/<NN>-<kind>[-<variant>].<ext>`.
-
-`z.number().int().min(1).max(99)`
-
-### `src/video-file.Ext` — zod-scalar — `src/video-file.ts:12`
+Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes the 09-09 numbered shape):
 
 `z.string().regex(/^[A-Za-z0-9]+$/, 'ext must be letters/digits, without the dot')`
 
-### `src/video-file.VideoFile` — zod-discriminated-union on `kind` — `src/video-file.ts:17-32`
+### `src/video-file.VideoFile` — zod-discriminated-union on `kind` — `src/video-file.ts:19-29`
 
 | field | type | default | at |
 |---|---|---|---|
-| `cut` | `z.object({ video: VideoNumber, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) → src/video-file.VideoNumber, src/video-file.Ext` | — | `src/video-file.ts:20` |
-| `final` | `z.object({ video: VideoNumber, kind: z.literal('final'), variant: z.null().default(null), ext: Ext }) → src/video-file.VideoNumber, src/video-file.Ext` | — | `src/video-file.ts:26` |
-| `audio` | `z.object({ video: VideoNumber, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }) → src/video-file.VideoNumber, src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:30` |
-| `overlay` | `z.object({ video: VideoNumber, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }) → src/video-file.VideoNumber, src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:31` |
+| `cut` | `z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:20` |
+| `final` | `z.object({ name: KebabSlug, kind: z.literal('final'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:23` |
+| `audio` | `z.object({ name: KebabSlug, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:27` |
+| `overlay` | `z.object({ name: KebabSlug, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:28` |
 
-### `src/video-file.VideoFile[kind=cut]` — zod-object — `src/video-file.ts:18-23`
+### `src/video-file.VideoFile[kind=cut]` — zod-object — `src/video-file.ts:20`
 
 | field | type | default | at |
 |---|---|---|---|
-| `video` | `VideoNumber → src/video-file.VideoNumber` | — | `src/video-file.ts:19` |
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:20` |
 | `kind` | `z.literal('cut')` | — | `src/video-file.ts:20` |
-| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:21` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:22` |
+| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:20` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:20` |
 
-### `src/video-file.VideoFile[kind=final]` — zod-object — `src/video-file.ts:24-29`
+### `src/video-file.VideoFile[kind=final]` — zod-object — `src/video-file.ts:21-26`
 
 | field | type | default | at |
 |---|---|---|---|
-| `video` | `VideoNumber → src/video-file.VideoNumber` | — | `src/video-file.ts:25` |
-| `kind` | `z.literal('final')` | — | `src/video-file.ts:26` |
-| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:27` |
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:22` |
+| `kind` | `z.literal('final')` | — | `src/video-file.ts:23` |
+| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:24` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:25` |
+
+### `src/video-file.VideoFile[kind=audio]` — zod-object — `src/video-file.ts:27`
+
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:27` |
+| `kind` | `z.literal('audio')` | — | `src/video-file.ts:27` |
+| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:27` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:27` |
+
+### `src/video-file.VideoFile[kind=overlay]` — zod-object — `src/video-file.ts:28`
+
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:28` |
+| `kind` | `z.literal('overlay')` | — | `src/video-file.ts:28` |
+| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:28` |
 | `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:28` |
 
-### `src/video-file.VideoFile[kind=audio]` — zod-object — `src/video-file.ts:30`
+### `src/video-file.UnknownVideoFile` — zod-object — `src/video-file.ts:32-36`
 
 | field | type | default | at |
 |---|---|---|---|
-| `video` | `VideoNumber → src/video-file.VideoNumber` | — | `src/video-file.ts:30` |
-| `kind` | `z.literal('audio')` | — | `src/video-file.ts:30` |
-| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:30` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:30` |
+| `kind` | `z.literal('unknown-kind')` | — | `src/video-file.ts:33` |
+| `name` | `z.string()` | — | `src/video-file.ts:34` |
+| `ext` | `z.string().nullable()` | — | `src/video-file.ts:35` |
 
-### `src/video-file.VideoFile[kind=overlay]` — zod-object — `src/video-file.ts:31`
-
-| field | type | default | at |
-|---|---|---|---|
-| `video` | `VideoNumber → src/video-file.VideoNumber` | — | `src/video-file.ts:31` |
-| `kind` | `z.literal('overlay')` | — | `src/video-file.ts:31` |
-| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:31` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:31` |
-
-### `src/video-file.UnknownVideoFile` — zod-object — `src/video-file.ts:35-41`
+### `src/video-file.ParsedVideoFile` — zod-union on `kind` — `src/video-file.ts:39`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('unknown-kind')` | — | `src/video-file.ts:36` |
-| `name` | `z.string()` | — | `src/video-file.ts:37` |
-| `video` | `VideoNumber.nullable() → src/video-file.VideoNumber` | — | `src/video-file.ts:39` |
-| `ext` | `z.string().nullable()` | — | `src/video-file.ts:40` |
+| `VideoFile` | `VideoFile → src/video-file.VideoFile` | — | `src/video-file.ts:39` |
+| `UnknownVideoFile` | `UnknownVideoFile → src/video-file.UnknownVideoFile` | — | `src/video-file.ts:39` |
 
-### `src/video-file.ParsedVideoFile` — zod-union on `kind` — `src/video-file.ts:44`
+### `src/video-file.VideoFolder` — zod-object — `src/video-file.ts:74-79`
 
 | field | type | default | at |
 |---|---|---|---|
-| `VideoFile` | `VideoFile → src/video-file.VideoFile` | — | `src/video-file.ts:44` |
-| `UnknownVideoFile` | `UnknownVideoFile → src/video-file.UnknownVideoFile` | — | `src/video-file.ts:44` |
+| `name` | `KebabSlug.refine((name) => !LEGACY_FOLDERS.includes(name), 'a legacy layout name (first-edit, edits, …) is never a video') → src/project-folder.KebabSlug, src/classify.LEGACY_FOLDERS` | — | `src/video-file.ts:75` |
 
-### `src/video-file.VideoFolder` — zod-object — `src/video-file.ts:83`
-
-| field | type | default | at |
-|---|---|---|---|
-| `video` | `VideoNumber → src/video-file.VideoNumber` | — | `src/video-file.ts:83` |
-| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:83` |
-
-### `src/video-file.VideoFolderName` — zod-scalar — `src/video-file.ts:90-92`
+### `src/video-file.VideoFolderName` — zod-scalar — `src/video-file.ts:86-91`
 
 The same rule as a string schema, for contexts that carry the folder name (`OpenContext.video`).
 
-`z.string().regex(VIDEO_FOLDER_PATTERN, 'video must be a video folder name, <NN>-<kebab-name>')`
+`z.string().regex(VIDEO_FOLDER_PATTERN, 'video must be a video folder name: a kebab-case name, e.g. flivideo-tour')`
 
 ## Cannot be mirrored
 

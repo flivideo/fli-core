@@ -95,7 +95,7 @@ describe('OpenContext and OpenArgs refuse unsafe values (F10)', () => {
     expect(result.error?.issues[0]?.message).toBe('projectDir must be an absolute path');
   });
 
-  it.each(['../../etc', '01', 'xmen', '1-xmen', '00-xmen', '01-Xmen', '01-xmen/'])(
+  it.each(['../../etc', 'Xmen', 'flivideo_tour', 'a--b', '-trash', 'xmen/', ''])(
     'refuses video "%s" in both schemas',
     (video) => {
       expect(OpenContext.safeParse({ ...ok, video }).success).toBe(false);
@@ -106,10 +106,10 @@ describe('OpenContext and OpenArgs refuse unsafe values (F10)', () => {
   );
 
   it('accepts a video folder name', () => {
-    expect(OpenContext.parse({ ...ok, video: '10-xmen-short' }).video).toBe('10-xmen-short');
-    expect(OpenArgs.parse({ brand: 'appydave', project: 'a01-xmen', video: '01-xmen' }).video).toBe(
-      '01-xmen',
-    );
+    expect(OpenContext.parse({ ...ok, video: 'flivideo-tour' }).video).toBe('flivideo-tour');
+    expect(
+      OpenArgs.parse({ brand: 'appydave', project: 'a01-xmen', video: 'flihub-demo' }).video,
+    ).toBe('flihub-demo');
   });
 });
 

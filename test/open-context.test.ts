@@ -148,10 +148,13 @@ describe('resolveOpenContext (open contract §5, F5)', () => {
     expect(result).toMatchObject({ kind: 'project-refused', result: { kind: 'unscanned' } });
   });
 
-  it.each(['../../etc', '01', '1-xmen', '01-Xmen'])('video-invalid: "%s"', async (video) => {
-    const { result } = await resolve({ brand: 'appydave', project: 'a01', video });
-    expect(result).toEqual({ kind: 'video-invalid', video });
-  });
+  it.each(['../../etc', 'Xmen', 'flivideo_tour', '-trash'])(
+    'video-invalid: "%s"',
+    async (video) => {
+      const { result } = await resolve({ brand: 'appydave', project: 'a01', video });
+      expect(result).toEqual({ kind: 'video-invalid', video });
+    },
+  );
 
   it('video-not-found: no such folder, or a file where the folder should be', async () => {
     const missing = await resolve({ brand: 'appydave', project: 'a01', video: '03-nope' });

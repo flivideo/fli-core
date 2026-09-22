@@ -741,14 +741,14 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 15
+            "line": 17
           },
           "name": "VideoFileKind"
         }
       ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 14
+        "line": 16
       },
       "authority": "`z.enum` `VideoFileKind` - a single declaring symbol",
       "grade": "declared",
@@ -757,28 +757,28 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 14
+            "line": 16
           },
           "value": "cut"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 14
+            "line": 16
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 14
+            "line": 16
           },
           "value": "overlay"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 14
+            "line": 16
           },
           "value": "final"
         }
@@ -786,9 +786,9 @@
     },
     {
       "anchor": {
-        "end_line": 32,
+        "end_line": 29,
         "file": "src/video-file.ts",
-        "line": 17
+        "line": 19
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `VideoFile` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -804,21 +804,21 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 26
+            "line": 23
           },
           "value": "final"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 30
+            "line": 27
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 28
           },
           "value": "overlay"
         }
@@ -827,7 +827,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 44
+        "line": 39
       },
       "authority": "the `kind` discriminator of the union `ParsedVideoFile` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -843,28 +843,28 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 26
+            "line": 23
           },
           "value": "final"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 30
+            "line": 27
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 28
           },
           "value": "overlay"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 36
+            "line": 33
           },
           "value": "unknown-kind"
         }
@@ -893,7 +893,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-22T05:07:01+00:00",
+  "generated": "2026-09-22T10:35:33+00:00",
   "mirror_version": 1,
   "parser": "typescript 6.0.3 (resolved from the target)",
   "scope": {
@@ -3209,7 +3209,7 @@
             "line": 22
           },
           "default": null,
-          "doc": "Video folder name, `<NN>-<name>`.",
+          "doc": "Video folder name: the video's kebab name (`flivideo-tour`).",
           "name": "video",
           "type": "VideoFolderName.optional() \u2192 src/video-file.VideoFolderName"
         }
@@ -3262,7 +3262,7 @@
             "line": 32
           },
           "default": null,
-          "doc": "Video folder name, `<NN>-<name>`.",
+          "doc": "Video folder name: the video's kebab name (`flivideo-tour`).",
           "name": "video",
           "type": "VideoFolderName.optional() \u2192 src/video-file.VideoFolderName"
         }
@@ -4091,24 +4091,10 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 11
+        "line": 14
       },
       "bases": [],
-      "doc": "Video files and folders (spec \u00a73 L1): `videos/<NN>-<video-name>/<NN>-<kind>[-<variant>].<ext>`.",
-      "exported": false,
-      "fields": [],
-      "grade": "declared",
-      "id": "src/video-file.VideoNumber",
-      "kind": "zod-scalar",
-      "value": "z.number().int().min(1).max(99)"
-    },
-    {
-      "anchor": {
-        "file": "src/video-file.ts",
-        "line": 12
-      },
-      "bases": [],
-      "doc": null,
+      "doc": "Video files and folders (ruling \"B only\", \ud83d\udc64 David 2026-09-22 \u2014 supersedes the 09-09 numbered shape):",
       "exported": false,
       "fields": [],
       "grade": "declared",
@@ -4121,15 +4107,15 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 33
+            "line": 30
           },
           "name": "VideoFile"
         }
       ],
       "anchor": {
-        "end_line": 32,
+        "end_line": 29,
         "file": "src/video-file.ts",
-        "line": 17
+        "line": 19
       },
       "bases": [],
       "doc": null,
@@ -4142,34 +4128,34 @@
           },
           "default": null,
           "name": "cut",
-          "type": "z.object({ video: VideoNumber, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) \u2192 src/video-file.VideoNumber, src/video-file.Ext"
+          "type": "z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) \u2192 src/project-folder.KebabSlug, src/video-file.Ext"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 26
+            "line": 23
           },
           "default": null,
           "name": "final",
-          "type": "z.object({ video: VideoNumber, kind: z.literal('final'), variant: z.null().default(null), ext: Ext }) \u2192 src/video-file.VideoNumber, src/video-file.Ext"
+          "type": "z.object({ name: KebabSlug, kind: z.literal('final'), variant: z.null().default(null), ext: Ext }) \u2192 src/project-folder.KebabSlug, src/video-file.Ext"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 30
+            "line": 27
           },
           "default": null,
           "name": "audio",
-          "type": "z.object({ video: VideoNumber, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }) \u2192 src/video-file.VideoNumber, src/project-folder.KebabSlug, src/video-file.Ext"
+          "type": "z.object({ name: KebabSlug, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }) \u2192 src/project-folder.KebabSlug, src/video-file.Ext"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 28
           },
           "default": null,
           "name": "overlay",
-          "type": "z.object({ video: VideoNumber, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }) \u2192 src/video-file.VideoNumber, src/project-folder.KebabSlug, src/video-file.Ext"
+          "type": "z.object({ name: KebabSlug, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }) \u2192 src/project-folder.KebabSlug, src/video-file.Ext"
         }
       ],
       "grade": "declared",
@@ -4178,9 +4164,8 @@
     },
     {
       "anchor": {
-        "end_line": 23,
         "file": "src/video-file.ts",
-        "line": 18
+        "line": 20
       },
       "bases": [],
       "doc": null,
@@ -4188,11 +4173,11 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 19
+            "line": 20
           },
           "default": null,
-          "name": "video",
-          "type": "VideoNumber \u2192 src/video-file.VideoNumber"
+          "name": "name",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
         },
         {
           "anchor": {
@@ -4206,7 +4191,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 21
+            "line": 20
           },
           "default": "null",
           "name": "variant",
@@ -4215,7 +4200,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 22
+            "line": 20
           },
           "default": null,
           "name": "ext",
@@ -4228,9 +4213,9 @@
     },
     {
       "anchor": {
-        "end_line": 29,
+        "end_line": 26,
         "file": "src/video-file.ts",
-        "line": 24
+        "line": 21
       },
       "bases": [],
       "doc": null,
@@ -4238,16 +4223,16 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 25
+            "line": 22
           },
           "default": null,
-          "name": "video",
-          "type": "VideoNumber \u2192 src/video-file.VideoNumber"
+          "name": "name",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 26
+            "line": 23
           },
           "default": null,
           "name": "kind",
@@ -4256,7 +4241,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 27
+            "line": 24
           },
           "default": "null",
           "name": "variant",
@@ -4265,7 +4250,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 28
+            "line": 25
           },
           "default": null,
           "name": "ext",
@@ -4279,7 +4264,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 30
+        "line": 27
       },
       "bases": [],
       "doc": null,
@@ -4287,16 +4272,16 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 30
+            "line": 27
           },
           "default": null,
-          "name": "video",
-          "type": "VideoNumber \u2192 src/video-file.VideoNumber"
+          "name": "name",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 30
+            "line": 27
           },
           "default": null,
           "name": "kind",
@@ -4305,7 +4290,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 30
+            "line": 27
           },
           "default": null,
           "name": "variant",
@@ -4314,7 +4299,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 30
+            "line": 27
           },
           "default": null,
           "name": "ext",
@@ -4328,7 +4313,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 31
+        "line": 28
       },
       "bases": [],
       "doc": null,
@@ -4336,16 +4321,16 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 28
           },
           "default": null,
-          "name": "video",
-          "type": "VideoNumber \u2192 src/video-file.VideoNumber"
+          "name": "name",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 28
           },
           "default": null,
           "name": "kind",
@@ -4354,7 +4339,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 28
           },
           "default": null,
           "name": "variant",
@@ -4363,7 +4348,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 28
           },
           "default": null,
           "name": "ext",
@@ -4379,15 +4364,15 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 42
+            "line": 37
           },
           "name": "UnknownVideoFile"
         }
       ],
       "anchor": {
-        "end_line": 41,
+        "end_line": 36,
         "file": "src/video-file.ts",
-        "line": 35
+        "line": 32
       },
       "bases": [],
       "doc": null,
@@ -4396,7 +4381,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 36
+            "line": 33
           },
           "default": null,
           "name": "kind",
@@ -4405,7 +4390,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 37
+            "line": 34
           },
           "default": null,
           "name": "name",
@@ -4414,17 +4399,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 39
-          },
-          "default": null,
-          "doc": "The `NN` prefix when the name has one, else `null`.",
-          "name": "video",
-          "type": "VideoNumber.nullable() \u2192 src/video-file.VideoNumber"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 40
+            "line": 35
           },
           "default": null,
           "name": "ext",
@@ -4440,14 +4415,14 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 45
+            "line": 40
           },
           "name": "ParsedVideoFile"
         }
       ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 44
+        "line": 39
       },
       "bases": [],
       "doc": null,
@@ -4456,7 +4431,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 44
+            "line": 39
           },
           "default": null,
           "name": "VideoFile",
@@ -4465,7 +4440,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 44
+            "line": 39
           },
           "default": null,
           "name": "UnknownVideoFile",
@@ -4481,14 +4456,15 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 84
+            "line": 80
           },
           "name": "VideoFolder"
         }
       ],
       "anchor": {
+        "end_line": 79,
         "file": "src/video-file.ts",
-        "line": 83
+        "line": 74
       },
       "bases": [],
       "doc": null,
@@ -4497,20 +4473,11 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 83
-          },
-          "default": null,
-          "name": "video",
-          "type": "VideoNumber \u2192 src/video-file.VideoNumber"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 83
+            "line": 75
           },
           "default": null,
           "name": "name",
-          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+          "type": "KebabSlug.refine((name) => !LEGACY_FOLDERS.includes(name), 'a legacy layout name (first-edit, edits, \u2026) is never a video') \u2192 src/project-folder.KebabSlug, src/classify.LEGACY_FOLDERS"
         }
       ],
       "grade": "declared",
@@ -4519,9 +4486,9 @@
     },
     {
       "anchor": {
-        "end_line": 92,
+        "end_line": 91,
         "file": "src/video-file.ts",
-        "line": 90
+        "line": 86
       },
       "bases": [],
       "doc": "The same rule as a string schema, for contexts that carry the folder name (`OpenContext.video`).",
@@ -4530,11 +4497,11 @@
       "grade": "declared",
       "id": "src/video-file.VideoFolderName",
       "kind": "zod-scalar",
-      "value": "z.string().regex(VIDEO_FOLDER_PATTERN, 'video must be a video folder name, <NN>-<kebab-name>')"
+      "value": "z.string().regex(VIDEO_FOLDER_PATTERN, 'video must be a video folder name: a kebab-case name, e.g. flivideo-tour')"
     }
   ],
   "target": {
-    "commit": "0ce32bbe0b37dd431feec15152cd5cc3f010e81f",
+    "commit": "befafefaf4d3566f3024b7f47f0c512557edd1a0",
     "root": "/Users/davidcruwys/dev/ad/flivideo/fli-core",
     "stack": "typescript"
   },

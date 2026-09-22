@@ -159,8 +159,8 @@ describe('result schemas match what the functions return (F4)', () => {
   it('ParsedOpenArgs and ParsedVideoFile', () => {
     matches(ParsedOpenArgs, parseOpenArgs(['--brand', 'appydave', '--video', 'not-a-folder'], {}));
     matches(ParsedOpenArgs, parseOpenArgs([], {}));
-    for (const name of ['01-cut.mp4', '01-audio-dfn100.m4a', 'notes.txt']) {
-      matches(ParsedVideoFile, parseVideoFile(name));
+    for (const name of ['xmen-cut.mp4', 'xmen-audio-dfn100.m4a', 'notes.txt']) {
+      matches(ParsedVideoFile, parseVideoFile(name, 'xmen'));
     }
   });
 });

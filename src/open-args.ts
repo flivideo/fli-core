@@ -18,7 +18,7 @@ export const OpenContext = z.object({
     .refine((value) => path.isAbsolute(value), 'projectDir must be an absolute path'),
   /** `fli.studio.json` `id`. */
   projectId: z.uuid(),
-  /** Video folder name, `<NN>-<name>`. */
+  /** Video folder name: the video's kebab name (`flivideo-tour`). */
   video: VideoFolderName.optional(),
 });
 export type OpenContext = z.infer<typeof OpenContext>;
@@ -28,7 +28,7 @@ export const OpenArgs = z.object({
   brand: z.string().min(1),
   /** Project folder name (or anything `resolveProject` accepts). */
   project: z.string().min(1),
-  /** Video folder name, `<NN>-<name>`. */
+  /** Video folder name: the video's kebab name (`flivideo-tour`). */
   video: VideoFolderName.optional(),
 });
 export type OpenArgs = z.infer<typeof OpenArgs>;
@@ -65,7 +65,7 @@ export type ParsedOpenArgs = z.infer<typeof ParsedOpenArgs>;
 const NAMES = OpenArgName.options;
 
 /**
- * Parse `--brand <k>`, `--project <folder>`, `--video <NN-name>` (and `--name=value`) from `argv`, falling back to
+ * Parse `--brand <k>`, `--project <folder>`, `--video <name>` (and `--name=value`) from `argv`, falling back to
  * `FLIVIDEO_BRAND`, `FLIVIDEO_PROJECT`, `FLIVIDEO_VIDEO` in `env`. Argv wins over env; a repeated flag keeps its last
  * value; an empty value counts as missing; parsing stops at `--`. Unknown arguments are ignored. Pure: no I/O.
  */

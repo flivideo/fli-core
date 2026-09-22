@@ -200,110 +200,127 @@ describe('divergences from FliHub parseRecordingFilename (F7)', () => {
   });
 });
 
-describe('parseVideoFile / videoFileName (L1)', () => {
-  it('parses the four v1 kinds (spec §11 #5)', () => {
-    expect(parseVideoFile('01-cut.mp4')).toEqual({
-      video: 1,
+describe('parseVideoFile / videoFileName (ruling "B only", 2026-09-22)', () => {
+  it('parses the four kinds in videos/<name>/<name>-<kind>[-<variant>].<ext>', () => {
+    const v = 'flivideo-tour';
+    expect(parseVideoFile('flivideo-tour-cut.mp4', v)).toEqual({
+      name: v,
       kind: 'cut',
       variant: null,
       ext: 'mp4',
     });
-    expect(parseVideoFile('01-audio-dfn100.m4a')).toEqual({
-      video: 1,
-      kind: 'audio',
-      variant: 'dfn100',
-      ext: 'm4a',
-    });
-    expect(parseVideoFile('01-overlay-v5-frame.mp4')).toEqual({
-      video: 1,
-      kind: 'overlay',
-      variant: 'v5-frame',
-      ext: 'mp4',
-    });
-    expect(parseVideoFile('01-final.mp4')).toEqual({
-      video: 1,
-      kind: 'final',
-      variant: null,
-      ext: 'mp4',
-    });
-    expect(parseVideoFile('01-cut.srt')).toEqual({
-      video: 1,
+    expect(parseVideoFile('flivideo-tour-cut.srt', v)).toEqual({
+      name: v,
       kind: 'cut',
       variant: null,
       ext: 'srt',
     });
+    expect(parseVideoFile('flivideo-tour-audio-a100.m4a', v)).toEqual({
+      name: v,
+      kind: 'audio',
+      variant: 'a100',
+      ext: 'm4a',
+    });
+    expect(parseVideoFile('flivideo-tour-overlay-v5-frame.mp4', v)).toEqual({
+      name: v,
+      kind: 'overlay',
+      variant: 'v5-frame',
+      ext: 'mp4',
+    });
+    expect(parseVideoFile('flivideo-tour-final.mp4', v)).toEqual({
+      name: v,
+      kind: 'final',
+      variant: null,
+      ext: 'mp4',
+    });
+  });
+
+  it('splits a name that contains kind words, because it knows the name', () => {
+    expect(parseVideoFile('the-final-cut-final.mp4', 'the-final-cut')).toEqual({
+      name: 'the-final-cut',
+      kind: 'final',
+      variant: null,
+      ext: 'mp4',
+    });
+    expect(parseVideoFile('cut-audio-audio-dfn100.m4a', 'cut-audio')).toEqual({
+      name: 'cut-audio',
+      kind: 'audio',
+      variant: 'dfn100',
+      ext: 'm4a',
+    });
   });
 
   it.each([
-    ['01-draft.mp4', 1, 'mp4'],
-    ['01-audio.m4a', 1, 'm4a'],
-    ['01-overlay.mp4', 1, 'mp4'],
-    ['01-cut-v2.mp4', 1, 'mp4'],
-    ['01-final-v2.mp4', 1, 'mp4'],
-    ['12-Cut.mp4', 12, 'mp4'],
-    ['notes.txt', null, 'txt'],
-    ['README', null, null],
-    ['00-cut.mp4', null, 'mp4'],
-    ['1-cut.mp4', null, 'mp4'],
-  ])('%s is unknown-kind, never a throw', (name, video, ext) => {
-    expect(parseVideoFile(name)).toEqual({ kind: 'unknown-kind', name, video, ext });
+    ['flivideo-tour-draft.mp4', 'mp4'],
+    ['flivideo-tour-audio.m4a', 'm4a'],
+    ['flivideo-tour-overlay.mp4', 'mp4'],
+    ['flivideo-tour-cut-v2.mp4', 'mp4'],
+    ['flivideo-tour-final-v2.mp4', 'mp4'],
+    ['flivideo-tour-Cut.mp4', 'mp4'],
+    ['other-video-cut.mp4', 'mp4'],
+    ['01-cut.mp4', 'mp4'],
+    ['notes.txt', 'txt'],
+    ['README', null],
+  ])('%s in flivideo-tour is unknown-kind, never a throw', (name, ext) => {
+    expect(parseVideoFile(name, 'flivideo-tour')).toEqual({ kind: 'unknown-kind', name, ext });
   });
 
   it('round-trips', () => {
     const cases: VideoFile[] = [
-      { video: 1, kind: 'cut', variant: null, ext: 'mp4' },
-      { video: 2, kind: 'audio', variant: 'dfn100', ext: 'm4a' },
-      { video: 10, kind: 'overlay', variant: 'v5-frame', ext: 'mp4' },
-      { video: 99, kind: 'final', variant: null, ext: 'mov' },
+      { name: 'flivideo-tour', kind: 'cut', variant: null, ext: 'mp4' },
+      { name: 'flivideo-tour', kind: 'audio', variant: 'a100', ext: 'm4a' },
+      { name: 'flihub-demo', kind: 'overlay', variant: 'v5-frame', ext: 'mp4' },
+      { name: 'flihub-demo', kind: 'final', variant: null, ext: 'mov' },
     ];
-    for (const file of cases) {
-      expect(parseVideoFile(videoFileName(file))).toEqual(file);
-    }
-    for (const name of [
-      '01-cut.mp4',
-      '01-audio-dfn100.m4a',
-      '01-overlay-v5-frame.mp4',
-      '01-final.mp4',
-    ]) {
-      expect(videoFileName(parseVideoFile(name) as VideoFile)).toBe(name);
-    }
+    for (const file of cases) expect(parseVideoFile(videoFileName(file), file.name)).toEqual(file);
   });
 
   it('lets cut and final omit the variant', () => {
-    expect(videoFileName({ video: 3, kind: 'final', ext: 'mp4' })).toBe('03-final.mp4');
+    expect(videoFileName({ name: 'flihub-demo', kind: 'final', ext: 'mp4' })).toBe(
+      'flihub-demo-final.mp4',
+    );
   });
 
   it('refuses to build a bad name', () => {
     expect(() =>
-      videoFileName({ video: 1, kind: 'audio', variant: null, ext: 'm4a' } as never),
+      videoFileName({ name: 'x', kind: 'audio', variant: null, ext: 'm4a' } as never),
     ).toThrow(FliCoreError);
     expect(() =>
-      videoFileName({ video: 1, kind: 'cut', variant: 'v2', ext: 'mp4' } as never),
+      videoFileName({ name: 'x', kind: 'cut', variant: 'v2', ext: 'mp4' } as never),
     ).toThrow(FliCoreError);
-    expect(() => videoFileName({ video: 0, kind: 'cut', ext: 'mp4' })).toThrow(FliCoreError);
-    expect(() => videoFileName({ video: 1, kind: 'draft', ext: 'mp4' } as never)).toThrow(
+    expect(() => videoFileName({ name: 'Flivideo', kind: 'cut', ext: 'mp4' })).toThrow(
+      FliCoreError,
+    );
+    expect(() => videoFileName({ name: 'x', kind: 'draft', ext: 'mp4' } as never)).toThrow(
       FliCoreError,
     );
   });
 });
 
 describe('parseVideoFolder / videoFolderName', () => {
-  it('parses and round-trips <NN>-<name>', () => {
-    expect(parseVideoFolder('01-xmen')).toEqual({ video: 1, name: 'xmen' });
-    expect(videoFolderName({ video: 2, name: 'xmen-short' })).toBe('02-xmen-short');
-    for (const name of ['01-xmen', '02-xmen-short', '99-a']) {
-      expect(
-        videoFolderName(parseVideoFolder(name) as NonNullable<ReturnType<typeof parseVideoFolder>>),
-      ).toBe(name);
-    }
+  it('a video folder is its kebab name — no numbers', () => {
+    expect(parseVideoFolder('flivideo-tour')).toEqual({ name: 'flivideo-tour' });
+    expect(videoFolderName({ name: 'flihub-demo' })).toBe('flihub-demo');
+    expect(parseVideoFolder('10-tips')).toEqual({ name: '10-tips' });
   });
 
-  it.each(['xmen', '1-xmen', '00-xmen', '01-', '01-Xmen'])('returns null for %s', (name) => {
+  it.each([
+    'Xmen',
+    'flivideo_tour',
+    'a--b',
+    '-trash',
+    '',
+    'first-edit',
+    'edits',
+    'final',
+    'pipeline',
+  ])('returns null for %s (not kebab, or a legacy layout name)', (name) => {
     expect(parseVideoFolder(name)).toBeNull();
   });
 
   it('refuses to build a bad name', () => {
-    expect(() => videoFolderName({ video: 100, name: 'x' })).toThrow(FliCoreError);
+    expect(() => videoFolderName({ name: 'Bad Name' })).toThrow(FliCoreError);
+    expect(() => videoFolderName({ name: 'first-edit' })).toThrow(FliCoreError);
   });
 });
 
