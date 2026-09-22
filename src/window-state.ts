@@ -293,10 +293,19 @@ export function trackWindow(
       ...(win.isMaximized() ? { maximized: true } : {}),
     };
   };
+  // Never throw out of a window's event listener: in Electron's main process that is an error dialog on David's
+  // screen, and a close must never be blocked by a failed save (flicut review, 2026-09-22).
+  const safely = (): SavedWindow | null => {
+    try {
+      return current();
+    } catch {
+      return null;
+    }
+  };
   const later = (): void => {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      const s = current();
+      const s = safely();
       if (s) void saveWindow(key, s, file);
     }, options.debounceMs ?? 400);
   };
@@ -304,7 +313,7 @@ export function trackWindow(
   win.on('resize', later);
   win.on('close', () => {
     clearTimeout(timer);
-    const s = current();
+    const s = safely();
     if (s) saveWindowSync(key, s, file);
   });
   return () => clearTimeout(timer);

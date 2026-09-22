@@ -257,4 +257,23 @@ describe('trackWindow — save on move, resize and close', () => {
     await new Promise((r) => setTimeout(r, 30));
     expect(loadWindow('flicut/main', file)).toBeUndefined();
   });
+
+  it('never throws out of a listener: a window or display lookup that fails, or a store it cannot write', async () => {
+    const dir = await tempDir();
+    const win = new FakeWindow();
+    trackWindow(win, 'flicut/main', {
+      file: path.join(dir, 'window-state.json'),
+      debounceMs: 5,
+      displayIdOf: () => {
+        throw new Error('display gone');
+      },
+    });
+    expect(() => win.emit('close')).not.toThrow();
+    win.emit('move');
+    await new Promise((r) => setTimeout(r, 30));
+    await fs.writeFile(path.join(dir, 'a-file'), 'x');
+    const blocked = new FakeWindow();
+    trackWindow(blocked, 'flicut/main', { file: path.join(dir, 'a-file', 'window-state.json') });
+    expect(() => blocked.emit('close')).not.toThrow();
+  });
 });
