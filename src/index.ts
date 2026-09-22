@@ -75,6 +75,8 @@ export {
   classifyProjectEntry,
   projectLayout,
   projectLayoutPaths,
+  projectLayoutPathsSync,
+  projectLayoutSync,
 } from './classify.js';
 
 export {

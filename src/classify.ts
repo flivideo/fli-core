@@ -1,4 +1,4 @@
-import { promises as fs } from 'node:fs';
+import { promises as fs, statSync } from 'node:fs';
 import path from 'node:path';
 import { z } from 'zod';
 import { IDENTITY_FILE, parseAppFile } from './app-file.js';
@@ -140,6 +140,33 @@ export async function projectLayout(projectDir: string): Promise<ProjectLayout> 
  */
 export async function projectLayoutPaths(projectDir: string): Promise<ProjectLayoutPaths> {
   const layout = await projectLayout(projectDir);
+  const dirs = LAYOUT_DIRS[layout];
+  return {
+    layout,
+    recordings: path.join(projectDir, dirs.recordings),
+    transcripts: path.join(projectDir, dirs.transcripts),
+  };
+}
+
+function isDirectorySync(p: string): boolean {
+  try {
+    return statSync(p).isDirectory();
+  } catch {
+    return false;
+  }
+}
+
+/** `projectLayout`, synchronously — for callers that cannot await (FliHub's `getProjectPaths`). Same rule. */
+export function projectLayoutSync(projectDir: string): ProjectLayout {
+  if (!isDirectorySync(path.join(projectDir, HUB_FOLDER))) return 'legacy';
+  if (isDirectorySync(path.join(projectDir, LAYOUT_DIRS.hub.recordings))) return 'hub';
+  if (isDirectorySync(path.join(projectDir, LAYOUT_DIRS.legacy.recordings))) return 'legacy';
+  return 'hub';
+}
+
+/** `projectLayoutPaths`, synchronously. Same rule, same paths. */
+export function projectLayoutPathsSync(projectDir: string): ProjectLayoutPaths {
+  const layout = projectLayoutSync(projectDir);
   const dirs = LAYOUT_DIRS[layout];
   return {
     layout,
