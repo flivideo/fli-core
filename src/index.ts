@@ -65,7 +65,15 @@ export {
   parseAppFile,
 } from './app-file.js';
 
-export { LEGACY_FOLDERS, ProjectZone, classifyProjectEntry } from './classify.js';
+export {
+  HUB_FOLDER,
+  LEGACY_FOLDERS,
+  ProjectLayout,
+  ProjectLayoutPaths,
+  ProjectZone,
+  classifyProjectEntry,
+  projectLayoutPaths,
+} from './classify.js';
 
 export {
   ARCHIVED_FOLDER,

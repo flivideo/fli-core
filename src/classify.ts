@@ -1,9 +1,12 @@
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
 import { z } from 'zod';
 import { IDENTITY_FILE, parseAppFile } from './app-file.js';
 
 /**
  * Which zone of the project layout (spec §3, roadmap §1) a path inside a project belongs to.
- * Pure: works on the path string alone, plus an optional hint that the entry is a directory.
+ * `classifyProjectEntry` is pure: the path string alone, plus an optional directory hint. `projectLayoutPaths` is the
+ * one function here that looks at the disk, to tell the hub layout from the legacy one.
  */
 export const ProjectZone = z.enum([
   'identity',
@@ -59,10 +62,63 @@ export function classifyProjectEntry(relPath: string, isDirectory?: boolean): Pr
 
   if (top.startsWith('-') || LEGACY_FOLDERS.includes(top)) return topIsFile ? 'other' : 'legacy';
 
+  // The hub layout (new projects): FliHub's two folders live under `hub/`, mirroring FliCast's `cast/`. The `hub/`
+  // container itself, and anything else under it, is not a zone.
+  if (top === HUB_FOLDER) {
+    if (topIsFile || !nested) return 'other';
+    const inner = HUB_ZONES[segments[1] as string];
+    if (inner === undefined) return 'other';
+    if (segments.length === 2 && directory === false) return 'other';
+    if (inner === 'recordings' && segments[2] === '-chapters') return 'legacy';
+    return inner;
+  }
+
   const zone = ZONE_FOLDERS[top];
   if (zone === undefined || topIsFile) return 'other';
 
   // Chapter previews are deprecated (D8); FliHub's live `-safe/` and `-trash/` stay recordings.
   if (zone === 'recordings' && segments[1] === '-chapters') return 'legacy';
   return zone;
+}
+
+/** The folder that holds FliHub's zones in the hub layout. */
+export const HUB_FOLDER = 'hub';
+
+const HUB_ZONES: Record<string, ProjectZone> = {
+  recordings: 'recordings',
+  transcripts: 'transcripts',
+};
+
+export const ProjectLayout = z.enum(['hub', 'legacy']);
+export type ProjectLayout = z.infer<typeof ProjectLayout>;
+
+export const ProjectLayoutPaths = z.object({
+  /** `hub` when `<project>/hub/` is a directory; `legacy` otherwise. */
+  layout: ProjectLayout,
+  /** Absolute path of the recordings folder for this layout (it may not exist yet). */
+  recordings: z.string(),
+  /** Absolute path of the transcripts folder for this layout (it may not exist yet). */
+  transcripts: z.string(),
+});
+export type ProjectLayoutPaths = z.infer<typeof ProjectLayoutPaths>;
+
+/**
+ * Where FliHub's recordings and transcripts live in one project. `hub/` present → the hub layout
+ * (`hub/recordings/`, `hub/transcripts/`); otherwise the legacy top-level `recordings/` and `transcripts/`. When a
+ * project has both, `hub/` wins and the two are never merged — the top-level folders are then legacy content.
+ * Existing projects are never migrated. The legacy transcripts name `recording-transcripts/` (D7) is not returned; a
+ * reader that still wants it looks for it beside the legacy `transcripts/`.
+ */
+export async function projectLayoutPaths(projectDir: string): Promise<ProjectLayoutPaths> {
+  const hub = path.join(projectDir, HUB_FOLDER);
+  const isHub = await fs.stat(hub).then(
+    (stat) => stat.isDirectory(),
+    () => false,
+  );
+  const base = isHub ? hub : projectDir;
+  return {
+    layout: isHub ? 'hub' : 'legacy',
+    recordings: path.join(base, 'recordings'),
+    transcripts: path.join(base, 'transcripts'),
+  };
 }

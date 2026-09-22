@@ -30,15 +30,15 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 18
+            "line": 21
           },
           "name": "ProjectZone"
         }
       ],
       "anchor": {
-        "end_line": 17,
+        "end_line": 20,
         "file": "src/classify.ts",
-        "line": 8
+        "line": 11
       },
       "authority": "`z.enum` `ProjectZone` - a single declaring symbol",
       "grade": "declared",
@@ -47,56 +47,56 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 9
+            "line": 12
           },
           "value": "identity"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 10
+            "line": 13
           },
           "value": "app-decisions"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 11
+            "line": 14
           },
           "value": "recordings"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 12
+            "line": 15
           },
           "value": "transcripts"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 13
+            "line": 16
           },
           "value": "cast"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 14
+            "line": 17
           },
           "value": "videos"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 15
+            "line": 18
           },
           "value": "legacy"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 16
+            "line": 19
           },
           "value": "other"
         }
@@ -104,56 +104,90 @@
     },
     {
       "anchor": {
-        "end_line": 36,
+        "end_line": 39,
         "file": "src/classify.ts",
-        "line": 29
+        "line": 32
       },
       "authority": "module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:29 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "finding": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "grade": "derived",
       "id": "src/classify.LEGACY_FOLDERS",
       "members": [
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 30
+            "line": 33
           },
           "value": "first-edit"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 31
+            "line": 34
           },
           "value": "edits"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 32
+            "line": 35
           },
           "value": "edit-1st"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 33
+            "line": 36
           },
           "value": "final"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 34
+            "line": 37
           },
           "value": "pipeline"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 35
+            "line": 38
           },
           "value": "animation"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 93
+          },
+          "name": "ProjectLayout"
+        }
+      ],
+      "anchor": {
+        "file": "src/classify.ts",
+        "line": 92
+      },
+      "authority": "`z.enum` `ProjectLayout` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/classify.ProjectLayout",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 92
+          },
+          "value": "hub"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 92
+          },
+          "value": "legacy"
         }
       ]
     },
@@ -841,12 +875,12 @@
   "findings": [
     {
       "anchor": {
-        "end_line": 36,
+        "end_line": 39,
         "file": "src/classify.ts",
-        "line": 29
+        "line": 32
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:29 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/classify.LEGACY_FOLDERS"
     },
     {
@@ -859,7 +893,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-22T03:35:11+00:00",
+  "generated": "2026-09-22T04:59:47+00:00",
   "mirror_version": 1,
   "parser": "typescript 6.0.3 (resolved from the target)",
   "scope": {
@@ -1397,6 +1431,60 @@
       "grade": "declared",
       "id": "src/brands.ResolveBrandRootOptions",
       "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 103
+          },
+          "name": "ProjectLayoutPaths"
+        }
+      ],
+      "anchor": {
+        "end_line": 102,
+        "file": "src/classify.ts",
+        "line": 95
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 97
+          },
+          "default": null,
+          "doc": "`hub` when `<project>/hub/` is a directory; `legacy` otherwise.",
+          "name": "layout",
+          "type": "ProjectLayout \u2192 src/classify.ProjectLayout"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 99
+          },
+          "default": null,
+          "doc": "Absolute path of the recordings folder for this layout (it may not exist yet).",
+          "name": "recordings",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 101
+          },
+          "default": null,
+          "doc": "Absolute path of the transcripts folder for this layout (it may not exist yet).",
+          "name": "transcripts",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/classify.ProjectLayoutPaths",
+      "kind": "zod-object"
     },
     {
       "anchor": {
@@ -4446,7 +4534,7 @@
     }
   ],
   "target": {
-    "commit": "aa0ed0ddb63e59b6a4a4b693abe28d81bc46798b",
+    "commit": "e1ed314fd616b11d8cd246dbeb8daa80306dda8f",
     "root": "/Users/davidcruwys/dev/ad/flivideo/fli-core",
     "stack": "typescript"
   },

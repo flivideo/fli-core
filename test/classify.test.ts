@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { classifyProjectEntry, type ProjectZone } from '../src/classify.js';
+import path from 'node:path';
+import { classifyProjectEntry, projectLayoutPaths, type ProjectZone } from '../src/classify.js';
 import { buildLayoutProject, buildTree, tempDir, walk } from './helpers/fixtures.js';
 
 describe('classifyProjectEntry', () => {
@@ -94,5 +95,64 @@ describe('classifyProjectEntry', () => {
     expect((await walk(legacy)).map((rel) => classifyProjectEntry(rel, false))).toEqual([
       'transcripts',
     ]);
+  });
+});
+
+describe('the hub layout (D14: FliHub folders under hub/ for new projects)', () => {
+  it.each<[string, ProjectZone, boolean?]>([
+    ['hub/recordings', 'recordings', true],
+    ['hub/recordings/01-1-intro.mov', 'recordings'],
+    ['hub/recordings/-safe/01-1-intro.mov', 'recordings'],
+    ['hub/recordings/-chapters', 'legacy', true],
+    ['hub/recordings/-chapters/01-intro.mov', 'legacy'],
+    ['hub/transcripts/01-1-intro.srt', 'transcripts'],
+    ['hub', 'other', true],
+    ['hub/', 'other'],
+    ['hub', 'other', false],
+    ['hub/recordings', 'other', false],
+    ['hub/recording-transcripts/01-1-intro.srt', 'other'],
+    ['hub/notes.md', 'other'],
+    ['hub/b-roll/x.mov', 'other'],
+  ])('%s → %s', (relPath, zone, isDirectory) => {
+    expect(classifyProjectEntry(relPath, isDirectory)).toBe(zone);
+  });
+
+  it('projectLayoutPaths: hub/ present → hub paths', async () => {
+    const dir = await tempDir();
+    await buildTree(dir, {
+      'hub/recordings/01-1-intro.mov': 'mov',
+      'hub/transcripts/01-1-intro.srt': '1\n',
+    });
+    expect(await projectLayoutPaths(dir)).toEqual({
+      layout: 'hub',
+      recordings: path.join(dir, 'hub', 'recordings'),
+      transcripts: path.join(dir, 'hub', 'transcripts'),
+    });
+  });
+
+  it('projectLayoutPaths: no hub/ → legacy top-level paths, whether or not they exist', async () => {
+    const legacy = await tempDir();
+    await buildTree(legacy, { 'recordings/01-1-intro.mov': 'mov' });
+    expect(await projectLayoutPaths(legacy)).toEqual({
+      layout: 'legacy',
+      recordings: path.join(legacy, 'recordings'),
+      transcripts: path.join(legacy, 'transcripts'),
+    });
+    const empty = await tempDir();
+    expect((await projectLayoutPaths(empty)).layout).toBe('legacy');
+  });
+
+  it('projectLayoutPaths: a legacy project with a stray hub/ → hub wins, never merged', async () => {
+    const dir = await tempDir();
+    await buildTree(dir, { 'recordings/01-1-intro.mov': 'mov', 'hub/notes.md': 'stray' });
+    const paths = await projectLayoutPaths(dir);
+    expect(paths.layout).toBe('hub');
+    expect(paths.recordings).toBe(path.join(dir, 'hub', 'recordings'));
+  });
+
+  it('projectLayoutPaths: a file named hub is not the hub layout', async () => {
+    const dir = await tempDir();
+    await buildTree(dir, { hub: 'a file', 'recordings/01-1-intro.mov': 'mov' });
+    expect((await projectLayoutPaths(dir)).layout).toBe('legacy');
   });
 });
