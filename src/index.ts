@@ -130,3 +130,21 @@ export {
   resolveOpenContext,
   type ResolveOpenContextOptions,
 } from './open-context.js';
+
+export {
+  DisplayArea,
+  SavedWindow,
+  WindowRect,
+  WindowStateFile,
+  importWindowState,
+  loadWindow,
+  placeWindow,
+  saveWindow,
+  saveWindowSync,
+  trackWindow,
+  windowKey,
+  windowStatePath,
+  type PlaceOptions,
+  type TrackOptions,
+  type TrackedWindow,
+} from './window-state.js';

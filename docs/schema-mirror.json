@@ -893,7 +893,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-22T10:35:33+00:00",
+  "generated": "2026-09-22T14:57:13+00:00",
   "mirror_version": 1,
   "parser": "typescript 6.0.3 (resolved from the target)",
   "scope": {
@@ -912,8 +912,7 @@
       "*/fixtures/*"
     ],
     "include": [
-      "*.ts",
-      "*.tsx"
+      "src/**"
     ]
   },
   "structures": [
@@ -4498,10 +4497,423 @@
       "id": "src/video-file.VideoFolderName",
       "kind": "zod-scalar",
       "value": "z.string().regex(VIDEO_FOLDER_PATTERN, 'video must be a video folder name: a kebab-case name, e.g. flivideo-tour')"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 22
+          },
+          "name": "WindowRect"
+        }
+      ],
+      "anchor": {
+        "end_line": 21,
+        "file": "src/window-state.ts",
+        "line": 16
+      },
+      "bases": [],
+      "doc": "Window positions that survive a restart (David, 2026-09-22): every Fli app window reopens where he last put it \u2014",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 17
+          },
+          "default": null,
+          "name": "x",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 18
+          },
+          "default": null,
+          "name": "y",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 19
+          },
+          "default": null,
+          "name": "width",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 20
+          },
+          "default": null,
+          "name": "height",
+          "type": "z.number()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/window-state.WindowRect",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 29
+          },
+          "name": "SavedWindow"
+        }
+      ],
+      "anchor": {
+        "end_line": 28,
+        "file": "src/window-state.ts",
+        "line": 24
+      },
+      "bases": [
+        "WindowRect"
+      ],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 17
+          },
+          "default": null,
+          "inherited_from": "WindowRect",
+          "name": "x",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 18
+          },
+          "default": null,
+          "inherited_from": "WindowRect",
+          "name": "y",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 19
+          },
+          "default": null,
+          "inherited_from": "WindowRect",
+          "name": "width",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 20
+          },
+          "default": null,
+          "inherited_from": "WindowRect",
+          "name": "height",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 25
+          },
+          "default": null,
+          "name": "maximized",
+          "type": "z.boolean().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 27
+          },
+          "default": null,
+          "doc": "Electron display id the window was on \u2014 informational; placement is decided by geometry.",
+          "name": "displayId",
+          "type": "z.number().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/window-state.SavedWindow",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 36
+          },
+          "name": "WindowStateFile"
+        }
+      ],
+      "anchor": {
+        "end_line": 35,
+        "file": "src/window-state.ts",
+        "line": 32
+      },
+      "bases": [],
+      "doc": "The store: `{ schema: 1, windows: { \"<app>/<role>\": SavedWindow } }`.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 33
+          },
+          "default": null,
+          "name": "schema",
+          "type": "z.literal(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "windows",
+          "type": "z.record(z.string(), SavedWindow) \u2192 src/window-state.SavedWindow"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/window-state.WindowStateFile",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 45
+          },
+          "name": "DisplayArea"
+        }
+      ],
+      "anchor": {
+        "end_line": 44,
+        "file": "src/window-state.ts",
+        "line": 39
+      },
+      "bases": [],
+      "doc": "One display as the app sees it: Electron's `display.id`, `display.workArea` and whether it is the primary one.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 40
+          },
+          "default": null,
+          "name": "id",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 42
+          },
+          "default": null,
+          "doc": "The display's work area (excludes the menu bar and Dock).",
+          "name": "workArea",
+          "type": "WindowRect \u2192 src/window-state.WindowRect"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 43
+          },
+          "default": null,
+          "name": "primary",
+          "type": "z.boolean().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/window-state.DisplayArea",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 57,
+        "file": "src/window-state.ts",
+        "line": 47
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 48
+          },
+          "default": null,
+          "name": "width",
+          "type": "number"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 49
+          },
+          "default": null,
+          "name": "height",
+          "type": "number"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 50
+          },
+          "default": null,
+          "name": "minWidth",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 51
+          },
+          "default": null,
+          "name": "minHeight",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 56
+          },
+          "default": null,
+          "doc": "`false`: restore the monitor and position but open at `width` \u00d7 `height` (FliCast's uat harness \u2014 its layout",
+          "name": "keepSize",
+          "type": "?: boolean"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/window-state.PlaceOptions",
+      "kind": "interface"
+    },
+    {
+      "anchor": {
+        "end_line": 262,
+        "file": "src/window-state.ts",
+        "line": 255
+      },
+      "bases": [],
+      "doc": "The part of an Electron `BrowserWindow` that `trackWindow` needs. Methods, not data \u2014 so a structural type rather",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 256
+          },
+          "default": null,
+          "name": "on",
+          "type": "(event: 'move' | 'resize' | 'close', listener: () => void): unknown"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 257
+          },
+          "default": null,
+          "name": "isDestroyed",
+          "type": "(): boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 258
+          },
+          "default": null,
+          "name": "isMinimized",
+          "type": "(): boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 259
+          },
+          "default": null,
+          "name": "isFullScreen",
+          "type": "(): boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 260
+          },
+          "default": null,
+          "name": "isMaximized",
+          "type": "(): boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 261
+          },
+          "default": null,
+          "name": "getNormalBounds",
+          "type": "(): WindowRect"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/window-state.TrackedWindow",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "end_line": 270,
+        "file": "src/window-state.ts",
+        "line": 264
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 266
+          },
+          "default": null,
+          "doc": "`screen.getDisplayMatching(bounds).id`, to record which monitor it was on.",
+          "name": "displayIdOf",
+          "type": "?: (bounds: WindowRect) => number \u2192 src/window-state.WindowRect"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 267
+          },
+          "default": null,
+          "name": "file",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/window-state.ts",
+            "line": 269
+          },
+          "default": null,
+          "doc": "Wait this long after the last move/resize before saving; default 400 ms.",
+          "name": "debounceMs",
+          "type": "?: number"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/window-state.TrackOptions",
+      "kind": "interface"
     }
   ],
   "target": {
-    "commit": "befafefaf4d3566f3024b7f47f0c512557edd1a0",
+    "commit": "97c8b9fcc3b6bdfd23ba316aa6c6176fb0894e98",
     "root": "/Users/davidcruwys/dev/ad/flivideo/fli-core",
     "stack": "typescript"
   },

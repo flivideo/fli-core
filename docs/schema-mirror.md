@@ -3,12 +3,12 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `befafefaf4d3` · **generated** 2026-09-22T10:35:33+00:00
-- **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`
+- **commit** `97c8b9fcc3b6` · **generated** 2026-09-22T14:57:13+00:00
+- **scope** include `src/**` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`
 
 | shapes | declared sets | derived sets | gaps | findings |
 |---|---|---|---|---|
-| 80 | 21 | 2 | 4 | 2 |
+| 87 | 21 | 2 | 4 | 2 |
 
 > **Read the gaps before trusting the shape.** Derived sets have no declaring symbol and will drift silently the next time one changes. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -938,6 +938,80 @@ Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes t
 The same rule as a string schema, for contexts that carry the folder name (`OpenContext.video`).
 
 `z.string().regex(VIDEO_FOLDER_PATTERN, 'video must be a video folder name: a kebab-case name, e.g. flivideo-tour')`
+
+### `src/window-state.WindowRect` — zod-object — `src/window-state.ts:16-21`
+
+Window positions that survive a restart (David, 2026-09-22): every Fli app window reopens where he last put it —
+
+| field | type | default | at |
+|---|---|---|---|
+| `x` | `z.number()` | — | `src/window-state.ts:17` |
+| `y` | `z.number()` | — | `src/window-state.ts:18` |
+| `width` | `z.number()` | — | `src/window-state.ts:19` |
+| `height` | `z.number()` | — | `src/window-state.ts:20` |
+
+### `src/window-state.SavedWindow` — zod-object — `src/window-state.ts:24-28`
+
+*extends* `WindowRect`
+
+| field | type | default | at |
+|---|---|---|---|
+| `x` | `z.number()` | — | `src/window-state.ts:17` |
+| `y` | `z.number()` | — | `src/window-state.ts:18` |
+| `width` | `z.number()` | — | `src/window-state.ts:19` |
+| `height` | `z.number()` | — | `src/window-state.ts:20` |
+| `maximized` | `z.boolean().optional()` | — | `src/window-state.ts:25` |
+| `displayId` | `z.number().optional()` | — | `src/window-state.ts:27` |
+
+### `src/window-state.WindowStateFile` — zod-object — `src/window-state.ts:32-35`
+
+The store: `{ schema: 1, windows: { "<app>/<role>": SavedWindow } }`.
+
+| field | type | default | at |
+|---|---|---|---|
+| `schema` | `z.literal(1)` | — | `src/window-state.ts:33` |
+| `windows` | `z.record(z.string(), SavedWindow) → src/window-state.SavedWindow` | — | `src/window-state.ts:34` |
+
+### `src/window-state.DisplayArea` — zod-object — `src/window-state.ts:39-44`
+
+One display as the app sees it: Electron's `display.id`, `display.workArea` and whether it is the primary one.
+
+| field | type | default | at |
+|---|---|---|---|
+| `id` | `z.number()` | — | `src/window-state.ts:40` |
+| `workArea` | `WindowRect → src/window-state.WindowRect` | — | `src/window-state.ts:42` |
+| `primary` | `z.boolean().optional()` | — | `src/window-state.ts:43` |
+
+### `src/window-state.PlaceOptions` — interface — `src/window-state.ts:47-57`
+
+| field | type | default | at |
+|---|---|---|---|
+| `width` | `number` | — | `src/window-state.ts:48` |
+| `height` | `number` | — | `src/window-state.ts:49` |
+| `minWidth` | `?: number` | — | `src/window-state.ts:50` |
+| `minHeight` | `?: number` | — | `src/window-state.ts:51` |
+| `keepSize` | `?: boolean` | — | `src/window-state.ts:56` |
+
+### `src/window-state.TrackedWindow` — type — `src/window-state.ts:255-262`
+
+The part of an Electron `BrowserWindow` that `trackWindow` needs. Methods, not data — so a structural type rather
+
+| field | type | default | at |
+|---|---|---|---|
+| `on` | `(event: 'move' | 'resize' | 'close', listener: () => void): unknown` | — | `src/window-state.ts:256` |
+| `isDestroyed` | `(): boolean` | — | `src/window-state.ts:257` |
+| `isMinimized` | `(): boolean` | — | `src/window-state.ts:258` |
+| `isFullScreen` | `(): boolean` | — | `src/window-state.ts:259` |
+| `isMaximized` | `(): boolean` | — | `src/window-state.ts:260` |
+| `getNormalBounds` | `(): WindowRect` | — | `src/window-state.ts:261` |
+
+### `src/window-state.TrackOptions` — interface — `src/window-state.ts:264-270`
+
+| field | type | default | at |
+|---|---|---|---|
+| `displayIdOf` | `?: (bounds: WindowRect) => number → src/window-state.WindowRect` | — | `src/window-state.ts:266` |
+| `file` | `?: string` | — | `src/window-state.ts:267` |
+| `debounceMs` | `?: number` | — | `src/window-state.ts:269` |
 
 ## Cannot be mirrored
 
