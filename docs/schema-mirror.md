@@ -3,7 +3,7 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `e1ed314fd616` · **generated** 2026-09-22T04:59:47+00:00
+- **commit** `0ce32bbe0b37` · **generated** 2026-09-22T05:07:01+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`
 
 | shapes | declared sets | derived sets | gaps | findings |

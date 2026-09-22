@@ -893,7 +893,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-22T04:59:47+00:00",
+  "generated": "2026-09-22T05:07:01+00:00",
   "mirror_version": 1,
   "parser": "typescript 6.0.3 (resolved from the target)",
   "scope": {
@@ -1457,7 +1457,7 @@
             "line": 97
           },
           "default": null,
-          "doc": "`hub` when `<project>/hub/` is a directory; `legacy` otherwise.",
+          "doc": "Detected by `projectLayout` (D14).",
           "name": "layout",
           "type": "ProjectLayout \u2192 src/classify.ProjectLayout"
         },
@@ -4534,7 +4534,7 @@
     }
   ],
   "target": {
-    "commit": "e1ed314fd616b11d8cd246dbeb8daa80306dda8f",
+    "commit": "0ce32bbe0b37dd431feec15152cd5cc3f010e81f",
     "root": "/Users/davidcruwys/dev/ad/flivideo/fli-core",
     "stack": "typescript"
   },

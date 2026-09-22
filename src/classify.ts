@@ -93,7 +93,7 @@ export const ProjectLayout = z.enum(['hub', 'legacy']);
 export type ProjectLayout = z.infer<typeof ProjectLayout>;
 
 export const ProjectLayoutPaths = z.object({
-  /** `hub` when `<project>/hub/` is a directory; `legacy` otherwise. */
+  /** Detected by `projectLayout` (D14). */
   layout: ProjectLayout,
   /** Absolute path of the recordings folder for this layout (it may not exist yet). */
   recordings: z.string(),
@@ -102,23 +102,48 @@ export const ProjectLayoutPaths = z.object({
 });
 export type ProjectLayoutPaths = z.infer<typeof ProjectLayoutPaths>;
 
-/**
- * Where FliHub's recordings and transcripts live in one project. `hub/` present → the hub layout
- * (`hub/recordings/`, `hub/transcripts/`); otherwise the legacy top-level `recordings/` and `transcripts/`. When a
- * project has both, `hub/` wins and the two are never merged — the top-level folders are then legacy content.
- * Existing projects are never migrated. The legacy transcripts name `recording-transcripts/` (D7) is not returned; a
- * reader that still wants it looks for it beside the legacy `transcripts/`.
- */
-export async function projectLayoutPaths(projectDir: string): Promise<ProjectLayoutPaths> {
-  const hub = path.join(projectDir, HUB_FOLDER);
-  const isHub = await fs.stat(hub).then(
+/** Where FliHub's two folders are in each layout, relative to the project (FliHub `shared/paths.ts` LAYOUT_DIRS). */
+export const LAYOUT_DIRS: Readonly<
+  Record<ProjectLayout, { recordings: string; transcripts: string }>
+> = {
+  hub: { recordings: 'hub/recordings', transcripts: 'hub/transcripts' },
+  legacy: { recordings: 'recordings', transcripts: 'recording-transcripts' },
+};
+
+async function isDirectory(p: string): Promise<boolean> {
+  return fs.stat(p).then(
     (stat) => stat.isDirectory(),
     () => false,
   );
-  const base = isHub ? hub : projectDir;
+}
+
+/**
+ * Which layout one project uses (D14), by the same rule as FliHub's `detectProjectLayout`, so the two apps never
+ * disagree about a folder:
+ *   1. no `hub/` directory                → `legacy`
+ *   2. `hub/recordings/` exists            → `hub`
+ *   3. a top-level `recordings/` exists   → `legacy` (a stray `hub/` never hides real recordings)
+ *   4. anything else (empty `hub/`, or a hub project whose recordings are held on the T7) → `hub`
+ * The two layouts are never merged. Existing projects are never migrated. A missing folder is `legacy`, never a throw.
+ */
+export async function projectLayout(projectDir: string): Promise<ProjectLayout> {
+  if (!(await isDirectory(path.join(projectDir, HUB_FOLDER)))) return 'legacy';
+  if (await isDirectory(path.join(projectDir, LAYOUT_DIRS.hub.recordings))) return 'hub';
+  if (await isDirectory(path.join(projectDir, LAYOUT_DIRS.legacy.recordings))) return 'legacy';
+  return 'hub';
+}
+
+/**
+ * Absolute recordings and transcripts folders for one project: `hub/recordings/` + `hub/transcripts/`, or the legacy
+ * top-level `recordings/` + `recording-transcripts/` (the name FliHub writes; a reader may also look for the D7 name
+ * `transcripts/` in a legacy project). The folders may not exist yet.
+ */
+export async function projectLayoutPaths(projectDir: string): Promise<ProjectLayoutPaths> {
+  const layout = await projectLayout(projectDir);
+  const dirs = LAYOUT_DIRS[layout];
   return {
-    layout: isHub ? 'hub' : 'legacy',
-    recordings: path.join(base, 'recordings'),
-    transcripts: path.join(base, 'transcripts'),
+    layout,
+    recordings: path.join(projectDir, dirs.recordings),
+    transcripts: path.join(projectDir, dirs.transcripts),
   };
 }

@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import path from 'node:path';
-import { classifyProjectEntry, projectLayoutPaths, type ProjectZone } from '../src/classify.js';
+import {
+  LAYOUT_DIRS,
+  classifyProjectEntry,
+  projectLayout,
+  projectLayoutPaths,
+  type ProjectZone,
+} from '../src/classify.js';
 import { buildLayoutProject, buildTree, tempDir, walk } from './helpers/fixtures.js';
 
 describe('classifyProjectEntry', () => {
@@ -117,42 +123,52 @@ describe('the hub layout (D14: FliHub folders under hub/ for new projects)', () 
     expect(classifyProjectEntry(relPath, isDirectory)).toBe(zone);
   });
 
-  it('projectLayoutPaths: hub/ present → hub paths', async () => {
+  // Mirrors FliHub's detectProjectLayout cases (flihub shared/projectLayout.test.ts, 43c7365) — the two must agree.
+  it.each<[string, Record<string, string>, 'hub' | 'legacy']>([
+    ['legacy: top-level recordings/, no hub/', { 'recordings/': '' }, 'legacy'],
+    ['legacy: an empty folder (every project created today)', {}, 'legacy'],
+    ['hub: hub/recordings/ exists', { 'hub/recordings/': '' }, 'hub'],
+    [
+      'hub: hub/recordings/ wins even when top-level recordings/ also exists',
+      { 'hub/recordings/': '', 'recordings/': '' },
+      'hub',
+    ],
+    [
+      'legacy: a STRAY hub/ (no hub/recordings) never hides top-level recordings/',
+      { 'recordings/': '', 'hub/': '' },
+      'legacy',
+    ],
+    [
+      'hub: hub/ with only transcripts (a held hub project) stays hub',
+      { 'hub/transcripts/': '' },
+      'hub',
+    ],
+    ['hub: an empty hub/ and no top-level recordings/', { 'hub/': '' }, 'hub'],
+    ['legacy: a FILE named hub is not a layout marker', { hub: 'x' }, 'legacy'],
+  ])('projectLayout — %s', async (_name, tree, layout) => {
     const dir = await tempDir();
-    await buildTree(dir, {
-      'hub/recordings/01-1-intro.mov': 'mov',
-      'hub/transcripts/01-1-intro.srt': '1\n',
-    });
-    expect(await projectLayoutPaths(dir)).toEqual({
-      layout: 'hub',
-      recordings: path.join(dir, 'hub', 'recordings'),
-      transcripts: path.join(dir, 'hub', 'transcripts'),
-    });
+    await buildTree(dir, tree);
+    expect(await projectLayout(dir)).toBe(layout);
   });
 
-  it('projectLayoutPaths: no hub/ → legacy top-level paths, whether or not they exist', async () => {
+  it('projectLayout: a missing folder is legacy, never a throw', async () => {
+    expect(await projectLayout(path.join(await tempDir(), 'nope'))).toBe('legacy');
+  });
+
+  it('projectLayoutPaths: hub → hub/recordings + hub/transcripts; legacy → recordings + recording-transcripts', async () => {
+    const hub = await tempDir();
+    await buildTree(hub, { 'hub/recordings/': '' });
+    expect(await projectLayoutPaths(hub)).toEqual({
+      layout: 'hub',
+      recordings: path.join(hub, 'hub', 'recordings'),
+      transcripts: path.join(hub, 'hub', 'transcripts'),
+    });
     const legacy = await tempDir();
-    await buildTree(legacy, { 'recordings/01-1-intro.mov': 'mov' });
     expect(await projectLayoutPaths(legacy)).toEqual({
       layout: 'legacy',
       recordings: path.join(legacy, 'recordings'),
-      transcripts: path.join(legacy, 'transcripts'),
+      transcripts: path.join(legacy, 'recording-transcripts'),
     });
-    const empty = await tempDir();
-    expect((await projectLayoutPaths(empty)).layout).toBe('legacy');
-  });
-
-  it('projectLayoutPaths: a legacy project with a stray hub/ → hub wins, never merged', async () => {
-    const dir = await tempDir();
-    await buildTree(dir, { 'recordings/01-1-intro.mov': 'mov', 'hub/notes.md': 'stray' });
-    const paths = await projectLayoutPaths(dir);
-    expect(paths.layout).toBe('hub');
-    expect(paths.recordings).toBe(path.join(dir, 'hub', 'recordings'));
-  });
-
-  it('projectLayoutPaths: a file named hub is not the hub layout', async () => {
-    const dir = await tempDir();
-    await buildTree(dir, { hub: 'a file', 'recordings/01-1-intro.mov': 'mov' });
-    expect((await projectLayoutPaths(dir)).layout).toBe('legacy');
+    expect(LAYOUT_DIRS.legacy.transcripts).toBe('recording-transcripts');
   });
 });

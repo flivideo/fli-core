@@ -67,11 +67,13 @@ export {
 
 export {
   HUB_FOLDER,
+  LAYOUT_DIRS,
   LEGACY_FOLDERS,
   ProjectLayout,
   ProjectLayoutPaths,
   ProjectZone,
   classifyProjectEntry,
+  projectLayout,
   projectLayoutPaths,
 } from './classify.js';
 
