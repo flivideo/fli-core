@@ -1,4 +1,121 @@
 {
+  "census": {
+    "declared": 114,
+    "files": {
+      "src/app-file.ts": {
+        "declared": 4,
+        "gaps": 0,
+        "mirrored": 4,
+        "not_read": 0,
+        "not_schema_bearing": 1
+      },
+      "src/brand-settings.ts": {
+        "declared": 4,
+        "gaps": 2,
+        "mirrored": 2,
+        "not_read": 0,
+        "not_schema_bearing": 1
+      },
+      "src/brands.ts": {
+        "declared": 12,
+        "gaps": 0,
+        "mirrored": 12,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
+      "src/classify.ts": {
+        "declared": 8,
+        "gaps": 0,
+        "mirrored": 7,
+        "not_read": 1,
+        "not_schema_bearing": 2
+      },
+      "src/estate.ts": {
+        "declared": 15,
+        "gaps": 0,
+        "mirrored": 14,
+        "not_read": 1,
+        "not_schema_bearing": 1
+      },
+      "src/identity.ts": {
+        "declared": 12,
+        "gaps": 2,
+        "mirrored": 9,
+        "not_read": 1,
+        "not_schema_bearing": 2
+      },
+      "src/lab-path.ts": {
+        "declared": 2,
+        "gaps": 0,
+        "mirrored": 2,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
+      "src/machine.ts": {
+        "declared": 7,
+        "gaps": 0,
+        "mirrored": 7,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
+      "src/open-args.ts": {
+        "declared": 12,
+        "gaps": 0,
+        "mirrored": 11,
+        "not_read": 1,
+        "not_schema_bearing": 0
+      },
+      "src/open-context.ts": {
+        "declared": 3,
+        "gaps": 0,
+        "mirrored": 3,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
+      "src/project-folder.ts": {
+        "declared": 5,
+        "gaps": 0,
+        "mirrored": 5,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
+      "src/recording.ts": {
+        "declared": 3,
+        "gaps": 0,
+        "mirrored": 3,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
+      "src/results.ts": {
+        "declared": 5,
+        "gaps": 0,
+        "mirrored": 2,
+        "not_read": 3,
+        "not_schema_bearing": 0
+      },
+      "src/video-file.ts": {
+        "declared": 11,
+        "gaps": 0,
+        "mirrored": 11,
+        "not_read": 0,
+        "not_schema_bearing": 1
+      },
+      "src/window-state.ts": {
+        "declared": 11,
+        "gaps": 0,
+        "mirrored": 11,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      }
+    },
+    "gaps": 4,
+    "mirrored": 103,
+    "not_read": 7,
+    "not_schema_bearing": 8,
+    "not_schema_bearing_by_family": {
+      "literal constant": 8
+    }
+  },
   "closed_sets": [
     {
       "anchor": {
@@ -41,6 +158,7 @@
         "line": 11
       },
       "authority": "`z.enum` `ProjectZone` - a single declaring symbol",
+      "doc": "Which zone of the project layout (spec \u00a73, roadmap \u00a71) a path inside a project belongs to.",
       "grade": "declared",
       "id": "src/classify.ProjectZone",
       "members": [
@@ -521,6 +639,7 @@
         "line": 11
       },
       "authority": "`z.enum` `ProjectAspect` - a single declaring symbol",
+      "doc": "The shape a project's videos are made for (David 2026-09-23, B584). Absent \u2192 `16:9`.",
       "grade": "declared",
       "id": "src/identity.ProjectAspect",
       "members": [
@@ -562,6 +681,7 @@
         "line": 21
       },
       "authority": "`z.enum` `ProjectShape` - a single declaring symbol",
+      "doc": "What the project is for \u2014 a HINT only, no behaviour yet (David 2026-09-23; brains `video-as-code/",
       "grade": "declared",
       "id": "src/identity.ProjectShape",
       "members": [
@@ -982,8 +1102,22 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-23T03:55:29+00:00",
+  "generated": "2026-09-23T08:06:17+00:00",
+  "ignored_derived": [],
   "mirror_version": 1,
+  "never_read": [
+    "classes - a class's fields are never mirrored (the census lists each one)",
+    "generic, mapped and conditional type aliases",
+    "template-literal types, and unions that contain one",
+    "aliases of another type or value (`X = Y`), and utility-type aliases (`Pick<>`, `Omit<>`, `Record<>`)",
+    "`keyof typeof X` / indexed-access types, unless X itself is read as a closed set",
+    "results of `.pick` / `.omit` / `.partial` / `.required` (listed as gaps where met)",
+    "zod schemas built inside function bodies, other than a function that returns one zod expression",
+    "the parameterised result of a schema helper or factory call (listed as gaps where met)",
+    "constants that are not exported (the census does not count them)",
+    "`*.d.ts` files and build output (`dist/`, `build/`, `out/`) - excluded by default",
+    "regex-encoded sets, JSON Schema files, and the data actually on disk"
+  ],
   "parser": "typescript 6.0.3 (resolved from the target)",
   "scope": {
     "exclude": [
@@ -998,7 +1132,11 @@
       "*/__tests__/*",
       "*/e2e/*",
       "*/__mocks__/*",
-      "*/fixtures/*"
+      "*/fixtures/*",
+      "*.d.ts",
+      "*/dist/*",
+      "*/build/*",
+      "*/out/*"
     ],
     "include": [
       "src/**"
@@ -3882,7 +4020,7 @@
           "default": null,
           "doc": "This machine's settings, from `readMachineSettings` (for `brandRoots`).",
           "name": "machine",
-          "type": "?: Pick<MachineSettings, 'brandRoots'> | null \u2192 Pick (node_modules/typescript/lib/lib.es5.d.ts), src/machine.MachineSettings"
+          "type": "?: Pick<MachineSettings, 'brandRoots'> | null \u2192 src/machine.MachineSettings"
         },
         {
           "anchor": {
@@ -5046,11 +5184,74 @@
     }
   ],
   "target": {
-    "commit": "e731222a10cdaeb088f9aaca8bcc544e935cd164",
-    "root": "/Users/davidcruwys/dev/ad/flivideo/fli-core",
+    "commit": "805f8c5c7d27149e231d15e3f907c68057a44b81",
+    "root": "..",
     "stack": "typescript"
   },
   "unresolved": [
+    {
+      "census": true,
+      "family": "object constant",
+      "looked_at": [
+        "src/classify.ts:111"
+      ],
+      "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/classify.LAYOUT_DIRS` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "generic type alias",
+      "looked_at": [
+        "src/estate.ts:28"
+      ],
+      "reason": "declared but not read: generic type alias. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/estate.Scanned` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "array constant",
+      "looked_at": [
+        "src/identity.ts:27"
+      ],
+      "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/identity.DEFAULT_LANGUAGES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "object constant",
+      "looked_at": [
+        "src/open-args.ts:47"
+      ],
+      "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/open-args.OPEN_ENV` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "class",
+      "looked_at": [
+        "src/results.ts:25"
+      ],
+      "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/results.FliCoreError` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "generic type alias",
+      "looked_at": [
+        "src/results.ts:22"
+      ],
+      "reason": "declared but not read: generic type alias. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/results.ReadFileResult` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "generic type alias",
+      "looked_at": [
+        "src/results.ts:16"
+      ],
+      "reason": "declared but not read: generic type alias. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/results.ValidFile` - declared but not read"
+    },
     {
       "looked_at": [
         "Refused('invalid-input') (src/identity.ts:63)",
@@ -5084,5 +5285,10 @@
       "reason": "built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here",
       "subject": "schemas built by `validFile(...)` (1 use)"
     }
-  ]
+  ],
+  "zod_detection": {
+    "call-shape": 0,
+    "import": 15,
+    "re-export": 0
+  }
 }

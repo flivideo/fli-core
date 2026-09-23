@@ -1,16 +1,69 @@
 # Schema mirror
 
-> Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run.
+> Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `e731222a10cd` · **generated** 2026-09-23T03:55:29+00:00
-- **scope** include `src/**` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`
+- **commit** `805f8c5c7d27` · **generated** 2026-09-23T08:06:17+00:00
+- **scope** include `src/**` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
+- **zod bound** in 15 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
-| shapes | declared sets | derived sets | gaps | findings |
+| shapes | declared sets | derived sets | gaps | declared but not read | findings |
+|---|---|---|---|---|---|
+| 88 | 23 | 2 | 4 | 7 | 2 |
+
+> **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
+
+## Index
+
+Top-level entries by file, with the line each is declared on. Search the page for the name.
+
+- `src/app-file.ts` — `AppName` :15 · `AppSubject` :19 · `AppFile` :26
+- `src/brand-settings.ts` — `BrandSettings` :9
+- `src/brands.ts` — `Brand` :9 · `RegistryEntry` :20 · `BrandsFile` :28 · `SkippedBrand` :32 · `BrandsRead` :35 · `ReadBrandsResult` :45 · `ReadBrandsOptions` :48 · `ResolveBrandRootOptions` :92
+- `src/classify.ts` — `ProjectZone` (set) :11 · `LEGACY_FOLDERS` (set) :36 · `ProjectLayout` (set) :97 · `ProjectLayoutPaths` :100
+- `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
+- `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :32
+- `src/identity.ts` — `ProjectAspect` (set) :11 · `ProjectShape` (set) :21 · `ProjectLanguage` :26 · `ProjectIdentity` :29 · `Refused()` :53 · `WriteIdentityResult` :61
+- `src/lab-path.ts` — `PathSegment` :6 · `LabPathInput` :14
+- `src/machine.ts` — `AbsolutePath` :7 · `MachineSettings` :12 · `ResolvedMachineSettings` :24 · `MachineSettingsOptions` :27 · `MachineSettingsResult` :32
+- `src/open-args.ts` — `OpenContext` :11 · `OpenArgs` :27 · `OpenArgName` (set) :36 · `RawOpenArgs` :40 · `ParseOpenArgsOptions` :53 · `ParsedOpenArgs` :58
+- `src/open-context.ts` — `OpenContextResult` :16 · `ResolveOpenContextOptions` :33
+- `src/project-folder.ts` — `ProjectCode` :5 · `KebabSlug` :11 · `ProjectFolder` :15
+- `src/recording.ts` — `RecordingTag` :14 · `Recording` :18
+- `src/results.ts` — `InvalidFile` :4 · `validFile()` :13 · `readFileResult()` :19
+- `src/video-file.ts` — `Ext` :14 · `VideoFileKind` (set) :16 · `VideoFile` :19 · `UnknownVideoFile` :32 · `ParsedVideoFile` :39 · `VideoFolder` :74 · `VideoFolderName` :86
+- `src/window-state.ts` — `WindowRect` :16 · `SavedWindow` :24 · `WindowStateFile` :32 · `DisplayArea` :39 · `PlaceOptions` :47 · `TrackedWindow` :255 · `TrackOptions` :264
+
+## Never read by this extractor
+
+These constructs are outside what this extractor reads **on every run, in every repo**. A page with no gaps is still partial by exactly this list.
+
+- classes - a class's fields are never mirrored (the census lists each one)
+- generic, mapped and conditional type aliases
+- template-literal types, and unions that contain one
+- aliases of another type or value (`X = Y`), and utility-type aliases (`Pick<>`, `Omit<>`, `Record<>`)
+- `keyof typeof X` / indexed-access types, unless X itself is read as a closed set
+- results of `.pick` / `.omit` / `.partial` / `.required` (listed as gaps where met)
+- zod schemas built inside function bodies, other than a function that returns one zod expression
+- the parameterised result of a schema helper or factory call (listed as gaps where met)
+- constants that are not exported (the census does not count them)
+- `*.d.ts` files and build output (`dist/`, `build/`, `out/`) - excluded by default
+- regex-encoded sets, JSON Schema files, and the data actually on disk
+
+## Coverage census
+
+**114** top-level declarations counted = **103** mirrored + **4** listed as gaps + **7** declared but not read.
+
+Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
+Not counted, as not schema-bearing: 8 literal constants.
+
+| file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
-| 88 | 23 | 2 | 4 | 2 |
-
-> **Read the gaps before trusting the shape.** Derived sets have no declaring symbol and will drift silently the next time one changes. Gaps are things this mirror could not reach — they are not absences in the code.
+| `src/classify.ts` | 8 | 7 | 0 | **1** |
+| `src/estate.ts` | 15 | 14 | 0 | **1** |
+| `src/identity.ts` | 12 | 9 | 2 | **1** |
+| `src/open-args.ts` | 12 | 11 | 0 | **1** |
+| `src/results.ts` | 5 | 2 | 0 | **3** |
 
 ## Closed sets — declared
 
@@ -27,7 +80,11 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 
 ### `src/classify.ProjectZone` — `src/classify.ts:11-22`
 
+Which zone of the project layout (spec §3, roadmap §1) a path inside a project belongs to.
+
 *`z.enum` `ProjectZone` - a single declaring symbol*
+
+*aliases* `ProjectZone` `src/classify.ts:25`
 
 | value | declared at |
 |---|---|
@@ -44,6 +101,8 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 ### `src/classify.ProjectLayout` — `src/classify.ts:97`
 
 *`z.enum` `ProjectLayout` - a single declaring symbol*
+
+*aliases* `ProjectLayout` `src/classify.ts:98`
 
 | value | declared at |
 |---|---|
@@ -132,7 +191,11 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 
 ### `src/identity.ProjectAspect` — `src/identity.ts:11`
 
+The shape a project's videos are made for (David 2026-09-23, B584). Absent → `16:9`.
+
 *`z.enum` `ProjectAspect` - a single declaring symbol*
+
+*aliases* `ProjectAspect` `src/identity.ts:12`
 
 | value | declared at |
 |---|---|
@@ -142,7 +205,11 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 
 ### `src/identity.ProjectShape` — `src/identity.ts:21`
 
+What the project is for — a HINT only, no behaviour yet (David 2026-09-23; brains `video-as-code/
+
 *`z.enum` `ProjectShape` - a single declaring symbol*
+
+*aliases* `ProjectShape` `src/identity.ts:22`
 
 | value | declared at |
 |---|---|
@@ -180,6 +247,8 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 ### `src/open-args.OpenArgName` — `src/open-args.ts:36`
 
 *`z.enum` `OpenArgName` - a single declaring symbol*
+
+*aliases* `OpenArgName` `src/open-args.ts:37`
 
 | value | declared at |
 |---|---|
@@ -223,6 +292,8 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 ### `src/video-file.VideoFileKind` — `src/video-file.ts:16`
 
 *`z.enum` `VideoFileKind` - a single declaring symbol*
+
+*aliases* `VideoFileKind` `src/video-file.ts:17`
 
 | value | declared at |
 |---|---|
@@ -299,6 +370,8 @@ Each set below was read out of the real authority — control flow, membership t
 
 ### `src/app-file.AppFile` — zod-object — `src/app-file.ts:26-31`
 
+*aliases* `AppFile` `src/app-file.ts:32`
+
 | field | type | default | at |
 |---|---|---|---|
 | `app` | `AppName → src/app-file.AppName` | — | `src/app-file.ts:27` |
@@ -308,23 +381,27 @@ Each set below was read out of the real authority — control flow, membership t
 
 `v-<brand>/fli.brand.json` (D13, spec O6): per-brand display settings, travelling in the brand's repo.
 
+*aliases* `BrandSettings` `src/brand-settings.ts:16`
+
 | field | type | default | at |
 |---|---|---|---|
 | `schema` | `z.literal(1)` | — | `src/brand-settings.ts:10` |
 | `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:11` |
-| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:12` |
+| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:12` |
 
 ### `src/brands.Brand` — zod-object — `src/brands.ts:9-17`
 
 A brand from the registry (R6, R29). Only the fields the Fli apps need; the rest of the entry is ignored.
 
-| field | type | default | at |
-|---|---|---|---|
-| `key` | `z.string().min(1)` | — | `src/brands.ts:11` |
-| `name` | `z.string().min(1)` | — | `src/brands.ts:12` |
-| `shortcut` | `z.string().optional()` | — | `src/brands.ts:13` |
-| `type` | `z.string().optional()` | — | `src/brands.ts:14` |
-| `videoProjects` | `z.string().optional()` | — | `src/brands.ts:16` |
+*aliases* `Brand` `src/brands.ts:18`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `key` | `z.string().min(1)` | — | `src/brands.ts:11` | The `brands.json` key: the join key across registries. |
+| `name` | `z.string().min(1)` | — | `src/brands.ts:12` |  |
+| `shortcut` | `z.string().optional()` | — | `src/brands.ts:13` |  |
+| `type` | `z.string().optional()` | — | `src/brands.ts:14` |  |
+| `videoProjects` | `z.string().optional()` | — | `src/brands.ts:16` | `locations.video_projects` exactly as the registry holds it (before the A5 rewrite). |
 
 ### `src/brands.RegistryEntry` — zod-object — `src/brands.ts:20-25`
 
@@ -345,6 +422,8 @@ A brand from the registry (R6, R29). Only the fields the Fli apps need; the rest
 
 The top level of `~/.config/appydave/brands.json`. Entries are checked one by one (see `readBrands`).
 
+*aliases* `BrandsFile` `src/brands.ts:29`
+
 | field | type | default | at |
 |---|---|---|---|
 | `brands` | `z.record(z.string(), z.unknown())` | — | `src/brands.ts:28` |
@@ -353,6 +432,8 @@ The top level of `~/.config/appydave/brands.json`. Entries are checked one by on
 
 A registry entry `readBrands` could not use, and why.
 
+*aliases* `SkippedBrand` `src/brands.ts:33`
+
 | field | type | default | at |
 |---|---|---|---|
 | `key` | `z.string()` | — | `src/brands.ts:32` |
@@ -360,16 +441,20 @@ A registry entry `readBrands` could not use, and why.
 
 ### `src/brands.BrandsRead` — zod-object — `src/brands.ts:35-42`
 
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('valid')` | — | `src/brands.ts:36` |
-| `path` | `z.string()` | — | `src/brands.ts:37` |
-| `value` | `z.array(Brand) → src/brands.Brand` | — | `src/brands.ts:39` |
-| `skipped` | `z.array(SkippedBrand) → src/brands.SkippedBrand` | — | `src/brands.ts:41` |
+*aliases* `BrandsRead` `src/brands.ts:43`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `z.literal('valid')` | — | `src/brands.ts:36` |  |
+| `path` | `z.string()` | — | `src/brands.ts:37` |  |
+| `value` | `z.array(Brand) → src/brands.Brand` | — | `src/brands.ts:39` | Usable brands, in registry order. |
+| `skipped` | `z.array(SkippedBrand) → src/brands.SkippedBrand` | — | `src/brands.ts:41` | Entries left out because they do not match the registry shape. |
 
 ### `src/brands.ReadBrandsResult` — zod-union on `kind` — `src/brands.ts:45`
 
-| field | type | default | at |
+*aliases* `ReadBrandsResult` `src/brands.ts:46`
+
+| variant | shape | default | at |
 |---|---|---|---|
 | `BrandsRead` | `BrandsRead → src/brands.BrandsRead` | — | `src/brands.ts:45` |
 | `InvalidFile` | `InvalidFile → src/results.InvalidFile` | — | `src/brands.ts:45` |
@@ -377,30 +462,32 @@ A registry entry `readBrands` could not use, and why.
 
 ### `src/brands.ReadBrandsOptions` — interface — `src/brands.ts:48-53`
 
-| field | type | default | at |
-|---|---|---|---|
-| `path` | `?: string` | — | `src/brands.ts:50` |
-| `home` | `?: string` | — | `src/brands.ts:52` |
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `path` | `?: string` | — | `src/brands.ts:50` | Path to `brands.json`; default `<home>/.config/appydave/brands.json`. |
+| `home` | `?: string` | — | `src/brands.ts:52` | Home directory; default `os.homedir()`. |
 
 ### `src/brands.ResolveBrandRootOptions` — interface — `src/brands.ts:92-95`
 
-| field | type | default | at |
-|---|---|---|---|
-| `home` | `?: string` | — | `src/brands.ts:94` |
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `home` | `?: string` | — | `src/brands.ts:94` | Home directory used for the A5 rewrite; default `os.homedir()`. |
 
 ### `src/classify.ProjectLayoutPaths` — zod-object — `src/classify.ts:100-107`
 
-| field | type | default | at |
-|---|---|---|---|
-| `layout` | `ProjectLayout → src/classify.ProjectLayout` | — | `src/classify.ts:102` |
-| `recordings` | `z.string()` | — | `src/classify.ts:104` |
-| `transcripts` | `z.string()` | — | `src/classify.ts:106` |
+*aliases* `ProjectLayoutPaths` `src/classify.ts:108`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `layout` | `ProjectLayout → src/classify.ProjectLayout` | — | `src/classify.ts:102` | Detected by `projectLayout` (D14). |
+| `recordings` | `z.string()` | — | `src/classify.ts:104` | Absolute path of the recordings folder for this layout (it may not exist yet). |
+| `transcripts` | `z.string()` | — | `src/classify.ts:106` | Absolute path of the transcripts folder for this layout (it may not exist yet). |
 
 ### `src/estate.scanned()` — zod-factory (zod-discriminated-union) on `state` — `src/estate.ts:17-27`
 
 A collection that was read, or one that could not be (R12): empty and unscanned are never the same thing.
 
-| field | type | default | at |
+| variant | shape | default | at |
 |---|---|---|---|
 | `scanned` | `z.object({ state: z.literal('scanned'), scannedAt: z.iso.datetime(), items: z.array(item) })` | — | `src/estate.ts:19` |
 | `unscanned` | `z.object({ state: z.literal('unscanned'), scannedAt: z.iso.datetime(), path: z.string(), message: z.string() })` | — | `src/estate.ts:21` |
@@ -426,28 +513,32 @@ A collection that was read, or one that could not be (R12): empty and unscanned 
 
 A folder holding a valid `fli.studio.json` (R8).
 
-| field | type | default | at |
-|---|---|---|---|
-| `folder` | `z.string()` | — | `src/estate.ts:32` |
-| `path` | `z.string()` | — | `src/estate.ts:33` |
-| `parsed` | `ProjectFolder.nullable() → src/project-folder.ProjectFolder` | — | `src/estate.ts:35` |
-| `identity` | `ProjectIdentity → src/identity.ProjectIdentity` | — | `src/estate.ts:36` |
+*aliases* `MemberProject` `src/estate.ts:38`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `folder` | `z.string()` | — | `src/estate.ts:32` |  |
+| `path` | `z.string()` | — | `src/estate.ts:33` |  |
+| `parsed` | `ProjectFolder.nullable() → src/project-folder.ProjectFolder` | — | `src/estate.ts:35` | The folder name parsed as `<code>-<slug>`, or `null` when it does not follow that shape. |
+| `identity` | `ProjectIdentity → src/identity.ProjectIdentity` | — | `src/estate.ts:36` |  |
 
 ### `src/estate.OtherFolder` — zod-object — `src/estate.ts:41-49`
 
 Any other top-level folder (R9): shown as *other folder*, never as an error.
 
-| field | type | default | at |
-|---|---|---|---|
-| `folder` | `z.string()` | — | `src/estate.ts:42` |
-| `path` | `z.string()` | — | `src/estate.ts:43` |
-| `looksLikeProject` | `z.boolean()` | — | `src/estate.ts:45` |
-| `parsed` | `ProjectFolder.nullable() → src/project-folder.ProjectFolder` | — | `src/estate.ts:46` |
-| `identity` | `z.union([z.literal('absent'), InvalidFile]) → src/results.InvalidFile` | — | `src/estate.ts:48` |
+*aliases* `OtherFolder` `src/estate.ts:50`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `folder` | `z.string()` | — | `src/estate.ts:42` |  |
+| `path` | `z.string()` | — | `src/estate.ts:43` |  |
+| `looksLikeProject` | `z.boolean()` | — | `src/estate.ts:45` | Named like a project (`d02-cutty-audio-cleanup`) rather than a plain folder (`docs`). |
+| `parsed` | `ProjectFolder.nullable() → src/project-folder.ProjectFolder` | — | `src/estate.ts:46` |  |
+| `identity` | `z.union([z.literal('absent'), InvalidFile]) → src/results.InvalidFile` | — | `src/estate.ts:48` | `absent`, or the `invalid` result when a `fli.studio.json` is there but not valid. |
 
 ### `src/estate.OtherFolder.identity` — zod-union — `src/estate.ts:48`
 
-| field | type | default | at |
+| variant | shape | default | at |
 |---|---|---|---|
 | `absent` | `z.literal('absent')` | — | `src/estate.ts:48` |
 | `InvalidFile` | `InvalidFile → src/results.InvalidFile` | — | `src/estate.ts:48` |
@@ -456,7 +547,9 @@ Any other top-level folder (R9): shown as *other folder*, never as an error.
 
 One folder directly under `<brandRoot>/archived/` (R13: listed, never descended into).
 
-| field | type | default | at |
+*aliases* `ArchivedEntry` `src/estate.ts:64`
+
+| variant | shape | default | at |
 |---|---|---|---|
 | `range` | `z.object({ kind: z.literal('range'), name: z.string(), letter: z.string().regex(/^[a-z]$/), from: z.number().int().min(0).max(99), to: z.nu…` | — | `src/estate.ts:55` |
 | `project` | `z.object({ kind: z.literal('project'), name: z.string(), code: ProjectCode, slug: z.string() }) → src/project-folder.ProjectCode` | — | `src/estate.ts:61` |
@@ -489,6 +582,8 @@ One folder directly under `<brandRoot>/archived/` (R13: listed, never descended 
 | `name` | `z.string()` | — | `src/estate.ts:62` |
 
 ### `src/estate.ProjectListing` — zod-object — `src/estate.ts:66-72`
+
+*aliases* `ProjectListing` `src/estate.ts:73`
 
 | field | type | default | at |
 |---|---|---|---|
@@ -544,7 +639,9 @@ One folder directly under `<brandRoot>/archived/` (R13: listed, never descended 
 
 Every `resolveProject` outcome except `found`: why a reference did not resolve (R31, C3).
 
-| field | type | default | at |
+*aliases* `ProjectRefusal` `src/estate.ts:221`
+
+| variant | shape | default | at |
 |---|---|---|---|
 | `ProjectAmbiguous` | `ProjectAmbiguous → src/estate.ProjectAmbiguous` | — | `src/estate.ts:216` |
 | `ProjectNotAProject` | `ProjectNotAProject → src/estate.ProjectNotAProject` | — | `src/estate.ts:217` |
@@ -553,7 +650,9 @@ Every `resolveProject` outcome except `found`: why a reference did not resolve (
 
 ### `src/estate.ResolveProjectResult` — zod-discriminated-union on `kind` — `src/estate.ts:223-229`
 
-| field | type | default | at |
+*aliases* `ResolveProjectResult` `src/estate.ts:230`
+
+| variant | shape | default | at |
 |---|---|---|---|
 | `ProjectFound` | `ProjectFound → src/estate.ProjectFound` | — | `src/estate.ts:224` |
 | `ProjectAmbiguous` | `ProjectAmbiguous → src/estate.ProjectAmbiguous` | — | `src/estate.ts:225` |
@@ -563,7 +662,9 @@ Every `resolveProject` outcome except `found`: why a reference did not resolve (
 
 ### `src/estate.NextCodeResult` — zod-discriminated-union on `kind` — `src/estate.ts:280-287`
 
-| field | type | default | at |
+*aliases* `NextCodeResult` `src/estate.ts:288`
+
+| variant | shape | default | at |
 |---|---|---|---|
 | `allocated` | `z.object({ kind: z.literal('allocated'), code: ProjectCode }) → src/project-folder.ProjectCode` | — | `src/estate.ts:281` |
 | `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-letter', 'unscanned', 'exhausted']), message: z.string() })` | — | `src/estate.ts:283` |
@@ -591,17 +692,19 @@ A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).
 
 ### `src/identity.ProjectIdentity` — zod-object — `src/identity.ts:29-42`
 
-| field | type | default | at |
-|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/identity.ts:30` |
-| `id` | `z.uuid()` | — | `src/identity.ts:31` |
-| `brand` | `z.string().min(1)` | — | `src/identity.ts:32` |
-| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/identity.ts:33` |
-| `name` | `z.string().min(1)` | — | `src/identity.ts:34` |
-| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/identity.ts:35` |
-| `aspect` | `ProjectAspect.optional() → src/identity.ProjectAspect` | — | `src/identity.ts:37` |
-| `languages` | `z.array(ProjectLanguage).min(1).optional() → src/identity.ProjectLanguage` | — | `src/identity.ts:39` |
-| `shape` | `ProjectShape.optional() → src/identity.ProjectShape` | — | `src/identity.ts:41` |
+*aliases* `ProjectIdentity` `src/identity.ts:43`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `schema` | `z.literal(1)` | — | `src/identity.ts:30` |  |
+| `id` | `z.uuid()` | — | `src/identity.ts:31` |  |
+| `brand` | `z.string().min(1)` | — | `src/identity.ts:32` |  |
+| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/identity.ts:33` |  |
+| `name` | `z.string().min(1)` | — | `src/identity.ts:34` |  |
+| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/identity.ts:35` |  |
+| `aspect` | `ProjectAspect.optional() → src/identity.ProjectAspect` | — | `src/identity.ts:37` | Intent (B584): the aspect the videos are made for. Absent → `16:9` (`projectIntents`). |
+| `languages` | `z.array(ProjectLanguage).min(1).optional() → src/identity.ProjectLanguage` | — | `src/identity.ts:39` | Intent (B584): what is spoken, dominant first — `["en"]`, `["th"]`, `["en","th"]`. Absent → `["en"]`. |
+| `shape` | `ProjectShape.optional() → src/identity.ProjectShape` | — | `src/identity.ts:41` | Hint (§8): `single` \| `shorts` \| `episodes`. Absent → `single`. No behaviour yet. |
 
 ### `src/identity.Refused()` — zod-factory — `src/identity.ts:53-59`
 
@@ -614,7 +717,9 @@ A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).
 
 ### `src/identity.WriteIdentityResult` — zod-union on `kind` — `src/identity.ts:61-67`
 
-| field | type | default | at |
+*aliases* `WriteIdentityResult` `src/identity.ts:68`
+
+| variant | shape | default | at |
 |---|---|---|---|
 | `written` | `z.object({ kind: z.literal('written'), path: z.string(), replaced: z.boolean() })` | — | `src/identity.ts:62` |
 | `Refused('invalid-input')` | `Refused('invalid-input') → src/identity.Refused()` | — | `src/identity.ts:63` |
@@ -648,13 +753,15 @@ A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).
 
 ### `src/lab-path.LabPathInput` — zod-object — `src/lab-path.ts:14-37`
 
-| field | type | default | at |
-|---|---|---|---|
-| `brandRoot` | `z.string().refine((value) => path.isAbsolute(value), 'must be an absolute path').optional() → path (node:path)` | — | `src/lab-path.ts:20` |
-| `brand` | `PathSegment.optional() → src/lab-path.PathSegment` | — | `src/lab-path.ts:28` |
-| `project` | `PathSegment → src/lab-path.PathSegment` | — | `src/lab-path.ts:30` |
-| `app` | `PathSegment → src/lab-path.PathSegment` | — | `src/lab-path.ts:31` |
-| `subject` | `PathSegment.optional() → src/lab-path.PathSegment` | — | `src/lab-path.ts:32` |
+*aliases* `LabPathInput` `src/lab-path.ts:38`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `brandRoot` | `z.string().refine((value) => path.isAbsolute(value), 'must be an absolute path').optional() → path (node:path)` | — | `src/lab-path.ts:20` | The resolved brand root (`resolveBrandRoot`). Preferred: the lab folder is its basename, so a brand whose root is |
+| `brand` | `PathSegment.optional() → src/lab-path.PathSegment` | — | `src/lab-path.ts:28` | Brand key (`appydave` → `v-appydave`) or brand folder name (`v-appydave`). Correct only when the brand root is |
+| `project` | `PathSegment → src/lab-path.PathSegment` | — | `src/lab-path.ts:30` | The project folder name, `<code>-<project>` (`a01-xmen`). |
+| `app` | `PathSegment → src/lab-path.PathSegment` | — | `src/lab-path.ts:31` |  |
+| `subject` | `PathSegment.optional() → src/lab-path.PathSegment` | — | `src/lab-path.ts:32` |  |
 
 ### `src/machine.AbsolutePath` — zod-scalar — `src/machine.ts:7-9`
 
@@ -664,12 +771,14 @@ A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).
 
 `~/.fli/machine.json` (D5, roadmap §1.2b): this machine's settings.
 
-| field | type | default | at |
-|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/machine.ts:13` |
-| `brandRoots` | `z.record(z.string().min(1), AbsolutePath).optional() → src/machine.AbsolutePath` | — | `src/machine.ts:15` |
-| `labRoot` | `AbsolutePath.optional() → src/machine.AbsolutePath` | — | `src/machine.ts:17` |
-| `apps` | `z.record(z.string().min(1), AbsolutePath).optional() → src/machine.AbsolutePath` | — | `src/machine.ts:19` |
+*aliases* `MachineSettings` `src/machine.ts:21`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `schema` | `z.literal(1)` | — | `src/machine.ts:13` |  |
+| `brandRoots` | `z.record(z.string().min(1), AbsolutePath).optional() → src/machine.AbsolutePath` | — | `src/machine.ts:15` | Per-brand override of the brand root, keyed by `brands.json` key (A5). |
+| `labRoot` | `AbsolutePath.optional() → src/machine.AbsolutePath` | — | `src/machine.ts:17` | Root of working files outside projects. Default `<home>/fli/lab`. |
+| `apps` | `z.record(z.string().min(1), AbsolutePath).optional() → src/machine.AbsolutePath` | — | `src/machine.ts:19` | Per-app checkout path, keyed by app name. |
 
 ### `src/machine.ResolvedMachineSettings` — zod-object — `src/machine.ts:24`
 
@@ -677,22 +786,26 @@ Machine settings with the defaults filled in.
 
 *extends* `MachineSettings`
 
-| field | type | default | at |
-|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/machine.ts:13` |
-| `brandRoots` | `z.record(z.string().min(1), AbsolutePath).optional() → src/machine.AbsolutePath` | — | `src/machine.ts:15` |
-| `apps` | `z.record(z.string().min(1), AbsolutePath).optional() → src/machine.AbsolutePath` | — | `src/machine.ts:19` |
-| `labRoot` | `AbsolutePath → src/machine.AbsolutePath` | — | `src/machine.ts:24` |
+*aliases* `ResolvedMachineSettings` `src/machine.ts:25`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `schema` | `z.literal(1)` | — | `src/machine.ts:13` |  |
+| `brandRoots` | `z.record(z.string().min(1), AbsolutePath).optional() → src/machine.AbsolutePath` | — | `src/machine.ts:15` | Per-brand override of the brand root, keyed by `brands.json` key (A5). |
+| `apps` | `z.record(z.string().min(1), AbsolutePath).optional() → src/machine.AbsolutePath` | — | `src/machine.ts:19` | Per-app checkout path, keyed by app name. |
+| `labRoot` | `AbsolutePath → src/machine.AbsolutePath` | — | `src/machine.ts:24` |  |
 
 ### `src/machine.MachineSettingsOptions` — interface — `src/machine.ts:27-30`
 
-| field | type | default | at |
-|---|---|---|---|
-| `home` | `?: string` | — | `src/machine.ts:29` |
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `home` | `?: string` | — | `src/machine.ts:29` | Home directory; default `os.homedir()`. The file is `<home>/.fli/machine.json`. |
 
 ### `src/machine.MachineSettingsResult` — zod-discriminated-union on `kind` — `src/machine.ts:32-40`
 
-| field | type | default | at |
+*aliases* `MachineSettingsResult` `src/machine.ts:41`
+
+| variant | shape | default | at |
 |---|---|---|---|
 | `valid` | `z.object({ kind: z.literal('valid'), path: z.string(), source: z.enum(['file', 'default']), value: ResolvedMachineSettings }) → src/machine.ResolvedMachineSettings` | — | `src/machine.ts:34` |
 | `InvalidFile` | `InvalidFile → src/results.InvalidFile` | — | `src/machine.ts:39` |
@@ -710,26 +823,32 @@ Machine settings with the defaults filled in.
 
 The resolved context an app is pointed at.
 
-| field | type | default | at |
-|---|---|---|---|
-| `brand` | `z.string().min(1)` | — | `src/open-args.ts:13` |
-| `projectDir` | `z.string().min(1).refine((value) => path.isAbsolute(value), 'projectDir must be an absolute path') → path (node:path)` | — | `src/open-args.ts:15` |
-| `projectId` | `z.uuid()` | — | `src/open-args.ts:20` |
-| `video` | `VideoFolderName.optional() → src/video-file.VideoFolderName` | — | `src/open-args.ts:22` |
+*aliases* `OpenContext` `src/open-args.ts:24`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `brand` | `z.string().min(1)` | — | `src/open-args.ts:13` | `brands.json` key. |
+| `projectDir` | `z.string().min(1).refine((value) => path.isAbsolute(value), 'projectDir must be an absolute path') → path (node:path)` | — | `src/open-args.ts:15` | Absolute path of the project folder on this machine (D4). |
+| `projectId` | `z.uuid()` | — | `src/open-args.ts:20` | `fli.studio.json` `id`. |
+| `video` | `VideoFolderName.optional() → src/video-file.VideoFolderName` | — | `src/open-args.ts:22` | Video folder name: the video's kebab name (`flivideo-tour`). |
 
 ### `src/open-args.OpenArgs` — zod-object — `src/open-args.ts:27-33`
 
 What door 2 carries before resolution: names, not paths or ids.
 
-| field | type | default | at |
-|---|---|---|---|
-| `brand` | `z.string().min(1)` | — | `src/open-args.ts:28` |
-| `project` | `z.string().min(1)` | — | `src/open-args.ts:30` |
-| `video` | `VideoFolderName.optional() → src/video-file.VideoFolderName` | — | `src/open-args.ts:32` |
+*aliases* `OpenArgs` `src/open-args.ts:34`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `brand` | `z.string().min(1)` | — | `src/open-args.ts:28` |  |
+| `project` | `z.string().min(1)` | — | `src/open-args.ts:30` | Project folder name (or anything `resolveProject` accepts). |
+| `video` | `VideoFolderName.optional() → src/video-file.VideoFolderName` | — | `src/open-args.ts:32` | Video folder name: the video's kebab name (`flivideo-tour`). |
 
 ### `src/open-args.RawOpenArgs` — zod-object — `src/open-args.ts:40-44`
 
 Door-2 values exactly as given (argv or env): present and non-empty, not yet validated or resolved.
+
+*aliases* `RawOpenArgs` `src/open-args.ts:45`
 
 | field | type | default | at |
 |---|---|---|---|
@@ -739,22 +858,26 @@ Door-2 values exactly as given (argv or env): present and non-empty, not yet val
 
 ### `src/open-args.ParseOpenArgsOptions` — interface — `src/open-args.ts:53-56`
 
-| field | type | default | at |
-|---|---|---|---|
-| `requireVideo` | `?: boolean` | — | `src/open-args.ts:55` |
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `requireVideo` | `?: boolean` | — | `src/open-args.ts:55` | Report `video` as missing when absent. Default `false`. |
 
 ### `src/open-args.ParsedOpenArgs` — zod-object — `src/open-args.ts:58-62`
 
-| field | type | default | at |
-|---|---|---|---|
-| `context` | `RawOpenArgs → src/open-args.RawOpenArgs` | — | `src/open-args.ts:59` |
-| `missing` | `z.array(OpenArgName) → src/open-args.OpenArgName` | — | `src/open-args.ts:61` |
+*aliases* `ParsedOpenArgs` `src/open-args.ts:63`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `context` | `RawOpenArgs → src/open-args.RawOpenArgs` | — | `src/open-args.ts:59` |  |
+| `missing` | `z.array(OpenArgName) → src/open-args.OpenArgName` | — | `src/open-args.ts:61` | Each missing argument, in `brand`, `project`, `video` order — each becomes a picker (R25). |
 
 ### `src/open-context.OpenContextResult` — zod-discriminated-union on `kind` — `src/open-context.ts:16-30`
 
 Door 2 end to end (open contract §3, §5; C1, C3): turn the names an app was launched with into the `OpenContext` it
 
-| field | type | default | at |
+*aliases* `OpenContextResult` `src/open-context.ts:31`
+
+| variant | shape | default | at |
 |---|---|---|---|
 | `resolved` | `z.object({ kind: z.literal('resolved'), context: OpenContext }) → src/open-args.OpenContext` | — | `src/open-context.ts:17` |
 | `missing` | `z.object({ kind: z.literal('missing'), missing: z.array(OpenArgName) }) → src/open-args.OpenArgName` | — | `src/open-context.ts:19` |
@@ -818,16 +941,18 @@ Door 2 end to end (open contract §3, §5; C1, C3): turn the names an app was la
 
 ### `src/open-context.ResolveOpenContextOptions` — interface — `src/open-context.ts:33-42`
 
-| field | type | default | at |
-|---|---|---|---|
-| `brands` | `readonly Brand[] → src/brands.Brand` | — | `src/open-context.ts:35` |
-| `machine` | `?: Pick<MachineSettings, 'brandRoots'> | null → Pick (node_modules/typescript/lib/lib.es5.d.ts), src/machine.MachineSettings` | — | `src/open-context.ts:37` |
-| `home` | `?: string` | — | `src/open-context.ts:39` |
-| `requireVideo` | `?: boolean` | — | `src/open-context.ts:41` |
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `brands` | `readonly Brand[] → src/brands.Brand` | — | `src/open-context.ts:35` | The registry, from `readBrands`. |
+| `machine` | `?: Pick<MachineSettings, 'brandRoots'> \| null → src/machine.MachineSettings` | — | `src/open-context.ts:37` | This machine's settings, from `readMachineSettings` (for `brandRoots`). |
+| `home` | `?: string` | — | `src/open-context.ts:39` | Home directory for the A5 rewrite; default `os.homedir()`. |
+| `requireVideo` | `?: boolean` | — | `src/open-context.ts:41` | Refuse with `missing: ['video']` when no video is given. Default `false`. |
 
 ### `src/project-folder.ProjectCode` — zod-scalar — `src/project-folder.ts:5-7`
 
 A project code: one lowercase letter and two digits (`a01`, `d02`).
+
+*aliases* `ProjectCode` `src/project-folder.ts:8`
 
 `z.string().regex(/^[a-z]\d{2}$/, 'code must be one lowercase letter + two digits')`
 
@@ -838,6 +963,8 @@ Kebab-case: lowercase letters and digits, single hyphens between words.
 `z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'must be kebab-case (a-z, 0-9, single hyphens)')`
 
 ### `src/project-folder.ProjectFolder` — zod-object — `src/project-folder.ts:15`
+
+*aliases* `ProjectFolder` `src/project-folder.ts:16`
 
 | field | type | default | at |
 |---|---|---|---|
@@ -850,6 +977,8 @@ Kebab-case: lowercase letters and digits, single hyphens between words.
 
 ### `src/recording.Recording` — zod-object — `src/recording.ts:18-45`
 
+*aliases* `Recording` `src/recording.ts:46`
+
 | field | type | default | at |
 |---|---|---|---|
 | `chapter` | `z.number().int().min(1).max(99)` | — | `src/recording.ts:20` |
@@ -861,6 +990,8 @@ Kebab-case: lowercase letters and digits, single hyphens between words.
 ### `src/results.InvalidFile` — zod-object — `src/results.ts:4-9`
 
 A JSON file that was found but could not be used. Readers return this instead of throwing.
+
+*aliases* `InvalidFile` `src/results.ts:10`
 
 | field | type | default | at |
 |---|---|---|---|
@@ -883,7 +1014,7 @@ A JSON file that was found and matched `value`'s schema.
 
 Absent → `null`; present and valid → `ValidFile`; present and unusable → `InvalidFile`.
 
-| field | type | default | at |
+| variant | shape | default | at |
 |---|---|---|---|
 | `validFile` | `validFile(value) → src/results.validFile()` | — | `src/results.ts:20` |
 | `InvalidFile` | `InvalidFile → src/results.InvalidFile` | — | `src/results.ts:20` |
@@ -897,7 +1028,9 @@ Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes t
 
 ### `src/video-file.VideoFile` — zod-discriminated-union on `kind` — `src/video-file.ts:19-29`
 
-| field | type | default | at |
+*aliases* `VideoFile` `src/video-file.ts:30`
+
+| variant | shape | default | at |
 |---|---|---|---|
 | `cut` | `z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:20` |
 | `final` | `z.object({ name: KebabSlug, kind: z.literal('final'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:23` |
@@ -942,6 +1075,8 @@ Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes t
 
 ### `src/video-file.UnknownVideoFile` — zod-object — `src/video-file.ts:32-36`
 
+*aliases* `UnknownVideoFile` `src/video-file.ts:37`
+
 | field | type | default | at |
 |---|---|---|---|
 | `kind` | `z.literal('unknown-kind')` | — | `src/video-file.ts:33` |
@@ -950,12 +1085,16 @@ Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes t
 
 ### `src/video-file.ParsedVideoFile` — zod-union on `kind` — `src/video-file.ts:39`
 
-| field | type | default | at |
+*aliases* `ParsedVideoFile` `src/video-file.ts:40`
+
+| variant | shape | default | at |
 |---|---|---|---|
 | `VideoFile` | `VideoFile → src/video-file.VideoFile` | — | `src/video-file.ts:39` |
 | `UnknownVideoFile` | `UnknownVideoFile → src/video-file.UnknownVideoFile` | — | `src/video-file.ts:39` |
 
 ### `src/video-file.VideoFolder` — zod-object — `src/video-file.ts:74-79`
+
+*aliases* `VideoFolder` `src/video-file.ts:80`
 
 | field | type | default | at |
 |---|---|---|---|
@@ -971,6 +1110,8 @@ The same rule as a string schema, for contexts that carry the folder name (`Open
 
 Window positions that survive a restart (David, 2026-09-22): every Fli app window reopens where he last put it —
 
+*aliases* `WindowRect` `src/window-state.ts:22`
+
 | field | type | default | at |
 |---|---|---|---|
 | `x` | `z.number()` | — | `src/window-state.ts:17` |
@@ -982,18 +1123,22 @@ Window positions that survive a restart (David, 2026-09-22): every Fli app windo
 
 *extends* `WindowRect`
 
-| field | type | default | at |
-|---|---|---|---|
-| `x` | `z.number()` | — | `src/window-state.ts:17` |
-| `y` | `z.number()` | — | `src/window-state.ts:18` |
-| `width` | `z.number()` | — | `src/window-state.ts:19` |
-| `height` | `z.number()` | — | `src/window-state.ts:20` |
-| `maximized` | `z.boolean().optional()` | — | `src/window-state.ts:25` |
-| `displayId` | `z.number().optional()` | — | `src/window-state.ts:27` |
+*aliases* `SavedWindow` `src/window-state.ts:29`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `x` | `z.number()` | — | `src/window-state.ts:17` |  |
+| `y` | `z.number()` | — | `src/window-state.ts:18` |  |
+| `width` | `z.number()` | — | `src/window-state.ts:19` |  |
+| `height` | `z.number()` | — | `src/window-state.ts:20` |  |
+| `maximized` | `z.boolean().optional()` | — | `src/window-state.ts:25` |  |
+| `displayId` | `z.number().optional()` | — | `src/window-state.ts:27` | Electron display id the window was on — informational; placement is decided by geometry. |
 
 ### `src/window-state.WindowStateFile` — zod-object — `src/window-state.ts:32-35`
 
 The store: `{ schema: 1, windows: { "<app>/<role>": SavedWindow } }`.
+
+*aliases* `WindowStateFile` `src/window-state.ts:36`
 
 | field | type | default | at |
 |---|---|---|---|
@@ -1004,21 +1149,23 @@ The store: `{ schema: 1, windows: { "<app>/<role>": SavedWindow } }`.
 
 One display as the app sees it: Electron's `display.id`, `display.workArea` and whether it is the primary one.
 
-| field | type | default | at |
-|---|---|---|---|
-| `id` | `z.number()` | — | `src/window-state.ts:40` |
-| `workArea` | `WindowRect → src/window-state.WindowRect` | — | `src/window-state.ts:42` |
-| `primary` | `z.boolean().optional()` | — | `src/window-state.ts:43` |
+*aliases* `DisplayArea` `src/window-state.ts:45`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `z.number()` | — | `src/window-state.ts:40` |  |
+| `workArea` | `WindowRect → src/window-state.WindowRect` | — | `src/window-state.ts:42` | The display's work area (excludes the menu bar and Dock). |
+| `primary` | `z.boolean().optional()` | — | `src/window-state.ts:43` |  |
 
 ### `src/window-state.PlaceOptions` — interface — `src/window-state.ts:47-57`
 
-| field | type | default | at |
-|---|---|---|---|
-| `width` | `number` | — | `src/window-state.ts:48` |
-| `height` | `number` | — | `src/window-state.ts:49` |
-| `minWidth` | `?: number` | — | `src/window-state.ts:50` |
-| `minHeight` | `?: number` | — | `src/window-state.ts:51` |
-| `keepSize` | `?: boolean` | — | `src/window-state.ts:56` |
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `width` | `number` | — | `src/window-state.ts:48` |  |
+| `height` | `number` | — | `src/window-state.ts:49` |  |
+| `minWidth` | `?: number` | — | `src/window-state.ts:50` |  |
+| `minHeight` | `?: number` | — | `src/window-state.ts:51` |  |
+| `keepSize` | `?: boolean` | — | `src/window-state.ts:56` | `false`: restore the monitor and position but open at `width` × `height` (FliCast's uat harness — its layout |
 
 ### `src/window-state.TrackedWindow` — type — `src/window-state.ts:255-262`
 
@@ -1026,7 +1173,7 @@ The part of an Electron `BrowserWindow` that `trackWindow` needs. Methods, not d
 
 | field | type | default | at |
 |---|---|---|---|
-| `on` | `(event: 'move' | 'resize' | 'close', listener: () => void): unknown` | — | `src/window-state.ts:256` |
+| `on` | `(event: 'move' \| 'resize' \| 'close', listener: () => void): unknown` | — | `src/window-state.ts:256` |
 | `isDestroyed` | `(): boolean` | — | `src/window-state.ts:257` |
 | `isMinimized` | `(): boolean` | — | `src/window-state.ts:258` |
 | `isFullScreen` | `(): boolean` | — | `src/window-state.ts:259` |
@@ -1035,11 +1182,11 @@ The part of an Electron `BrowserWindow` that `trackWindow` needs. Methods, not d
 
 ### `src/window-state.TrackOptions` — interface — `src/window-state.ts:264-270`
 
-| field | type | default | at |
-|---|---|---|---|
-| `displayIdOf` | `?: (bounds: WindowRect) => number → src/window-state.WindowRect` | — | `src/window-state.ts:266` |
-| `file` | `?: string` | — | `src/window-state.ts:267` |
-| `debounceMs` | `?: number` | — | `src/window-state.ts:269` |
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `displayIdOf` | `?: (bounds: WindowRect) => number → src/window-state.WindowRect` | — | `src/window-state.ts:266` | `screen.getDisplayMatching(bounds).id`, to record which monitor it was on. |
+| `file` | `?: string` | — | `src/window-state.ts:267` |  |
+| `debounceMs` | `?: number` | — | `src/window-state.ts:269` | Wait this long after the last move/resize before saving; default 400 ms. |
 
 ## Cannot be mirrored
 
@@ -1051,6 +1198,17 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 | schemas built by `readFileResult(...)` (2 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:18)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:45)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
+
+### Declared but not read
+
+The census found these top-level declarations and the extractor did not mirror them. Nothing else about them is on this page.
+
+| family | count | declarations |
+|---|---|---|
+| generic type alias | 3 | `src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
+| object constant | 2 | `src/classify.LAYOUT_DIRS` `src/classify.ts:111`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47` |
+| array constant | 1 | `src/identity.DEFAULT_LANGUAGES` `src/identity.ts:27` |
+| class | 1 | `src/results.FliCoreError` `src/results.ts:25` |
 
 ## Findings — changes needed in the target application
 
