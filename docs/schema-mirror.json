@@ -1490,7 +1490,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-23T10:13:51+00:00",
+  "generated": "2026-09-23T10:29:33+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -1533,7 +1533,7 @@
   "structures": [
     {
       "anchor": {
-        "end_line": 28,
+        "end_line": 33,
         "file": "src/api-page.ts",
         "line": 16
       },
@@ -1554,7 +1554,7 @@
         {
           "anchor": {
             "file": "src/api-page.ts",
-            "line": 27
+            "line": 32
           },
           "default": null,
           "doc": "A link back to the other mode (reference \u2194 console).",
@@ -1568,7 +1568,7 @@
     },
     {
       "anchor": {
-        "end_line": 25,
+        "end_line": 30,
         "file": "src/api-page.ts",
         "line": 18
       },
@@ -1604,6 +1604,16 @@
           "doc": "Same-origin GET answering `{ token }`, when the door needs a bearer token and there is no bridge.",
           "name": "tokenPath",
           "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 29
+          },
+          "default": null,
+          "doc": "Show a \"Dry run\" box. Ticked, a call goes as `window.fliConsole.call(method, params, { dryRun: true })` or with",
+          "name": "dryRun",
+          "type": "?: boolean"
         }
       ],
       "grade": "declared",
@@ -1613,7 +1623,7 @@
     {
       "anchor": {
         "file": "src/api-page.ts",
-        "line": 27
+        "line": 32
       },
       "bases": [],
       "doc": null,
@@ -1621,7 +1631,7 @@
         {
           "anchor": {
             "file": "src/api-page.ts",
-            "line": 27
+            "line": 32
           },
           "default": null,
           "name": "href",
@@ -1630,7 +1640,7 @@
         {
           "anchor": {
             "file": "src/api-page.ts",
-            "line": 27
+            "line": 32
           },
           "default": null,
           "name": "label",
@@ -7719,7 +7729,7 @@
     }
   ],
   "target": {
-    "commit": "94a5072e054ed451ed4f613b0273b156e433f08f",
+    "commit": "cc4a8b556e7b758cd8083a69ed114dda5f93871b",
     "root": "..",
     "stack": "typescript"
   },

@@ -509,7 +509,27 @@ describe('renderApiPage — reference and console', () => {
       rpcPath: null,
       principal: 'agent:console',
       tokenPath: null,
+      dryRun: false,
     });
+  });
+
+  it('its script parses (it is only ever run in a browser)', () => {
+    for (const html of [
+      renderApiPage(doc),
+      renderApiPage(doc, { console: { rpcPath: '/rpc', dryRun: true } }),
+    ]) {
+      const script = must(/<script>([\s\S]*?)<\/script>/.exec(html)?.[1], 'inline script');
+      expect(() => new Function(script)).not.toThrow();
+    }
+  });
+
+  it('offers a dry run only when asked', () => {
+    const plain = renderApiPage(doc, { console: { rpcPath: '/rpc' } });
+    expect((embedded(plain, 'fli-config') as { dryRun: boolean }).dryRun).toBe(false);
+    const dry = renderApiPage(doc, { console: { rpcPath: '/rpc', dryRun: true } });
+    expect((embedded(dry, 'fli-config') as { dryRun: boolean }).dryRun).toBe(true);
+    expect(dry).toContain('window.fliConsole.call(method, params, { dryRun: true })');
+    expect(dry).toContain("headers['x-fli-dry-run'] = '1'");
   });
 
   it('is light-only', () => {
@@ -532,6 +552,7 @@ describe('renderApiPage — reference and console', () => {
       rpcPath: '/api/rpc',
       principal: 'agent:studio-console',
       tokenPath: '/api/session',
+      dryRun: false,
     });
     expect(html).toContain('<a class="other" href="/api/docs">Reference</a>');
     expect(html).toContain('— console</title>');

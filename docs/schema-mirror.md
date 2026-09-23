@@ -3,7 +3,7 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `94a5072e054e` · **generated** 2026-09-23T10:13:51+00:00
+- **commit** `cc4a8b556e7b` · **generated** 2026-09-23T10:29:33+00:00
 - **scope** include `src/**` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 20 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
@@ -476,29 +476,30 @@ Each set below was read out of the real authority — control flow, membership t
 
 ## Shapes
 
-### `src/api-page.ApiPageOptions` — interface — `src/api-page.ts:16-28`
+### `src/api-page.ApiPageOptions` — interface — `src/api-page.ts:16-33`
 
 The self-describing surface as ONE served HTML page (agent-drivable step 2). Two modes from one renderer:
 
 | field | type | default | at | note |
 |---|---|---|---|---|
 | `console` | `?: { /** Same-origin JSON-RPC endpoint, e.g. `/api/rpc`. */ rpcPath: string; /** Principal the console fires as; an agent name shows the fence…` | — | `src/api-page.ts:18` | Present → the console; absent → the read-only reference. |
-| `otherPage` | `?: { href: string; label: string }` | — | `src/api-page.ts:27` | A link back to the other mode (reference ↔ console). |
+| `otherPage` | `?: { href: string; label: string }` | — | `src/api-page.ts:32` | A link back to the other mode (reference ↔ console). |
 
-### `src/api-page.ApiPageOptions.console` — type — `src/api-page.ts:18-25`
+### `src/api-page.ApiPageOptions.console` — type — `src/api-page.ts:18-30`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
 | `rpcPath` | `string` | — | `src/api-page.ts:20` | Same-origin JSON-RPC endpoint, e.g. `/api/rpc`. |
 | `principal` | `?: string` | — | `src/api-page.ts:22` | Principal the console fires as; an agent name shows the fence working. Default `agent:console`. |
 | `tokenPath` | `?: string` | — | `src/api-page.ts:24` | Same-origin GET answering `{ token }`, when the door needs a bearer token and there is no bridge. |
+| `dryRun` | `?: boolean` | — | `src/api-page.ts:29` | Show a "Dry run" box. Ticked, a call goes as `window.fliConsole.call(method, params, { dryRun: true })` or with |
 
-### `src/api-page.ApiPageOptions.otherPage` — type — `src/api-page.ts:27`
+### `src/api-page.ApiPageOptions.otherPage` — type — `src/api-page.ts:32`
 
 | field | type | default | at |
 |---|---|---|---|
-| `href` | `string` | — | `src/api-page.ts:27` |
-| `label` | `string` | — | `src/api-page.ts:27` |
+| `href` | `string` | — | `src/api-page.ts:32` |
+| `label` | `string` | — | `src/api-page.ts:32` |
 
 ### `src/app-file.AppName` — zod-scalar — `src/app-file.ts:15-18`
 

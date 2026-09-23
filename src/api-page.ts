@@ -22,6 +22,11 @@ export interface ApiPageOptions {
     principal?: string;
     /** Same-origin GET answering `{ token }`, when the door needs a bearer token and there is no bridge. */
     tokenPath?: string;
+    /**
+     * Show a "Dry run" box. Ticked, a call goes as `window.fliConsole.call(method, params, { dryRun: true })` or with
+     * an `x-fli-dry-run: 1` header — offer it only when the app's seam honours one of them.
+     */
+    dryRun?: boolean;
   };
   /** A link back to the other mode (reference ↔ console). */
   otherPage?: { href: string; label: string };
@@ -45,6 +50,7 @@ export function renderApiPage(doc: OpenRpcDocument, options: ApiPageOptions = {}
     rpcPath: options.console?.rpcPath ?? null,
     principal: options.console?.principal ?? 'agent:console',
     tokenPath: options.console?.tokenPath ?? null,
+    dryRun: options.console?.dryRun ?? false,
   };
   const title = `${doc.info.title} — ${mode === 'console' ? 'console' : 'reference'}`;
   const other = options.otherPage
@@ -92,6 +98,7 @@ button { justify-self:start; font:600 13px "Oswald", sans-serif; text-transform:
 pre.out { margin:8px 0 0; padding:10px; border-radius:6px; background:var(--surface); border-left:4px solid var(--line); overflow:auto; font-size:12.5px; max-height:360px; }
 pre.out.ok { border-left-color:var(--ok); } pre.out.bad { border-left-color:var(--bad); }
 .empty { color:var(--muted); padding:20px 0; }
+label.dry { display:flex; gap:6px; align-items:center; }
 </style>
 </head>
 <body>
@@ -124,17 +131,39 @@ pre.out.ok { border-left-color:var(--ok); } pre.out.bad { border-left-color:var(
     const as = document.getElementById('as');
     as.append('Fires as ', $('code', { text: cfg.principal }), ' — human-only verbs are refused, on purpose.');
   }
+  // A schema in a line a person can read: an object's fields with their types, or a value's type and limits.
+  function brief(s) {
+    if (!s || typeof s !== 'object' || !Object.keys(s).some((k) => k !== '$schema')) return '';
+    if (s.properties) {
+      const req = new Set(s.required || []);
+      return '{ ' + Object.entries(s.properties).map(([k, v]) => k + (req.has(k) ? '' : '?') + ': ' + typeName(v)).join(', ') + ' }';
+    }
+    return typeName(s);
+  }
+  function typeName(s) {
+    if (!s || typeof s !== 'object') return 'any';
+    if (s.enum) return s.enum.map((v) => JSON.stringify(v)).join(' | ');
+    if ('const' in s) return JSON.stringify(s.const);
+    if (s.anyOf || s.oneOf) return (s.anyOf || s.oneOf).map(typeName).join(' | ');
+    if (s.type === 'array') return typeName(s.items) + '[]';
+    if (s.type === 'object') return s.properties ? brief(s) : 'object';
+    const limits = [s.format, s.pattern && '/' + s.pattern + '/', s.minLength !== undefined && 'min ' + s.minLength].filter(Boolean);
+    return (s.type || 'any') + (limits.length ? ' (' + limits.join(', ') + ')' : '');
+  }
   const starOf = (m) => m['x-human-only'] === true ? '★ human-only' : (m['x-human-only'] && m['x-human-only'].when ? '★ human-only when ' + m['x-human-only'].when : null);
 
   let token = null;
-  async function fire(method, params) {
-    if (window.fliConsole && typeof window.fliConsole.call === 'function') return window.fliConsole.call(method, params);
+  async function fire(method, params, dryRun) {
+    if (window.fliConsole && typeof window.fliConsole.call === 'function') {
+      return dryRun ? window.fliConsole.call(method, params, { dryRun: true }) : window.fliConsole.call(method, params);
+    }
     if (cfg.tokenPath && token === null) {
       const t = await fetch(cfg.tokenPath, { credentials: 'same-origin' });
       token = t.ok ? (await t.json()).token : '';
     }
     const headers = { 'content-type': 'application/json', 'x-fli-principal': cfg.principal };
     if (token) headers.authorization = 'Bearer ' + token;
+    if (dryRun) headers['x-fli-dry-run'] = '1';
     const res = await fetch(cfg.rpcPath, { method: 'POST', headers, body: JSON.stringify({ jsonrpc: '2.0', id: Date.now(), method, params }) });
     return res.json();
   }
@@ -165,19 +194,22 @@ pre.out.ok { border-left-color:var(--ok); } pre.out.bad { border-left-color:var(
     const form = $('form', { 'data-verb': m.name });
     for (const p of m.params) form.append(field(p));
     const out = $('pre', { class: 'out', hidden: '' });
+    const dry = cfg.dryRun ? $('input', { type: 'checkbox', 'data-dry-run': '' }) : null;
+    if (dry) form.append($('label', { class: 'dry' }, dry, $('span', { text: 'Dry run — preview, change nothing' })));
     form.append($('button', { type: 'submit', text: 'Fire' }), out);
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const params = {};
       try {
         for (const el of form.querySelectorAll('[name]')) {
+        if (el.hasAttribute('data-dry-run')) continue;
           if (el.value === '') continue;
           params[el.name] = el.dataset.kind === 'string' ? el.value : JSON.parse(el.value);
         }
       } catch (err) { out.hidden = false; out.className = 'out bad'; out.textContent = 'Not JSON: ' + err.message; return; }
       out.hidden = false; out.className = 'out'; out.textContent = '…';
       try {
-        const answer = await fire(m.name, params);
+        const answer = await fire(m.name, params, Boolean(dry && dry.checked));
         const bad = answer && (answer.error || answer.ok === false);
         out.className = 'out ' + (bad ? 'bad' : 'ok');
         out.textContent = JSON.stringify(answer, null, 2);
@@ -202,11 +234,11 @@ pre.out.ok { border-left-color:var(--ok); } pre.out.bad { border-left-color:var(
     body.append(facts);
     if (m.params.length) {
       const rows = m.params.map((p) => $('tr', {}, $('td', {}, $('code', { text: p.name + (p.required ? ' *' : '') })),
-        $('td', { class: 'mono', text: JSON.stringify(p.schema) }), $('td', { text: p.summary || '' })));
+        $('td', { class: 'mono', text: brief(p.schema) }), $('td', { text: p.summary || '' })));
       body.append($('table', {}, $('thead', {}, $('tr', {}, $('th', { text: 'Param' }), $('th', { text: 'Schema' }), $('th', { text: '' }))), $('tbody', {}, ...rows)));
     }
     const errs = m.errors.map((e) => $('tr', {}, $('td', {}, $('code', { text: e.message })), $('td', { class: 'mono', text: String(e.code) }),
-      $('td', { class: 'mono', text: e.data && e.data.properties && Object.keys(e.data.properties.details || {}).length ? JSON.stringify(e.data.properties.details) : '' })));
+      $('td', { class: 'mono', text: e.data && e.data.properties ? brief(e.data.properties.details) : '' })));
     body.append($('table', {}, $('thead', {}, $('tr', {}, $('th', { text: 'Refusal' }), $('th', { text: 'Code' }), $('th', { text: 'Details' }))), $('tbody', {}, ...errs)));
     if (cfg.mode === 'console') body.append(consoleFor(m));
     const card = $('details', { class: 'm', id: 'm-' + m.name });
