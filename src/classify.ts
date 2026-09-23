@@ -118,18 +118,27 @@ async function isDirectory(p: string): Promise<boolean> {
 }
 
 /**
- * Which layout one project uses (D14), by the same rule as FliHub's `detectProjectLayout`, so the two apps never
- * disagree about a folder:
- *   1. no `hub/` directory                → `legacy`
- *   2. `hub/recordings/` exists            → `hub`
- *   3. a top-level `recordings/` exists   → `legacy` (a stray `hub/` never hides real recordings)
- *   4. anything else (empty `hub/`, or a hub project whose recordings are held on the T7) → `hub`
- * The two layouts are never merged. Existing projects are never migrated. A missing folder is `legacy`, never a throw.
+ * Top-level folders that show a project already holds legacy-layout recordings: the recordings themselves, or their
+ * transcripts — media is not in git, so on another machine a legacy project may have only its transcripts.
+ */
+const LEGACY_EVIDENCE = [
+  LAYOUT_DIRS.legacy.recordings,
+  LAYOUT_DIRS.legacy.transcripts,
+  'transcripts',
+];
+
+/**
+ * Which layout one project uses (D14). Self-healing (David 2026-09-23, option A): a project with no recordings anywhere
+ * is `hub`, so a new or empty project needs no marker folder and FliHub writes `hub/recordings/` on the first take.
+ *   1. `hub/recordings/` exists                                          → `hub`
+ *   2. a top-level `recordings/`, `recording-transcripts/` or `transcripts/` → `legacy` (a stray `hub/` never hides them)
+ *   3. anything else (new, empty, a missing folder, a hub project whose media is held elsewhere) → `hub`
+ * The two layouts are never merged. Never throws.
  */
 export async function projectLayout(projectDir: string): Promise<ProjectLayout> {
-  if (!(await isDirectory(path.join(projectDir, HUB_FOLDER)))) return 'legacy';
   if (await isDirectory(path.join(projectDir, LAYOUT_DIRS.hub.recordings))) return 'hub';
-  if (await isDirectory(path.join(projectDir, LAYOUT_DIRS.legacy.recordings))) return 'legacy';
+  for (const dir of LEGACY_EVIDENCE)
+    if (await isDirectory(path.join(projectDir, dir))) return 'legacy';
   return 'hub';
 }
 
@@ -158,9 +167,9 @@ function isDirectorySync(p: string): boolean {
 
 /** `projectLayout`, synchronously — for callers that cannot await (FliHub's `getProjectPaths`). Same rule. */
 export function projectLayoutSync(projectDir: string): ProjectLayout {
-  if (!isDirectorySync(path.join(projectDir, HUB_FOLDER))) return 'legacy';
   if (isDirectorySync(path.join(projectDir, LAYOUT_DIRS.hub.recordings))) return 'hub';
-  if (isDirectorySync(path.join(projectDir, LAYOUT_DIRS.legacy.recordings))) return 'legacy';
+  for (const dir of LEGACY_EVIDENCE)
+    if (isDirectorySync(path.join(projectDir, dir))) return 'legacy';
   return 'hub';
 }
 

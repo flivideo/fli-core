@@ -3,12 +3,12 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `97c8b9fcc3b6` · **generated** 2026-09-22T14:57:13+00:00
+- **commit** `747dc43e409f` · **generated** 2026-09-23T02:56:35+00:00
 - **scope** include `src/**` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`
 
 | shapes | declared sets | derived sets | gaps | findings |
 |---|---|---|---|---|
-| 87 | 21 | 2 | 4 | 2 |
+| 88 | 22 | 2 | 4 | 2 |
 
 > **Read the gaps before trusting the shape.** Derived sets have no declaring symbol and will drift silently the next time one changes. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -129,14 +129,24 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 | `unscanned` | `src/estate.ts:284` |
 | `exhausted` | `src/estate.ts:284` |
 
-### `src/identity.WriteIdentityResult.kind` — `src/identity.ts:36-42`
+### `src/identity.ProjectAspect` — `src/identity.ts:11`
+
+*`z.enum` `ProjectAspect` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `16:9` | `src/identity.ts:11` |
+| `9:16` | `src/identity.ts:11` |
+| `1:1` | `src/identity.ts:11` |
+
+### `src/identity.WriteIdentityResult.kind` — `src/identity.ts:49-55`
 
 *the `kind` discriminator of the union `WriteIdentityResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/identity.ts:37` |
-| `refused` | `src/identity.ts:30` |
+| `written` | `src/identity.ts:50` |
+| `refused` | `src/identity.ts:43` |
 
 ### `src/machine.MachineSettingsResult.kind` — `src/machine.ts:32-40`
 
@@ -562,57 +572,63 @@ Every `resolveProject` outcome except `found`: why a reference did not resolve (
 | `reason` | `z.enum(['invalid-letter', 'unscanned', 'exhausted'])` | — | `src/estate.ts:284` |
 | `message` | `z.string()` | — | `src/estate.ts:285` |
 
-### `src/identity.ProjectIdentity` — zod-object — `src/identity.ts:10-17`
+### `src/identity.ProjectLanguage` — zod-scalar — `src/identity.ts:16`
 
-`fli.studio.json` (A3): the project's identity. Membership of a brand = this file exists and is valid (R8).
+A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).
 
-| field | type | default | at |
-|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/identity.ts:11` |
-| `id` | `z.uuid()` | — | `src/identity.ts:12` |
-| `brand` | `z.string().min(1)` | — | `src/identity.ts:13` |
-| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/identity.ts:14` |
-| `name` | `z.string().min(1)` | — | `src/identity.ts:15` |
-| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/identity.ts:16` |
+`z.string().regex(/^[a-z]{2}$/)`
 
-### `src/identity.Refused()` — zod-factory — `src/identity.ts:28-34`
+### `src/identity.ProjectIdentity` — zod-object — `src/identity.ts:19-30`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/identity.ts:30` |
-| `reason` | `z.literal(reason)` | — | `src/identity.ts:31` |
-| `path` | `z.string()` | — | `src/identity.ts:32` |
-| `message` | `z.string()` | — | `src/identity.ts:33` |
+| `schema` | `z.literal(1)` | — | `src/identity.ts:20` |
+| `id` | `z.uuid()` | — | `src/identity.ts:21` |
+| `brand` | `z.string().min(1)` | — | `src/identity.ts:22` |
+| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/identity.ts:23` |
+| `name` | `z.string().min(1)` | — | `src/identity.ts:24` |
+| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/identity.ts:25` |
+| `aspect` | `ProjectAspect.optional() → src/identity.ProjectAspect` | — | `src/identity.ts:27` |
+| `languages` | `z.array(ProjectLanguage).min(1).optional() → src/identity.ProjectLanguage` | — | `src/identity.ts:29` |
 
-### `src/identity.WriteIdentityResult` — zod-union on `kind` — `src/identity.ts:36-42`
-
-| field | type | default | at |
-|---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string(), replaced: z.boolean() })` | — | `src/identity.ts:37` |
-| `Refused('invalid-input')` | `Refused('invalid-input') → src/identity.Refused()` | — | `src/identity.ts:38` |
-| `Refused('different-id').extend({ existingId: z.string() })` | `Refused('different-id').extend({ existingId: z.string() }) → src/identity.Refused()` | — | `src/identity.ts:39` |
-| `Refused('existing-invalid')` | `Refused('existing-invalid') → src/identity.Refused()` | — | `src/identity.ts:40` |
-| `Refused('io-error')` | `Refused('io-error') → src/identity.Refused()` | — | `src/identity.ts:41` |
-
-### `src/identity.WriteIdentityResult[kind=written]` — zod-object — `src/identity.ts:37`
+### `src/identity.Refused()` — zod-factory — `src/identity.ts:41-47`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/identity.ts:37` |
-| `path` | `z.string()` | — | `src/identity.ts:37` |
-| `replaced` | `z.boolean()` | — | `src/identity.ts:37` |
+| `kind` | `z.literal('refused')` | — | `src/identity.ts:43` |
+| `reason` | `z.literal(reason)` | — | `src/identity.ts:44` |
+| `path` | `z.string()` | — | `src/identity.ts:45` |
+| `message` | `z.string()` | — | `src/identity.ts:46` |
 
-### `src/identity.WriteIdentityResult[2]` — zod-object — `src/identity.ts:39`
+### `src/identity.WriteIdentityResult` — zod-union on `kind` — `src/identity.ts:49-55`
+
+| field | type | default | at |
+|---|---|---|---|
+| `written` | `z.object({ kind: z.literal('written'), path: z.string(), replaced: z.boolean() })` | — | `src/identity.ts:50` |
+| `Refused('invalid-input')` | `Refused('invalid-input') → src/identity.Refused()` | — | `src/identity.ts:51` |
+| `Refused('different-id').extend({ existingId: z.string() })` | `Refused('different-id').extend({ existingId: z.string() }) → src/identity.Refused()` | — | `src/identity.ts:52` |
+| `Refused('existing-invalid')` | `Refused('existing-invalid') → src/identity.Refused()` | — | `src/identity.ts:53` |
+| `Refused('io-error')` | `Refused('io-error') → src/identity.Refused()` | — | `src/identity.ts:54` |
+
+### `src/identity.WriteIdentityResult[kind=written]` — zod-object — `src/identity.ts:50`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('written')` | — | `src/identity.ts:50` |
+| `path` | `z.string()` | — | `src/identity.ts:50` |
+| `replaced` | `z.boolean()` | — | `src/identity.ts:50` |
+
+### `src/identity.WriteIdentityResult[2]` — zod-object — `src/identity.ts:52`
 
 *extends* `Refused(...)`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/identity.ts:30` |
-| `reason` | `z.literal(reason)` | — | `src/identity.ts:31` |
-| `path` | `z.string()` | — | `src/identity.ts:32` |
-| `message` | `z.string()` | — | `src/identity.ts:33` |
-| `existingId` | `z.string()` | — | `src/identity.ts:39` |
+| `kind` | `z.literal('refused')` | — | `src/identity.ts:43` |
+| `reason` | `z.literal(reason)` | — | `src/identity.ts:44` |
+| `path` | `z.string()` | — | `src/identity.ts:45` |
+| `message` | `z.string()` | — | `src/identity.ts:46` |
+| `existingId` | `z.string()` | — | `src/identity.ts:52` |
 
 ### `src/lab-path.PathSegment` — zod-scalar — `src/lab-path.ts:6-12`
 
@@ -1019,8 +1035,8 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 
 | subject | why | looked at |
 |---|---|---|
-| schemas built by `Refused(...)` (3 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:38)`<br>`Refused('existing-invalid') (src/identity.ts:40)`<br>`Refused('io-error') (src/identity.ts:41)` |
-| schemas built by `readFileResult(...)` (2 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:18)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:20)` |
+| schemas built by `Refused(...)` (3 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:51)`<br>`Refused('existing-invalid') (src/identity.ts:53)`<br>`Refused('io-error') (src/identity.ts:54)` |
+| schemas built by `readFileResult(...)` (2 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:18)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:33)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
 

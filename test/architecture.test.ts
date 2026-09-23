@@ -134,6 +134,7 @@ describe('public surface (spec §4)', () => {
       'ParsedVideoFile',
       'VideoFolder',
       'VideoFolderName',
+      'ProjectAspect',
       'WindowRect',
       'SavedWindow',
       'WindowStateFile',

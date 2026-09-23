@@ -7,6 +7,15 @@ import { ProjectCode } from './project-folder.js';
 import { issuesOf, readFileResult, type ReadFileResult } from './results.js';
 
 /** `fli.studio.json` (A3): the project's identity. Membership of a brand = this file exists and is valid (R8). */
+/** The shape a project's videos are made for (David 2026-09-23, B584). Absent → `16:9`. */
+export const ProjectAspect = z.enum(['16:9', '9:16', '1:1']);
+export type ProjectAspect = z.infer<typeof ProjectAspect>;
+export const DEFAULT_ASPECT: ProjectAspect = '16:9';
+
+/** A spoken language, as a lower-case ISO 639-1 code (`en`, `th`). */
+export const ProjectLanguage = z.string().regex(/^[a-z]{2}$/);
+export const DEFAULT_LANGUAGES: readonly string[] = ['en'];
+
 export const ProjectIdentity = z.object({
   schema: z.literal(1),
   id: z.uuid(),
@@ -14,6 +23,10 @@ export const ProjectIdentity = z.object({
   code: ProjectCode,
   name: z.string().min(1),
   createdAt: z.iso.datetime({ offset: true }),
+  /** Intent (B584): the aspect the videos are made for. Absent → `16:9` (`projectIntents`). */
+  aspect: ProjectAspect.optional(),
+  /** Intent (B584): what is spoken, dominant first — `["en"]`, `["th"]`, `["en","th"]`. Absent → `["en"]`. */
+  languages: z.array(ProjectLanguage).min(1).optional(),
 });
 export type ProjectIdentity = z.infer<typeof ProjectIdentity>;
 
@@ -131,4 +144,15 @@ function refusalFor(
     };
   }
   return null;
+}
+
+/** A project's intents with the defaults filled in: `{ aspect: '16:9', languages: ['en'] }` when the file has none. */
+export function projectIntents(identity: Pick<ProjectIdentity, 'aspect' | 'languages'>): {
+  aspect: ProjectAspect;
+  languages: string[];
+} {
+  return {
+    aspect: identity.aspect ?? DEFAULT_ASPECT,
+    languages: identity.languages?.length ? [...identity.languages] : [...DEFAULT_LANGUAGES],
+  };
 }

@@ -25,7 +25,12 @@ export {
 } from './brands.js';
 
 export {
+  DEFAULT_ASPECT,
+  DEFAULT_LANGUAGES,
+  ProjectAspect,
   ProjectIdentity,
+  ProjectLanguage,
+  projectIntents,
   ReadIdentityResult,
   WriteIdentityResult,
   readIdentity,

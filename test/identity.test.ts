@@ -2,7 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { atomicWrite } from '../src/fs-utils.js';
-import { ProjectIdentity, readIdentity, writeIdentity } from '../src/identity.js';
+import { ProjectIdentity, projectIntents, readIdentity, writeIdentity } from '../src/identity.js';
 import { buildTree, identity, tempDir } from './helpers/fixtures.js';
 
 describe('readIdentity', () => {
@@ -316,5 +316,24 @@ describe('atomicWrite', () => {
     spy.mockRestore();
     expect(await fs.readFile(file, 'utf8')).toBe('two');
     expect(await fs.readdir(dir)).toEqual(['a.json']);
+  });
+
+  it('carries the project intents (aspect, languages) and fills the defaults when absent', async () => {
+    const dir = await tempDir();
+    const base = identity();
+    await buildTree(dir, {
+      'fli.studio.json': JSON.stringify({ ...base, aspect: '9:16', languages: ['th', 'en'] }),
+    });
+    const read = await readIdentity(dir);
+    if (read?.kind !== 'valid') throw new Error('expected a valid identity');
+    expect(projectIntents(read.value)).toEqual({ aspect: '9:16', languages: ['th', 'en'] });
+    expect(projectIntents({})).toEqual({ aspect: '16:9', languages: ['en'] });
+    const bad = await tempDir();
+    await buildTree(bad, { 'fli.studio.json': JSON.stringify({ ...base, aspect: '4:3' }) });
+    expect((await readIdentity(bad))?.kind).toBe('invalid');
+    await buildTree(bad, {
+      'fli.studio.json': JSON.stringify({ ...base, languages: ['English'] }),
+    });
+    expect((await readIdentity(bad))?.kind).toBe('invalid');
   });
 });

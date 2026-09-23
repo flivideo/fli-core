@@ -125,10 +125,17 @@ describe('the hub layout (D14: FliHub folders under hub/ for new projects)', () 
     expect(classifyProjectEntry(relPath, isDirectory)).toBe(zone);
   });
 
-  // Mirrors FliHub's detectProjectLayout cases (flihub shared/projectLayout.test.ts, 43c7365) — the two must agree.
+  // Self-healing (David 2026-09-23, option A): no recordings anywhere → hub. FliHub's detectProjectLayout must agree.
   it.each<[string, Record<string, string>, 'hub' | 'legacy']>([
     ['legacy: top-level recordings/, no hub/', { 'recordings/': '' }, 'legacy'],
-    ['legacy: an empty folder (every project created today)', {}, 'legacy'],
+    ['hub: an empty folder — a new project needs no marker (self-healing)', {}, 'hub'],
+    [
+      'legacy: only recording-transcripts/ (media not on this machine)',
+      { 'recording-transcripts/': '' },
+      'legacy',
+    ],
+    ['legacy: only a top-level transcripts/', { 'transcripts/': '' }, 'legacy'],
+    ['hub: only other folders (footage/, videos/)', { 'footage/': '', 'videos/': '' }, 'hub'],
     ['hub: hub/recordings/ exists', { 'hub/recordings/': '' }, 'hub'],
     [
       'hub: hub/recordings/ wins even when top-level recordings/ also exists',
@@ -146,7 +153,7 @@ describe('the hub layout (D14: FliHub folders under hub/ for new projects)', () 
       'hub',
     ],
     ['hub: an empty hub/ and no top-level recordings/', { 'hub/': '' }, 'hub'],
-    ['legacy: a FILE named hub is not a layout marker', { hub: 'x' }, 'legacy'],
+    ['legacy: a FILE named hub is not a layout marker', { hub: 'x', 'recordings/': '' }, 'legacy'],
   ])('projectLayout / projectLayoutSync — %s', async (_name, tree, layout) => {
     const dir = await tempDir();
     await buildTree(dir, tree);
@@ -155,10 +162,10 @@ describe('the hub layout (D14: FliHub folders under hub/ for new projects)', () 
     expect(projectLayoutPathsSync(dir)).toEqual(await projectLayoutPaths(dir));
   });
 
-  it('projectLayout: a missing folder is legacy, never a throw', async () => {
+  it('projectLayout: a missing folder is hub (no recordings anywhere), never a throw', async () => {
     const missing = path.join(await tempDir(), 'nope');
-    expect(await projectLayout(missing)).toBe('legacy');
-    expect(projectLayoutSync(missing)).toBe('legacy');
+    expect(await projectLayout(missing)).toBe('hub');
+    expect(projectLayoutSync(missing)).toBe('hub');
   });
 
   it('projectLayoutPaths: hub → hub/recordings + hub/transcripts; legacy → recordings + recording-transcripts', async () => {
@@ -170,6 +177,7 @@ describe('the hub layout (D14: FliHub folders under hub/ for new projects)', () 
       transcripts: path.join(hub, 'hub', 'transcripts'),
     });
     const legacy = await tempDir();
+    await buildTree(legacy, { 'recordings/': '' });
     expect(await projectLayoutPaths(legacy)).toEqual({
       layout: 'legacy',
       recordings: path.join(legacy, 'recordings'),
