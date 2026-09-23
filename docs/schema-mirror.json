@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 175,
+    "declared": 186,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -63,6 +63,13 @@
         "gaps": 0,
         "mirrored": 12,
         "not_read": 6,
+        "not_schema_bearing": 0
+      },
+      "src/flitools.ts": {
+        "declared": 11,
+        "gaps": 0,
+        "mirrored": 11,
+        "not_read": 0,
         "not_schema_bearing": 0
       },
       "src/identity.ts": {
@@ -151,7 +158,7 @@
       }
     },
     "gaps": 4,
-    "mirrored": 156,
+    "mirrored": 167,
     "not_read": 15,
     "not_schema_bearing": 10,
     "not_schema_bearing_by_family": {
@@ -892,6 +899,87 @@
       ]
     },
     {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 17
+          },
+          "name": "TranscriptJobStatus"
+        }
+      ],
+      "anchor": {
+        "file": "src/flitools.ts",
+        "line": 16
+      },
+      "authority": "`z.enum` `TranscriptJobStatus` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/flitools.TranscriptJobStatus",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 16
+          },
+          "value": "queued"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 16
+          },
+          "value": "running"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 16
+          },
+          "value": "done"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 16
+          },
+          "value": "failed"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 47,
+        "file": "src/flitools.ts",
+        "line": 44
+      },
+      "authority": "the `kind` discriminator of union type `FliToolsAnswer` - each value declared by a literal type in one variant",
+      "grade": "declared",
+      "id": "src/flitools.FliToolsAnswer.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 45
+          },
+          "value": "ok"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 46
+          },
+          "value": "refused"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 47
+          },
+          "value": "unavailable"
+        }
+      ]
+    },
+    {
       "anchor": {
         "file": "src/fs-utils.ts",
         "line": 32
@@ -1490,7 +1578,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-23T10:43:58+00:00",
+  "generated": "2026-09-23T14:13:15+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -4271,6 +4359,494 @@
       "grade": "declared",
       "id": "src/failure-codes.AppBusyDetails",
       "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 14
+          },
+          "name": "TranscriptFiles"
+        }
+      ],
+      "anchor": {
+        "file": "src/flitools.ts",
+        "line": 13
+      },
+      "bases": [],
+      "doc": "Where a transcript's three files live: json (words + timings), srt, txt.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 13
+          },
+          "default": null,
+          "name": "json",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 13
+          },
+          "default": null,
+          "name": "srt",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 13
+          },
+          "default": null,
+          "name": "txt",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/flitools.TranscriptFiles",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 32
+          },
+          "name": "TranscriptJob"
+        }
+      ],
+      "anchor": {
+        "end_line": 31,
+        "file": "src/flitools.ts",
+        "line": 20
+      },
+      "bases": [],
+      "doc": "One FliTools job (`transcribe.jobs`, or `transcribe.run { wait: false }`).",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 21
+          },
+          "default": null,
+          "name": "id",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 22
+          },
+          "default": null,
+          "name": "status",
+          "type": "TranscriptJobStatus \u2192 src/flitools.TranscriptJobStatus"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 23
+          },
+          "default": null,
+          "name": "phase",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 24
+          },
+          "default": null,
+          "name": "pct",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 26
+          },
+          "default": null,
+          "doc": "The recording's absolute path.",
+          "name": "source",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 27
+          },
+          "default": null,
+          "name": "app",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 28
+          },
+          "default": null,
+          "name": "project",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 29
+          },
+          "default": null,
+          "name": "queuedAt",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 30
+          },
+          "default": null,
+          "name": "error",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/flitools.TranscriptJob",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 42
+          },
+          "name": "TranscriptFound"
+        }
+      ],
+      "anchor": {
+        "end_line": 41,
+        "file": "src/flitools.ts",
+        "line": 35
+      },
+      "bases": [],
+      "doc": "`transcribe.find`: is there a transcript for this recording, and is it for its current content.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 36
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 37
+          },
+          "default": null,
+          "name": "files",
+          "type": "TranscriptFiles \u2192 src/flitools.TranscriptFiles"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 38
+          },
+          "default": null,
+          "name": "exists",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 39
+          },
+          "default": null,
+          "name": "current",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 40
+          },
+          "default": null,
+          "name": "wordTimings",
+          "type": "z.boolean()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/flitools.TranscriptFound",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 47,
+        "file": "src/flitools.ts",
+        "line": 44
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 45
+          },
+          "default": null,
+          "name": "ok",
+          "type": "{ kind: 'ok'; value: T }"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "refused",
+          "type": "{ kind: 'refused'; failureMode: string; message: string; details?: unknown }"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 47
+          },
+          "default": null,
+          "name": "unavailable",
+          "type": "{ kind: 'unavailable'; reason: string }"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/flitools.FliToolsAnswer",
+      "kind": "type-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/flitools.ts",
+        "line": 45
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 45
+          },
+          "default": null,
+          "name": "kind",
+          "type": "'ok'"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 45
+          },
+          "default": null,
+          "name": "value",
+          "type": "T"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/flitools.FliToolsAnswer[kind=ok]",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "file": "src/flitools.ts",
+        "line": 46
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "kind",
+          "type": "'refused'"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "failureMode",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "message",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "details",
+          "type": "?: unknown"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/flitools.FliToolsAnswer[kind=refused]",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "file": "src/flitools.ts",
+        "line": 47
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 47
+          },
+          "default": null,
+          "name": "kind",
+          "type": "'unavailable'"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 47
+          },
+          "default": null,
+          "name": "reason",
+          "type": "string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/flitools.FliToolsAnswer[kind=unavailable]",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "end_line": 56,
+        "file": "src/flitools.ts",
+        "line": 49
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 51
+          },
+          "default": null,
+          "doc": "The calling app; FliTools records it and scopes its queue by it. Sent as `agent:<app>`.",
+          "name": "app",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 53
+          },
+          "default": null,
+          "doc": "FliTools' control file. Default `<home>/Library/Application Support/flitools/control.json`.",
+          "name": "controlFile",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 54
+          },
+          "default": null,
+          "name": "home",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 55
+          },
+          "default": null,
+          "name": "timeoutMs",
+          "type": "?: number"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/flitools.FliToolsOptions",
+      "kind": "interface"
+    },
+    {
+      "anchor": {
+        "end_line": 64,
+        "file": "src/flitools.ts",
+        "line": 58
+      },
+      "bases": [
+        "FliToolsOptions"
+      ],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 59
+          },
+          "default": null,
+          "name": "project",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 61
+          },
+          "default": null,
+          "doc": "Default true: answer with the transcript. false: answer with the queued job.",
+          "name": "wait",
+          "type": "?: boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 62
+          },
+          "default": null,
+          "name": "language",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 63
+          },
+          "default": null,
+          "name": "vocabulary",
+          "type": "?: string[]"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/flitools.TranscribeOptions",
+      "kind": "interface"
     },
     {
       "anchor": {
@@ -7729,7 +8305,7 @@
     }
   ],
   "target": {
-    "commit": "cf0160511de7e1cf0cc58bba3877087fa84d05ea",
+    "commit": "4550f2aa35e4b309910988bd5aea16c8080d5fa3",
     "root": "..",
     "stack": "typescript"
   },
@@ -7905,7 +8481,7 @@
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 20,
+    "import": 21,
     "re-export": 0
   }
 }

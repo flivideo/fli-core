@@ -228,6 +228,21 @@ export {
 export { renderApiPage, type ApiPageOptions } from './api-page.js';
 
 export {
+  TranscriptFiles,
+  TranscriptFound,
+  TranscriptJob,
+  TranscriptJobStatus,
+  flitoolsCall,
+  transcribe,
+  transcribeQueued,
+  transcriptFor,
+  transcriptJobs,
+  type FliToolsAnswer,
+  type FliToolsOptions,
+  type TranscribeOptions,
+} from './flitools.js';
+
+export {
   AppScriptOpen,
   LIFECYCLE_CAPABILITIES,
   LifecycleVerb,

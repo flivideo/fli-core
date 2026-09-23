@@ -222,6 +222,10 @@ describe('public surface (spec §4)', () => {
       'SystemQuitOutput',
       'LifecycleVerb',
       'AppScriptOpen',
+      'TranscriptFiles',
+      'TranscriptFound',
+      'TranscriptJob',
+      'TranscriptJobStatus',
     ];
     const exported = core as Record<string, unknown>;
     expect(schemas.filter((name) => !(exported[name] instanceof z.ZodType))).toEqual([]);

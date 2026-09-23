@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `cf0160511de7` · **generated** 2026-09-23T10:43:58+00:00
+- **commit** `4550f2aa35e4` · **generated** 2026-09-23T14:13:15+00:00
 - **scope** include `src/**` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 20 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 21 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 136 | 32 | 2 | 4 | 15 | 2 |
+| 145 | 34 | 2 | 4 | 15 | 2 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -26,6 +26,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/control-file.ts` — `ControlFile` :18 · `ControlFileRead` :30 · `ControlFileOptions` :39
 - `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
+- `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
 - `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :32
 - `src/identity.ts` — `ProjectAspect` (set) :11 · `ProjectShape` (set) :21 · `ProjectLanguage` :26 · `ProjectIdentity` :29 · `Refused()` :53 · `WriteIdentityResult` :61
 - `src/lab-path.ts` — `PathSegment` :6 · `LabPathInput` :14
@@ -58,7 +59,7 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**175** top-level declarations counted = **156** mirrored + **4** listed as gaps + **15** declared but not read.
+**186** top-level declarations counted = **167** mirrored + **4** listed as gaps + **15** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
 Not counted, as not schema-bearing: 1 function, 9 literal constants.
@@ -280,6 +281,29 @@ Which zone of the project layout (spec §3, roadmap §1) a path inside a project
 | `human` | `src/failure-codes.ts:143` |
 | `agent` | `src/failure-codes.ts:143` |
 | `cli` | `src/failure-codes.ts:143` |
+
+### `src/flitools.TranscriptJobStatus` — `src/flitools.ts:16`
+
+*`z.enum` `TranscriptJobStatus` - a single declaring symbol*
+
+*aliases* `TranscriptJobStatus` `src/flitools.ts:17`
+
+| value | declared at |
+|---|---|
+| `queued` | `src/flitools.ts:16` |
+| `running` | `src/flitools.ts:16` |
+| `done` | `src/flitools.ts:16` |
+| `failed` | `src/flitools.ts:16` |
+
+### `src/flitools.FliToolsAnswer.kind` — `src/flitools.ts:44-47`
+
+*the `kind` discriminator of union type `FliToolsAnswer` - each value declared by a literal type in one variant*
+
+| value | declared at |
+|---|---|
+| `ok` | `src/flitools.ts:45` |
+| `refused` | `src/flitools.ts:46` |
+| `unavailable` | `src/flitools.ts:47` |
 
 ### `src/identity.ProjectAspect` — `src/identity.ts:11`
 
@@ -1046,6 +1070,101 @@ What an app is doing that a quit would lose.
 | field | type | default | at |
 |---|---|---|---|
 | `busy` | `z.array(BusyWork) → src/failure-codes.BusyWork` | — | `src/failure-codes.ts:160` |
+
+### `src/flitools.TranscriptFiles` — zod-object — `src/flitools.ts:13`
+
+Where a transcript's three files live: json (words + timings), srt, txt.
+
+*aliases* `TranscriptFiles` `src/flitools.ts:14`
+
+| field | type | default | at |
+|---|---|---|---|
+| `json` | `z.string()` | — | `src/flitools.ts:13` |
+| `srt` | `z.string()` | — | `src/flitools.ts:13` |
+| `txt` | `z.string()` | — | `src/flitools.ts:13` |
+
+### `src/flitools.TranscriptJob` — zod-object — `src/flitools.ts:20-31`
+
+One FliTools job (`transcribe.jobs`, or `transcribe.run { wait: false }`).
+
+*aliases* `TranscriptJob` `src/flitools.ts:32`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `z.string()` | — | `src/flitools.ts:21` |  |
+| `status` | `TranscriptJobStatus → src/flitools.TranscriptJobStatus` | — | `src/flitools.ts:22` |  |
+| `phase` | `z.string()` | — | `src/flitools.ts:23` |  |
+| `pct` | `z.number()` | — | `src/flitools.ts:24` |  |
+| `source` | `z.string()` | — | `src/flitools.ts:26` | The recording's absolute path. |
+| `app` | `z.string()` | — | `src/flitools.ts:27` |  |
+| `project` | `z.string()` | — | `src/flitools.ts:28` |  |
+| `queuedAt` | `z.string()` | — | `src/flitools.ts:29` |  |
+| `error` | `z.string().optional()` | — | `src/flitools.ts:30` |  |
+
+### `src/flitools.TranscriptFound` — zod-object — `src/flitools.ts:35-41`
+
+`transcribe.find`: is there a transcript for this recording, and is it for its current content.
+
+*aliases* `TranscriptFound` `src/flitools.ts:42`
+
+| field | type | default | at |
+|---|---|---|---|
+| `path` | `z.string()` | — | `src/flitools.ts:36` |
+| `files` | `TranscriptFiles → src/flitools.TranscriptFiles` | — | `src/flitools.ts:37` |
+| `exists` | `z.boolean()` | — | `src/flitools.ts:38` |
+| `current` | `z.boolean()` | — | `src/flitools.ts:39` |
+| `wordTimings` | `z.boolean()` | — | `src/flitools.ts:40` |
+
+### `src/flitools.FliToolsAnswer` — type-union on `kind` — `src/flitools.ts:44-47`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `ok` | `{ kind: 'ok'; value: T }` | — | `src/flitools.ts:45` |
+| `refused` | `{ kind: 'refused'; failureMode: string; message: string; details?: unknown }` | — | `src/flitools.ts:46` |
+| `unavailable` | `{ kind: 'unavailable'; reason: string }` | — | `src/flitools.ts:47` |
+
+### `src/flitools.FliToolsAnswer[kind=ok]` — type — `src/flitools.ts:45`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `'ok'` | — | `src/flitools.ts:45` |
+| `value` | `T` | — | `src/flitools.ts:45` |
+
+### `src/flitools.FliToolsAnswer[kind=refused]` — type — `src/flitools.ts:46`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `'refused'` | — | `src/flitools.ts:46` |
+| `failureMode` | `string` | — | `src/flitools.ts:46` |
+| `message` | `string` | — | `src/flitools.ts:46` |
+| `details` | `?: unknown` | — | `src/flitools.ts:46` |
+
+### `src/flitools.FliToolsAnswer[kind=unavailable]` — type — `src/flitools.ts:47`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `'unavailable'` | — | `src/flitools.ts:47` |
+| `reason` | `string` | — | `src/flitools.ts:47` |
+
+### `src/flitools.FliToolsOptions` — interface — `src/flitools.ts:49-56`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `app` | `string` | — | `src/flitools.ts:51` | The calling app; FliTools records it and scopes its queue by it. Sent as `agent:<app>`. |
+| `controlFile` | `?: string` | — | `src/flitools.ts:53` | FliTools' control file. Default `<home>/Library/Application Support/flitools/control.json`. |
+| `home` | `?: string` | — | `src/flitools.ts:54` |  |
+| `timeoutMs` | `?: number` | — | `src/flitools.ts:55` |  |
+
+### `src/flitools.TranscribeOptions` — interface — `src/flitools.ts:58-64`
+
+*extends* `FliToolsOptions`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `project` | `?: string` | — | `src/flitools.ts:59` |  |
+| `wait` | `?: boolean` | — | `src/flitools.ts:61` | Default true: answer with the transcript. false: answer with the queued job. |
+| `language` | `?: string` | — | `src/flitools.ts:62` |  |
+| `vocabulary` | `?: string[]` | — | `src/flitools.ts:63` |  |
 
 ### `src/identity.ProjectLanguage` — zod-scalar — `src/identity.ts:26`
 
