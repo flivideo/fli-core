@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.7.3 · True at 62eab47 (2026-09-23)
+**Status:** active, v0.8.0 · True at e078de1 (2026-09-23)
 
 ## Install
 
@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.7.3"
+    "@flivideo/core": "github:flivideo/fli-core#v0.8.0"
   }
 }
 ```
@@ -109,6 +109,14 @@ const gate = authorize('project.empty-trash', CAPS['project.empty-trash'], 'agen
   you). `console.dryRun: true` adds a Dry run box (v0.7.1). Self-contained, light-only.
 - **Lifecycle**: `LIFECYCLE_CAPABILITIES` (`system.status`, `system.quit`, `system.restart`; `force` is human-only;
   a busy app refuses `app-busy`) and `appScriptArgs(verb, open?)` for driving `scripts/app.sh` from outside.
+
+## Asking FliTools for a transcript (v0.8.0)
+
+FliTools (`~/dev/ad/flivideo/flitools`) is the one transcription service. Apps call it through this client, never
+their own engine: `transcribeQueued(path, { app, project })` queues a recording (FliTools writes `json`/`srt`/`txt`
+beside it), `transcriptFor(path, { app })` says whether a current transcript exists, `transcriptJobs({ project },
+{ app })` reads the app's own queue. Each answers `ok`, `refused` (FliTools' named refusal) or `unavailable` (not
+running) — never a throw. Node only: it reads FliTools' control file.
 
 ## Data shapes
 
