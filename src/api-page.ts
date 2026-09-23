@@ -145,7 +145,7 @@ label.dry { display:flex; gap:6px; align-items:center; }
     if (s.enum) return s.enum.map((v) => JSON.stringify(v)).join(' | ');
     if ('const' in s) return JSON.stringify(s.const);
     if (s.anyOf || s.oneOf) return (s.anyOf || s.oneOf).map(typeName).join(' | ');
-    if (s.type === 'array') return typeName(s.items) + '[]';
+    if (s.type === 'array') { const t = typeName(s.items); return (t.includes(' | ') ? '(' + t + ')' : t) + '[]'; }
     if (s.type === 'object') return s.properties ? brief(s) : 'object';
     const limits = [s.format, s.pattern && '/' + s.pattern + '/', s.minLength !== undefined && 'min ' + s.minLength].filter(Boolean);
     return (s.type || 'any') + (limits.length ? ' (' + limits.join(', ') + ')' : '');

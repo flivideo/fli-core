@@ -148,6 +148,18 @@ describe('defineCapability — the contract', () => {
     expect(() => defineCapabilities({ 'Bad.verb': SET['project.list'] })).toThrow();
   });
 
+  it('re-exports its own zod, and reads required fields by shape', async () => {
+    const { z: coreZ } = await import('../src/index.js');
+    expect(coreZ).toBe(z);
+    const contracts = await import('../src/contracts.js');
+    expect(contracts.z).toBe(z);
+    const lookalike = {
+      ...SET['project.list'],
+      input: { shape: { a: z.string(), b: z.string().optional() } },
+    };
+    expect(requiredFields(lookalike as unknown as (typeof SET)['project.list'])).toEqual(['a']);
+  });
+
   it('knows the required fields', () => {
     expect(requiredFields(SET['project.empty-trash'])).toEqual(['brand', 'project']);
     const scalar = scalarVerb();

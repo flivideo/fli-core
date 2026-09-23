@@ -236,3 +236,9 @@ export {
   SystemStatus,
   appScriptArgs,
 } from './lifecycle.js';
+
+/**
+ * The zod this package is built with (v4). Declare capability inputs and outputs with it when the app itself is on
+ * zod 3 (Teletubby, FliCut): a zod 3 schema is not a `z.ZodType` here, and a copy of zod 4 from elsewhere may not be.
+ */
+export { z } from 'zod';

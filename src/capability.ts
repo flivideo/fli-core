@@ -175,10 +175,10 @@ export function authorize(
 
 /** The fields an input object requires (each one missing can become a picker, or a `missing` refusal). */
 export function requiredFields(contract: CapabilityContract): string[] {
-  const input = contract.input;
-  if (!(input instanceof z.ZodObject)) return [];
-  const shape = input.shape as Record<string, z.ZodType>;
-  return Object.entries(shape)
+  // By shape, not `instanceof`: a schema built with another copy of zod 4 is still an object schema.
+  const shape = (contract.input as { shape?: unknown }).shape;
+  if (typeof shape !== 'object' || shape === null) return [];
+  return Object.entries(shape as Record<string, z.ZodType>)
     .filter(([, field]) => !field.safeParse(undefined).success)
     .map(([key]) => key);
 }
