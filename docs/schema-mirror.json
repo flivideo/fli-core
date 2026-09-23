@@ -1,7 +1,14 @@
 {
   "census": {
-    "declared": 114,
+    "declared": 175,
     "files": {
+      "src/api-page.ts": {
+        "declared": 1,
+        "gaps": 0,
+        "mirrored": 1,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
       "src/app-file.ts": {
         "declared": 4,
         "gaps": 0,
@@ -23,6 +30,13 @@
         "not_read": 0,
         "not_schema_bearing": 0
       },
+      "src/capability.ts": {
+        "declared": 17,
+        "gaps": 0,
+        "mirrored": 16,
+        "not_read": 1,
+        "not_schema_bearing": 2
+      },
       "src/classify.ts": {
         "declared": 8,
         "gaps": 0,
@@ -30,12 +44,26 @@
         "not_read": 1,
         "not_schema_bearing": 2
       },
+      "src/control-file.ts": {
+        "declared": 5,
+        "gaps": 0,
+        "mirrored": 5,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
       "src/estate.ts": {
         "declared": 15,
         "gaps": 0,
         "mirrored": 14,
         "not_read": 1,
         "not_schema_bearing": 1
+      },
+      "src/failure-codes.ts": {
+        "declared": 18,
+        "gaps": 0,
+        "mirrored": 12,
+        "not_read": 6,
+        "not_schema_bearing": 0
       },
       "src/identity.ts": {
         "declared": 12,
@@ -49,6 +77,13 @@
         "gaps": 0,
         "mirrored": 2,
         "not_read": 0,
+        "not_schema_bearing": 0
+      },
+      "src/lifecycle.ts": {
+        "declared": 11,
+        "gaps": 0,
+        "mirrored": 10,
+        "not_read": 1,
         "not_schema_bearing": 0
       },
       "src/machine.ts": {
@@ -69,6 +104,13 @@
         "declared": 3,
         "gaps": 0,
         "mirrored": 3,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
+      "src/openrpc.ts": {
+        "declared": 9,
+        "gaps": 0,
+        "mirrored": 9,
         "not_read": 0,
         "not_schema_bearing": 0
       },
@@ -109,11 +151,12 @@
       }
     },
     "gaps": 4,
-    "mirrored": 103,
-    "not_read": 7,
-    "not_schema_bearing": 8,
+    "mirrored": 156,
+    "not_read": 15,
+    "not_schema_bearing": 10,
     "not_schema_bearing_by_family": {
-      "literal constant": 8
+      "function": 1,
+      "literal constant": 9
     }
   },
   "closed_sets": [
@@ -139,6 +182,205 @@
             "line": 5
           },
           "value": "invalid"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 18
+          },
+          "name": "PrincipalKind"
+        }
+      ],
+      "anchor": {
+        "file": "src/capability.ts",
+        "line": 17
+      },
+      "authority": "`z.enum` `PrincipalKind` - a single declaring symbol",
+      "doc": "Who is calling, by kind. The principal NAME is `human` or `human:<surface>`, `agent:<name>`, or `cli`.",
+      "grade": "declared",
+      "id": "src/capability.PrincipalKind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 17
+          },
+          "value": "human"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 17
+          },
+          "value": "agent"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 17
+          },
+          "value": "cli"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 36
+          },
+          "name": "CapabilityKind"
+        }
+      ],
+      "anchor": {
+        "file": "src/capability.ts",
+        "line": 35
+      },
+      "authority": "`z.enum` `CapabilityKind` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/capability.CapabilityKind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 35
+          },
+          "value": "query"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 35
+          },
+          "value": "command"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 35
+          },
+          "value": "task"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 35
+          },
+          "value": "event"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 45
+          },
+          "name": "SideEffects"
+        }
+      ],
+      "anchor": {
+        "end_line": 44,
+        "file": "src/capability.ts",
+        "line": 39
+      },
+      "authority": "`z.enum` `SideEffects` - a single declaring symbol",
+      "doc": "What calling it does to the world: nothing, an edit that can be taken back, one that cannot, or something outside.",
+      "grade": "declared",
+      "id": "src/capability.SideEffects",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 40
+          },
+          "value": "read-only"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 41
+          },
+          "value": "reversible-write"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 42
+          },
+          "value": "destructive"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 43
+          },
+          "value": "external-side-effect"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 48
+          },
+          "name": "ExpectedDuration"
+        }
+      ],
+      "anchor": {
+        "file": "src/capability.ts",
+        "line": 47
+      },
+      "authority": "`z.enum` `ExpectedDuration` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/capability.ExpectedDuration",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 47
+          },
+          "value": "fast"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 47
+          },
+          "value": "slow"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/capability.ts",
+        "line": 122
+      },
+      "authority": "the `ok` discriminator of union type `Authorization` - each value declared by a literal type in one variant",
+      "grade": "declared",
+      "id": "src/capability.Authorization.ok",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 122
+          },
+          "value": "true"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 122
+          },
+          "value": "false"
         }
       ]
     },
@@ -313,6 +555,46 @@
             "line": 97
           },
           "value": "legacy"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 36,
+        "file": "src/control-file.ts",
+        "line": 30
+      },
+      "authority": "the `kind` discriminator of `z.discriminatedUnion` `ControlFileRead` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/control-file.ControlFileRead.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 31
+          },
+          "value": "live"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 33
+          },
+          "value": "stale"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 34
+          },
+          "value": "absent"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 35
+          },
+          "value": "invalid"
         }
       ]
     },
@@ -579,6 +861,38 @@
     },
     {
       "anchor": {
+        "file": "src/failure-codes.ts",
+        "line": 143
+      },
+      "authority": "`z.enum` `allowed[]` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/failure-codes.ForbiddenDetails.allowed[]",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 143
+          },
+          "value": "human"
+        },
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 143
+          },
+          "value": "agent"
+        },
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 143
+          },
+          "value": "cli"
+        }
+      ]
+    },
+    {
+      "anchor": {
         "file": "src/fs-utils.ts",
         "line": 32
       },
@@ -735,6 +1049,55 @@
       ]
     },
     {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 19
+          },
+          "name": "LifecycleVerb"
+        }
+      ],
+      "anchor": {
+        "file": "src/lifecycle.ts",
+        "line": 18
+      },
+      "authority": "`z.enum` `LifecycleVerb` - a single declaring symbol",
+      "doc": "The lifecycle verb contract (agent-drivable step 2, David 2026-09-23: \"Do we have support for closing them down",
+      "grade": "declared",
+      "id": "src/lifecycle.LifecycleVerb",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 18
+          },
+          "value": "status"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 18
+          },
+          "value": "start"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 18
+          },
+          "value": "stop"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 18
+          },
+          "value": "restart"
+        }
+      ]
+    },
+    {
       "anchor": {
         "end_line": 40,
         "file": "src/machine.ts",
@@ -884,6 +1247,31 @@
             "line": 25
           },
           "value": "video-not-found"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 183
+      },
+      "authority": "the `ok` discriminator of union type `CallAnswer` - each value declared by a literal type in one variant",
+      "grade": "declared",
+      "id": "src/openrpc.CallAnswer.ok",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 183
+          },
+          "value": "true"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 183
+          },
+          "value": "false"
         }
       ]
     },
@@ -1102,7 +1490,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-23T08:06:17+00:00",
+  "generated": "2026-09-23T10:13:51+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -1143,6 +1531,116 @@
     ]
   },
   "structures": [
+    {
+      "anchor": {
+        "end_line": 28,
+        "file": "src/api-page.ts",
+        "line": 16
+      },
+      "bases": [],
+      "doc": "The self-describing surface as ONE served HTML page (agent-drivable step 2). Two modes from one renderer:",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 18
+          },
+          "default": null,
+          "doc": "Present \u2192 the console; absent \u2192 the read-only reference.",
+          "name": "console",
+          "type": "?: { /** Same-origin JSON-RPC endpoint, e.g. `/api/rpc`. */ rpcPath: string; /** Principal the console fires as; an agent name shows the fence\u2026"
+        },
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 27
+          },
+          "default": null,
+          "doc": "A link back to the other mode (reference \u2194 console).",
+          "name": "otherPage",
+          "type": "?: { href: string; label: string }"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/api-page.ApiPageOptions",
+      "kind": "interface"
+    },
+    {
+      "anchor": {
+        "end_line": 25,
+        "file": "src/api-page.ts",
+        "line": 18
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 20
+          },
+          "default": null,
+          "doc": "Same-origin JSON-RPC endpoint, e.g. `/api/rpc`.",
+          "name": "rpcPath",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 22
+          },
+          "default": null,
+          "doc": "Principal the console fires as; an agent name shows the fence working. Default `agent:console`.",
+          "name": "principal",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 24
+          },
+          "default": null,
+          "doc": "Same-origin GET answering `{ token }`, when the door needs a bearer token and there is no bridge.",
+          "name": "tokenPath",
+          "type": "?: string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/api-page.ApiPageOptions.console",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "file": "src/api-page.ts",
+        "line": 27
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 27
+          },
+          "default": null,
+          "name": "href",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 27
+          },
+          "default": null,
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/api-page.ApiPageOptions.otherPage",
+      "kind": "type"
+    },
     {
       "anchor": {
         "end_line": 18,
@@ -1662,6 +2160,495 @@
       "aliases": [
         {
           "anchor": {
+            "file": "src/capability.ts",
+            "line": 23
+          },
+          "name": "PrincipalName"
+        }
+      ],
+      "anchor": {
+        "end_line": 22,
+        "file": "src/capability.ts",
+        "line": 20
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/capability.PrincipalName",
+      "kind": "zod-scalar",
+      "value": "z.string().regex(/^(human(:[\\w.-]+)?|cli|agent:[\\w.-]+)$/, 'human[:surface], agent:<name> or cli')"
+    },
+    {
+      "anchor": {
+        "end_line": 53,
+        "file": "src/capability.ts",
+        "line": 51
+      },
+      "bases": [],
+      "doc": "Capability names are `family.verb` (`project.create`, `app.stop`, `system.quit`).",
+      "exported": true,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/capability.CapabilityName",
+      "kind": "zod-scalar",
+      "value": "z.string().regex(/^[a-z][a-z0-9-]*(\\.[a-z][a-zA-Z0-9-]*)+$/, 'family.verb')"
+    },
+    {
+      "anchor": {
+        "file": "src/capability.ts",
+        "line": 59
+      },
+      "bases": [],
+      "doc": "Human-only by input: the capability is open to agents, except when the input asks for the part only a person may",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 59
+          },
+          "default": null,
+          "name": "when",
+          "type": "(input: I): boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 59
+          },
+          "default": null,
+          "name": "note",
+          "type": "string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/capability.HumanOnlyWhen",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "end_line": 77,
+        "file": "src/capability.ts",
+        "line": 61
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 62
+          },
+          "default": null,
+          "name": "kind",
+          "type": "CapabilityKind \u2192 src/capability.CapabilityKind"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 63
+          },
+          "default": null,
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 64
+          },
+          "default": null,
+          "name": "input",
+          "type": "I"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 65
+          },
+          "default": null,
+          "name": "output",
+          "type": "O"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 66
+          },
+          "default": null,
+          "name": "sideEffects",
+          "type": "SideEffects \u2192 src/capability.SideEffects"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 67
+          },
+          "default": null,
+          "name": "idempotent",
+          "type": "boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 69
+          },
+          "default": null,
+          "doc": "The UI asks a person before calling it. Metadata only \u2014 the fence is `humanOnly`.",
+          "name": "confirmationRequired",
+          "type": "boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 70
+          },
+          "default": null,
+          "name": "expectedDuration",
+          "type": "ExpectedDuration \u2192 src/capability.ExpectedDuration"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 72
+          },
+          "default": null,
+          "doc": "The refusals this capability can make on top of the ones any call can.",
+          "name": "failureModes",
+          "type": "readonly string[]"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 74
+          },
+          "default": null,
+          "doc": "Who may call it. A human-only capability allows `human` alone.",
+          "name": "principals",
+          "type": "readonly PrincipalKind[] \u2192 src/capability.PrincipalKind"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 76
+          },
+          "default": null,
+          "doc": "\u2605 `true`: never an agent or the CLI. An object: only for the inputs `when` picks out.",
+          "name": "humanOnly",
+          "type": "boolean | HumanOnlyWhen<z.infer<I>> \u2192 src/capability.HumanOnlyWhen, output (../core/index.cjs)"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/capability.CapabilityContract",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "file": "src/capability.ts",
+        "line": 122
+      },
+      "bases": [],
+      "doc": "The result of `authorize`: the caller's kind, or a `forbidden` refusal with typed details.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 122
+          },
+          "default": null,
+          "name": "true",
+          "type": "{ ok: true; kind: PrincipalKind }"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 122
+          },
+          "default": null,
+          "name": "false",
+          "type": "{ ok: false; refusal: Refusal }"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/capability.Authorization",
+      "kind": "type-union on `ok`"
+    },
+    {
+      "anchor": {
+        "file": "src/capability.ts",
+        "line": 122
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 122
+          },
+          "default": null,
+          "name": "ok",
+          "type": "false"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 122
+          },
+          "default": null,
+          "name": "refusal",
+          "type": "Refusal \u2192 src/failure-codes.Refusal"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/capability.Authorization[ok=false]",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "file": "src/capability.ts",
+        "line": 122
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 122
+          },
+          "default": null,
+          "name": "ok",
+          "type": "true"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 122
+          },
+          "default": null,
+          "name": "kind",
+          "type": "PrincipalKind \u2192 src/capability.PrincipalKind"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/capability.Authorization[ok=true]",
+      "kind": "type"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 204
+          },
+          "name": "CapabilityMeta"
+        }
+      ],
+      "anchor": {
+        "end_line": 203,
+        "file": "src/capability.ts",
+        "line": 187
+      },
+      "bases": [],
+      "doc": "One capability as data, for `GET \u2026/capabilities`, a CLI's `list` and the OpenRPC generator.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 188
+          },
+          "default": null,
+          "name": "name",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 189
+          },
+          "default": null,
+          "name": "family",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 190
+          },
+          "default": null,
+          "name": "kind",
+          "type": "CapabilityKind \u2192 src/capability.CapabilityKind"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 191
+          },
+          "default": null,
+          "name": "description",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 192
+          },
+          "default": null,
+          "name": "sideEffects",
+          "type": "SideEffects \u2192 src/capability.SideEffects"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 193
+          },
+          "default": null,
+          "name": "idempotent",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 194
+          },
+          "default": null,
+          "name": "confirmationRequired",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 195
+          },
+          "default": null,
+          "name": "expectedDuration",
+          "type": "ExpectedDuration \u2192 src/capability.ExpectedDuration"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 196
+          },
+          "default": null,
+          "name": "failureModes",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 197
+          },
+          "default": null,
+          "name": "principals",
+          "type": "z.array(PrincipalKind) \u2192 src/capability.PrincipalKind"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 199
+          },
+          "default": null,
+          "doc": "`true`, `false`, or the note saying which inputs are human-only.",
+          "name": "humanOnly",
+          "type": "z.union([z.boolean(), z.object({ when: z.string() })])"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 200
+          },
+          "default": null,
+          "name": "required",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 201
+          },
+          "default": null,
+          "name": "input",
+          "type": "z.unknown()"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 202
+          },
+          "default": null,
+          "name": "output",
+          "type": "z.unknown()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/capability.CapabilityMeta",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/capability.ts",
+        "line": 199
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 199
+          },
+          "default": null,
+          "name": "boolean",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 199
+          },
+          "default": null,
+          "name": "object",
+          "type": "z.object({ when: z.string() })"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/capability.CapabilityMeta.humanOnly",
+      "kind": "zod-union"
+    },
+    {
+      "anchor": {
+        "file": "src/capability.ts",
+        "line": 199
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/capability.ts",
+            "line": 199
+          },
+          "default": null,
+          "name": "when",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/capability.CapabilityMeta.humanOnly[1]",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
             "file": "src/classify.ts",
             "line": 108
           },
@@ -1711,6 +2698,314 @@
       "grade": "declared",
       "id": "src/classify.ProjectLayoutPaths",
       "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 28
+          },
+          "name": "ControlFile"
+        }
+      ],
+      "anchor": {
+        "end_line": 27,
+        "file": "src/control-file.ts",
+        "line": 18
+      },
+      "bases": [],
+      "doc": "Control-file discovery (agent-drivable step 2, David 2026-09-23): a running app publishes where its door is and the",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 19
+          },
+          "default": null,
+          "name": "port",
+          "type": "z.number().int().positive()"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 21
+          },
+          "default": null,
+          "doc": "Bearer token for this run; a new one every launch.",
+          "name": "token",
+          "type": "z.string().min(16)"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 23
+          },
+          "default": null,
+          "doc": "The process serving the door. Optional only so older files still read; every writer sets it.",
+          "name": "pid",
+          "type": "z.number().int().positive().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 24
+          },
+          "default": null,
+          "name": "startedAt",
+          "type": "z.iso.datetime().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 26
+          },
+          "default": null,
+          "doc": "The app's version, for a caller that must know what it is talking to.",
+          "name": "version",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/control-file.ControlFile",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 37
+          },
+          "name": "ControlFileRead"
+        }
+      ],
+      "anchor": {
+        "end_line": 36,
+        "file": "src/control-file.ts",
+        "line": 30
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 31
+          },
+          "default": null,
+          "name": "live",
+          "type": "z.object({ kind: z.literal('live'), path: z.string(), control: ControlFile }) \u2192 src/control-file.ControlFile"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 33
+          },
+          "default": null,
+          "name": "stale",
+          "type": "z.object({ kind: z.literal('stale'), path: z.string(), control: ControlFile }) \u2192 src/control-file.ControlFile"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "absent",
+          "type": "z.object({ kind: z.literal('absent'), path: z.string() })"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 35
+          },
+          "default": null,
+          "name": "invalid",
+          "type": "z.object({ kind: z.literal('invalid'), path: z.string(), message: z.string() })"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/control-file.ControlFileRead",
+      "kind": "zod-discriminated-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/control-file.ts",
+        "line": 31
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 31
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('live')"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 31
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 31
+          },
+          "default": null,
+          "name": "control",
+          "type": "ControlFile \u2192 src/control-file.ControlFile"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/control-file.ControlFileRead[kind=live]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/control-file.ts",
+        "line": 33
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 33
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('stale')"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 33
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 33
+          },
+          "default": null,
+          "name": "control",
+          "type": "ControlFile \u2192 src/control-file.ControlFile"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/control-file.ControlFileRead[kind=stale]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/control-file.ts",
+        "line": 34
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('absent')"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/control-file.ControlFileRead[kind=absent]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/control-file.ts",
+        "line": 35
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 35
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('invalid')"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 35
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 35
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/control-file.ControlFileRead[kind=invalid]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 42,
+        "file": "src/control-file.ts",
+        "line": 39
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/control-file.ts",
+            "line": 41
+          },
+          "default": null,
+          "doc": "Defaults to `os.homedir()`; tests pass a temp home.",
+          "name": "home",
+          "type": "?: string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/control-file.ControlFileOptions",
+      "kind": "interface"
     },
     {
       "anchor": {
@@ -2728,6 +4023,246 @@
       "kind": "zod-object"
     },
     {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 53
+          },
+          "name": "FailureCodeTable"
+        }
+      ],
+      "anchor": {
+        "file": "src/failure-codes.ts",
+        "line": 52
+      },
+      "bases": [],
+      "doc": "An app's frozen name \u2192 code table.",
+      "exported": true,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/failure-codes.FailureCodeTable",
+      "kind": "zod-scalar",
+      "value": "z.record(z.string().min(1), z.number().int())"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 137
+          },
+          "name": "Refusal"
+        }
+      ],
+      "anchor": {
+        "end_line": 136,
+        "file": "src/failure-codes.ts",
+        "line": 132
+      },
+      "bases": [],
+      "doc": "A refusal as data: the name, a neutral sentence saying WHAT IS TRUE (never what to click), and details typed per",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 133
+          },
+          "default": null,
+          "name": "failureMode",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 134
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 135
+          },
+          "default": null,
+          "name": "details",
+          "type": "z.unknown().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/failure-codes.Refusal",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 146
+          },
+          "name": "ForbiddenDetails"
+        }
+      ],
+      "anchor": {
+        "end_line": 145,
+        "file": "src/failure-codes.ts",
+        "line": 140
+      },
+      "bases": [],
+      "doc": "`forbidden`: this principal may not call the capability. `humanOnly` says no agent ever may.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 141
+          },
+          "default": null,
+          "name": "capability",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 142
+          },
+          "default": null,
+          "name": "principal",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 143
+          },
+          "default": null,
+          "name": "allowed",
+          "type": "z.array(z.enum(['human', 'agent', 'cli']))"
+        },
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 144
+          },
+          "default": null,
+          "name": "humanOnly",
+          "type": "z.boolean()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/failure-codes.ForbiddenDetails",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 150
+          },
+          "name": "MissingDetails"
+        }
+      ],
+      "anchor": {
+        "file": "src/failure-codes.ts",
+        "line": 149
+      },
+      "bases": [],
+      "doc": "`missing`: the required fields the call left out.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 149
+          },
+          "default": null,
+          "name": "missing",
+          "type": "z.array(z.string())"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/failure-codes.MissingDetails",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 157
+          },
+          "name": "BusyWork"
+        }
+      ],
+      "anchor": {
+        "end_line": 156,
+        "file": "src/failure-codes.ts",
+        "line": 153
+      },
+      "bases": [],
+      "doc": "What an app is doing that a quit would lose.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 154
+          },
+          "default": null,
+          "name": "what",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 155
+          },
+          "default": null,
+          "name": "since",
+          "type": "z.iso.datetime().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/failure-codes.BusyWork",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 161
+          },
+          "name": "AppBusyDetails"
+        }
+      ],
+      "anchor": {
+        "file": "src/failure-codes.ts",
+        "line": 160
+      },
+      "bases": [],
+      "doc": "`app-busy`: what is in progress, so a caller can wait and retry rather than force it.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/failure-codes.ts",
+            "line": 160
+          },
+          "default": null,
+          "name": "busy",
+          "type": "z.array(BusyWork) \u2192 src/failure-codes.BusyWork"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/failure-codes.AppBusyDetails",
+      "kind": "zod-object"
+    },
+    {
       "anchor": {
         "file": "src/identity.ts",
         "line": 26
@@ -3162,6 +4697,253 @@
       "refinements": [
         "refine at line 34"
       ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 32
+          },
+          "name": "SystemStatus"
+        }
+      ],
+      "anchor": {
+        "end_line": 31,
+        "file": "src/lifecycle.ts",
+        "line": 21
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 22
+          },
+          "default": null,
+          "name": "app",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 23
+          },
+          "default": null,
+          "name": "version",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 24
+          },
+          "default": null,
+          "name": "pid",
+          "type": "z.number().int().positive()"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 25
+          },
+          "default": null,
+          "name": "startedAt",
+          "type": "z.iso.datetime()"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 27
+          },
+          "default": null,
+          "doc": "The brand + project this run is pointed at, when it has one.",
+          "name": "context",
+          "type": "z.object({ brand: z.string(), project: z.string(), video: z.string().optional() }).nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 30
+          },
+          "default": null,
+          "name": "busy",
+          "type": "z.array(BusyWork) \u2192 src/failure-codes.BusyWork"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/lifecycle.SystemStatus",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/lifecycle.ts",
+        "line": 27
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 28
+          },
+          "default": null,
+          "name": "brand",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 28
+          },
+          "default": null,
+          "name": "project",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 28
+          },
+          "default": null,
+          "name": "video",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/lifecycle.SystemStatus.context",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 38
+          },
+          "name": "SystemQuitInput"
+        }
+      ],
+      "anchor": {
+        "end_line": 37,
+        "file": "src/lifecycle.ts",
+        "line": 34
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 36
+          },
+          "default": null,
+          "doc": "Quit even while busy. Human-only: an agent waits for the work to finish instead.",
+          "name": "force",
+          "type": "z.boolean().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/lifecycle.SystemQuitInput",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 45
+          },
+          "name": "SystemQuitOutput"
+        }
+      ],
+      "anchor": {
+        "end_line": 44,
+        "file": "src/lifecycle.ts",
+        "line": 40
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 41
+          },
+          "default": null,
+          "name": "pid",
+          "type": "z.number().int().positive()"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 43
+          },
+          "default": null,
+          "doc": "When the process will be gone, roughly \u2014 the reply leaves first.",
+          "name": "quittingInMs",
+          "type": "z.number().int().min(0)"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/lifecycle.SystemQuitOutput",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 89
+          },
+          "name": "AppScriptOpen"
+        }
+      ],
+      "anchor": {
+        "end_line": 88,
+        "file": "src/lifecycle.ts",
+        "line": 84
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 85
+          },
+          "default": null,
+          "name": "brand",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 86
+          },
+          "default": null,
+          "name": "project",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/lifecycle.ts",
+            "line": 87
+          },
+          "default": null,
+          "name": "video",
+          "type": "z.string().min(1).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/lifecycle.AppScriptOpen",
+      "kind": "zod-object"
     },
     {
       "anchor": {
@@ -4046,6 +5828,759 @@
       "grade": "declared",
       "id": "src/open-context.ResolveOpenContextOptions",
       "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 26
+          },
+          "name": "OpenRpcServer"
+        }
+      ],
+      "anchor": {
+        "end_line": 25,
+        "file": "src/openrpc.ts",
+        "line": 18
+      },
+      "bases": [],
+      "doc": "One OpenRPC generator for every Fli app (agent-drivable step 2), built from FliCast's `scripts/gen-openrpc.mjs`.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 19
+          },
+          "default": null,
+          "name": "name",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 20
+          },
+          "default": null,
+          "name": "url",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 21
+          },
+          "default": null,
+          "name": "summary",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 22
+          },
+          "default": null,
+          "name": "variables",
+          "type": "z.record(z.string(), z.object({ default: z.string(), description: z.string().optional() })).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.OpenRpcServer",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 50
+          },
+          "name": "OpenRpcDocument"
+        }
+      ],
+      "anchor": {
+        "end_line": 49,
+        "file": "src/openrpc.ts",
+        "line": 29
+      },
+      "bases": [],
+      "doc": "The generated document, loosely typed: enough for the page renderer and tests to read.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 30
+          },
+          "default": null,
+          "name": "openrpc",
+          "type": "z.literal('1.3.2')"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 31
+          },
+          "default": null,
+          "name": "info",
+          "type": "z.looseObject({ title: z.string(), version: z.string(), description: z.string().optional() })"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 36
+          },
+          "default": null,
+          "name": "servers",
+          "type": "z.array(OpenRpcServer) \u2192 src/openrpc.OpenRpcServer"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 37
+          },
+          "default": null,
+          "name": "methods",
+          "type": "z.array(z.looseObject({ name: z.string(), summary: z.string(), params: z.array(z.looseObject({ name: z.string(), required: z.boolean(), sch\u2026"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.OpenRpcDocument",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 31
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 32
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 33
+          },
+          "default": null,
+          "name": "version",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "description",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.OpenRpcDocument.info",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 37
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 39
+          },
+          "default": null,
+          "name": "name",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 40
+          },
+          "default": null,
+          "name": "summary",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 41
+          },
+          "default": null,
+          "name": "params",
+          "type": "z.array(z.looseObject({ name: z.string(), required: z.boolean(), schema: z.unknown() }))"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 44
+          },
+          "default": null,
+          "name": "errors",
+          "type": "z.array(z.looseObject({ code: z.number(), message: z.string() }))"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 45
+          },
+          "default": null,
+          "name": "x-principals",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "x-human-only",
+          "type": "z.union([z.boolean(), z.object({ when: z.string() })])"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.OpenRpcDocument.methods[]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 41
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 42
+          },
+          "default": null,
+          "name": "name",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 42
+          },
+          "default": null,
+          "name": "required",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 42
+          },
+          "default": null,
+          "name": "schema",
+          "type": "z.unknown()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.OpenRpcDocument.methods[].params[]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 44
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 44
+          },
+          "default": null,
+          "name": "code",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 44
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.OpenRpcDocument.methods[].errors[]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 46
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "boolean",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "object",
+          "type": "z.object({ when: z.string() })"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.OpenRpcDocument.methods[].x-human-only",
+      "kind": "zod-union"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 46
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "when",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.OpenRpcDocument.methods[].x-human-only[1]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 67,
+        "file": "src/openrpc.ts",
+        "line": 52
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 53
+          },
+          "default": null,
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 55
+          },
+          "default": null,
+          "doc": "App version, and the API version when it moves separately (`0.3.1+api1`).",
+          "name": "version",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 56
+          },
+          "default": null,
+          "name": "description",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 57
+          },
+          "default": null,
+          "name": "servers",
+          "type": "OpenRpcServer[] \u2192 src/openrpc.OpenRpcServer"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 58
+          },
+          "default": null,
+          "name": "capabilities",
+          "type": "Record<string, CapabilityContract> \u2192 src/capability.CapabilityContract"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 60
+          },
+          "default": null,
+          "doc": "The app's frozen name \u2192 code table (`defineFailureCodes`).",
+          "name": "codes",
+          "type": "Readonly<Record<string, number>>"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 62
+          },
+          "default": null,
+          "doc": "Typed details per refusal name (zod), e.g. `{ ...SUITE_REFUSAL_DETAILS, overlap: OverlapDetails }`.",
+          "name": "refusalDetails",
+          "type": "?: Readonly<Record<string, z.ZodType>> \u2192 ZodType (zod)"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 64
+          },
+          "default": null,
+          "doc": "Refusals ANY call can make (a bad principal, bad input, an unknown name, a fault) \u2014 listed on every method.",
+          "name": "alwaysPossible",
+          "type": "?: readonly string[]"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 66
+          },
+          "default": null,
+          "doc": "Where the document came from, for `x-generated-by`.",
+          "name": "generatedBy",
+          "type": "?: string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.OpenRpcOptions",
+      "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 180
+          },
+          "name": "JsonRpcRequest"
+        }
+      ],
+      "anchor": {
+        "end_line": 179,
+        "file": "src/openrpc.ts",
+        "line": 174
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 175
+          },
+          "default": null,
+          "name": "jsonrpc",
+          "type": "z.literal('2.0')"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 176
+          },
+          "default": null,
+          "name": "method",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 177
+          },
+          "default": null,
+          "name": "params",
+          "type": "z.union([z.record(z.string(), z.unknown()), z.array(z.unknown())]).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 178
+          },
+          "default": null,
+          "name": "id",
+          "type": "z.union([z.string(), z.number(), z.null()]).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.JsonRpcRequest",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 177
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 177
+          },
+          "default": null,
+          "name": "record",
+          "type": "z.record(z.string(), z.unknown())"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 177
+          },
+          "default": null,
+          "name": "array",
+          "type": "z.array(z.unknown())"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.JsonRpcRequest.params",
+      "kind": "zod-union"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 178
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 178
+          },
+          "default": null,
+          "name": "string",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 178
+          },
+          "default": null,
+          "name": "number",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 178
+          },
+          "default": null,
+          "name": "null",
+          "type": "z.null()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.JsonRpcRequest.id",
+      "kind": "zod-union"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 183
+      },
+      "bases": [],
+      "doc": "What an app's seam answers: the value, or a named refusal.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 183
+          },
+          "default": null,
+          "name": "true",
+          "type": "{ ok: true; value: unknown }"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 183
+          },
+          "default": null,
+          "name": "false",
+          "type": "{ ok: false; error: Refusal }"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.CallAnswer",
+      "kind": "type-union on `ok`"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 183
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 183
+          },
+          "default": null,
+          "name": "ok",
+          "type": "false"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 183
+          },
+          "default": null,
+          "name": "error",
+          "type": "Refusal \u2192 src/failure-codes.Refusal"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.CallAnswer[ok=false]",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 183
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 183
+          },
+          "default": null,
+          "name": "ok",
+          "type": "true"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 183
+          },
+          "default": null,
+          "name": "value",
+          "type": "unknown"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.CallAnswer[ok=true]",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "end_line": 189,
+        "file": "src/openrpc.ts",
+        "line": 185
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 186
+          },
+          "default": null,
+          "name": "codes",
+          "type": "Readonly<Record<string, number>>"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 188
+          },
+          "default": null,
+          "doc": "The app's names for the three standard cases, when it does not use these.",
+          "name": "names",
+          "type": "?: { unknownCapability?: string; invalidInput?: string; internal?: string }"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.JsonRpcOptions",
+      "kind": "interface"
+    },
+    {
+      "anchor": {
+        "file": "src/openrpc.ts",
+        "line": 188
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 188
+          },
+          "default": null,
+          "name": "unknownCapability",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 188
+          },
+          "default": null,
+          "name": "invalidInput",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 188
+          },
+          "default": null,
+          "name": "internal",
+          "type": "?: string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/openrpc.JsonRpcOptions.names",
+      "kind": "type"
     },
     {
       "aliases": [
@@ -5184,11 +7719,20 @@
     }
   ],
   "target": {
-    "commit": "805f8c5c7d27149e231d15e3f907c68057a44b81",
+    "commit": "94a5072e054ed451ed4f613b0273b156e433f08f",
     "root": "..",
     "stack": "typescript"
   },
   "unresolved": [
+    {
+      "census": true,
+      "family": "generic type alias",
+      "looked_at": [
+        "src/capability.ts:79"
+      ],
+      "reason": "declared but not read: generic type alias. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/capability.ContractInput` - declared but not read"
+    },
     {
       "census": true,
       "family": "object constant",
@@ -5209,12 +7753,75 @@
     },
     {
       "census": true,
+      "family": "class",
+      "looked_at": [
+        "src/failure-codes.ts:171"
+      ],
+      "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/failure-codes.CapabilityRefusal` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "object constant",
+      "looked_at": [
+        "src/failure-codes.ts:31"
+      ],
+      "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/failure-codes.FAILURE_CODE_RANGE` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "object constant",
+      "looked_at": [
+        "src/failure-codes.ts:22"
+      ],
+      "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/failure-codes.JSONRPC_CODES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "const built by a call (helper or non-zod call)",
+      "looked_at": [
+        "src/failure-codes.ts:34"
+      ],
+      "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/failure-codes.SUITE_FAILURE_CODES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "const built by a call (helper or non-zod call)",
+      "looked_at": [
+        "src/failure-codes.ts:164"
+      ],
+      "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/failure-codes.SUITE_REFUSAL_DETAILS` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "derived type (`keyof typeof`, indexed access, `typeof`)",
+      "looked_at": [
+        "src/failure-codes.ts:49"
+      ],
+      "reason": "declared but not read: derived type (`keyof typeof`, indexed access, `typeof`). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/failure-codes.SuiteFailureMode` - declared but not read"
+    },
+    {
+      "census": true,
       "family": "array constant",
       "looked_at": [
         "src/identity.ts:27"
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/identity.DEFAULT_LANGUAGES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "object constant",
+      "looked_at": [
+        "src/lifecycle.ts:48"
+      ],
+      "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/lifecycle.LIFECYCLE_CAPABILITIES` - declared but not read"
     },
     {
       "census": true,
@@ -5288,7 +7895,7 @@
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 15,
+    "import": 20,
     "re-export": 0
   }
 }

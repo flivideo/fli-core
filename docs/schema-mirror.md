@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `805f8c5c7d27` · **generated** 2026-09-23T08:06:17+00:00
+- **commit** `94a5072e054e` · **generated** 2026-09-23T10:13:51+00:00
 - **scope** include `src/**` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 15 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 20 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 88 | 23 | 2 | 4 | 7 | 2 |
+| 136 | 32 | 2 | 4 | 15 | 2 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -17,17 +17,23 @@
 
 Top-level entries by file, with the line each is declared on. Search the page for the name.
 
+- `src/api-page.ts` — `ApiPageOptions` :16
 - `src/app-file.ts` — `AppName` :15 · `AppSubject` :19 · `AppFile` :26
 - `src/brand-settings.ts` — `BrandSettings` :9
 - `src/brands.ts` — `Brand` :9 · `RegistryEntry` :20 · `BrandsFile` :28 · `SkippedBrand` :32 · `BrandsRead` :35 · `ReadBrandsResult` :45 · `ReadBrandsOptions` :48 · `ResolveBrandRootOptions` :92
+- `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
 - `src/classify.ts` — `ProjectZone` (set) :11 · `LEGACY_FOLDERS` (set) :36 · `ProjectLayout` (set) :97 · `ProjectLayoutPaths` :100
+- `src/control-file.ts` — `ControlFile` :18 · `ControlFileRead` :30 · `ControlFileOptions` :39
 - `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
+- `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
 - `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :32
 - `src/identity.ts` — `ProjectAspect` (set) :11 · `ProjectShape` (set) :21 · `ProjectLanguage` :26 · `ProjectIdentity` :29 · `Refused()` :53 · `WriteIdentityResult` :61
 - `src/lab-path.ts` — `PathSegment` :6 · `LabPathInput` :14
+- `src/lifecycle.ts` — `LifecycleVerb` (set) :18 · `SystemStatus` :21 · `SystemQuitInput` :34 · `SystemQuitOutput` :40 · `AppScriptOpen` :84
 - `src/machine.ts` — `AbsolutePath` :7 · `MachineSettings` :12 · `ResolvedMachineSettings` :24 · `MachineSettingsOptions` :27 · `MachineSettingsResult` :32
 - `src/open-args.ts` — `OpenContext` :11 · `OpenArgs` :27 · `OpenArgName` (set) :36 · `RawOpenArgs` :40 · `ParseOpenArgsOptions` :53 · `ParsedOpenArgs` :58
 - `src/open-context.ts` — `OpenContextResult` :16 · `ResolveOpenContextOptions` :33
+- `src/openrpc.ts` — `OpenRpcServer` :18 · `OpenRpcDocument` :29 · `OpenRpcOptions` :52 · `JsonRpcRequest` :174 · `CallAnswer` :183 · `JsonRpcOptions` :185
 - `src/project-folder.ts` — `ProjectCode` :5 · `KebabSlug` :11 · `ProjectFolder` :15
 - `src/recording.ts` — `RecordingTag` :14 · `Recording` :18
 - `src/results.ts` — `InvalidFile` :4 · `validFile()` :13 · `readFileResult()` :19
@@ -52,16 +58,19 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**114** top-level declarations counted = **103** mirrored + **4** listed as gaps + **7** declared but not read.
+**175** top-level declarations counted = **156** mirrored + **4** listed as gaps + **15** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 8 literal constants.
+Not counted, as not schema-bearing: 1 function, 9 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
+| `src/capability.ts` | 17 | 16 | 0 | **1** |
 | `src/classify.ts` | 8 | 7 | 0 | **1** |
 | `src/estate.ts` | 15 | 14 | 0 | **1** |
+| `src/failure-codes.ts` | 18 | 12 | 0 | **6** |
 | `src/identity.ts` | 12 | 9 | 2 | **1** |
+| `src/lifecycle.ts` | 11 | 10 | 0 | **1** |
 | `src/open-args.ts` | 12 | 11 | 0 | **1** |
 | `src/results.ts` | 5 | 2 | 0 | **3** |
 
@@ -77,6 +86,68 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 |---|---|
 | `valid` | `src/brands.ts:36` |
 | `invalid` | `src/results.ts:5` |
+
+### `src/capability.PrincipalKind` — `src/capability.ts:17`
+
+Who is calling, by kind. The principal NAME is `human` or `human:<surface>`, `agent:<name>`, or `cli`.
+
+*`z.enum` `PrincipalKind` - a single declaring symbol*
+
+*aliases* `PrincipalKind` `src/capability.ts:18`
+
+| value | declared at |
+|---|---|
+| `human` | `src/capability.ts:17` |
+| `agent` | `src/capability.ts:17` |
+| `cli` | `src/capability.ts:17` |
+
+### `src/capability.CapabilityKind` — `src/capability.ts:35`
+
+*`z.enum` `CapabilityKind` - a single declaring symbol*
+
+*aliases* `CapabilityKind` `src/capability.ts:36`
+
+| value | declared at |
+|---|---|
+| `query` | `src/capability.ts:35` |
+| `command` | `src/capability.ts:35` |
+| `task` | `src/capability.ts:35` |
+| `event` | `src/capability.ts:35` |
+
+### `src/capability.SideEffects` — `src/capability.ts:39-44`
+
+What calling it does to the world: nothing, an edit that can be taken back, one that cannot, or something outside.
+
+*`z.enum` `SideEffects` - a single declaring symbol*
+
+*aliases* `SideEffects` `src/capability.ts:45`
+
+| value | declared at |
+|---|---|
+| `read-only` | `src/capability.ts:40` |
+| `reversible-write` | `src/capability.ts:41` |
+| `destructive` | `src/capability.ts:42` |
+| `external-side-effect` | `src/capability.ts:43` |
+
+### `src/capability.ExpectedDuration` — `src/capability.ts:47`
+
+*`z.enum` `ExpectedDuration` - a single declaring symbol*
+
+*aliases* `ExpectedDuration` `src/capability.ts:48`
+
+| value | declared at |
+|---|---|
+| `fast` | `src/capability.ts:47` |
+| `slow` | `src/capability.ts:47` |
+
+### `src/capability.Authorization.ok` — `src/capability.ts:122`
+
+*the `ok` discriminator of union type `Authorization` - each value declared by a literal type in one variant*
+
+| value | declared at |
+|---|---|
+| `true` | `src/capability.ts:122` |
+| `false` | `src/capability.ts:122` |
 
 ### `src/classify.ProjectZone` — `src/classify.ts:11-22`
 
@@ -108,6 +179,17 @@ Which zone of the project layout (spec §3, roadmap §1) a path inside a project
 |---|---|
 | `hub` | `src/classify.ts:97` |
 | `legacy` | `src/classify.ts:97` |
+
+### `src/control-file.ControlFileRead.kind` — `src/control-file.ts:30-36`
+
+*the `kind` discriminator of `z.discriminatedUnion` `ControlFileRead` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `live` | `src/control-file.ts:31` |
+| `stale` | `src/control-file.ts:33` |
+| `absent` | `src/control-file.ts:34` |
+| `invalid` | `src/control-file.ts:35` |
 
 ### `src/estate.scanned().state` — `src/estate.ts:17-27`
 
@@ -189,6 +271,16 @@ Which zone of the project layout (spec §3, roadmap §1) a path inside a project
 | `unscanned` | `src/estate.ts:284` |
 | `exhausted` | `src/estate.ts:284` |
 
+### `src/failure-codes.ForbiddenDetails.allowed[]` — `src/failure-codes.ts:143`
+
+*`z.enum` `allowed[]` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `human` | `src/failure-codes.ts:143` |
+| `agent` | `src/failure-codes.ts:143` |
+| `cli` | `src/failure-codes.ts:143` |
+
 ### `src/identity.ProjectAspect` — `src/identity.ts:11`
 
 The shape a project's videos are made for (David 2026-09-23, B584). Absent → `16:9`.
@@ -225,6 +317,21 @@ What the project is for — a HINT only, no behaviour yet (David 2026-09-23; bra
 |---|---|
 | `written` | `src/identity.ts:62` |
 | `refused` | `src/identity.ts:55` |
+
+### `src/lifecycle.LifecycleVerb` — `src/lifecycle.ts:18`
+
+The lifecycle verb contract (agent-drivable step 2, David 2026-09-23: "Do we have support for closing them down
+
+*`z.enum` `LifecycleVerb` - a single declaring symbol*
+
+*aliases* `LifecycleVerb` `src/lifecycle.ts:19`
+
+| value | declared at |
+|---|---|
+| `status` | `src/lifecycle.ts:18` |
+| `start` | `src/lifecycle.ts:18` |
+| `stop` | `src/lifecycle.ts:18` |
+| `restart` | `src/lifecycle.ts:18` |
 
 ### `src/machine.MachineSettingsResult.kind` — `src/machine.ts:32-40`
 
@@ -269,6 +376,15 @@ What the project is for — a HINT only, no behaviour yet (David 2026-09-23; bra
 | `project-refused` | `src/open-context.ts:22` |
 | `video-invalid` | `src/open-context.ts:23` |
 | `video-not-found` | `src/open-context.ts:25` |
+
+### `src/openrpc.CallAnswer.ok` — `src/openrpc.ts:183`
+
+*the `ok` discriminator of union type `CallAnswer` - each value declared by a literal type in one variant*
+
+| value | declared at |
+|---|---|
+| `true` | `src/openrpc.ts:183` |
+| `false` | `src/openrpc.ts:183` |
 
 ### `src/results.InvalidFile.reason` — `src/results.ts:7`
 
@@ -359,6 +475,30 @@ Each set below was read out of the real authority — control flow, membership t
 > **REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.**
 
 ## Shapes
+
+### `src/api-page.ApiPageOptions` — interface — `src/api-page.ts:16-28`
+
+The self-describing surface as ONE served HTML page (agent-drivable step 2). Two modes from one renderer:
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `console` | `?: { /** Same-origin JSON-RPC endpoint, e.g. `/api/rpc`. */ rpcPath: string; /** Principal the console fires as; an agent name shows the fence…` | — | `src/api-page.ts:18` | Present → the console; absent → the read-only reference. |
+| `otherPage` | `?: { href: string; label: string }` | — | `src/api-page.ts:27` | A link back to the other mode (reference ↔ console). |
+
+### `src/api-page.ApiPageOptions.console` — type — `src/api-page.ts:18-25`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `rpcPath` | `string` | — | `src/api-page.ts:20` | Same-origin JSON-RPC endpoint, e.g. `/api/rpc`. |
+| `principal` | `?: string` | — | `src/api-page.ts:22` | Principal the console fires as; an agent name shows the fence working. Default `agent:console`. |
+| `tokenPath` | `?: string` | — | `src/api-page.ts:24` | Same-origin GET answering `{ token }`, when the door needs a bearer token and there is no bridge. |
+
+### `src/api-page.ApiPageOptions.otherPage` — type — `src/api-page.ts:27`
+
+| field | type | default | at |
+|---|---|---|---|
+| `href` | `string` | — | `src/api-page.ts:27` |
+| `label` | `string` | — | `src/api-page.ts:27` |
 
 ### `src/app-file.AppName` — zod-scalar — `src/app-file.ts:15-18`
 
@@ -473,6 +613,102 @@ A registry entry `readBrands` could not use, and why.
 |---|---|---|---|---|
 | `home` | `?: string` | — | `src/brands.ts:94` | Home directory used for the A5 rewrite; default `os.homedir()`. |
 
+### `src/capability.PrincipalName` — zod-scalar — `src/capability.ts:20-22`
+
+*aliases* `PrincipalName` `src/capability.ts:23`
+
+`z.string().regex(/^(human(:[\w.-]+)?|cli|agent:[\w.-]+)$/, 'human[:surface], agent:<name> or cli')`
+
+### `src/capability.CapabilityName` — zod-scalar — `src/capability.ts:51-53`
+
+Capability names are `family.verb` (`project.create`, `app.stop`, `system.quit`).
+
+`z.string().regex(/^[a-z][a-z0-9-]*(\.[a-z][a-zA-Z0-9-]*)+$/, 'family.verb')`
+
+### `src/capability.HumanOnlyWhen` — type — `src/capability.ts:59`
+
+Human-only by input: the capability is open to agents, except when the input asks for the part only a person may
+
+| field | type | default | at |
+|---|---|---|---|
+| `when` | `(input: I): boolean` | — | `src/capability.ts:59` |
+| `note` | `string` | — | `src/capability.ts:59` |
+
+### `src/capability.CapabilityContract` — type — `src/capability.ts:61-77`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `CapabilityKind → src/capability.CapabilityKind` | — | `src/capability.ts:62` |  |
+| `description` | `string` | — | `src/capability.ts:63` |  |
+| `input` | `I` | — | `src/capability.ts:64` |  |
+| `output` | `O` | — | `src/capability.ts:65` |  |
+| `sideEffects` | `SideEffects → src/capability.SideEffects` | — | `src/capability.ts:66` |  |
+| `idempotent` | `boolean` | — | `src/capability.ts:67` |  |
+| `confirmationRequired` | `boolean` | — | `src/capability.ts:69` | The UI asks a person before calling it. Metadata only — the fence is `humanOnly`. |
+| `expectedDuration` | `ExpectedDuration → src/capability.ExpectedDuration` | — | `src/capability.ts:70` |  |
+| `failureModes` | `readonly string[]` | — | `src/capability.ts:72` | The refusals this capability can make on top of the ones any call can. |
+| `principals` | `readonly PrincipalKind[] → src/capability.PrincipalKind` | — | `src/capability.ts:74` | Who may call it. A human-only capability allows `human` alone. |
+| `humanOnly` | `boolean \| HumanOnlyWhen<z.infer<I>> → src/capability.HumanOnlyWhen, output (../core/index.cjs)` | — | `src/capability.ts:76` | ★ `true`: never an agent or the CLI. An object: only for the inputs `when` picks out. |
+
+### `src/capability.Authorization` — type-union on `ok` — `src/capability.ts:122`
+
+The result of `authorize`: the caller's kind, or a `forbidden` refusal with typed details.
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `true` | `{ ok: true; kind: PrincipalKind }` | — | `src/capability.ts:122` |
+| `false` | `{ ok: false; refusal: Refusal }` | — | `src/capability.ts:122` |
+
+### `src/capability.Authorization[ok=false]` — type — `src/capability.ts:122`
+
+| field | type | default | at |
+|---|---|---|---|
+| `ok` | `false` | — | `src/capability.ts:122` |
+| `refusal` | `Refusal → src/failure-codes.Refusal` | — | `src/capability.ts:122` |
+
+### `src/capability.Authorization[ok=true]` — type — `src/capability.ts:122`
+
+| field | type | default | at |
+|---|---|---|---|
+| `ok` | `true` | — | `src/capability.ts:122` |
+| `kind` | `PrincipalKind → src/capability.PrincipalKind` | — | `src/capability.ts:122` |
+
+### `src/capability.CapabilityMeta` — zod-object — `src/capability.ts:187-203`
+
+One capability as data, for `GET …/capabilities`, a CLI's `list` and the OpenRPC generator.
+
+*aliases* `CapabilityMeta` `src/capability.ts:204`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `name` | `z.string()` | — | `src/capability.ts:188` |  |
+| `family` | `z.string()` | — | `src/capability.ts:189` |  |
+| `kind` | `CapabilityKind → src/capability.CapabilityKind` | — | `src/capability.ts:190` |  |
+| `description` | `z.string()` | — | `src/capability.ts:191` |  |
+| `sideEffects` | `SideEffects → src/capability.SideEffects` | — | `src/capability.ts:192` |  |
+| `idempotent` | `z.boolean()` | — | `src/capability.ts:193` |  |
+| `confirmationRequired` | `z.boolean()` | — | `src/capability.ts:194` |  |
+| `expectedDuration` | `ExpectedDuration → src/capability.ExpectedDuration` | — | `src/capability.ts:195` |  |
+| `failureModes` | `z.array(z.string())` | — | `src/capability.ts:196` |  |
+| `principals` | `z.array(PrincipalKind) → src/capability.PrincipalKind` | — | `src/capability.ts:197` |  |
+| `humanOnly` | `z.union([z.boolean(), z.object({ when: z.string() })])` | — | `src/capability.ts:199` | `true`, `false`, or the note saying which inputs are human-only. |
+| `required` | `z.array(z.string())` | — | `src/capability.ts:200` |  |
+| `input` | `z.unknown()` | — | `src/capability.ts:201` |  |
+| `output` | `z.unknown()` | — | `src/capability.ts:202` |  |
+
+### `src/capability.CapabilityMeta.humanOnly` — zod-union — `src/capability.ts:199`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `boolean` | `z.boolean()` | — | `src/capability.ts:199` |
+| `object` | `z.object({ when: z.string() })` | — | `src/capability.ts:199` |
+
+### `src/capability.CapabilityMeta.humanOnly[1]` — zod-object — `src/capability.ts:199`
+
+| field | type | default | at |
+|---|---|---|---|
+| `when` | `z.string()` | — | `src/capability.ts:199` |
+
 ### `src/classify.ProjectLayoutPaths` — zod-object — `src/classify.ts:100-107`
 
 *aliases* `ProjectLayoutPaths` `src/classify.ts:108`
@@ -482,6 +718,68 @@ A registry entry `readBrands` could not use, and why.
 | `layout` | `ProjectLayout → src/classify.ProjectLayout` | — | `src/classify.ts:102` | Detected by `projectLayout` (D14). |
 | `recordings` | `z.string()` | — | `src/classify.ts:104` | Absolute path of the recordings folder for this layout (it may not exist yet). |
 | `transcripts` | `z.string()` | — | `src/classify.ts:106` | Absolute path of the transcripts folder for this layout (it may not exist yet). |
+
+### `src/control-file.ControlFile` — zod-object — `src/control-file.ts:18-27`
+
+Control-file discovery (agent-drivable step 2, David 2026-09-23): a running app publishes where its door is and the
+
+*aliases* `ControlFile` `src/control-file.ts:28`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `port` | `z.number().int().positive()` | — | `src/control-file.ts:19` |  |
+| `token` | `z.string().min(16)` | — | `src/control-file.ts:21` | Bearer token for this run; a new one every launch. |
+| `pid` | `z.number().int().positive().optional()` | — | `src/control-file.ts:23` | The process serving the door. Optional only so older files still read; every writer sets it. |
+| `startedAt` | `z.iso.datetime().optional()` | — | `src/control-file.ts:24` |  |
+| `version` | `z.string().optional()` | — | `src/control-file.ts:26` | The app's version, for a caller that must know what it is talking to. |
+
+### `src/control-file.ControlFileRead` — zod-discriminated-union on `kind` — `src/control-file.ts:30-36`
+
+*aliases* `ControlFileRead` `src/control-file.ts:37`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `live` | `z.object({ kind: z.literal('live'), path: z.string(), control: ControlFile }) → src/control-file.ControlFile` | — | `src/control-file.ts:31` |
+| `stale` | `z.object({ kind: z.literal('stale'), path: z.string(), control: ControlFile }) → src/control-file.ControlFile` | — | `src/control-file.ts:33` |
+| `absent` | `z.object({ kind: z.literal('absent'), path: z.string() })` | — | `src/control-file.ts:34` |
+| `invalid` | `z.object({ kind: z.literal('invalid'), path: z.string(), message: z.string() })` | — | `src/control-file.ts:35` |
+
+### `src/control-file.ControlFileRead[kind=live]` — zod-object — `src/control-file.ts:31`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('live')` | — | `src/control-file.ts:31` |
+| `path` | `z.string()` | — | `src/control-file.ts:31` |
+| `control` | `ControlFile → src/control-file.ControlFile` | — | `src/control-file.ts:31` |
+
+### `src/control-file.ControlFileRead[kind=stale]` — zod-object — `src/control-file.ts:33`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('stale')` | — | `src/control-file.ts:33` |
+| `path` | `z.string()` | — | `src/control-file.ts:33` |
+| `control` | `ControlFile → src/control-file.ControlFile` | — | `src/control-file.ts:33` |
+
+### `src/control-file.ControlFileRead[kind=absent]` — zod-object — `src/control-file.ts:34`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('absent')` | — | `src/control-file.ts:34` |
+| `path` | `z.string()` | — | `src/control-file.ts:34` |
+
+### `src/control-file.ControlFileRead[kind=invalid]` — zod-object — `src/control-file.ts:35`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('invalid')` | — | `src/control-file.ts:35` |
+| `path` | `z.string()` | — | `src/control-file.ts:35` |
+| `message` | `z.string()` | — | `src/control-file.ts:35` |
+
+### `src/control-file.ControlFileOptions` — interface — `src/control-file.ts:39-42`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `home` | `?: string` | — | `src/control-file.ts:41` | Defaults to `os.homedir()`; tests pass a temp home. |
 
 ### `src/estate.scanned()` — zod-factory (zod-discriminated-union) on `state` — `src/estate.ts:17-27`
 
@@ -684,6 +982,70 @@ Every `resolveProject` outcome except `found`: why a reference did not resolve (
 | `reason` | `z.enum(['invalid-letter', 'unscanned', 'exhausted'])` | — | `src/estate.ts:284` |
 | `message` | `z.string()` | — | `src/estate.ts:285` |
 
+### `src/failure-codes.FailureCodeTable` — zod-scalar — `src/failure-codes.ts:52`
+
+An app's frozen name → code table.
+
+*aliases* `FailureCodeTable` `src/failure-codes.ts:53`
+
+`z.record(z.string().min(1), z.number().int())`
+
+### `src/failure-codes.Refusal` — zod-object — `src/failure-codes.ts:132-136`
+
+A refusal as data: the name, a neutral sentence saying WHAT IS TRUE (never what to click), and details typed per
+
+*aliases* `Refusal` `src/failure-codes.ts:137`
+
+| field | type | default | at |
+|---|---|---|---|
+| `failureMode` | `z.string().min(1)` | — | `src/failure-codes.ts:133` |
+| `message` | `z.string()` | — | `src/failure-codes.ts:134` |
+| `details` | `z.unknown().optional()` | — | `src/failure-codes.ts:135` |
+
+### `src/failure-codes.ForbiddenDetails` — zod-object — `src/failure-codes.ts:140-145`
+
+`forbidden`: this principal may not call the capability. `humanOnly` says no agent ever may.
+
+*aliases* `ForbiddenDetails` `src/failure-codes.ts:146`
+
+| field | type | default | at |
+|---|---|---|---|
+| `capability` | `z.string()` | — | `src/failure-codes.ts:141` |
+| `principal` | `z.string()` | — | `src/failure-codes.ts:142` |
+| `allowed` | `z.array(z.enum(['human', 'agent', 'cli']))` | — | `src/failure-codes.ts:143` |
+| `humanOnly` | `z.boolean()` | — | `src/failure-codes.ts:144` |
+
+### `src/failure-codes.MissingDetails` — zod-object — `src/failure-codes.ts:149`
+
+`missing`: the required fields the call left out.
+
+*aliases* `MissingDetails` `src/failure-codes.ts:150`
+
+| field | type | default | at |
+|---|---|---|---|
+| `missing` | `z.array(z.string())` | — | `src/failure-codes.ts:149` |
+
+### `src/failure-codes.BusyWork` — zod-object — `src/failure-codes.ts:153-156`
+
+What an app is doing that a quit would lose.
+
+*aliases* `BusyWork` `src/failure-codes.ts:157`
+
+| field | type | default | at |
+|---|---|---|---|
+| `what` | `z.string()` | — | `src/failure-codes.ts:154` |
+| `since` | `z.iso.datetime().optional()` | — | `src/failure-codes.ts:155` |
+
+### `src/failure-codes.AppBusyDetails` — zod-object — `src/failure-codes.ts:160`
+
+`app-busy`: what is in progress, so a caller can wait and retry rather than force it.
+
+*aliases* `AppBusyDetails` `src/failure-codes.ts:161`
+
+| field | type | default | at |
+|---|---|---|---|
+| `busy` | `z.array(BusyWork) → src/failure-codes.BusyWork` | — | `src/failure-codes.ts:160` |
+
 ### `src/identity.ProjectLanguage` — zod-scalar — `src/identity.ts:26`
 
 A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).
@@ -762,6 +1124,54 @@ A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).
 | `project` | `PathSegment → src/lab-path.PathSegment` | — | `src/lab-path.ts:30` | The project folder name, `<code>-<project>` (`a01-xmen`). |
 | `app` | `PathSegment → src/lab-path.PathSegment` | — | `src/lab-path.ts:31` |  |
 | `subject` | `PathSegment.optional() → src/lab-path.PathSegment` | — | `src/lab-path.ts:32` |  |
+
+### `src/lifecycle.SystemStatus` — zod-object — `src/lifecycle.ts:21-31`
+
+*aliases* `SystemStatus` `src/lifecycle.ts:32`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `app` | `z.string()` | — | `src/lifecycle.ts:22` |  |
+| `version` | `z.string()` | — | `src/lifecycle.ts:23` |  |
+| `pid` | `z.number().int().positive()` | — | `src/lifecycle.ts:24` |  |
+| `startedAt` | `z.iso.datetime()` | — | `src/lifecycle.ts:25` |  |
+| `context` | `z.object({ brand: z.string(), project: z.string(), video: z.string().optional() }).nullable()` | — | `src/lifecycle.ts:27` | The brand + project this run is pointed at, when it has one. |
+| `busy` | `z.array(BusyWork) → src/failure-codes.BusyWork` | — | `src/lifecycle.ts:30` |  |
+
+### `src/lifecycle.SystemStatus.context` — zod-object — `src/lifecycle.ts:27`
+
+| field | type | default | at |
+|---|---|---|---|
+| `brand` | `z.string()` | — | `src/lifecycle.ts:28` |
+| `project` | `z.string()` | — | `src/lifecycle.ts:28` |
+| `video` | `z.string().optional()` | — | `src/lifecycle.ts:28` |
+
+### `src/lifecycle.SystemQuitInput` — zod-object — `src/lifecycle.ts:34-37`
+
+*aliases* `SystemQuitInput` `src/lifecycle.ts:38`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `force` | `z.boolean().optional()` | — | `src/lifecycle.ts:36` | Quit even while busy. Human-only: an agent waits for the work to finish instead. |
+
+### `src/lifecycle.SystemQuitOutput` — zod-object — `src/lifecycle.ts:40-44`
+
+*aliases* `SystemQuitOutput` `src/lifecycle.ts:45`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `pid` | `z.number().int().positive()` | — | `src/lifecycle.ts:41` |  |
+| `quittingInMs` | `z.number().int().min(0)` | — | `src/lifecycle.ts:43` | When the process will be gone, roughly — the reply leaves first. |
+
+### `src/lifecycle.AppScriptOpen` — zod-object — `src/lifecycle.ts:84-88`
+
+*aliases* `AppScriptOpen` `src/lifecycle.ts:89`
+
+| field | type | default | at |
+|---|---|---|---|
+| `brand` | `z.string().min(1)` | — | `src/lifecycle.ts:85` |
+| `project` | `z.string().min(1)` | — | `src/lifecycle.ts:86` |
+| `video` | `z.string().min(1).optional()` | — | `src/lifecycle.ts:87` |
 
 ### `src/machine.AbsolutePath` — zod-scalar — `src/machine.ts:7-9`
 
@@ -947,6 +1357,157 @@ Door 2 end to end (open contract §3, §5; C1, C3): turn the names an app was la
 | `machine` | `?: Pick<MachineSettings, 'brandRoots'> \| null → src/machine.MachineSettings` | — | `src/open-context.ts:37` | This machine's settings, from `readMachineSettings` (for `brandRoots`). |
 | `home` | `?: string` | — | `src/open-context.ts:39` | Home directory for the A5 rewrite; default `os.homedir()`. |
 | `requireVideo` | `?: boolean` | — | `src/open-context.ts:41` | Refuse with `missing: ['video']` when no video is given. Default `false`. |
+
+### `src/openrpc.OpenRpcServer` — zod-object — `src/openrpc.ts:18-25`
+
+One OpenRPC generator for every Fli app (agent-drivable step 2), built from FliCast's `scripts/gen-openrpc.mjs`.
+
+*aliases* `OpenRpcServer` `src/openrpc.ts:26`
+
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `z.string()` | — | `src/openrpc.ts:19` |
+| `url` | `z.string()` | — | `src/openrpc.ts:20` |
+| `summary` | `z.string().optional()` | — | `src/openrpc.ts:21` |
+| `variables` | `z.record(z.string(), z.object({ default: z.string(), description: z.string().optional() })).optional()` | — | `src/openrpc.ts:22` |
+
+### `src/openrpc.OpenRpcDocument` — zod-object — `src/openrpc.ts:29-49`
+
+The generated document, loosely typed: enough for the page renderer and tests to read.
+
+*aliases* `OpenRpcDocument` `src/openrpc.ts:50`
+
+| field | type | default | at |
+|---|---|---|---|
+| `openrpc` | `z.literal('1.3.2')` | — | `src/openrpc.ts:30` |
+| `info` | `z.looseObject({ title: z.string(), version: z.string(), description: z.string().optional() })` | — | `src/openrpc.ts:31` |
+| `servers` | `z.array(OpenRpcServer) → src/openrpc.OpenRpcServer` | — | `src/openrpc.ts:36` |
+| `methods` | `z.array(z.looseObject({ name: z.string(), summary: z.string(), params: z.array(z.looseObject({ name: z.string(), required: z.boolean(), sch…` | — | `src/openrpc.ts:37` |
+
+### `src/openrpc.OpenRpcDocument.info` — zod-object — `src/openrpc.ts:31`
+
+| field | type | default | at |
+|---|---|---|---|
+| `title` | `z.string()` | — | `src/openrpc.ts:32` |
+| `version` | `z.string()` | — | `src/openrpc.ts:33` |
+| `description` | `z.string().optional()` | — | `src/openrpc.ts:34` |
+
+### `src/openrpc.OpenRpcDocument.methods[]` — zod-object — `src/openrpc.ts:37`
+
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `z.string()` | — | `src/openrpc.ts:39` |
+| `summary` | `z.string()` | — | `src/openrpc.ts:40` |
+| `params` | `z.array(z.looseObject({ name: z.string(), required: z.boolean(), schema: z.unknown() }))` | — | `src/openrpc.ts:41` |
+| `errors` | `z.array(z.looseObject({ code: z.number(), message: z.string() }))` | — | `src/openrpc.ts:44` |
+| `x-principals` | `z.array(z.string())` | — | `src/openrpc.ts:45` |
+| `x-human-only` | `z.union([z.boolean(), z.object({ when: z.string() })])` | — | `src/openrpc.ts:46` |
+
+### `src/openrpc.OpenRpcDocument.methods[].params[]` — zod-object — `src/openrpc.ts:41`
+
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `z.string()` | — | `src/openrpc.ts:42` |
+| `required` | `z.boolean()` | — | `src/openrpc.ts:42` |
+| `schema` | `z.unknown()` | — | `src/openrpc.ts:42` |
+
+### `src/openrpc.OpenRpcDocument.methods[].errors[]` — zod-object — `src/openrpc.ts:44`
+
+| field | type | default | at |
+|---|---|---|---|
+| `code` | `z.number()` | — | `src/openrpc.ts:44` |
+| `message` | `z.string()` | — | `src/openrpc.ts:44` |
+
+### `src/openrpc.OpenRpcDocument.methods[].x-human-only` — zod-union — `src/openrpc.ts:46`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `boolean` | `z.boolean()` | — | `src/openrpc.ts:46` |
+| `object` | `z.object({ when: z.string() })` | — | `src/openrpc.ts:46` |
+
+### `src/openrpc.OpenRpcDocument.methods[].x-human-only[1]` — zod-object — `src/openrpc.ts:46`
+
+| field | type | default | at |
+|---|---|---|---|
+| `when` | `z.string()` | — | `src/openrpc.ts:46` |
+
+### `src/openrpc.OpenRpcOptions` — interface — `src/openrpc.ts:52-67`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `title` | `string` | — | `src/openrpc.ts:53` |  |
+| `version` | `string` | — | `src/openrpc.ts:55` | App version, and the API version when it moves separately (`0.3.1+api1`). |
+| `description` | `?: string` | — | `src/openrpc.ts:56` |  |
+| `servers` | `OpenRpcServer[] → src/openrpc.OpenRpcServer` | — | `src/openrpc.ts:57` |  |
+| `capabilities` | `Record<string, CapabilityContract> → src/capability.CapabilityContract` | — | `src/openrpc.ts:58` |  |
+| `codes` | `Readonly<Record<string, number>>` | — | `src/openrpc.ts:60` | The app's frozen name → code table (`defineFailureCodes`). |
+| `refusalDetails` | `?: Readonly<Record<string, z.ZodType>> → ZodType (zod)` | — | `src/openrpc.ts:62` | Typed details per refusal name (zod), e.g. `{ ...SUITE_REFUSAL_DETAILS, overlap: OverlapDetails }`. |
+| `alwaysPossible` | `?: readonly string[]` | — | `src/openrpc.ts:64` | Refusals ANY call can make (a bad principal, bad input, an unknown name, a fault) — listed on every method. |
+| `generatedBy` | `?: string` | — | `src/openrpc.ts:66` | Where the document came from, for `x-generated-by`. |
+
+### `src/openrpc.JsonRpcRequest` — zod-object — `src/openrpc.ts:174-179`
+
+*aliases* `JsonRpcRequest` `src/openrpc.ts:180`
+
+| field | type | default | at |
+|---|---|---|---|
+| `jsonrpc` | `z.literal('2.0')` | — | `src/openrpc.ts:175` |
+| `method` | `z.string().min(1)` | — | `src/openrpc.ts:176` |
+| `params` | `z.union([z.record(z.string(), z.unknown()), z.array(z.unknown())]).optional()` | — | `src/openrpc.ts:177` |
+| `id` | `z.union([z.string(), z.number(), z.null()]).optional()` | — | `src/openrpc.ts:178` |
+
+### `src/openrpc.JsonRpcRequest.params` — zod-union — `src/openrpc.ts:177`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `record` | `z.record(z.string(), z.unknown())` | — | `src/openrpc.ts:177` |
+| `array` | `z.array(z.unknown())` | — | `src/openrpc.ts:177` |
+
+### `src/openrpc.JsonRpcRequest.id` — zod-union — `src/openrpc.ts:178`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `string` | `z.string()` | — | `src/openrpc.ts:178` |
+| `number` | `z.number()` | — | `src/openrpc.ts:178` |
+| `null` | `z.null()` | — | `src/openrpc.ts:178` |
+
+### `src/openrpc.CallAnswer` — type-union on `ok` — `src/openrpc.ts:183`
+
+What an app's seam answers: the value, or a named refusal.
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `true` | `{ ok: true; value: unknown }` | — | `src/openrpc.ts:183` |
+| `false` | `{ ok: false; error: Refusal }` | — | `src/openrpc.ts:183` |
+
+### `src/openrpc.CallAnswer[ok=false]` — type — `src/openrpc.ts:183`
+
+| field | type | default | at |
+|---|---|---|---|
+| `ok` | `false` | — | `src/openrpc.ts:183` |
+| `error` | `Refusal → src/failure-codes.Refusal` | — | `src/openrpc.ts:183` |
+
+### `src/openrpc.CallAnswer[ok=true]` — type — `src/openrpc.ts:183`
+
+| field | type | default | at |
+|---|---|---|---|
+| `ok` | `true` | — | `src/openrpc.ts:183` |
+| `value` | `unknown` | — | `src/openrpc.ts:183` |
+
+### `src/openrpc.JsonRpcOptions` — interface — `src/openrpc.ts:185-189`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `codes` | `Readonly<Record<string, number>>` | — | `src/openrpc.ts:186` |  |
+| `names` | `?: { unknownCapability?: string; invalidInput?: string; internal?: string }` | — | `src/openrpc.ts:188` | The app's names for the three standard cases, when it does not use these. |
+
+### `src/openrpc.JsonRpcOptions.names` — type — `src/openrpc.ts:188`
+
+| field | type | default | at |
+|---|---|---|---|
+| `unknownCapability` | `?: string` | — | `src/openrpc.ts:188` |
+| `invalidInput` | `?: string` | — | `src/openrpc.ts:188` |
+| `internal` | `?: string` | — | `src/openrpc.ts:188` |
 
 ### `src/project-folder.ProjectCode` — zod-scalar — `src/project-folder.ts:5-7`
 
@@ -1205,10 +1766,12 @@ The census found these top-level declarations and the extractor did not mirror t
 
 | family | count | declarations |
 |---|---|---|
-| generic type alias | 3 | `src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
-| object constant | 2 | `src/classify.LAYOUT_DIRS` `src/classify.ts:111`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47` |
+| object constant | 5 | `src/classify.LAYOUT_DIRS` `src/classify.ts:111`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47` |
+| generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
+| class | 2 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/results.FliCoreError` `src/results.ts:25` |
+| const built by a call (helper or non-zod call) | 2 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164` |
 | array constant | 1 | `src/identity.DEFAULT_LANGUAGES` `src/identity.ts:27` |
-| class | 1 | `src/results.FliCoreError` `src/results.ts:25` |
+| derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 
 ## Findings — changes needed in the target application
 

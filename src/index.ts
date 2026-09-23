@@ -156,3 +156,83 @@ export {
   type TrackOptions,
   type TrackedWindow,
 } from './window-state.js';
+
+// ── The agent-drivable layer (v0.7.0, David 2026-09-23): one contract, one fence, one spec, one page. ──
+
+export {
+  CapabilityKind,
+  CapabilityMeta,
+  CapabilityName,
+  ExpectedDuration,
+  PRINCIPAL_HEADER,
+  PrincipalKind,
+  PrincipalName,
+  SideEffects,
+  authorize,
+  defineCapabilities,
+  defineCapability,
+  describeCapabilities,
+  familyOf,
+  isHumanOnly,
+  principalKind,
+  requiredFields,
+  type Authorization,
+  type CapabilityContract,
+  type HumanOnlyWhen,
+} from './capability.js';
+
+export {
+  AppBusyDetails,
+  BusyWork,
+  CapabilityRefusal,
+  FAILURE_CODE_RANGE,
+  FailureCodeTable,
+  ForbiddenDetails,
+  JSONRPC_CODES,
+  MissingDetails,
+  Refusal,
+  SUITE_FAILURE_CODES,
+  SUITE_REFUSAL_DETAILS,
+  assertAppendOnly,
+  defineFailureCodes,
+  failureCode,
+  nextFailureCode,
+  type SuiteFailureMode,
+} from './failure-codes.js';
+
+export {
+  ControlFile,
+  ControlFileRead,
+  bearerMatches,
+  controlFilePath,
+  newControlToken,
+  pidAlive,
+  readControlFile,
+  removeControlFile,
+  writeControlFile,
+  type ControlFileOptions,
+} from './control-file.js';
+
+export {
+  JsonRpcRequest,
+  OpenRpcDocument,
+  OpenRpcServer,
+  answerJsonRpc,
+  openRpcText,
+  toOpenRpc,
+  type CallAnswer,
+  type JsonRpcOptions,
+  type OpenRpcOptions,
+} from './openrpc.js';
+
+export { renderApiPage, type ApiPageOptions } from './api-page.js';
+
+export {
+  AppScriptOpen,
+  LIFECYCLE_CAPABILITIES,
+  LifecycleVerb,
+  SystemQuitInput,
+  SystemQuitOutput,
+  SystemStatus,
+  appScriptArgs,
+} from './lifecycle.js';
