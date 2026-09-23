@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.7.0 · True at bc295f4 (2026-09-23)
+**Status:** active, v0.7.1 · True at 4e86ec2 (2026-09-23)
 
 ## Install
 
@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.7.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.7.1"
   }
 }
 ```
@@ -101,7 +101,7 @@ const gate = authorize('project.empty-trash', CAPS['project.empty-trash'], 'agen
 { codes })` answers JSON-RPC 2.0 with `data.failureMode` on every error.
 - **Page**: `renderApiPage(doc)` is the read-only reference; `renderApiPage(doc, { console: { rpcPath } })` is the
   console — pick a verb, fill the fields, fire it as a principal, see the answer (human-only verbs refuse in front of
-  you). Self-contained, light-only.
+  you). `console.dryRun: true` adds a Dry run box (v0.7.1). Self-contained, light-only.
 - **Lifecycle**: `LIFECYCLE_CAPABILITIES` (`system.status`, `system.quit`, `system.restart`; `force` is human-only;
   a busy app refuses `app-busy`) and `appScriptArgs(verb, open?)` for driving `scripts/app.sh` from outside.
 
