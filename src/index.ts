@@ -27,9 +27,11 @@ export {
 export {
   DEFAULT_ASPECT,
   DEFAULT_LANGUAGES,
+  DEFAULT_SHAPE,
   ProjectAspect,
   ProjectIdentity,
   ProjectLanguage,
+  ProjectShape,
   projectIntents,
   ReadIdentityResult,
   WriteIdentityResult,

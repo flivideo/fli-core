@@ -541,10 +541,51 @@
       ]
     },
     {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 22
+          },
+          "name": "ProjectShape"
+        }
+      ],
       "anchor": {
-        "end_line": 55,
         "file": "src/identity.ts",
-        "line": 49
+        "line": 21
+      },
+      "authority": "`z.enum` `ProjectShape` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/identity.ProjectShape",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 21
+          },
+          "value": "single"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 21
+          },
+          "value": "shorts"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 21
+          },
+          "value": "episodes"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 67,
+        "file": "src/identity.ts",
+        "line": 61
       },
       "authority": "the `kind` discriminator of the union `WriteIdentityResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -553,14 +594,14 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 50
+            "line": 62
           },
           "value": "written"
         },
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 43
+            "line": 55
           },
           "value": "refused"
         }
@@ -934,7 +975,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-23T02:56:35+00:00",
+  "generated": "2026-09-23T02:58:04+00:00",
   "mirror_version": 1,
   "parser": "typescript 6.0.3 (resolved from the target)",
   "scope": {
@@ -2544,7 +2585,7 @@
     {
       "anchor": {
         "file": "src/identity.ts",
-        "line": 16
+        "line": 26
       },
       "bases": [],
       "doc": "A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).",
@@ -2560,15 +2601,15 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 31
+            "line": 43
           },
           "name": "ProjectIdentity"
         }
       ],
       "anchor": {
-        "end_line": 30,
+        "end_line": 42,
         "file": "src/identity.ts",
-        "line": 19
+        "line": 29
       },
       "bases": [],
       "doc": null,
@@ -2577,7 +2618,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 20
+            "line": 30
           },
           "default": null,
           "name": "schema",
@@ -2586,7 +2627,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 21
+            "line": 31
           },
           "default": null,
           "name": "id",
@@ -2595,7 +2636,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 22
+            "line": 32
           },
           "default": null,
           "name": "brand",
@@ -2604,7 +2645,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 23
+            "line": 33
           },
           "default": null,
           "name": "code",
@@ -2613,7 +2654,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 24
+            "line": 34
           },
           "default": null,
           "name": "name",
@@ -2622,7 +2663,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 25
+            "line": 35
           },
           "default": null,
           "name": "createdAt",
@@ -2631,7 +2672,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 27
+            "line": 37
           },
           "default": null,
           "doc": "Intent (B584): the aspect the videos are made for. Absent \u2192 `16:9` (`projectIntents`).",
@@ -2641,12 +2682,22 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 29
+            "line": 39
           },
           "default": null,
           "doc": "Intent (B584): what is spoken, dominant first \u2014 `[\"en\"]`, `[\"th\"]`, `[\"en\",\"th\"]`. Absent \u2192 `[\"en\"]`.",
           "name": "languages",
           "type": "z.array(ProjectLanguage).min(1).optional() \u2192 src/identity.ProjectLanguage"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 41
+          },
+          "default": null,
+          "doc": "Hint (\u00a78): `single` | `shorts` | `episodes`. Absent \u2192 `single`. No behaviour yet.",
+          "name": "shape",
+          "type": "ProjectShape.optional() \u2192 src/identity.ProjectShape"
         }
       ],
       "grade": "declared",
@@ -2655,9 +2706,9 @@
     },
     {
       "anchor": {
-        "end_line": 47,
+        "end_line": 59,
         "file": "src/identity.ts",
-        "line": 41
+        "line": 53
       },
       "bases": [],
       "doc": null,
@@ -2666,7 +2717,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 43
+            "line": 55
           },
           "default": null,
           "name": "kind",
@@ -2675,7 +2726,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 44
+            "line": 56
           },
           "default": null,
           "name": "reason",
@@ -2684,7 +2735,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 45
+            "line": 57
           },
           "default": null,
           "name": "path",
@@ -2693,7 +2744,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 46
+            "line": 58
           },
           "default": null,
           "name": "message",
@@ -2709,15 +2760,15 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 56
+            "line": 68
           },
           "name": "WriteIdentityResult"
         }
       ],
       "anchor": {
-        "end_line": 55,
+        "end_line": 67,
         "file": "src/identity.ts",
-        "line": 49
+        "line": 61
       },
       "bases": [],
       "doc": null,
@@ -2726,7 +2777,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 50
+            "line": 62
           },
           "default": null,
           "name": "written",
@@ -2735,7 +2786,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 51
+            "line": 63
           },
           "default": null,
           "name": "Refused('invalid-input')",
@@ -2744,7 +2795,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 52
+            "line": 64
           },
           "default": null,
           "name": "Refused('different-id').extend({ existingId: z.string() })",
@@ -2753,7 +2804,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 53
+            "line": 65
           },
           "default": null,
           "name": "Refused('existing-invalid')",
@@ -2762,7 +2813,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 54
+            "line": 66
           },
           "default": null,
           "name": "Refused('io-error')",
@@ -2776,7 +2827,7 @@
     {
       "anchor": {
         "file": "src/identity.ts",
-        "line": 50
+        "line": 62
       },
       "bases": [],
       "doc": null,
@@ -2784,7 +2835,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 50
+            "line": 62
           },
           "default": null,
           "name": "kind",
@@ -2793,7 +2844,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 50
+            "line": 62
           },
           "default": null,
           "name": "path",
@@ -2802,7 +2853,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 50
+            "line": 62
           },
           "default": null,
           "name": "replaced",
@@ -2816,7 +2867,7 @@
     {
       "anchor": {
         "file": "src/identity.ts",
-        "line": 52
+        "line": 64
       },
       "bases": [
         "Refused(...)"
@@ -2826,7 +2877,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 43
+            "line": 55
           },
           "default": null,
           "inherited_from": "Refused(...)",
@@ -2836,7 +2887,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 44
+            "line": 56
           },
           "default": null,
           "inherited_from": "Refused(...)",
@@ -2846,7 +2897,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 45
+            "line": 57
           },
           "default": null,
           "inherited_from": "Refused(...)",
@@ -2856,7 +2907,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 46
+            "line": 58
           },
           "default": null,
           "inherited_from": "Refused(...)",
@@ -2866,7 +2917,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 52
+            "line": 64
           },
           "default": null,
           "name": "existingId",
@@ -4988,16 +5039,16 @@
     }
   ],
   "target": {
-    "commit": "747dc43e409fa78119c8613650435d1b7f3faa35",
+    "commit": "1a5541a60c05395498d20b54511e30ac10fb3943",
     "root": "/Users/davidcruwys/dev/ad/flivideo/fli-core",
     "stack": "typescript"
   },
   "unresolved": [
     {
       "looked_at": [
-        "Refused('invalid-input') (src/identity.ts:51)",
-        "Refused('existing-invalid') (src/identity.ts:53)",
-        "Refused('io-error') (src/identity.ts:54)"
+        "Refused('invalid-input') (src/identity.ts:63)",
+        "Refused('existing-invalid') (src/identity.ts:65)",
+        "Refused('io-error') (src/identity.ts:66)"
       ],
       "reason": "built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here",
       "subject": "schemas built by `Refused(...)` (3 uses)"
@@ -5005,7 +5056,7 @@
     {
       "looked_at": [
         "readFileResult(BrandSettings) (src/brand-settings.ts:18)",
-        "readFileResult(ProjectIdentity) (src/identity.ts:33)"
+        "readFileResult(ProjectIdentity) (src/identity.ts:45)"
       ],
       "reason": "built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here",
       "subject": "schemas built by `readFileResult(...)` (2 uses)"

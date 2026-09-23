@@ -322,12 +322,23 @@ describe('atomicWrite', () => {
     const dir = await tempDir();
     const base = identity();
     await buildTree(dir, {
-      'fli.studio.json': JSON.stringify({ ...base, aspect: '9:16', languages: ['th', 'en'] }),
+      'fli.studio.json': JSON.stringify({
+        ...base,
+        aspect: '9:16',
+        languages: ['th', 'en'],
+        shape: 'shorts',
+      }),
     });
     const read = await readIdentity(dir);
     if (read?.kind !== 'valid') throw new Error('expected a valid identity');
-    expect(projectIntents(read.value)).toEqual({ aspect: '9:16', languages: ['th', 'en'] });
-    expect(projectIntents({})).toEqual({ aspect: '16:9', languages: ['en'] });
+    expect(projectIntents(read.value)).toEqual({
+      aspect: '9:16',
+      languages: ['th', 'en'],
+      shape: 'shorts',
+    });
+    expect(projectIntents({})).toEqual({ aspect: '16:9', languages: ['en'], shape: 'single' });
+    await buildTree(dir, { 'fli.studio.json': JSON.stringify({ ...base, shape: 'series' }) });
+    expect((await readIdentity(dir))?.kind).toBe('invalid');
     const bad = await tempDir();
     await buildTree(bad, { 'fli.studio.json': JSON.stringify({ ...base, aspect: '4:3' }) });
     expect((await readIdentity(bad))?.kind).toBe('invalid');

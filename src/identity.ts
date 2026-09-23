@@ -12,6 +12,16 @@ export const ProjectAspect = z.enum(['16:9', '9:16', '1:1']);
 export type ProjectAspect = z.infer<typeof ProjectAspect>;
 export const DEFAULT_ASPECT: ProjectAspect = '16:9';
 
+/**
+ * What the project is for — a HINT only, no behaviour yet (David 2026-09-23; brains `video-as-code/
+ * project-folder-convention.md` §8): `single` one video (chapters are its sections), `shorts` one recording session cut
+ * into several shorts (chapter N = short N; FliHub's FR-168 `ships: per-chapter`), `episodes` a series of full episodes
+ * in one project (no structure yet). Absent → `single`.
+ */
+export const ProjectShape = z.enum(['single', 'shorts', 'episodes']);
+export type ProjectShape = z.infer<typeof ProjectShape>;
+export const DEFAULT_SHAPE: ProjectShape = 'single';
+
 /** A spoken language, as a lower-case ISO 639-1 code (`en`, `th`). */
 export const ProjectLanguage = z.string().regex(/^[a-z]{2}$/);
 export const DEFAULT_LANGUAGES: readonly string[] = ['en'];
@@ -27,6 +37,8 @@ export const ProjectIdentity = z.object({
   aspect: ProjectAspect.optional(),
   /** Intent (B584): what is spoken, dominant first — `["en"]`, `["th"]`, `["en","th"]`. Absent → `["en"]`. */
   languages: z.array(ProjectLanguage).min(1).optional(),
+  /** Hint (§8): `single` | `shorts` | `episodes`. Absent → `single`. No behaviour yet. */
+  shape: ProjectShape.optional(),
 });
 export type ProjectIdentity = z.infer<typeof ProjectIdentity>;
 
@@ -146,13 +158,15 @@ function refusalFor(
   return null;
 }
 
-/** A project's intents with the defaults filled in: `{ aspect: '16:9', languages: ['en'] }` when the file has none. */
-export function projectIntents(identity: Pick<ProjectIdentity, 'aspect' | 'languages'>): {
+/** A project's intents with the defaults filled in: `{ aspect: '16:9', languages: ['en'], shape: 'single' }`. */
+export function projectIntents(identity: Pick<ProjectIdentity, 'aspect' | 'languages' | 'shape'>): {
   aspect: ProjectAspect;
   languages: string[];
+  shape: ProjectShape;
 } {
   return {
     aspect: identity.aspect ?? DEFAULT_ASPECT,
     languages: identity.languages?.length ? [...identity.languages] : [...DEFAULT_LANGUAGES],
+    shape: identity.shape ?? DEFAULT_SHAPE,
   };
 }
