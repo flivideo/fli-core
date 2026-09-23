@@ -222,6 +222,7 @@ describe('public surface (spec §4)', () => {
       'SystemQuitOutput',
       'LifecycleVerb',
       'AppScriptOpen',
+      'ResolvedLabPath',
       'TranscriptFiles',
       'TranscriptFound',
       'TranscriptJob',

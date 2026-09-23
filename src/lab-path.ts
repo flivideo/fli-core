@@ -1,6 +1,8 @@
+import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { z } from 'zod';
 import { defaultLabRoot, type MachineSettings } from './machine.js';
+import { parseProjectFolder } from './project-folder.js';
 import { FliCoreError, parseOrThrow } from './results.js';
 
 const PathSegment = z
@@ -71,4 +73,63 @@ function brandFolder(brandRoot: string | undefined, brand: string | undefined): 
   }
   const key = brand as string;
   return key.startsWith('v-') ? key : `v-${key}`;
+}
+
+/** Where a project's lab is after `resolveLabPath`: the path, and what (if anything) was moved into place. */
+export const ResolvedLabPath = z.object({
+  /** Same as `labPath(input)`. */
+  path: z.string(),
+  /** The old project lab folder (`<code>-<old name>`) renamed into place, or null. */
+  migratedFrom: z.string().nullable(),
+  /** Two or more `<code>-*` labs and none under the current name: nothing was moved; they are listed. */
+  ambiguous: z.array(z.string()),
+});
+export type ResolvedLabPath = z.infer<typeof ResolvedLabPath>;
+
+/**
+ * `labPath`, keyed on the project CODE (FC-40, d04 UAT 2026-09-23). The folder name is display: a rename (R32 — the code
+ * never changes) must not strand an app's lab and undo history. When `<code>-<project>/` does not exist but exactly one
+ * other `<code>-*` folder does in the brand's lab, that folder is renamed to the current name — the whole project lab,
+ * every app's part of it — and reported in `migratedFrom`. Two or more candidates are never guessed between. Creates
+ * nothing else. Safe to race: a lost rename finds the winner's folder in place.
+ */
+export async function resolveLabPath(
+  input: LabPathInput,
+  machine?: Pick<MachineSettings, 'labRoot'> | null,
+): Promise<ResolvedLabPath> {
+  const target = labPath(input, machine);
+  const parsed = parseOrThrow(LabPathInput, input, 'lab path input');
+  const brandLab = path.join(
+    machine?.labRoot ?? defaultLabRoot(),
+    brandFolder(parsed.brandRoot, parsed.brand),
+  );
+  const current = path.join(brandLab, parsed.project);
+  const found: ResolvedLabPath = { path: target, migratedFrom: null, ambiguous: [] };
+  const exists = (dir: string) =>
+    fs.stat(dir).then(
+      (s) => s.isDirectory(),
+      () => false,
+    );
+  if (await exists(current)) return found;
+  const project = parseProjectFolder(parsed.project);
+  if (project === null) return found;
+  const { code } = project;
+  const entries = await fs.readdir(brandLab, { withFileTypes: true }).catch(() => []);
+  const olds = entries
+    .filter((e) => e.isDirectory() && e.name !== parsed.project)
+    .filter((e) => {
+      return parseProjectFolder(e.name)?.code === code;
+    })
+    .map((e) => e.name)
+    .sort();
+  if (olds.length === 0) return found;
+  if (olds.length > 1) return { ...found, ambiguous: olds.map((o) => path.join(brandLab, o)) };
+  const old = path.join(brandLab, olds[0] as string);
+  try {
+    await fs.rename(old, current);
+  } catch (error) {
+    if (await exists(current)) return found;
+    throw error;
+  }
+  return { ...found, migratedFrom: old };
 }

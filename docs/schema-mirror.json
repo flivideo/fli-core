@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 186,
+    "declared": 188,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -80,9 +80,9 @@
         "not_schema_bearing": 2
       },
       "src/lab-path.ts": {
-        "declared": 2,
+        "declared": 4,
         "gaps": 0,
-        "mirrored": 2,
+        "mirrored": 4,
         "not_read": 0,
         "not_schema_bearing": 0
       },
@@ -158,7 +158,7 @@
       }
     },
     "gaps": 4,
-    "mirrored": 167,
+    "mirrored": 169,
     "not_read": 15,
     "not_schema_bearing": 10,
     "not_schema_bearing_by_family": {
@@ -1578,7 +1578,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-23T14:13:15+00:00",
+  "generated": "2026-09-23T15:48:48+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -5196,9 +5196,9 @@
     },
     {
       "anchor": {
-        "end_line": 12,
+        "end_line": 14,
         "file": "src/lab-path.ts",
-        "line": 6
+        "line": 8
       },
       "bases": [],
       "doc": null,
@@ -5214,15 +5214,15 @@
         {
           "anchor": {
             "file": "src/lab-path.ts",
-            "line": 38
+            "line": 40
           },
           "name": "LabPathInput"
         }
       ],
       "anchor": {
-        "end_line": 37,
+        "end_line": 39,
         "file": "src/lab-path.ts",
-        "line": 14
+        "line": 16
       },
       "bases": [],
       "doc": null,
@@ -5231,7 +5231,7 @@
         {
           "anchor": {
             "file": "src/lab-path.ts",
-            "line": 20
+            "line": 22
           },
           "default": null,
           "doc": "The resolved brand root (`resolveBrandRoot`). Preferred: the lab folder is its basename, so a brand whose root is",
@@ -5241,7 +5241,7 @@
         {
           "anchor": {
             "file": "src/lab-path.ts",
-            "line": 28
+            "line": 30
           },
           "default": null,
           "doc": "Brand key (`appydave` \u2192 `v-appydave`) or brand folder name (`v-appydave`). Correct only when the brand root is",
@@ -5251,7 +5251,7 @@
         {
           "anchor": {
             "file": "src/lab-path.ts",
-            "line": 30
+            "line": 32
           },
           "default": null,
           "doc": "The project folder name, `<code>-<project>` (`a01-xmen`).",
@@ -5261,7 +5261,7 @@
         {
           "anchor": {
             "file": "src/lab-path.ts",
-            "line": 31
+            "line": 33
           },
           "default": null,
           "name": "app",
@@ -5270,7 +5270,7 @@
         {
           "anchor": {
             "file": "src/lab-path.ts",
-            "line": 32
+            "line": 34
           },
           "default": null,
           "name": "subject",
@@ -5281,8 +5281,62 @@
       "id": "src/lab-path.LabPathInput",
       "kind": "zod-object",
       "refinements": [
-        "refine at line 34"
+        "refine at line 36"
       ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/lab-path.ts",
+            "line": 87
+          },
+          "name": "ResolvedLabPath"
+        }
+      ],
+      "anchor": {
+        "end_line": 86,
+        "file": "src/lab-path.ts",
+        "line": 79
+      },
+      "bases": [],
+      "doc": "Where a project's lab is after `resolveLabPath`: the path, and what (if anything) was moved into place.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/lab-path.ts",
+            "line": 81
+          },
+          "default": null,
+          "doc": "Same as `labPath(input)`.",
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/lab-path.ts",
+            "line": 83
+          },
+          "default": null,
+          "doc": "The old project lab folder (`<code>-<old name>`) renamed into place, or null.",
+          "name": "migratedFrom",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/lab-path.ts",
+            "line": 85
+          },
+          "default": null,
+          "doc": "Two or more `<code>-*` labs and none under the current name: nothing was moved; they are listed.",
+          "name": "ambiguous",
+          "type": "z.array(z.string())"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/lab-path.ResolvedLabPath",
+      "kind": "zod-object"
     },
     {
       "aliases": [
@@ -8305,7 +8359,7 @@
     }
   ],
   "target": {
-    "commit": "4550f2aa35e4b309910988bd5aea16c8080d5fa3",
+    "commit": "2d6968ef32dcf77709eaaa7436be5af26a1cc8cd",
     "root": "..",
     "stack": "typescript"
   },

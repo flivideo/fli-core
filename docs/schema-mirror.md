@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `4550f2aa35e4` · **generated** 2026-09-23T14:13:15+00:00
+- **commit** `2d6968ef32dc` · **generated** 2026-09-23T15:48:48+00:00
 - **scope** include `src/**` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 21 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 145 | 34 | 2 | 4 | 15 | 2 |
+| 146 | 34 | 2 | 4 | 15 | 2 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -29,7 +29,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
 - `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :32
 - `src/identity.ts` — `ProjectAspect` (set) :11 · `ProjectShape` (set) :21 · `ProjectLanguage` :26 · `ProjectIdentity` :29 · `Refused()` :53 · `WriteIdentityResult` :61
-- `src/lab-path.ts` — `PathSegment` :6 · `LabPathInput` :14
+- `src/lab-path.ts` — `PathSegment` :8 · `LabPathInput` :16 · `ResolvedLabPath` :79
 - `src/lifecycle.ts` — `LifecycleVerb` (set) :18 · `SystemStatus` :21 · `SystemQuitInput` :34 · `SystemQuitOutput` :40 · `AppScriptOpen` :84
 - `src/machine.ts` — `AbsolutePath` :7 · `MachineSettings` :12 · `ResolvedMachineSettings` :24 · `MachineSettingsOptions` :27 · `MachineSettingsResult` :32
 - `src/open-args.ts` — `OpenContext` :11 · `OpenArgs` :27 · `OpenArgName` (set) :36 · `RawOpenArgs` :40 · `ParseOpenArgsOptions` :53 · `ParsedOpenArgs` :58
@@ -59,7 +59,7 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**186** top-level declarations counted = **167** mirrored + **4** listed as gaps + **15** declared but not read.
+**188** top-level declarations counted = **169** mirrored + **4** listed as gaps + **15** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
 Not counted, as not schema-bearing: 1 function, 9 literal constants.
@@ -1229,21 +1229,33 @@ A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).
 | `message` | `z.string()` | — | `src/identity.ts:58` |
 | `existingId` | `z.string()` | — | `src/identity.ts:64` |
 
-### `src/lab-path.PathSegment` — zod-scalar — `src/lab-path.ts:6-12`
+### `src/lab-path.PathSegment` — zod-scalar — `src/lab-path.ts:8-14`
 
 `z.string().min(1).refine((value) => !/[/\\]/.test(value) && value !== '.' && value !== '..', 'must be a single path segment')`
 
-### `src/lab-path.LabPathInput` — zod-object — `src/lab-path.ts:14-37`
+### `src/lab-path.LabPathInput` — zod-object — `src/lab-path.ts:16-39`
 
-*aliases* `LabPathInput` `src/lab-path.ts:38`
+*aliases* `LabPathInput` `src/lab-path.ts:40`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `brandRoot` | `z.string().refine((value) => path.isAbsolute(value), 'must be an absolute path').optional() → path (node:path)` | — | `src/lab-path.ts:20` | The resolved brand root (`resolveBrandRoot`). Preferred: the lab folder is its basename, so a brand whose root is |
-| `brand` | `PathSegment.optional() → src/lab-path.PathSegment` | — | `src/lab-path.ts:28` | Brand key (`appydave` → `v-appydave`) or brand folder name (`v-appydave`). Correct only when the brand root is |
-| `project` | `PathSegment → src/lab-path.PathSegment` | — | `src/lab-path.ts:30` | The project folder name, `<code>-<project>` (`a01-xmen`). |
-| `app` | `PathSegment → src/lab-path.PathSegment` | — | `src/lab-path.ts:31` |  |
-| `subject` | `PathSegment.optional() → src/lab-path.PathSegment` | — | `src/lab-path.ts:32` |  |
+| `brandRoot` | `z.string().refine((value) => path.isAbsolute(value), 'must be an absolute path').optional() → path (node:path)` | — | `src/lab-path.ts:22` | The resolved brand root (`resolveBrandRoot`). Preferred: the lab folder is its basename, so a brand whose root is |
+| `brand` | `PathSegment.optional() → src/lab-path.PathSegment` | — | `src/lab-path.ts:30` | Brand key (`appydave` → `v-appydave`) or brand folder name (`v-appydave`). Correct only when the brand root is |
+| `project` | `PathSegment → src/lab-path.PathSegment` | — | `src/lab-path.ts:32` | The project folder name, `<code>-<project>` (`a01-xmen`). |
+| `app` | `PathSegment → src/lab-path.PathSegment` | — | `src/lab-path.ts:33` |  |
+| `subject` | `PathSegment.optional() → src/lab-path.PathSegment` | — | `src/lab-path.ts:34` |  |
+
+### `src/lab-path.ResolvedLabPath` — zod-object — `src/lab-path.ts:79-86`
+
+Where a project's lab is after `resolveLabPath`: the path, and what (if anything) was moved into place.
+
+*aliases* `ResolvedLabPath` `src/lab-path.ts:87`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `path` | `z.string()` | — | `src/lab-path.ts:81` | Same as `labPath(input)`. |
+| `migratedFrom` | `z.string().nullable()` | — | `src/lab-path.ts:83` | The old project lab folder (`<code>-<old name>`) renamed into place, or null. |
+| `ambiguous` | `z.array(z.string())` | — | `src/lab-path.ts:85` | Two or more `<code>-*` labs and none under the current name: nothing was moved; they are listed. |
 
 ### `src/lifecycle.SystemStatus` — zod-object — `src/lifecycle.ts:21-31`
 

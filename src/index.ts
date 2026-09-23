@@ -120,7 +120,7 @@ export {
   type MachineSettingsOptions,
 } from './machine.js';
 
-export { LabPathInput, labPath } from './lab-path.js';
+export { LabPathInput, ResolvedLabPath, labPath, resolveLabPath } from './lab-path.js';
 
 export {
   OPEN_ENV,
