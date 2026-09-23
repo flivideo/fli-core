@@ -3,7 +3,7 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `1a5541a60c05` · **generated** 2026-09-23T02:58:04+00:00
+- **commit** `e731222a10cd` · **generated** 2026-09-23T03:55:29+00:00
 - **scope** include `src/**` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`
 
 | shapes | declared sets | derived sets | gaps | findings |
@@ -25,7 +25,7 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 | `valid` | `src/brands.ts:36` |
 | `invalid` | `src/results.ts:5` |
 
-### `src/classify.ProjectZone` — `src/classify.ts:11-20`
+### `src/classify.ProjectZone` — `src/classify.ts:11-22`
 
 *`z.enum` `ProjectZone` - a single declaring symbol*
 
@@ -38,16 +38,17 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 | `cast` | `src/classify.ts:16` |
 | `videos` | `src/classify.ts:17` |
 | `legacy` | `src/classify.ts:18` |
-| `other` | `src/classify.ts:19` |
+| `trash` | `src/classify.ts:20` |
+| `other` | `src/classify.ts:21` |
 
-### `src/classify.ProjectLayout` — `src/classify.ts:92`
+### `src/classify.ProjectLayout` — `src/classify.ts:97`
 
 *`z.enum` `ProjectLayout` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `hub` | `src/classify.ts:92` |
-| `legacy` | `src/classify.ts:92` |
+| `hub` | `src/classify.ts:97` |
+| `legacy` | `src/classify.ts:97` |
 
 ### `src/estate.scanned().state` — `src/estate.ts:17-27`
 
@@ -257,20 +258,20 @@ One symbol states each set. Adding a member changes that symbol, so these cannot
 
 Each set below was read out of the real authority — control flow, membership tests, dispatch tables — because nothing declares it. **Correct as of this commit and fragile after it.** Each carries the refactor that would make it declared.
 
-### `src/classify.LEGACY_FOLDERS` — `src/classify.ts:32-39`
+### `src/classify.LEGACY_FOLDERS` — `src/classify.ts:36-43`
 
 *module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `first-edit` | `src/classify.ts:33` |
-| `edits` | `src/classify.ts:34` |
-| `edit-1st` | `src/classify.ts:35` |
-| `final` | `src/classify.ts:36` |
-| `pipeline` | `src/classify.ts:37` |
-| `animation` | `src/classify.ts:38` |
+| `first-edit` | `src/classify.ts:37` |
+| `edits` | `src/classify.ts:38` |
+| `edit-1st` | `src/classify.ts:39` |
+| `final` | `src/classify.ts:40` |
+| `pipeline` | `src/classify.ts:41` |
+| `animation` | `src/classify.ts:42` |
 
-> **REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:36 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
 
 ### `src/fs-utils.NO_HARD_LINKS` — `src/fs-utils.ts:32`
 
@@ -387,13 +388,13 @@ A registry entry `readBrands` could not use, and why.
 |---|---|---|---|
 | `home` | `?: string` | — | `src/brands.ts:94` |
 
-### `src/classify.ProjectLayoutPaths` — zod-object — `src/classify.ts:95-102`
+### `src/classify.ProjectLayoutPaths` — zod-object — `src/classify.ts:100-107`
 
 | field | type | default | at |
 |---|---|---|---|
-| `layout` | `ProjectLayout → src/classify.ProjectLayout` | — | `src/classify.ts:97` |
-| `recordings` | `z.string()` | — | `src/classify.ts:99` |
-| `transcripts` | `z.string()` | — | `src/classify.ts:101` |
+| `layout` | `ProjectLayout → src/classify.ProjectLayout` | — | `src/classify.ts:102` |
+| `recordings` | `z.string()` | — | `src/classify.ts:104` |
+| `transcripts` | `z.string()` | — | `src/classify.ts:106` |
 
 ### `src/estate.scanned()` — zod-factory (zod-discriminated-union) on `state` — `src/estate.ts:17-27`
 
@@ -1055,7 +1056,7 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 
 These are refactors of the **application**, not of this mirror. Each one converts a derived section into a declared one.
 
-1. `src/classify.ts:32-39` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
+1. `src/classify.ts:36-43` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:36 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
 2. `src/fs-utils.ts:32` — REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.
 
 ---

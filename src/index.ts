@@ -79,6 +79,7 @@ export {
   ProjectLayout,
   ProjectLayoutPaths,
   ProjectZone,
+  TRASH_FOLDER,
   classifyProjectEntry,
   projectLayout,
   projectLayoutPaths,

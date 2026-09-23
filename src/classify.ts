@@ -16,8 +16,12 @@ export const ProjectZone = z.enum([
   'cast',
   'videos',
   'legacy',
+  /** A project's top-level `-trash/` (FliHub's delete target): always shown with its size, emptied on request (David 2026-09-23). */
+  'trash',
   'other',
 ]);
+/** FliHub moves deleted takes here (`getProjectPaths().trash`); a zone of its own, not legacy. */
+export const TRASH_FOLDER = '-trash';
 export type ProjectZone = z.infer<typeof ProjectZone>;
 
 const ZONE_FOLDERS: Record<string, ProjectZone> = {
@@ -60,6 +64,7 @@ export function classifyProjectEntry(relPath: string, isDirectory?: boolean): Pr
   // A top-level *file* named like a zone folder is not that zone.
   const topIsFile = !nested && directory === false;
 
+  if (top === TRASH_FOLDER) return topIsFile ? 'other' : 'trash';
   if (top.startsWith('-') || LEGACY_FOLDERS.includes(top)) return topIsFile ? 'other' : 'legacy';
 
   // The hub layout (new projects): FliHub's two folders live under `hub/`, mirroring FliCast's `cast/`. The `hub/`

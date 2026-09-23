@@ -30,13 +30,13 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 21
+            "line": 25
           },
           "name": "ProjectZone"
         }
       ],
       "anchor": {
-        "end_line": 20,
+        "end_line": 22,
         "file": "src/classify.ts",
         "line": 11
       },
@@ -96,7 +96,14 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 19
+            "line": 20
+          },
+          "value": "trash"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 21
           },
           "value": "other"
         }
@@ -104,54 +111,54 @@
     },
     {
       "anchor": {
-        "end_line": 39,
+        "end_line": 43,
         "file": "src/classify.ts",
-        "line": 32
+        "line": 36
       },
       "authority": "module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "finding": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:36 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "grade": "derived",
       "id": "src/classify.LEGACY_FOLDERS",
       "members": [
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 33
+            "line": 37
           },
           "value": "first-edit"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 34
+            "line": 38
           },
           "value": "edits"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 35
+            "line": 39
           },
           "value": "edit-1st"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 36
+            "line": 40
           },
           "value": "final"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 37
+            "line": 41
           },
           "value": "pipeline"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 38
+            "line": 42
           },
           "value": "animation"
         }
@@ -162,14 +169,14 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 93
+            "line": 98
           },
           "name": "ProjectLayout"
         }
       ],
       "anchor": {
         "file": "src/classify.ts",
-        "line": 92
+        "line": 97
       },
       "authority": "`z.enum` `ProjectLayout` - a single declaring symbol",
       "grade": "declared",
@@ -178,14 +185,14 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 92
+            "line": 97
           },
           "value": "hub"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 92
+            "line": 97
           },
           "value": "legacy"
         }
@@ -957,12 +964,12 @@
   "findings": [
     {
       "anchor": {
-        "end_line": 39,
+        "end_line": 43,
         "file": "src/classify.ts",
-        "line": 32
+        "line": 36
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:36 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/classify.LEGACY_FOLDERS"
     },
     {
@@ -975,7 +982,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-23T02:58:04+00:00",
+  "generated": "2026-09-23T03:55:29+00:00",
   "mirror_version": 1,
   "parser": "typescript 6.0.3 (resolved from the target)",
   "scope": {
@@ -1518,15 +1525,15 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 103
+            "line": 108
           },
           "name": "ProjectLayoutPaths"
         }
       ],
       "anchor": {
-        "end_line": 102,
+        "end_line": 107,
         "file": "src/classify.ts",
-        "line": 95
+        "line": 100
       },
       "bases": [],
       "doc": null,
@@ -1535,7 +1542,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 97
+            "line": 102
           },
           "default": null,
           "doc": "Detected by `projectLayout` (D14).",
@@ -1545,7 +1552,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 99
+            "line": 104
           },
           "default": null,
           "doc": "Absolute path of the recordings folder for this layout (it may not exist yet).",
@@ -1555,7 +1562,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 101
+            "line": 106
           },
           "default": null,
           "doc": "Absolute path of the transcripts folder for this layout (it may not exist yet).",
@@ -5039,7 +5046,7 @@
     }
   ],
   "target": {
-    "commit": "1a5541a60c05395498d20b54511e30ac10fb3943",
+    "commit": "e731222a10cdaeb088f9aaca8bcc544e935cd164",
     "root": "/Users/davidcruwys/dev/ad/flivideo/fli-core",
     "stack": "typescript"
   },
