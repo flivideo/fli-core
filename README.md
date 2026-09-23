@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.7.2 · True at 751cd96 (2026-09-23)
+**Status:** active, v0.7.3 · True at 62eab47 (2026-09-23)
 
 ## Install
 
@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.7.2"
+    "@flivideo/core": "github:flivideo/fli-core#v0.7.3"
   }
 }
 ```
@@ -35,7 +35,7 @@ import { SystemStatus, AppBusyDetails } from '@flivideo/core/contracts'; // brow
 
 Browser code (a renderer, a Vite bundle) imports from **`@flivideo/core/contracts`**: the agent-drivable layer and the
 pure naming parsers, with no `node:*` in its import graph. The main entry reads the disk and will not bundle for a
-browser.
+browser. Both entries re-export `z` (zod 4): an app still on zod 3 declares its capability shapes with it.
 
 ## Exports
 
