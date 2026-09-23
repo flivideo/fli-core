@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.6.0 · True at e20e51f (2026-09-23)
+**Status:** active, v0.7.0 · True at bc295f4 (2026-09-23)
 
 ## Install
 
@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.6.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.7.0"
   }
 }
 ```
@@ -64,6 +64,46 @@ and it reads a zero-padded segment as a number, so `01-01-intro.mov` rebuilds as
 
 Name builders (`…FileName`, `…FolderName`) and `labPath` throw `FliCoreError` on input they must not turn into a
 name. Readers and resolvers never throw: they return typed results.
+
+## The agent-drivable layer (v0.7.0)
+
+Every Fli app gives agents the same surface as FliCast (checklist:
+`~/dev/ad/flivideo/flicast/docs/agent-drivable-reference.md`). The app keeps its handlers; fli-core holds the
+contract, the fence, the codes, the spec and the page, so no app hand-rolls them.
+
+```ts
+const CAPS = defineCapabilities({
+  'project.empty-trash': defineCapability({
+    kind: 'command',
+    input,
+    output,
+    sideEffects: 'destructive',
+    idempotent: true,
+    confirmationRequired: true,
+    failureModes: ['confirm-required'],
+    humanOnly: true,
+    description,
+  }),
+});
+const CODES = defineFailureCodes({ 'confirm-required': -32002 }); // suite names keep their numbers
+const gate = authorize('project.empty-trash', CAPS['project.empty-trash'], 'agent:claude', input); // → forbidden
+```
+
+- **Contract and fence**: `defineCapability` / `defineCapabilities`, `authorize(name, contract, principal, input)`.
+  Principals are `human[:surface]`, `agent:<name>`, `cli`, named in the `x-fli-principal` header. `humanOnly` is
+  `true` or `{ when(input), note }` (a dry run open to agents, `apply: true` a person's). The fence guides
+  cooperating agents; the bearer token is what keeps other machines and web pages out.
+- **Refusals are data**: `SUITE_FAILURE_CODES` keeps the numbers FliCast published; `defineFailureCodes` adds an
+  app's own and throws on a clash; `assertAppendOnly` pins a published table. Typed details: `SUITE_REFUSAL_DETAILS`.
+- **Discovery**: `controlFilePath(app)` (`~/Library/Application Support/<app>/control.json`), `writeControlFile`
+  (0600), `readControlFile` (`live` / `stale` when the pid is gone / `absent` / `invalid`), `bearerMatches`.
+- **Spec and door**: `toOpenRpc(...)` + `openRpcText` for a committed `api/openrpc.json`; `answerJsonRpc(body, seam,
+{ codes })` answers JSON-RPC 2.0 with `data.failureMode` on every error.
+- **Page**: `renderApiPage(doc)` is the read-only reference; `renderApiPage(doc, { console: { rpcPath } })` is the
+  console — pick a verb, fill the fields, fire it as a principal, see the answer (human-only verbs refuse in front of
+  you). Self-contained, light-only.
+- **Lifecycle**: `LIFECYCLE_CAPABILITIES` (`system.status`, `system.quit`, `system.restart`; `force` is human-only;
+  a busy app refuses `app-busy`) and `appScriptArgs(verb, open?)` for driving `scripts/app.sh` from outside.
 
 ## Data shapes
 
