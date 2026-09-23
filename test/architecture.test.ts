@@ -83,6 +83,46 @@ describe('architecture: zero app imports (spec §10)', () => {
   });
 });
 
+describe('the browser-safe entry (@flivideo/core/contracts, v0.7.2)', () => {
+  it('reaches no node:* module anywhere in its import graph', async () => {
+    const seen = new Set<string>();
+    const nodeImports: string[] = [];
+    const visit = async (file: string): Promise<void> => {
+      if (seen.has(file)) return;
+      seen.add(file);
+      for (const spec of specifiers(await fs.readFile(file, 'utf8'))) {
+        if (spec.startsWith('node:')) nodeImports.push(`${path.relative(SRC, file)} → ${spec}`);
+        else if (spec.startsWith('.'))
+          await visit(path.resolve(path.dirname(file), spec.replace(/\.js$/, '.ts')));
+      }
+    };
+    await visit(path.join(SRC, 'contracts.ts'));
+    expect(seen.size).toBeGreaterThan(5);
+    expect(nodeImports).toEqual([]);
+  });
+
+  it('is a subset of the main entry, and carries the agent-drivable layer', async () => {
+    const contracts = (await import('../src/contracts.js')) as Record<string, unknown>;
+    const main = core as Record<string, unknown>;
+    expect(Object.keys(contracts).filter((k) => contracts[k] !== main[k])).toEqual([]);
+    for (const name of [
+      'defineCapability',
+      'authorize',
+      'SUITE_FAILURE_CODES',
+      'AppBusyDetails',
+      'SystemStatus',
+      'LIFECYCLE_CAPABILITIES',
+      'toOpenRpc',
+      'answerJsonRpc',
+      'renderApiPage',
+      'parseAppFile',
+      'parseRecording',
+    ]) {
+      expect(contracts[name], name).toBeDefined();
+    }
+  });
+});
+
 describe('public surface (spec §4)', () => {
   it('exports every spec §4 function and schema', () => {
     const expected = [

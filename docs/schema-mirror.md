@@ -3,7 +3,7 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `cc4a8b556e7b` · **generated** 2026-09-23T10:29:33+00:00
+- **commit** `21777e19f6ec` · **generated** 2026-09-23T10:42:13+00:00
 - **scope** include `src/**` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 20 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
