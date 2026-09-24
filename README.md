@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.9.0 · True at e6df201 (2026-09-23)
+**Status:** active, v0.10.0 · True at deb64e9 (2026-09-24)
 
 ## Install
 
@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.9.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.10.0"
   }
 }
 ```
@@ -117,6 +117,20 @@ their own engine: `transcribeQueued(path, { app, project })` queues a recording 
 beside it), `transcriptFor(path, { app })` says whether a current transcript exists, `transcriptJobs({ project },
 { app })` reads the app's own queue. Each answers `ok`, `refused` (FliTools' named refusal) or `unavailable` (not
 running) — never a throw. Node only: it reads FliTools' control file.
+
+## Folder access — one pattern for every app (v0.10.0)
+
+David approved it on 2026-09-24. Wherever an app shows a location, it shows two quiet icons right after it, in this
+order: FliHub's outline **folder** ("Open in Finder") and **`>_`** ("Copy full path"). They stay hidden until the
+line or row is pointed at, and are visible on touch screens and on keyboard focus. A copy confirms with a tick in place
+of the icon for about a second, not a toast. A file opens Finder with the file selected. Clicking an icon never opens
+the row.
+
+The server half is `revealPath(abs, { roots })`. It opens a folder, or a file selected (`open -R`), and only inside
+the roots the app passes (a brand root, a project), with links resolved. It answers `revealed` or `refused` with a
+reason. A reveal raises a window on the person's screen, so make the capability that calls it ★ human-only. Each app
+draws the icons in its own stack (there is no shared UI code): the icon, the words and the behaviour above are the
+shared part.
 
 ## Data shapes
 
