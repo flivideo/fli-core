@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.10.0 · True at deb64e9 (2026-09-24)
+**Status:** active, v0.11.0 · True at c5465c3 (2026-09-24)
 
 ## Install
 
