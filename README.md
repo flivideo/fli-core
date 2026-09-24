@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.10.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.11.0"
   }
 }
 ```
@@ -131,6 +131,23 @@ the roots the app passes (a brand root, a project), with links resolved. It answ
 reason. A reveal raises a window on the person's screen, so make the capability that calls it ★ human-only. Each app
 draws the icons in its own stack (there is no shared UI code): the icon, the words and the behaviour above are the
 shared part.
+
+## The word store (v0.11.0)
+
+David ruled on 2026-09-24 that names, spelling rules and filler lists live in one store that FliStudio owns and every
+app reads ("FliCut just uses the information. That way, the other tools can also use it"). It is one file,
+`fli.words.json`, at up to three levels: **global** (`~/.config/appydave/`, may be empty), **brand** (`v-<brand>/`) and
+**project**. A lower level wins on the same key and can turn off an entry it inherits.
+
+`readWords({ globalFile, brandRoot, projectDir })` reads and merges them. It is a plain file read that never throws,
+and a file it cannot use counts as empty. `vocabularyOf(words)` gives the names to hint to a transcriber;
+`fillersOf(words, lang)` gives the fillers and the words that are never fillers. Only FliStudio writes the file, with
+`addWord` / `removeWord` / `writeWordsFile`. Corrections made inside an edit stay in the edit: nothing here rewrites a
+transcript.
+
+Every entry carries a **`Stamp`**, `{ at, by }`, where `by` is the principal the change came through (`human:ui`,
+`cli`, `agent:<name>`). That is the answer to "who changed this, and when". It is a separate export so other stores
+can adopt it.
 
 ## Data shapes
 

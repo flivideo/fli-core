@@ -1,6 +1,6 @@
 {
   "name": "@flivideo/core",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Shared video-project rules for the Fli apps: brands, project identity, layout, naming, lab paths and the open contract.",
   "license": "MIT",
   "repository": {

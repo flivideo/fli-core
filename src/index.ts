@@ -122,6 +122,37 @@ export {
 
 export { RevealResult, revealPath, type RevealOptions } from './reveal.js';
 
+export { Stamp, stampOf } from './stamp.js';
+
+export {
+  EMPTY_WORDS,
+  MergedWords,
+  ReadWordsFileResult,
+  WORDS_FILE,
+  WordFiller,
+  WordInput,
+  WordKind,
+  WordLevel,
+  WordName,
+  WordOff,
+  WordRef,
+  WordRule,
+  WordsFile,
+  WordsRead,
+  WriteWordsResult,
+  addWord,
+  fillersOf,
+  mergeWords,
+  readWords,
+  readWordsFile,
+  removeWord,
+  vocabularyOf,
+  wordKey,
+  wordsFilePaths,
+  writeWordsFile,
+  type ReadWordsOptions,
+} from './words.js';
+
 export { LabPathInput, ResolvedLabPath, labPath, resolveLabPath } from './lab-path.js';
 
 export {

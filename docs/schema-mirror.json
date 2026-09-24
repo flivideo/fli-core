@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 191,
+    "declared": 221,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -149,6 +149,13 @@
         "not_read": 0,
         "not_schema_bearing": 0
       },
+      "src/stamp.ts": {
+        "declared": 2,
+        "gaps": 0,
+        "mirrored": 2,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
       "src/video-file.ts": {
         "declared": 11,
         "gaps": 0,
@@ -162,15 +169,22 @@
         "mirrored": 11,
         "not_read": 0,
         "not_schema_bearing": 0
+      },
+      "src/words.ts": {
+        "declared": 28,
+        "gaps": 2,
+        "mirrored": 25,
+        "not_read": 1,
+        "not_schema_bearing": 1
       }
     },
-    "gaps": 4,
-    "mirrored": 172,
-    "not_read": 15,
-    "not_schema_bearing": 10,
+    "gaps": 6,
+    "mirrored": 199,
+    "not_read": 16,
+    "not_schema_bearing": 11,
     "not_schema_bearing_by_family": {
       "function": 1,
-      "literal constant": 9
+      "literal constant": 10
     }
   },
   "closed_sets": [
@@ -1626,6 +1640,218 @@
           "value": "unknown-kind"
         }
       ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 25
+          },
+          "name": "WordLevel"
+        }
+      ],
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 24
+      },
+      "authority": "`z.enum` `WordLevel` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/words.WordLevel",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 24
+          },
+          "value": "global"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 24
+          },
+          "value": "brand"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 24
+          },
+          "value": "project"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 52
+          },
+          "name": "WordKind"
+        }
+      ],
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 51
+      },
+      "authority": "`z.enum` `WordKind` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/words.WordKind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 51
+          },
+          "value": "name"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 51
+          },
+          "value": "rule"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 51
+          },
+          "value": "filler"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 81,
+        "file": "src/words.ts",
+        "line": 71
+      },
+      "authority": "the `kind` discriminator of `z.discriminatedUnion` `WordInput` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/words.WordInput.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 72
+          },
+          "value": "name"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 73
+          },
+          "value": "rule"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 75
+          },
+          "value": "filler"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 80
+          },
+          "value": "off"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 85
+      },
+      "authority": "`z.enum` `kind` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/words.WordRef.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 85
+          },
+          "value": "name"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 85
+          },
+          "value": "rule"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 85
+          },
+          "value": "filler"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 85
+          },
+          "value": "off"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 281,
+        "file": "src/words.ts",
+        "line": 273
+      },
+      "authority": "the `kind` discriminator of `z.discriminatedUnion` `WriteWordsResult` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/words.WriteWordsResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 274
+          },
+          "value": "written"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 276
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 277
+      },
+      "authority": "`z.enum` `reason` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/words.WriteWordsResult[kind=refused].reason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 277
+          },
+          "value": "invalid-input"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 277
+          },
+          "value": "io-error"
+        }
+      ]
     }
   ],
   "extractor": "extract_typescript.py",
@@ -1650,7 +1876,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-24T01:40:49+00:00",
+  "generated": "2026-09-24T08:15:26+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -1687,7 +1913,8 @@
       "*/out/*"
     ],
     "include": [
-      "src/**"
+      "*.ts",
+      "*.tsx"
     ]
   },
   "structures": [
@@ -7773,6 +8000,48 @@
       "kind": "interface"
     },
     {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/stamp.ts",
+            "line": 13
+          },
+          "name": "Stamp"
+        }
+      ],
+      "anchor": {
+        "end_line": 12,
+        "file": "src/stamp.ts",
+        "line": 9
+      },
+      "bases": [],
+      "doc": "Who changed a record, and when (David 2026-09-24: \"keep a time updated and a who agent versus human\"). `by` is the",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/stamp.ts",
+            "line": 10
+          },
+          "default": null,
+          "name": "at",
+          "type": "z.iso.datetime({ offset: true })"
+        },
+        {
+          "anchor": {
+            "file": "src/stamp.ts",
+            "line": 11
+          },
+          "default": null,
+          "name": "by",
+          "type": "PrincipalName \u2192 src/capability.PrincipalName"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/stamp.Stamp",
+      "kind": "zod-object"
+    },
+    {
       "anchor": {
         "file": "src/video-file.ts",
         "line": 14
@@ -8595,10 +8864,897 @@
       "grade": "declared",
       "id": "src/window-state.TrackOptions",
       "kind": "interface"
+    },
+    {
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 28
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/words.Text",
+      "kind": "zod-scalar",
+      "value": "z.string().trim().min(1).max(200)"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 36
+          },
+          "name": "WordName"
+        }
+      ],
+      "anchor": {
+        "end_line": 35,
+        "file": "src/words.ts",
+        "line": 31
+      },
+      "bases": [],
+      "doc": "A name spelled exactly like this. `heardAs` are the ways the transcriber gets it wrong (proposed fixes).",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 32
+          },
+          "default": null,
+          "name": "term",
+          "type": "Text \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 33
+          },
+          "default": null,
+          "name": "heardAs",
+          "type": "z.array(Text).optional() \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "changed",
+          "type": "Stamp \u2192 src/stamp.Stamp"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordName",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 40
+          },
+          "name": "WordRule"
+        }
+      ],
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 39
+      },
+      "bases": [],
+      "doc": "A literal, whole-word, case-insensitive spelling rule: `find` in a transcript is proposed as `write`.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 39
+          },
+          "default": null,
+          "name": "find",
+          "type": "Text \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 39
+          },
+          "default": null,
+          "name": "write",
+          "type": "Text \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 39
+          },
+          "default": null,
+          "name": "changed",
+          "type": "Stamp \u2192 src/stamp.Stamp"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordRule",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 49
+          },
+          "name": "WordFiller"
+        }
+      ],
+      "anchor": {
+        "end_line": 48,
+        "file": "src/words.ts",
+        "line": 43
+      },
+      "bases": [],
+      "doc": "A filler word for a language, or with `never: true` a word that is never proposed as a filler.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 44
+          },
+          "default": null,
+          "name": "word",
+          "type": "Text \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 45
+          },
+          "default": "'en'",
+          "name": "lang",
+          "type": "z.string().min(2).max(10).default('en')"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "never",
+          "type": "z.boolean().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 47
+          },
+          "default": null,
+          "name": "changed",
+          "type": "Stamp \u2192 src/stamp.Stamp"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordFiller",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 56
+          },
+          "name": "WordOff"
+        }
+      ],
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 55
+      },
+      "bases": [],
+      "doc": "Turns off an entry inherited from a higher level (`text` is its term, `find`, or `lang:word`).",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 55
+          },
+          "default": null,
+          "name": "kind",
+          "type": "WordKind \u2192 src/words.WordKind"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 55
+          },
+          "default": null,
+          "name": "text",
+          "type": "Text \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 55
+          },
+          "default": null,
+          "name": "changed",
+          "type": "Stamp \u2192 src/stamp.Stamp"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordOff",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 65
+          },
+          "name": "WordsFile"
+        }
+      ],
+      "anchor": {
+        "end_line": 64,
+        "file": "src/words.ts",
+        "line": 58
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 59
+          },
+          "default": null,
+          "name": "schema",
+          "type": "z.literal(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 60
+          },
+          "default": "[]",
+          "name": "names",
+          "type": "z.array(WordName).default([]) \u2192 src/words.WordName"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 61
+          },
+          "default": "[]",
+          "name": "rules",
+          "type": "z.array(WordRule).default([]) \u2192 src/words.WordRule"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 62
+          },
+          "default": "[]",
+          "name": "fillers",
+          "type": "z.array(WordFiller).default([]) \u2192 src/words.WordFiller"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 63
+          },
+          "default": "[]",
+          "name": "off",
+          "type": "z.array(WordOff).default([]) \u2192 src/words.WordOff"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordsFile",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 82
+          },
+          "name": "WordInput"
+        }
+      ],
+      "anchor": {
+        "end_line": 81,
+        "file": "src/words.ts",
+        "line": 71
+      },
+      "bases": [],
+      "doc": "What a caller asks to add. The stamp is added by `addWord`.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 72
+          },
+          "default": null,
+          "name": "name",
+          "type": "z.object({ kind: z.literal('name'), term: Text, heardAs: z.array(Text).optional() }) \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "rule",
+          "type": "z.object({ kind: z.literal('rule'), find: Text, write: Text }) \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 75
+          },
+          "default": null,
+          "name": "filler",
+          "type": "z.object({ kind: z.literal('filler'), word: Text, lang: z.string().min(2).max(10).optional(), never: z.boolean().optional() }) \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 80
+          },
+          "default": null,
+          "name": "off",
+          "type": "z.object({ kind: z.literal('off'), of: WordKind, text: Text }) \u2192 src/words.WordKind, src/words.Text"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordInput",
+      "kind": "zod-discriminated-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 72
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 72
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('name')"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 72
+          },
+          "default": null,
+          "name": "term",
+          "type": "Text \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 72
+          },
+          "default": null,
+          "name": "heardAs",
+          "type": "z.array(Text).optional() \u2192 src/words.Text"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordInput[kind=name]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 73
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('rule')"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "find",
+          "type": "Text \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "write",
+          "type": "Text \u2192 src/words.Text"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordInput[kind=rule]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 79,
+        "file": "src/words.ts",
+        "line": 74
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 75
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('filler')"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 76
+          },
+          "default": null,
+          "name": "word",
+          "type": "Text \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 77
+          },
+          "default": null,
+          "name": "lang",
+          "type": "z.string().min(2).max(10).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 78
+          },
+          "default": null,
+          "name": "never",
+          "type": "z.boolean().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordInput[kind=filler]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 80
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 80
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('off')"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 80
+          },
+          "default": null,
+          "name": "of",
+          "type": "WordKind \u2192 src/words.WordKind"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 80
+          },
+          "default": null,
+          "name": "text",
+          "type": "Text \u2192 src/words.Text"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordInput[kind=off]",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 86
+          },
+          "name": "WordRef"
+        }
+      ],
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 85
+      },
+      "bases": [],
+      "doc": "Which entry to remove: its kind (or `off`) and its text, as `wordKey` reads it.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 85
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.enum(['name', 'rule', 'filler', 'off'])"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 85
+          },
+          "default": null,
+          "name": "text",
+          "type": "Text \u2192 src/words.Text"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordRef",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 96
+          },
+          "name": "MergedWords"
+        }
+      ],
+      "anchor": {
+        "end_line": 95,
+        "file": "src/words.ts",
+        "line": 89
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 90
+          },
+          "default": null,
+          "name": "names",
+          "type": "z.array(WordName.extend(From)) \u2192 src/words.WordName, src/words.From"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 91
+          },
+          "default": null,
+          "name": "rules",
+          "type": "z.array(WordRule.extend(From)) \u2192 src/words.WordRule, src/words.From"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 92
+          },
+          "default": null,
+          "name": "fillers",
+          "type": "z.array(WordFiller.extend(From)) \u2192 src/words.WordFiller, src/words.From"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 94
+          },
+          "default": null,
+          "doc": "The entries a level turned off, and which level did it.",
+          "name": "off",
+          "type": "z.array(WordOff.extend(From)) \u2192 src/words.WordOff, src/words.From"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.MergedWords",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 109
+          },
+          "name": "WordsRead"
+        }
+      ],
+      "anchor": {
+        "end_line": 108,
+        "file": "src/words.ts",
+        "line": 98
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 99
+          },
+          "default": null,
+          "name": "words",
+          "type": "MergedWords \u2192 src/words.MergedWords"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 101
+          },
+          "default": null,
+          "doc": "Each level as found: its file, and `null` when that level has no file (or was not asked for).",
+          "name": "levels",
+          "type": "z.object({ global: WordsFile.nullable(), brand: WordsFile.nullable(), project: WordsFile.nullable() }) \u2192 src/words.WordsFile"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 107
+          },
+          "default": null,
+          "doc": "Files that exist but could not be used. Their level counts as empty; never an error.",
+          "name": "invalid",
+          "type": "z.array(InvalidFile) \u2192 src/results.InvalidFile"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordsRead",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 101
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 102
+          },
+          "default": null,
+          "name": "global",
+          "type": "WordsFile.nullable() \u2192 src/words.WordsFile"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 103
+          },
+          "default": null,
+          "name": "brand",
+          "type": "WordsFile.nullable() \u2192 src/words.WordsFile"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 104
+          },
+          "default": null,
+          "name": "project",
+          "type": "WordsFile.nullable() \u2192 src/words.WordsFile"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordsRead.levels",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 118,
+        "file": "src/words.ts",
+        "line": 111
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 113
+          },
+          "default": null,
+          "doc": "The global file (FliStudio: `~/.config/appydave/fli.words.json`).",
+          "name": "globalFile",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 115
+          },
+          "default": null,
+          "doc": "The brand folder, `v-<brand>/`.",
+          "name": "brandRoot",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 117
+          },
+          "default": null,
+          "doc": "The project folder.",
+          "name": "projectDir",
+          "type": "?: string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.ReadWordsOptions",
+      "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 282
+          },
+          "name": "WriteWordsResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 281,
+        "file": "src/words.ts",
+        "line": 273
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 274
+          },
+          "default": null,
+          "name": "written",
+          "type": "z.object({ kind: z.literal('written'), path: z.string() })"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 276
+          },
+          "default": null,
+          "name": "refused",
+          "type": "z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WriteWordsResult",
+      "kind": "zod-discriminated-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 274
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 274
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('written')"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 274
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WriteWordsResult[kind=written]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 280,
+        "file": "src/words.ts",
+        "line": 275
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 276
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('refused')"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 277
+          },
+          "default": null,
+          "name": "reason",
+          "type": "z.enum(['invalid-input', 'io-error'])"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 278
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 279
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WriteWordsResult[kind=refused]",
+      "kind": "zod-object"
     }
   ],
   "target": {
-    "commit": "22adda946569430fe07b5a07e0e0e415b091330a",
+    "commit": "1b0b61f54aeb2fd6f6a6182207aa585bdf1e3701",
     "root": "..",
     "stack": "typescript"
   },
@@ -8739,6 +9895,15 @@
       "subject": "`src/results.ValidFile` - declared but not read"
     },
     {
+      "census": true,
+      "family": "object constant",
+      "looked_at": [
+        "src/words.ts:141"
+      ],
+      "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/words.EMPTY_WORDS` - declared but not read"
+    },
+    {
       "looked_at": [
         "Refused('invalid-input') (src/identity.ts:63)",
         "Refused('existing-invalid') (src/identity.ts:65)",
@@ -8750,10 +9915,11 @@
     {
       "looked_at": [
         "readFileResult(BrandSettings) (src/brand-settings.ts:18)",
-        "readFileResult(ProjectIdentity) (src/identity.ts:45)"
+        "readFileResult(ProjectIdentity) (src/identity.ts:45)",
+        "readFileResult(WordsFile) (src/words.ts:67)"
       ],
       "reason": "built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here",
-      "subject": "schemas built by `readFileResult(...)` (2 uses)"
+      "subject": "schemas built by `readFileResult(...)` (3 uses)"
     },
     {
       "looked_at": [
@@ -8774,7 +9940,7 @@
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 22,
+    "import": 24,
     "re-export": 0
   }
 }
