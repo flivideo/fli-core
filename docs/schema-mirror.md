@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `2d6968ef32dc` · **generated** 2026-09-23T15:48:48+00:00
+- **commit** `22adda946569` · **generated** 2026-09-24T01:40:49+00:00
 - **scope** include `src/**` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 21 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 22 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 146 | 34 | 2 | 4 | 15 | 2 |
+| 150 | 36 | 2 | 4 | 15 | 2 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -38,6 +38,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/project-folder.ts` — `ProjectCode` :5 · `KebabSlug` :11 · `ProjectFolder` :15
 - `src/recording.ts` — `RecordingTag` :14 · `Recording` :18
 - `src/results.ts` — `InvalidFile` :4 · `validFile()` :13 · `readFileResult()` :19
+- `src/reveal.ts` — `RevealResult` :13 · `RevealOptions` :24
 - `src/video-file.ts` — `Ext` :14 · `VideoFileKind` (set) :16 · `VideoFile` :19 · `UnknownVideoFile` :32 · `ParsedVideoFile` :39 · `VideoFolder` :74 · `VideoFolderName` :86
 - `src/window-state.ts` — `WindowRect` :16 · `SavedWindow` :24 · `WindowStateFile` :32 · `DisplayArea` :39 · `PlaceOptions` :47 · `TrackedWindow` :255 · `TrackOptions` :264
 
@@ -59,7 +60,7 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**188** top-level declarations counted = **169** mirrored + **4** listed as gaps + **15** declared but not read.
+**191** top-level declarations counted = **172** mirrored + **4** listed as gaps + **15** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
 Not counted, as not schema-bearing: 1 function, 9 literal constants.
@@ -428,6 +429,26 @@ The lifecycle verb contract (agent-drivable step 2, David 2026-09-23: "Do we hav
 |---|---|
 | `valid` | `src/results.ts:14` |
 | `invalid` | `src/results.ts:5` |
+
+### `src/reveal.RevealResult.kind` — `src/reveal.ts:13-21`
+
+*the `kind` discriminator of `z.discriminatedUnion` `RevealResult` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `revealed` | `src/reveal.ts:14` |
+| `refused` | `src/reveal.ts:16` |
+
+### `src/reveal.RevealResult[kind=refused].reason` — `src/reveal.ts:18`
+
+*`z.enum` `reason` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `outside-roots` | `src/reveal.ts:18` |
+| `not-found` | `src/reveal.ts:18` |
+| `not-absolute` | `src/reveal.ts:18` |
+| `failed` | `src/reveal.ts:18` |
 
 ### `src/video-file.VideoFileKind` — `src/video-file.ts:16`
 
@@ -1712,6 +1733,41 @@ Absent → `null`; present and valid → `ValidFile`; present and unusable → `
 | `validFile` | `validFile(value) → src/results.validFile()` | — | `src/results.ts:20` |
 | `InvalidFile` | `InvalidFile → src/results.InvalidFile` | — | `src/results.ts:20` |
 | `null` | `z.null()` | — | `src/results.ts:20` |
+
+### `src/reveal.RevealResult` — zod-discriminated-union on `kind` — `src/reveal.ts:13-21`
+
+Open a location in Finder (David 2026-09-24, folder access — "Open in Finder" and "Copy full path" on every location
+
+*aliases* `RevealResult` `src/reveal.ts:22`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `revealed` | `z.object({ kind: z.literal('revealed'), path: z.string(), selected: z.boolean() })` | — | `src/reveal.ts:14` |
+| `refused` | `z.object({ kind: z.literal('refused'), path: z.string(), reason: z.enum(['outside-roots', 'not-found', 'not-absolute', 'failed']), message:…` | — | `src/reveal.ts:16` |
+
+### `src/reveal.RevealResult[kind=revealed]` — zod-object — `src/reveal.ts:14`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('revealed')` | — | `src/reveal.ts:14` |
+| `path` | `z.string()` | — | `src/reveal.ts:14` |
+| `selected` | `z.boolean()` | — | `src/reveal.ts:14` |
+
+### `src/reveal.RevealResult[kind=refused]` — zod-object — `src/reveal.ts:15-20`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/reveal.ts:16` |
+| `path` | `z.string()` | — | `src/reveal.ts:17` |
+| `reason` | `z.enum(['outside-roots', 'not-found', 'not-absolute', 'failed'])` | — | `src/reveal.ts:18` |
+| `message` | `z.string()` | — | `src/reveal.ts:19` |
+
+### `src/reveal.RevealOptions` — interface — `src/reveal.ts:24-29`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `roots` | `readonly string[]` | — | `src/reveal.ts:26` | Absolute folders the path must be inside (after resolving links). |
+| `run` | `?: (args: string[]) => Promise<void>` | — | `src/reveal.ts:28` | Runs `open`; tests pass a stub so no window is ever raised. |
 
 ### `src/video-file.Ext` — zod-scalar — `src/video-file.ts:14`
 

@@ -120,6 +120,8 @@ export {
   type MachineSettingsOptions,
 } from './machine.js';
 
+export { RevealResult, revealPath, type RevealOptions } from './reveal.js';
+
 export { LabPathInput, ResolvedLabPath, labPath, resolveLabPath } from './lab-path.js';
 
 export {
