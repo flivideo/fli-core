@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 221,
+    "declared": 262,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -135,6 +135,13 @@
         "not_read": 0,
         "not_schema_bearing": 0
       },
+      "src/resources.ts": {
+        "declared": 41,
+        "gaps": 6,
+        "mirrored": 33,
+        "not_read": 2,
+        "not_schema_bearing": 2
+      },
       "src/results.ts": {
         "declared": 5,
         "gaps": 0,
@@ -178,13 +185,13 @@
         "not_schema_bearing": 1
       }
     },
-    "gaps": 6,
-    "mirrored": 199,
-    "not_read": 16,
-    "not_schema_bearing": 11,
+    "gaps": 12,
+    "mirrored": 232,
+    "not_read": 18,
+    "not_schema_bearing": 13,
     "not_schema_bearing_by_family": {
       "function": 1,
-      "literal constant": 10
+      "literal constant": 12
     }
   },
   "closed_sets": [
@@ -1385,6 +1392,280 @@
       ]
     },
     {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 41
+          },
+          "name": "ResourceValue"
+        }
+      ],
+      "anchor": {
+        "end_line": 40,
+        "file": "src/resources.ts",
+        "line": 31
+      },
+      "authority": "`z.enum` `ResourceValue` - a single declaring symbol",
+      "doc": "How a value is drawn. A new one is code (a renderer); everything else is data.",
+      "grade": "declared",
+      "id": "src/resources.ResourceValue",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 32
+          },
+          "value": "text"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 33
+          },
+          "value": "url"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 34
+          },
+          "value": "path"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 35
+          },
+          "value": "image"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 36
+          },
+          "value": "list"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 37
+          },
+          "value": "chapters"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 38
+          },
+          "value": "ref"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 39
+          },
+          "value": "meta"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 48
+          },
+          "name": "ResourceChoose"
+        }
+      ],
+      "anchor": {
+        "file": "src/resources.ts",
+        "line": 47
+      },
+      "authority": "`z.enum` `ResourceChoose` - a single declaring symbol",
+      "doc": "How candidates of a kind are chosen: `one` \u2014 at most one `chosen` per video; `one+test` \u2014 that, plus any number",
+      "grade": "declared",
+      "id": "src/resources.ResourceChoose",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 47
+          },
+          "value": "none"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 47
+          },
+          "value": "one"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 47
+          },
+          "value": "one+test"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 47
+          },
+          "value": "published"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 51
+          },
+          "name": "ResourceStatus"
+        }
+      ],
+      "anchor": {
+        "file": "src/resources.ts",
+        "line": 50
+      },
+      "authority": "`z.enum` `ResourceStatus` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/resources.ResourceStatus",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 50
+          },
+          "value": "candidate"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 50
+          },
+          "value": "in-test"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 50
+          },
+          "value": "chosen"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 50
+          },
+          "value": "published"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 50
+          },
+          "value": "retired"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 54
+          },
+          "name": "ResourceAudience"
+        }
+      ],
+      "anchor": {
+        "file": "src/resources.ts",
+        "line": 53
+      },
+      "authority": "`z.enum` `ResourceAudience` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/resources.ResourceAudience",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 53
+          },
+          "value": "youtube"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 53
+          },
+          "value": "skool"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 53
+          },
+          "value": "internal"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 486,
+        "file": "src/resources.ts",
+        "line": 478
+      },
+      "authority": "the `kind` discriminator of `z.discriminatedUnion` `WriteResourcesResult` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/resources.WriteResourcesResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 479
+          },
+          "value": "written"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 481
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/resources.ts",
+        "line": 482
+      },
+      "authority": "`z.enum` `reason` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/resources.WriteResourcesResult[kind=refused].reason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 482
+          },
+          "value": "invalid-input"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 482
+          },
+          "value": "io-error"
+        }
+      ]
+    },
+    {
       "anchor": {
         "file": "src/results.ts",
         "line": 7
@@ -1876,7 +2157,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-09-24T08:15:26+00:00",
+  "generated": "2026-09-27T03:45:01+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -7689,6 +7970,994 @@
       ]
     },
     {
+      "anchor": {
+        "file": "src/resources.ts",
+        "line": 25
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/resources.Text",
+      "kind": "zod-scalar",
+      "value": "z.string().trim().min(1).max(200)"
+    },
+    {
+      "anchor": {
+        "end_line": 28,
+        "file": "src/resources.ts",
+        "line": 26
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/resources.Key",
+      "kind": "zod-scalar",
+      "value": "z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'a kind or group is kebab-case, e.g. shorts-hook')"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 62
+          },
+          "name": "ResourceGroup"
+        }
+      ],
+      "anchor": {
+        "end_line": 61,
+        "file": "src/resources.ts",
+        "line": 56
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 57
+          },
+          "default": null,
+          "name": "group",
+          "type": "Key \u2192 src/resources.Key"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 58
+          },
+          "default": null,
+          "name": "label",
+          "type": "Text \u2192 src/resources.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 59
+          },
+          "default": "50",
+          "name": "order",
+          "type": "z.number().int().default(50)"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 60
+          },
+          "default": null,
+          "name": "changed",
+          "type": "Stamp \u2192 src/stamp.Stamp"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ResourceGroup",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 76
+          },
+          "name": "ResourceKind"
+        }
+      ],
+      "anchor": {
+        "end_line": 75,
+        "file": "src/resources.ts",
+        "line": 64
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 65
+          },
+          "default": null,
+          "name": "kind",
+          "type": "Key \u2192 src/resources.Key"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 66
+          },
+          "default": null,
+          "name": "group",
+          "type": "Key \u2192 src/resources.Key"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 67
+          },
+          "default": null,
+          "name": "label",
+          "type": "Text \u2192 src/resources.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 68
+          },
+          "default": null,
+          "name": "value",
+          "type": "ResourceValue \u2192 src/resources.ResourceValue"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 69
+          },
+          "default": "false",
+          "name": "many",
+          "type": "z.boolean().default(false)"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 70
+          },
+          "default": "'none'",
+          "name": "choose",
+          "type": "ResourceChoose.default('none') \u2192 src/resources.ResourceChoose"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 72
+          },
+          "default": null,
+          "doc": "Who sees it by default when a resource gives none.",
+          "name": "audience",
+          "type": "z.array(ResourceAudience).optional() \u2192 src/resources.ResourceAudience"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "hint",
+          "type": "z.string().max(300).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 74
+          },
+          "default": null,
+          "name": "changed",
+          "type": "Stamp \u2192 src/stamp.Stamp"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ResourceKind",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 82
+          },
+          "name": "ResourceOff"
+        }
+      ],
+      "anchor": {
+        "end_line": 81,
+        "file": "src/resources.ts",
+        "line": 79
+      },
+      "bases": [],
+      "doc": "A lower level switching off an inherited kind or group.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 80
+          },
+          "default": null,
+          "name": "kind",
+          "type": "Key.optional() \u2192 src/resources.Key"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 80
+          },
+          "default": null,
+          "name": "group",
+          "type": "Key.optional() \u2192 src/resources.Key"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 80
+          },
+          "default": null,
+          "name": "changed",
+          "type": "Stamp \u2192 src/stamp.Stamp"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ResourceOff",
+      "kind": "zod-object",
+      "refinements": [
+        "refine at line 81"
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 88,
+        "file": "src/resources.ts",
+        "line": 85
+      },
+      "bases": [],
+      "doc": "A video name in the `videos/` naming; the folder need not exist yet (ideas come first). `null` = the project's.",
+      "exported": true,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/resources.ResourceVideo",
+      "kind": "zod-scalar",
+      "value": "z.string().regex(VIDEO_FOLDER_PATTERN, 'video must be a kebab-case video name').nullable()"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 95
+          },
+          "name": "ResourceRef"
+        }
+      ],
+      "anchor": {
+        "end_line": 94,
+        "file": "src/resources.ts",
+        "line": 90
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 91
+          },
+          "default": null,
+          "name": "schema",
+          "type": "z.string().min(1).max(80)"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 92
+          },
+          "default": null,
+          "name": "id",
+          "type": "z.string().max(200).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 93
+          },
+          "default": null,
+          "name": "file",
+          "type": "z.string().max(1000).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ResourceRef",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 116
+          },
+          "name": "Resource"
+        }
+      ],
+      "anchor": {
+        "end_line": 115,
+        "file": "src/resources.ts",
+        "line": 97
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 98
+          },
+          "default": null,
+          "name": "id",
+          "type": "z.string().regex(/^r_[a-z0-9]{6 }$/)"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 99
+          },
+          "default": null,
+          "name": "kind",
+          "type": "Key \u2192 src/resources.Key"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 100
+          },
+          "default": "null",
+          "name": "video",
+          "type": "ResourceVideo.default(null) \u2192 src/resources.ResourceVideo"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 101
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string().max(300).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 102
+          },
+          "default": null,
+          "name": "text",
+          "type": "z.string().max(20_000).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 104
+          },
+          "default": null,
+          "doc": "Where it came from on the web. A file's own copy is `path`; the url is then only provenance.",
+          "name": "url",
+          "type": "z.string().max(2000).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 106
+          },
+          "default": null,
+          "doc": "Project-relative (`resources/\u2026`) when inside the project, else absolute.",
+          "name": "path",
+          "type": "z.string().max(1000).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 107
+          },
+          "default": "[]",
+          "name": "tags",
+          "type": "z.array(z.string().trim().min(1).max(60)).default([])"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 108
+          },
+          "default": "[]",
+          "name": "audience",
+          "type": "z.array(ResourceAudience).default([]) \u2192 src/resources.ResourceAudience"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 109
+          },
+          "default": "'candidate'",
+          "name": "status",
+          "type": "ResourceStatus.default('candidate') \u2192 src/resources.ResourceStatus"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 110
+          },
+          "default": null,
+          "name": "ref",
+          "type": "ResourceRef.optional() \u2192 src/resources.ResourceRef"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 112
+          },
+          "default": null,
+          "doc": "The producer's payload, stored as given (a thumbnail's generation_record, chapters, provenance fields\u2026).",
+          "name": "meta",
+          "type": "z.record(z.string(), z.unknown()).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 113
+          },
+          "default": null,
+          "name": "added",
+          "type": "Stamp \u2192 src/stamp.Stamp"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 114
+          },
+          "default": null,
+          "name": "changed",
+          "type": "Stamp \u2192 src/stamp.Stamp"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.Resource",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 125
+          },
+          "name": "ResourcesFile"
+        }
+      ],
+      "anchor": {
+        "end_line": 124,
+        "file": "src/resources.ts",
+        "line": 118
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 119
+          },
+          "default": null,
+          "name": "schema",
+          "type": "z.literal(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 120
+          },
+          "default": "[]",
+          "name": "groups",
+          "type": "z.array(ResourceGroup).default([]) \u2192 src/resources.ResourceGroup"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 121
+          },
+          "default": "[]",
+          "name": "kinds",
+          "type": "z.array(ResourceKind).default([]) \u2192 src/resources.ResourceKind"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 122
+          },
+          "default": "[]",
+          "name": "off",
+          "type": "z.array(ResourceOff).default([]) \u2192 src/resources.ResourceOff"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 123
+          },
+          "default": "[]",
+          "name": "resources",
+          "type": "z.array(Resource).default([]) \u2192 src/resources.Resource"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ResourcesFile",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 144
+          },
+          "name": "ResourceRegistry"
+        }
+      ],
+      "anchor": {
+        "end_line": 143,
+        "file": "src/resources.ts",
+        "line": 140
+      },
+      "bases": [],
+      "doc": "The merged registry: each row with the level it came from.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 141
+          },
+          "default": null,
+          "name": "groups",
+          "type": "z.array(ResourceGroup.extend(From)) \u2192 src/resources.ResourceGroup, src/resources.From"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 142
+          },
+          "default": null,
+          "name": "kinds",
+          "type": "z.array(ResourceKind.extend(From)) \u2192 src/resources.ResourceKind, src/resources.From"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ResourceRegistry",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 153,
+        "file": "src/resources.ts",
+        "line": 149
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 150
+          },
+          "default": null,
+          "name": "globalFile",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 151
+          },
+          "default": null,
+          "name": "brandRoot",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 152
+          },
+          "default": null,
+          "name": "projectDir",
+          "type": "?: string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ReadResourcesOptions",
+      "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 166
+          },
+          "name": "ResourcesRead"
+        }
+      ],
+      "anchor": {
+        "end_line": 165,
+        "file": "src/resources.ts",
+        "line": 155
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 156
+          },
+          "default": null,
+          "name": "registry",
+          "type": "ResourceRegistry \u2192 src/resources.ResourceRegistry"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 158
+          },
+          "default": null,
+          "doc": "The project's resources (empty without a project).",
+          "name": "resources",
+          "type": "z.array(Resource) \u2192 src/resources.Resource"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 159
+          },
+          "default": null,
+          "name": "levels",
+          "type": "z.object({ global: ResourcesFile.nullable(), brand: ResourcesFile.nullable(), project: ResourcesFile.nullable() }) \u2192 src/resources.ResourcesFile"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 164
+          },
+          "default": null,
+          "name": "invalid",
+          "type": "z.array(InvalidFile) \u2192 src/results.InvalidFile"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ResourcesRead",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/resources.ts",
+        "line": 159
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 160
+          },
+          "default": null,
+          "name": "global",
+          "type": "ResourcesFile.nullable() \u2192 src/resources.ResourcesFile"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 161
+          },
+          "default": null,
+          "name": "brand",
+          "type": "ResourcesFile.nullable() \u2192 src/resources.ResourcesFile"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 162
+          },
+          "default": null,
+          "name": "project",
+          "type": "ResourcesFile.nullable() \u2192 src/resources.ResourcesFile"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ResourcesRead.levels",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 246
+          },
+          "name": "ResourceInput"
+        }
+      ],
+      "anchor": {
+        "end_line": 245,
+        "file": "src/resources.ts",
+        "line": 232
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 241
+          },
+          "default": null,
+          "name": "video",
+          "type": "ResourceVideo.optional() \u2192 src/resources.ResourceVideo"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 242
+          },
+          "default": null,
+          "name": "tags",
+          "type": "z.array(z.string().trim().min(1).max(60)).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 243
+          },
+          "default": null,
+          "name": "audience",
+          "type": "z.array(ResourceAudience).optional() \u2192 src/resources.ResourceAudience"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 244
+          },
+          "default": null,
+          "name": "status",
+          "type": "ResourceStatus.optional() \u2192 src/resources.ResourceStatus"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ResourceInput",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/resources.ts",
+        "line": 256
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 256
+          },
+          "default": null,
+          "name": "file",
+          "type": "ResourcesFile \u2192 src/resources.ResourcesFile"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 256
+          },
+          "default": null,
+          "name": "resource",
+          "type": "Resource \u2192 src/resources.Resource"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 256
+          },
+          "default": null,
+          "name": "warnings",
+          "type": "string[]"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ResourceChange",
+      "kind": "type"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 342
+          },
+          "name": "ResourcePatch"
+        }
+      ],
+      "anchor": {
+        "end_line": 341,
+        "file": "src/resources.ts",
+        "line": 334
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 341
+          },
+          "default": null,
+          "name": "video",
+          "type": "ResourceVideo.optional() \u2192 src/resources.ResourceVideo"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 341
+          },
+          "default": null,
+          "name": "audience",
+          "type": "z.array(ResourceAudience).optional() \u2192 src/resources.ResourceAudience"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.ResourcePatch",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 487
+          },
+          "name": "WriteResourcesResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 486,
+        "file": "src/resources.ts",
+        "line": 478
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 479
+          },
+          "default": null,
+          "name": "written",
+          "type": "z.object({ kind: z.literal('written'), path: z.string() })"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 481
+          },
+          "default": null,
+          "name": "refused",
+          "type": "z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.WriteResourcesResult",
+      "kind": "zod-discriminated-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/resources.ts",
+        "line": 479
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 479
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('written')"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 479
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.WriteResourcesResult[kind=written]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 485,
+        "file": "src/resources.ts",
+        "line": 480
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 481
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('refused')"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 482
+          },
+          "default": null,
+          "name": "reason",
+          "type": "z.enum(['invalid-input', 'io-error'])"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 483
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/resources.ts",
+            "line": 484
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/resources.WriteResourcesResult[kind=refused]",
+      "kind": "zod-object"
+    },
+    {
       "aliases": [
         {
           "anchor": {
@@ -9754,7 +11023,7 @@
     }
   ],
   "target": {
-    "commit": "1b0b61f54aeb2fd6f6a6182207aa585bdf1e3701",
+    "commit": "8707ae12c5a5657bce7d4745e5e4c1b4c6cedb6a",
     "root": "..",
     "stack": "typescript"
   },
@@ -9869,6 +11138,24 @@
     },
     {
       "census": true,
+      "family": "object constant",
+      "looked_at": [
+        "src/resources.ts:127"
+      ],
+      "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/resources.EMPTY_RESOURCES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "class",
+      "looked_at": [
+        "src/resources.ts:328"
+      ],
+      "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/resources.ResourceNotFound` - declared but not read"
+    },
+    {
+      "census": true,
       "family": "class",
       "looked_at": [
         "src/results.ts:25"
@@ -9916,10 +11203,11 @@
       "looked_at": [
         "readFileResult(BrandSettings) (src/brand-settings.ts:18)",
         "readFileResult(ProjectIdentity) (src/identity.ts:45)",
+        "readFileResult(ResourcesFile) (src/resources.ts:135)",
         "readFileResult(WordsFile) (src/words.ts:67)"
       ],
       "reason": "built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here",
-      "subject": "schemas built by `readFileResult(...)` (3 uses)"
+      "subject": "schemas built by `readFileResult(...)` (4 uses)"
     },
     {
       "looked_at": [
@@ -9936,11 +11224,25 @@
       ],
       "reason": "built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here",
       "subject": "schemas built by `validFile(...)` (1 use)"
+    },
+    {
+      "looked_at": [
+        "ResourceGroup.omit({ changed: true }) (src/resources.ts:407)"
+      ],
+      "reason": "shape computed by `.omit(...)` - a transform of another schema, not expanded",
+      "subject": "src/resources.GroupInput"
+    },
+    {
+      "looked_at": [
+        "ResourceKind.omit({ changed: true }) (src/resources.ts:405)"
+      ],
+      "reason": "shape computed by `.omit(...)` - a transform of another schema, not expanded",
+      "subject": "src/resources.KindInput"
     }
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 24,
+    "import": 25,
     "re-export": 0
   }
 }

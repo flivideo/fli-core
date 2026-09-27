@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.11.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.12.0"
   }
 }
 ```
@@ -148,6 +148,23 @@ transcript.
 Every entry carries a **`Stamp`**, `{ at, by }`, where `by` is the principal the change came through (`human:ui`,
 `cli`, `agent:<name>`). That is the answer to "who changed this, and when". It is a separate export so other stores
 can adopt it.
+
+## Video resources (v0.12.0)
+
+Everything that belongs to a video: launch titles and thumbnails (many candidates, some chosen), description,
+chapters, keywords, Skool links, affiliate slots, artefacts and private provenance. The design is flivideo
+`docs/briefs/video-resources-model.md` (David approved the thin slice on 2026-09-27). It is one file,
+`fli.resources.json`, with the same shape at global, brand and project level. The **registry** of kinds and groups is
+data at every level, and a lower level wins or turns a row `off`. The resources themselves live at project level, each
+with a `video`.
+
+`readResources({ globalFile, brandRoot, projectDir })` merges the registry and returns the project's resources. It is a
+plain file read and never throws. Only FliStudio writes the file, using the pure edits `addResource`, `updateResource`,
+`tagResource`, `setResourceStatus` (which applies the choosing rules), `removeResource`, `addRegistryRow` and
+`removeRegistryRow`, then `writeResourcesFile`.
+
+Code knows only the value types (`ResourceValue`) and the choosing rules (`ResourceChoose`). A kind with no row is still
+stored and falls into `other`. Every resource carries `added` and `changed` `Stamp`s.
 
 ## Data shapes
 

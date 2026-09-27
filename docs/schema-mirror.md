@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `1b0b61f54aeb` · **generated** 2026-09-24T08:15:26+00:00
+- **commit** `8707ae12c5a5` · **generated** 2026-09-27T03:45:01+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 24 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 25 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 170 | 42 | 2 | 4 | 16 | 2 |
+| 189 | 48 | 2 | 6 | 18 | 2 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -37,6 +37,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/openrpc.ts` — `OpenRpcServer` :18 · `OpenRpcDocument` :29 · `OpenRpcOptions` :52 · `JsonRpcRequest` :174 · `CallAnswer` :183 · `JsonRpcOptions` :185
 - `src/project-folder.ts` — `ProjectCode` :5 · `KebabSlug` :11 · `ProjectFolder` :15
 - `src/recording.ts` — `RecordingTag` :14 · `Recording` :18
+- `src/resources.ts` — `Text` :25 · `Key` :26 · `ResourceValue` (set) :31 · `ResourceChoose` (set) :47 · `ResourceStatus` (set) :50 · `ResourceAudience` (set) :53 · `ResourceGroup` :56 · `ResourceKind` :64 · `ResourceOff` :79 · `ResourceVideo` :85 · `ResourceRef` :90 · `Resource` :97 · `ResourcesFile` :118 · `ResourceRegistry` :140 · `ReadResourcesOptions` :149 · `ResourcesRead` :155 · `ResourceInput` :232 · `ResourceChange` :256 · `ResourcePatch` :334 · `WriteResourcesResult` :478
 - `src/results.ts` — `InvalidFile` :4 · `validFile()` :13 · `readFileResult()` :19
 - `src/reveal.ts` — `RevealResult` :13 · `RevealOptions` :24
 - `src/stamp.ts` — `Stamp` :9
@@ -62,10 +63,10 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**221** top-level declarations counted = **199** mirrored + **6** listed as gaps + **16** declared but not read.
+**262** top-level declarations counted = **232** mirrored + **12** listed as gaps + **18** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 1 function, 10 literal constants.
+Not counted, as not schema-bearing: 1 function, 12 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
@@ -76,6 +77,7 @@ Not counted, as not schema-bearing: 1 function, 10 literal constants.
 | `src/identity.ts` | 12 | 9 | 2 | **1** |
 | `src/lifecycle.ts` | 11 | 10 | 0 | **1** |
 | `src/open-args.ts` | 12 | 11 | 0 | **1** |
+| `src/resources.ts` | 41 | 33 | 6 | **2** |
 | `src/results.ts` | 5 | 2 | 0 | **3** |
 | `src/words.ts` | 28 | 25 | 2 | **1** |
 
@@ -413,6 +415,84 @@ The lifecycle verb contract (agent-drivable step 2, David 2026-09-23: "Do we hav
 |---|---|
 | `true` | `src/openrpc.ts:183` |
 | `false` | `src/openrpc.ts:183` |
+
+### `src/resources.ResourceValue` — `src/resources.ts:31-40`
+
+How a value is drawn. A new one is code (a renderer); everything else is data.
+
+*`z.enum` `ResourceValue` - a single declaring symbol*
+
+*aliases* `ResourceValue` `src/resources.ts:41`
+
+| value | declared at |
+|---|---|
+| `text` | `src/resources.ts:32` |
+| `url` | `src/resources.ts:33` |
+| `path` | `src/resources.ts:34` |
+| `image` | `src/resources.ts:35` |
+| `list` | `src/resources.ts:36` |
+| `chapters` | `src/resources.ts:37` |
+| `ref` | `src/resources.ts:38` |
+| `meta` | `src/resources.ts:39` |
+
+### `src/resources.ResourceChoose` — `src/resources.ts:47`
+
+How candidates of a kind are chosen: `one` — at most one `chosen` per video; `one+test` — that, plus any number
+
+*`z.enum` `ResourceChoose` - a single declaring symbol*
+
+*aliases* `ResourceChoose` `src/resources.ts:48`
+
+| value | declared at |
+|---|---|
+| `none` | `src/resources.ts:47` |
+| `one` | `src/resources.ts:47` |
+| `one+test` | `src/resources.ts:47` |
+| `published` | `src/resources.ts:47` |
+
+### `src/resources.ResourceStatus` — `src/resources.ts:50`
+
+*`z.enum` `ResourceStatus` - a single declaring symbol*
+
+*aliases* `ResourceStatus` `src/resources.ts:51`
+
+| value | declared at |
+|---|---|
+| `candidate` | `src/resources.ts:50` |
+| `in-test` | `src/resources.ts:50` |
+| `chosen` | `src/resources.ts:50` |
+| `published` | `src/resources.ts:50` |
+| `retired` | `src/resources.ts:50` |
+
+### `src/resources.ResourceAudience` — `src/resources.ts:53`
+
+*`z.enum` `ResourceAudience` - a single declaring symbol*
+
+*aliases* `ResourceAudience` `src/resources.ts:54`
+
+| value | declared at |
+|---|---|
+| `youtube` | `src/resources.ts:53` |
+| `skool` | `src/resources.ts:53` |
+| `internal` | `src/resources.ts:53` |
+
+### `src/resources.WriteResourcesResult.kind` — `src/resources.ts:478-486`
+
+*the `kind` discriminator of `z.discriminatedUnion` `WriteResourcesResult` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `written` | `src/resources.ts:479` |
+| `refused` | `src/resources.ts:481` |
+
+### `src/resources.WriteResourcesResult[kind=refused].reason` — `src/resources.ts:482`
+
+*`z.enum` `reason` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `invalid-input` | `src/resources.ts:482` |
+| `io-error` | `src/resources.ts:482` |
 
 ### `src/results.InvalidFile.reason` — `src/results.ts:7`
 
@@ -1768,6 +1848,193 @@ Kebab-case: lowercase letters and digits, single hyphens between words.
 | `tags` | `z.array(RecordingTag) → src/recording.RecordingTag` | — | `src/recording.ts:28` |
 | `ext` | `z.string().regex(/^[A-Za-z0-9]*[A-Za-z][A-Za-z0-9]*$/, 'ext must be letters/digits with a letter, without the dot')` | — | `src/recording.ts:29` |
 
+### `src/resources.Text` — zod-scalar — `src/resources.ts:25`
+
+`z.string().trim().min(1).max(200)`
+
+### `src/resources.Key` — zod-scalar — `src/resources.ts:26-28`
+
+`z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'a kind or group is kebab-case, e.g. shorts-hook')`
+
+### `src/resources.ResourceGroup` — zod-object — `src/resources.ts:56-61`
+
+*aliases* `ResourceGroup` `src/resources.ts:62`
+
+| field | type | default | at |
+|---|---|---|---|
+| `group` | `Key → src/resources.Key` | — | `src/resources.ts:57` |
+| `label` | `Text → src/resources.Text` | — | `src/resources.ts:58` |
+| `order` | `z.number().int().default(50)` | `50` | `src/resources.ts:59` |
+| `changed` | `Stamp → src/stamp.Stamp` | — | `src/resources.ts:60` |
+
+### `src/resources.ResourceKind` — zod-object — `src/resources.ts:64-75`
+
+*aliases* `ResourceKind` `src/resources.ts:76`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `Key → src/resources.Key` | — | `src/resources.ts:65` |  |
+| `group` | `Key → src/resources.Key` | — | `src/resources.ts:66` |  |
+| `label` | `Text → src/resources.Text` | — | `src/resources.ts:67` |  |
+| `value` | `ResourceValue → src/resources.ResourceValue` | — | `src/resources.ts:68` |  |
+| `many` | `z.boolean().default(false)` | `false` | `src/resources.ts:69` |  |
+| `choose` | `ResourceChoose.default('none') → src/resources.ResourceChoose` | `'none'` | `src/resources.ts:70` |  |
+| `audience` | `z.array(ResourceAudience).optional() → src/resources.ResourceAudience` | — | `src/resources.ts:72` | Who sees it by default when a resource gives none. |
+| `hint` | `z.string().max(300).optional()` | — | `src/resources.ts:73` |  |
+| `changed` | `Stamp → src/stamp.Stamp` | — | `src/resources.ts:74` |  |
+
+### `src/resources.ResourceOff` — zod-object — `src/resources.ts:79-81`
+
+A lower level switching off an inherited kind or group.
+
+*aliases* `ResourceOff` `src/resources.ts:82`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `Key.optional() → src/resources.Key` | — | `src/resources.ts:80` |
+| `group` | `Key.optional() → src/resources.Key` | — | `src/resources.ts:80` |
+| `changed` | `Stamp → src/stamp.Stamp` | — | `src/resources.ts:80` |
+
+### `src/resources.ResourceVideo` — zod-scalar — `src/resources.ts:85-88`
+
+A video name in the `videos/` naming; the folder need not exist yet (ideas come first). `null` = the project's.
+
+`z.string().regex(VIDEO_FOLDER_PATTERN, 'video must be a kebab-case video name').nullable()`
+
+### `src/resources.ResourceRef` — zod-object — `src/resources.ts:90-94`
+
+*aliases* `ResourceRef` `src/resources.ts:95`
+
+| field | type | default | at |
+|---|---|---|---|
+| `schema` | `z.string().min(1).max(80)` | — | `src/resources.ts:91` |
+| `id` | `z.string().max(200).optional()` | — | `src/resources.ts:92` |
+| `file` | `z.string().max(1000).optional()` | — | `src/resources.ts:93` |
+
+### `src/resources.Resource` — zod-object — `src/resources.ts:97-115`
+
+*aliases* `Resource` `src/resources.ts:116`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `z.string().regex(/^r_[a-z0-9]{6 }$/)` | — | `src/resources.ts:98` |  |
+| `kind` | `Key → src/resources.Key` | — | `src/resources.ts:99` |  |
+| `video` | `ResourceVideo.default(null) → src/resources.ResourceVideo` | `null` | `src/resources.ts:100` |  |
+| `title` | `z.string().max(300).optional()` | — | `src/resources.ts:101` |  |
+| `text` | `z.string().max(20_000).optional()` | — | `src/resources.ts:102` |  |
+| `url` | `z.string().max(2000).optional()` | — | `src/resources.ts:104` | Where it came from on the web. A file's own copy is `path`; the url is then only provenance. |
+| `path` | `z.string().max(1000).optional()` | — | `src/resources.ts:106` | Project-relative (`resources/…`) when inside the project, else absolute. |
+| `tags` | `z.array(z.string().trim().min(1).max(60)).default([])` | `[]` | `src/resources.ts:107` |  |
+| `audience` | `z.array(ResourceAudience).default([]) → src/resources.ResourceAudience` | `[]` | `src/resources.ts:108` |  |
+| `status` | `ResourceStatus.default('candidate') → src/resources.ResourceStatus` | `'candidate'` | `src/resources.ts:109` |  |
+| `ref` | `ResourceRef.optional() → src/resources.ResourceRef` | — | `src/resources.ts:110` |  |
+| `meta` | `z.record(z.string(), z.unknown()).optional()` | — | `src/resources.ts:112` | The producer's payload, stored as given (a thumbnail's generation_record, chapters, provenance fields…). |
+| `added` | `Stamp → src/stamp.Stamp` | — | `src/resources.ts:113` |  |
+| `changed` | `Stamp → src/stamp.Stamp` | — | `src/resources.ts:114` |  |
+
+### `src/resources.ResourcesFile` — zod-object — `src/resources.ts:118-124`
+
+*aliases* `ResourcesFile` `src/resources.ts:125`
+
+| field | type | default | at |
+|---|---|---|---|
+| `schema` | `z.literal(1)` | — | `src/resources.ts:119` |
+| `groups` | `z.array(ResourceGroup).default([]) → src/resources.ResourceGroup` | `[]` | `src/resources.ts:120` |
+| `kinds` | `z.array(ResourceKind).default([]) → src/resources.ResourceKind` | `[]` | `src/resources.ts:121` |
+| `off` | `z.array(ResourceOff).default([]) → src/resources.ResourceOff` | `[]` | `src/resources.ts:122` |
+| `resources` | `z.array(Resource).default([]) → src/resources.Resource` | `[]` | `src/resources.ts:123` |
+
+### `src/resources.ResourceRegistry` — zod-object — `src/resources.ts:140-143`
+
+The merged registry: each row with the level it came from.
+
+*aliases* `ResourceRegistry` `src/resources.ts:144`
+
+| field | type | default | at |
+|---|---|---|---|
+| `groups` | `z.array(ResourceGroup.extend(From)) → src/resources.ResourceGroup, src/resources.From` | — | `src/resources.ts:141` |
+| `kinds` | `z.array(ResourceKind.extend(From)) → src/resources.ResourceKind, src/resources.From` | — | `src/resources.ts:142` |
+
+### `src/resources.ReadResourcesOptions` — interface — `src/resources.ts:149-153`
+
+| field | type | default | at |
+|---|---|---|---|
+| `globalFile` | `?: string` | — | `src/resources.ts:150` |
+| `brandRoot` | `?: string` | — | `src/resources.ts:151` |
+| `projectDir` | `?: string` | — | `src/resources.ts:152` |
+
+### `src/resources.ResourcesRead` — zod-object — `src/resources.ts:155-165`
+
+*aliases* `ResourcesRead` `src/resources.ts:166`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `registry` | `ResourceRegistry → src/resources.ResourceRegistry` | — | `src/resources.ts:156` |  |
+| `resources` | `z.array(Resource) → src/resources.Resource` | — | `src/resources.ts:158` | The project's resources (empty without a project). |
+| `levels` | `z.object({ global: ResourcesFile.nullable(), brand: ResourcesFile.nullable(), project: ResourcesFile.nullable() }) → src/resources.ResourcesFile` | — | `src/resources.ts:159` |  |
+| `invalid` | `z.array(InvalidFile) → src/results.InvalidFile` | — | `src/resources.ts:164` |  |
+
+### `src/resources.ResourcesRead.levels` — zod-object — `src/resources.ts:159`
+
+| field | type | default | at |
+|---|---|---|---|
+| `global` | `ResourcesFile.nullable() → src/resources.ResourcesFile` | — | `src/resources.ts:160` |
+| `brand` | `ResourcesFile.nullable() → src/resources.ResourcesFile` | — | `src/resources.ts:161` |
+| `project` | `ResourcesFile.nullable() → src/resources.ResourcesFile` | — | `src/resources.ts:162` |
+
+### `src/resources.ResourceInput` — zod-object — `src/resources.ts:232-245`
+
+*aliases* `ResourceInput` `src/resources.ts:246`
+
+| field | type | default | at |
+|---|---|---|---|
+| `video` | `ResourceVideo.optional() → src/resources.ResourceVideo` | — | `src/resources.ts:241` |
+| `tags` | `z.array(z.string().trim().min(1).max(60)).optional()` | — | `src/resources.ts:242` |
+| `audience` | `z.array(ResourceAudience).optional() → src/resources.ResourceAudience` | — | `src/resources.ts:243` |
+| `status` | `ResourceStatus.optional() → src/resources.ResourceStatus` | — | `src/resources.ts:244` |
+
+### `src/resources.ResourceChange` — type — `src/resources.ts:256`
+
+| field | type | default | at |
+|---|---|---|---|
+| `file` | `ResourcesFile → src/resources.ResourcesFile` | — | `src/resources.ts:256` |
+| `resource` | `Resource → src/resources.Resource` | — | `src/resources.ts:256` |
+| `warnings` | `string[]` | — | `src/resources.ts:256` |
+
+### `src/resources.ResourcePatch` — zod-object — `src/resources.ts:334-341`
+
+*aliases* `ResourcePatch` `src/resources.ts:342`
+
+| field | type | default | at |
+|---|---|---|---|
+| `video` | `ResourceVideo.optional() → src/resources.ResourceVideo` | — | `src/resources.ts:341` |
+| `audience` | `z.array(ResourceAudience).optional() → src/resources.ResourceAudience` | — | `src/resources.ts:341` |
+
+### `src/resources.WriteResourcesResult` — zod-discriminated-union on `kind` — `src/resources.ts:478-486`
+
+*aliases* `WriteResourcesResult` `src/resources.ts:487`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/resources.ts:479` |
+| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/resources.ts:481` |
+
+### `src/resources.WriteResourcesResult[kind=written]` — zod-object — `src/resources.ts:479`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('written')` | — | `src/resources.ts:479` |
+| `path` | `z.string()` | — | `src/resources.ts:479` |
+
+### `src/resources.WriteResourcesResult[kind=refused]` — zod-object — `src/resources.ts:480-485`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/resources.ts:481` |
+| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/resources.ts:482` |
+| `path` | `z.string()` | — | `src/resources.ts:483` |
+| `message` | `z.string()` | — | `src/resources.ts:484` |
+
 ### `src/results.InvalidFile` — zod-object — `src/results.ts:4-9`
 
 A JSON file that was found but could not be used. Readers return this instead of throwing.
@@ -2206,9 +2473,11 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 | subject | why | looked at |
 |---|---|---|
 | schemas built by `Refused(...)` (3 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:63)`<br>`Refused('existing-invalid') (src/identity.ts:65)`<br>`Refused('io-error') (src/identity.ts:66)` |
-| schemas built by `readFileResult(...)` (3 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:18)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:45)`<br>`readFileResult(WordsFile) (src/words.ts:67)` |
+| schemas built by `readFileResult(...)` (4 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:18)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:45)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(WordsFile) (src/words.ts:67)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
+| src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:407)` |
+| src/resources.KindInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceKind.omit({ changed: true }) (src/resources.ts:405)` |
 
 ### Declared but not read
 
@@ -2216,9 +2485,9 @@ The census found these top-level declarations and the extractor did not mirror t
 
 | family | count | declarations |
 |---|---|---|
-| object constant | 6 | `src/classify.LAYOUT_DIRS` `src/classify.ts:111`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/words.EMPTY_WORDS` `src/words.ts:141` |
+| object constant | 7 | `src/classify.LAYOUT_DIRS` `src/classify.ts:111`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:141` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
-| class | 2 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/results.FliCoreError` `src/results.ts:25` |
+| class | 3 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/resources.ResourceNotFound` `src/resources.ts:328`<br>`src/results.FliCoreError` `src/results.ts:25` |
 | const built by a call (helper or non-zod call) | 2 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164` |
 | array constant | 1 | `src/identity.DEFAULT_LANGUAGES` `src/identity.ts:27` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
