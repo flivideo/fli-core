@@ -145,6 +145,8 @@ describe('public surface (spec §4)', () => {
       'nextCode',
       'BrandSettings',
       'readBrandSettings',
+      'writeBrandSettings',
+      'TranscriptionChoice',
       'MachineSettings',
       'readMachineSettings',
       'labPath',

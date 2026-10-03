@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `8707ae12c5a5` · **generated** 2026-09-27T03:45:01+00:00
+- **commit** `ec403b57bf16` · **generated** 2026-10-03T12:29:40+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 25 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 189 | 48 | 2 | 6 | 18 | 2 |
+| 193 | 50 | 2 | 6 | 18 | 2 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -19,7 +19,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 
 - `src/api-page.ts` — `ApiPageOptions` :16
 - `src/app-file.ts` — `AppName` :15 · `AppSubject` :19 · `AppFile` :26
-- `src/brand-settings.ts` — `BrandSettings` :9
+- `src/brand-settings.ts` — `TranscriptionChoice` :13 · `BrandSettings` :21 · `WriteBrandSettingsResult` :40
 - `src/brands.ts` — `Brand` :9 · `RegistryEntry` :20 · `BrandsFile` :28 · `SkippedBrand` :32 · `BrandsRead` :35 · `ReadBrandsResult` :45 · `ReadBrandsOptions` :48 · `ResolveBrandRootOptions` :92
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
 - `src/classify.ts` — `ProjectZone` (set) :11 · `LEGACY_FOLDERS` (set) :36 · `ProjectLayout` (set) :97 · `ProjectLayoutPaths` :100
@@ -28,7 +28,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
 - `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
 - `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :32
-- `src/identity.ts` — `ProjectAspect` (set) :11 · `ProjectShape` (set) :21 · `ProjectLanguage` :26 · `ProjectIdentity` :29 · `Refused()` :53 · `WriteIdentityResult` :61
+- `src/identity.ts` — `ProjectAspect` (set) :12 · `ProjectShape` (set) :22 · `ProjectLanguage` :27 · `ProjectIdentity` :30 · `Refused()` :56 · `WriteIdentityResult` :64
 - `src/lab-path.ts` — `PathSegment` :8 · `LabPathInput` :16 · `ResolvedLabPath` :79
 - `src/lifecycle.ts` — `LifecycleVerb` (set) :18 · `SystemStatus` :21 · `SystemQuitInput` :34 · `SystemQuitOutput` :40 · `AppScriptOpen` :84
 - `src/machine.ts` — `AbsolutePath` :7 · `MachineSettings` :12 · `ResolvedMachineSettings` :24 · `MachineSettingsOptions` :27 · `MachineSettingsResult` :32
@@ -63,7 +63,7 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**262** top-level declarations counted = **232** mirrored + **12** listed as gaps + **18** declared but not read.
+**266** top-level declarations counted = **236** mirrored + **12** listed as gaps + **18** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
 Not counted, as not schema-bearing: 1 function, 12 literal constants.
@@ -84,6 +84,24 @@ Not counted, as not schema-bearing: 1 function, 12 literal constants.
 ## Closed sets — declared
 
 One symbol states each set. Adding a member changes that symbol, so these cannot drift.
+
+### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:40-48`
+
+*the `kind` discriminator of the union `WriteBrandSettingsResult` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `written` | `src/brand-settings.ts:41` |
+| `refused` | `src/brand-settings.ts:43` |
+
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:44`
+
+*`z.enum` `reason` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `invalid-input` | `src/brand-settings.ts:44` |
+| `io-error` | `src/brand-settings.ts:44` |
 
 ### `src/brands.ReadBrandsResult.kind` — `src/brands.ts:45`
 
@@ -311,42 +329,42 @@ Which zone of the project layout (spec §3, roadmap §1) a path inside a project
 | `refused` | `src/flitools.ts:46` |
 | `unavailable` | `src/flitools.ts:47` |
 
-### `src/identity.ProjectAspect` — `src/identity.ts:11`
+### `src/identity.ProjectAspect` — `src/identity.ts:12`
 
 The shape a project's videos are made for (David 2026-09-23, B584). Absent → `16:9`.
 
 *`z.enum` `ProjectAspect` - a single declaring symbol*
 
-*aliases* `ProjectAspect` `src/identity.ts:12`
+*aliases* `ProjectAspect` `src/identity.ts:13`
 
 | value | declared at |
 |---|---|
-| `16:9` | `src/identity.ts:11` |
-| `9:16` | `src/identity.ts:11` |
-| `1:1` | `src/identity.ts:11` |
+| `16:9` | `src/identity.ts:12` |
+| `9:16` | `src/identity.ts:12` |
+| `1:1` | `src/identity.ts:12` |
 
-### `src/identity.ProjectShape` — `src/identity.ts:21`
+### `src/identity.ProjectShape` — `src/identity.ts:22`
 
 What the project is for — a HINT only, no behaviour yet (David 2026-09-23; brains `video-as-code/
 
 *`z.enum` `ProjectShape` - a single declaring symbol*
 
-*aliases* `ProjectShape` `src/identity.ts:22`
+*aliases* `ProjectShape` `src/identity.ts:23`
 
 | value | declared at |
 |---|---|
-| `single` | `src/identity.ts:21` |
-| `shorts` | `src/identity.ts:21` |
-| `episodes` | `src/identity.ts:21` |
+| `single` | `src/identity.ts:22` |
+| `shorts` | `src/identity.ts:22` |
+| `episodes` | `src/identity.ts:22` |
 
-### `src/identity.WriteIdentityResult.kind` — `src/identity.ts:61-67`
+### `src/identity.WriteIdentityResult.kind` — `src/identity.ts:64-70`
 
 *the `kind` discriminator of the union `WriteIdentityResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/identity.ts:62` |
-| `refused` | `src/identity.ts:55` |
+| `written` | `src/identity.ts:65` |
+| `refused` | `src/identity.ts:58` |
 
 ### `src/lifecycle.LifecycleVerb` — `src/lifecycle.ts:18`
 
@@ -710,17 +728,52 @@ The self-describing surface as ONE served HTML page (agent-drivable step 2). Two
 | `app` | `AppName → src/app-file.AppName` | — | `src/app-file.ts:27` |
 | `subject` | `AppSubject.optional() → src/app-file.AppSubject` | — | `src/app-file.ts:27` |
 
-### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:9-15`
+### `src/brand-settings.TranscriptionChoice` — zod-object — `src/brand-settings.ts:13-18`
 
-`v-<brand>/fli.brand.json` (D13, spec O6): per-brand display settings, travelling in the brand's repo.
+A level's transcription providers (FliTools reads them: global `flitools.json` → brand `fli.brand.json` → project
 
-*aliases* `BrandSettings` `src/brand-settings.ts:16`
+*aliases* `TranscriptionChoice` `src/brand-settings.ts:19`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `fast` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:15` | Pass 1 (fast): `auto`, `groq-whisper`, `mlx-whisper`, … |
+| `editGrade` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:17` | Pass 2 (edit-grade): `crisperwhisper`, `elevenlabs`, `off`, … |
+
+### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:21-29`
+
+*aliases* `BrandSettings` `src/brand-settings.ts:30`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:22` |  |
+| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:23` |  |
+| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:24` |  |
+| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/brand-settings.ts:28` | The brand's transcription providers, over the suite default; absent → the suite default. |
+
+### `src/brand-settings.WriteBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:40-48`
+
+*aliases* `WriteBrandSettingsResult` `src/brand-settings.ts:49`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/brand-settings.ts:41` |
+| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/brand-settings.ts:43` |
+
+### `src/brand-settings.WriteBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:41`
 
 | field | type | default | at |
 |---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:10` |
-| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:11` |
-| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:12` |
+| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:41` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:41` |
+
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:42-47`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:43` |
+| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/brand-settings.ts:44` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:45` |
+| `message` | `z.string()` | — | `src/brand-settings.ts:46` |
 
 ### `src/brands.Brand` — zod-object — `src/brands.ts:9-17`
 
@@ -1334,68 +1387,69 @@ One FliTools job (`transcribe.jobs`, or `transcribe.run { wait: false }`).
 | `language` | `?: string` | — | `src/flitools.ts:62` |  |
 | `vocabulary` | `?: string[]` | — | `src/flitools.ts:63` |  |
 
-### `src/identity.ProjectLanguage` — zod-scalar — `src/identity.ts:26`
+### `src/identity.ProjectLanguage` — zod-scalar — `src/identity.ts:27`
 
 A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).
 
 `z.string().regex(/^[a-z]{2}$/)`
 
-### `src/identity.ProjectIdentity` — zod-object — `src/identity.ts:29-42`
+### `src/identity.ProjectIdentity` — zod-object — `src/identity.ts:30-45`
 
-*aliases* `ProjectIdentity` `src/identity.ts:43`
+*aliases* `ProjectIdentity` `src/identity.ts:46`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/identity.ts:30` |  |
-| `id` | `z.uuid()` | — | `src/identity.ts:31` |  |
-| `brand` | `z.string().min(1)` | — | `src/identity.ts:32` |  |
-| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/identity.ts:33` |  |
-| `name` | `z.string().min(1)` | — | `src/identity.ts:34` |  |
-| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/identity.ts:35` |  |
-| `aspect` | `ProjectAspect.optional() → src/identity.ProjectAspect` | — | `src/identity.ts:37` | Intent (B584): the aspect the videos are made for. Absent → `16:9` (`projectIntents`). |
-| `languages` | `z.array(ProjectLanguage).min(1).optional() → src/identity.ProjectLanguage` | — | `src/identity.ts:39` | Intent (B584): what is spoken, dominant first — `["en"]`, `["th"]`, `["en","th"]`. Absent → `["en"]`. |
-| `shape` | `ProjectShape.optional() → src/identity.ProjectShape` | — | `src/identity.ts:41` | Hint (§8): `single` \| `shorts` \| `episodes`. Absent → `single`. No behaviour yet. |
+| `schema` | `z.literal(1)` | — | `src/identity.ts:31` |  |
+| `id` | `z.uuid()` | — | `src/identity.ts:32` |  |
+| `brand` | `z.string().min(1)` | — | `src/identity.ts:33` |  |
+| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/identity.ts:34` |  |
+| `name` | `z.string().min(1)` | — | `src/identity.ts:35` |  |
+| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/identity.ts:36` |  |
+| `aspect` | `ProjectAspect.optional() → src/identity.ProjectAspect` | — | `src/identity.ts:38` | Intent (B584): the aspect the videos are made for. Absent → `16:9` (`projectIntents`). |
+| `languages` | `z.array(ProjectLanguage).min(1).optional() → src/identity.ProjectLanguage` | — | `src/identity.ts:40` | Intent (B584): what is spoken, dominant first — `["en"]`, `["th"]`, `["en","th"]`. Absent → `["en"]`. |
+| `shape` | `ProjectShape.optional() → src/identity.ProjectShape` | — | `src/identity.ts:42` | Hint (§8): `single` \| `shorts` \| `episodes`. Absent → `single`. No behaviour yet. |
+| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/identity.ts:44` | The project's transcription providers, over the brand's and the suite's (FliTools reads them). |
 
-### `src/identity.Refused()` — zod-factory — `src/identity.ts:53-59`
+### `src/identity.Refused()` — zod-factory — `src/identity.ts:56-62`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/identity.ts:55` |
-| `reason` | `z.literal(reason)` | — | `src/identity.ts:56` |
-| `path` | `z.string()` | — | `src/identity.ts:57` |
-| `message` | `z.string()` | — | `src/identity.ts:58` |
+| `kind` | `z.literal('refused')` | — | `src/identity.ts:58` |
+| `reason` | `z.literal(reason)` | — | `src/identity.ts:59` |
+| `path` | `z.string()` | — | `src/identity.ts:60` |
+| `message` | `z.string()` | — | `src/identity.ts:61` |
 
-### `src/identity.WriteIdentityResult` — zod-union on `kind` — `src/identity.ts:61-67`
+### `src/identity.WriteIdentityResult` — zod-union on `kind` — `src/identity.ts:64-70`
 
-*aliases* `WriteIdentityResult` `src/identity.ts:68`
+*aliases* `WriteIdentityResult` `src/identity.ts:71`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string(), replaced: z.boolean() })` | — | `src/identity.ts:62` |
-| `Refused('invalid-input')` | `Refused('invalid-input') → src/identity.Refused()` | — | `src/identity.ts:63` |
-| `Refused('different-id').extend({ existingId: z.string() })` | `Refused('different-id').extend({ existingId: z.string() }) → src/identity.Refused()` | — | `src/identity.ts:64` |
-| `Refused('existing-invalid')` | `Refused('existing-invalid') → src/identity.Refused()` | — | `src/identity.ts:65` |
-| `Refused('io-error')` | `Refused('io-error') → src/identity.Refused()` | — | `src/identity.ts:66` |
+| `written` | `z.object({ kind: z.literal('written'), path: z.string(), replaced: z.boolean() })` | — | `src/identity.ts:65` |
+| `Refused('invalid-input')` | `Refused('invalid-input') → src/identity.Refused()` | — | `src/identity.ts:66` |
+| `Refused('different-id').extend({ existingId: z.string() })` | `Refused('different-id').extend({ existingId: z.string() }) → src/identity.Refused()` | — | `src/identity.ts:67` |
+| `Refused('existing-invalid')` | `Refused('existing-invalid') → src/identity.Refused()` | — | `src/identity.ts:68` |
+| `Refused('io-error')` | `Refused('io-error') → src/identity.Refused()` | — | `src/identity.ts:69` |
 
-### `src/identity.WriteIdentityResult[kind=written]` — zod-object — `src/identity.ts:62`
+### `src/identity.WriteIdentityResult[kind=written]` — zod-object — `src/identity.ts:65`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/identity.ts:62` |
-| `path` | `z.string()` | — | `src/identity.ts:62` |
-| `replaced` | `z.boolean()` | — | `src/identity.ts:62` |
+| `kind` | `z.literal('written')` | — | `src/identity.ts:65` |
+| `path` | `z.string()` | — | `src/identity.ts:65` |
+| `replaced` | `z.boolean()` | — | `src/identity.ts:65` |
 
-### `src/identity.WriteIdentityResult[2]` — zod-object — `src/identity.ts:64`
+### `src/identity.WriteIdentityResult[2]` — zod-object — `src/identity.ts:67`
 
 *extends* `Refused(...)`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/identity.ts:55` |
-| `reason` | `z.literal(reason)` | — | `src/identity.ts:56` |
-| `path` | `z.string()` | — | `src/identity.ts:57` |
-| `message` | `z.string()` | — | `src/identity.ts:58` |
-| `existingId` | `z.string()` | — | `src/identity.ts:64` |
+| `kind` | `z.literal('refused')` | — | `src/identity.ts:58` |
+| `reason` | `z.literal(reason)` | — | `src/identity.ts:59` |
+| `path` | `z.string()` | — | `src/identity.ts:60` |
+| `message` | `z.string()` | — | `src/identity.ts:61` |
+| `existingId` | `z.string()` | — | `src/identity.ts:67` |
 
 ### `src/lab-path.PathSegment` — zod-scalar — `src/lab-path.ts:8-14`
 
@@ -2472,8 +2526,8 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 
 | subject | why | looked at |
 |---|---|---|
-| schemas built by `Refused(...)` (3 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:63)`<br>`Refused('existing-invalid') (src/identity.ts:65)`<br>`Refused('io-error') (src/identity.ts:66)` |
-| schemas built by `readFileResult(...)` (4 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:18)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:45)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(WordsFile) (src/words.ts:67)` |
+| schemas built by `Refused(...)` (3 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:66)`<br>`Refused('existing-invalid') (src/identity.ts:68)`<br>`Refused('io-error') (src/identity.ts:69)` |
+| schemas built by `readFileResult(...)` (4 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:32)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:48)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(WordsFile) (src/words.ts:67)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
 | src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:407)` |
@@ -2489,7 +2543,7 @@ The census found these top-level declarations and the extractor did not mirror t
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
 | class | 3 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/resources.ResourceNotFound` `src/resources.ts:328`<br>`src/results.FliCoreError` `src/results.ts:25` |
 | const built by a call (helper or non-zod call) | 2 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164` |
-| array constant | 1 | `src/identity.DEFAULT_LANGUAGES` `src/identity.ts:27` |
+| array constant | 1 | `src/identity.DEFAULT_LANGUAGES` `src/identity.ts:28` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 
 ## Findings — changes needed in the target application

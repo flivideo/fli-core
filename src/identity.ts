@@ -2,6 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { z } from 'zod';
 import { IDENTITY_FILE } from './app-file.js';
+import { TranscriptionChoice } from './brand-settings.js';
 import { atomicCreate, atomicWrite, errorCode, errorMessage, readJsonFile } from './fs-utils.js';
 import { ProjectCode } from './project-folder.js';
 import { issuesOf, readFileResult, type ReadFileResult } from './results.js';
@@ -39,6 +40,8 @@ export const ProjectIdentity = z.object({
   languages: z.array(ProjectLanguage).min(1).optional(),
   /** Hint (§8): `single` | `shorts` | `episodes`. Absent → `single`. No behaviour yet. */
   shape: ProjectShape.optional(),
+  /** The project's transcription providers, over the brand's and the suite's (FliTools reads them). */
+  transcription: TranscriptionChoice.optional(),
 });
 export type ProjectIdentity = z.infer<typeof ProjectIdentity>;
 

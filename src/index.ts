@@ -107,7 +107,10 @@ export {
   BRAND_SETTINGS_FILE,
   BrandSettings,
   ReadBrandSettingsResult,
+  TranscriptionChoice,
   readBrandSettings,
+  WriteBrandSettingsResult,
+  writeBrandSettings,
 } from './brand-settings.js';
 
 export {
