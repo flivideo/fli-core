@@ -3,7 +3,7 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `17b928778762` · **generated** 2026-10-04T12:36:30+00:00
+- **commit** `779dec3557b9` · **generated** 2026-10-04T12:44:19+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 25 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
@@ -43,7 +43,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/stamp.ts` — `Stamp` :9
 - `src/video-file.ts` — `Ext` :14 · `VideoFileKind` (set) :16 · `VideoFile` :19 · `UnknownVideoFile` :32 · `ParsedVideoFile` :39 · `VideoFolder` :74 · `VideoFolderName` :86
 - `src/window-state.ts` — `WindowRect` :16 · `SavedWindow` :24 · `WindowStateFile` :32 · `DisplayArea` :39 · `PlaceOptions` :47 · `TrackedWindow` :255 · `TrackOptions` :264
-- `src/words.ts` — `WordLevel` (set) :25 · `Text` :29 · `WordName` :32 · `WordRule` :40 · `WordFiller` :44 · `WordKind` (set) :52 · `WordOff` :56 · `WordsFile` :59 · `WordInput` :72 · `WordRef` :86 · `MergedWords` :90 · `WordsRead` :99 · `ReadWordsOptions` :112 · `WriteWordsResult` :274 · `ChangeWordsResult` :307 · `ChangeWordsOptions` :322
+- `src/words.ts` — `WordLevel` (set) :25 · `Text` :29 · `WordName` :32 · `WordRule` :40 · `WordFiller` :44 · `WordKind` (set) :52 · `WordOff` :56 · `WordsFile` :59 · `WordInput` :72 · `WordRef` :95 · `MergedWords` :99 · `WordsRead` :108 · `ReadWordsOptions` :121 · `WriteWordsResult` :287 · `ChangeWordsResult` :320 · `ChangeWordsOptions` :335
 
 ## Never read by this extractor
 
@@ -611,66 +611,66 @@ How candidates of a kind are chosen: `one` — at most one `chosen` per video; `
 | `rule` | `src/words.ts:52` |
 | `filler` | `src/words.ts:52` |
 
-### `src/words.WordInput.kind` — `src/words.ts:72-82`
+### `src/words.WordInput.kind` — `src/words.ts:72-91`
 
 *the `kind` discriminator of `z.discriminatedUnion` `WordInput` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `name` | `src/words.ts:73` |
-| `rule` | `src/words.ts:74` |
-| `filler` | `src/words.ts:76` |
-| `off` | `src/words.ts:81` |
+| `name` | `src/words.ts:74` |
+| `rule` | `src/words.ts:83` |
+| `filler` | `src/words.ts:85` |
+| `off` | `src/words.ts:90` |
 
-### `src/words.WordRef.kind` — `src/words.ts:86`
+### `src/words.WordRef.kind` — `src/words.ts:95`
 
 *`z.enum` `kind` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `name` | `src/words.ts:86` |
-| `rule` | `src/words.ts:86` |
-| `filler` | `src/words.ts:86` |
-| `off` | `src/words.ts:86` |
+| `name` | `src/words.ts:95` |
+| `rule` | `src/words.ts:95` |
+| `filler` | `src/words.ts:95` |
+| `off` | `src/words.ts:95` |
 
-### `src/words.WriteWordsResult.kind` — `src/words.ts:274-282`
+### `src/words.WriteWordsResult.kind` — `src/words.ts:287-295`
 
 *the `kind` discriminator of `z.discriminatedUnion` `WriteWordsResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/words.ts:275` |
-| `refused` | `src/words.ts:277` |
+| `written` | `src/words.ts:288` |
+| `refused` | `src/words.ts:290` |
 
-### `src/words.WriteWordsResult[kind=refused].reason` — `src/words.ts:278`
+### `src/words.WriteWordsResult[kind=refused].reason` — `src/words.ts:291`
 
 *`z.enum` `reason` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `invalid-input` | `src/words.ts:278` |
-| `io-error` | `src/words.ts:278` |
+| `invalid-input` | `src/words.ts:291` |
+| `io-error` | `src/words.ts:291` |
 
-### `src/words.ChangeWordsResult.kind` — `src/words.ts:307-319`
+### `src/words.ChangeWordsResult.kind` — `src/words.ts:320-332`
 
 *the `kind` discriminator of `z.discriminatedUnion` `ChangeWordsResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/words.ts:308` |
-| `refused` | `src/words.ts:310` |
+| `written` | `src/words.ts:321` |
+| `refused` | `src/words.ts:323` |
 
-### `src/words.ChangeWordsResult[kind=refused].reason` — `src/words.ts:315`
+### `src/words.ChangeWordsResult[kind=refused].reason` — `src/words.ts:328`
 
 *`z.enum` `reason` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `invalid-input` | `src/words.ts:315` |
-| `io-error` | `src/words.ts:315` |
-| `unusable-file` | `src/words.ts:315` |
-| `not-found` | `src/words.ts:315` |
-| `busy` | `src/words.ts:315` |
+| `invalid-input` | `src/words.ts:328` |
+| `io-error` | `src/words.ts:328` |
+| `unusable-file` | `src/words.ts:328` |
+| `not-found` | `src/words.ts:328` |
+| `busy` | `src/words.ts:328` |
 
 ## Closed sets — derived (no declaring symbol)
 
@@ -2422,158 +2422,159 @@ Turns off an entry inherited from a higher level (`text` is its term, `find`, or
 | `fillers` | `z.array(WordFiller).default([]) → src/words.WordFiller` | `[]` | `src/words.ts:63` |
 | `off` | `z.array(WordOff).default([]) → src/words.WordOff` | `[]` | `src/words.ts:64` |
 
-### `src/words.WordInput` — zod-discriminated-union on `kind` — `src/words.ts:72-82`
+### `src/words.WordInput` — zod-discriminated-union on `kind` — `src/words.ts:72-91`
 
 What a caller asks to add. The stamp is added by `addWord`.
 
-*aliases* `WordInput` `src/words.ts:83`
+*aliases* `WordInput` `src/words.ts:92`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `name` | `z.object({ kind: z.literal('name'), term: Text, heardAs: z.array(Text).optional() }) → src/words.Text` | — | `src/words.ts:73` |
-| `rule` | `z.object({ kind: z.literal('rule'), find: Text, write: Text }) → src/words.Text` | — | `src/words.ts:74` |
-| `filler` | `z.object({ kind: z.literal('filler'), word: Text, lang: z.string().min(2).max(10).optional(), never: z.boolean().optional() }) → src/words.Text` | — | `src/words.ts:76` |
-| `off` | `z.object({ kind: z.literal('off'), of: WordKind, text: Text }) → src/words.WordKind, src/words.Text` | — | `src/words.ts:81` |
+| `name` | `z.object({ kind: z.literal('name'), term: Text, heardAs: z.array(Text).optional(), /** * "Remember" rather than "set": keep this level's ex… → src/words.Text` | — | `src/words.ts:74` |
+| `rule` | `z.object({ kind: z.literal('rule'), find: Text, write: Text }) → src/words.Text` | — | `src/words.ts:83` |
+| `filler` | `z.object({ kind: z.literal('filler'), word: Text, lang: z.string().min(2).max(10).optional(), never: z.boolean().optional() }) → src/words.Text` | — | `src/words.ts:85` |
+| `off` | `z.object({ kind: z.literal('off'), of: WordKind, text: Text }) → src/words.WordKind, src/words.Text` | — | `src/words.ts:90` |
 
-### `src/words.WordInput[kind=name]` — zod-object — `src/words.ts:73`
+### `src/words.WordInput[kind=name]` — zod-object — `src/words.ts:73-82`
 
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('name')` | — | `src/words.ts:73` |
-| `term` | `Text → src/words.Text` | — | `src/words.ts:73` |
-| `heardAs` | `z.array(Text).optional() → src/words.Text` | — | `src/words.ts:73` |
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `z.literal('name')` | — | `src/words.ts:74` |  |
+| `term` | `Text → src/words.Text` | — | `src/words.ts:75` |  |
+| `heardAs` | `z.array(Text).optional() → src/words.Text` | — | `src/words.ts:76` |  |
+| `merge` | `z.boolean().optional()` | — | `src/words.ts:81` | "Remember" rather than "set": keep this level's existing mishearings for the term (and its spelling), adding |
 
-### `src/words.WordInput[kind=rule]` — zod-object — `src/words.ts:74`
-
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('rule')` | — | `src/words.ts:74` |
-| `find` | `Text → src/words.Text` | — | `src/words.ts:74` |
-| `write` | `Text → src/words.Text` | — | `src/words.ts:74` |
-
-### `src/words.WordInput[kind=filler]` — zod-object — `src/words.ts:75-80`
+### `src/words.WordInput[kind=rule]` — zod-object — `src/words.ts:83`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('filler')` | — | `src/words.ts:76` |
-| `word` | `Text → src/words.Text` | — | `src/words.ts:77` |
-| `lang` | `z.string().min(2).max(10).optional()` | — | `src/words.ts:78` |
-| `never` | `z.boolean().optional()` | — | `src/words.ts:79` |
+| `kind` | `z.literal('rule')` | — | `src/words.ts:83` |
+| `find` | `Text → src/words.Text` | — | `src/words.ts:83` |
+| `write` | `Text → src/words.Text` | — | `src/words.ts:83` |
 
-### `src/words.WordInput[kind=off]` — zod-object — `src/words.ts:81`
+### `src/words.WordInput[kind=filler]` — zod-object — `src/words.ts:84-89`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('off')` | — | `src/words.ts:81` |
-| `of` | `WordKind → src/words.WordKind` | — | `src/words.ts:81` |
-| `text` | `Text → src/words.Text` | — | `src/words.ts:81` |
+| `kind` | `z.literal('filler')` | — | `src/words.ts:85` |
+| `word` | `Text → src/words.Text` | — | `src/words.ts:86` |
+| `lang` | `z.string().min(2).max(10).optional()` | — | `src/words.ts:87` |
+| `never` | `z.boolean().optional()` | — | `src/words.ts:88` |
 
-### `src/words.WordRef` — zod-object — `src/words.ts:86`
+### `src/words.WordInput[kind=off]` — zod-object — `src/words.ts:90`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('off')` | — | `src/words.ts:90` |
+| `of` | `WordKind → src/words.WordKind` | — | `src/words.ts:90` |
+| `text` | `Text → src/words.Text` | — | `src/words.ts:90` |
+
+### `src/words.WordRef` — zod-object — `src/words.ts:95`
 
 Which entry to remove: its kind (or `off`) and its text, as `wordKey` reads it.
 
-*aliases* `WordRef` `src/words.ts:87`
+*aliases* `WordRef` `src/words.ts:96`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.enum(['name', 'rule', 'filler', 'off'])` | — | `src/words.ts:86` |
-| `text` | `Text → src/words.Text` | — | `src/words.ts:86` |
+| `kind` | `z.enum(['name', 'rule', 'filler', 'off'])` | — | `src/words.ts:95` |
+| `text` | `Text → src/words.Text` | — | `src/words.ts:95` |
 
-### `src/words.MergedWords` — zod-object — `src/words.ts:90-96`
+### `src/words.MergedWords` — zod-object — `src/words.ts:99-105`
 
-*aliases* `MergedWords` `src/words.ts:97`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `names` | `z.array(WordName.extend(From)) → src/words.WordName, src/words.From` | — | `src/words.ts:91` |  |
-| `rules` | `z.array(WordRule.extend(From)) → src/words.WordRule, src/words.From` | — | `src/words.ts:92` |  |
-| `fillers` | `z.array(WordFiller.extend(From)) → src/words.WordFiller, src/words.From` | — | `src/words.ts:93` |  |
-| `off` | `z.array(WordOff.extend(From)) → src/words.WordOff, src/words.From` | — | `src/words.ts:95` | The entries a level turned off, and which level did it. |
-
-### `src/words.WordsRead` — zod-object — `src/words.ts:99-109`
-
-*aliases* `WordsRead` `src/words.ts:110`
+*aliases* `MergedWords` `src/words.ts:106`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `words` | `MergedWords → src/words.MergedWords` | — | `src/words.ts:100` |  |
-| `levels` | `z.object({ global: WordsFile.nullable(), brand: WordsFile.nullable(), project: WordsFile.nullable() }) → src/words.WordsFile` | — | `src/words.ts:102` | Each level as found: its file, and `null` when that level has no file (or was not asked for). |
-| `invalid` | `z.array(InvalidFile) → src/results.InvalidFile` | — | `src/words.ts:108` | Files that exist but could not be used. Their level counts as empty; never an error. |
+| `names` | `z.array(WordName.extend(From)) → src/words.WordName, src/words.From` | — | `src/words.ts:100` |  |
+| `rules` | `z.array(WordRule.extend(From)) → src/words.WordRule, src/words.From` | — | `src/words.ts:101` |  |
+| `fillers` | `z.array(WordFiller.extend(From)) → src/words.WordFiller, src/words.From` | — | `src/words.ts:102` |  |
+| `off` | `z.array(WordOff.extend(From)) → src/words.WordOff, src/words.From` | — | `src/words.ts:104` | The entries a level turned off, and which level did it. |
 
-### `src/words.WordsRead.levels` — zod-object — `src/words.ts:102`
+### `src/words.WordsRead` — zod-object — `src/words.ts:108-118`
+
+*aliases* `WordsRead` `src/words.ts:119`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `words` | `MergedWords → src/words.MergedWords` | — | `src/words.ts:109` |  |
+| `levels` | `z.object({ global: WordsFile.nullable(), brand: WordsFile.nullable(), project: WordsFile.nullable() }) → src/words.WordsFile` | — | `src/words.ts:111` | Each level as found: its file, and `null` when that level has no file (or was not asked for). |
+| `invalid` | `z.array(InvalidFile) → src/results.InvalidFile` | — | `src/words.ts:117` | Files that exist but could not be used. Their level counts as empty; never an error. |
+
+### `src/words.WordsRead.levels` — zod-object — `src/words.ts:111`
 
 | field | type | default | at |
 |---|---|---|---|
-| `global` | `WordsFile.nullable() → src/words.WordsFile` | — | `src/words.ts:103` |
-| `brand` | `WordsFile.nullable() → src/words.WordsFile` | — | `src/words.ts:104` |
-| `project` | `WordsFile.nullable() → src/words.WordsFile` | — | `src/words.ts:105` |
+| `global` | `WordsFile.nullable() → src/words.WordsFile` | — | `src/words.ts:112` |
+| `brand` | `WordsFile.nullable() → src/words.WordsFile` | — | `src/words.ts:113` |
+| `project` | `WordsFile.nullable() → src/words.WordsFile` | — | `src/words.ts:114` |
 
-### `src/words.ReadWordsOptions` — interface — `src/words.ts:112-119`
+### `src/words.ReadWordsOptions` — interface — `src/words.ts:121-128`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `globalFile` | `?: string` | — | `src/words.ts:114` | The global file (FliStudio: `~/.config/appydave/fli.words.json`). |
-| `brandRoot` | `?: string` | — | `src/words.ts:116` | The brand folder, `v-<brand>/`. |
-| `projectDir` | `?: string` | — | `src/words.ts:118` | The project folder. |
+| `globalFile` | `?: string` | — | `src/words.ts:123` | The global file (FliStudio: `~/.config/appydave/fli.words.json`). |
+| `brandRoot` | `?: string` | — | `src/words.ts:125` | The brand folder, `v-<brand>/`. |
+| `projectDir` | `?: string` | — | `src/words.ts:127` | The project folder. |
 
-### `src/words.WriteWordsResult` — zod-discriminated-union on `kind` — `src/words.ts:274-282`
+### `src/words.WriteWordsResult` — zod-discriminated-union on `kind` — `src/words.ts:287-295`
 
-*aliases* `WriteWordsResult` `src/words.ts:283`
+*aliases* `WriteWordsResult` `src/words.ts:296`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/words.ts:275` |
-| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/words.ts:277` |
+| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/words.ts:288` |
+| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/words.ts:290` |
 
-### `src/words.WriteWordsResult[kind=written]` — zod-object — `src/words.ts:275`
-
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/words.ts:275` |
-| `path` | `z.string()` | — | `src/words.ts:275` |
-
-### `src/words.WriteWordsResult[kind=refused]` — zod-object — `src/words.ts:276-281`
+### `src/words.WriteWordsResult[kind=written]` — zod-object — `src/words.ts:288`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/words.ts:277` |
-| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/words.ts:278` |
-| `path` | `z.string()` | — | `src/words.ts:279` |
-| `message` | `z.string()` | — | `src/words.ts:280` |
+| `kind` | `z.literal('written')` | — | `src/words.ts:288` |
+| `path` | `z.string()` | — | `src/words.ts:288` |
 
-### `src/words.ChangeWordsResult` — zod-discriminated-union on `kind` — `src/words.ts:307-319`
+### `src/words.WriteWordsResult[kind=refused]` — zod-object — `src/words.ts:289-294`
 
-*aliases* `ChangeWordsResult` `src/words.ts:320`
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/words.ts:290` |
+| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/words.ts:291` |
+| `path` | `z.string()` | — | `src/words.ts:292` |
+| `message` | `z.string()` | — | `src/words.ts:293` |
+
+### `src/words.ChangeWordsResult` — zod-discriminated-union on `kind` — `src/words.ts:320-332`
+
+*aliases* `ChangeWordsResult` `src/words.ts:333`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string(), words: WordsFile }) → src/words.WordsFile` | — | `src/words.ts:308` |
-| `refused` | `z.object({ kind: z.literal('refused'), /** * `unusable-file`: the file exists but is not a usable word list — never overwritten, fix it by …` | — | `src/words.ts:310` |
+| `written` | `z.object({ kind: z.literal('written'), path: z.string(), words: WordsFile }) → src/words.WordsFile` | — | `src/words.ts:321` |
+| `refused` | `z.object({ kind: z.literal('refused'), /** * `unusable-file`: the file exists but is not a usable word list — never overwritten, fix it by …` | — | `src/words.ts:323` |
 
-### `src/words.ChangeWordsResult[kind=written]` — zod-object — `src/words.ts:308`
+### `src/words.ChangeWordsResult[kind=written]` — zod-object — `src/words.ts:321`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/words.ts:308` |
-| `path` | `z.string()` | — | `src/words.ts:308` |
-| `words` | `WordsFile → src/words.WordsFile` | — | `src/words.ts:308` |
+| `kind` | `z.literal('written')` | — | `src/words.ts:321` |
+| `path` | `z.string()` | — | `src/words.ts:321` |
+| `words` | `WordsFile → src/words.WordsFile` | — | `src/words.ts:321` |
 
-### `src/words.ChangeWordsResult[kind=refused]` — zod-object — `src/words.ts:309-318`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/words.ts:310` |  |
-| `reason` | `z.enum(['invalid-input', 'io-error', 'unusable-file', 'not-found', 'busy'])` | — | `src/words.ts:315` | `unusable-file`: the file exists but is not a usable word list — never overwritten, fix it by hand. |
-| `path` | `z.string()` | — | `src/words.ts:316` |  |
-| `message` | `z.string()` | — | `src/words.ts:317` |  |
-
-### `src/words.ChangeWordsOptions` — interface — `src/words.ts:322-329`
+### `src/words.ChangeWordsResult[kind=refused]` — zod-object — `src/words.ts:322-331`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `createDir` | `?: boolean` | — | `src/words.ts:324` | Create the file's folder first (the global level only; a brand or project folder is never created). |
-| `waitMs` | `?: number` | — | `src/words.ts:326` | How long to wait for another writer's lock (default 3 s). |
-| `staleMs` | `?: number` | — | `src/words.ts:328` | A lock older than this is a crashed writer's and is broken (default 10 s). |
+| `kind` | `z.literal('refused')` | — | `src/words.ts:323` |  |
+| `reason` | `z.enum(['invalid-input', 'io-error', 'unusable-file', 'not-found', 'busy'])` | — | `src/words.ts:328` | `unusable-file`: the file exists but is not a usable word list — never overwritten, fix it by hand. |
+| `path` | `z.string()` | — | `src/words.ts:329` |  |
+| `message` | `z.string()` | — | `src/words.ts:330` |  |
+
+### `src/words.ChangeWordsOptions` — interface — `src/words.ts:335-342`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `createDir` | `?: boolean` | — | `src/words.ts:337` | Create the file's folder first (the global level only; a brand or project folder is never created). |
+| `waitMs` | `?: number` | — | `src/words.ts:339` | How long to wait for another writer's lock (default 3 s). |
+| `staleMs` | `?: number` | — | `src/words.ts:341` | A lock older than this is a crashed writer's and is broken (default 10 s). |
 
 ## Cannot be mirrored
 
@@ -2594,7 +2595,7 @@ The census found these top-level declarations and the extractor did not mirror t
 
 | family | count | declarations |
 |---|---|---|
-| object constant | 7 | `src/classify.LAYOUT_DIRS` `src/classify.ts:111`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:142` |
+| object constant | 7 | `src/classify.LAYOUT_DIRS` `src/classify.ts:111`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
 | class | 3 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/resources.ResourceNotFound` `src/resources.ts:328`<br>`src/results.FliCoreError` `src/results.ts:25` |
 | const built by a call (helper or non-zod call) | 2 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164` |

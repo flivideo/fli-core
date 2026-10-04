@@ -300,3 +300,17 @@ describe('rememberWord — by level', () => {
     });
   });
 });
+
+describe('a name with merge: true — "remember", not "set"', () => {
+  it("keeps the level's mishearings and spelling, adds the new one, drops one equal to the term", () => {
+    let f = add(EMPTY_WORDS, { kind: 'name', term: 'AppyDave', heardAs: ['happy dave'] });
+    f = add(f, { kind: 'name', term: 'appydave', heardAs: ['Abhi Dave', 'APPYDAVE'], merge: true });
+    expect(f.names).toEqual([
+      { term: 'AppyDave', heardAs: ['happy dave', 'Abhi Dave'], changed: stampOf('human:ui', NOW) },
+    ]);
+    expect(add(f, { kind: 'name', term: 'AppyDave' }).names[0]).not.toHaveProperty('heardAs');
+    expect(add(EMPTY_WORDS, { kind: 'name', term: 'D06', merge: true }).names).toEqual([
+      { term: 'D06', changed: stampOf('human:ui', NOW) },
+    ]);
+  });
+});

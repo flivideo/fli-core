@@ -70,7 +70,16 @@ export type ReadWordsFileResult = z.infer<typeof ReadWordsFileResult>;
 
 /** What a caller asks to add. The stamp is added by `addWord`. */
 export const WordInput = z.discriminatedUnion('kind', [
-  z.object({ kind: z.literal('name'), term: Text, heardAs: z.array(Text).optional() }),
+  z.object({
+    kind: z.literal('name'),
+    term: Text,
+    heardAs: z.array(Text).optional(),
+    /**
+     * "Remember" rather than "set": keep this level's existing mishearings for the term (and its spelling), adding
+     * these. Without it the entry replaces the old one. Never stored.
+     */
+    merge: z.boolean().optional(),
+  }),
   z.object({ kind: z.literal('rule'), find: Text, write: Text }),
   z.object({
     kind: z.literal('filler'),
@@ -216,9 +225,13 @@ export function addWord(
   switch (entry.kind) {
     case 'name': {
       const key = wordKey(entry.term);
+      const old = entry.merge ? next.names.find((n) => wordKey(n.term) === key) : undefined;
       next.names = next.names.filter((n) => wordKey(n.term) !== key);
-      const heard = dedupe(entry.heardAs ?? []);
-      next.names.push({ term: entry.term, ...(heard.length ? { heardAs: heard } : {}), changed });
+      const heard = dedupe([...(old?.heardAs ?? []), ...(entry.heardAs ?? [])]).filter(
+        (h) => !entry.merge || wordKey(h) !== key,
+      );
+      const term = old?.term ?? entry.term;
+      next.names.push({ term, ...(heard.length ? { heardAs: heard } : {}), changed });
       break;
     }
     case 'rule': {
