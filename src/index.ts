@@ -193,6 +193,7 @@ export {
   mergeWords,
   readWords,
   readWordsFile,
+  rememberWord,
   removeWord,
   removeWordAt,
   vocabularyOf,

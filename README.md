@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.13.0 · True at v0.13.0 (2026-10-03)
+**Status:** active, v0.14.0 · True at v0.14.0 (2026-10-04)
 
 ## Install
 
@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.13.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.14.0"
   }
 }
 ```
@@ -141,9 +141,17 @@ app reads ("FliCut just uses the information. That way, the other tools can also
 
 `readWords({ globalFile, brandRoot, projectDir })` reads and merges them. It is a plain file read that never throws,
 and a file it cannot use counts as empty. `vocabularyOf(words)` gives the names to hint to a transcriber;
-`fillersOf(words, lang)` gives the fillers and the words that are never fillers. Only FliStudio writes the file, with
-`addWord` / `removeWord` / `writeWordsFile`. Corrections made inside an edit stay in the edit: nothing here rewrites a
-transcript.
+`fillersOf(words, lang)` gives the fillers and the words that are never fillers. Corrections made inside an edit stay
+in the edit: nothing here rewrites a transcript.
+
+**Writing (v0.14.0).** Every write goes through one function, `changeWordsFile(file, change)`: under a lock file beside
+it (`fli.words.json.lock`) it re-reads the file, applies the pure `addWord` / `removeWord` to what is on disk now, and
+writes atomically, so two writers never lose each other's entry. `addWordAt` / `removeWordAt` wrap it for one file;
+`rememberWord(level, { globalFile, brandRoot, projectDir }, entry, by)` picks the file by level — `'project'` is
+"remember for this video". FliStudio's `words.add` uses it; an app with no FliStudio running calls it directly, so
+the rules are the same either way. An unusable file is refused (`unusable-file`), never overwritten; a held lock waits
+up to 3 s then answers `busy`. The pattern across words, brand settings and resources is written up once in
+`flivideo/docs/shared-data-levels.md`.
 
 Every entry carries a **`Stamp`**, `{ at, by }`, where `by` is the principal the change came through (`human:ui`,
 `cli`, `agent:<name>`). That is the answer to "who changed this, and when". It is a separate export so other stores

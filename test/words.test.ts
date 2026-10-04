@@ -10,6 +10,7 @@ import {
   fillersOf,
   mergeWords,
   readWords,
+  rememberWord,
   removeWord,
   removeWordAt,
   vocabularyOf,
@@ -265,6 +266,37 @@ describe('changeWordsFile / addWordAt / removeWordAt — the one write path', ()
     expect(await changeWordsFile(path.join(dir, 'plain', WORDS_FILE), (w) => w)).toMatchObject({
       kind: 'refused',
       reason: 'io-error',
+    });
+  });
+});
+
+describe('rememberWord — by level', () => {
+  it('"remember for this video" writes the project file; the brand file stays untouched', async () => {
+    const dir = await tempDir();
+    const brandRoot = path.join(dir, 'v-appydave');
+    const projectDir = path.join(brandRoot, 'd01-flivideo-tour');
+    await buildTree(dir, { 'v-appydave/d01-flivideo-tour/': null });
+    const where = { brandRoot, projectDir, globalFile: path.join(dir, 'cfg', WORDS_FILE) };
+    const out = await rememberWord('project', where, { kind: 'name', term: 'D06' }, 'human:ui');
+    expect(out).toMatchObject({ kind: 'written', path: path.join(projectDir, WORDS_FILE) });
+    await expect(fs.stat(path.join(brandRoot, WORDS_FILE))).rejects.toThrow();
+    await rememberWord('brand', where, { kind: 'name', term: 'AppyDave' }, 'human:ui');
+    await rememberWord('global', where, { kind: 'name', term: 'FliVideo' }, 'human:ui');
+    const read = await readWords(where);
+    expect(read.words.names.map((n) => [n.term, n.from])).toEqual([
+      ['FliVideo', 'global'],
+      ['AppyDave', 'brand'],
+      ['D06', 'project'],
+    ]);
+  });
+
+  it('refuses a level whose folder was not given', async () => {
+    expect(
+      await rememberWord('project', {}, { kind: 'name', term: 'X' }, 'human:ui'),
+    ).toMatchObject({
+      kind: 'refused',
+      reason: 'invalid-input',
+      message: 'level project needs projectDir',
     });
   });
 });

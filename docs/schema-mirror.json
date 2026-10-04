@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 266,
+    "declared": 269,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -178,15 +178,15 @@
         "not_schema_bearing": 0
       },
       "src/words.ts": {
-        "declared": 28,
+        "declared": 31,
         "gaps": 2,
-        "mirrored": 25,
+        "mirrored": 28,
         "not_read": 1,
         "not_schema_bearing": 1
       }
     },
     "gaps": 12,
-    "mirrored": 236,
+    "mirrored": 239,
     "not_read": 18,
     "not_schema_bearing": 13,
     "not_schema_bearing_by_family": {
@@ -1978,14 +1978,14 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 25
+            "line": 26
           },
           "name": "WordLevel"
         }
       ],
       "anchor": {
         "file": "src/words.ts",
-        "line": 24
+        "line": 25
       },
       "authority": "`z.enum` `WordLevel` - a single declaring symbol",
       "grade": "declared",
@@ -1994,21 +1994,21 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 24
+            "line": 25
           },
           "value": "global"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 24
+            "line": 25
           },
           "value": "brand"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 24
+            "line": 25
           },
           "value": "project"
         }
@@ -2019,14 +2019,14 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 52
+            "line": 53
           },
           "name": "WordKind"
         }
       ],
       "anchor": {
         "file": "src/words.ts",
-        "line": 51
+        "line": 52
       },
       "authority": "`z.enum` `WordKind` - a single declaring symbol",
       "grade": "declared",
@@ -2035,21 +2035,21 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 51
+            "line": 52
           },
           "value": "name"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 51
+            "line": 52
           },
           "value": "rule"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 51
+            "line": 52
           },
           "value": "filler"
         }
@@ -2057,9 +2057,9 @@
     },
     {
       "anchor": {
-        "end_line": 81,
+        "end_line": 82,
         "file": "src/words.ts",
-        "line": 71
+        "line": 72
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `WordInput` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -2068,28 +2068,28 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 72
+            "line": 73
           },
           "value": "name"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 73
+            "line": 74
           },
           "value": "rule"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 75
+            "line": 76
           },
           "value": "filler"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 80
+            "line": 81
           },
           "value": "off"
         }
@@ -2098,7 +2098,7 @@
     {
       "anchor": {
         "file": "src/words.ts",
-        "line": 85
+        "line": 86
       },
       "authority": "`z.enum` `kind` - a single declaring symbol",
       "grade": "declared",
@@ -2107,28 +2107,28 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 85
+            "line": 86
           },
           "value": "name"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 85
+            "line": 86
           },
           "value": "rule"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 85
+            "line": 86
           },
           "value": "filler"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 85
+            "line": 86
           },
           "value": "off"
         }
@@ -2136,9 +2136,9 @@
     },
     {
       "anchor": {
-        "end_line": 281,
+        "end_line": 282,
         "file": "src/words.ts",
-        "line": 273
+        "line": 274
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `WriteWordsResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -2147,14 +2147,14 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 274
+            "line": 275
           },
           "value": "written"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 276
+            "line": 277
           },
           "value": "refused"
         }
@@ -2163,7 +2163,7 @@
     {
       "anchor": {
         "file": "src/words.ts",
-        "line": 277
+        "line": 278
       },
       "authority": "`z.enum` `reason` - a single declaring symbol",
       "grade": "declared",
@@ -2172,16 +2172,88 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 277
+            "line": 278
           },
           "value": "invalid-input"
         },
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 277
+            "line": 278
           },
           "value": "io-error"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 319,
+        "file": "src/words.ts",
+        "line": 307
+      },
+      "authority": "the `kind` discriminator of `z.discriminatedUnion` `ChangeWordsResult` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/words.ChangeWordsResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 308
+          },
+          "value": "written"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 310
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 315
+      },
+      "authority": "`z.enum` `reason` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/words.ChangeWordsResult[kind=refused].reason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 315
+          },
+          "value": "invalid-input"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 315
+          },
+          "value": "io-error"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 315
+          },
+          "value": "unusable-file"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 315
+          },
+          "value": "not-found"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 315
+          },
+          "value": "busy"
         }
       ]
     }
@@ -2208,7 +2280,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-10-03T12:29:40+00:00",
+  "generated": "2026-10-04T12:36:30+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -10375,7 +10447,7 @@
     {
       "anchor": {
         "file": "src/words.ts",
-        "line": 28
+        "line": 29
       },
       "bases": [],
       "doc": null,
@@ -10391,15 +10463,15 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 36
+            "line": 37
           },
           "name": "WordName"
         }
       ],
       "anchor": {
-        "end_line": 35,
+        "end_line": 36,
         "file": "src/words.ts",
-        "line": 31
+        "line": 32
       },
       "bases": [],
       "doc": "A name spelled exactly like this. `heardAs` are the ways the transcriber gets it wrong (proposed fixes).",
@@ -10408,7 +10480,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 32
+            "line": 33
           },
           "default": null,
           "name": "term",
@@ -10417,7 +10489,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 33
+            "line": 34
           },
           "default": null,
           "name": "heardAs",
@@ -10426,7 +10498,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 34
+            "line": 35
           },
           "default": null,
           "name": "changed",
@@ -10442,14 +10514,14 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 40
+            "line": 41
           },
           "name": "WordRule"
         }
       ],
       "anchor": {
         "file": "src/words.ts",
-        "line": 39
+        "line": 40
       },
       "bases": [],
       "doc": "A literal, whole-word, case-insensitive spelling rule: `find` in a transcript is proposed as `write`.",
@@ -10458,7 +10530,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 39
+            "line": 40
           },
           "default": null,
           "name": "find",
@@ -10467,7 +10539,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 39
+            "line": 40
           },
           "default": null,
           "name": "write",
@@ -10476,7 +10548,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 39
+            "line": 40
           },
           "default": null,
           "name": "changed",
@@ -10492,15 +10564,15 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 49
+            "line": 50
           },
           "name": "WordFiller"
         }
       ],
       "anchor": {
-        "end_line": 48,
+        "end_line": 49,
         "file": "src/words.ts",
-        "line": 43
+        "line": 44
       },
       "bases": [],
       "doc": "A filler word for a language, or with `never: true` a word that is never proposed as a filler.",
@@ -10509,7 +10581,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 44
+            "line": 45
           },
           "default": null,
           "name": "word",
@@ -10518,7 +10590,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 45
+            "line": 46
           },
           "default": "'en'",
           "name": "lang",
@@ -10527,7 +10599,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 46
+            "line": 47
           },
           "default": null,
           "name": "never",
@@ -10536,7 +10608,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 47
+            "line": 48
           },
           "default": null,
           "name": "changed",
@@ -10552,14 +10624,14 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 56
+            "line": 57
           },
           "name": "WordOff"
         }
       ],
       "anchor": {
         "file": "src/words.ts",
-        "line": 55
+        "line": 56
       },
       "bases": [],
       "doc": "Turns off an entry inherited from a higher level (`text` is its term, `find`, or `lang:word`).",
@@ -10568,7 +10640,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 55
+            "line": 56
           },
           "default": null,
           "name": "kind",
@@ -10577,7 +10649,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 55
+            "line": 56
           },
           "default": null,
           "name": "text",
@@ -10586,7 +10658,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 55
+            "line": 56
           },
           "default": null,
           "name": "changed",
@@ -10602,15 +10674,15 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 65
+            "line": 66
           },
           "name": "WordsFile"
         }
       ],
       "anchor": {
-        "end_line": 64,
+        "end_line": 65,
         "file": "src/words.ts",
-        "line": 58
+        "line": 59
       },
       "bases": [],
       "doc": null,
@@ -10619,7 +10691,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 59
+            "line": 60
           },
           "default": null,
           "name": "schema",
@@ -10628,7 +10700,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 60
+            "line": 61
           },
           "default": "[]",
           "name": "names",
@@ -10637,7 +10709,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 61
+            "line": 62
           },
           "default": "[]",
           "name": "rules",
@@ -10646,7 +10718,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 62
+            "line": 63
           },
           "default": "[]",
           "name": "fillers",
@@ -10655,7 +10727,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 63
+            "line": 64
           },
           "default": "[]",
           "name": "off",
@@ -10671,15 +10743,15 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 82
+            "line": 83
           },
           "name": "WordInput"
         }
       ],
       "anchor": {
-        "end_line": 81,
+        "end_line": 82,
         "file": "src/words.ts",
-        "line": 71
+        "line": 72
       },
       "bases": [],
       "doc": "What a caller asks to add. The stamp is added by `addWord`.",
@@ -10688,7 +10760,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 72
+            "line": 73
           },
           "default": null,
           "name": "name",
@@ -10697,7 +10769,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 73
+            "line": 74
           },
           "default": null,
           "name": "rule",
@@ -10706,7 +10778,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 75
+            "line": 76
           },
           "default": null,
           "name": "filler",
@@ -10715,7 +10787,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 80
+            "line": 81
           },
           "default": null,
           "name": "off",
@@ -10725,46 +10797,6 @@
       "grade": "declared",
       "id": "src/words.WordInput",
       "kind": "zod-discriminated-union on `kind`"
-    },
-    {
-      "anchor": {
-        "file": "src/words.ts",
-        "line": 72
-      },
-      "bases": [],
-      "doc": null,
-      "fields": [
-        {
-          "anchor": {
-            "file": "src/words.ts",
-            "line": 72
-          },
-          "default": null,
-          "name": "kind",
-          "type": "z.literal('name')"
-        },
-        {
-          "anchor": {
-            "file": "src/words.ts",
-            "line": 72
-          },
-          "default": null,
-          "name": "term",
-          "type": "Text \u2192 src/words.Text"
-        },
-        {
-          "anchor": {
-            "file": "src/words.ts",
-            "line": 72
-          },
-          "default": null,
-          "name": "heardAs",
-          "type": "z.array(Text).optional() \u2192 src/words.Text"
-        }
-      ],
-      "grade": "declared",
-      "id": "src/words.WordInput[kind=name]",
-      "kind": "zod-object"
     },
     {
       "anchor": {
@@ -10781,12 +10813,52 @@
           },
           "default": null,
           "name": "kind",
-          "type": "z.literal('rule')"
+          "type": "z.literal('name')"
         },
         {
           "anchor": {
             "file": "src/words.ts",
             "line": 73
+          },
+          "default": null,
+          "name": "term",
+          "type": "Text \u2192 src/words.Text"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "heardAs",
+          "type": "z.array(Text).optional() \u2192 src/words.Text"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.WordInput[kind=name]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 74
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 74
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('rule')"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 74
           },
           "default": null,
           "name": "find",
@@ -10795,7 +10867,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 73
+            "line": 74
           },
           "default": null,
           "name": "write",
@@ -10808,9 +10880,9 @@
     },
     {
       "anchor": {
-        "end_line": 79,
+        "end_line": 80,
         "file": "src/words.ts",
-        "line": 74
+        "line": 75
       },
       "bases": [],
       "doc": null,
@@ -10818,7 +10890,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 75
+            "line": 76
           },
           "default": null,
           "name": "kind",
@@ -10827,7 +10899,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 76
+            "line": 77
           },
           "default": null,
           "name": "word",
@@ -10836,7 +10908,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 77
+            "line": 78
           },
           "default": null,
           "name": "lang",
@@ -10845,7 +10917,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 78
+            "line": 79
           },
           "default": null,
           "name": "never",
@@ -10859,7 +10931,7 @@
     {
       "anchor": {
         "file": "src/words.ts",
-        "line": 80
+        "line": 81
       },
       "bases": [],
       "doc": null,
@@ -10867,7 +10939,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 80
+            "line": 81
           },
           "default": null,
           "name": "kind",
@@ -10876,7 +10948,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 80
+            "line": 81
           },
           "default": null,
           "name": "of",
@@ -10885,7 +10957,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 80
+            "line": 81
           },
           "default": null,
           "name": "text",
@@ -10901,14 +10973,14 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 86
+            "line": 87
           },
           "name": "WordRef"
         }
       ],
       "anchor": {
         "file": "src/words.ts",
-        "line": 85
+        "line": 86
       },
       "bases": [],
       "doc": "Which entry to remove: its kind (or `off`) and its text, as `wordKey` reads it.",
@@ -10917,7 +10989,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 85
+            "line": 86
           },
           "default": null,
           "name": "kind",
@@ -10926,7 +10998,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 85
+            "line": 86
           },
           "default": null,
           "name": "text",
@@ -10942,15 +11014,15 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 96
+            "line": 97
           },
           "name": "MergedWords"
         }
       ],
       "anchor": {
-        "end_line": 95,
+        "end_line": 96,
         "file": "src/words.ts",
-        "line": 89
+        "line": 90
       },
       "bases": [],
       "doc": null,
@@ -10959,7 +11031,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 90
+            "line": 91
           },
           "default": null,
           "name": "names",
@@ -10968,7 +11040,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 91
+            "line": 92
           },
           "default": null,
           "name": "rules",
@@ -10977,7 +11049,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 92
+            "line": 93
           },
           "default": null,
           "name": "fillers",
@@ -10986,7 +11058,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 94
+            "line": 95
           },
           "default": null,
           "doc": "The entries a level turned off, and which level did it.",
@@ -11003,15 +11075,15 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 109
+            "line": 110
           },
           "name": "WordsRead"
         }
       ],
       "anchor": {
-        "end_line": 108,
+        "end_line": 109,
         "file": "src/words.ts",
-        "line": 98
+        "line": 99
       },
       "bases": [],
       "doc": null,
@@ -11020,7 +11092,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 99
+            "line": 100
           },
           "default": null,
           "name": "words",
@@ -11029,7 +11101,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 101
+            "line": 102
           },
           "default": null,
           "doc": "Each level as found: its file, and `null` when that level has no file (or was not asked for).",
@@ -11039,7 +11111,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 107
+            "line": 108
           },
           "default": null,
           "doc": "Files that exist but could not be used. Their level counts as empty; never an error.",
@@ -11054,7 +11126,7 @@
     {
       "anchor": {
         "file": "src/words.ts",
-        "line": 101
+        "line": 102
       },
       "bases": [],
       "doc": null,
@@ -11062,7 +11134,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 102
+            "line": 103
           },
           "default": null,
           "name": "global",
@@ -11071,7 +11143,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 103
+            "line": 104
           },
           "default": null,
           "name": "brand",
@@ -11080,7 +11152,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 104
+            "line": 105
           },
           "default": null,
           "name": "project",
@@ -11093,9 +11165,9 @@
     },
     {
       "anchor": {
-        "end_line": 118,
+        "end_line": 119,
         "file": "src/words.ts",
-        "line": 111
+        "line": 112
       },
       "bases": [],
       "doc": null,
@@ -11104,7 +11176,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 113
+            "line": 114
           },
           "default": null,
           "doc": "The global file (FliStudio: `~/.config/appydave/fli.words.json`).",
@@ -11114,7 +11186,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 115
+            "line": 116
           },
           "default": null,
           "doc": "The brand folder, `v-<brand>/`.",
@@ -11124,7 +11196,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 117
+            "line": 118
           },
           "default": null,
           "doc": "The project folder.",
@@ -11141,15 +11213,15 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 282
+            "line": 283
           },
           "name": "WriteWordsResult"
         }
       ],
       "anchor": {
-        "end_line": 281,
+        "end_line": 282,
         "file": "src/words.ts",
-        "line": 273
+        "line": 274
       },
       "bases": [],
       "doc": null,
@@ -11158,7 +11230,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 274
+            "line": 275
           },
           "default": null,
           "name": "written",
@@ -11167,7 +11239,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 276
+            "line": 277
           },
           "default": null,
           "name": "refused",
@@ -11181,7 +11253,7 @@
     {
       "anchor": {
         "file": "src/words.ts",
-        "line": 274
+        "line": 275
       },
       "bases": [],
       "doc": null,
@@ -11189,7 +11261,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 274
+            "line": 275
           },
           "default": null,
           "name": "kind",
@@ -11198,7 +11270,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 274
+            "line": 275
           },
           "default": null,
           "name": "path",
@@ -11211,9 +11283,9 @@
     },
     {
       "anchor": {
-        "end_line": 280,
+        "end_line": 281,
         "file": "src/words.ts",
-        "line": 275
+        "line": 276
       },
       "bases": [],
       "doc": null,
@@ -11221,7 +11293,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 276
+            "line": 277
           },
           "default": null,
           "name": "kind",
@@ -11230,7 +11302,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 277
+            "line": 278
           },
           "default": null,
           "name": "reason",
@@ -11239,7 +11311,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 278
+            "line": 279
           },
           "default": null,
           "name": "path",
@@ -11248,7 +11320,7 @@
         {
           "anchor": {
             "file": "src/words.ts",
-            "line": 279
+            "line": 280
           },
           "default": null,
           "name": "message",
@@ -11258,10 +11330,188 @@
       "grade": "declared",
       "id": "src/words.WriteWordsResult[kind=refused]",
       "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 320
+          },
+          "name": "ChangeWordsResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 319,
+        "file": "src/words.ts",
+        "line": 307
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 308
+          },
+          "default": null,
+          "name": "written",
+          "type": "z.object({ kind: z.literal('written'), path: z.string(), words: WordsFile }) \u2192 src/words.WordsFile"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 310
+          },
+          "default": null,
+          "name": "refused",
+          "type": "z.object({ kind: z.literal('refused'), /** * `unusable-file`: the file exists but is not a usable word list \u2014 never overwritten, fix it by \u2026"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.ChangeWordsResult",
+      "kind": "zod-discriminated-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/words.ts",
+        "line": 308
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 308
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('written')"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 308
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 308
+          },
+          "default": null,
+          "name": "words",
+          "type": "WordsFile \u2192 src/words.WordsFile"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.ChangeWordsResult[kind=written]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 318,
+        "file": "src/words.ts",
+        "line": 309
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 310
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('refused')"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 315
+          },
+          "default": null,
+          "doc": "`unusable-file`: the file exists but is not a usable word list \u2014 never overwritten, fix it by hand.",
+          "name": "reason",
+          "type": "z.enum(['invalid-input', 'io-error', 'unusable-file', 'not-found', 'busy'])"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 316
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 317
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.ChangeWordsResult[kind=refused]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 329,
+        "file": "src/words.ts",
+        "line": 322
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 324
+          },
+          "default": null,
+          "doc": "Create the file's folder first (the global level only; a brand or project folder is never created).",
+          "name": "createDir",
+          "type": "?: boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 326
+          },
+          "default": null,
+          "doc": "How long to wait for another writer's lock (default 3 s).",
+          "name": "waitMs",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/words.ts",
+            "line": 328
+          },
+          "default": null,
+          "doc": "A lock older than this is a crashed writer's and is broken (default 10 s).",
+          "name": "staleMs",
+          "type": "?: number"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/words.ChangeWordsOptions",
+      "kind": "interface"
     }
   ],
   "target": {
-    "commit": "ec403b57bf16d2bc0355d81f0d7606a9fc500a40",
+    "commit": "17b92877876228c713374bbe0aa7815a0ff2f3f6",
     "root": "..",
     "stack": "typescript"
   },
@@ -11423,7 +11673,7 @@
       "census": true,
       "family": "object constant",
       "looked_at": [
-        "src/words.ts:141"
+        "src/words.ts:142"
       ],
       "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/words.EMPTY_WORDS` - declared but not read"
@@ -11442,7 +11692,7 @@
         "readFileResult(BrandSettings) (src/brand-settings.ts:32)",
         "readFileResult(ProjectIdentity) (src/identity.ts:48)",
         "readFileResult(ResourcesFile) (src/resources.ts:135)",
-        "readFileResult(WordsFile) (src/words.ts:67)"
+        "readFileResult(WordsFile) (src/words.ts:68)"
       ],
       "reason": "built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here",
       "subject": "schemas built by `readFileResult(...)` (4 uses)"

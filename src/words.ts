@@ -405,6 +405,31 @@ export function removeWordAt(
   );
 }
 
+/**
+ * "Remember for <brand>" / "Remember for this video" / global, by level (David 2026-10-04, editing pass item 16): the
+ * file for `level` from the same options `readWords` takes, then `addWordAt`. Refused `invalid-input` when the option
+ * that level needs is missing. Only the global folder is ever created.
+ */
+export function rememberWord(
+  level: WordLevel,
+  where: ReadWordsOptions,
+  input: WordInput,
+  by: PrincipalName,
+  options: Omit<ChangeWordsOptions, 'createDir'> & { now?: Date } = {},
+): Promise<ChangeWordsResult> {
+  const file = wordsFilePaths(where)[WordLevel.parse(level)];
+  if (file === null) {
+    const needs = { global: 'globalFile', brand: 'brandRoot', project: 'projectDir' }[level];
+    return Promise.resolve({
+      kind: 'refused',
+      reason: 'invalid-input',
+      path: '',
+      message: `level ${level} needs ${needs}`,
+    });
+  }
+  return addWordAt(file, input, by, { ...options, createDir: level === 'global' });
+}
+
 async function takeLock(lock: string, waitMs: number, staleMs: number): Promise<boolean> {
   const until = Date.now() + waitMs;
   for (;;) {
