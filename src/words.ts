@@ -2,7 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { z } from 'zod';
 import { type PrincipalName } from './capability.js';
-import { atomicWrite, errorMessage, readJsonFile } from './fs-utils.js';
+import { atomicWrite, errorCode, errorMessage, readJsonFile } from './fs-utils.js';
 import { InvalidFile, issuesOf, readFileResult } from './results.js';
 import { Stamp, stampOf } from './stamp.js';
 
@@ -14,9 +14,10 @@ import { Stamp, stampOf } from './stamp.js';
  *   brand       v-<brand>/fli.words.json
  *   project     <project>/fli.words.json
  *
- * A lower level wins on the same key, and can turn off an entry inherited from above. FliStudio is the only writer;
- * every app reads through `readWords`, a plain file read, so it works while FliStudio is down. Corrections made in an
- * edit stay in the edit — nothing here ever rewrites a transcript.
+ * A lower level wins on the same key, and can turn off an entry inherited from above. Every app reads through
+ * `readWords`, a plain file read, so it works while FliStudio is down. Every write goes through `changeWordsFile`
+ * (`addWordAt` / `removeWordAt`): FliStudio's `words.add` when it is running, the app itself when it is not — one set
+ * of rules either way. Corrections made in an edit stay in the edit — nothing here ever rewrites a transcript.
  */
 
 export const WORDS_FILE = 'fli.words.json';
@@ -300,6 +301,130 @@ export async function writeWordsFile(file: string, words: WordsFile): Promise<Wr
     return { kind: 'written', path: file };
   } catch (error) {
     return { kind: 'refused', reason: 'io-error', path: file, message: errorMessage(error) };
+  }
+}
+
+export const ChangeWordsResult = z.discriminatedUnion('kind', [
+  z.object({ kind: z.literal('written'), path: z.string(), words: WordsFile }),
+  z.object({
+    kind: z.literal('refused'),
+    /**
+     * `unusable-file`: the file exists but is not a usable word list — never overwritten, fix it by hand.
+     * `not-found`: a remove matched nothing. `busy`: another writer held the lock past the wait.
+     */
+    reason: z.enum(['invalid-input', 'io-error', 'unusable-file', 'not-found', 'busy']),
+    path: z.string(),
+    message: z.string(),
+  }),
+]);
+export type ChangeWordsResult = z.infer<typeof ChangeWordsResult>;
+
+export interface ChangeWordsOptions {
+  /** Create the file's folder first (the global level only; a brand or project folder is never created). */
+  createDir?: boolean;
+  /** How long to wait for another writer's lock (default 3 s). */
+  waitMs?: number;
+  /** A lock older than this is a crashed writer's and is broken (default 10 s). */
+  staleMs?: number;
+}
+
+/**
+ * The one write path for `fli.words.json`, used by FliStudio's `words.add` / `words.remove` and by any app writing
+ * without FliStudio (David 2026-10-04, editing pass item 15). Under a lock file beside it (`fli.words.json.lock`), it
+ * re-reads the file, applies `change` to what is on disk now, and writes atomically, so two writers never lose each
+ * other's entry. An unusable file is refused, never overwritten. `change` returns the new file, or `null` for "nothing
+ * matched" (refused `not-found`). Never throws.
+ */
+export async function changeWordsFile(
+  file: string,
+  change: (words: WordsFile) => WordsFile | null,
+  options: ChangeWordsOptions = {},
+): Promise<ChangeWordsResult> {
+  const refuse = (
+    reason: Extract<ChangeWordsResult, { kind: 'refused' }>['reason'],
+    message: string,
+  ) => ({ kind: 'refused', reason, path: file, message }) as const;
+  try {
+    if (options.createDir) await fs.mkdir(path.dirname(file), { recursive: true });
+    else if (!(await fs.stat(path.dirname(file))).isDirectory()) {
+      return refuse('io-error', `${path.dirname(file)} is not a directory`);
+    }
+  } catch (error) {
+    return refuse('io-error', errorMessage(error));
+  }
+  const lock = `${file}.lock`;
+  if (!(await takeLock(lock, options.waitMs ?? 3000, options.staleMs ?? 10_000))) {
+    return refuse('busy', `${file} is being changed by another writer (${lock}); try again.`);
+  }
+  try {
+    const read = await readWordsFile(file);
+    if (read?.kind === 'invalid') {
+      return refuse(
+        'unusable-file',
+        `${file} is not a usable word list (${read.reason}: ${read.message}); fix it by hand first.`,
+      );
+    }
+    let next: WordsFile | null;
+    try {
+      next = change(read?.value ?? EMPTY_WORDS);
+    } catch (error) {
+      return refuse('invalid-input', errorMessage(error));
+    }
+    if (next === null) return refuse('not-found', `Nothing to change in ${file}.`);
+    const written = await writeWordsFile(file, next);
+    if (written.kind === 'refused') return refuse(written.reason, written.message);
+    return { kind: 'written', path: file, words: WordsFile.parse(next) };
+  } finally {
+    await fs.rm(lock, { force: true });
+  }
+}
+
+/** Add one entry to the file at `file`, through `changeWordsFile`. */
+export function addWordAt(
+  file: string,
+  input: WordInput,
+  by: PrincipalName,
+  options: ChangeWordsOptions & { now?: Date } = {},
+): Promise<ChangeWordsResult> {
+  return changeWordsFile(file, (words) => addWord(words, input, by, options.now), options);
+}
+
+/** Remove one entry from the file at `file`, through `changeWordsFile`; refused `not-found` when nothing matched. */
+export function removeWordAt(
+  file: string,
+  ref: WordRef,
+  options: ChangeWordsOptions = {},
+): Promise<ChangeWordsResult> {
+  return changeWordsFile(
+    file,
+    (words) => {
+      const { file: next, removed } = removeWord(words, ref);
+      return removed === null ? null : next;
+    },
+    options,
+  );
+}
+
+async function takeLock(lock: string, waitMs: number, staleMs: number): Promise<boolean> {
+  const until = Date.now() + waitMs;
+  for (;;) {
+    try {
+      await fs.writeFile(lock, `${process.pid} ${new Date().toISOString()}\n`, { flag: 'wx' });
+      return true;
+    } catch (error) {
+      if (errorCode(error) !== 'EEXIST') throw error;
+    }
+    try {
+      if (Date.now() - (await fs.stat(lock)).mtimeMs > staleMs) {
+        await fs.rm(lock, { force: true });
+        continue;
+      }
+    } catch (error) {
+      if (errorCode(error) === 'ENOENT') continue;
+      throw error;
+    }
+    if (Date.now() >= until) return false;
+    await new Promise((resolve) => setTimeout(resolve, 20));
   }
 }
 

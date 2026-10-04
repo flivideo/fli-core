@@ -170,6 +170,7 @@ export {
 } from './resources.js';
 
 export {
+  ChangeWordsResult,
   EMPTY_WORDS,
   MergedWords,
   ReadWordsFileResult,
@@ -186,15 +187,19 @@ export {
   WordsRead,
   WriteWordsResult,
   addWord,
+  addWordAt,
+  changeWordsFile,
   fillersOf,
   mergeWords,
   readWords,
   readWordsFile,
   removeWord,
+  removeWordAt,
   vocabularyOf,
   wordKey,
   wordsFilePaths,
   writeWordsFile,
+  type ChangeWordsOptions,
   type ReadWordsOptions,
 } from './words.js';
 
