@@ -63,12 +63,13 @@ describe('the registry is data, levelled global → brand → project', () => {
     );
     project = removeRegistryRow(project, { kind: 'title' }, 'cli', NOW).file;
     const all = mergeRegistry({ global, brand });
-    expect(all.kinds.map((k) => [k.kind, k.label, k.from])).toEqual([
+    const own = (r: typeof all) => r.kinds.filter((k) => k.from !== 'core');
+    expect(own(all).map((k) => [k.kind, k.label, k.from])).toEqual([
       ['title', 'Video titles', 'brand'],
     ]);
     expect(all.groups.map((g) => g.group)).toEqual(['launch']);
     const low = mergeRegistry({ global, brand, project });
-    expect(low.kinds.map((k) => k.kind)).toEqual(['shorts-hook']);
+    expect(own(low).map((k) => k.kind)).toEqual(['shorts-hook']);
     expect(low.groups.map((g) => [g.group, g.from])).toEqual([
       ['launch', 'global'],
       ['sponsor', 'project'],
@@ -186,7 +187,7 @@ describe('readResources / writeResourcesFile', () => {
       brandRoot: path.join(dir, 'v-a'),
       projectDir: path.join(dir, 'v-a', 'p1'),
     });
-    expect(read.registry.kinds.map((k) => k.kind)).toEqual(['title']);
+    expect(read.registry.kinds.map((k) => k.kind)).toEqual(['video', 'audio', 'captions', 'title']);
     expect(read.resources).toHaveLength(1);
     expect(read.invalid).toEqual([expect.objectContaining({ reason: 'not-json' })]);
     expect((await readResources({})).resources).toEqual([]);

@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `a0ec55919f91` · **generated** 2026-10-05T05:22:48+00:00
+- **commit** `4e6406e48755` · **generated** 2026-10-05T05:55:55+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 26 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 27 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 198 | 54 | 2 | 6 | 19 | 2 |
+| 209 | 60 | 3 | 7 | 25 | 3 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -36,8 +36,9 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/open-context.ts` — `OpenContextResult` :16 · `ResolveOpenContextOptions` :33
 - `src/openrpc.ts` — `OpenRpcServer` :18 · `OpenRpcDocument` :29 · `OpenRpcOptions` :52 · `JsonRpcRequest` :174 · `CallAnswer` :183 · `JsonRpcOptions` :185
 - `src/project-folder.ts` — `ProjectCode` :5 · `KebabSlug` :11 · `ProjectFolder` :15
+- `src/publish.ts` — `PublishPiece` (set) :41 · `PublishState` (set) :61 · `PUBLISH_RULES` (set) :75 · `EditApp` (set) :85 · `Iso` :88 · `PublishExport` :91 · `PublishEdit` :107 · `PublishLaunch` :111 · `PublishFacts` :123 · `PublishRow` :134 · `PublishReadiness` :155 · `LIVE` (set) :188 · `PublishedVideo` :655
 - `src/recording.ts` — `RecordingTag` :14 · `Recording` :18
-- `src/resources.ts` — `Text` :25 · `Key` :26 · `ResourceValue` (set) :31 · `ResourceChoose` (set) :47 · `ResourceStatus` (set) :50 · `ResourceAudience` (set) :53 · `ResourceGroup` :56 · `ResourceKind` :64 · `ResourceOff` :79 · `ResourceVideo` :85 · `ResourceRef` :90 · `Resource` :97 · `ResourcesFile` :118 · `ResourceRegistry` :140 · `ReadResourcesOptions` :149 · `ResourcesRead` :155 · `ResourceInput` :232 · `ResourceChange` :256 · `ResourcePatch` :334 · `WriteResourcesResult` :478
+- `src/resources.ts` — `Text` :25 · `Key` :26 · `ResourceValue` (set) :31 · `ResourceChoose` (set) :47 · `ResourceStatus` (set) :50 · `ResourceAudience` (set) :53 · `ResourceGroup` :56 · `ResourceKind` :64 · `ResourceOff` :79 · `ResourceVideo` :85 · `ResourceRef` :90 · `Resource` :97 · `ResourcesFile` :118 · `ResourceRegistry` :147 · `ReadResourcesOptions` :156 · `ResourcesRead` :162 · `ResourceInput` :285 · `ResourceChange` :309 · `ResourcePatch` :387 · `WriteResourcesResult` :531
 - `src/results.ts` — `InvalidFile` :4 · `validFile()` :13 · `readFileResult()` :19
 - `src/reveal.ts` — `RevealResult` :13 · `RevealOptions` :24
 - `src/stamp.ts` — `Stamp` :9
@@ -64,10 +65,10 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**274** top-level declarations counted = **243** mirrored + **12** listed as gaps + **19** declared but not read.
+**304** top-level declarations counted = **265** mirrored + **14** listed as gaps + **25** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 1 function, 13 literal constants.
+Not counted, as not schema-bearing: 1 function, 14 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
@@ -78,7 +79,8 @@ Not counted, as not schema-bearing: 1 function, 13 literal constants.
 | `src/identity.ts` | 12 | 9 | 2 | **1** |
 | `src/lifecycle.ts` | 11 | 10 | 0 | **1** |
 | `src/open-args.ts` | 12 | 11 | 0 | **1** |
-| `src/resources.ts` | 41 | 33 | 6 | **2** |
+| `src/publish.ts` | 27 | 22 | 0 | **5** |
+| `src/resources.ts` | 44 | 33 | 8 | **3** |
 | `src/results.ts` | 5 | 2 | 0 | **3** |
 | `src/transport.ts` | 5 | 4 | 0 | **1** |
 | `src/words.ts` | 31 | 28 | 2 | **1** |
@@ -436,6 +438,89 @@ The lifecycle verb contract (agent-drivable step 2, David 2026-09-23: "Do we hav
 | `true` | `src/openrpc.ts:183` |
 | `false` | `src/openrpc.ts:183` |
 
+### `src/publish.PublishPiece` — `src/publish.ts:41`
+
+*`z.enum` `PublishPiece` - members read through `PUBLISH_PIECES` (src/publish.PUBLISH_PIECES) - a single declaring symbol*
+
+*aliases* `PublishPiece` `src/publish.ts:42`
+
+| value | declared at |
+|---|---|
+| `video` | `src/publish.ts:31` |
+| `audio` | `src/publish.ts:32` |
+| `captions` | `src/publish.ts:33` |
+| `thumbnail` | `src/publish.ts:34` |
+| `title` | `src/publish.ts:35` |
+| `description` | `src/publish.ts:36` |
+| `chapters` | `src/publish.ts:37` |
+| `studio` | `src/publish.ts:38` |
+| `published` | `src/publish.ts:39` |
+
+### `src/publish.PublishState` — `src/publish.ts:61`
+
+Human vs AI must be visible (David 2026-10-05): `set` — a person's choice; `suggested` — an agent's choice (Tuber,
+
+*`z.enum` `PublishState` - a single declaring symbol*
+
+*aliases* `PublishState` `src/publish.ts:62`
+
+| value | declared at |
+|---|---|
+| `set` | `src/publish.ts:61` |
+| `suggested` | `src/publish.ts:61` |
+| `inferred` | `src/publish.ts:61` |
+| `default` | `src/publish.ts:61` |
+| `missing` | `src/publish.ts:61` |
+| `stale` | `src/publish.ts:61` |
+
+### `src/publish.PUBLISH_RULES` — `src/publish.ts:75-81`
+
+*`as const` object keys `PUBLISH_RULES`, typed from by `keyof typeof PUBLISH_RULES` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `newest-export` | `src/publish.ts:76` |
+| `audio-from-name` | `src/publish.ts:77` |
+| `same-export-captions` | `src/publish.ts:78` |
+| `ylo-launch` | `src/publish.ts:79` |
+| `brand-default` | `src/publish.ts:80` |
+
+### `src/publish.EditApp` — `src/publish.ts:85`
+
+The app that writes an export kind: FliCut writes `-cut` and `-audio-<treatment>`, FliEdit `-final` (+ overlays).
+
+*`z.enum` `EditApp` - a single declaring symbol*
+
+*aliases* `EditApp` `src/publish.ts:86`
+
+| value | declared at |
+|---|---|
+| `flicut` | `src/publish.ts:85` |
+| `fliedit` | `src/publish.ts:85` |
+
+### `src/publish.PublishExport.kind` — `src/publish.ts:95`
+
+*`z.enum` `kind` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `cut` | `src/publish.ts:95` |
+| `audio` | `src/publish.ts:95` |
+| `final` | `src/publish.ts:95` |
+| `overlay` | `src/publish.ts:95` |
+
+### `src/publish.PublishRow.source` — `src/publish.ts:143`
+
+*`z.enum` `source` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `choice` | `src/publish.ts:143` |
+| `rule` | `src/publish.ts:143` |
+| `brand` | `src/publish.ts:143` |
+| `ylo` | `src/publish.ts:143` |
+| `none` | `src/publish.ts:143` |
+
 ### `src/resources.ResourceValue` — `src/resources.ts:31-40`
 
 How a value is drawn. A new one is code (a renderer); everything else is data.
@@ -496,23 +581,23 @@ How candidates of a kind are chosen: `one` — at most one `chosen` per video; `
 | `skool` | `src/resources.ts:53` |
 | `internal` | `src/resources.ts:53` |
 
-### `src/resources.WriteResourcesResult.kind` — `src/resources.ts:478-486`
+### `src/resources.WriteResourcesResult.kind` — `src/resources.ts:531-539`
 
 *the `kind` discriminator of `z.discriminatedUnion` `WriteResourcesResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/resources.ts:479` |
-| `refused` | `src/resources.ts:481` |
+| `written` | `src/resources.ts:532` |
+| `refused` | `src/resources.ts:534` |
 
-### `src/resources.WriteResourcesResult[kind=refused].reason` — `src/resources.ts:482`
+### `src/resources.WriteResourcesResult[kind=refused].reason` — `src/resources.ts:535`
 
 *`z.enum` `reason` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `invalid-input` | `src/resources.ts:482` |
-| `io-error` | `src/resources.ts:482` |
+| `invalid-input` | `src/resources.ts:535` |
+| `io-error` | `src/resources.ts:535` |
 
 ### `src/results.InvalidFile.reason` — `src/results.ts:7`
 
@@ -727,6 +812,17 @@ Each set below was read out of the real authority — control flow, membership t
 | `EXDEV` | `src/fs-utils.ts:32` |
 
 > **REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.**
+
+### `src/publish.LIVE` — `src/publish.ts:188`
+
+*module constant `LIVE` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
+
+| value | read from |
+|---|---|
+| `chosen` | `src/publish.ts:188` |
+| `published` | `src/publish.ts:188` |
+
+> **REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.**
 
 ## Shapes
 
@@ -1930,6 +2026,134 @@ Kebab-case: lowercase letters and digits, single hyphens between words.
 | `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/project-folder.ts:15` |
 | `slug` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/project-folder.ts:15` |
 
+### `src/publish.Iso` — zod-scalar — `src/publish.ts:88`
+
+`z.iso.datetime({ offset: true })`
+
+### `src/publish.PublishExport` — zod-object — `src/publish.ts:91-103`
+
+One file in `videos/<name>/` that a person could ship, with its caption file beside it (same stem) if any.
+
+*aliases* `PublishExport` `src/publish.ts:104`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `file` | `z.string().min(1)` | — | `src/publish.ts:93` | Project-relative, `/`-separated. |
+| `kind` | `z.enum(['cut', 'audio', 'final', 'overlay']).nullable()` | — | `src/publish.ts:95` | `cut` · `audio` · `final` · `overlay` (D15), or null for a file that does not parse. |
+| `variant` | `z.string().nullable()` | — | `src/publish.ts:96` |  |
+| `app` | `EditApp.nullable() → src/publish.EditApp` | — | `src/publish.ts:97` |  |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:98` |  |
+| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:99` |  |
+| `srt` | `z.object({ file: z.string().min(1), modifiedAt: Iso, durationSec: z.number().nullable() }).nullable() → src/publish.Iso` | — | `src/publish.ts:100` |  |
+
+### `src/publish.PublishExport.srt` — zod-object — `src/publish.ts:100`
+
+| field | type | default | at |
+|---|---|---|---|
+| `file` | `z.string().min(1)` | — | `src/publish.ts:101` |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:101` |
+| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:101` |
+
+### `src/publish.PublishEdit` — zod-object — `src/publish.ts:107`
+
+An edit document for the video: FliCut's `fli.cut.<name>.json` or FliEdit's `fli.edit.<name>.json`.
+
+*aliases* `PublishEdit` `src/publish.ts:108`
+
+| field | type | default | at |
+|---|---|---|---|
+| `file` | `z.string().min(1)` | — | `src/publish.ts:107` |
+| `app` | `EditApp → src/publish.EditApp` | — | `src/publish.ts:107` |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:107` |
+
+### `src/publish.PublishLaunch` — zod-object — `src/publish.ts:111-120`
+
+What YLO's `launch.json` (the workshop) offers, reduced to what the rules need.
+
+*aliases* `PublishLaunch` `src/publish.ts:121`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `file` | `z.string().min(1)` | — | `src/publish.ts:112` |  |
+| `madeAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:114` | When its texts were made (`updated_at`, else the file's time). |
+| `titles` | `z.array(z.object({ id: z.string().nullable(), text: z.string() }))` | — | `src/publish.ts:116` | The titles bound to YLO's variant slots, slot 1 first. |
+| `description` | `z.string().nullable()` | — | `src/publish.ts:117` |  |
+| `chapters` | `z.array(z.record(z.string(), z.unknown()))` | — | `src/publish.ts:119` | YLO's `Chapter{n,title,timestamp}` list (empty when none). |
+
+### `src/publish.PublishLaunch.titles[]` — zod-object — `src/publish.ts:116`
+
+| field | type | default | at |
+|---|---|---|---|
+| `id` | `z.string().nullable()` | — | `src/publish.ts:116` |
+| `text` | `z.string()` | — | `src/publish.ts:116` |
+
+### `src/publish.PublishFacts` — zod-object — `src/publish.ts:123-131`
+
+*aliases* `PublishFacts` `src/publish.ts:132`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `video` | `z.string().nullable()` | — | `src/publish.ts:125` | The video folder name, or null for a project with no video yet. |
+| `exports` | `z.array(PublishExport) → src/publish.PublishExport` | — | `src/publish.ts:126` |  |
+| `edits` | `z.array(PublishEdit) → src/publish.PublishEdit` | — | `src/publish.ts:127` |  |
+| `resources` | `z.array(Resource) → src/resources.Resource` | — | `src/publish.ts:129` | The project's resources for this video (and the project's own, `video: null`). |
+| `launch` | `PublishLaunch.nullable() → src/publish.PublishLaunch` | — | `src/publish.ts:130` |  |
+
+### `src/publish.PublishRow` — zod-object — `src/publish.ts:134-152`
+
+*aliases* `PublishRow` `src/publish.ts:153`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `piece` | `PublishPiece → src/publish.PublishPiece` | — | `src/publish.ts:135` |  |
+| `label` | `z.string()` | — | `src/publish.ts:136` |  |
+| `state` | `PublishState → src/publish.PublishState` | — | `src/publish.ts:137` |  |
+| `value` | `z.string().nullable()` | — | `src/publish.ts:139` | What would ship, in a few words (a file name, a title, "Strong noise removal"). |
+| `file` | `z.string().nullable()` | — | `src/publish.ts:141` | The project-relative file behind it, when there is one. |
+| `source` | `z.enum(['choice', 'rule', 'brand', 'ylo', 'none'])` | — | `src/publish.ts:143` | Where the answer came from: `choice`, `rule`, `brand`, `ylo`, or `none`. |
+| `why` | `z.string()` | — | `src/publish.ts:145` | One line: why this state. Kept for the audit trail. |
+| `resourceId` | `z.string().nullable()` | — | `src/publish.ts:147` | The resource behind a choice, so a person or agent can change it. |
+| `by` | `z.string().nullable()` | — | `src/publish.ts:149` | Who made it: a principal (`human:ui`, `agent:tuber`, `cli`) or `rule:<id>`; null when nothing is there. |
+| `at` | `Iso.nullable() → src/publish.Iso` | — | `src/publish.ts:151` | When the thing behind it was made or chosen (for an ⓘ, never shown as a timestamp). |
+
+### `src/publish.PublishReadiness` — zod-object — `src/publish.ts:155-168`
+
+*aliases* `PublishReadiness` `src/publish.ts:169`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `video` | `z.string().nullable()` | — | `src/publish.ts:156` |  |
+| `rows` | `z.array(PublishRow) → src/publish.PublishRow` | — | `src/publish.ts:157` |  |
+| `ready` | `z.number().int()` | — | `src/publish.ts:158` |  |
+| `total` | `z.number().int()` | — | `src/publish.ts:159` |  |
+| `suggestions` | `z.number().int()` | — | `src/publish.ts:161` | Ready rows a person has not decided (agent choices + rule guesses). |
+| `counts` | `z.object({ set: z.number().int(), suggested: z.number().int(), inferred: z.number().int(), notReady: z.number().int() })` | — | `src/publish.ts:162` |  |
+
+### `src/publish.PublishReadiness.counts` — zod-object — `src/publish.ts:162`
+
+| field | type | default | at |
+|---|---|---|---|
+| `set` | `z.number().int()` | — | `src/publish.ts:163` |
+| `suggested` | `z.number().int()` | — | `src/publish.ts:164` |
+| `inferred` | `z.number().int()` | — | `src/publish.ts:165` |
+| `notReady` | `z.number().int()` | — | `src/publish.ts:166` |
+
+### `src/publish.PublishedVideo` — zod-object — `src/publish.ts:655-663`
+
+The hook for whatever comes after publishing (post-publish posts, YLO's related-videos linking): every published
+
+*aliases* `PublishedVideo` `src/publish.ts:664`
+
+| field | type | default | at |
+|---|---|---|---|
+| `resourceId` | `z.string()` | — | `src/publish.ts:656` |
+| `video` | `z.string().nullable()` | — | `src/publish.ts:657` |
+| `path` | `z.string().nullable()` | — | `src/publish.ts:658` |
+| `youtubeId` | `z.string()` | — | `src/publish.ts:659` |
+| `url` | `z.string()` | — | `src/publish.ts:660` |
+| `publishedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:661` |
+| `by` | `z.string()` | — | `src/publish.ts:662` |
+
 ### `src/recording.RecordingTag` — zod-scalar — `src/recording.ts:14-16`
 
 `z.string().regex(TAG, 'tag must be uppercase letters/digits with a letter')`
@@ -2042,96 +2266,96 @@ A video name in the `videos/` naming; the folder need not exist yet (ideas come 
 | `off` | `z.array(ResourceOff).default([]) → src/resources.ResourceOff` | `[]` | `src/resources.ts:122` |
 | `resources` | `z.array(Resource).default([]) → src/resources.Resource` | `[]` | `src/resources.ts:123` |
 
-### `src/resources.ResourceRegistry` — zod-object — `src/resources.ts:140-143`
+### `src/resources.ResourceRegistry` — zod-object — `src/resources.ts:147-150`
 
 The merged registry: each row with the level it came from.
 
-*aliases* `ResourceRegistry` `src/resources.ts:144`
+*aliases* `ResourceRegistry` `src/resources.ts:151`
 
 | field | type | default | at |
 |---|---|---|---|
-| `groups` | `z.array(ResourceGroup.extend(From)) → src/resources.ResourceGroup, src/resources.From` | — | `src/resources.ts:141` |
-| `kinds` | `z.array(ResourceKind.extend(From)) → src/resources.ResourceKind, src/resources.From` | — | `src/resources.ts:142` |
+| `groups` | `z.array(ResourceGroup.extend(From)) → src/resources.ResourceGroup, src/resources.From` | — | `src/resources.ts:148` |
+| `kinds` | `z.array(ResourceKind.extend(From)) → src/resources.ResourceKind, src/resources.From` | — | `src/resources.ts:149` |
 
-### `src/resources.ReadResourcesOptions` — interface — `src/resources.ts:149-153`
+### `src/resources.ReadResourcesOptions` — interface — `src/resources.ts:156-160`
 
 | field | type | default | at |
 |---|---|---|---|
-| `globalFile` | `?: string` | — | `src/resources.ts:150` |
-| `brandRoot` | `?: string` | — | `src/resources.ts:151` |
-| `projectDir` | `?: string` | — | `src/resources.ts:152` |
+| `globalFile` | `?: string` | — | `src/resources.ts:157` |
+| `brandRoot` | `?: string` | — | `src/resources.ts:158` |
+| `projectDir` | `?: string` | — | `src/resources.ts:159` |
 
-### `src/resources.ResourcesRead` — zod-object — `src/resources.ts:155-165`
+### `src/resources.ResourcesRead` — zod-object — `src/resources.ts:162-172`
 
-*aliases* `ResourcesRead` `src/resources.ts:166`
+*aliases* `ResourcesRead` `src/resources.ts:173`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `registry` | `ResourceRegistry → src/resources.ResourceRegistry` | — | `src/resources.ts:156` |  |
-| `resources` | `z.array(Resource) → src/resources.Resource` | — | `src/resources.ts:158` | The project's resources (empty without a project). |
-| `levels` | `z.object({ global: ResourcesFile.nullable(), brand: ResourcesFile.nullable(), project: ResourcesFile.nullable() }) → src/resources.ResourcesFile` | — | `src/resources.ts:159` |  |
-| `invalid` | `z.array(InvalidFile) → src/results.InvalidFile` | — | `src/resources.ts:164` |  |
+| `registry` | `ResourceRegistry → src/resources.ResourceRegistry` | — | `src/resources.ts:163` |  |
+| `resources` | `z.array(Resource) → src/resources.Resource` | — | `src/resources.ts:165` | The project's resources (empty without a project). |
+| `levels` | `z.object({ global: ResourcesFile.nullable(), brand: ResourcesFile.nullable(), project: ResourcesFile.nullable() }) → src/resources.ResourcesFile` | — | `src/resources.ts:166` |  |
+| `invalid` | `z.array(InvalidFile) → src/results.InvalidFile` | — | `src/resources.ts:171` |  |
 
-### `src/resources.ResourcesRead.levels` — zod-object — `src/resources.ts:159`
-
-| field | type | default | at |
-|---|---|---|---|
-| `global` | `ResourcesFile.nullable() → src/resources.ResourcesFile` | — | `src/resources.ts:160` |
-| `brand` | `ResourcesFile.nullable() → src/resources.ResourcesFile` | — | `src/resources.ts:161` |
-| `project` | `ResourcesFile.nullable() → src/resources.ResourcesFile` | — | `src/resources.ts:162` |
-
-### `src/resources.ResourceInput` — zod-object — `src/resources.ts:232-245`
-
-*aliases* `ResourceInput` `src/resources.ts:246`
+### `src/resources.ResourcesRead.levels` — zod-object — `src/resources.ts:166`
 
 | field | type | default | at |
 |---|---|---|---|
-| `video` | `ResourceVideo.optional() → src/resources.ResourceVideo` | — | `src/resources.ts:241` |
-| `tags` | `z.array(z.string().trim().min(1).max(60)).optional()` | — | `src/resources.ts:242` |
-| `audience` | `z.array(ResourceAudience).optional() → src/resources.ResourceAudience` | — | `src/resources.ts:243` |
-| `status` | `ResourceStatus.optional() → src/resources.ResourceStatus` | — | `src/resources.ts:244` |
+| `global` | `ResourcesFile.nullable() → src/resources.ResourcesFile` | — | `src/resources.ts:167` |
+| `brand` | `ResourcesFile.nullable() → src/resources.ResourcesFile` | — | `src/resources.ts:168` |
+| `project` | `ResourcesFile.nullable() → src/resources.ResourcesFile` | — | `src/resources.ts:169` |
 
-### `src/resources.ResourceChange` — type — `src/resources.ts:256`
+### `src/resources.ResourceInput` — zod-object — `src/resources.ts:285-298`
 
-| field | type | default | at |
-|---|---|---|---|
-| `file` | `ResourcesFile → src/resources.ResourcesFile` | — | `src/resources.ts:256` |
-| `resource` | `Resource → src/resources.Resource` | — | `src/resources.ts:256` |
-| `warnings` | `string[]` | — | `src/resources.ts:256` |
-
-### `src/resources.ResourcePatch` — zod-object — `src/resources.ts:334-341`
-
-*aliases* `ResourcePatch` `src/resources.ts:342`
+*aliases* `ResourceInput` `src/resources.ts:299`
 
 | field | type | default | at |
 |---|---|---|---|
-| `video` | `ResourceVideo.optional() → src/resources.ResourceVideo` | — | `src/resources.ts:341` |
-| `audience` | `z.array(ResourceAudience).optional() → src/resources.ResourceAudience` | — | `src/resources.ts:341` |
+| `video` | `ResourceVideo.optional() → src/resources.ResourceVideo` | — | `src/resources.ts:294` |
+| `tags` | `z.array(z.string().trim().min(1).max(60)).optional()` | — | `src/resources.ts:295` |
+| `audience` | `z.array(ResourceAudience).optional() → src/resources.ResourceAudience` | — | `src/resources.ts:296` |
+| `status` | `ResourceStatus.optional() → src/resources.ResourceStatus` | — | `src/resources.ts:297` |
 
-### `src/resources.WriteResourcesResult` — zod-discriminated-union on `kind` — `src/resources.ts:478-486`
+### `src/resources.ResourceChange` — type — `src/resources.ts:309`
 
-*aliases* `WriteResourcesResult` `src/resources.ts:487`
+| field | type | default | at |
+|---|---|---|---|
+| `file` | `ResourcesFile → src/resources.ResourcesFile` | — | `src/resources.ts:309` |
+| `resource` | `Resource → src/resources.Resource` | — | `src/resources.ts:309` |
+| `warnings` | `string[]` | — | `src/resources.ts:309` |
+
+### `src/resources.ResourcePatch` — zod-object — `src/resources.ts:387-394`
+
+*aliases* `ResourcePatch` `src/resources.ts:395`
+
+| field | type | default | at |
+|---|---|---|---|
+| `video` | `ResourceVideo.optional() → src/resources.ResourceVideo` | — | `src/resources.ts:394` |
+| `audience` | `z.array(ResourceAudience).optional() → src/resources.ResourceAudience` | — | `src/resources.ts:394` |
+
+### `src/resources.WriteResourcesResult` — zod-discriminated-union on `kind` — `src/resources.ts:531-539`
+
+*aliases* `WriteResourcesResult` `src/resources.ts:540`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/resources.ts:479` |
-| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/resources.ts:481` |
+| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/resources.ts:532` |
+| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/resources.ts:534` |
 
-### `src/resources.WriteResourcesResult[kind=written]` — zod-object — `src/resources.ts:479`
-
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/resources.ts:479` |
-| `path` | `z.string()` | — | `src/resources.ts:479` |
-
-### `src/resources.WriteResourcesResult[kind=refused]` — zod-object — `src/resources.ts:480-485`
+### `src/resources.WriteResourcesResult[kind=written]` — zod-object — `src/resources.ts:532`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/resources.ts:481` |
-| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/resources.ts:482` |
-| `path` | `z.string()` | — | `src/resources.ts:483` |
-| `message` | `z.string()` | — | `src/resources.ts:484` |
+| `kind` | `z.literal('written')` | — | `src/resources.ts:532` |
+| `path` | `z.string()` | — | `src/resources.ts:532` |
+
+### `src/resources.WriteResourcesResult[kind=refused]` — zod-object — `src/resources.ts:533-538`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/resources.ts:534` |
+| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/resources.ts:535` |
+| `path` | `z.string()` | — | `src/resources.ts:536` |
+| `message` | `z.string()` | — | `src/resources.ts:537` |
 
 ### `src/results.InvalidFile` — zod-object — `src/results.ts:4-9`
 
@@ -2620,8 +2844,9 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 | schemas built by `readFileResult(...)` (4 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:32)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:48)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(WordsFile) (src/words.ts:68)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
-| src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:407)` |
-| src/resources.KindInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceKind.omit({ changed: true }) (src/resources.ts:405)` |
+| src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:460)` |
+| src/resources.KindInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceKind.omit({ changed: true }) (src/resources.ts:458)` |
+| src/resources.RegistryLevel | a z.enum whose members are computed or imported - this reader could not reach a literal list | `z.enum(['core', ...WordLevel.options])` |
 
 ### Declared but not read
 
@@ -2630,10 +2855,10 @@ The census found these top-level declarations and the extractor did not mirror t
 | family | count | declarations |
 |---|---|---|
 | object constant | 7 | `src/classify.LAYOUT_DIRS` `src/classify.ts:111`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
+| array constant | 5 | `src/identity.DEFAULT_LANGUAGES` `src/identity.ts:28`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:30`<br>`src/publish.READY_STATES` `src/publish.ts:65`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:67`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
+| class | 4 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:764`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25` |
+| const built by a call (helper or non-zod call) | 4 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:172`<br>`src/resources.CORE_KINDS` `src/resources.ts:195` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
-| class | 3 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/resources.ResourceNotFound` `src/resources.ts:328`<br>`src/results.FliCoreError` `src/results.ts:25` |
-| array constant | 2 | `src/identity.DEFAULT_LANGUAGES` `src/identity.ts:28`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
-| const built by a call (helper or non-zod call) | 2 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 
 ## Findings — changes needed in the target application
@@ -2642,6 +2867,7 @@ These are refactors of the **application**, not of this mirror. Each one convert
 
 1. `src/classify.ts:36-43` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:36 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
 2. `src/fs-utils.ts:32` — REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.
+3. `src/publish.ts:188` — REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.
 
 ---
 

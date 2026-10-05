@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.16.0 · True at v0.16.0 (2026-10-05)
+**Status:** active, v0.17.0 · True at v0.17.0 (2026-10-05)
 
 ## Install
 
@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.16.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.17.0"
   }
 }
 ```
@@ -194,6 +194,26 @@ and FliCast unchanged; pure and browser-safe (`@flivideo/core/contracts`). Each 
 | `jkl(state, 'J' \| 'K' \| 'L')`               | David's ruling d06 (2026-09-27): L paused → 1×, else one step faster (ceiling 4×); J paused → 0.75×, else one step slower (floor 0.25×); K → 1×, playing stays (a reverse stops). Both forward. Off-ladder counts as 1× |
 | `shuttle(state, action)`, `MAX_SHUTTLE`       | The NLE shuttle (FliCast, FliEdit, FliCut's ⇧J): `playForward` / `playBackward` double to ±8×, `stop`, `togglePlay`                                                                                                     |
 | `shuttleLabel(playing, rate)`, `ShuttleState` | The badge (`❚❚ 1×`, `▶▶ 2×`, `◀ 1×`) and the `{ playing, rate }` shape (signed rate)                                                                                                                                    |
+
+## Ready for YouTube — the Publish rules (v0.17.0)
+
+David's four rulings (2026-10-05, mock https://claude.ai/artifact/9hLAvSeF9b6DJWEX3yMEmP): the final video is a
+**marker**, not a copy; **video, audio and captions are resource kinds** (`CORE_KINDS`, merged into every registry
+with `from: 'core'`, `choose: 'one'`; a file row may restyle them); final thumbnails live in
+`<project>/resources/<video>/`; marking published records the **YouTube id**.
+
+| Export                                                                   | What                                                                                                                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `publishReadiness(facts)`                                                | Pure. The app gathers `PublishFacts` (the video's exports with their `.srt`, the edit files, the resources, YLO's `launch.json` via `launchFacts`) and gets nine `PublishRow`s — video, audio, captions, thumbnail, title, description, chapters, studio, published — each with `state`, `value`, `file`, `by` and a one-line `why` |
+| `PublishState`                                                           | `set` (a person's choice) · `suggested` (an agent's or the CLI's choice) · `inferred` (a rule: `by` is `rule:<id>`, `PUBLISH_RULES`) · `default` · `missing` · `stale`. `ready` counts the first four; `suggestions` counts `suggested` + `inferred`                                                                                |
+| `promoteFile(file, { kind, video, path }, registry, by)`                 | The marker: that file's resource becomes `chosen` (added if new); the previous chosen goes back to `candidate`                                                                                                                                                                                                                      |
+| `markPublished(file, video, youtubeId, by)`                              | The chosen video becomes `published` with `meta.{youtubeId, url, publishedAt}`; the video's other chosen resources go `published` too. `NoFinalVideo` without a final                                                                                                                                                               |
+| `publishedVideos(resources)`                                             | The hook for later steps (post-publish posts, related-videos linking): every published video, newest first                                                                                                                                                                                                                          |
+| `acceptableRows`, `isPersonChoice`, `parseYoutubeId`, `AUDIO_TREATMENTS` | Helpers                                                                                                                                                                                                                                                                                                                             |
+
+The rules: a choice wins; the video is the newest export of the newest edit (stale if the edit changed after it);
+captions come from the same export with a matching length; YLO texts made before the final video are stale; the rules
+never choose a thumbnail or the visibility.
 
 ## Data shapes
 

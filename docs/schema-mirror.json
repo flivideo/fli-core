@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 274,
+    "declared": 304,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -128,6 +128,13 @@
         "not_read": 0,
         "not_schema_bearing": 0
       },
+      "src/publish.ts": {
+        "declared": 27,
+        "gaps": 0,
+        "mirrored": 22,
+        "not_read": 5,
+        "not_schema_bearing": 1
+      },
       "src/recording.ts": {
         "declared": 3,
         "gaps": 0,
@@ -136,10 +143,10 @@
         "not_schema_bearing": 0
       },
       "src/resources.ts": {
-        "declared": 41,
-        "gaps": 6,
+        "declared": 44,
+        "gaps": 8,
         "mirrored": 33,
-        "not_read": 2,
+        "not_read": 3,
         "not_schema_bearing": 2
       },
       "src/results.ts": {
@@ -192,13 +199,13 @@
         "not_schema_bearing": 1
       }
     },
-    "gaps": 12,
-    "mirrored": 243,
-    "not_read": 19,
-    "not_schema_bearing": 14,
+    "gaps": 14,
+    "mirrored": 265,
+    "not_read": 25,
+    "not_schema_bearing": 15,
     "not_schema_bearing_by_family": {
       "function": 1,
-      "literal constant": 13
+      "literal constant": 14
     }
   },
   "closed_sets": [
@@ -1453,6 +1460,345 @@
       "aliases": [
         {
           "anchor": {
+            "file": "src/publish.ts",
+            "line": 42
+          },
+          "name": "PublishPiece"
+        }
+      ],
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 41
+      },
+      "authority": "`z.enum` `PublishPiece` - members read through `PUBLISH_PIECES` (src/publish.PUBLISH_PIECES) - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/publish.PublishPiece",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 31
+          },
+          "value": "video"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 32
+          },
+          "value": "audio"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 33
+          },
+          "value": "captions"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 34
+          },
+          "value": "thumbnail"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 35
+          },
+          "value": "title"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 36
+          },
+          "value": "description"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 37
+          },
+          "value": "chapters"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 38
+          },
+          "value": "studio"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 39
+          },
+          "value": "published"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 62
+          },
+          "name": "PublishState"
+        }
+      ],
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 61
+      },
+      "authority": "`z.enum` `PublishState` - a single declaring symbol",
+      "doc": "Human vs AI must be visible (David 2026-10-05): `set` \u2014 a person's choice; `suggested` \u2014 an agent's choice (Tuber,",
+      "grade": "declared",
+      "id": "src/publish.PublishState",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 61
+          },
+          "value": "set"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 61
+          },
+          "value": "suggested"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 61
+          },
+          "value": "inferred"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 61
+          },
+          "value": "default"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 61
+          },
+          "value": "missing"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 61
+          },
+          "value": "stale"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 81,
+        "file": "src/publish.ts",
+        "line": 75
+      },
+      "authority": "`as const` object keys `PUBLISH_RULES`, typed from by `keyof typeof PUBLISH_RULES` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/publish.PUBLISH_RULES",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 76
+          },
+          "value": "newest-export"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 77
+          },
+          "value": "audio-from-name"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 78
+          },
+          "value": "same-export-captions"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 79
+          },
+          "value": "ylo-launch"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 80
+          },
+          "value": "brand-default"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 86
+          },
+          "name": "EditApp"
+        }
+      ],
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 85
+      },
+      "authority": "`z.enum` `EditApp` - a single declaring symbol",
+      "doc": "The app that writes an export kind: FliCut writes `-cut` and `-audio-<treatment>`, FliEdit `-final` (+ overlays).",
+      "grade": "declared",
+      "id": "src/publish.EditApp",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 85
+          },
+          "value": "flicut"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 85
+          },
+          "value": "fliedit"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 95
+      },
+      "authority": "`z.enum` `kind` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/publish.PublishExport.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 95
+          },
+          "value": "cut"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 95
+          },
+          "value": "audio"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 95
+          },
+          "value": "final"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 95
+          },
+          "value": "overlay"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 143
+      },
+      "authority": "`z.enum` `source` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/publish.PublishRow.source",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 143
+          },
+          "value": "choice"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 143
+          },
+          "value": "rule"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 143
+          },
+          "value": "brand"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 143
+          },
+          "value": "ylo"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 143
+          },
+          "value": "none"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 188
+      },
+      "authority": "module constant `LIVE` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
+      "finding": "REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
+      "grade": "derived",
+      "id": "src/publish.LIVE",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 188
+          },
+          "value": "chosen"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 188
+          },
+          "value": "published"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
             "file": "src/resources.ts",
             "line": 41
           },
@@ -1674,9 +2020,9 @@
     },
     {
       "anchor": {
-        "end_line": 486,
+        "end_line": 539,
         "file": "src/resources.ts",
-        "line": 478
+        "line": 531
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `WriteResourcesResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -1685,14 +2031,14 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 479
+            "line": 532
           },
           "value": "written"
         },
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 481
+            "line": 534
           },
           "value": "refused"
         }
@@ -1701,7 +2047,7 @@
     {
       "anchor": {
         "file": "src/resources.ts",
-        "line": 482
+        "line": 535
       },
       "authority": "`z.enum` `reason` - a single declaring symbol",
       "grade": "declared",
@@ -1710,14 +2056,14 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 482
+            "line": 535
           },
           "value": "invalid-input"
         },
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 482
+            "line": 535
           },
           "value": "io-error"
         }
@@ -2356,9 +2702,18 @@
       "kind": "refactor_required",
       "message": "REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/fs-utils.NO_HARD_LINKS"
+    },
+    {
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 188
+      },
+      "kind": "refactor_required",
+      "message": "REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
+      "target": "src/publish.LIVE"
     }
   ],
-  "generated": "2026-10-05T05:22:48+00:00",
+  "generated": "2026-10-05T05:55:55+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -8272,6 +8627,709 @@
     },
     {
       "anchor": {
+        "file": "src/publish.ts",
+        "line": 88
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/publish.Iso",
+      "kind": "zod-scalar",
+      "value": "z.iso.datetime({ offset: true })"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 104
+          },
+          "name": "PublishExport"
+        }
+      ],
+      "anchor": {
+        "end_line": 103,
+        "file": "src/publish.ts",
+        "line": 91
+      },
+      "bases": [],
+      "doc": "One file in `videos/<name>/` that a person could ship, with its caption file beside it (same stem) if any.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 93
+          },
+          "default": null,
+          "doc": "Project-relative, `/`-separated.",
+          "name": "file",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 95
+          },
+          "default": null,
+          "doc": "`cut` \u00b7 `audio` \u00b7 `final` \u00b7 `overlay` (D15), or null for a file that does not parse.",
+          "name": "kind",
+          "type": "z.enum(['cut', 'audio', 'final', 'overlay']).nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 96
+          },
+          "default": null,
+          "name": "variant",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 97
+          },
+          "default": null,
+          "name": "app",
+          "type": "EditApp.nullable() \u2192 src/publish.EditApp"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 98
+          },
+          "default": null,
+          "name": "modifiedAt",
+          "type": "Iso \u2192 src/publish.Iso"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 99
+          },
+          "default": null,
+          "name": "durationSec",
+          "type": "z.number().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 100
+          },
+          "default": null,
+          "name": "srt",
+          "type": "z.object({ file: z.string().min(1), modifiedAt: Iso, durationSec: z.number().nullable() }).nullable() \u2192 src/publish.Iso"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/publish.PublishExport",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 100
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 101
+          },
+          "default": null,
+          "name": "file",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 101
+          },
+          "default": null,
+          "name": "modifiedAt",
+          "type": "Iso \u2192 src/publish.Iso"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 101
+          },
+          "default": null,
+          "name": "durationSec",
+          "type": "z.number().nullable()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/publish.PublishExport.srt",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 108
+          },
+          "name": "PublishEdit"
+        }
+      ],
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 107
+      },
+      "bases": [],
+      "doc": "An edit document for the video: FliCut's `fli.cut.<name>.json` or FliEdit's `fli.edit.<name>.json`.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 107
+          },
+          "default": null,
+          "name": "file",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 107
+          },
+          "default": null,
+          "name": "app",
+          "type": "EditApp \u2192 src/publish.EditApp"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 107
+          },
+          "default": null,
+          "name": "modifiedAt",
+          "type": "Iso \u2192 src/publish.Iso"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/publish.PublishEdit",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 121
+          },
+          "name": "PublishLaunch"
+        }
+      ],
+      "anchor": {
+        "end_line": 120,
+        "file": "src/publish.ts",
+        "line": 111
+      },
+      "bases": [],
+      "doc": "What YLO's `launch.json` (the workshop) offers, reduced to what the rules need.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 112
+          },
+          "default": null,
+          "name": "file",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 114
+          },
+          "default": null,
+          "doc": "When its texts were made (`updated_at`, else the file's time).",
+          "name": "madeAt",
+          "type": "Iso \u2192 src/publish.Iso"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 116
+          },
+          "default": null,
+          "doc": "The titles bound to YLO's variant slots, slot 1 first.",
+          "name": "titles",
+          "type": "z.array(z.object({ id: z.string().nullable(), text: z.string() }))"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 117
+          },
+          "default": null,
+          "name": "description",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 119
+          },
+          "default": null,
+          "doc": "YLO's `Chapter{n,title,timestamp}` list (empty when none).",
+          "name": "chapters",
+          "type": "z.array(z.record(z.string(), z.unknown()))"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/publish.PublishLaunch",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 116
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 116
+          },
+          "default": null,
+          "name": "id",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 116
+          },
+          "default": null,
+          "name": "text",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/publish.PublishLaunch.titles[]",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 132
+          },
+          "name": "PublishFacts"
+        }
+      ],
+      "anchor": {
+        "end_line": 131,
+        "file": "src/publish.ts",
+        "line": 123
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 125
+          },
+          "default": null,
+          "doc": "The video folder name, or null for a project with no video yet.",
+          "name": "video",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 126
+          },
+          "default": null,
+          "name": "exports",
+          "type": "z.array(PublishExport) \u2192 src/publish.PublishExport"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 127
+          },
+          "default": null,
+          "name": "edits",
+          "type": "z.array(PublishEdit) \u2192 src/publish.PublishEdit"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 129
+          },
+          "default": null,
+          "doc": "The project's resources for this video (and the project's own, `video: null`).",
+          "name": "resources",
+          "type": "z.array(Resource) \u2192 src/resources.Resource"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 130
+          },
+          "default": null,
+          "name": "launch",
+          "type": "PublishLaunch.nullable() \u2192 src/publish.PublishLaunch"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/publish.PublishFacts",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 153
+          },
+          "name": "PublishRow"
+        }
+      ],
+      "anchor": {
+        "end_line": 152,
+        "file": "src/publish.ts",
+        "line": 134
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 135
+          },
+          "default": null,
+          "name": "piece",
+          "type": "PublishPiece \u2192 src/publish.PublishPiece"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 136
+          },
+          "default": null,
+          "name": "label",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 137
+          },
+          "default": null,
+          "name": "state",
+          "type": "PublishState \u2192 src/publish.PublishState"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 139
+          },
+          "default": null,
+          "doc": "What would ship, in a few words (a file name, a title, \"Strong noise removal\").",
+          "name": "value",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 141
+          },
+          "default": null,
+          "doc": "The project-relative file behind it, when there is one.",
+          "name": "file",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 143
+          },
+          "default": null,
+          "doc": "Where the answer came from: `choice`, `rule`, `brand`, `ylo`, or `none`.",
+          "name": "source",
+          "type": "z.enum(['choice', 'rule', 'brand', 'ylo', 'none'])"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 145
+          },
+          "default": null,
+          "doc": "One line: why this state. Kept for the audit trail.",
+          "name": "why",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 147
+          },
+          "default": null,
+          "doc": "The resource behind a choice, so a person or agent can change it.",
+          "name": "resourceId",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 149
+          },
+          "default": null,
+          "doc": "Who made it: a principal (`human:ui`, `agent:tuber`, `cli`) or `rule:<id>`; null when nothing is there.",
+          "name": "by",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 151
+          },
+          "default": null,
+          "doc": "When the thing behind it was made or chosen (for an \u24d8, never shown as a timestamp).",
+          "name": "at",
+          "type": "Iso.nullable() \u2192 src/publish.Iso"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/publish.PublishRow",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 169
+          },
+          "name": "PublishReadiness"
+        }
+      ],
+      "anchor": {
+        "end_line": 168,
+        "file": "src/publish.ts",
+        "line": 155
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 156
+          },
+          "default": null,
+          "name": "video",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 157
+          },
+          "default": null,
+          "name": "rows",
+          "type": "z.array(PublishRow) \u2192 src/publish.PublishRow"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 158
+          },
+          "default": null,
+          "name": "ready",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 159
+          },
+          "default": null,
+          "name": "total",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 161
+          },
+          "default": null,
+          "doc": "Ready rows a person has not decided (agent choices + rule guesses).",
+          "name": "suggestions",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 162
+          },
+          "default": null,
+          "name": "counts",
+          "type": "z.object({ set: z.number().int(), suggested: z.number().int(), inferred: z.number().int(), notReady: z.number().int() })"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/publish.PublishReadiness",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 162
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 163
+          },
+          "default": null,
+          "name": "set",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 164
+          },
+          "default": null,
+          "name": "suggested",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 165
+          },
+          "default": null,
+          "name": "inferred",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 166
+          },
+          "default": null,
+          "name": "notReady",
+          "type": "z.number().int()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/publish.PublishReadiness.counts",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 664
+          },
+          "name": "PublishedVideo"
+        }
+      ],
+      "anchor": {
+        "end_line": 663,
+        "file": "src/publish.ts",
+        "line": 655
+      },
+      "bases": [],
+      "doc": "The hook for whatever comes after publishing (post-publish posts, YLO's related-videos linking): every published",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 656
+          },
+          "default": null,
+          "name": "resourceId",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 657
+          },
+          "default": null,
+          "name": "video",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 658
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 659
+          },
+          "default": null,
+          "name": "youtubeId",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 660
+          },
+          "default": null,
+          "name": "url",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 661
+          },
+          "default": null,
+          "name": "publishedAt",
+          "type": "Iso \u2192 src/publish.Iso"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 662
+          },
+          "default": null,
+          "name": "by",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/publish.PublishedVideo",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
         "end_line": 16,
         "file": "src/recording.ts",
         "line": 14
@@ -8899,15 +9957,15 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 144
+            "line": 151
           },
           "name": "ResourceRegistry"
         }
       ],
       "anchor": {
-        "end_line": 143,
+        "end_line": 150,
         "file": "src/resources.ts",
-        "line": 140
+        "line": 147
       },
       "bases": [],
       "doc": "The merged registry: each row with the level it came from.",
@@ -8916,7 +9974,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 141
+            "line": 148
           },
           "default": null,
           "name": "groups",
@@ -8925,7 +9983,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 142
+            "line": 149
           },
           "default": null,
           "name": "kinds",
@@ -8938,9 +9996,9 @@
     },
     {
       "anchor": {
-        "end_line": 153,
+        "end_line": 160,
         "file": "src/resources.ts",
-        "line": 149
+        "line": 156
       },
       "bases": [],
       "doc": null,
@@ -8949,7 +10007,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 150
+            "line": 157
           },
           "default": null,
           "name": "globalFile",
@@ -8958,7 +10016,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 151
+            "line": 158
           },
           "default": null,
           "name": "brandRoot",
@@ -8967,7 +10025,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 152
+            "line": 159
           },
           "default": null,
           "name": "projectDir",
@@ -8983,15 +10041,15 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 166
+            "line": 173
           },
           "name": "ResourcesRead"
         }
       ],
       "anchor": {
-        "end_line": 165,
+        "end_line": 172,
         "file": "src/resources.ts",
-        "line": 155
+        "line": 162
       },
       "bases": [],
       "doc": null,
@@ -9000,7 +10058,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 156
+            "line": 163
           },
           "default": null,
           "name": "registry",
@@ -9009,7 +10067,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 158
+            "line": 165
           },
           "default": null,
           "doc": "The project's resources (empty without a project).",
@@ -9019,7 +10077,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 159
+            "line": 166
           },
           "default": null,
           "name": "levels",
@@ -9028,7 +10086,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 164
+            "line": 171
           },
           "default": null,
           "name": "invalid",
@@ -9042,7 +10100,7 @@
     {
       "anchor": {
         "file": "src/resources.ts",
-        "line": 159
+        "line": 166
       },
       "bases": [],
       "doc": null,
@@ -9050,7 +10108,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 160
+            "line": 167
           },
           "default": null,
           "name": "global",
@@ -9059,7 +10117,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 161
+            "line": 168
           },
           "default": null,
           "name": "brand",
@@ -9068,7 +10126,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 162
+            "line": 169
           },
           "default": null,
           "name": "project",
@@ -9084,15 +10142,15 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 246
+            "line": 299
           },
           "name": "ResourceInput"
         }
       ],
       "anchor": {
-        "end_line": 245,
+        "end_line": 298,
         "file": "src/resources.ts",
-        "line": 232
+        "line": 285
       },
       "bases": [],
       "doc": null,
@@ -9101,7 +10159,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 241
+            "line": 294
           },
           "default": null,
           "name": "video",
@@ -9110,7 +10168,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 242
+            "line": 295
           },
           "default": null,
           "name": "tags",
@@ -9119,7 +10177,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 243
+            "line": 296
           },
           "default": null,
           "name": "audience",
@@ -9128,7 +10186,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 244
+            "line": 297
           },
           "default": null,
           "name": "status",
@@ -9142,7 +10200,7 @@
     {
       "anchor": {
         "file": "src/resources.ts",
-        "line": 256
+        "line": 309
       },
       "bases": [],
       "doc": null,
@@ -9151,7 +10209,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 256
+            "line": 309
           },
           "default": null,
           "name": "file",
@@ -9160,7 +10218,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 256
+            "line": 309
           },
           "default": null,
           "name": "resource",
@@ -9169,7 +10227,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 256
+            "line": 309
           },
           "default": null,
           "name": "warnings",
@@ -9185,15 +10243,15 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 342
+            "line": 395
           },
           "name": "ResourcePatch"
         }
       ],
       "anchor": {
-        "end_line": 341,
+        "end_line": 394,
         "file": "src/resources.ts",
-        "line": 334
+        "line": 387
       },
       "bases": [],
       "doc": null,
@@ -9202,7 +10260,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 341
+            "line": 394
           },
           "default": null,
           "name": "video",
@@ -9211,7 +10269,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 341
+            "line": 394
           },
           "default": null,
           "name": "audience",
@@ -9227,15 +10285,15 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 487
+            "line": 540
           },
           "name": "WriteResourcesResult"
         }
       ],
       "anchor": {
-        "end_line": 486,
+        "end_line": 539,
         "file": "src/resources.ts",
-        "line": 478
+        "line": 531
       },
       "bases": [],
       "doc": null,
@@ -9244,7 +10302,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 479
+            "line": 532
           },
           "default": null,
           "name": "written",
@@ -9253,7 +10311,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 481
+            "line": 534
           },
           "default": null,
           "name": "refused",
@@ -9267,7 +10325,7 @@
     {
       "anchor": {
         "file": "src/resources.ts",
-        "line": 479
+        "line": 532
       },
       "bases": [],
       "doc": null,
@@ -9275,7 +10333,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 479
+            "line": 532
           },
           "default": null,
           "name": "kind",
@@ -9284,7 +10342,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 479
+            "line": 532
           },
           "default": null,
           "name": "path",
@@ -9297,9 +10355,9 @@
     },
     {
       "anchor": {
-        "end_line": 485,
+        "end_line": 538,
         "file": "src/resources.ts",
-        "line": 480
+        "line": 533
       },
       "bases": [],
       "doc": null,
@@ -9307,7 +10365,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 481
+            "line": 534
           },
           "default": null,
           "name": "kind",
@@ -9316,7 +10374,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 482
+            "line": 535
           },
           "default": null,
           "name": "reason",
@@ -9325,7 +10383,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 483
+            "line": 536
           },
           "default": null,
           "name": "path",
@@ -9334,7 +10392,7 @@
         {
           "anchor": {
             "file": "src/resources.ts",
-            "line": 484
+            "line": 537
           },
           "default": null,
           "name": "message",
@@ -11642,7 +12700,7 @@
     }
   ],
   "target": {
-    "commit": "a0ec55919f9157bcbca16d9843986037800a3673",
+    "commit": "4e6406e487559339b4a1374a9920a93758b86677",
     "root": "..",
     "stack": "typescript"
   },
@@ -11757,6 +12815,60 @@
     },
     {
       "census": true,
+      "family": "const built by a call (helper or non-zod call)",
+      "looked_at": [
+        "src/publish.ts:172"
+      ],
+      "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/publish.AUDIO_TREATMENTS` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "class",
+      "looked_at": [
+        "src/publish.ts:764"
+      ],
+      "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/publish.NoFinalVideo` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "array constant",
+      "looked_at": [
+        "src/publish.ts:30"
+      ],
+      "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/publish.PUBLISH_PIECES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "array constant",
+      "looked_at": [
+        "src/publish.ts:65"
+      ],
+      "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/publish.READY_STATES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "array constant",
+      "looked_at": [
+        "src/publish.ts:67"
+      ],
+      "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/publish.SUGGESTION_STATES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "const built by a call (helper or non-zod call)",
+      "looked_at": [
+        "src/resources.ts:195"
+      ],
+      "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/resources.CORE_KINDS` - declared but not read"
+    },
+    {
+      "census": true,
       "family": "object constant",
       "looked_at": [
         "src/resources.ts:127"
@@ -11768,7 +12880,7 @@
       "census": true,
       "family": "class",
       "looked_at": [
-        "src/resources.ts:328"
+        "src/resources.ts:381"
       ],
       "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/resources.ResourceNotFound` - declared but not read"
@@ -11855,22 +12967,29 @@
     },
     {
       "looked_at": [
-        "ResourceGroup.omit({ changed: true }) (src/resources.ts:407)"
+        "ResourceGroup.omit({ changed: true }) (src/resources.ts:460)"
       ],
       "reason": "shape computed by `.omit(...)` - a transform of another schema, not expanded",
       "subject": "src/resources.GroupInput"
     },
     {
       "looked_at": [
-        "ResourceKind.omit({ changed: true }) (src/resources.ts:405)"
+        "ResourceKind.omit({ changed: true }) (src/resources.ts:458)"
       ],
       "reason": "shape computed by `.omit(...)` - a transform of another schema, not expanded",
       "subject": "src/resources.KindInput"
+    },
+    {
+      "looked_at": [
+        "z.enum(['core', ...WordLevel.options])"
+      ],
+      "reason": "a z.enum whose members are computed or imported - this reader could not reach a literal list",
+      "subject": "src/resources.RegistryLevel"
     }
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 26,
+    "import": 27,
     "re-export": 0
   }
 }

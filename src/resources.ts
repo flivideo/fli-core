@@ -135,7 +135,14 @@ export const EMPTY_RESOURCES: ResourcesFile = {
 export const ReadResourcesFileResult = readFileResult(ResourcesFile);
 export type ReadResourcesFileResult = z.infer<typeof ReadResourcesFileResult>;
 
-const From = { from: WordLevel };
+/**
+ * Where a registry row came from: a file level, or `core` — a kind fli-core itself defines because code depends on how
+ * it is chosen (the Publish view's `video`, `audio` and `captions`, David 2026-10-05). A file row with the same key wins.
+ */
+export const RegistryLevel = z.enum(['core', ...WordLevel.options]);
+export type RegistryLevel = z.infer<typeof RegistryLevel>;
+
+const From = { from: RegistryLevel };
 /** The merged registry: each row with the level it came from. */
 export const ResourceRegistry = z.object({
   groups: z.array(ResourceGroup.extend(From)),
@@ -177,12 +184,58 @@ export function readResourcesFile(file: string): Promise<ReadResourcesFileResult
   return readJsonFile(file, ResourcesFile);
 }
 
-/** Merge the registry, highest level first; a lower level's row or `off` wins. */
+const CORE_STAMP: Stamp = { at: '2026-10-05T00:00:00.000Z', by: 'agent:fli-core' };
+
+/**
+ * The kinds fli-core defines (David 2026-10-05, Publish ruling 2: "video and audio become resource kinds, so everything
+ * going to YouTube has one status system"). The final video is a MARKER — a `video` resource whose `path` names the
+ * export that ships, `chosen` — never a renamed copy (ruling 1). When it is marked published it carries the YouTube id
+ * (`meta.youtubeId`, ruling 4). A file level may restyle either row; only `choose: 'one'` matters to the code.
+ */
+export const CORE_KINDS: readonly ResourceKind[] = Object.freeze([
+  ResourceKind.parse({
+    kind: 'video',
+    group: 'launch',
+    label: 'Final video',
+    value: 'path',
+    many: true,
+    choose: 'one',
+    audience: ['youtube'],
+    hint: 'The export that ships: a marker on a file in videos/<name>/, never a copy. Published carries meta.youtubeId.',
+    changed: CORE_STAMP,
+  }),
+  ResourceKind.parse({
+    kind: 'audio',
+    group: 'launch',
+    label: 'Audio',
+    value: 'path',
+    many: true,
+    choose: 'one',
+    audience: ['youtube'],
+    hint: 'The audio that ships: the export whose treatment is wanted (meta.treatment: none, a12, a100…).',
+    changed: CORE_STAMP,
+  }),
+  ResourceKind.parse({
+    kind: 'captions',
+    group: 'launch',
+    label: 'Captions',
+    value: 'path',
+    many: true,
+    choose: 'one',
+    audience: ['youtube'],
+    hint: 'The .srt that ships: written by the same export as the final video (same stem, same length).',
+    changed: CORE_STAMP,
+  }),
+]);
+
+/** Merge the registry: fli-core's own kinds, then each level, highest first; a lower level's row or `off` wins. */
 export function mergeRegistry(
   levels: Partial<Record<WordLevel, ResourcesFile | null>>,
 ): ResourceRegistry {
   const groups = new Map<string, ResourceRegistry['groups'][number]>();
-  const kinds = new Map<string, ResourceRegistry['kinds'][number]>();
+  const kinds = new Map<string, ResourceRegistry['kinds'][number]>(
+    CORE_KINDS.map((k) => [k.kind, { ...k, from: 'core' as const }]),
+  );
   for (const from of WordLevel.options) {
     const file = levels[from];
     if (!file) continue;
