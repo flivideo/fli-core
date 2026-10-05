@@ -3,7 +3,7 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `a4f01fca9fcf` · **generated** 2026-10-05T14:35:33+00:00
+- **commit** `0cc8aa646bd1` · **generated** 2026-10-05T14:42:53+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 32 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
@@ -38,7 +38,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/open-context.ts` — `OpenContextResult` :16 · `ResolveOpenContextOptions` :33
 - `src/openrpc.ts` — `OpenRpcServer` :18 · `OpenRpcDocument` :29 · `OpenRpcOptions` :52 · `JsonRpcRequest` :174 · `CallAnswer` :183 · `JsonRpcOptions` :185
 - `src/project-folder.ts` — `ProjectCode` :5 · `KebabSlug` :11 · `ProjectFolder` :15
-- `src/publish.ts` — `PublishPiece` (set) :41 · `PublishState` (set) :61 · `PUBLISH_RULES` (set) :75 · `EditApp` (set) :85 · `Iso` :88 · `PublishExport` :91 · `PublishEdit` :107 · `PublishLaunch` :111 · `PublishFacts` :123 · `PublishRow` :134 · `PublishReadiness` :155 · `LIVE` (set) :188 · `PublishedVideo` :655
+- `src/publish.ts` — `PublishPiece` (set) :41 · `PublishState` (set) :61 · `PUBLISH_RULES` (set) :75 · `EditApp` (set) :85 · `Iso` :88 · `PublishExport` :91 · `PublishEdit` :112 · `PublishLaunch` :116 · `PublishFacts` :128 · `PublishRow` :139 · `PublishReadiness` :160 · `LIVE` (set) :193 · `PublishedVideo` :680
 - `src/recipe-paths.ts` — `RecipePathProblem` (set) :15 · `RecipePathWarning` :18 · `SKIP` (set) :77
 - `src/recording.ts` — `RecordingTag` :14 · `Recording` :18
 - `src/renders.ts` — `PathSegment` :15 · `RendersPathInput` :23 · `RendersTool` :52 · `RendersTally` :59 · `ClearRendersResult` :121
@@ -611,17 +611,17 @@ The app that writes an export kind: FliCut writes `-cut` and `-audio-<treatment>
 | `overlay` | `src/publish.ts:95` |
 | `part` | `src/publish.ts:95` |
 
-### `src/publish.PublishRow.source` — `src/publish.ts:143`
+### `src/publish.PublishRow.source` — `src/publish.ts:148`
 
 *`z.enum` `source` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `choice` | `src/publish.ts:143` |
-| `rule` | `src/publish.ts:143` |
-| `brand` | `src/publish.ts:143` |
-| `ylo` | `src/publish.ts:143` |
-| `none` | `src/publish.ts:143` |
+| `choice` | `src/publish.ts:148` |
+| `rule` | `src/publish.ts:148` |
+| `brand` | `src/publish.ts:148` |
+| `ylo` | `src/publish.ts:148` |
+| `none` | `src/publish.ts:148` |
 
 ### `src/recipe-paths.RecipePathProblem` — `src/recipe-paths.ts:15`
 
@@ -1015,16 +1015,16 @@ Each set below was read out of the real authority — control flow, membership t
 
 > **REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.**
 
-### `src/publish.LIVE` — `src/publish.ts:188`
+### `src/publish.LIVE` — `src/publish.ts:193`
 
 *module constant `LIVE` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `chosen` | `src/publish.ts:188` |
-| `published` | `src/publish.ts:188` |
+| `chosen` | `src/publish.ts:193` |
+| `published` | `src/publish.ts:193` |
 
-> **REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `LIVE` at src/publish.ts:193 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.**
 
 ### `src/recipe-paths.SKIP` — `src/recipe-paths.ts:77`
 
@@ -2440,11 +2440,11 @@ Kebab-case: lowercase letters and digits, single hyphens between words.
 
 `z.iso.datetime({ offset: true })`
 
-### `src/publish.PublishExport` — zod-object — `src/publish.ts:91-103`
+### `src/publish.PublishExport` — zod-object — `src/publish.ts:91-108`
 
 One file in `videos/<name>/` that a person could ship, with its caption file beside it (same stem) if any.
 
-*aliases* `PublishExport` `src/publish.ts:104`
+*aliases* `PublishExport` `src/publish.ts:109`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
@@ -2452,117 +2452,118 @@ One file in `videos/<name>/` that a person could ship, with its caption file bes
 | `kind` | `z.enum(['cut', 'audio', 'final', 'overlay', 'part']).nullable()` | — | `src/publish.ts:95` | `cut` · `audio` · `final` · `overlay` (D15) · `part`, or null for a file that does not parse. |
 | `variant` | `z.string().nullable()` | — | `src/publish.ts:96` |  |
 | `app` | `EditApp.nullable() → src/publish.EditApp` | — | `src/publish.ts:97` |  |
-| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:98` |  |
-| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:99` |  |
-| `srt` | `z.object({ file: z.string().min(1), modifiedAt: Iso, durationSec: z.number().nullable() }).nullable() → src/publish.Iso` | — | `src/publish.ts:100` |  |
+| `source` | `z.string().nullable().default(null)` | `null` | `src/publish.ts:102` | Where the file came from, in words, when the app knows better than the kind does ("FliCut export", "FliEdit |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:103` |  |
+| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:104` |  |
+| `srt` | `z.object({ file: z.string().min(1), modifiedAt: Iso, durationSec: z.number().nullable() }).nullable() → src/publish.Iso` | — | `src/publish.ts:105` |  |
 
-### `src/publish.PublishExport.srt` — zod-object — `src/publish.ts:100`
+### `src/publish.PublishExport.srt` — zod-object — `src/publish.ts:105`
 
 | field | type | default | at |
 |---|---|---|---|
-| `file` | `z.string().min(1)` | — | `src/publish.ts:101` |
-| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:101` |
-| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:101` |
+| `file` | `z.string().min(1)` | — | `src/publish.ts:106` |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:106` |
+| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:106` |
 
-### `src/publish.PublishEdit` — zod-object — `src/publish.ts:107`
+### `src/publish.PublishEdit` — zod-object — `src/publish.ts:112`
 
 An edit document for the video: FliCut's `fli.cut.<name>.json` or FliEdit's `fli.edit.<name>.json`.
 
-*aliases* `PublishEdit` `src/publish.ts:108`
+*aliases* `PublishEdit` `src/publish.ts:113`
 
 | field | type | default | at |
 |---|---|---|---|
-| `file` | `z.string().min(1)` | — | `src/publish.ts:107` |
-| `app` | `EditApp → src/publish.EditApp` | — | `src/publish.ts:107` |
-| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:107` |
+| `file` | `z.string().min(1)` | — | `src/publish.ts:112` |
+| `app` | `EditApp → src/publish.EditApp` | — | `src/publish.ts:112` |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:112` |
 
-### `src/publish.PublishLaunch` — zod-object — `src/publish.ts:111-120`
+### `src/publish.PublishLaunch` — zod-object — `src/publish.ts:116-125`
 
 What YLO's `launch.json` (the workshop) offers, reduced to what the rules need.
 
-*aliases* `PublishLaunch` `src/publish.ts:121`
+*aliases* `PublishLaunch` `src/publish.ts:126`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `file` | `z.string().min(1)` | — | `src/publish.ts:112` |  |
-| `madeAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:114` | When its texts were made (`updated_at`, else the file's time). |
-| `titles` | `z.array(z.object({ id: z.string().nullable(), text: z.string() }))` | — | `src/publish.ts:116` | The titles bound to YLO's variant slots, slot 1 first. |
-| `description` | `z.string().nullable()` | — | `src/publish.ts:117` |  |
-| `chapters` | `z.array(z.record(z.string(), z.unknown()))` | — | `src/publish.ts:119` | YLO's `Chapter{n,title,timestamp}` list (empty when none). |
+| `file` | `z.string().min(1)` | — | `src/publish.ts:117` |  |
+| `madeAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:119` | When its texts were made (`updated_at`, else the file's time). |
+| `titles` | `z.array(z.object({ id: z.string().nullable(), text: z.string() }))` | — | `src/publish.ts:121` | The titles bound to YLO's variant slots, slot 1 first. |
+| `description` | `z.string().nullable()` | — | `src/publish.ts:122` |  |
+| `chapters` | `z.array(z.record(z.string(), z.unknown()))` | — | `src/publish.ts:124` | YLO's `Chapter{n,title,timestamp}` list (empty when none). |
 
-### `src/publish.PublishLaunch.titles[]` — zod-object — `src/publish.ts:116`
+### `src/publish.PublishLaunch.titles[]` — zod-object — `src/publish.ts:121`
 
 | field | type | default | at |
 |---|---|---|---|
-| `id` | `z.string().nullable()` | — | `src/publish.ts:116` |
-| `text` | `z.string()` | — | `src/publish.ts:116` |
+| `id` | `z.string().nullable()` | — | `src/publish.ts:121` |
+| `text` | `z.string()` | — | `src/publish.ts:121` |
 
-### `src/publish.PublishFacts` — zod-object — `src/publish.ts:123-131`
+### `src/publish.PublishFacts` — zod-object — `src/publish.ts:128-136`
 
-*aliases* `PublishFacts` `src/publish.ts:132`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `video` | `z.string().nullable()` | — | `src/publish.ts:125` | The video folder name, or null for a project with no video yet. |
-| `exports` | `z.array(PublishExport) → src/publish.PublishExport` | — | `src/publish.ts:126` |  |
-| `edits` | `z.array(PublishEdit) → src/publish.PublishEdit` | — | `src/publish.ts:127` |  |
-| `resources` | `z.array(Resource) → src/resources.Resource` | — | `src/publish.ts:129` | The project's resources for this video (and the project's own, `video: null`). |
-| `launch` | `PublishLaunch.nullable() → src/publish.PublishLaunch` | — | `src/publish.ts:130` |  |
-
-### `src/publish.PublishRow` — zod-object — `src/publish.ts:134-152`
-
-*aliases* `PublishRow` `src/publish.ts:153`
+*aliases* `PublishFacts` `src/publish.ts:137`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `piece` | `PublishPiece → src/publish.PublishPiece` | — | `src/publish.ts:135` |  |
-| `label` | `z.string()` | — | `src/publish.ts:136` |  |
-| `state` | `PublishState → src/publish.PublishState` | — | `src/publish.ts:137` |  |
-| `value` | `z.string().nullable()` | — | `src/publish.ts:139` | What would ship, in a few words (a file name, a title, "Strong noise removal"). |
-| `file` | `z.string().nullable()` | — | `src/publish.ts:141` | The project-relative file behind it, when there is one. |
-| `source` | `z.enum(['choice', 'rule', 'brand', 'ylo', 'none'])` | — | `src/publish.ts:143` | Where the answer came from: `choice`, `rule`, `brand`, `ylo`, or `none`. |
-| `why` | `z.string()` | — | `src/publish.ts:145` | One line: why this state. Kept for the audit trail. |
-| `resourceId` | `z.string().nullable()` | — | `src/publish.ts:147` | The resource behind a choice, so a person or agent can change it. |
-| `by` | `z.string().nullable()` | — | `src/publish.ts:149` | Who made it: a principal (`human:ui`, `agent:tuber`, `cli`) or `rule:<id>`; null when nothing is there. |
-| `at` | `Iso.nullable() → src/publish.Iso` | — | `src/publish.ts:151` | When the thing behind it was made or chosen (for an ⓘ, never shown as a timestamp). |
+| `video` | `z.string().nullable()` | — | `src/publish.ts:130` | The video folder name, or null for a project with no video yet. |
+| `exports` | `z.array(PublishExport) → src/publish.PublishExport` | — | `src/publish.ts:131` |  |
+| `edits` | `z.array(PublishEdit) → src/publish.PublishEdit` | — | `src/publish.ts:132` |  |
+| `resources` | `z.array(Resource) → src/resources.Resource` | — | `src/publish.ts:134` | The project's resources for this video (and the project's own, `video: null`). |
+| `launch` | `PublishLaunch.nullable() → src/publish.PublishLaunch` | — | `src/publish.ts:135` |  |
 
-### `src/publish.PublishReadiness` — zod-object — `src/publish.ts:155-168`
+### `src/publish.PublishRow` — zod-object — `src/publish.ts:139-157`
 
-*aliases* `PublishReadiness` `src/publish.ts:169`
+*aliases* `PublishRow` `src/publish.ts:158`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `video` | `z.string().nullable()` | — | `src/publish.ts:156` |  |
-| `rows` | `z.array(PublishRow) → src/publish.PublishRow` | — | `src/publish.ts:157` |  |
-| `ready` | `z.number().int()` | — | `src/publish.ts:158` |  |
-| `total` | `z.number().int()` | — | `src/publish.ts:159` |  |
-| `suggestions` | `z.number().int()` | — | `src/publish.ts:161` | Ready rows a person has not decided (agent choices + rule guesses). |
-| `counts` | `z.object({ set: z.number().int(), suggested: z.number().int(), inferred: z.number().int(), notReady: z.number().int() })` | — | `src/publish.ts:162` |  |
+| `piece` | `PublishPiece → src/publish.PublishPiece` | — | `src/publish.ts:140` |  |
+| `label` | `z.string()` | — | `src/publish.ts:141` |  |
+| `state` | `PublishState → src/publish.PublishState` | — | `src/publish.ts:142` |  |
+| `value` | `z.string().nullable()` | — | `src/publish.ts:144` | What would ship, in a few words (a file name, a title, "Strong noise removal"). |
+| `file` | `z.string().nullable()` | — | `src/publish.ts:146` | The project-relative file behind it, when there is one. |
+| `source` | `z.enum(['choice', 'rule', 'brand', 'ylo', 'none'])` | — | `src/publish.ts:148` | Where the answer came from: `choice`, `rule`, `brand`, `ylo`, or `none`. |
+| `why` | `z.string()` | — | `src/publish.ts:150` | One line: why this state. Kept for the audit trail. |
+| `resourceId` | `z.string().nullable()` | — | `src/publish.ts:152` | The resource behind a choice, so a person or agent can change it. |
+| `by` | `z.string().nullable()` | — | `src/publish.ts:154` | Who made it: a principal (`human:ui`, `agent:tuber`, `cli`) or `rule:<id>`; null when nothing is there. |
+| `at` | `Iso.nullable() → src/publish.Iso` | — | `src/publish.ts:156` | When the thing behind it was made or chosen (for an ⓘ, never shown as a timestamp). |
 
-### `src/publish.PublishReadiness.counts` — zod-object — `src/publish.ts:162`
+### `src/publish.PublishReadiness` — zod-object — `src/publish.ts:160-173`
+
+*aliases* `PublishReadiness` `src/publish.ts:174`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `video` | `z.string().nullable()` | — | `src/publish.ts:161` |  |
+| `rows` | `z.array(PublishRow) → src/publish.PublishRow` | — | `src/publish.ts:162` |  |
+| `ready` | `z.number().int()` | — | `src/publish.ts:163` |  |
+| `total` | `z.number().int()` | — | `src/publish.ts:164` |  |
+| `suggestions` | `z.number().int()` | — | `src/publish.ts:166` | Ready rows a person has not decided (agent choices + rule guesses). |
+| `counts` | `z.object({ set: z.number().int(), suggested: z.number().int(), inferred: z.number().int(), notReady: z.number().int() })` | — | `src/publish.ts:167` |  |
+
+### `src/publish.PublishReadiness.counts` — zod-object — `src/publish.ts:167`
 
 | field | type | default | at |
 |---|---|---|---|
-| `set` | `z.number().int()` | — | `src/publish.ts:163` |
-| `suggested` | `z.number().int()` | — | `src/publish.ts:164` |
-| `inferred` | `z.number().int()` | — | `src/publish.ts:165` |
-| `notReady` | `z.number().int()` | — | `src/publish.ts:166` |
+| `set` | `z.number().int()` | — | `src/publish.ts:168` |
+| `suggested` | `z.number().int()` | — | `src/publish.ts:169` |
+| `inferred` | `z.number().int()` | — | `src/publish.ts:170` |
+| `notReady` | `z.number().int()` | — | `src/publish.ts:171` |
 
-### `src/publish.PublishedVideo` — zod-object — `src/publish.ts:655-663`
+### `src/publish.PublishedVideo` — zod-object — `src/publish.ts:680-688`
 
 The hook for whatever comes after publishing (post-publish posts, YLO's related-videos linking): every published
 
-*aliases* `PublishedVideo` `src/publish.ts:664`
+*aliases* `PublishedVideo` `src/publish.ts:689`
 
 | field | type | default | at |
 |---|---|---|---|
-| `resourceId` | `z.string()` | — | `src/publish.ts:656` |
-| `video` | `z.string().nullable()` | — | `src/publish.ts:657` |
-| `path` | `z.string().nullable()` | — | `src/publish.ts:658` |
-| `youtubeId` | `z.string()` | — | `src/publish.ts:659` |
-| `url` | `z.string()` | — | `src/publish.ts:660` |
-| `publishedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:661` |
-| `by` | `z.string()` | — | `src/publish.ts:662` |
+| `resourceId` | `z.string()` | — | `src/publish.ts:681` |
+| `video` | `z.string().nullable()` | — | `src/publish.ts:682` |
+| `path` | `z.string().nullable()` | — | `src/publish.ts:683` |
+| `youtubeId` | `z.string()` | — | `src/publish.ts:684` |
+| `url` | `z.string()` | — | `src/publish.ts:685` |
+| `publishedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:686` |
+| `by` | `z.string()` | — | `src/publish.ts:687` |
 
 ### `src/recipe-paths.RecipePathWarning` — zod-object — `src/recipe-paths.ts:18-27`
 
@@ -3440,8 +3441,8 @@ The census found these top-level declarations and the extractor did not mirror t
 |---|---|---|
 | object constant | 8 | `src/classify.LAYOUT_DIRS` `src/classify.ts:259`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
 | array constant | 6 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:30`<br>`src/publish.READY_STATES` `src/publish.ts:65`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:67`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
-| const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:172`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
-| class | 4 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:764`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25` |
+| const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:177`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
+| class | 4 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:789`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 | union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:201` |
@@ -3454,7 +3455,7 @@ These are refactors of the **application**, not of this mirror. Each one convert
 2. `src/classify.ts:66-73` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:66 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
 3. `src/classify.ts:122-129` — REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:122 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.
 4. `src/fs-utils.ts:32` — REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.
-5. `src/publish.ts:188` — REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.
+5. `src/publish.ts:193` — REFACTOR (minor): `LIVE` at src/publish.ts:193 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.
 6. `src/recipe-paths.ts:77` — REFACTOR (minor): `SKIP` at src/recipe-paths.ts:77 names the set but does not type it. A z.enum or `as const` + `typeof SKIP[number]` would make a wrong value a static error rather than a runtime miss.
 
 ---

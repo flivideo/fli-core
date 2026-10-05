@@ -2200,7 +2200,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 143
+        "line": 148
       },
       "authority": "`z.enum` `source` - a single declaring symbol",
       "grade": "declared",
@@ -2209,35 +2209,35 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 143
+            "line": 148
           },
           "value": "choice"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 143
+            "line": 148
           },
           "value": "rule"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 143
+            "line": 148
           },
           "value": "brand"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 143
+            "line": 148
           },
           "value": "ylo"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 143
+            "line": 148
           },
           "value": "none"
         }
@@ -2246,24 +2246,24 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 188
+        "line": 193
       },
       "authority": "module constant `LIVE` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
+      "finding": "REFACTOR (minor): `LIVE` at src/publish.ts:193 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
       "grade": "derived",
       "id": "src/publish.LIVE",
       "members": [
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 188
+            "line": 193
           },
           "value": "chosen"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 188
+            "line": 193
           },
           "value": "published"
         }
@@ -3502,10 +3502,10 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 188
+        "line": 193
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `LIVE` at src/publish.ts:193 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/publish.LIVE"
     },
     {
@@ -3518,7 +3518,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-10-05T14:35:33+00:00",
+  "generated": "2026-10-05T14:42:53+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -10508,13 +10508,13 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 104
+            "line": 109
           },
           "name": "PublishExport"
         }
       ],
       "anchor": {
-        "end_line": 103,
+        "end_line": 108,
         "file": "src/publish.ts",
         "line": 91
       },
@@ -10563,7 +10563,17 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 98
+            "line": 102
+          },
+          "default": "null",
+          "doc": "Where the file came from, in words, when the app knows better than the kind does (\"FliCut export\", \"FliEdit",
+          "name": "source",
+          "type": "z.string().nullable().default(null)"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 103
           },
           "default": null,
           "name": "modifiedAt",
@@ -10572,7 +10582,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 99
+            "line": 104
           },
           "default": null,
           "name": "durationSec",
@@ -10581,7 +10591,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 100
+            "line": 105
           },
           "default": null,
           "name": "srt",
@@ -10595,7 +10605,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 100
+        "line": 105
       },
       "bases": [],
       "doc": null,
@@ -10603,7 +10613,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 101
+            "line": 106
           },
           "default": null,
           "name": "file",
@@ -10612,7 +10622,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 101
+            "line": 106
           },
           "default": null,
           "name": "modifiedAt",
@@ -10621,7 +10631,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 101
+            "line": 106
           },
           "default": null,
           "name": "durationSec",
@@ -10637,14 +10647,14 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 108
+            "line": 113
           },
           "name": "PublishEdit"
         }
       ],
       "anchor": {
         "file": "src/publish.ts",
-        "line": 107
+        "line": 112
       },
       "bases": [],
       "doc": "An edit document for the video: FliCut's `fli.cut.<name>.json` or FliEdit's `fli.edit.<name>.json`.",
@@ -10653,7 +10663,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 107
+            "line": 112
           },
           "default": null,
           "name": "file",
@@ -10662,7 +10672,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 107
+            "line": 112
           },
           "default": null,
           "name": "app",
@@ -10671,7 +10681,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 107
+            "line": 112
           },
           "default": null,
           "name": "modifiedAt",
@@ -10687,15 +10697,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 121
+            "line": 126
           },
           "name": "PublishLaunch"
         }
       ],
       "anchor": {
-        "end_line": 120,
+        "end_line": 125,
         "file": "src/publish.ts",
-        "line": 111
+        "line": 116
       },
       "bases": [],
       "doc": "What YLO's `launch.json` (the workshop) offers, reduced to what the rules need.",
@@ -10704,7 +10714,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 112
+            "line": 117
           },
           "default": null,
           "name": "file",
@@ -10713,7 +10723,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 114
+            "line": 119
           },
           "default": null,
           "doc": "When its texts were made (`updated_at`, else the file's time).",
@@ -10723,7 +10733,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 116
+            "line": 121
           },
           "default": null,
           "doc": "The titles bound to YLO's variant slots, slot 1 first.",
@@ -10733,7 +10743,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 117
+            "line": 122
           },
           "default": null,
           "name": "description",
@@ -10742,7 +10752,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 119
+            "line": 124
           },
           "default": null,
           "doc": "YLO's `Chapter{n,title,timestamp}` list (empty when none).",
@@ -10757,7 +10767,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 116
+        "line": 121
       },
       "bases": [],
       "doc": null,
@@ -10765,7 +10775,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 116
+            "line": 121
           },
           "default": null,
           "name": "id",
@@ -10774,7 +10784,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 116
+            "line": 121
           },
           "default": null,
           "name": "text",
@@ -10790,15 +10800,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 132
+            "line": 137
           },
           "name": "PublishFacts"
         }
       ],
       "anchor": {
-        "end_line": 131,
+        "end_line": 136,
         "file": "src/publish.ts",
-        "line": 123
+        "line": 128
       },
       "bases": [],
       "doc": null,
@@ -10807,7 +10817,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 125
+            "line": 130
           },
           "default": null,
           "doc": "The video folder name, or null for a project with no video yet.",
@@ -10817,7 +10827,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 126
+            "line": 131
           },
           "default": null,
           "name": "exports",
@@ -10826,7 +10836,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 127
+            "line": 132
           },
           "default": null,
           "name": "edits",
@@ -10835,7 +10845,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 129
+            "line": 134
           },
           "default": null,
           "doc": "The project's resources for this video (and the project's own, `video: null`).",
@@ -10845,7 +10855,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 130
+            "line": 135
           },
           "default": null,
           "name": "launch",
@@ -10861,15 +10871,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 153
+            "line": 158
           },
           "name": "PublishRow"
         }
       ],
       "anchor": {
-        "end_line": 152,
+        "end_line": 157,
         "file": "src/publish.ts",
-        "line": 134
+        "line": 139
       },
       "bases": [],
       "doc": null,
@@ -10878,7 +10888,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 135
+            "line": 140
           },
           "default": null,
           "name": "piece",
@@ -10887,7 +10897,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 136
+            "line": 141
           },
           "default": null,
           "name": "label",
@@ -10896,7 +10906,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 137
+            "line": 142
           },
           "default": null,
           "name": "state",
@@ -10905,7 +10915,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 139
+            "line": 144
           },
           "default": null,
           "doc": "What would ship, in a few words (a file name, a title, \"Strong noise removal\").",
@@ -10915,7 +10925,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 141
+            "line": 146
           },
           "default": null,
           "doc": "The project-relative file behind it, when there is one.",
@@ -10925,7 +10935,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 143
+            "line": 148
           },
           "default": null,
           "doc": "Where the answer came from: `choice`, `rule`, `brand`, `ylo`, or `none`.",
@@ -10935,7 +10945,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 145
+            "line": 150
           },
           "default": null,
           "doc": "One line: why this state. Kept for the audit trail.",
@@ -10945,7 +10955,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 147
+            "line": 152
           },
           "default": null,
           "doc": "The resource behind a choice, so a person or agent can change it.",
@@ -10955,7 +10965,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 149
+            "line": 154
           },
           "default": null,
           "doc": "Who made it: a principal (`human:ui`, `agent:tuber`, `cli`) or `rule:<id>`; null when nothing is there.",
@@ -10965,7 +10975,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 151
+            "line": 156
           },
           "default": null,
           "doc": "When the thing behind it was made or chosen (for an \u24d8, never shown as a timestamp).",
@@ -10982,15 +10992,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 169
+            "line": 174
           },
           "name": "PublishReadiness"
         }
       ],
       "anchor": {
-        "end_line": 168,
+        "end_line": 173,
         "file": "src/publish.ts",
-        "line": 155
+        "line": 160
       },
       "bases": [],
       "doc": null,
@@ -10999,7 +11009,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 156
+            "line": 161
           },
           "default": null,
           "name": "video",
@@ -11008,7 +11018,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 157
+            "line": 162
           },
           "default": null,
           "name": "rows",
@@ -11017,7 +11027,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 158
+            "line": 163
           },
           "default": null,
           "name": "ready",
@@ -11026,7 +11036,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 159
+            "line": 164
           },
           "default": null,
           "name": "total",
@@ -11035,7 +11045,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 161
+            "line": 166
           },
           "default": null,
           "doc": "Ready rows a person has not decided (agent choices + rule guesses).",
@@ -11045,7 +11055,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 162
+            "line": 167
           },
           "default": null,
           "name": "counts",
@@ -11059,7 +11069,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 162
+        "line": 167
       },
       "bases": [],
       "doc": null,
@@ -11067,7 +11077,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 163
+            "line": 168
           },
           "default": null,
           "name": "set",
@@ -11076,7 +11086,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 164
+            "line": 169
           },
           "default": null,
           "name": "suggested",
@@ -11085,7 +11095,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 165
+            "line": 170
           },
           "default": null,
           "name": "inferred",
@@ -11094,7 +11104,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 166
+            "line": 171
           },
           "default": null,
           "name": "notReady",
@@ -11110,15 +11120,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 664
+            "line": 689
           },
           "name": "PublishedVideo"
         }
       ],
       "anchor": {
-        "end_line": 663,
+        "end_line": 688,
         "file": "src/publish.ts",
-        "line": 655
+        "line": 680
       },
       "bases": [],
       "doc": "The hook for whatever comes after publishing (post-publish posts, YLO's related-videos linking): every published",
@@ -11127,7 +11137,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 656
+            "line": 681
           },
           "default": null,
           "name": "resourceId",
@@ -11136,7 +11146,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 657
+            "line": 682
           },
           "default": null,
           "name": "video",
@@ -11145,7 +11155,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 658
+            "line": 683
           },
           "default": null,
           "name": "path",
@@ -11154,7 +11164,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 659
+            "line": 684
           },
           "default": null,
           "name": "youtubeId",
@@ -11163,7 +11173,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 660
+            "line": 685
           },
           "default": null,
           "name": "url",
@@ -11172,7 +11182,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 661
+            "line": 686
           },
           "default": null,
           "name": "publishedAt",
@@ -11181,7 +11191,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 662
+            "line": 687
           },
           "default": null,
           "name": "by",
@@ -15458,7 +15468,7 @@
     }
   ],
   "target": {
-    "commit": "a4f01fca9fcf563f306da04e4a94a629ae4f4df9",
+    "commit": "0cc8aa646bd1af14c140280cc4008971d9d338d9",
     "root": "..",
     "stack": "typescript"
   },
@@ -15602,7 +15612,7 @@
       "census": true,
       "family": "const built by a call (helper or non-zod call)",
       "looked_at": [
-        "src/publish.ts:172"
+        "src/publish.ts:177"
       ],
       "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.AUDIO_TREATMENTS` - declared but not read"
@@ -15611,7 +15621,7 @@
       "census": true,
       "family": "class",
       "looked_at": [
-        "src/publish.ts:764"
+        "src/publish.ts:789"
       ],
       "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.NoFinalVideo` - declared but not read"

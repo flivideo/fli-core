@@ -95,6 +95,11 @@ export const PublishExport = z.object({
   kind: z.enum(['cut', 'audio', 'final', 'overlay', 'part']).nullable(),
   variant: z.string().nullable(),
   app: EditApp.nullable(),
+  /**
+   * Where the file came from, in words, when the app knows better than the kind does ("FliCut export", "FliEdit
+   * export", "generated render", "placed file"). Shown instead of guessing an app from the name.
+   */
+  source: z.string().nullable().default(null),
   modifiedAt: Iso,
   durationSec: z.number().nullable(),
   srt: z
@@ -299,8 +304,20 @@ function videoRow(f: PublishFacts): { row: PublishRow; final: PublishExport | nu
     };
   }
   const edit = newestFirst(f.edits)[0] ?? null;
-  const fromEdit = edit ? newestFirst(f.exports.filter((e) => e.app === edit.app)) : [];
-  const final = fromEdit[0] ?? (newestFirst(f.exports)[0] as PublishExport);
+  // A part or an overlay is a piece of a video, never the video that ships.
+  const shippable = f.exports.filter((e) => e.kind !== 'part' && e.kind !== 'overlay');
+  if (shippable.length === 0) {
+    return {
+      final: null,
+      row: row(
+        'video',
+        'missing',
+        'Only parts and overlays in videos/; no whole video to ship yet.',
+      ),
+    };
+  }
+  const fromEdit = edit ? newestFirst(shippable.filter((e) => e.app === edit.app)) : [];
+  const final = fromEdit[0] ?? (newestFirst(shippable)[0] as PublishExport);
   const more = {
     value: base(final.file),
     file: final.file,
@@ -330,7 +347,8 @@ function videoRow(f: PublishFacts): { row: PublishRow; final: PublishExport | nu
       ),
     };
   }
-  const by = final.app ? ` (${APP_NAMES[final.app]})` : '';
+  const from = final.source ?? (final.app ? APP_NAMES[final.app] : null);
+  const by = from ? ` (${from})` : '';
   return {
     final,
     row: row(
@@ -376,9 +394,16 @@ function audioRow(f: PublishFacts, final: PublishExport | null): PublishRow {
     });
   }
   if (final.kind === 'final') {
-    return row('audio', 'inferred', 'As mixed in FliEdit.', {
+    if (final.app === 'fliedit') {
+      return row('audio', 'inferred', 'As mixed in FliEdit.', {
+        ...at,
+        value: 'As mixed in FliEdit',
+      });
+    }
+    const from = final.source ?? 'placed file';
+    return row('audio', 'inferred', `The final is a ${from}; its audio is what it holds.`, {
       ...at,
-      value: 'As mixed in FliEdit',
+      value: `As in the ${from}`,
     });
   }
   return row('audio', 'missing', `Cannot tell the audio from ${base(final.file)}.`, {

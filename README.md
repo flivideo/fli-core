@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.18.0 · True at v0.18.0 (2026-10-05)
+**Status:** active, v0.19.0 · True at v0.19.0 (2026-10-05)
 
 ## Install
 
@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.18.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.19.0"
   }
 }
 ```
@@ -210,6 +210,8 @@ with `from: 'core'`, `choose: 'one'`; a file row may restyle them); final thumbn
 | `markPublished(file, video, youtubeId, by)`                              | The chosen video becomes `published` with `meta.{youtubeId, url, publishedAt}`; the video's other chosen resources go `published` too. `NoFinalVideo` without a final                                                                                                                                                               |
 | `publishedVideos(resources)`                                             | The hook for later steps (post-publish posts, related-videos linking): every published video, newest first                                                                                                                                                                                                                          |
 | `acceptableRows`, `isPersonChoice`, `parseYoutubeId`, `AUDIO_TREATMENTS` | Helpers                                                                                                                                                                                                                                                                                                                             |
+
+v0.19.0: an export may carry a `source` ("generated render", "placed file") that the rows name instead of guessing an app from the file name; a `part` or `overlay` is never inferred as the final.
 
 The rules: a choice wins; the video is the newest export of the newest edit (stale if the edit changed after it);
 captions come from the same export with a matching length; YLO texts made before the final video are stale; the rules

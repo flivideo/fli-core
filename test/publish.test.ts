@@ -35,6 +35,7 @@ const exp = (over: Partial<PublishExport> & { file: string }): PublishExport => 
   kind: 'cut',
   variant: null,
   app: 'flicut',
+  source: null,
   modifiedAt: '2026-10-05T05:11:00.000Z',
   durationSec: 344,
   srt: null,
@@ -152,6 +153,38 @@ describe('rule 2 — the video: the newest export of the newest edit', () => {
     expect(rowOf(facts({ exports: [odd], edits: [] }), 'audio')).toMatchObject({
       state: 'missing',
     });
+  });
+});
+
+describe('the final is a whole video, and says where it came from (AITLDR b05, 2026-10-05)', () => {
+  const generated = exp({
+    file: 'videos/title-lab/title-lab-final.mp4',
+    kind: 'final',
+    app: null,
+    source: 'generated render',
+    modifiedAt: '2026-10-05T04:00:00.000Z',
+  });
+  const part = exp({
+    file: 'videos/title-lab/title-lab-part-intro.mp4',
+    kind: 'part',
+    variant: 'intro',
+    modifiedAt: '2026-10-05T05:00:00.000Z',
+  });
+  it('a newer part never becomes the final; a generated final is named as generated, never FliEdit', () => {
+    const f = facts({ video: 'title-lab', exports: [part, generated], edits: [] });
+    expect(rowOf(f, 'video')).toMatchObject({ state: 'inferred', file: generated.file });
+    expect(rowOf(f, 'video').why).toContain('(generated render)');
+    expect(rowOf(f, 'audio')).toMatchObject({ value: 'As in the generated render' });
+    expect(rowOf(f, 'audio').why).not.toContain('FliEdit');
+  });
+  it('only parts → missing; a final with no source is a placed file', () => {
+    expect(rowOf(facts({ exports: [part], edits: [] }), 'video')).toMatchObject({
+      state: 'missing',
+    });
+    const placed = { ...generated, source: null };
+    expect(rowOf(facts({ exports: [placed], edits: [] }), 'audio').value).toBe(
+      'As in the placed file',
+    );
   });
 });
 
