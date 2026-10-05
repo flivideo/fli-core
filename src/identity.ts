@@ -1,10 +1,11 @@
+import { randomUUID } from 'node:crypto';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { z } from 'zod';
 import { IDENTITY_FILE } from './app-file.js';
 import { TranscriptionChoice } from './brand-settings.js';
 import { atomicCreate, atomicWrite, errorCode, errorMessage, readJsonFile } from './fs-utils.js';
-import { ProjectCode } from './project-folder.js';
+import { ProjectCode, parseProjectFolder } from './project-folder.js';
 import { issuesOf, readFileResult, type ReadFileResult } from './results.js';
 
 /** `fli.studio.json` (A3): the project's identity. Membership of a brand = this file exists and is valid (R8). */
@@ -172,4 +173,117 @@ export function projectIntents(identity: Pick<ProjectIdentity, 'aspect' | 'langu
     languages: identity.languages?.length ? [...identity.languages] : [...DEFAULT_LANGUAGES],
     shape: identity.shape ?? DEFAULT_SHAPE,
   };
+}
+
+export const AdoptIdentityResult = z.union([
+  z.object({
+    /** `created`: a new `fli.studio.json`. `updated`: the same `id`, other fields changed. `kept`: nothing to change. */
+    kind: z.enum(['created', 'updated', 'kept']),
+    path: z.string(),
+    identity: ProjectIdentity,
+  }),
+  Refused('invalid-input'),
+  Refused('different-id').extend({ existingId: z.string() }),
+  Refused('existing-invalid'),
+  Refused('io-error'),
+]);
+export type AdoptIdentityResult = z.infer<typeof AdoptIdentityResult>;
+
+/** What `adoptIdentity` may be told; everything but `brand` (when no identity exists yet) can be left out. */
+export type AdoptIdentityInput = {
+  /** Keep this id: a re-run, or a project re-routed from another folder, must not mint a new uuid (plan §4C item 5). */
+  id?: string;
+  brand?: string;
+  /** Default: the folder's `<code>-<name>`. */
+  code?: string;
+  name?: string;
+  aspect?: ProjectAspect;
+  languages?: string[];
+  shape?: ProjectShape;
+  createdAt?: string;
+};
+
+/**
+ * `project.adopt`: make `dir` a project and keep whatever identity it already has (video-structure plan §4C item 5,
+ * paired with the AITLDR chain's "adopt, not create"). The `id` is the project's, and it never changes here:
+ *   - an identity is already there → its `id` is kept. A given `id` that differs is refused (`different-id`), never
+ *     overwritten; given fields (`code`, `name`, `aspect`…) update it, and it is rewritten only if something changed;
+ *   - none → a new one, with the given `id` if there is one (a stable id carried from another machine or folder), else a
+ *     fresh uuid. `code` and `name` default to the folder name's `<code>-<name>`.
+ * Same atomic, never-throws rules as `writeIdentity`, which does the write.
+ */
+export async function adoptIdentity(
+  dir: string,
+  input: AdoptIdentityInput = {},
+  now: Date = new Date(),
+): Promise<AdoptIdentityResult> {
+  const file = path.join(dir, IDENTITY_FILE);
+  const refused = (reason: 'invalid-input' | 'io-error', message: string): AdoptIdentityResult => ({
+    kind: 'refused',
+    reason,
+    path: file,
+    message,
+  });
+  const existing = await readIdentity(dir);
+  if (existing?.kind === 'invalid') {
+    return {
+      kind: 'refused',
+      reason: 'existing-invalid',
+      path: file,
+      message: `An unreadable ${IDENTITY_FILE} is already there (${existing.reason}: ${existing.message}); it is not overwritten.`,
+    };
+  }
+  const base = existing?.value ?? null;
+  if (base !== null && input.id !== undefined && input.id !== base.id) {
+    return {
+      kind: 'refused',
+      reason: 'different-id',
+      path: file,
+      existingId: base.id,
+      message: `${IDENTITY_FILE} already holds a different project id (${base.id}).`,
+    };
+  }
+  const folder = parseProjectFolder(path.basename(dir));
+  const brand = input.brand ?? base?.brand;
+  const code = input.code ?? base?.code ?? folder?.code;
+  const name = input.name ?? base?.name ?? folder?.slug;
+  if (brand === undefined || code === undefined || name === undefined) {
+    return refused(
+      'invalid-input',
+      `Cannot adopt ${dir}: ${[
+        brand === undefined && 'no brand given',
+        (code === undefined || name === undefined) &&
+          `"${path.basename(dir)}" is not <code>-<name>, so give code and name`,
+      ]
+        .filter(Boolean)
+        .join('; ')}.`,
+    );
+  }
+  const optional = (key: 'aspect' | 'languages' | 'shape') => {
+    const value = input[key] ?? base?.[key];
+    return value === undefined ? {} : { [key]: value };
+  };
+  const candidate: ProjectIdentity = {
+    ...(base ?? {}),
+    schema: 1,
+    id: base?.id ?? input.id ?? randomUUID(),
+    brand,
+    code,
+    name,
+    createdAt: base?.createdAt ?? input.createdAt ?? now.toISOString(),
+    ...optional('aspect'),
+    ...optional('languages'),
+    ...optional('shape'),
+  };
+  const parsed = ProjectIdentity.safeParse(candidate);
+  if (!parsed.success) return refused('invalid-input', issuesOf(parsed.error).join('; '));
+  if (
+    base !== null &&
+    JSON.stringify(parsed.data) === JSON.stringify(ProjectIdentity.parse(base))
+  ) {
+    return { kind: 'kept', path: file, identity: parsed.data };
+  }
+  const written = await writeIdentity(dir, parsed.data);
+  if (written.kind === 'refused') return written;
+  return { kind: base === null ? 'created' : 'updated', path: file, identity: parsed.data };
 }

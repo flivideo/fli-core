@@ -33,10 +33,13 @@ export {
   ProjectLanguage,
   ProjectShape,
   projectIntents,
+  AdoptIdentityResult,
   ReadIdentityResult,
   WriteIdentityResult,
+  adoptIdentity,
   readIdentity,
   writeIdentity,
+  type AdoptIdentityInput,
 } from './identity.js';
 
 export {
@@ -57,6 +60,7 @@ export {
   VideoFileKind,
   VideoFolder,
   VideoFolderName,
+  VideoPart,
   parseVideoFile,
   parseVideoFolder,
   videoFileName,
@@ -73,14 +77,21 @@ export {
 } from './app-file.js';
 
 export {
+  ASSEMBLY_FOLDERS,
   HUB_FOLDER,
   LAYOUT_DIRS,
   LEGACY_FOLDERS,
+  MOTION_MACHINERY,
+  OverlayRole,
+  ProjectEntry,
   ProjectLayout,
   ProjectLayoutPaths,
+  ProjectTier,
   ProjectZone,
+  RENDERS_FOLDER,
   TRASH_FOLDER,
   classifyProjectEntry,
+  describeProjectEntry,
   projectLayout,
   projectLayoutPaths,
   projectLayoutPathsSync,
@@ -239,6 +250,72 @@ export {
 } from './words.js';
 
 export { LabPathInput, ResolvedLabPath, labPath, resolveLabPath } from './lab-path.js';
+
+export {
+  ClearRendersResult,
+  FOLDER_HEAVY,
+  RendersPathInput,
+  RendersTally,
+  RendersTool,
+  clearRenders,
+  rendersOf,
+  rendersPath,
+} from './renders.js';
+
+export {
+  ChangeSeriesResult,
+  ReadSeriesResult,
+  SERIES_CAPABILITIES,
+  SERIES_FILE,
+  SERIES_FOLDER,
+  SeriesFile,
+  SeriesListing,
+  SeriesMember,
+  addSeriesMember,
+  changeSeries,
+  createSeries,
+  listSeries,
+  readSeries,
+  removeSeriesMember,
+  seriesFilePath,
+  type ChangeSeriesOptions,
+} from './series.js';
+
+export {
+  RecipePathProblem,
+  RecipePathWarning,
+  recipePathWarnings,
+  recipePathWarningsIn,
+} from './recipe-paths.js';
+
+export {
+  GITIGNORE_BASE,
+  GITIGNORE_BASE_VERSION,
+  GITIGNORE_BEGIN,
+  GITIGNORE_END,
+  GitignoreCheckResult,
+  GitignoreGroup,
+  GitignoreOverlayRule,
+  GitignorePattern,
+  GitignoreRenderResult,
+  checkGitignore,
+  locateBlock,
+  patternLines,
+  renderGitignore,
+  renderGitignoreBlock,
+  type GitignoreRenderOptions,
+} from './gitignore-rules.js';
+
+export {
+  GITIGNORE_FILE,
+  GitignoreResult,
+  TrackedIgnored,
+  gitignoreRender,
+  trackedIgnored,
+  type GitignoreOptions,
+} from './gitignore.js';
+
+export { cloneFile } from './fs-utils.js';
 
 export {
   OPEN_ENV,

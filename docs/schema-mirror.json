@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 304,
+    "declared": 363,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -38,11 +38,11 @@
         "not_schema_bearing": 2
       },
       "src/classify.ts": {
-        "declared": 8,
+        "declared": 16,
         "gaps": 0,
-        "mirrored": 7,
+        "mirrored": 15,
         "not_read": 1,
-        "not_schema_bearing": 2
+        "not_schema_bearing": 3
       },
       "src/control-file.ts": {
         "declared": 5,
@@ -72,10 +72,24 @@
         "not_read": 0,
         "not_schema_bearing": 0
       },
+      "src/gitignore-rules.ts": {
+        "declared": 13,
+        "gaps": 0,
+        "mirrored": 10,
+        "not_read": 3,
+        "not_schema_bearing": 3
+      },
+      "src/gitignore.ts": {
+        "declared": 8,
+        "gaps": 0,
+        "mirrored": 8,
+        "not_read": 0,
+        "not_schema_bearing": 1
+      },
       "src/identity.ts": {
-        "declared": 12,
+        "declared": 15,
         "gaps": 2,
-        "mirrored": 9,
+        "mirrored": 12,
         "not_read": 1,
         "not_schema_bearing": 2
       },
@@ -135,11 +149,25 @@
         "not_read": 5,
         "not_schema_bearing": 1
       },
+      "src/recipe-paths.ts": {
+        "declared": 4,
+        "gaps": 0,
+        "mirrored": 4,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
       "src/recording.ts": {
         "declared": 3,
         "gaps": 0,
         "mirrored": 3,
         "not_read": 0,
+        "not_schema_bearing": 0
+      },
+      "src/renders.ts": {
+        "declared": 9,
+        "gaps": 0,
+        "mirrored": 8,
+        "not_read": 1,
         "not_schema_bearing": 0
       },
       "src/resources.ts": {
@@ -163,6 +191,13 @@
         "not_read": 0,
         "not_schema_bearing": 0
       },
+      "src/series.ts": {
+        "declared": 12,
+        "gaps": 2,
+        "mirrored": 9,
+        "not_read": 1,
+        "not_schema_bearing": 2
+      },
       "src/stamp.ts": {
         "declared": 2,
         "gaps": 0,
@@ -178,9 +213,9 @@
         "not_schema_bearing": 1
       },
       "src/video-file.ts": {
-        "declared": 11,
+        "declared": 13,
         "gaps": 0,
-        "mirrored": 11,
+        "mirrored": 13,
         "not_read": 0,
         "not_schema_bearing": 1
       },
@@ -199,21 +234,21 @@
         "not_schema_bearing": 1
       }
     },
-    "gaps": 14,
-    "mirrored": 265,
-    "not_read": 25,
-    "not_schema_bearing": 15,
+    "gaps": 16,
+    "mirrored": 317,
+    "not_read": 30,
+    "not_schema_bearing": 22,
     "not_schema_bearing_by_family": {
       "function": 1,
-      "literal constant": 14
+      "literal constant": 21
     }
   },
   "closed_sets": [
     {
       "anchor": {
-        "end_line": 48,
+        "end_line": 54,
         "file": "src/brand-settings.ts",
-        "line": 40
+        "line": 46
       },
       "authority": "the `kind` discriminator of the union `WriteBrandSettingsResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -222,14 +257,14 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 41
+            "line": 47
           },
           "value": "written"
         },
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 43
+            "line": 49
           },
           "value": "refused"
         }
@@ -238,7 +273,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 44
+        "line": 50
       },
       "authority": "`z.enum` `reason` - a single declaring symbol",
       "grade": "declared",
@@ -247,14 +282,14 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 44
+            "line": 50
           },
           "value": "invalid-input"
         },
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 44
+            "line": 50
           },
           "value": "io-error"
         }
@@ -489,13 +524,13 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 25
+            "line": 41
           },
           "name": "ProjectZone"
         }
       ],
       "anchor": {
-        "end_line": 22,
+        "end_line": 36,
         "file": "src/classify.ts",
         "line": 11
       },
@@ -542,28 +577,84 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 17
+            "line": 18
           },
-          "value": "videos"
+          "value": "voice"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 18
+            "line": 19
           },
-          "value": "legacy"
+          "value": "avatar"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
             "line": 20
           },
+          "value": "script"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 22
+          },
+          "value": "motion"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 24
+          },
+          "value": "overlay"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 26
+          },
+          "value": "framing"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 28
+          },
+          "value": "assembly"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 30
+          },
+          "value": "renders"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 31
+          },
+          "value": "videos"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 32
+          },
+          "value": "legacy"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 34
+          },
           "value": "trash"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 21
+            "line": 35
           },
           "value": "other"
         }
@@ -571,56 +662,137 @@
     },
     {
       "anchor": {
-        "end_line": 43,
         "file": "src/classify.ts",
-        "line": 36
+        "line": 63
       },
-      "authority": "module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:36 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "authority": "module constant `ASSEMBLY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
+      "finding": "REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:63 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "grade": "derived",
-      "id": "src/classify.LEGACY_FOLDERS",
+      "id": "src/classify.ASSEMBLY_FOLDERS",
       "members": [
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 37
+            "line": 63
           },
           "value": "first-edit"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 38
+            "line": 63
+          },
+          "value": "edit"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 73,
+        "file": "src/classify.ts",
+        "line": 66
+      },
+      "authority": "module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
+      "finding": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:66 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "grade": "derived",
+      "id": "src/classify.LEGACY_FOLDERS",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 67
+          },
+          "value": "first-edit"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 68
           },
           "value": "edits"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 39
+            "line": 69
           },
           "value": "edit-1st"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 40
+            "line": 70
           },
           "value": "final"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 41
+            "line": 71
           },
           "value": "pipeline"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 42
+            "line": 72
           },
           "value": "animation"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 129,
+        "file": "src/classify.ts",
+        "line": 122
+      },
+      "authority": "module constant `MOTION_MACHINERY` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
+      "finding": "REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:122 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.",
+      "grade": "derived",
+      "id": "src/classify.MOTION_MACHINERY",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 123
+          },
+          "value": "out"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 124
+          },
+          "value": ".cache"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 125
+          },
+          "value": ".transcode-cache"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 126
+          },
+          "value": "dist"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 127
+          },
+          "value": "build"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 128
+          },
+          "value": "node_modules"
         }
       ]
     },
@@ -629,14 +801,127 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 98
+            "line": 144
+          },
+          "name": "ProjectTier"
+        }
+      ],
+      "anchor": {
+        "end_line": 143,
+        "file": "src/classify.ts",
+        "line": 136
+      },
+      "authority": "`z.enum` `ProjectTier` - a single declaring symbol",
+      "doc": "How much a path matters (the plan \u00a71.1 tier test: \"if you deleted it, could you get it back by re-running a tool?\"):",
+      "grade": "declared",
+      "id": "src/classify.ProjectTier",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 137
+          },
+          "value": "authored"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 138
+          },
+          "value": "input"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 139
+          },
+          "value": "generated"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 140
+          },
+          "value": "regenerable"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 141
+          },
+          "value": "output"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 142
+          },
+          "value": "other"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 148
+          },
+          "name": "OverlayRole"
+        }
+      ],
+      "anchor": {
+        "file": "src/classify.ts",
+        "line": 147
+      },
+      "authority": "`z.enum` `OverlayRole` - a single declaring symbol",
+      "doc": "What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are authored, `spec.json` is generated.",
+      "grade": "declared",
+      "id": "src/classify.OverlayRole",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 147
+          },
+          "value": "beats"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 147
+          },
+          "value": "framing"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 147
+          },
+          "value": "spec"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 147
+          },
+          "value": "variant-file"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 246
           },
           "name": "ProjectLayout"
         }
       ],
       "anchor": {
         "file": "src/classify.ts",
-        "line": 97
+        "line": 245
       },
       "authority": "`z.enum` `ProjectLayout` - a single declaring symbol",
       "grade": "declared",
@@ -645,14 +930,14 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 97
+            "line": 245
           },
           "value": "hub"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 97
+            "line": 245
           },
           "value": "legacy"
         }
@@ -1120,18 +1405,168 @@
       ]
     },
     {
+      "anchor": {
+        "file": "src/gitignore-rules.ts",
+        "line": 239
+      },
+      "authority": "`z.enum` `status` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/gitignore-rules.GitignoreRenderResult.status",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 239
+          },
+          "value": "created"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 239
+          },
+          "value": "updated"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 239
+          },
+          "value": "unchanged"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 239
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/gitignore-rules.ts",
+        "line": 336
+      },
+      "authority": "`z.enum` `status` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/gitignore-rules.GitignoreCheckResult.status",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 336
+          },
+          "value": "ok"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 336
+          },
+          "value": "drift"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 336
+          },
+          "value": "no-block"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 336
+          },
+          "value": "broken-markers"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/gitignore.ts",
+        "line": 44
+      },
+      "authority": "`z.enum` `reason` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/gitignore.GitignoreRefusal.reason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 44
+          },
+          "value": "no-brand-root"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 44
+          },
+          "value": "brand-settings-invalid"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 44
+          },
+          "value": "damaged-markers"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 44
+          },
+          "value": "io-error"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 67,
+        "file": "src/gitignore.ts",
+        "line": 63
+      },
+      "authority": "the `kind` discriminator of the union `GitignoreResult` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/gitignore.GitignoreResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 50
+          },
+          "value": "rendered"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 58
+          },
+          "value": "checked"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 43
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
       "aliases": [
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 13
+            "line": 14
           },
           "name": "ProjectAspect"
         }
       ],
       "anchor": {
         "file": "src/identity.ts",
-        "line": 12
+        "line": 13
       },
       "authority": "`z.enum` `ProjectAspect` - a single declaring symbol",
       "doc": "The shape a project's videos are made for (David 2026-09-23, B584). Absent \u2192 `16:9`.",
@@ -1141,21 +1576,21 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 12
+            "line": 13
           },
           "value": "16:9"
         },
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 12
+            "line": 13
           },
           "value": "9:16"
         },
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 12
+            "line": 13
           },
           "value": "1:1"
         }
@@ -1166,14 +1601,14 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 23
+            "line": 24
           },
           "name": "ProjectShape"
         }
       ],
       "anchor": {
         "file": "src/identity.ts",
-        "line": 22
+        "line": 23
       },
       "authority": "`z.enum` `ProjectShape` - a single declaring symbol",
       "doc": "What the project is for \u2014 a HINT only, no behaviour yet (David 2026-09-23; brains `video-as-code/",
@@ -1183,21 +1618,21 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 22
+            "line": 23
           },
           "value": "single"
         },
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 22
+            "line": 23
           },
           "value": "shorts"
         },
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 22
+            "line": 23
           },
           "value": "episodes"
         }
@@ -1205,9 +1640,9 @@
     },
     {
       "anchor": {
-        "end_line": 70,
+        "end_line": 71,
         "file": "src/identity.ts",
-        "line": 64
+        "line": 65
       },
       "authority": "the `kind` discriminator of the union `WriteIdentityResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -1216,16 +1651,48 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 65
+            "line": 66
           },
           "value": "written"
         },
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 58
+            "line": 59
           },
           "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/identity.ts",
+        "line": 181
+      },
+      "authority": "`z.enum` `kind` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/identity.AdoptIdentityResult[0].kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 181
+          },
+          "value": "created"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 181
+          },
+          "value": "updated"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 181
+          },
+          "value": "kept"
         }
       ]
     },
@@ -1720,6 +2187,13 @@
             "line": 95
           },
           "value": "overlay"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 95
+          },
+          "value": "part"
         }
       ]
     },
@@ -1792,6 +2266,160 @@
             "line": 188
           },
           "value": "published"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 16
+          },
+          "name": "RecipePathProblem"
+        }
+      ],
+      "anchor": {
+        "file": "src/recipe-paths.ts",
+        "line": 15
+      },
+      "authority": "`z.enum` `RecipePathProblem` - a single declaring symbol",
+      "doc": "The ingest rule (workstream B ruling, 2026-10-05): **a recipe may only reference paths inside its own project.**",
+      "grade": "declared",
+      "id": "src/recipe-paths.RecipePathProblem",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 15
+          },
+          "value": "absolute"
+        },
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 15
+          },
+          "value": "home"
+        },
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 15
+          },
+          "value": "file-url"
+        },
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 15
+          },
+          "value": "escapes-project"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/recipe-paths.ts",
+        "line": 77
+      },
+      "authority": "module constant `SKIP` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
+      "finding": "REFACTOR (minor): `SKIP` at src/recipe-paths.ts:77 names the set but does not type it. A z.enum or `as const` + `typeof SKIP[number]` would make a wrong value a static error rather than a runtime miss.",
+      "grade": "derived",
+      "id": "src/recipe-paths.SKIP",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 77
+          },
+          "value": "node_modules"
+        },
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 77
+          },
+          "value": ".cache"
+        },
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 77
+          },
+          "value": "out"
+        },
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 77
+          },
+          "value": "-renders"
+        },
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 77
+          },
+          "value": "-trash"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 134,
+        "file": "src/renders.ts",
+        "line": 121
+      },
+      "authority": "the `kind` discriminator of the union `ClearRendersResult` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/renders.ClearRendersResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 123
+          },
+          "value": "cleared"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 130
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/renders.ts",
+        "line": 131
+      },
+      "authority": "`z.enum` `reason` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/renders.ClearRendersResult[kind=refused].reason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 131
+          },
+          "value": "invalid-input"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 131
+          },
+          "value": "not-a-folder"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 131
+          },
+          "value": "io-error"
         }
       ]
     },
@@ -2194,6 +2822,92 @@
     },
     {
       "anchor": {
+        "file": "src/series.ts",
+        "line": 104
+      },
+      "authority": "`z.enum` `reason` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/series.Refusal.reason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 105
+          },
+          "value": "invalid-input"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 106
+          },
+          "value": "series-exists"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 107
+          },
+          "value": "series-not-found"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 108
+          },
+          "value": "member-not-found"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 109
+          },
+          "value": "unusable-file"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 110
+          },
+          "value": "busy"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 111
+          },
+          "value": "io-error"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 120,
+        "file": "src/series.ts",
+        "line": 117
+      },
+      "authority": "the `kind` discriminator of the union `ChangeSeriesResult` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/series.ChangeSeriesResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 118
+          },
+          "value": "written"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 103
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
         "file": "src/transport.ts",
         "line": 27
       },
@@ -2268,14 +2982,14 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 17
+            "line": 18
           },
           "name": "VideoFileKind"
         }
       ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 16
+        "line": 17
       },
       "authority": "`z.enum` `VideoFileKind` - a single declaring symbol",
       "grade": "declared",
@@ -2284,38 +2998,87 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 16
+            "line": 17
           },
           "value": "cut"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 16
+            "line": 17
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 16
+            "line": 17
           },
           "value": "overlay"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 16
+            "line": 17
           },
           "value": "final"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 17
+          },
+          "value": "part"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 22
+          },
+          "name": "VideoPart"
+        }
+      ],
+      "anchor": {
+        "file": "src/video-file.ts",
+        "line": 21
+      },
+      "authority": "`z.enum` `VideoPart` - a single declaring symbol",
+      "doc": "Which section of a video a `part` file is. A closed set: `<name>-part-<intro|body|outro>`.",
+      "grade": "declared",
+      "id": "src/video-file.VideoPart",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 21
+          },
+          "value": "intro"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 21
+          },
+          "value": "body"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 21
+          },
+          "value": "outro"
         }
       ]
     },
     {
       "anchor": {
-        "end_line": 29,
+        "end_line": 35,
         "file": "src/video-file.ts",
-        "line": 19
+        "line": 24
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `VideoFile` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -2324,37 +3087,44 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 20
+            "line": 25
           },
           "value": "cut"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 23
+            "line": 28
           },
           "value": "final"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 27
+            "line": 32
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 28
+            "line": 33
           },
           "value": "overlay"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 34
+          },
+          "value": "part"
         }
       ]
     },
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 39
+        "line": 45
       },
       "authority": "the `kind` discriminator of the union `ParsedVideoFile` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -2363,35 +3133,42 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 20
+            "line": 25
           },
           "value": "cut"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 23
+            "line": 28
           },
           "value": "final"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 27
+            "line": 32
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 28
+            "line": 33
           },
           "value": "overlay"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 33
+            "line": 34
+          },
+          "value": "part"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 39
           },
           "value": "unknown-kind"
         }
@@ -2686,13 +3463,32 @@
   "findings": [
     {
       "anchor": {
-        "end_line": 43,
         "file": "src/classify.ts",
-        "line": 36
+        "line": 63
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:36 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:63 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "target": "src/classify.ASSEMBLY_FOLDERS"
+    },
+    {
+      "anchor": {
+        "end_line": 73,
+        "file": "src/classify.ts",
+        "line": 66
+      },
+      "kind": "refactor_required",
+      "message": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:66 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/classify.LEGACY_FOLDERS"
+    },
+    {
+      "anchor": {
+        "end_line": 129,
+        "file": "src/classify.ts",
+        "line": 122
+      },
+      "kind": "refactor_required",
+      "message": "REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:122 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.",
+      "target": "src/classify.MOTION_MACHINERY"
     },
     {
       "anchor": {
@@ -2711,9 +3507,18 @@
       "kind": "refactor_required",
       "message": "REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/publish.LIVE"
+    },
+    {
+      "anchor": {
+        "file": "src/recipe-paths.ts",
+        "line": 77
+      },
+      "kind": "refactor_required",
+      "message": "REFACTOR (minor): `SKIP` at src/recipe-paths.ts:77 names the set but does not type it. A z.enum or `as const` + `typeof SKIP[number]` would make a wrong value a static error rather than a runtime miss.",
+      "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-10-05T05:55:55+00:00",
+  "generated": "2026-10-05T14:35:33+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -2955,15 +3760,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 19
+            "line": 20
           },
           "name": "TranscriptionChoice"
         }
       ],
       "anchor": {
-        "end_line": 18,
+        "end_line": 19,
         "file": "src/brand-settings.ts",
-        "line": 13
+        "line": 14
       },
       "bases": [],
       "doc": "A level's transcription providers (FliTools reads them: global `flitools.json` \u2192 brand `fli.brand.json` \u2192 project",
@@ -2972,7 +3777,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 15
+            "line": 16
           },
           "default": null,
           "doc": "Pass 1 (fast): `auto`, `groq-whisper`, `mlx-whisper`, \u2026",
@@ -2982,7 +3787,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 17
+            "line": 18
           },
           "default": null,
           "doc": "Pass 2 (edit-grade): `crisperwhisper`, `elevenlabs`, `off`, \u2026",
@@ -2999,15 +3804,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 30
+            "line": 36
           },
           "name": "BrandSettings"
         }
       ],
       "anchor": {
-        "end_line": 29,
+        "end_line": 35,
         "file": "src/brand-settings.ts",
-        "line": 21
+        "line": 22
       },
       "bases": [],
       "doc": null,
@@ -3016,7 +3821,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 22
+            "line": 23
           },
           "default": null,
           "name": "schema",
@@ -3025,7 +3830,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 23
+            "line": 24
           },
           "default": null,
           "name": "brand",
@@ -3034,7 +3839,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 24
+            "line": 25
           },
           "default": null,
           "name": "colour",
@@ -3043,12 +3848,22 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 28
+            "line": 29
           },
           "default": null,
           "doc": "The brand's transcription providers, over the suite default; absent \u2192 the suite default.",
           "name": "transcription",
           "type": "TranscriptionChoice.optional() \u2192 src/brand-settings.TranscriptionChoice"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 34
+          },
+          "default": null,
+          "doc": "The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's",
+          "name": "gitignore",
+          "type": "z.array(GitignoreOverlayRule).optional() \u2192 src/gitignore-rules.GitignoreOverlayRule"
         }
       ],
       "grade": "declared",
@@ -3060,15 +3875,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 49
+            "line": 55
           },
           "name": "WriteBrandSettingsResult"
         }
       ],
       "anchor": {
-        "end_line": 48,
+        "end_line": 54,
         "file": "src/brand-settings.ts",
-        "line": 40
+        "line": 46
       },
       "bases": [],
       "doc": null,
@@ -3077,7 +3892,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 41
+            "line": 47
           },
           "default": null,
           "name": "written",
@@ -3086,7 +3901,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 43
+            "line": 49
           },
           "default": null,
           "name": "refused",
@@ -3100,7 +3915,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 41
+        "line": 47
       },
       "bases": [],
       "doc": null,
@@ -3108,7 +3923,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 41
+            "line": 47
           },
           "default": null,
           "name": "kind",
@@ -3117,7 +3932,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 41
+            "line": 47
           },
           "default": null,
           "name": "path",
@@ -3130,9 +3945,9 @@
     },
     {
       "anchor": {
-        "end_line": 47,
+        "end_line": 53,
         "file": "src/brand-settings.ts",
-        "line": 42
+        "line": 48
       },
       "bases": [],
       "doc": null,
@@ -3140,7 +3955,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 43
+            "line": 49
           },
           "default": null,
           "name": "kind",
@@ -3149,7 +3964,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 44
+            "line": 50
           },
           "default": null,
           "name": "reason",
@@ -3158,7 +3973,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 45
+            "line": 51
           },
           "default": null,
           "name": "path",
@@ -3167,7 +3982,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 46
+            "line": 52
           },
           "default": null,
           "name": "message",
@@ -4061,15 +4876,15 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 108
+            "line": 159
           },
-          "name": "ProjectLayoutPaths"
+          "name": "ProjectEntry"
         }
       ],
       "anchor": {
-        "end_line": 107,
+        "end_line": 158,
         "file": "src/classify.ts",
-        "line": 100
+        "line": 150
       },
       "bases": [],
       "doc": null,
@@ -4078,7 +4893,78 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 102
+            "line": 151
+          },
+          "default": null,
+          "name": "zone",
+          "type": "ProjectZone \u2192 src/classify.ProjectZone"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 152
+          },
+          "default": null,
+          "name": "tier",
+          "type": "ProjectTier \u2192 src/classify.ProjectTier"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 154
+          },
+          "default": null,
+          "doc": "`overlay/<chapter>/\u2026` only; null for a flat overlay (`ships` = one video) and for every other zone.",
+          "name": "chapter",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 156
+          },
+          "default": null,
+          "doc": "`overlay/[<chapter>/]<variant>/\u2026` only.",
+          "name": "variant",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 157
+          },
+          "default": null,
+          "name": "role",
+          "type": "OverlayRole.nullable() \u2192 src/classify.OverlayRole"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/classify.ProjectEntry",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 256
+          },
+          "name": "ProjectLayoutPaths"
+        }
+      ],
+      "anchor": {
+        "end_line": 255,
+        "file": "src/classify.ts",
+        "line": 248
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 250
           },
           "default": null,
           "doc": "Detected by `projectLayout` (D14).",
@@ -4088,7 +4974,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 104
+            "line": 252
           },
           "default": null,
           "doc": "Absolute path of the recordings folder for this layout (it may not exist yet).",
@@ -4098,7 +4984,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 106
+            "line": 254
           },
           "default": null,
           "doc": "Absolute path of the transcripts folder for this layout (it may not exist yet).",
@@ -6163,8 +7049,722 @@
     },
     {
       "anchor": {
+        "file": "src/gitignore-rules.ts",
+        "line": 19
+      },
+      "fields": [],
+      "grade": "declared",
+      "id": "src/gitignore-rules.GITIGNORE_BASE_VERSION",
+      "kind": "constant",
+      "note": "declared in code; compare against what is actually on disk",
+      "value": 1
+    },
+    {
+      "anchor": {
+        "file": "src/gitignore-rules.ts",
+        "line": 24
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/gitignore-rules.Tag",
+      "kind": "zod-scalar",
+      "value": "z.string().regex(/^[A-Z][A-Z0-9-]*$/, 'a reason tag is UPPER-KEBAB (DAMIT-MASTER)')"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 43
+          },
+          "name": "GitignoreOverlayRule"
+        }
+      ],
+      "anchor": {
+        "end_line": 42,
+        "file": "src/gitignore-rules.ts",
+        "line": 38
+      },
+      "bases": [],
+      "doc": "A brand's own rule, kept in its `fli.brand.json` (`gitignore: [...]`) so it travels with the repo.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 39
+          },
+          "default": null,
+          "name": "pattern",
+          "type": "GitignorePattern \u2192 src/gitignore-rules.GitignorePattern"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 40
+          },
+          "default": null,
+          "name": "reason",
+          "type": "Tag \u2192 src/gitignore-rules.Tag"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 41
+          },
+          "default": null,
+          "name": "note",
+          "type": "OneLine('a note').optional() \u2192 src/gitignore-rules.OneLine"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore-rules.GitignoreOverlayRule",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 50
+          },
+          "name": "GitignoreGroup"
+        }
+      ],
+      "anchor": {
+        "end_line": 49,
+        "file": "src/gitignore-rules.ts",
+        "line": 45
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "reason",
+          "type": "Tag \u2192 src/gitignore-rules.Tag"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 47
+          },
+          "default": null,
+          "name": "note",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 48
+          },
+          "default": null,
+          "name": "patterns",
+          "type": "z.array(z.string())"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore-rules.GitignoreGroup",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 165,
+        "file": "src/gitignore-rules.ts",
+        "line": 161
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 163
+          },
+          "default": null,
+          "doc": "The brand key (`aitldr`), as in `fli.brand.json`. Named in the marker; no path, host or user ever is.",
+          "name": "brand",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 164
+          },
+          "default": null,
+          "name": "overlay",
+          "type": "?: readonly GitignoreOverlayRule[] \u2192 src/gitignore-rules.GitignoreOverlayRule"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore-rules.GitignoreRenderOptions",
+      "kind": "interface"
+    },
+    {
+      "anchor": {
+        "end_line": 199,
+        "file": "src/gitignore-rules.ts",
+        "line": 194
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 196
+          },
+          "default": null,
+          "doc": "Offset of the BEGIN line's first character.",
+          "name": "start",
+          "type": "number"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 198
+          },
+          "default": null,
+          "doc": "Offset just past the END line's newline (or the end of the file).",
+          "name": "end",
+          "type": "number"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore-rules.Located",
+      "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 253
+          },
+          "name": "GitignoreRenderResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 252,
+        "file": "src/gitignore-rules.ts",
+        "line": 238
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 239
+          },
+          "default": null,
+          "name": "status",
+          "type": "z.enum(['created', 'updated', 'unchanged', 'refused'])"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 241
+          },
+          "default": null,
+          "doc": "The whole file after the render (the existing text, untouched, when refused).",
+          "name": "content",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 243
+          },
+          "default": null,
+          "doc": "Lines in the new block that were not in the old one.",
+          "name": "added",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 245
+          },
+          "default": null,
+          "doc": "Lines in the old block that are not in the new one.",
+          "name": "removed",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 247
+          },
+          "default": null,
+          "doc": "Hand-written pattern lines outside the block that the block now also emits: reported, never deleted.",
+          "name": "legacyDuplicates",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 249
+          },
+          "default": null,
+          "doc": "The block is not the last thing in the file: a hand rule after it could undo a re-include. Reported, not moved.",
+          "name": "blockNotLast",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 251
+          },
+          "default": null,
+          "doc": "Why a render was refused: the markers are broken.",
+          "name": "message",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore-rules.GitignoreRenderResult",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 351
+          },
+          "name": "GitignoreCheckResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 350,
+        "file": "src/gitignore-rules.ts",
+        "line": 334
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 336
+          },
+          "default": null,
+          "doc": "`ok`: the block is what would be rendered. `drift`: it differs. `no-block`: never generated. `broken-markers`.",
+          "name": "status",
+          "type": "z.enum(['ok', 'drift', 'no-block', 'broken-markers'])"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 338
+          },
+          "default": null,
+          "doc": "`status === 'ok'`: the exit code of a hook or a fleet sweep is non-zero for everything else.",
+          "name": "ok",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 340
+          },
+          "default": null,
+          "doc": "Lines the rendered block has that the file's does not.",
+          "name": "missing",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 342
+          },
+          "default": null,
+          "doc": "Lines the file's block has that the rendered one does not (someone edited between the markers).",
+          "name": "extra",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 344
+          },
+          "default": null,
+          "doc": "The base version in the file's marker, when there is one.",
+          "name": "fileBaseVersion",
+          "type": "z.number().int().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 345
+          },
+          "default": null,
+          "name": "baseVersion",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 347
+          },
+          "default": null,
+          "doc": "Why, in a sentence, when not ok.",
+          "name": "reason",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 348
+          },
+          "default": null,
+          "name": "legacyDuplicates",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore-rules.ts",
+            "line": 349
+          },
+          "default": null,
+          "name": "blockNotLast",
+          "type": "z.boolean()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore-rules.GitignoreCheckResult",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 29
+          },
+          "name": "TrackedIgnored"
+        }
+      ],
+      "anchor": {
+        "end_line": 28,
+        "file": "src/gitignore.ts",
+        "line": 23
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 25
+          },
+          "default": null,
+          "doc": "How many committed files the rendered rules now ignore. Ignoring a path does not untrack it.",
+          "name": "count",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 27
+          },
+          "default": null,
+          "doc": "The first 100, `/`-separated, exactly as git names them (`core.quotepath=false`: no octal escapes).",
+          "name": "files",
+          "type": "z.array(z.string())"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore.TrackedIgnored",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 40,
+        "file": "src/gitignore.ts",
+        "line": 31
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 33
+          },
+          "default": null,
+          "doc": "Check only: write nothing.",
+          "name": "check",
+          "type": "?: boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 35
+          },
+          "default": null,
+          "doc": "The brand key; default `fli.brand.json`'s `brand`, else the folder name without `v-`.",
+          "name": "brand",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 37
+          },
+          "default": null,
+          "doc": "Override the overlay (a scratch run); default `fli.brand.json`'s `gitignore`.",
+          "name": "overlay",
+          "type": "?: readonly GitignoreOverlayRule[] \u2192 src/gitignore-rules.GitignoreOverlayRule"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 39
+          },
+          "default": null,
+          "doc": "List tracked files the rules ignore (needs `git`; default `true` for a check). `null` in the result when git cannot say.",
+          "name": "tracked",
+          "type": "?: boolean"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore.GitignoreOptions",
+      "kind": "interface"
+    },
+    {
+      "anchor": {
+        "end_line": 47,
+        "file": "src/gitignore.ts",
+        "line": 42
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 43
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('refused')"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 44
+          },
+          "default": null,
+          "name": "reason",
+          "type": "z.enum(['no-brand-root', 'brand-settings-invalid', 'damaged-markers', 'io-error'])"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 45
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 46
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore.GitignoreRefusal",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 56,
+        "file": "src/gitignore.ts",
+        "line": 49
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 50
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('rendered')"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 51
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 53
+          },
+          "default": null,
+          "doc": "`true` when the file on disk was changed (never in a check).",
+          "name": "wrote",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 54
+          },
+          "default": null,
+          "name": "render",
+          "type": "GitignoreRenderResult \u2192 src/gitignore-rules.GitignoreRenderResult"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 55
+          },
+          "default": null,
+          "name": "trackedIgnored",
+          "type": "TrackedIgnored.nullable() \u2192 src/gitignore.TrackedIgnored"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore.GitignoreRenderedFile",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 62,
+        "file": "src/gitignore.ts",
+        "line": 57
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 58
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('checked')"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 59
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 60
+          },
+          "default": null,
+          "name": "check",
+          "type": "GitignoreCheckResult \u2192 src/gitignore-rules.GitignoreCheckResult"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 61
+          },
+          "default": null,
+          "name": "trackedIgnored",
+          "type": "TrackedIgnored.nullable() \u2192 src/gitignore.TrackedIgnored"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore.GitignoreCheckedFile",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 68
+          },
+          "name": "GitignoreResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 67,
+        "file": "src/gitignore.ts",
+        "line": 63
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 64
+          },
+          "default": null,
+          "name": "GitignoreRenderedFile",
+          "type": "GitignoreRenderedFile \u2192 src/gitignore.GitignoreRenderedFile"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 65
+          },
+          "default": null,
+          "name": "GitignoreCheckedFile",
+          "type": "GitignoreCheckedFile \u2192 src/gitignore.GitignoreCheckedFile"
+        },
+        {
+          "anchor": {
+            "file": "src/gitignore.ts",
+            "line": 66
+          },
+          "default": null,
+          "name": "GitignoreRefusal",
+          "type": "GitignoreRefusal \u2192 src/gitignore.GitignoreRefusal"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/gitignore.GitignoreResult",
+      "kind": "zod-union on `kind`"
+    },
+    {
+      "anchor": {
         "file": "src/identity.ts",
-        "line": 27
+        "line": 28
       },
       "bases": [],
       "doc": "A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).",
@@ -6180,15 +7780,15 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 46
+            "line": 47
           },
           "name": "ProjectIdentity"
         }
       ],
       "anchor": {
-        "end_line": 45,
+        "end_line": 46,
         "file": "src/identity.ts",
-        "line": 30
+        "line": 31
       },
       "bases": [],
       "doc": null,
@@ -6197,7 +7797,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 31
+            "line": 32
           },
           "default": null,
           "name": "schema",
@@ -6206,7 +7806,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 32
+            "line": 33
           },
           "default": null,
           "name": "id",
@@ -6215,7 +7815,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 33
+            "line": 34
           },
           "default": null,
           "name": "brand",
@@ -6224,7 +7824,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 34
+            "line": 35
           },
           "default": null,
           "name": "code",
@@ -6233,7 +7833,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 35
+            "line": 36
           },
           "default": null,
           "name": "name",
@@ -6242,7 +7842,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 36
+            "line": 37
           },
           "default": null,
           "name": "createdAt",
@@ -6251,7 +7851,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 38
+            "line": 39
           },
           "default": null,
           "doc": "Intent (B584): the aspect the videos are made for. Absent \u2192 `16:9` (`projectIntents`).",
@@ -6261,7 +7861,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 40
+            "line": 41
           },
           "default": null,
           "doc": "Intent (B584): what is spoken, dominant first \u2014 `[\"en\"]`, `[\"th\"]`, `[\"en\",\"th\"]`. Absent \u2192 `[\"en\"]`.",
@@ -6271,7 +7871,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 42
+            "line": 43
           },
           "default": null,
           "doc": "Hint (\u00a78): `single` | `shorts` | `episodes`. Absent \u2192 `single`. No behaviour yet.",
@@ -6281,7 +7881,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 44
+            "line": 45
           },
           "default": null,
           "doc": "The project's transcription providers, over the brand's and the suite's (FliTools reads them).",
@@ -6295,9 +7895,9 @@
     },
     {
       "anchor": {
-        "end_line": 62,
+        "end_line": 63,
         "file": "src/identity.ts",
-        "line": 56
+        "line": 57
       },
       "bases": [],
       "doc": null,
@@ -6306,7 +7906,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 58
+            "line": 59
           },
           "default": null,
           "name": "kind",
@@ -6315,7 +7915,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 59
+            "line": 60
           },
           "default": null,
           "name": "reason",
@@ -6324,7 +7924,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 60
+            "line": 61
           },
           "default": null,
           "name": "path",
@@ -6333,7 +7933,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 61
+            "line": 62
           },
           "default": null,
           "name": "message",
@@ -6349,15 +7949,15 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 71
+            "line": 72
           },
           "name": "WriteIdentityResult"
         }
       ],
       "anchor": {
-        "end_line": 70,
+        "end_line": 71,
         "file": "src/identity.ts",
-        "line": 64
+        "line": 65
       },
       "bases": [],
       "doc": null,
@@ -6366,7 +7966,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 65
+            "line": 66
           },
           "default": null,
           "name": "written",
@@ -6375,7 +7975,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 66
+            "line": 67
           },
           "default": null,
           "name": "Refused('invalid-input')",
@@ -6384,7 +7984,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 67
+            "line": 68
           },
           "default": null,
           "name": "Refused('different-id').extend({ existingId: z.string() })",
@@ -6393,7 +7993,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 68
+            "line": 69
           },
           "default": null,
           "name": "Refused('existing-invalid')",
@@ -6402,7 +8002,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 69
+            "line": 70
           },
           "default": null,
           "name": "Refused('io-error')",
@@ -6416,7 +8016,7 @@
     {
       "anchor": {
         "file": "src/identity.ts",
-        "line": 65
+        "line": 66
       },
       "bases": [],
       "doc": null,
@@ -6424,7 +8024,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 65
+            "line": 66
           },
           "default": null,
           "name": "kind",
@@ -6433,7 +8033,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 65
+            "line": 66
           },
           "default": null,
           "name": "path",
@@ -6442,7 +8042,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 65
+            "line": 66
           },
           "default": null,
           "name": "replaced",
@@ -6456,7 +8056,7 @@
     {
       "anchor": {
         "file": "src/identity.ts",
-        "line": 67
+        "line": 68
       },
       "bases": [
         "Refused(...)"
@@ -6466,7 +8066,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 58
+            "line": 59
           },
           "default": null,
           "inherited_from": "Refused(...)",
@@ -6476,7 +8076,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 59
+            "line": 60
           },
           "default": null,
           "inherited_from": "Refused(...)",
@@ -6486,7 +8086,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 60
+            "line": 61
           },
           "default": null,
           "inherited_from": "Refused(...)",
@@ -6496,7 +8096,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 61
+            "line": 62
           },
           "default": null,
           "inherited_from": "Refused(...)",
@@ -6506,7 +8106,7 @@
         {
           "anchor": {
             "file": "src/identity.ts",
-            "line": 67
+            "line": 68
           },
           "default": null,
           "name": "existingId",
@@ -6516,6 +8116,270 @@
       "grade": "declared",
       "id": "src/identity.WriteIdentityResult[2]",
       "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 190
+          },
+          "name": "AdoptIdentityResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 189,
+        "file": "src/identity.ts",
+        "line": 178
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 179
+          },
+          "default": null,
+          "name": "object",
+          "type": "z.object({ /** `created`: a new `fli.studio.json`. `updated`: the same `id`, other fields changed. `kept`: nothing to change. */ kind: z.en\u2026 \u2192 src/identity.ProjectIdentity"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 185
+          },
+          "default": null,
+          "name": "Refused('invalid-input')",
+          "type": "Refused('invalid-input') \u2192 src/identity.Refused()"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 186
+          },
+          "default": null,
+          "name": "Refused('different-id').extend({ existingId: z.string() })",
+          "type": "Refused('different-id').extend({ existingId: z.string() }) \u2192 src/identity.Refused()"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 187
+          },
+          "default": null,
+          "name": "Refused('existing-invalid')",
+          "type": "Refused('existing-invalid') \u2192 src/identity.Refused()"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 188
+          },
+          "default": null,
+          "name": "Refused('io-error')",
+          "type": "Refused('io-error') \u2192 src/identity.Refused()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/identity.AdoptIdentityResult",
+      "kind": "zod-union"
+    },
+    {
+      "anchor": {
+        "end_line": 184,
+        "file": "src/identity.ts",
+        "line": 179
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 181
+          },
+          "default": null,
+          "doc": "`created`: a new `fli.studio.json`. `updated`: the same `id`, other fields changed. `kept`: nothing to change.",
+          "name": "kind",
+          "type": "z.enum(['created', 'updated', 'kept'])"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 182
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 183
+          },
+          "default": null,
+          "name": "identity",
+          "type": "ProjectIdentity \u2192 src/identity.ProjectIdentity"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/identity.AdoptIdentityResult[0]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/identity.ts",
+        "line": 186
+      },
+      "bases": [
+        "Refused(...)"
+      ],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 59
+          },
+          "default": null,
+          "inherited_from": "Refused(...)",
+          "name": "kind",
+          "type": "z.literal('refused')"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 60
+          },
+          "default": null,
+          "inherited_from": "Refused(...)",
+          "name": "reason",
+          "type": "z.literal(reason)"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 61
+          },
+          "default": null,
+          "inherited_from": "Refused(...)",
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 62
+          },
+          "default": null,
+          "inherited_from": "Refused(...)",
+          "name": "message",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 186
+          },
+          "default": null,
+          "name": "existingId",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/identity.AdoptIdentityResult[2]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 204,
+        "file": "src/identity.ts",
+        "line": 193
+      },
+      "bases": [],
+      "doc": "What `adoptIdentity` may be told; everything but `brand` (when no identity exists yet) can be left out.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 195
+          },
+          "default": null,
+          "doc": "Keep this id: a re-run, or a project re-routed from another folder, must not mint a new uuid (plan \u00a74C item 5).",
+          "name": "id",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 196
+          },
+          "default": null,
+          "name": "brand",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 198
+          },
+          "default": null,
+          "doc": "Default: the folder's `<code>-<name>`.",
+          "name": "code",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 199
+          },
+          "default": null,
+          "name": "name",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 200
+          },
+          "default": null,
+          "name": "aspect",
+          "type": "?: ProjectAspect \u2192 src/identity.ProjectAspect"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 201
+          },
+          "default": null,
+          "name": "languages",
+          "type": "?: string[]"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 202
+          },
+          "default": null,
+          "name": "shape",
+          "type": "?: ProjectShape \u2192 src/identity.ProjectShape"
+        },
+        {
+          "anchor": {
+            "file": "src/identity.ts",
+            "line": 203
+          },
+          "default": null,
+          "name": "createdAt",
+          "type": "?: string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/identity.AdoptIdentityInput",
+      "kind": "type"
     },
     {
       "anchor": {
@@ -6612,15 +8476,15 @@
         {
           "anchor": {
             "file": "src/lab-path.ts",
-            "line": 87
+            "line": 92
           },
           "name": "ResolvedLabPath"
         }
       ],
       "anchor": {
-        "end_line": 86,
+        "end_line": 91,
         "file": "src/lab-path.ts",
-        "line": 79
+        "line": 84
       },
       "bases": [],
       "doc": "Where a project's lab is after `resolveLabPath`: the path, and what (if anything) was moved into place.",
@@ -6629,7 +8493,7 @@
         {
           "anchor": {
             "file": "src/lab-path.ts",
-            "line": 81
+            "line": 86
           },
           "default": null,
           "doc": "Same as `labPath(input)`.",
@@ -6639,7 +8503,7 @@
         {
           "anchor": {
             "file": "src/lab-path.ts",
-            "line": 83
+            "line": 88
           },
           "default": null,
           "doc": "The old project lab folder (`<code>-<old name>`) renamed into place, or null.",
@@ -6649,7 +8513,7 @@
         {
           "anchor": {
             "file": "src/lab-path.ts",
-            "line": 85
+            "line": 90
           },
           "default": null,
           "doc": "Two or more `<code>-*` labs and none under the current name: nothing was moved; they are listed.",
@@ -8674,9 +10538,9 @@
             "line": 95
           },
           "default": null,
-          "doc": "`cut` \u00b7 `audio` \u00b7 `final` \u00b7 `overlay` (D15), or null for a file that does not parse.",
+          "doc": "`cut` \u00b7 `audio` \u00b7 `final` \u00b7 `overlay` (D15) \u00b7 `part`, or null for a file that does not parse.",
           "name": "kind",
-          "type": "z.enum(['cut', 'audio', 'final', 'overlay']).nullable()"
+          "type": "z.enum(['cut', 'audio', 'final', 'overlay', 'part']).nullable()"
         },
         {
           "anchor": {
@@ -9329,6 +11193,78 @@
       "kind": "zod-object"
     },
     {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 28
+          },
+          "name": "RecipePathWarning"
+        }
+      ],
+      "anchor": {
+        "end_line": 27,
+        "file": "src/recipe-paths.ts",
+        "line": 18
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 20
+          },
+          "default": null,
+          "doc": "Project-relative file, `/`-separated; empty for a bare value.",
+          "name": "file",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 22
+          },
+          "default": null,
+          "doc": "RFC 6901 JSON pointer to the string (`/audio/arms/0/path`).",
+          "name": "pointer",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 23
+          },
+          "default": null,
+          "name": "value",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 24
+          },
+          "default": null,
+          "name": "problem",
+          "type": "RecipePathProblem \u2192 src/recipe-paths.RecipePathProblem"
+        },
+        {
+          "anchor": {
+            "file": "src/recipe-paths.ts",
+            "line": 26
+          },
+          "default": null,
+          "doc": "An absolute path that is inside this project is still absolute (it breaks on another machine); null when unknown.",
+          "name": "insideProject",
+          "type": "z.boolean().nullable()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/recipe-paths.RecipePathWarning",
+      "kind": "zod-object"
+    },
+    {
       "anchor": {
         "end_line": 16,
         "file": "src/recording.ts",
@@ -9414,6 +11350,331 @@
       "refinements": [
         "superRefine at line 36"
       ]
+    },
+    {
+      "anchor": {
+        "end_line": 21,
+        "file": "src/renders.ts",
+        "line": 15
+      },
+      "bases": [],
+      "doc": "`<project>/-renders/<tool>/` (R2, David 2026-10-05: \"they only need to live around long enough for the video to get",
+      "exported": false,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/renders.PathSegment",
+      "kind": "zod-scalar",
+      "value": "z.string().min(1).refine((value) => !/[/\\\\]/.test(value) && value !== '.' && value !== '..', 'must be a single path segment')"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 30
+          },
+          "name": "RendersPathInput"
+        }
+      ],
+      "anchor": {
+        "end_line": 29,
+        "file": "src/renders.ts",
+        "line": 23
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 25
+          },
+          "default": null,
+          "doc": "The absolute project folder (`<brand root>/<code>-<name>`).",
+          "name": "projectDir",
+          "type": "z.string().refine((value) => path.isAbsolute(value), 'must be an absolute path') \u2192 path (node:path)"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 27
+          },
+          "default": null,
+          "doc": "The tool that renders: `remotion`, `hyperframes`, `ffmpeg`, `flicut`\u2026",
+          "name": "tool",
+          "type": "PathSegment \u2192 src/renders.PathSegment"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 28
+          },
+          "default": null,
+          "name": "subject",
+          "type": "PathSegment.optional() \u2192 src/renders.PathSegment"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/renders.RendersPathInput",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 57
+          },
+          "name": "RendersTool"
+        }
+      ],
+      "anchor": {
+        "end_line": 56,
+        "file": "src/renders.ts",
+        "line": 52
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 53
+          },
+          "default": null,
+          "name": "tool",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 54
+          },
+          "default": null,
+          "name": "files",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 55
+          },
+          "default": null,
+          "name": "bytes",
+          "type": "z.number().int()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/renders.RendersTool",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 69
+          },
+          "name": "RendersTally"
+        }
+      ],
+      "anchor": {
+        "end_line": 68,
+        "file": "src/renders.ts",
+        "line": 59
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 61
+          },
+          "default": null,
+          "doc": "Is `-renders/` a real folder here (never a link elsewhere)?",
+          "name": "present",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 62
+          },
+          "default": null,
+          "name": "files",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 63
+          },
+          "default": null,
+          "name": "bytes",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 65
+          },
+          "default": null,
+          "doc": "Over `FOLDER_HEAVY.heavyBytes`: amber.",
+          "name": "heavy",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 67
+          },
+          "default": null,
+          "doc": "One row per tool folder, biggest first. Loose files directly in `-renders/` count under the tool `\"\"`.",
+          "name": "tools",
+          "type": "z.array(RendersTool) \u2192 src/renders.RendersTool"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/renders.RendersTally",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 135
+          },
+          "name": "ClearRendersResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 134,
+        "file": "src/renders.ts",
+        "line": 121
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 123
+          },
+          "default": null,
+          "name": "cleared",
+          "type": "z.object({ kind: z.literal('cleared'), /** Top-level entries of `-renders/` removed (a tool folder, or a loose file). */ removed: z.array(z\u2026"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 130
+          },
+          "default": null,
+          "name": "refused",
+          "type": "z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'not-a-folder', 'io-error']), message: z.string() })"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/renders.ClearRendersResult",
+      "kind": "zod-union on `kind`"
+    },
+    {
+      "anchor": {
+        "end_line": 128,
+        "file": "src/renders.ts",
+        "line": 122
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 123
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('cleared')"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 125
+          },
+          "default": null,
+          "doc": "Top-level entries of `-renders/` removed (a tool folder, or a loose file).",
+          "name": "removed",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 126
+          },
+          "default": null,
+          "name": "files",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 127
+          },
+          "default": null,
+          "name": "bytes",
+          "type": "z.number().int()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/renders.ClearRendersResult[kind=cleared]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 133,
+        "file": "src/renders.ts",
+        "line": 129
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 130
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('refused')"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 131
+          },
+          "default": null,
+          "name": "reason",
+          "type": "z.enum(['invalid-input', 'not-a-folder', 'io-error'])"
+        },
+        {
+          "anchor": {
+            "file": "src/renders.ts",
+            "line": 132
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/renders.ClearRendersResult[kind=refused]",
+      "kind": "zod-object"
     },
     {
       "anchor": {
@@ -10718,6 +12979,445 @@
       "aliases": [
         {
           "anchor": {
+            "file": "src/series.ts",
+            "line": 30
+          },
+          "name": "SeriesMember"
+        }
+      ],
+      "anchor": {
+        "end_line": 29,
+        "file": "src/series.ts",
+        "line": 22
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 24
+          },
+          "default": null,
+          "doc": "The project's identity `id`.",
+          "name": "id",
+          "type": "z.uuid()"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 26
+          },
+          "default": null,
+          "doc": "The project's code when it was added; display only.",
+          "name": "code",
+          "type": "ProjectCode \u2192 src/project-folder.ProjectCode"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 28
+          },
+          "default": null,
+          "doc": "A label for the member in this series (\"Day 5\"); absent \u2192 the project's name.",
+          "name": "label",
+          "type": "z.string().min(1).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/series.SeriesMember",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 41
+          },
+          "name": "SeriesFile"
+        }
+      ],
+      "anchor": {
+        "end_line": 40,
+        "file": "src/series.ts",
+        "line": 32
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 33
+          },
+          "default": null,
+          "name": "schema",
+          "type": "z.literal(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 35
+          },
+          "default": null,
+          "doc": "The folder name under `series/`.",
+          "name": "id",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 36
+          },
+          "default": null,
+          "name": "brand",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 37
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 38
+          },
+          "default": null,
+          "name": "createdAt",
+          "type": "z.iso.datetime({ offset: true })"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 39
+          },
+          "default": null,
+          "name": "members",
+          "type": "z.array(SeriesMember) \u2192 src/series.SeriesMember"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/series.SeriesFile",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 79
+          },
+          "name": "SeriesListing"
+        }
+      ],
+      "anchor": {
+        "end_line": 78,
+        "file": "src/series.ts",
+        "line": 74
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 75
+          },
+          "default": null,
+          "name": "series",
+          "type": "z.array(SeriesFile) \u2192 src/series.SeriesFile"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 77
+          },
+          "default": null,
+          "doc": "Folders under `series/` whose file is missing or unusable: listed, never hidden.",
+          "name": "invalid",
+          "type": "z.array(z.object({ folder: z.string(), message: z.string() }))"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/series.SeriesListing",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/series.ts",
+        "line": 77
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 77
+          },
+          "default": null,
+          "name": "folder",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 77
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/series.SeriesListing.invalid[]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 115,
+        "file": "src/series.ts",
+        "line": 102
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 103
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('refused')"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 104
+          },
+          "default": null,
+          "name": "reason",
+          "type": "z.enum(['invalid-input', 'series-exists', 'series-not-found', 'member-not-found', 'unusable-file', 'busy', 'io-error'])"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 113
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 114
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/series.Refusal",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 121
+          },
+          "name": "ChangeSeriesResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 120,
+        "file": "src/series.ts",
+        "line": 117
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 118
+          },
+          "default": null,
+          "name": "written",
+          "type": "z.object({ kind: z.literal('written'), path: z.string(), series: SeriesFile }) \u2192 src/series.SeriesFile"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 119
+          },
+          "default": null,
+          "name": "Refusal",
+          "type": "Refusal \u2192 src/series.Refusal"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/series.ChangeSeriesResult",
+      "kind": "zod-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/series.ts",
+        "line": 118
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 118
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('written')"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 118
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 118
+          },
+          "default": null,
+          "name": "series",
+          "type": "SeriesFile \u2192 src/series.SeriesFile"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/series.ChangeSeriesResult[kind=written]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 128,
+        "file": "src/series.ts",
+        "line": 123
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 125
+          },
+          "default": null,
+          "doc": "How long to wait for another writer's lock (default 3 s).",
+          "name": "waitMs",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 127
+          },
+          "default": null,
+          "doc": "A lock older than this is a crashed writer's and is broken (default 10 s).",
+          "name": "staleMs",
+          "type": "?: number"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/series.ChangeSeriesOptions",
+      "kind": "interface"
+    },
+    {
+      "anchor": {
+        "file": "src/series.ts",
+        "line": 271
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 271
+          },
+          "default": null,
+          "name": "brand",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 271
+          },
+          "default": null,
+          "name": "series",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/series.SeriesRef",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/series.ts",
+        "line": 272
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 272
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/series.ts",
+            "line": 272
+          },
+          "default": null,
+          "name": "series",
+          "type": "SeriesFile \u2192 src/series.SeriesFile"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/series.Changed",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
             "file": "src/stamp.ts",
             "line": 13
           },
@@ -10801,7 +13501,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 14
+        "line": 15
       },
       "bases": [],
       "doc": "Video files and folders (ruling \"B only\", \ud83d\udc64 David 2026-09-22 \u2014 supersedes the 09-09 numbered shape):",
@@ -10817,15 +13517,15 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 30
+            "line": 36
           },
           "name": "VideoFile"
         }
       ],
       "anchor": {
-        "end_line": 29,
+        "end_line": 35,
         "file": "src/video-file.ts",
-        "line": 19
+        "line": 24
       },
       "bases": [],
       "doc": null,
@@ -10834,7 +13534,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 20
+            "line": 25
           },
           "default": null,
           "name": "cut",
@@ -10843,7 +13543,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 23
+            "line": 28
           },
           "default": null,
           "name": "final",
@@ -10852,7 +13552,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 27
+            "line": 32
           },
           "default": null,
           "name": "audio",
@@ -10861,11 +13561,20 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 28
+            "line": 33
           },
           "default": null,
           "name": "overlay",
           "type": "z.object({ name: KebabSlug, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }) \u2192 src/project-folder.KebabSlug, src/video-file.Ext"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "part",
+          "type": "z.object({ name: KebabSlug, kind: z.literal('part'), variant: VideoPart, ext: Ext }) \u2192 src/project-folder.KebabSlug, src/video-file.VideoPart, src/video-file.Ext"
         }
       ],
       "grade": "declared",
@@ -10875,7 +13584,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 20
+        "line": 25
       },
       "bases": [],
       "doc": null,
@@ -10883,7 +13592,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 20
+            "line": 25
           },
           "default": null,
           "name": "name",
@@ -10892,7 +13601,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 20
+            "line": 25
           },
           "default": null,
           "name": "kind",
@@ -10901,57 +13610,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 20
-          },
-          "default": "null",
-          "name": "variant",
-          "type": "z.null().default(null)"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 20
-          },
-          "default": null,
-          "name": "ext",
-          "type": "Ext \u2192 src/video-file.Ext"
-        }
-      ],
-      "grade": "declared",
-      "id": "src/video-file.VideoFile[kind=cut]",
-      "kind": "zod-object"
-    },
-    {
-      "anchor": {
-        "end_line": 26,
-        "file": "src/video-file.ts",
-        "line": 21
-      },
-      "bases": [],
-      "doc": null,
-      "fields": [
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 22
-          },
-          "default": null,
-          "name": "name",
-          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 23
-          },
-          "default": null,
-          "name": "kind",
-          "type": "z.literal('final')"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 24
+            "line": 25
           },
           "default": "null",
           "name": "variant",
@@ -10968,13 +13627,14 @@
         }
       ],
       "grade": "declared",
-      "id": "src/video-file.VideoFile[kind=final]",
+      "id": "src/video-file.VideoFile[kind=cut]",
       "kind": "zod-object"
     },
     {
       "anchor": {
+        "end_line": 31,
         "file": "src/video-file.ts",
-        "line": 27
+        "line": 26
       },
       "bases": [],
       "doc": null,
@@ -10991,7 +13651,56 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 27
+            "line": 28
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('final')"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 29
+          },
+          "default": "null",
+          "name": "variant",
+          "type": "z.null().default(null)"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 30
+          },
+          "default": null,
+          "name": "ext",
+          "type": "Ext \u2192 src/video-file.Ext"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/video-file.VideoFile[kind=final]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/video-file.ts",
+        "line": 32
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 32
+          },
+          "default": null,
+          "name": "name",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 32
           },
           "default": null,
           "name": "kind",
@@ -11000,7 +13709,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 27
+            "line": 32
           },
           "default": null,
           "name": "variant",
@@ -11009,7 +13718,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 27
+            "line": 32
           },
           "default": null,
           "name": "ext",
@@ -11023,7 +13732,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 28
+        "line": 33
       },
       "bases": [],
       "doc": null,
@@ -11031,7 +13740,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 28
+            "line": 33
           },
           "default": null,
           "name": "name",
@@ -11040,7 +13749,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 28
+            "line": 33
           },
           "default": null,
           "name": "kind",
@@ -11049,7 +13758,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 28
+            "line": 33
           },
           "default": null,
           "name": "variant",
@@ -11058,7 +13767,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 28
+            "line": 33
           },
           "default": null,
           "name": "ext",
@@ -11070,19 +13779,68 @@
       "kind": "zod-object"
     },
     {
+      "anchor": {
+        "file": "src/video-file.ts",
+        "line": 34
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "name",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('part')"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "variant",
+          "type": "VideoPart \u2192 src/video-file.VideoPart"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "ext",
+          "type": "Ext \u2192 src/video-file.Ext"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/video-file.VideoFile[kind=part]",
+      "kind": "zod-object"
+    },
+    {
       "aliases": [
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 37
+            "line": 43
           },
           "name": "UnknownVideoFile"
         }
       ],
       "anchor": {
-        "end_line": 36,
+        "end_line": 42,
         "file": "src/video-file.ts",
-        "line": 32
+        "line": 38
       },
       "bases": [],
       "doc": null,
@@ -11091,7 +13849,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 33
+            "line": 39
           },
           "default": null,
           "name": "kind",
@@ -11100,7 +13858,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 34
+            "line": 40
           },
           "default": null,
           "name": "name",
@@ -11109,7 +13867,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 35
+            "line": 41
           },
           "default": null,
           "name": "ext",
@@ -11125,14 +13883,14 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 40
+            "line": 46
           },
           "name": "ParsedVideoFile"
         }
       ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 39
+        "line": 45
       },
       "bases": [],
       "doc": null,
@@ -11141,7 +13899,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 39
+            "line": 45
           },
           "default": null,
           "name": "VideoFile",
@@ -11150,7 +13908,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 39
+            "line": 45
           },
           "default": null,
           "name": "UnknownVideoFile",
@@ -11166,15 +13924,15 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 80
+            "line": 86
           },
           "name": "VideoFolder"
         }
       ],
       "anchor": {
-        "end_line": 79,
+        "end_line": 85,
         "file": "src/video-file.ts",
-        "line": 74
+        "line": 80
       },
       "bases": [],
       "doc": null,
@@ -11183,7 +13941,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 75
+            "line": 81
           },
           "default": null,
           "name": "name",
@@ -11196,9 +13954,9 @@
     },
     {
       "anchor": {
-        "end_line": 91,
+        "end_line": 97,
         "file": "src/video-file.ts",
-        "line": 86
+        "line": 92
       },
       "bases": [],
       "doc": "The same rule as a string schema, for contexts that carry the folder name (`OpenContext.video`).",
@@ -12700,7 +15458,7 @@
     }
   ],
   "target": {
-    "commit": "4e6406e487559339b4a1374a9920a93758b86677",
+    "commit": "a4f01fca9fcf563f306da04e4a94a629ae4f4df9",
     "root": "..",
     "stack": "typescript"
   },
@@ -12718,7 +15476,7 @@
       "census": true,
       "family": "object constant",
       "looked_at": [
-        "src/classify.ts:111"
+        "src/classify.ts:259"
       ],
       "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/classify.LAYOUT_DIRS` - declared but not read"
@@ -12788,9 +15546,36 @@
     },
     {
       "census": true,
+      "family": "union of named or mixed types",
+      "looked_at": [
+        "src/gitignore-rules.ts:201"
+      ],
+      "reason": "declared but not read: union of named or mixed types. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/gitignore-rules.BlockLocation` - declared but not read"
+    },
+    {
+      "census": true,
       "family": "array constant",
       "looked_at": [
-        "src/identity.ts:28"
+        "src/gitignore-rules.ts:55"
+      ],
+      "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/gitignore-rules.GITIGNORE_BASE` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "const built by a call (helper or non-zod call)",
+      "looked_at": [
+        "src/gitignore-rules.ts:32"
+      ],
+      "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/gitignore-rules.GitignorePattern` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "array constant",
+      "looked_at": [
+        "src/identity.ts:29"
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/identity.DEFAULT_LANGUAGES` - declared but not read"
@@ -12860,6 +15645,15 @@
     },
     {
       "census": true,
+      "family": "object constant",
+      "looked_at": [
+        "src/renders.ts:47"
+      ],
+      "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/renders.FOLDER_HEAVY` - declared but not read"
+    },
+    {
+      "census": true,
       "family": "const built by a call (helper or non-zod call)",
       "looked_at": [
         "src/resources.ts:195"
@@ -12914,6 +15708,15 @@
     },
     {
       "census": true,
+      "family": "const built by a call (helper or non-zod call)",
+      "looked_at": [
+        "src/series.ts:282"
+      ],
+      "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/series.SERIES_CAPABILITIES` - declared but not read"
+    },
+    {
+      "census": true,
       "family": "array constant",
       "looked_at": [
         "src/transport.ts:25"
@@ -12932,22 +15735,40 @@
     },
     {
       "looked_at": [
-        "Refused('invalid-input') (src/identity.ts:66)",
-        "Refused('existing-invalid') (src/identity.ts:68)",
-        "Refused('io-error') (src/identity.ts:69)"
+        "OneLine('a note').optional() (src/gitignore-rules.ts:41)"
       ],
-      "reason": "built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here",
-      "subject": "schemas built by `Refused(...)` (3 uses)"
+      "reason": "built by calling `OneLine(...)`, which does not return a single zod expression this reader can follow",
+      "subject": "schemas built by `OneLine(...)` (1 use)"
     },
     {
       "looked_at": [
-        "readFileResult(BrandSettings) (src/brand-settings.ts:32)",
-        "readFileResult(ProjectIdentity) (src/identity.ts:48)",
+        "Refused('invalid-input') (src/identity.ts:67)",
+        "Refused('existing-invalid') (src/identity.ts:69)",
+        "Refused('io-error') (src/identity.ts:70)",
+        "Refused('invalid-input') (src/identity.ts:185)",
+        "Refused('existing-invalid') (src/identity.ts:187)",
+        "Refused('io-error') (src/identity.ts:188)"
+      ],
+      "reason": "built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here",
+      "subject": "schemas built by `Refused(...)` (6 uses)"
+    },
+    {
+      "looked_at": [
+        "promisify(execFile) (src/gitignore.ts:17)"
+      ],
+      "reason": "built by calling `promisify(...)` imported from `node:util`; package helpers are not expanded - see that package's own mirror",
+      "subject": "schemas built by `promisify(...)` (1 use)"
+    },
+    {
+      "looked_at": [
+        "readFileResult(BrandSettings) (src/brand-settings.ts:38)",
+        "readFileResult(ProjectIdentity) (src/identity.ts:49)",
         "readFileResult(ResourcesFile) (src/resources.ts:135)",
+        "readFileResult(SeriesFile) (src/series.ts:43)",
         "readFileResult(WordsFile) (src/words.ts:68)"
       ],
       "reason": "built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here",
-      "subject": "schemas built by `readFileResult(...)` (4 uses)"
+      "subject": "schemas built by `readFileResult(...)` (5 uses)"
     },
     {
       "looked_at": [
@@ -12989,7 +15810,7 @@
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 27,
+    "import": 32,
     "re-export": 0
   }
 }

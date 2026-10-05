@@ -1,5 +1,5 @@
 import { randomBytes } from 'node:crypto';
-import { promises as fs } from 'node:fs';
+import { constants, promises as fs } from 'node:fs';
 import path from 'node:path';
 import type { z } from 'zod';
 import { issuesOf, type ReadFileResult } from './results.js';
@@ -90,4 +90,42 @@ export async function readJsonFile<S extends z.ZodType>(
     };
   }
   return { kind: 'valid', path: file, value: parsed.data };
+}
+
+/**
+ * Copy `source` to `dest` as a copy-on-write clone where the volume has them (APFS `clonefile`, the same as `cp -c`),
+ * a plain copy where it does not (`COPYFILE_FICLONE` falls back, so this never fails for want of clone support).
+ * Never overwrites: an existing `dest` throws `EEXIST`. A clone shares disk blocks with its source until one of them is
+ * written, so a placed video costs no space (video-structure plan §4C, `export.place` for `part`). Node does not say
+ * which of the two happened.
+ */
+export async function cloneFile(source: string, dest: string): Promise<void> {
+  await fs.copyFile(source, dest, constants.COPYFILE_FICLONE | constants.COPYFILE_EXCL);
+}
+
+/**
+ * Take a lock file (`wx` create). Waits up to `waitMs` for another writer to let go, breaks a lock older than `staleMs`
+ * (a crashed writer's), and answers `false` if it could not. Shared by every locked read-modify-write (words, series).
+ */
+export async function takeLock(lock: string, waitMs: number, staleMs: number): Promise<boolean> {
+  const until = Date.now() + waitMs;
+  for (;;) {
+    try {
+      await fs.writeFile(lock, `${process.pid} ${new Date().toISOString()}\n`, { flag: 'wx' });
+      return true;
+    } catch (error) {
+      if (errorCode(error) !== 'EEXIST') throw error;
+    }
+    try {
+      if (Date.now() - (await fs.stat(lock)).mtimeMs > staleMs) {
+        await fs.rm(lock, { force: true });
+        continue;
+      }
+    } catch (error) {
+      if (errorCode(error) === 'ENOENT') continue;
+      throw error;
+    }
+    if (Date.now() >= until) return false;
+    await new Promise((resolve) => setTimeout(resolve, 20));
+  }
 }

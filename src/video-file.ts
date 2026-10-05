@@ -7,14 +7,19 @@ import { parseOrThrow } from './results.js';
  * Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes the 09-09 numbered shape):
  * `videos/<name>/<name>-<kind>[-<variant>].<ext>`, e.g. `videos/flivideo-tour/flivideo-tour-audio-a100.m4a`.
  * No numbers. The video's name is on every file, so a file explains itself outside its folder.
- * Kinds: `cut`, `final` (no variant), `audio-<treatment>`, `overlay-<variant>` (variant required).
+ * Kinds: `cut`, `final` (no variant), `audio-<treatment>`, `overlay-<variant>` (variant required), and (video-structure
+ * plan §4C, 2026-10-05) `part-<intro|body|outro>` — one piece of a video made in sections, joined later.
  * Anything else is `unknown-kind`: shown, never hidden, and `parseVideoFile` never throws.
  */
 
 const Ext = z.string().regex(/^[A-Za-z0-9]+$/, 'ext must be letters/digits, without the dot');
 
-export const VideoFileKind = z.enum(['cut', 'audio', 'overlay', 'final']);
+export const VideoFileKind = z.enum(['cut', 'audio', 'overlay', 'final', 'part']);
 export type VideoFileKind = z.infer<typeof VideoFileKind>;
+
+/** Which section of a video a `part` file is. A closed set: `<name>-part-<intro|body|outro>`. */
+export const VideoPart = z.enum(['intro', 'body', 'outro']);
+export type VideoPart = z.infer<typeof VideoPart>;
 
 export const VideoFile = z.discriminatedUnion('kind', [
   z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }),
@@ -26,6 +31,7 @@ export const VideoFile = z.discriminatedUnion('kind', [
   }),
   z.object({ name: KebabSlug, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }),
   z.object({ name: KebabSlug, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }),
+  z.object({ name: KebabSlug, kind: z.literal('part'), variant: VideoPart, ext: Ext }),
 ]);
 export type VideoFile = z.infer<typeof VideoFile>;
 

@@ -2,7 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { z } from 'zod';
 import { type PrincipalName } from './capability.js';
-import { atomicWrite, errorCode, errorMessage, readJsonFile } from './fs-utils.js';
+import { atomicWrite, errorMessage, readJsonFile, takeLock } from './fs-utils.js';
 import { InvalidFile, issuesOf, readFileResult } from './results.js';
 import { Stamp, stampOf } from './stamp.js';
 
@@ -441,29 +441,6 @@ export function rememberWord(
     });
   }
   return addWordAt(file, input, by, { ...options, createDir: level === 'global' });
-}
-
-async function takeLock(lock: string, waitMs: number, staleMs: number): Promise<boolean> {
-  const until = Date.now() + waitMs;
-  for (;;) {
-    try {
-      await fs.writeFile(lock, `${process.pid} ${new Date().toISOString()}\n`, { flag: 'wx' });
-      return true;
-    } catch (error) {
-      if (errorCode(error) !== 'EEXIST') throw error;
-    }
-    try {
-      if (Date.now() - (await fs.stat(lock)).mtimeMs > staleMs) {
-        await fs.rm(lock, { force: true });
-        continue;
-      }
-    } catch (error) {
-      if (errorCode(error) === 'ENOENT') continue;
-      throw error;
-    }
-    if (Date.now() >= until) return false;
-    await new Promise((resolve) => setTimeout(resolve, 20));
-  }
 }
 
 /** `"en:um"` or `"um"` (English). */

@@ -14,6 +14,20 @@ export const ProjectZone = z.enum([
   'recordings',
   'transcripts',
   'cast',
+  /** Source recordings from FliCast; a tier-1 input, not "other" (workstream B ruling, 2026-10-05). */
+  'voice',
+  'avatar',
+  'script',
+  /** Motion-scene source (R1): `motion/<tool>/`. Machinery inside it is regenerable (`motionMachinery`). */
+  'motion',
+  /** Overlay recipes (plan §3, B ruling): `overlay/<chapter>/beats.json` + `overlay/<chapter>/<variant>/spec.json`. */
+  'overlay',
+  /** Per-video geometry, confirmed by a person (B ruling): tier 1, authored. */
+  'framing',
+  /** FliCut's in-project folder (`first-edit/` on disk today, `edit/` reserved); its `work/` is regenerable. */
+  'assembly',
+  /** A project's top-level `-renders/` (R2): the cache, ignored by git, cleared on request like `-trash/`. */
+  'renders',
   'videos',
   'legacy',
   /** A project's top-level `-trash/` (FliHub's delete target): always shown with its size, emptied on request (David 2026-09-23). */
@@ -22,6 +36,8 @@ export const ProjectZone = z.enum([
 ]);
 /** FliHub moves deleted takes here (`getProjectPaths().trash`); a zone of its own, not legacy. */
 export const TRASH_FOLDER = '-trash';
+/** Renders live in the project, like trash (R2, David 2026-10-05): `<project>/-renders/<tool>/`. A cache. */
+export const RENDERS_FOLDER = '-renders';
 export type ProjectZone = z.infer<typeof ProjectZone>;
 
 const ZONE_FOLDERS: Record<string, ProjectZone> = {
@@ -29,8 +45,22 @@ const ZONE_FOLDERS: Record<string, ProjectZone> = {
   transcripts: 'transcripts',
   'recording-transcripts': 'transcripts', // legacy name, still read (D7)
   cast: 'cast',
+  voice: 'voice',
+  avatar: 'avatar',
+  script: 'script',
+  motion: 'motion',
+  overlay: 'overlay',
+  framing: 'framing',
   videos: 'videos',
 };
+
+/**
+ * FliCut's in-project folder (B ruling 2026-10-05). `first-edit/` is what is on disk (FliCut's `projectsRoot`, e.g.
+ * `v-kybernesis/a01-…/first-edit/NN-slug/{project.json,viewState.json,work/,exports/}`); `edit/` is reserved for its
+ * rename. FliCut's files are not moved and FliCut is not changed: this only names the folder. `first-edit` stays in
+ * `LEGACY_FOLDERS` so it is still never a video name.
+ */
+export const ASSEMBLY_FOLDERS: readonly string[] = ['first-edit', 'edit'];
 
 /** Top-level folders from layouts older than the 09-09 ruling (A8). Read-only, never migrated. */
 export const LEGACY_FOLDERS: readonly string[] = [
@@ -65,6 +95,8 @@ export function classifyProjectEntry(relPath: string, isDirectory?: boolean): Pr
   const topIsFile = !nested && directory === false;
 
   if (top === TRASH_FOLDER) return topIsFile ? 'other' : 'trash';
+  if (top === RENDERS_FOLDER) return topIsFile ? 'other' : 'renders';
+  if (ASSEMBLY_FOLDERS.includes(top)) return topIsFile ? 'other' : 'assembly';
   if (top.startsWith('-') || LEGACY_FOLDERS.includes(top)) return topIsFile ? 'other' : 'legacy';
 
   // The hub layout (new projects): FliHub's two folders live under `hub/`, mirroring FliCast's `cast/`. The `hub/`
@@ -84,6 +116,122 @@ export function classifyProjectEntry(relPath: string, isDirectory?: boolean): Pr
   // Chapter previews are deprecated (D8); FliHub's live `-safe/` and `-trash/` stay recordings.
   if (zone === 'recordings' && segments[1] === '-chapters') return 'legacy';
   return zone;
+}
+
+/** Folders inside `motion/**` that are machinery, not source: regenerable, never in git (gitignore `TIER-CACHE`). */
+export const MOTION_MACHINERY: readonly string[] = [
+  'out',
+  '.cache',
+  '.transcode-cache',
+  'dist',
+  'build',
+  'node_modules',
+];
+
+/**
+ * How much a path matters (the plan §1.1 tier test: "if you deleted it, could you get it back by re-running a tool?"):
+ * `authored` and `input` are tier 1 (the edit, the script, paid inputs: no), `generated` can be rebuilt from tier 1 but
+ * belongs to a recipe, `regenerable` is cache (`-renders/`, `-trash/`, `work/`, motion machinery), `output` is a video.
+ */
+export const ProjectTier = z.enum([
+  'authored',
+  'input',
+  'generated',
+  'regenerable',
+  'output',
+  'other',
+]);
+export type ProjectTier = z.infer<typeof ProjectTier>;
+
+/** What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are authored, `spec.json` is generated. */
+export const OverlayRole = z.enum(['beats', 'framing', 'spec', 'variant-file']);
+export type OverlayRole = z.infer<typeof OverlayRole>;
+
+export const ProjectEntry = z.object({
+  zone: ProjectZone,
+  tier: ProjectTier,
+  /** `overlay/<chapter>/…` only; null for a flat overlay (`ships` = one video) and for every other zone. */
+  chapter: z.string().nullable(),
+  /** `overlay/[<chapter>/]<variant>/…` only. */
+  variant: z.string().nullable(),
+  role: OverlayRole.nullable(),
+});
+export type ProjectEntry = z.infer<typeof ProjectEntry>;
+
+const OVERLAY_AUTHORED_FILES: Record<string, OverlayRole> = {
+  'beats.json': 'beats',
+  'framing.json': 'framing',
+};
+
+function overlayEntry(rest: string[], directory: boolean | undefined): Omit<ProjectEntry, 'zone'> {
+  const file = directory !== true ? rest[rest.length - 1] : undefined;
+  // `overlay/beats.json` (flat, `ships` = one video) or `overlay/<chapter>/beats.json`.
+  const authored = file === undefined ? undefined : OVERLAY_AUTHORED_FILES[file];
+  if (authored !== undefined && rest.length <= 2) {
+    const chapter = rest.length === 2 ? (rest[0] as string) : null;
+    return { tier: 'authored', chapter, variant: null, role: authored };
+  }
+  // `overlay/<variant>/spec.json` (flat) or `overlay/<chapter>/<variant>/spec.json`. Only these two shapes name their
+  // chapter and variant outright; anything deeper is the variant's own files, whose owner a path alone cannot tell.
+  if (file === 'spec.json' && (rest.length === 2 || rest.length === 3)) {
+    const chapter = rest.length === 3 ? (rest[0] as string) : null;
+    return { tier: 'generated', chapter, variant: rest[rest.length - 2] as string, role: 'spec' };
+  }
+  return { tier: 'generated', chapter: null, variant: null, role: 'variant-file' };
+}
+
+function tierOf(
+  zone: ProjectZone,
+  segments: string[],
+  directory: boolean | undefined,
+): Omit<ProjectEntry, 'zone'> {
+  const none = { chapter: null, variant: null, role: null };
+  switch (zone) {
+    case 'identity':
+    case 'app-decisions':
+    case 'script':
+    case 'framing':
+      return { tier: 'authored', ...none };
+    case 'recordings':
+    case 'transcripts':
+    case 'cast':
+    case 'voice':
+    case 'avatar':
+      return { tier: 'input', ...none };
+    case 'videos':
+      return { tier: 'output', ...none };
+    case 'trash':
+    case 'renders':
+      return { tier: 'regenerable', ...none };
+    case 'motion':
+      return {
+        tier: segments.slice(1).some((s) => MOTION_MACHINERY.includes(s))
+          ? 'regenerable'
+          : 'authored',
+        ...none,
+      };
+    case 'overlay':
+      return overlayEntry(segments.slice(1), directory);
+    case 'assembly': {
+      const inner = segments.slice(1);
+      if (inner.includes('work')) return { tier: 'regenerable', ...none };
+      if (inner.includes('exports')) return { tier: 'output', ...none };
+      return { tier: 'authored', ...none };
+    }
+    default:
+      return { tier: 'other', ...none };
+  }
+}
+
+/**
+ * `classifyProjectEntry` plus how much the path matters and, under `overlay/`, which chapter, variant and role it is.
+ * Pure. `overlay/kybernesis-ch01/beats.json` is `authored`; `overlay/ch01/v5-frame/spec.json` is `generated`.
+ */
+export function describeProjectEntry(relPath: string, isDirectory?: boolean): ProjectEntry {
+  const zone = classifyProjectEntry(relPath, isDirectory);
+  const segments = relPath.split(/[/\\]+/).filter((segment) => segment !== '' && segment !== '.');
+  const directory = isDirectory ?? (/[/\\]$/.test(relPath) ? true : undefined);
+  return { zone, ...tierOf(zone, segments, directory) };
 }
 
 /** The folder that holds FliHub's zones in the hub layout. */

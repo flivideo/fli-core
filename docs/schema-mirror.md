@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `4e6406e48755` · **generated** 2026-10-05T05:55:55+00:00
+- **commit** `a4f01fca9fcf` · **generated** 2026-10-05T14:35:33+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 27 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 32 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 209 | 60 | 3 | 7 | 25 | 3 |
+| 247 | 73 | 6 | 9 | 30 | 6 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -19,17 +19,19 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 
 - `src/api-page.ts` — `ApiPageOptions` :16
 - `src/app-file.ts` — `AppName` :15 · `AppSubject` :19 · `AppFile` :26
-- `src/brand-settings.ts` — `TranscriptionChoice` :13 · `BrandSettings` :21 · `WriteBrandSettingsResult` :40
+- `src/brand-settings.ts` — `TranscriptionChoice` :14 · `BrandSettings` :22 · `WriteBrandSettingsResult` :46
 - `src/brands.ts` — `Brand` :9 · `RegistryEntry` :20 · `BrandsFile` :28 · `SkippedBrand` :32 · `BrandsRead` :35 · `ReadBrandsResult` :45 · `ReadBrandsOptions` :48 · `ResolveBrandRootOptions` :92
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
-- `src/classify.ts` — `ProjectZone` (set) :11 · `LEGACY_FOLDERS` (set) :36 · `ProjectLayout` (set) :97 · `ProjectLayoutPaths` :100
+- `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :63 · `LEGACY_FOLDERS` (set) :66 · `MOTION_MACHINERY` (set) :122 · `ProjectTier` (set) :136 · `OverlayRole` (set) :147 · `ProjectEntry` :150 · `ProjectLayout` (set) :245 · `ProjectLayoutPaths` :248
 - `src/control-file.ts` — `ControlFile` :18 · `ControlFileRead` :30 · `ControlFileOptions` :39
 - `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
 - `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
 - `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :32
-- `src/identity.ts` — `ProjectAspect` (set) :12 · `ProjectShape` (set) :22 · `ProjectLanguage` :27 · `ProjectIdentity` :30 · `Refused()` :56 · `WriteIdentityResult` :64
-- `src/lab-path.ts` — `PathSegment` :8 · `LabPathInput` :16 · `ResolvedLabPath` :79
+- `src/gitignore-rules.ts` — `GITIGNORE_BASE_VERSION` :19 · `Tag` :24 · `GitignoreOverlayRule` :38 · `GitignoreGroup` :45 · `GitignoreRenderOptions` :161 · `Located` :194 · `GitignoreRenderResult` :238 · `GitignoreCheckResult` :334
+- `src/gitignore.ts` — `TrackedIgnored` :23 · `GitignoreOptions` :31 · `GitignoreRefusal` :42 · `GitignoreRenderedFile` :49 · `GitignoreCheckedFile` :57 · `GitignoreResult` :63
+- `src/identity.ts` — `ProjectAspect` (set) :13 · `ProjectShape` (set) :23 · `ProjectLanguage` :28 · `ProjectIdentity` :31 · `Refused()` :57 · `WriteIdentityResult` :65 · `AdoptIdentityResult` :178 · `AdoptIdentityInput` :193
+- `src/lab-path.ts` — `PathSegment` :8 · `LabPathInput` :16 · `ResolvedLabPath` :84
 - `src/lifecycle.ts` — `LifecycleVerb` (set) :18 · `SystemStatus` :21 · `SystemQuitInput` :34 · `SystemQuitOutput` :40 · `AppScriptOpen` :84
 - `src/machine.ts` — `AbsolutePath` :7 · `MachineSettings` :12 · `ResolvedMachineSettings` :24 · `MachineSettingsOptions` :27 · `MachineSettingsResult` :32
 - `src/open-args.ts` — `OpenContext` :11 · `OpenArgs` :27 · `OpenArgName` (set) :36 · `RawOpenArgs` :40 · `ParseOpenArgsOptions` :53 · `ParsedOpenArgs` :58
@@ -37,13 +39,16 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/openrpc.ts` — `OpenRpcServer` :18 · `OpenRpcDocument` :29 · `OpenRpcOptions` :52 · `JsonRpcRequest` :174 · `CallAnswer` :183 · `JsonRpcOptions` :185
 - `src/project-folder.ts` — `ProjectCode` :5 · `KebabSlug` :11 · `ProjectFolder` :15
 - `src/publish.ts` — `PublishPiece` (set) :41 · `PublishState` (set) :61 · `PUBLISH_RULES` (set) :75 · `EditApp` (set) :85 · `Iso` :88 · `PublishExport` :91 · `PublishEdit` :107 · `PublishLaunch` :111 · `PublishFacts` :123 · `PublishRow` :134 · `PublishReadiness` :155 · `LIVE` (set) :188 · `PublishedVideo` :655
+- `src/recipe-paths.ts` — `RecipePathProblem` (set) :15 · `RecipePathWarning` :18 · `SKIP` (set) :77
 - `src/recording.ts` — `RecordingTag` :14 · `Recording` :18
+- `src/renders.ts` — `PathSegment` :15 · `RendersPathInput` :23 · `RendersTool` :52 · `RendersTally` :59 · `ClearRendersResult` :121
 - `src/resources.ts` — `Text` :25 · `Key` :26 · `ResourceValue` (set) :31 · `ResourceChoose` (set) :47 · `ResourceStatus` (set) :50 · `ResourceAudience` (set) :53 · `ResourceGroup` :56 · `ResourceKind` :64 · `ResourceOff` :79 · `ResourceVideo` :85 · `ResourceRef` :90 · `Resource` :97 · `ResourcesFile` :118 · `ResourceRegistry` :147 · `ReadResourcesOptions` :156 · `ResourcesRead` :162 · `ResourceInput` :285 · `ResourceChange` :309 · `ResourcePatch` :387 · `WriteResourcesResult` :531
 - `src/results.ts` — `InvalidFile` :4 · `validFile()` :13 · `readFileResult()` :19
 - `src/reveal.ts` — `RevealResult` :13 · `RevealOptions` :24
+- `src/series.ts` — `SeriesMember` :22 · `SeriesFile` :32 · `SeriesListing` :74 · `Refusal` :102 · `ChangeSeriesResult` :117 · `ChangeSeriesOptions` :123 · `SeriesRef` :271 · `Changed` :272
 - `src/stamp.ts` — `Stamp` :9
 - `src/transport.ts` — `ShuttleState` :15 · `JklKey` (set) :27 · `ShuttleAction` (set) :45
-- `src/video-file.ts` — `Ext` :14 · `VideoFileKind` (set) :16 · `VideoFile` :19 · `UnknownVideoFile` :32 · `ParsedVideoFile` :39 · `VideoFolder` :74 · `VideoFolderName` :86
+- `src/video-file.ts` — `Ext` :15 · `VideoFileKind` (set) :17 · `VideoPart` (set) :21 · `VideoFile` :24 · `UnknownVideoFile` :38 · `ParsedVideoFile` :45 · `VideoFolder` :80 · `VideoFolderName` :92
 - `src/window-state.ts` — `WindowRect` :16 · `SavedWindow` :24 · `WindowStateFile` :32 · `DisplayArea` :39 · `PlaceOptions` :47 · `TrackedWindow` :255 · `TrackOptions` :264
 - `src/words.ts` — `WordLevel` (set) :25 · `Text` :29 · `WordName` :32 · `WordRule` :40 · `WordFiller` :44 · `WordKind` (set) :52 · `WordOff` :56 · `WordsFile` :59 · `WordInput` :72 · `WordRef` :95 · `MergedWords` :99 · `WordsRead` :108 · `ReadWordsOptions` :121 · `WriteWordsResult` :287 · `ChangeWordsResult` :320 · `ChangeWordsOptions` :335
 
@@ -65,23 +70,26 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**304** top-level declarations counted = **265** mirrored + **14** listed as gaps + **25** declared but not read.
+**363** top-level declarations counted = **317** mirrored + **16** listed as gaps + **30** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 1 function, 14 literal constants.
+Not counted, as not schema-bearing: 1 function, 21 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
 | `src/capability.ts` | 17 | 16 | 0 | **1** |
-| `src/classify.ts` | 8 | 7 | 0 | **1** |
+| `src/classify.ts` | 16 | 15 | 0 | **1** |
 | `src/estate.ts` | 15 | 14 | 0 | **1** |
 | `src/failure-codes.ts` | 18 | 12 | 0 | **6** |
-| `src/identity.ts` | 12 | 9 | 2 | **1** |
+| `src/gitignore-rules.ts` | 13 | 10 | 0 | **3** |
+| `src/identity.ts` | 15 | 12 | 2 | **1** |
 | `src/lifecycle.ts` | 11 | 10 | 0 | **1** |
 | `src/open-args.ts` | 12 | 11 | 0 | **1** |
 | `src/publish.ts` | 27 | 22 | 0 | **5** |
+| `src/renders.ts` | 9 | 8 | 0 | **1** |
 | `src/resources.ts` | 44 | 33 | 8 | **3** |
 | `src/results.ts` | 5 | 2 | 0 | **3** |
+| `src/series.ts` | 12 | 9 | 2 | **1** |
 | `src/transport.ts` | 5 | 4 | 0 | **1** |
 | `src/words.ts` | 31 | 28 | 2 | **1** |
 
@@ -89,23 +97,23 @@ Not counted, as not schema-bearing: 1 function, 14 literal constants.
 
 One symbol states each set. Adding a member changes that symbol, so these cannot drift.
 
-### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:40-48`
+### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:46-54`
 
 *the `kind` discriminator of the union `WriteBrandSettingsResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/brand-settings.ts:41` |
-| `refused` | `src/brand-settings.ts:43` |
+| `written` | `src/brand-settings.ts:47` |
+| `refused` | `src/brand-settings.ts:49` |
 
-### `src/brand-settings.WriteBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:44`
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:50`
 
 *`z.enum` `reason` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `invalid-input` | `src/brand-settings.ts:44` |
-| `io-error` | `src/brand-settings.ts:44` |
+| `invalid-input` | `src/brand-settings.ts:50` |
+| `io-error` | `src/brand-settings.ts:50` |
 
 ### `src/brands.ReadBrandsResult.kind` — `src/brands.ts:45`
 
@@ -178,13 +186,13 @@ What calling it does to the world: nothing, an edit that can be taken back, one 
 | `true` | `src/capability.ts:122` |
 | `false` | `src/capability.ts:122` |
 
-### `src/classify.ProjectZone` — `src/classify.ts:11-22`
+### `src/classify.ProjectZone` — `src/classify.ts:11-36`
 
 Which zone of the project layout (spec §3, roadmap §1) a path inside a project belongs to.
 
 *`z.enum` `ProjectZone` - a single declaring symbol*
 
-*aliases* `ProjectZone` `src/classify.ts:25`
+*aliases* `ProjectZone` `src/classify.ts:41`
 
 | value | declared at |
 |---|---|
@@ -193,21 +201,61 @@ Which zone of the project layout (spec §3, roadmap §1) a path inside a project
 | `recordings` | `src/classify.ts:14` |
 | `transcripts` | `src/classify.ts:15` |
 | `cast` | `src/classify.ts:16` |
-| `videos` | `src/classify.ts:17` |
-| `legacy` | `src/classify.ts:18` |
-| `trash` | `src/classify.ts:20` |
-| `other` | `src/classify.ts:21` |
+| `voice` | `src/classify.ts:18` |
+| `avatar` | `src/classify.ts:19` |
+| `script` | `src/classify.ts:20` |
+| `motion` | `src/classify.ts:22` |
+| `overlay` | `src/classify.ts:24` |
+| `framing` | `src/classify.ts:26` |
+| `assembly` | `src/classify.ts:28` |
+| `renders` | `src/classify.ts:30` |
+| `videos` | `src/classify.ts:31` |
+| `legacy` | `src/classify.ts:32` |
+| `trash` | `src/classify.ts:34` |
+| `other` | `src/classify.ts:35` |
 
-### `src/classify.ProjectLayout` — `src/classify.ts:97`
+### `src/classify.ProjectTier` — `src/classify.ts:136-143`
 
-*`z.enum` `ProjectLayout` - a single declaring symbol*
+How much a path matters (the plan §1.1 tier test: "if you deleted it, could you get it back by re-running a tool?"):
 
-*aliases* `ProjectLayout` `src/classify.ts:98`
+*`z.enum` `ProjectTier` - a single declaring symbol*
+
+*aliases* `ProjectTier` `src/classify.ts:144`
 
 | value | declared at |
 |---|---|
-| `hub` | `src/classify.ts:97` |
-| `legacy` | `src/classify.ts:97` |
+| `authored` | `src/classify.ts:137` |
+| `input` | `src/classify.ts:138` |
+| `generated` | `src/classify.ts:139` |
+| `regenerable` | `src/classify.ts:140` |
+| `output` | `src/classify.ts:141` |
+| `other` | `src/classify.ts:142` |
+
+### `src/classify.OverlayRole` — `src/classify.ts:147`
+
+What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are authored, `spec.json` is generated.
+
+*`z.enum` `OverlayRole` - a single declaring symbol*
+
+*aliases* `OverlayRole` `src/classify.ts:148`
+
+| value | declared at |
+|---|---|
+| `beats` | `src/classify.ts:147` |
+| `framing` | `src/classify.ts:147` |
+| `spec` | `src/classify.ts:147` |
+| `variant-file` | `src/classify.ts:147` |
+
+### `src/classify.ProjectLayout` — `src/classify.ts:245`
+
+*`z.enum` `ProjectLayout` - a single declaring symbol*
+
+*aliases* `ProjectLayout` `src/classify.ts:246`
+
+| value | declared at |
+|---|---|
+| `hub` | `src/classify.ts:245` |
+| `legacy` | `src/classify.ts:245` |
 
 ### `src/control-file.ControlFileRead.kind` — `src/control-file.ts:30-36`
 
@@ -333,42 +381,95 @@ Which zone of the project layout (spec §3, roadmap §1) a path inside a project
 | `refused` | `src/flitools.ts:46` |
 | `unavailable` | `src/flitools.ts:47` |
 
-### `src/identity.ProjectAspect` — `src/identity.ts:12`
+### `src/gitignore-rules.GitignoreRenderResult.status` — `src/gitignore-rules.ts:239`
+
+*`z.enum` `status` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `created` | `src/gitignore-rules.ts:239` |
+| `updated` | `src/gitignore-rules.ts:239` |
+| `unchanged` | `src/gitignore-rules.ts:239` |
+| `refused` | `src/gitignore-rules.ts:239` |
+
+### `src/gitignore-rules.GitignoreCheckResult.status` — `src/gitignore-rules.ts:336`
+
+*`z.enum` `status` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `ok` | `src/gitignore-rules.ts:336` |
+| `drift` | `src/gitignore-rules.ts:336` |
+| `no-block` | `src/gitignore-rules.ts:336` |
+| `broken-markers` | `src/gitignore-rules.ts:336` |
+
+### `src/gitignore.GitignoreRefusal.reason` — `src/gitignore.ts:44`
+
+*`z.enum` `reason` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `no-brand-root` | `src/gitignore.ts:44` |
+| `brand-settings-invalid` | `src/gitignore.ts:44` |
+| `damaged-markers` | `src/gitignore.ts:44` |
+| `io-error` | `src/gitignore.ts:44` |
+
+### `src/gitignore.GitignoreResult.kind` — `src/gitignore.ts:63-67`
+
+*the `kind` discriminator of the union `GitignoreResult` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `rendered` | `src/gitignore.ts:50` |
+| `checked` | `src/gitignore.ts:58` |
+| `refused` | `src/gitignore.ts:43` |
+
+### `src/identity.ProjectAspect` — `src/identity.ts:13`
 
 The shape a project's videos are made for (David 2026-09-23, B584). Absent → `16:9`.
 
 *`z.enum` `ProjectAspect` - a single declaring symbol*
 
-*aliases* `ProjectAspect` `src/identity.ts:13`
+*aliases* `ProjectAspect` `src/identity.ts:14`
 
 | value | declared at |
 |---|---|
-| `16:9` | `src/identity.ts:12` |
-| `9:16` | `src/identity.ts:12` |
-| `1:1` | `src/identity.ts:12` |
+| `16:9` | `src/identity.ts:13` |
+| `9:16` | `src/identity.ts:13` |
+| `1:1` | `src/identity.ts:13` |
 
-### `src/identity.ProjectShape` — `src/identity.ts:22`
+### `src/identity.ProjectShape` — `src/identity.ts:23`
 
 What the project is for — a HINT only, no behaviour yet (David 2026-09-23; brains `video-as-code/
 
 *`z.enum` `ProjectShape` - a single declaring symbol*
 
-*aliases* `ProjectShape` `src/identity.ts:23`
+*aliases* `ProjectShape` `src/identity.ts:24`
 
 | value | declared at |
 |---|---|
-| `single` | `src/identity.ts:22` |
-| `shorts` | `src/identity.ts:22` |
-| `episodes` | `src/identity.ts:22` |
+| `single` | `src/identity.ts:23` |
+| `shorts` | `src/identity.ts:23` |
+| `episodes` | `src/identity.ts:23` |
 
-### `src/identity.WriteIdentityResult.kind` — `src/identity.ts:64-70`
+### `src/identity.WriteIdentityResult.kind` — `src/identity.ts:65-71`
 
 *the `kind` discriminator of the union `WriteIdentityResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/identity.ts:65` |
-| `refused` | `src/identity.ts:58` |
+| `written` | `src/identity.ts:66` |
+| `refused` | `src/identity.ts:59` |
+
+### `src/identity.AdoptIdentityResult[0].kind` — `src/identity.ts:181`
+
+*`z.enum` `kind` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `created` | `src/identity.ts:181` |
+| `updated` | `src/identity.ts:181` |
+| `kept` | `src/identity.ts:181` |
 
 ### `src/lifecycle.LifecycleVerb` — `src/lifecycle.ts:18`
 
@@ -508,6 +609,7 @@ The app that writes an export kind: FliCut writes `-cut` and `-audio-<treatment>
 | `audio` | `src/publish.ts:95` |
 | `final` | `src/publish.ts:95` |
 | `overlay` | `src/publish.ts:95` |
+| `part` | `src/publish.ts:95` |
 
 ### `src/publish.PublishRow.source` — `src/publish.ts:143`
 
@@ -520,6 +622,40 @@ The app that writes an export kind: FliCut writes `-cut` and `-audio-<treatment>
 | `brand` | `src/publish.ts:143` |
 | `ylo` | `src/publish.ts:143` |
 | `none` | `src/publish.ts:143` |
+
+### `src/recipe-paths.RecipePathProblem` — `src/recipe-paths.ts:15`
+
+The ingest rule (workstream B ruling, 2026-10-05): **a recipe may only reference paths inside its own project.**
+
+*`z.enum` `RecipePathProblem` - a single declaring symbol*
+
+*aliases* `RecipePathProblem` `src/recipe-paths.ts:16`
+
+| value | declared at |
+|---|---|
+| `absolute` | `src/recipe-paths.ts:15` |
+| `home` | `src/recipe-paths.ts:15` |
+| `file-url` | `src/recipe-paths.ts:15` |
+| `escapes-project` | `src/recipe-paths.ts:15` |
+
+### `src/renders.ClearRendersResult.kind` — `src/renders.ts:121-134`
+
+*the `kind` discriminator of the union `ClearRendersResult` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `cleared` | `src/renders.ts:123` |
+| `refused` | `src/renders.ts:130` |
+
+### `src/renders.ClearRendersResult[kind=refused].reason` — `src/renders.ts:131`
+
+*`z.enum` `reason` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `invalid-input` | `src/renders.ts:131` |
+| `not-a-folder` | `src/renders.ts:131` |
+| `io-error` | `src/renders.ts:131` |
 
 ### `src/resources.ResourceValue` — `src/resources.ts:31-40`
 
@@ -638,6 +774,29 @@ How candidates of a kind are chosen: `one` — at most one `chosen` per video; `
 | `not-absolute` | `src/reveal.ts:18` |
 | `failed` | `src/reveal.ts:18` |
 
+### `src/series.Refusal.reason` — `src/series.ts:104`
+
+*`z.enum` `reason` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `invalid-input` | `src/series.ts:105` |
+| `series-exists` | `src/series.ts:106` |
+| `series-not-found` | `src/series.ts:107` |
+| `member-not-found` | `src/series.ts:108` |
+| `unusable-file` | `src/series.ts:109` |
+| `busy` | `src/series.ts:110` |
+| `io-error` | `src/series.ts:111` |
+
+### `src/series.ChangeSeriesResult.kind` — `src/series.ts:117-120`
+
+*the `kind` discriminator of the union `ChangeSeriesResult` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `written` | `src/series.ts:118` |
+| `refused` | `src/series.ts:103` |
+
 ### `src/transport.JklKey` — `src/transport.ts:27`
 
 *literal union type alias `JklKey` - a single declaring symbol*
@@ -659,41 +818,58 @@ How candidates of a kind are chosen: `one` — at most one `chosen` per video; `
 | `playBackward` | `src/transport.ts:45` |
 | `stop` | `src/transport.ts:45` |
 
-### `src/video-file.VideoFileKind` — `src/video-file.ts:16`
+### `src/video-file.VideoFileKind` — `src/video-file.ts:17`
 
 *`z.enum` `VideoFileKind` - a single declaring symbol*
 
-*aliases* `VideoFileKind` `src/video-file.ts:17`
+*aliases* `VideoFileKind` `src/video-file.ts:18`
 
 | value | declared at |
 |---|---|
-| `cut` | `src/video-file.ts:16` |
-| `audio` | `src/video-file.ts:16` |
-| `overlay` | `src/video-file.ts:16` |
-| `final` | `src/video-file.ts:16` |
+| `cut` | `src/video-file.ts:17` |
+| `audio` | `src/video-file.ts:17` |
+| `overlay` | `src/video-file.ts:17` |
+| `final` | `src/video-file.ts:17` |
+| `part` | `src/video-file.ts:17` |
 
-### `src/video-file.VideoFile.kind` — `src/video-file.ts:19-29`
+### `src/video-file.VideoPart` — `src/video-file.ts:21`
+
+Which section of a video a `part` file is. A closed set: `<name>-part-<intro|body|outro>`.
+
+*`z.enum` `VideoPart` - a single declaring symbol*
+
+*aliases* `VideoPart` `src/video-file.ts:22`
+
+| value | declared at |
+|---|---|
+| `intro` | `src/video-file.ts:21` |
+| `body` | `src/video-file.ts:21` |
+| `outro` | `src/video-file.ts:21` |
+
+### `src/video-file.VideoFile.kind` — `src/video-file.ts:24-35`
 
 *the `kind` discriminator of `z.discriminatedUnion` `VideoFile` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `cut` | `src/video-file.ts:20` |
-| `final` | `src/video-file.ts:23` |
-| `audio` | `src/video-file.ts:27` |
-| `overlay` | `src/video-file.ts:28` |
+| `cut` | `src/video-file.ts:25` |
+| `final` | `src/video-file.ts:28` |
+| `audio` | `src/video-file.ts:32` |
+| `overlay` | `src/video-file.ts:33` |
+| `part` | `src/video-file.ts:34` |
 
-### `src/video-file.ParsedVideoFile.kind` — `src/video-file.ts:39`
+### `src/video-file.ParsedVideoFile.kind` — `src/video-file.ts:45`
 
 *the `kind` discriminator of the union `ParsedVideoFile` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `cut` | `src/video-file.ts:20` |
-| `final` | `src/video-file.ts:23` |
-| `audio` | `src/video-file.ts:27` |
-| `overlay` | `src/video-file.ts:28` |
-| `unknown-kind` | `src/video-file.ts:33` |
+| `cut` | `src/video-file.ts:25` |
+| `final` | `src/video-file.ts:28` |
+| `audio` | `src/video-file.ts:32` |
+| `overlay` | `src/video-file.ts:33` |
+| `part` | `src/video-file.ts:34` |
+| `unknown-kind` | `src/video-file.ts:39` |
 
 ### `src/words.WordLevel` — `src/words.ts:25`
 
@@ -784,20 +960,46 @@ How candidates of a kind are chosen: `one` — at most one `chosen` per video; `
 
 Each set below was read out of the real authority — control flow, membership tests, dispatch tables — because nothing declares it. **Correct as of this commit and fragile after it.** Each carries the refactor that would make it declared.
 
-### `src/classify.LEGACY_FOLDERS` — `src/classify.ts:36-43`
+### `src/classify.ASSEMBLY_FOLDERS` — `src/classify.ts:63`
+
+*module constant `ASSEMBLY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
+
+| value | read from |
+|---|---|
+| `first-edit` | `src/classify.ts:63` |
+| `edit` | `src/classify.ts:63` |
+
+> **REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:63 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
+
+### `src/classify.LEGACY_FOLDERS` — `src/classify.ts:66-73`
 
 *module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `first-edit` | `src/classify.ts:37` |
-| `edits` | `src/classify.ts:38` |
-| `edit-1st` | `src/classify.ts:39` |
-| `final` | `src/classify.ts:40` |
-| `pipeline` | `src/classify.ts:41` |
-| `animation` | `src/classify.ts:42` |
+| `first-edit` | `src/classify.ts:67` |
+| `edits` | `src/classify.ts:68` |
+| `edit-1st` | `src/classify.ts:69` |
+| `final` | `src/classify.ts:70` |
+| `pipeline` | `src/classify.ts:71` |
+| `animation` | `src/classify.ts:72` |
 
-> **REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:36 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:66 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
+
+### `src/classify.MOTION_MACHINERY` — `src/classify.ts:122-129`
+
+*module constant `MOTION_MACHINERY` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
+
+| value | read from |
+|---|---|
+| `out` | `src/classify.ts:123` |
+| `.cache` | `src/classify.ts:124` |
+| `.transcode-cache` | `src/classify.ts:125` |
+| `dist` | `src/classify.ts:126` |
+| `build` | `src/classify.ts:127` |
+| `node_modules` | `src/classify.ts:128` |
+
+> **REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:122 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.**
 
 ### `src/fs-utils.NO_HARD_LINKS` — `src/fs-utils.ts:32`
 
@@ -823,6 +1025,28 @@ Each set below was read out of the real authority — control flow, membership t
 | `published` | `src/publish.ts:188` |
 
 > **REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.**
+
+### `src/recipe-paths.SKIP` — `src/recipe-paths.ts:77`
+
+*module constant `SKIP` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
+
+| value | read from |
+|---|---|
+| `node_modules` | `src/recipe-paths.ts:77` |
+| `.cache` | `src/recipe-paths.ts:77` |
+| `out` | `src/recipe-paths.ts:77` |
+| `-renders` | `src/recipe-paths.ts:77` |
+| `-trash` | `src/recipe-paths.ts:77` |
+
+> **REFACTOR (minor): `SKIP` at src/recipe-paths.ts:77 names the set but does not type it. A z.enum or `as const` + `typeof SKIP[number]` would make a wrong value a static error rather than a runtime miss.**
+
+## Declared constants
+
+| constant | value in code | declared at |
+|---|---|---|
+| `src/gitignore-rules.GITIGNORE_BASE_VERSION` | `1` | `src/gitignore-rules.ts:19` |
+
+> These are what the **code** says. This mirror does not read the data on disk, so a disagreement between the two is still invisible here.
 
 ## Shapes
 
@@ -868,52 +1092,53 @@ The self-describing surface as ONE served HTML page (agent-drivable step 2). Two
 | `app` | `AppName → src/app-file.AppName` | — | `src/app-file.ts:27` |
 | `subject` | `AppSubject.optional() → src/app-file.AppSubject` | — | `src/app-file.ts:27` |
 
-### `src/brand-settings.TranscriptionChoice` — zod-object — `src/brand-settings.ts:13-18`
+### `src/brand-settings.TranscriptionChoice` — zod-object — `src/brand-settings.ts:14-19`
 
 A level's transcription providers (FliTools reads them: global `flitools.json` → brand `fli.brand.json` → project
 
-*aliases* `TranscriptionChoice` `src/brand-settings.ts:19`
+*aliases* `TranscriptionChoice` `src/brand-settings.ts:20`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `fast` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:15` | Pass 1 (fast): `auto`, `groq-whisper`, `mlx-whisper`, … |
-| `editGrade` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:17` | Pass 2 (edit-grade): `crisperwhisper`, `elevenlabs`, `off`, … |
+| `fast` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:16` | Pass 1 (fast): `auto`, `groq-whisper`, `mlx-whisper`, … |
+| `editGrade` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:18` | Pass 2 (edit-grade): `crisperwhisper`, `elevenlabs`, `off`, … |
 
-### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:21-29`
+### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:22-35`
 
-*aliases* `BrandSettings` `src/brand-settings.ts:30`
+*aliases* `BrandSettings` `src/brand-settings.ts:36`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:22` |  |
-| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:23` |  |
-| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:24` |  |
-| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/brand-settings.ts:28` | The brand's transcription providers, over the suite default; absent → the suite default. |
+| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:23` |  |
+| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:24` |  |
+| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:25` |  |
+| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/brand-settings.ts:29` | The brand's transcription providers, over the suite default; absent → the suite default. |
+| `gitignore` | `z.array(GitignoreOverlayRule).optional() → src/gitignore-rules.GitignoreOverlayRule` | — | `src/brand-settings.ts:34` | The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's |
 
-### `src/brand-settings.WriteBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:40-48`
+### `src/brand-settings.WriteBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:46-54`
 
-*aliases* `WriteBrandSettingsResult` `src/brand-settings.ts:49`
+*aliases* `WriteBrandSettingsResult` `src/brand-settings.ts:55`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/brand-settings.ts:41` |
-| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/brand-settings.ts:43` |
+| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/brand-settings.ts:47` |
+| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/brand-settings.ts:49` |
 
-### `src/brand-settings.WriteBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:41`
-
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:41` |
-| `path` | `z.string()` | — | `src/brand-settings.ts:41` |
-
-### `src/brand-settings.WriteBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:42-47`
+### `src/brand-settings.WriteBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:47`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:43` |
-| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/brand-settings.ts:44` |
-| `path` | `z.string()` | — | `src/brand-settings.ts:45` |
-| `message` | `z.string()` | — | `src/brand-settings.ts:46` |
+| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:47` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:47` |
+
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:48-53`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:49` |
+| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/brand-settings.ts:50` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:51` |
+| `message` | `z.string()` | — | `src/brand-settings.ts:52` |
 
 ### `src/brands.Brand` — zod-object — `src/brands.ts:9-17`
 
@@ -1095,15 +1320,27 @@ One capability as data, for `GET …/capabilities`, a CLI's `list` and the OpenR
 |---|---|---|---|
 | `when` | `z.string()` | — | `src/capability.ts:199` |
 
-### `src/classify.ProjectLayoutPaths` — zod-object — `src/classify.ts:100-107`
+### `src/classify.ProjectEntry` — zod-object — `src/classify.ts:150-158`
 
-*aliases* `ProjectLayoutPaths` `src/classify.ts:108`
+*aliases* `ProjectEntry` `src/classify.ts:159`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `layout` | `ProjectLayout → src/classify.ProjectLayout` | — | `src/classify.ts:102` | Detected by `projectLayout` (D14). |
-| `recordings` | `z.string()` | — | `src/classify.ts:104` | Absolute path of the recordings folder for this layout (it may not exist yet). |
-| `transcripts` | `z.string()` | — | `src/classify.ts:106` | Absolute path of the transcripts folder for this layout (it may not exist yet). |
+| `zone` | `ProjectZone → src/classify.ProjectZone` | — | `src/classify.ts:151` |  |
+| `tier` | `ProjectTier → src/classify.ProjectTier` | — | `src/classify.ts:152` |  |
+| `chapter` | `z.string().nullable()` | — | `src/classify.ts:154` | `overlay/<chapter>/…` only; null for a flat overlay (`ships` = one video) and for every other zone. |
+| `variant` | `z.string().nullable()` | — | `src/classify.ts:156` | `overlay/[<chapter>/]<variant>/…` only. |
+| `role` | `OverlayRole.nullable() → src/classify.OverlayRole` | — | `src/classify.ts:157` |  |
+
+### `src/classify.ProjectLayoutPaths` — zod-object — `src/classify.ts:248-255`
+
+*aliases* `ProjectLayoutPaths` `src/classify.ts:256`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `layout` | `ProjectLayout → src/classify.ProjectLayout` | — | `src/classify.ts:250` | Detected by `projectLayout` (D14). |
+| `recordings` | `z.string()` | — | `src/classify.ts:252` | Absolute path of the recordings folder for this layout (it may not exist yet). |
+| `transcripts` | `z.string()` | — | `src/classify.ts:254` | Absolute path of the transcripts folder for this layout (it may not exist yet). |
 
 ### `src/control-file.ControlFile` — zod-object — `src/control-file.ts:18-27`
 
@@ -1527,69 +1764,242 @@ One FliTools job (`transcribe.jobs`, or `transcribe.run { wait: false }`).
 | `language` | `?: string` | — | `src/flitools.ts:62` |  |
 | `vocabulary` | `?: string[]` | — | `src/flitools.ts:63` |  |
 
-### `src/identity.ProjectLanguage` — zod-scalar — `src/identity.ts:27`
+### `src/gitignore-rules.Tag` — zod-scalar — `src/gitignore-rules.ts:24`
+
+`z.string().regex(/^[A-Z][A-Z0-9-]*$/, 'a reason tag is UPPER-KEBAB (DAMIT-MASTER)')`
+
+### `src/gitignore-rules.GitignoreOverlayRule` — zod-object — `src/gitignore-rules.ts:38-42`
+
+A brand's own rule, kept in its `fli.brand.json` (`gitignore: [...]`) so it travels with the repo.
+
+*aliases* `GitignoreOverlayRule` `src/gitignore-rules.ts:43`
+
+| field | type | default | at |
+|---|---|---|---|
+| `pattern` | `GitignorePattern → src/gitignore-rules.GitignorePattern` | — | `src/gitignore-rules.ts:39` |
+| `reason` | `Tag → src/gitignore-rules.Tag` | — | `src/gitignore-rules.ts:40` |
+| `note` | `OneLine('a note').optional() → src/gitignore-rules.OneLine` | — | `src/gitignore-rules.ts:41` |
+
+### `src/gitignore-rules.GitignoreGroup` — zod-object — `src/gitignore-rules.ts:45-49`
+
+*aliases* `GitignoreGroup` `src/gitignore-rules.ts:50`
+
+| field | type | default | at |
+|---|---|---|---|
+| `reason` | `Tag → src/gitignore-rules.Tag` | — | `src/gitignore-rules.ts:46` |
+| `note` | `z.string()` | — | `src/gitignore-rules.ts:47` |
+| `patterns` | `z.array(z.string())` | — | `src/gitignore-rules.ts:48` |
+
+### `src/gitignore-rules.GitignoreRenderOptions` — interface — `src/gitignore-rules.ts:161-165`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `brand` | `string` | — | `src/gitignore-rules.ts:163` | The brand key (`aitldr`), as in `fli.brand.json`. Named in the marker; no path, host or user ever is. |
+| `overlay` | `?: readonly GitignoreOverlayRule[] → src/gitignore-rules.GitignoreOverlayRule` | — | `src/gitignore-rules.ts:164` |  |
+
+### `src/gitignore-rules.Located` — interface — `src/gitignore-rules.ts:194-199`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `start` | `number` | — | `src/gitignore-rules.ts:196` | Offset of the BEGIN line's first character. |
+| `end` | `number` | — | `src/gitignore-rules.ts:198` | Offset just past the END line's newline (or the end of the file). |
+
+### `src/gitignore-rules.GitignoreRenderResult` — zod-object — `src/gitignore-rules.ts:238-252`
+
+*aliases* `GitignoreRenderResult` `src/gitignore-rules.ts:253`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `status` | `z.enum(['created', 'updated', 'unchanged', 'refused'])` | — | `src/gitignore-rules.ts:239` |  |
+| `content` | `z.string()` | — | `src/gitignore-rules.ts:241` | The whole file after the render (the existing text, untouched, when refused). |
+| `added` | `z.array(z.string())` | — | `src/gitignore-rules.ts:243` | Lines in the new block that were not in the old one. |
+| `removed` | `z.array(z.string())` | — | `src/gitignore-rules.ts:245` | Lines in the old block that are not in the new one. |
+| `legacyDuplicates` | `z.array(z.string())` | — | `src/gitignore-rules.ts:247` | Hand-written pattern lines outside the block that the block now also emits: reported, never deleted. |
+| `blockNotLast` | `z.boolean()` | — | `src/gitignore-rules.ts:249` | The block is not the last thing in the file: a hand rule after it could undo a re-include. Reported, not moved. |
+| `message` | `z.string().optional()` | — | `src/gitignore-rules.ts:251` | Why a render was refused: the markers are broken. |
+
+### `src/gitignore-rules.GitignoreCheckResult` — zod-object — `src/gitignore-rules.ts:334-350`
+
+*aliases* `GitignoreCheckResult` `src/gitignore-rules.ts:351`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `status` | `z.enum(['ok', 'drift', 'no-block', 'broken-markers'])` | — | `src/gitignore-rules.ts:336` | `ok`: the block is what would be rendered. `drift`: it differs. `no-block`: never generated. `broken-markers`. |
+| `ok` | `z.boolean()` | — | `src/gitignore-rules.ts:338` | `status === 'ok'`: the exit code of a hook or a fleet sweep is non-zero for everything else. |
+| `missing` | `z.array(z.string())` | — | `src/gitignore-rules.ts:340` | Lines the rendered block has that the file's does not. |
+| `extra` | `z.array(z.string())` | — | `src/gitignore-rules.ts:342` | Lines the file's block has that the rendered one does not (someone edited between the markers). |
+| `fileBaseVersion` | `z.number().int().nullable()` | — | `src/gitignore-rules.ts:344` | The base version in the file's marker, when there is one. |
+| `baseVersion` | `z.number().int()` | — | `src/gitignore-rules.ts:345` |  |
+| `reason` | `z.string().optional()` | — | `src/gitignore-rules.ts:347` | Why, in a sentence, when not ok. |
+| `legacyDuplicates` | `z.array(z.string())` | — | `src/gitignore-rules.ts:348` |  |
+| `blockNotLast` | `z.boolean()` | — | `src/gitignore-rules.ts:349` |  |
+
+### `src/gitignore.TrackedIgnored` — zod-object — `src/gitignore.ts:23-28`
+
+*aliases* `TrackedIgnored` `src/gitignore.ts:29`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `count` | `z.number().int()` | — | `src/gitignore.ts:25` | How many committed files the rendered rules now ignore. Ignoring a path does not untrack it. |
+| `files` | `z.array(z.string())` | — | `src/gitignore.ts:27` | The first 100, `/`-separated, exactly as git names them (`core.quotepath=false`: no octal escapes). |
+
+### `src/gitignore.GitignoreOptions` — interface — `src/gitignore.ts:31-40`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `check` | `?: boolean` | — | `src/gitignore.ts:33` | Check only: write nothing. |
+| `brand` | `?: string` | — | `src/gitignore.ts:35` | The brand key; default `fli.brand.json`'s `brand`, else the folder name without `v-`. |
+| `overlay` | `?: readonly GitignoreOverlayRule[] → src/gitignore-rules.GitignoreOverlayRule` | — | `src/gitignore.ts:37` | Override the overlay (a scratch run); default `fli.brand.json`'s `gitignore`. |
+| `tracked` | `?: boolean` | — | `src/gitignore.ts:39` | List tracked files the rules ignore (needs `git`; default `true` for a check). `null` in the result when git cannot say. |
+
+### `src/gitignore.GitignoreRefusal` — zod-object — `src/gitignore.ts:42-47`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/gitignore.ts:43` |
+| `reason` | `z.enum(['no-brand-root', 'brand-settings-invalid', 'damaged-markers', 'io-error'])` | — | `src/gitignore.ts:44` |
+| `path` | `z.string()` | — | `src/gitignore.ts:45` |
+| `message` | `z.string()` | — | `src/gitignore.ts:46` |
+
+### `src/gitignore.GitignoreRenderedFile` — zod-object — `src/gitignore.ts:49-56`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `z.literal('rendered')` | — | `src/gitignore.ts:50` |  |
+| `path` | `z.string()` | — | `src/gitignore.ts:51` |  |
+| `wrote` | `z.boolean()` | — | `src/gitignore.ts:53` | `true` when the file on disk was changed (never in a check). |
+| `render` | `GitignoreRenderResult → src/gitignore-rules.GitignoreRenderResult` | — | `src/gitignore.ts:54` |  |
+| `trackedIgnored` | `TrackedIgnored.nullable() → src/gitignore.TrackedIgnored` | — | `src/gitignore.ts:55` |  |
+
+### `src/gitignore.GitignoreCheckedFile` — zod-object — `src/gitignore.ts:57-62`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('checked')` | — | `src/gitignore.ts:58` |
+| `path` | `z.string()` | — | `src/gitignore.ts:59` |
+| `check` | `GitignoreCheckResult → src/gitignore-rules.GitignoreCheckResult` | — | `src/gitignore.ts:60` |
+| `trackedIgnored` | `TrackedIgnored.nullable() → src/gitignore.TrackedIgnored` | — | `src/gitignore.ts:61` |
+
+### `src/gitignore.GitignoreResult` — zod-union on `kind` — `src/gitignore.ts:63-67`
+
+*aliases* `GitignoreResult` `src/gitignore.ts:68`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `GitignoreRenderedFile` | `GitignoreRenderedFile → src/gitignore.GitignoreRenderedFile` | — | `src/gitignore.ts:64` |
+| `GitignoreCheckedFile` | `GitignoreCheckedFile → src/gitignore.GitignoreCheckedFile` | — | `src/gitignore.ts:65` |
+| `GitignoreRefusal` | `GitignoreRefusal → src/gitignore.GitignoreRefusal` | — | `src/gitignore.ts:66` |
+
+### `src/identity.ProjectLanguage` — zod-scalar — `src/identity.ts:28`
 
 A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).
 
 `z.string().regex(/^[a-z]{2}$/)`
 
-### `src/identity.ProjectIdentity` — zod-object — `src/identity.ts:30-45`
+### `src/identity.ProjectIdentity` — zod-object — `src/identity.ts:31-46`
 
-*aliases* `ProjectIdentity` `src/identity.ts:46`
+*aliases* `ProjectIdentity` `src/identity.ts:47`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/identity.ts:31` |  |
-| `id` | `z.uuid()` | — | `src/identity.ts:32` |  |
-| `brand` | `z.string().min(1)` | — | `src/identity.ts:33` |  |
-| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/identity.ts:34` |  |
-| `name` | `z.string().min(1)` | — | `src/identity.ts:35` |  |
-| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/identity.ts:36` |  |
-| `aspect` | `ProjectAspect.optional() → src/identity.ProjectAspect` | — | `src/identity.ts:38` | Intent (B584): the aspect the videos are made for. Absent → `16:9` (`projectIntents`). |
-| `languages` | `z.array(ProjectLanguage).min(1).optional() → src/identity.ProjectLanguage` | — | `src/identity.ts:40` | Intent (B584): what is spoken, dominant first — `["en"]`, `["th"]`, `["en","th"]`. Absent → `["en"]`. |
-| `shape` | `ProjectShape.optional() → src/identity.ProjectShape` | — | `src/identity.ts:42` | Hint (§8): `single` \| `shorts` \| `episodes`. Absent → `single`. No behaviour yet. |
-| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/identity.ts:44` | The project's transcription providers, over the brand's and the suite's (FliTools reads them). |
+| `schema` | `z.literal(1)` | — | `src/identity.ts:32` |  |
+| `id` | `z.uuid()` | — | `src/identity.ts:33` |  |
+| `brand` | `z.string().min(1)` | — | `src/identity.ts:34` |  |
+| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/identity.ts:35` |  |
+| `name` | `z.string().min(1)` | — | `src/identity.ts:36` |  |
+| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/identity.ts:37` |  |
+| `aspect` | `ProjectAspect.optional() → src/identity.ProjectAspect` | — | `src/identity.ts:39` | Intent (B584): the aspect the videos are made for. Absent → `16:9` (`projectIntents`). |
+| `languages` | `z.array(ProjectLanguage).min(1).optional() → src/identity.ProjectLanguage` | — | `src/identity.ts:41` | Intent (B584): what is spoken, dominant first — `["en"]`, `["th"]`, `["en","th"]`. Absent → `["en"]`. |
+| `shape` | `ProjectShape.optional() → src/identity.ProjectShape` | — | `src/identity.ts:43` | Hint (§8): `single` \| `shorts` \| `episodes`. Absent → `single`. No behaviour yet. |
+| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/identity.ts:45` | The project's transcription providers, over the brand's and the suite's (FliTools reads them). |
 
-### `src/identity.Refused()` — zod-factory — `src/identity.ts:56-62`
+### `src/identity.Refused()` — zod-factory — `src/identity.ts:57-63`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/identity.ts:58` |
-| `reason` | `z.literal(reason)` | — | `src/identity.ts:59` |
-| `path` | `z.string()` | — | `src/identity.ts:60` |
-| `message` | `z.string()` | — | `src/identity.ts:61` |
+| `kind` | `z.literal('refused')` | — | `src/identity.ts:59` |
+| `reason` | `z.literal(reason)` | — | `src/identity.ts:60` |
+| `path` | `z.string()` | — | `src/identity.ts:61` |
+| `message` | `z.string()` | — | `src/identity.ts:62` |
 
-### `src/identity.WriteIdentityResult` — zod-union on `kind` — `src/identity.ts:64-70`
+### `src/identity.WriteIdentityResult` — zod-union on `kind` — `src/identity.ts:65-71`
 
-*aliases* `WriteIdentityResult` `src/identity.ts:71`
+*aliases* `WriteIdentityResult` `src/identity.ts:72`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string(), replaced: z.boolean() })` | — | `src/identity.ts:65` |
-| `Refused('invalid-input')` | `Refused('invalid-input') → src/identity.Refused()` | — | `src/identity.ts:66` |
-| `Refused('different-id').extend({ existingId: z.string() })` | `Refused('different-id').extend({ existingId: z.string() }) → src/identity.Refused()` | — | `src/identity.ts:67` |
-| `Refused('existing-invalid')` | `Refused('existing-invalid') → src/identity.Refused()` | — | `src/identity.ts:68` |
-| `Refused('io-error')` | `Refused('io-error') → src/identity.Refused()` | — | `src/identity.ts:69` |
+| `written` | `z.object({ kind: z.literal('written'), path: z.string(), replaced: z.boolean() })` | — | `src/identity.ts:66` |
+| `Refused('invalid-input')` | `Refused('invalid-input') → src/identity.Refused()` | — | `src/identity.ts:67` |
+| `Refused('different-id').extend({ existingId: z.string() })` | `Refused('different-id').extend({ existingId: z.string() }) → src/identity.Refused()` | — | `src/identity.ts:68` |
+| `Refused('existing-invalid')` | `Refused('existing-invalid') → src/identity.Refused()` | — | `src/identity.ts:69` |
+| `Refused('io-error')` | `Refused('io-error') → src/identity.Refused()` | — | `src/identity.ts:70` |
 
-### `src/identity.WriteIdentityResult[kind=written]` — zod-object — `src/identity.ts:65`
+### `src/identity.WriteIdentityResult[kind=written]` — zod-object — `src/identity.ts:66`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/identity.ts:65` |
-| `path` | `z.string()` | — | `src/identity.ts:65` |
-| `replaced` | `z.boolean()` | — | `src/identity.ts:65` |
+| `kind` | `z.literal('written')` | — | `src/identity.ts:66` |
+| `path` | `z.string()` | — | `src/identity.ts:66` |
+| `replaced` | `z.boolean()` | — | `src/identity.ts:66` |
 
-### `src/identity.WriteIdentityResult[2]` — zod-object — `src/identity.ts:67`
+### `src/identity.WriteIdentityResult[2]` — zod-object — `src/identity.ts:68`
 
 *extends* `Refused(...)`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/identity.ts:58` |
-| `reason` | `z.literal(reason)` | — | `src/identity.ts:59` |
-| `path` | `z.string()` | — | `src/identity.ts:60` |
-| `message` | `z.string()` | — | `src/identity.ts:61` |
-| `existingId` | `z.string()` | — | `src/identity.ts:67` |
+| `kind` | `z.literal('refused')` | — | `src/identity.ts:59` |
+| `reason` | `z.literal(reason)` | — | `src/identity.ts:60` |
+| `path` | `z.string()` | — | `src/identity.ts:61` |
+| `message` | `z.string()` | — | `src/identity.ts:62` |
+| `existingId` | `z.string()` | — | `src/identity.ts:68` |
+
+### `src/identity.AdoptIdentityResult` — zod-union — `src/identity.ts:178-189`
+
+*aliases* `AdoptIdentityResult` `src/identity.ts:190`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `object` | `z.object({ /** `created`: a new `fli.studio.json`. `updated`: the same `id`, other fields changed. `kept`: nothing to change. */ kind: z.en… → src/identity.ProjectIdentity` | — | `src/identity.ts:179` |
+| `Refused('invalid-input')` | `Refused('invalid-input') → src/identity.Refused()` | — | `src/identity.ts:185` |
+| `Refused('different-id').extend({ existingId: z.string() })` | `Refused('different-id').extend({ existingId: z.string() }) → src/identity.Refused()` | — | `src/identity.ts:186` |
+| `Refused('existing-invalid')` | `Refused('existing-invalid') → src/identity.Refused()` | — | `src/identity.ts:187` |
+| `Refused('io-error')` | `Refused('io-error') → src/identity.Refused()` | — | `src/identity.ts:188` |
+
+### `src/identity.AdoptIdentityResult[0]` — zod-object — `src/identity.ts:179-184`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `z.enum(['created', 'updated', 'kept'])` | — | `src/identity.ts:181` | `created`: a new `fli.studio.json`. `updated`: the same `id`, other fields changed. `kept`: nothing to change. |
+| `path` | `z.string()` | — | `src/identity.ts:182` |  |
+| `identity` | `ProjectIdentity → src/identity.ProjectIdentity` | — | `src/identity.ts:183` |  |
+
+### `src/identity.AdoptIdentityResult[2]` — zod-object — `src/identity.ts:186`
+
+*extends* `Refused(...)`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/identity.ts:59` |
+| `reason` | `z.literal(reason)` | — | `src/identity.ts:60` |
+| `path` | `z.string()` | — | `src/identity.ts:61` |
+| `message` | `z.string()` | — | `src/identity.ts:62` |
+| `existingId` | `z.string()` | — | `src/identity.ts:186` |
+
+### `src/identity.AdoptIdentityInput` — type — `src/identity.ts:193-204`
+
+What `adoptIdentity` may be told; everything but `brand` (when no identity exists yet) can be left out.
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `?: string` | — | `src/identity.ts:195` | Keep this id: a re-run, or a project re-routed from another folder, must not mint a new uuid (plan §4C item 5). |
+| `brand` | `?: string` | — | `src/identity.ts:196` |  |
+| `code` | `?: string` | — | `src/identity.ts:198` | Default: the folder's `<code>-<name>`. |
+| `name` | `?: string` | — | `src/identity.ts:199` |  |
+| `aspect` | `?: ProjectAspect → src/identity.ProjectAspect` | — | `src/identity.ts:200` |  |
+| `languages` | `?: string[]` | — | `src/identity.ts:201` |  |
+| `shape` | `?: ProjectShape → src/identity.ProjectShape` | — | `src/identity.ts:202` |  |
+| `createdAt` | `?: string` | — | `src/identity.ts:203` |  |
 
 ### `src/lab-path.PathSegment` — zod-scalar — `src/lab-path.ts:8-14`
 
@@ -1607,17 +2017,17 @@ A spoken language, as a lower-case ISO 639-1 code (`en`, `th`).
 | `app` | `PathSegment → src/lab-path.PathSegment` | — | `src/lab-path.ts:33` |  |
 | `subject` | `PathSegment.optional() → src/lab-path.PathSegment` | — | `src/lab-path.ts:34` |  |
 
-### `src/lab-path.ResolvedLabPath` — zod-object — `src/lab-path.ts:79-86`
+### `src/lab-path.ResolvedLabPath` — zod-object — `src/lab-path.ts:84-91`
 
 Where a project's lab is after `resolveLabPath`: the path, and what (if anything) was moved into place.
 
-*aliases* `ResolvedLabPath` `src/lab-path.ts:87`
+*aliases* `ResolvedLabPath` `src/lab-path.ts:92`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `path` | `z.string()` | — | `src/lab-path.ts:81` | Same as `labPath(input)`. |
-| `migratedFrom` | `z.string().nullable()` | — | `src/lab-path.ts:83` | The old project lab folder (`<code>-<old name>`) renamed into place, or null. |
-| `ambiguous` | `z.array(z.string())` | — | `src/lab-path.ts:85` | Two or more `<code>-*` labs and none under the current name: nothing was moved; they are listed. |
+| `path` | `z.string()` | — | `src/lab-path.ts:86` | Same as `labPath(input)`. |
+| `migratedFrom` | `z.string().nullable()` | — | `src/lab-path.ts:88` | The old project lab folder (`<code>-<old name>`) renamed into place, or null. |
+| `ambiguous` | `z.array(z.string())` | — | `src/lab-path.ts:90` | Two or more `<code>-*` labs and none under the current name: nothing was moved; they are listed. |
 
 ### `src/lifecycle.SystemStatus` — zod-object — `src/lifecycle.ts:21-31`
 
@@ -2039,7 +2449,7 @@ One file in `videos/<name>/` that a person could ship, with its caption file bes
 | field | type | default | at | note |
 |---|---|---|---|---|
 | `file` | `z.string().min(1)` | — | `src/publish.ts:93` | Project-relative, `/`-separated. |
-| `kind` | `z.enum(['cut', 'audio', 'final', 'overlay']).nullable()` | — | `src/publish.ts:95` | `cut` · `audio` · `final` · `overlay` (D15), or null for a file that does not parse. |
+| `kind` | `z.enum(['cut', 'audio', 'final', 'overlay', 'part']).nullable()` | — | `src/publish.ts:95` | `cut` · `audio` · `final` · `overlay` (D15) · `part`, or null for a file that does not parse. |
 | `variant` | `z.string().nullable()` | — | `src/publish.ts:96` |  |
 | `app` | `EditApp.nullable() → src/publish.EditApp` | — | `src/publish.ts:97` |  |
 | `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:98` |  |
@@ -2154,6 +2564,18 @@ The hook for whatever comes after publishing (post-publish posts, YLO's related-
 | `publishedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:661` |
 | `by` | `z.string()` | — | `src/publish.ts:662` |
 
+### `src/recipe-paths.RecipePathWarning` — zod-object — `src/recipe-paths.ts:18-27`
+
+*aliases* `RecipePathWarning` `src/recipe-paths.ts:28`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `file` | `z.string()` | — | `src/recipe-paths.ts:20` | Project-relative file, `/`-separated; empty for a bare value. |
+| `pointer` | `z.string()` | — | `src/recipe-paths.ts:22` | RFC 6901 JSON pointer to the string (`/audio/arms/0/path`). |
+| `value` | `z.string()` | — | `src/recipe-paths.ts:23` |  |
+| `problem` | `RecipePathProblem → src/recipe-paths.RecipePathProblem` | — | `src/recipe-paths.ts:24` |  |
+| `insideProject` | `z.boolean().nullable()` | — | `src/recipe-paths.ts:26` | An absolute path that is inside this project is still absolute (it breaks on another machine); null when unknown. |
+
 ### `src/recording.RecordingTag` — zod-scalar — `src/recording.ts:14-16`
 
 `z.string().regex(TAG, 'tag must be uppercase letters/digits with a letter')`
@@ -2169,6 +2591,70 @@ The hook for whatever comes after publishing (post-publish posts, YLO's related-
 | `slug` | `z.string().regex(/^[a-z0-9.]+(?:-[a-z0-9.]+)*$/, 'slug must be kebab-case (a-z, 0-9, periods, hyphens)')` | — | `src/recording.ts:22` |
 | `tags` | `z.array(RecordingTag) → src/recording.RecordingTag` | — | `src/recording.ts:28` |
 | `ext` | `z.string().regex(/^[A-Za-z0-9]*[A-Za-z][A-Za-z0-9]*$/, 'ext must be letters/digits with a letter, without the dot')` | — | `src/recording.ts:29` |
+
+### `src/renders.PathSegment` — zod-scalar — `src/renders.ts:15-21`
+
+`<project>/-renders/<tool>/` (R2, David 2026-10-05: "they only need to live around long enough for the video to get
+
+`z.string().min(1).refine((value) => !/[/\\]/.test(value) && value !== '.' && value !== '..', 'must be a single path segment')`
+
+### `src/renders.RendersPathInput` — zod-object — `src/renders.ts:23-29`
+
+*aliases* `RendersPathInput` `src/renders.ts:30`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `projectDir` | `z.string().refine((value) => path.isAbsolute(value), 'must be an absolute path') → path (node:path)` | — | `src/renders.ts:25` | The absolute project folder (`<brand root>/<code>-<name>`). |
+| `tool` | `PathSegment → src/renders.PathSegment` | — | `src/renders.ts:27` | The tool that renders: `remotion`, `hyperframes`, `ffmpeg`, `flicut`… |
+| `subject` | `PathSegment.optional() → src/renders.PathSegment` | — | `src/renders.ts:28` |  |
+
+### `src/renders.RendersTool` — zod-object — `src/renders.ts:52-56`
+
+*aliases* `RendersTool` `src/renders.ts:57`
+
+| field | type | default | at |
+|---|---|---|---|
+| `tool` | `z.string()` | — | `src/renders.ts:53` |
+| `files` | `z.number().int()` | — | `src/renders.ts:54` |
+| `bytes` | `z.number().int()` | — | `src/renders.ts:55` |
+
+### `src/renders.RendersTally` — zod-object — `src/renders.ts:59-68`
+
+*aliases* `RendersTally` `src/renders.ts:69`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `present` | `z.boolean()` | — | `src/renders.ts:61` | Is `-renders/` a real folder here (never a link elsewhere)? |
+| `files` | `z.number().int()` | — | `src/renders.ts:62` |  |
+| `bytes` | `z.number().int()` | — | `src/renders.ts:63` |  |
+| `heavy` | `z.boolean()` | — | `src/renders.ts:65` | Over `FOLDER_HEAVY.heavyBytes`: amber. |
+| `tools` | `z.array(RendersTool) → src/renders.RendersTool` | — | `src/renders.ts:67` | One row per tool folder, biggest first. Loose files directly in `-renders/` count under the tool `""`. |
+
+### `src/renders.ClearRendersResult` — zod-union on `kind` — `src/renders.ts:121-134`
+
+*aliases* `ClearRendersResult` `src/renders.ts:135`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `cleared` | `z.object({ kind: z.literal('cleared'), /** Top-level entries of `-renders/` removed (a tool folder, or a loose file). */ removed: z.array(z…` | — | `src/renders.ts:123` |
+| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'not-a-folder', 'io-error']), message: z.string() })` | — | `src/renders.ts:130` |
+
+### `src/renders.ClearRendersResult[kind=cleared]` — zod-object — `src/renders.ts:122-128`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `z.literal('cleared')` | — | `src/renders.ts:123` |  |
+| `removed` | `z.array(z.string())` | — | `src/renders.ts:125` | Top-level entries of `-renders/` removed (a tool folder, or a loose file). |
+| `files` | `z.number().int()` | — | `src/renders.ts:126` |  |
+| `bytes` | `z.number().int()` | — | `src/renders.ts:127` |  |
+
+### `src/renders.ClearRendersResult[kind=refused]` — zod-object — `src/renders.ts:129-133`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/renders.ts:130` |
+| `reason` | `z.enum(['invalid-input', 'not-a-folder', 'io-error'])` | — | `src/renders.ts:131` |
+| `message` | `z.string()` | — | `src/renders.ts:132` |
 
 ### `src/resources.Text` — zod-scalar — `src/resources.ts:25`
 
@@ -2425,6 +2911,92 @@ Open a location in Finder (David 2026-09-24, folder access — "Open in Finder" 
 | `roots` | `readonly string[]` | — | `src/reveal.ts:26` | Absolute folders the path must be inside (after resolving links). |
 | `run` | `?: (args: string[]) => Promise<void>` | — | `src/reveal.ts:28` | Runs `open`; tests pass a stub so no window is ever raised. |
 
+### `src/series.SeriesMember` — zod-object — `src/series.ts:22-29`
+
+*aliases* `SeriesMember` `src/series.ts:30`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `z.uuid()` | — | `src/series.ts:24` | The project's identity `id`. |
+| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/series.ts:26` | The project's code when it was added; display only. |
+| `label` | `z.string().min(1).optional()` | — | `src/series.ts:28` | A label for the member in this series ("Day 5"); absent → the project's name. |
+
+### `src/series.SeriesFile` — zod-object — `src/series.ts:32-40`
+
+*aliases* `SeriesFile` `src/series.ts:41`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `schema` | `z.literal(1)` | — | `src/series.ts:33` |  |
+| `id` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/series.ts:35` | The folder name under `series/`. |
+| `brand` | `z.string().min(1)` | — | `src/series.ts:36` |  |
+| `title` | `z.string().min(1)` | — | `src/series.ts:37` |  |
+| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/series.ts:38` |  |
+| `members` | `z.array(SeriesMember) → src/series.SeriesMember` | — | `src/series.ts:39` |  |
+
+### `src/series.SeriesListing` — zod-object — `src/series.ts:74-78`
+
+*aliases* `SeriesListing` `src/series.ts:79`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `series` | `z.array(SeriesFile) → src/series.SeriesFile` | — | `src/series.ts:75` |  |
+| `invalid` | `z.array(z.object({ folder: z.string(), message: z.string() }))` | — | `src/series.ts:77` | Folders under `series/` whose file is missing or unusable: listed, never hidden. |
+
+### `src/series.SeriesListing.invalid[]` — zod-object — `src/series.ts:77`
+
+| field | type | default | at |
+|---|---|---|---|
+| `folder` | `z.string()` | — | `src/series.ts:77` |
+| `message` | `z.string()` | — | `src/series.ts:77` |
+
+### `src/series.Refusal` — zod-object — `src/series.ts:102-115`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/series.ts:103` |
+| `reason` | `z.enum(['invalid-input', 'series-exists', 'series-not-found', 'member-not-found', 'unusable-file', 'busy', 'io-error'])` | — | `src/series.ts:104` |
+| `path` | `z.string()` | — | `src/series.ts:113` |
+| `message` | `z.string()` | — | `src/series.ts:114` |
+
+### `src/series.ChangeSeriesResult` — zod-union on `kind` — `src/series.ts:117-120`
+
+*aliases* `ChangeSeriesResult` `src/series.ts:121`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `written` | `z.object({ kind: z.literal('written'), path: z.string(), series: SeriesFile }) → src/series.SeriesFile` | — | `src/series.ts:118` |
+| `Refusal` | `Refusal → src/series.Refusal` | — | `src/series.ts:119` |
+
+### `src/series.ChangeSeriesResult[kind=written]` — zod-object — `src/series.ts:118`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('written')` | — | `src/series.ts:118` |
+| `path` | `z.string()` | — | `src/series.ts:118` |
+| `series` | `SeriesFile → src/series.SeriesFile` | — | `src/series.ts:118` |
+
+### `src/series.ChangeSeriesOptions` — interface — `src/series.ts:123-128`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `waitMs` | `?: number` | — | `src/series.ts:125` | How long to wait for another writer's lock (default 3 s). |
+| `staleMs` | `?: number` | — | `src/series.ts:127` | A lock older than this is a crashed writer's and is broken (default 10 s). |
+
+### `src/series.SeriesRef` — zod-object — `src/series.ts:271`
+
+| field | type | default | at |
+|---|---|---|---|
+| `brand` | `z.string().min(1)` | — | `src/series.ts:271` |
+| `series` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/series.ts:271` |
+
+### `src/series.Changed` — zod-object — `src/series.ts:272`
+
+| field | type | default | at |
+|---|---|---|---|
+| `path` | `z.string()` | — | `src/series.ts:272` |
+| `series` | `SeriesFile → src/series.SeriesFile` | — | `src/series.ts:272` |
+
 ### `src/stamp.Stamp` — zod-object — `src/stamp.ts:9-12`
 
 Who changed a record, and when (David 2026-09-24: "keep a time updated and a who agent versus human"). `by` is the
@@ -2447,87 +3019,97 @@ Playing or not, and the signed rate: +1 forward at 1×, −2 backward at 2×.
 | `playing` | `z.boolean()` | — | `src/transport.ts:16` |
 | `rate` | `z.number()` | — | `src/transport.ts:17` |
 
-### `src/video-file.Ext` — zod-scalar — `src/video-file.ts:14`
+### `src/video-file.Ext` — zod-scalar — `src/video-file.ts:15`
 
 Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes the 09-09 numbered shape):
 
 `z.string().regex(/^[A-Za-z0-9]+$/, 'ext must be letters/digits, without the dot')`
 
-### `src/video-file.VideoFile` — zod-discriminated-union on `kind` — `src/video-file.ts:19-29`
+### `src/video-file.VideoFile` — zod-discriminated-union on `kind` — `src/video-file.ts:24-35`
 
-*aliases* `VideoFile` `src/video-file.ts:30`
+*aliases* `VideoFile` `src/video-file.ts:36`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `cut` | `z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:20` |
-| `final` | `z.object({ name: KebabSlug, kind: z.literal('final'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:23` |
-| `audio` | `z.object({ name: KebabSlug, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:27` |
-| `overlay` | `z.object({ name: KebabSlug, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:28` |
+| `cut` | `z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:25` |
+| `final` | `z.object({ name: KebabSlug, kind: z.literal('final'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:28` |
+| `audio` | `z.object({ name: KebabSlug, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:32` |
+| `overlay` | `z.object({ name: KebabSlug, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:33` |
+| `part` | `z.object({ name: KebabSlug, kind: z.literal('part'), variant: VideoPart, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.VideoPart, src/video-file.Ext` | — | `src/video-file.ts:34` |
 
-### `src/video-file.VideoFile[kind=cut]` — zod-object — `src/video-file.ts:20`
-
-| field | type | default | at |
-|---|---|---|---|
-| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:20` |
-| `kind` | `z.literal('cut')` | — | `src/video-file.ts:20` |
-| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:20` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:20` |
-
-### `src/video-file.VideoFile[kind=final]` — zod-object — `src/video-file.ts:21-26`
+### `src/video-file.VideoFile[kind=cut]` — zod-object — `src/video-file.ts:25`
 
 | field | type | default | at |
 |---|---|---|---|
-| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:22` |
-| `kind` | `z.literal('final')` | — | `src/video-file.ts:23` |
-| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:24` |
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:25` |
+| `kind` | `z.literal('cut')` | — | `src/video-file.ts:25` |
+| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:25` |
 | `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:25` |
 
-### `src/video-file.VideoFile[kind=audio]` — zod-object — `src/video-file.ts:27`
+### `src/video-file.VideoFile[kind=final]` — zod-object — `src/video-file.ts:26-31`
 
 | field | type | default | at |
 |---|---|---|---|
 | `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:27` |
-| `kind` | `z.literal('audio')` | — | `src/video-file.ts:27` |
-| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:27` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:27` |
+| `kind` | `z.literal('final')` | — | `src/video-file.ts:28` |
+| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:29` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:30` |
 
-### `src/video-file.VideoFile[kind=overlay]` — zod-object — `src/video-file.ts:28`
-
-| field | type | default | at |
-|---|---|---|---|
-| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:28` |
-| `kind` | `z.literal('overlay')` | — | `src/video-file.ts:28` |
-| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:28` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:28` |
-
-### `src/video-file.UnknownVideoFile` — zod-object — `src/video-file.ts:32-36`
-
-*aliases* `UnknownVideoFile` `src/video-file.ts:37`
+### `src/video-file.VideoFile[kind=audio]` — zod-object — `src/video-file.ts:32`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('unknown-kind')` | — | `src/video-file.ts:33` |
-| `name` | `z.string()` | — | `src/video-file.ts:34` |
-| `ext` | `z.string().nullable()` | — | `src/video-file.ts:35` |
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:32` |
+| `kind` | `z.literal('audio')` | — | `src/video-file.ts:32` |
+| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:32` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:32` |
 
-### `src/video-file.ParsedVideoFile` — zod-union on `kind` — `src/video-file.ts:39`
+### `src/video-file.VideoFile[kind=overlay]` — zod-object — `src/video-file.ts:33`
 
-*aliases* `ParsedVideoFile` `src/video-file.ts:40`
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:33` |
+| `kind` | `z.literal('overlay')` | — | `src/video-file.ts:33` |
+| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:33` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:33` |
+
+### `src/video-file.VideoFile[kind=part]` — zod-object — `src/video-file.ts:34`
+
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:34` |
+| `kind` | `z.literal('part')` | — | `src/video-file.ts:34` |
+| `variant` | `VideoPart → src/video-file.VideoPart` | — | `src/video-file.ts:34` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:34` |
+
+### `src/video-file.UnknownVideoFile` — zod-object — `src/video-file.ts:38-42`
+
+*aliases* `UnknownVideoFile` `src/video-file.ts:43`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('unknown-kind')` | — | `src/video-file.ts:39` |
+| `name` | `z.string()` | — | `src/video-file.ts:40` |
+| `ext` | `z.string().nullable()` | — | `src/video-file.ts:41` |
+
+### `src/video-file.ParsedVideoFile` — zod-union on `kind` — `src/video-file.ts:45`
+
+*aliases* `ParsedVideoFile` `src/video-file.ts:46`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `VideoFile` | `VideoFile → src/video-file.VideoFile` | — | `src/video-file.ts:39` |
-| `UnknownVideoFile` | `UnknownVideoFile → src/video-file.UnknownVideoFile` | — | `src/video-file.ts:39` |
+| `VideoFile` | `VideoFile → src/video-file.VideoFile` | — | `src/video-file.ts:45` |
+| `UnknownVideoFile` | `UnknownVideoFile → src/video-file.UnknownVideoFile` | — | `src/video-file.ts:45` |
 
-### `src/video-file.VideoFolder` — zod-object — `src/video-file.ts:74-79`
+### `src/video-file.VideoFolder` — zod-object — `src/video-file.ts:80-85`
 
-*aliases* `VideoFolder` `src/video-file.ts:80`
+*aliases* `VideoFolder` `src/video-file.ts:86`
 
 | field | type | default | at |
 |---|---|---|---|
-| `name` | `KebabSlug.refine((name) => !LEGACY_FOLDERS.includes(name), 'a legacy layout name (first-edit, edits, …) is never a video') → src/project-folder.KebabSlug, src/classify.LEGACY_FOLDERS` | — | `src/video-file.ts:75` |
+| `name` | `KebabSlug.refine((name) => !LEGACY_FOLDERS.includes(name), 'a legacy layout name (first-edit, edits, …) is never a video') → src/project-folder.KebabSlug, src/classify.LEGACY_FOLDERS` | — | `src/video-file.ts:81` |
 
-### `src/video-file.VideoFolderName` — zod-scalar — `src/video-file.ts:86-91`
+### `src/video-file.VideoFolderName` — zod-scalar — `src/video-file.ts:92-97`
 
 The same rule as a string schema, for contexts that carry the folder name (`OpenContext.video`).
 
@@ -2840,8 +3422,10 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 
 | subject | why | looked at |
 |---|---|---|
-| schemas built by `Refused(...)` (3 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:66)`<br>`Refused('existing-invalid') (src/identity.ts:68)`<br>`Refused('io-error') (src/identity.ts:69)` |
-| schemas built by `readFileResult(...)` (4 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:32)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:48)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(WordsFile) (src/words.ts:68)` |
+| schemas built by `OneLine(...)` (1 use) | built by calling `OneLine(...)`, which does not return a single zod expression this reader can follow | `OneLine('a note').optional() (src/gitignore-rules.ts:41)` |
+| schemas built by `Refused(...)` (6 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:67)`<br>`Refused('existing-invalid') (src/identity.ts:69)`<br>`Refused('io-error') (src/identity.ts:70)`<br>`Refused('invalid-input') (src/identity.ts:185)`<br>`Refused('existing-invalid') (src/identity.ts:187)`<br>`Refused('io-error') (src/identity.ts:188)` |
+| schemas built by `promisify(...)` (1 use) | built by calling `promisify(...)` imported from `node:util`; package helpers are not expanded - see that package's own mirror | `promisify(execFile) (src/gitignore.ts:17)` |
+| schemas built by `readFileResult(...)` (5 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:38)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
 | src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:460)` |
@@ -2854,20 +3438,24 @@ The census found these top-level declarations and the extractor did not mirror t
 
 | family | count | declarations |
 |---|---|---|
-| object constant | 7 | `src/classify.LAYOUT_DIRS` `src/classify.ts:111`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
-| array constant | 5 | `src/identity.DEFAULT_LANGUAGES` `src/identity.ts:28`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:30`<br>`src/publish.READY_STATES` `src/publish.ts:65`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:67`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
+| object constant | 8 | `src/classify.LAYOUT_DIRS` `src/classify.ts:259`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
+| array constant | 6 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:30`<br>`src/publish.READY_STATES` `src/publish.ts:65`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:67`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
+| const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:172`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
 | class | 4 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:764`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25` |
-| const built by a call (helper or non-zod call) | 4 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:172`<br>`src/resources.CORE_KINDS` `src/resources.ts:195` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
+| union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:201` |
 
 ## Findings — changes needed in the target application
 
 These are refactors of the **application**, not of this mirror. Each one converts a derived section into a declared one.
 
-1. `src/classify.ts:36-43` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:36 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
-2. `src/fs-utils.ts:32` — REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.
-3. `src/publish.ts:188` — REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.
+1. `src/classify.ts:63` — REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:63 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
+2. `src/classify.ts:66-73` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:66 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
+3. `src/classify.ts:122-129` — REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:122 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.
+4. `src/fs-utils.ts:32` — REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.
+5. `src/publish.ts:188` — REFACTOR (minor): `LIVE` at src/publish.ts:188 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.
+6. `src/recipe-paths.ts:77` — REFACTOR (minor): `SKIP` at src/recipe-paths.ts:77 names the set but does not type it. A z.enum or `as const` + `typeof SKIP[number]` would make a wrong value a static error rather than a runtime miss.
 
 ---
 

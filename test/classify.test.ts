@@ -37,8 +37,8 @@ describe('classifyProjectEntry', () => {
     ['videos', 'videos'],
     ['videos/01-xmen/01-cut.mp4', 'videos'],
     ['videos/01-xmen/fli.studio.json', 'videos'],
-    ['first-edit', 'legacy'],
-    ['first-edit/edit.json', 'legacy'],
+    ['first-edit', 'assembly'],
+    ['first-edit/edit.json', 'assembly'],
     ['edits/x', 'legacy'],
     ['edit-1st', 'legacy'],
     ['final/01.mp4', 'legacy'],
@@ -80,7 +80,7 @@ describe('classifyProjectEntry', () => {
     );
     expect(zones).toEqual({
       'cast/tool-xyz/screen-0.mov': 'cast',
-      'first-edit/edit.json': 'legacy',
+      'first-edit/edit.json': 'assembly',
       'fli.cut.01-xmen.json': 'app-decisions',
       'fli.hub.json': 'app-decisions',
       'fli.studio.json': 'identity',

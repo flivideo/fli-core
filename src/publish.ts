@@ -91,8 +91,8 @@ const Iso = z.iso.datetime({ offset: true });
 export const PublishExport = z.object({
   /** Project-relative, `/`-separated. */
   file: z.string().min(1),
-  /** `cut` · `audio` · `final` · `overlay` (D15), or null for a file that does not parse. */
-  kind: z.enum(['cut', 'audio', 'final', 'overlay']).nullable(),
+  /** `cut` · `audio` · `final` · `overlay` (D15) · `part`, or null for a file that does not parse. */
+  kind: z.enum(['cut', 'audio', 'final', 'overlay', 'part']).nullable(),
   variant: z.string().nullable(),
   app: EditApp.nullable(),
   modifiedAt: Iso,
@@ -179,7 +179,7 @@ export const AUDIO_TREATMENTS: Readonly<Record<string, string>> = Object.freeze(
 
 /** The app that writes a D15 export kind. */
 export function exportApp(kind: PublishExport['kind']): EditApp | null {
-  if (kind === 'cut' || kind === 'audio') return 'flicut';
+  if (kind === 'cut' || kind === 'audio' || kind === 'part') return 'flicut';
   if (kind === 'final' || kind === 'overlay') return 'fliedit';
   return null;
 }

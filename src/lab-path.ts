@@ -40,6 +40,11 @@ export const LabPathInput = z
 export type LabPathInput = z.infer<typeof LabPathInput>;
 
 /**
+ * @deprecated `~/fli/lab` goes away (R2, David 2026-10-05): renders live in the project, at `rendersPath` →
+ * `<project>/-renders/<tool>/`. Kept, unchanged, only so an app can find an old lab to migrate it (the migration waits for
+ * David's go, and `~/fli/lab` is not deleted before it) and so FliCut / FliHub keep compiling until they move. Nothing new
+ * should call it; it is removed once the migration is done.
+ *
  * Where an app keeps working files for a project outside the project (D5, roadmap §1.2b):
  * `<labRoot>/<brand folder>/<code>-<project>/<app>/[<subject>/]`, with a trailing separator. The brand folder is the
  * basename of `brandRoot` when given, else `v-<brand>`. `labRoot` comes from `machine` (see `readMachineSettings`),
@@ -87,6 +92,8 @@ export const ResolvedLabPath = z.object({
 export type ResolvedLabPath = z.infer<typeof ResolvedLabPath>;
 
 /**
+ * @deprecated See `labPath`: renders live in `<project>/-renders/<tool>/` now (`rendersPath`).
+ *
  * `labPath`, keyed on the project CODE (FC-40, d04 UAT 2026-09-23). The folder name is display: a rename (R32 — the code
  * never changes) must not strand an app's lab and undo history. When `<code>-<project>/` does not exist but exactly one
  * other `<code>-*` folder does in the brand's lab, that folder is renamed to the current name — the whole project lab,

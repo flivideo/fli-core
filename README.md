@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.17.0 · True at v0.17.0 (2026-10-05)
+**Status:** active, v0.18.0 · True at v0.18.0 (2026-10-05)
 
 ## Install
 
@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.17.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.18.0"
   }
 }
 ```
@@ -214,6 +214,22 @@ with `from: 'core'`, `choose: 'one'`; a file row may restyle them); final thumbn
 The rules: a choice wins; the video is the newest export of the newest edit (stale if the edit changed after it);
 captions come from the same export with a matching length; YLO texts made before the final video are stale; the rules
 never choose a thumbnail or the visibility.
+
+## Video structure — zones, parts, series, renders, `.gitignore` (v0.18.0)
+
+Workstream C part 1 of the video-structure plan (brains `video-as-code/video-structure-composable-rendering-plan.md`
+§4C), with the workstream B rulings (2026-10-05). Nothing here moves a file or changes FliCut.
+
+| Export                                                                                                                     | What                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `classifyProjectEntry`, `describeProjectEntry(relPath, isDirectory?)`                                                      | New zones: `motion` `overlay` `voice` `avatar` `script` `framing` `assembly` (FliCut's `first-edit/`, or `edit/`) `renders` (`-renders/`); `cast` stays. `describeProjectEntry` adds the tier (`authored` `input` `generated` `regenerable` `output`) and, under `overlay/`, `chapter` / `variant` / `role`. `overlay/<chapter>/beats.json` is authored; `overlay/<chapter>/<variant>/spec.json` is generated; `first-edit/<x>/work/` is regenerable    |
+| `part` video kind, `VideoPart`                                                                                             | `videos/<name>/<name>-part-<intro\|body\|outro>.<ext>`. `exportApp('part')` is `flicut`                                                                                                                                                                                                                                                                                                                                                                 |
+| `cloneFile(source, dest)`                                                                                                  | A copy-on-write clone (APFS `clonefile`, like `cp -c`), a plain copy where the volume has none; never overwrites (`EEXIST`). For `export.place` of a `part`                                                                                                                                                                                                                                                                                             |
+| `SERIES_CAPABILITIES`, `listSeries`, `readSeries`, `createSeries`, `changeSeries`, `addSeriesMember`, `removeSeriesMember` | `series.*` over `<brand root>/series/<id>/fli.series.json`: members are named by project `id` (not folder), ordered, never listed twice. Writes are locked + atomic. `fli.studio.json` is unchanged and `ProjectIdentity` stays **non-strict** (it strips unknown keys): series membership lives in the series file, so identity needs no new key, and passing unknown keys through would widen the exported type with an index signature for every app |
+| `adoptIdentity(dir, input?)`                                                                                               | `project.adopt`: keeps an identity\'s `id` on a re-run (`kept`), updates `code` / `name` / intents under the same `id` (`updated`, e.g. `a05` → `b05`), creates one with a given or fresh `id`, refuses a different `id`                                                                                                                                                                                                                                |
+| `rendersPath`, `rendersOf`, `clearRenders`, `FOLDER_HEAVY`                                                                 | R2: `<project>/-renders/<tool>/`. `rendersOf` is size per tool; `clearRenders(projectDir, { tool? })` empties it like trash (never follows a link; keeps `-renders/`); `FOLDER_HEAVY` is FliStudio\'s `TRASH_HEAVY` (hidden under 1 MB, amber over 500 MB). `labPath` / `resolveLabPath` are **deprecated**, kept only to find an old `~/fli/lab` for the migration                                                                                     |
+| `renderGitignore`, `checkGitignore`, `gitignoreRender(brandRoot, { check? })`                                              | `gitignore.render`: one generated block between `# >>> BEGIN generated by fli gitignore.render` and `# <<< END generated`; hand rules outside it are untouched; deterministic, no machine text. Overlay in `fli.brand.json` `gitignore: [{ pattern, reason, note? }]`. `--check` writes nothing: `ok` / `drift` / `no-block` / `broken-markers`, plus the committed files the rules now ignore                                                          |
+| `recipePathWarnings`, `recipePathWarningsIn(projectDir)`                                                                   | The ingest rule: a recipe may only reference paths inside its own project. Finds absolute, `~/`, `file://` and `../`-escaping paths in `overlay/**` and `framing/**` JSON                                                                                                                                                                                                                                                                               |
 
 ## Data shapes
 

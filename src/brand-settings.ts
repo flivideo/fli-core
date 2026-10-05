@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { z } from 'zod';
 import { atomicWrite, errorMessage, readJsonFile } from './fs-utils.js';
+import { GitignoreOverlayRule } from './gitignore-rules.js';
 import { issuesOf, readFileResult } from './results.js';
 
 export const BRAND_SETTINGS_FILE = 'fli.brand.json';
@@ -26,6 +27,11 @@ export const BrandSettings = z.object({
     .regex(/^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)'),
   /** The brand's transcription providers, over the suite default; absent → the suite default. */
   transcription: TranscriptionChoice.optional(),
+  /**
+   * The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's
+   * staging folders…). Optional, so an older reader (FliTools reads this file too) is unaffected. Travels in the repo.
+   */
+  gitignore: z.array(GitignoreOverlayRule).optional(),
 });
 export type BrandSettings = z.infer<typeof BrandSettings>;
 
