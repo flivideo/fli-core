@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.15.0 · True at v0.15.0 (2026-10-04)
+**Status:** active, v0.16.0 · True at v0.16.0 (2026-10-05)
 
 ## Install
 
@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.15.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.16.0"
   }
 }
 ```
@@ -182,6 +182,18 @@ stored and falls into `other`. Every resource carries `added` and `changed` `Sta
 `BrandSettings` (`fli.brand.json`) and on `ProjectIdentity` (`fli.studio.json`), so a rewrite of either file keeps it.
 FliTools reads the levels (its own global `flitools.json` → brand → project); FliStudio's Settings → Transcription
 writes the brand and project levels and sets the global one through FliTools' `config.set`.
+
+## J / K / L — the shared speed keys (v0.16.0)
+
+David (2026-10-05): J / K / L "feels like a global system... it probably should be part of Core." Lifted from FliCut
+and FliCast unchanged; pure and browser-safe (`@flivideo/core/contracts`). Each app binds the keys itself.
+
+| Export                                        | What                                                                                                                                                                                                                    |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `FORWARD_SPEEDS`                              | The ladder J / L climb: `0.25 0.5 0.75 1 1.5 2 2.5 3 3.5 4`                                                                                                                                                             |
+| `jkl(state, 'J' \| 'K' \| 'L')`               | David's ruling d06 (2026-09-27): L paused → 1×, else one step faster (ceiling 4×); J paused → 0.75×, else one step slower (floor 0.25×); K → 1×, playing stays (a reverse stops). Both forward. Off-ladder counts as 1× |
+| `shuttle(state, action)`, `MAX_SHUTTLE`       | The NLE shuttle (FliCast, FliEdit, FliCut's ⇧J): `playForward` / `playBackward` double to ±8×, `stop`, `togglePlay`                                                                                                     |
+| `shuttleLabel(playing, rate)`, `ShuttleState` | The badge (`❚❚ 1×`, `▶▶ 2×`, `◀ 1×`) and the `{ playing, rate }` shape (signed rate)                                                                                                                                    |
 
 ## Data shapes
 

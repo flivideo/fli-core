@@ -117,6 +117,10 @@ describe('the browser-safe entry (@flivideo/core/contracts, v0.7.2)', () => {
       'renderApiPage',
       'parseAppFile',
       'parseRecording',
+      'jkl',
+      'shuttle',
+      'shuttleLabel',
+      'FORWARD_SPEEDS',
     ]) {
       expect(contracts[name], name).toBeDefined();
     }

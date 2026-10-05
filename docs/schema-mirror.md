@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `779dec3557b9` · **generated** 2026-10-04T12:44:19+00:00
+- **commit** `a0ec55919f91` · **generated** 2026-10-05T05:22:48+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 25 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 26 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 197 | 52 | 2 | 6 | 18 | 2 |
+| 198 | 54 | 2 | 6 | 19 | 2 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -41,6 +41,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/results.ts` — `InvalidFile` :4 · `validFile()` :13 · `readFileResult()` :19
 - `src/reveal.ts` — `RevealResult` :13 · `RevealOptions` :24
 - `src/stamp.ts` — `Stamp` :9
+- `src/transport.ts` — `ShuttleState` :15 · `JklKey` (set) :27 · `ShuttleAction` (set) :45
 - `src/video-file.ts` — `Ext` :14 · `VideoFileKind` (set) :16 · `VideoFile` :19 · `UnknownVideoFile` :32 · `ParsedVideoFile` :39 · `VideoFolder` :74 · `VideoFolderName` :86
 - `src/window-state.ts` — `WindowRect` :16 · `SavedWindow` :24 · `WindowStateFile` :32 · `DisplayArea` :39 · `PlaceOptions` :47 · `TrackedWindow` :255 · `TrackOptions` :264
 - `src/words.ts` — `WordLevel` (set) :25 · `Text` :29 · `WordName` :32 · `WordRule` :40 · `WordFiller` :44 · `WordKind` (set) :52 · `WordOff` :56 · `WordsFile` :59 · `WordInput` :72 · `WordRef` :95 · `MergedWords` :99 · `WordsRead` :108 · `ReadWordsOptions` :121 · `WriteWordsResult` :287 · `ChangeWordsResult` :320 · `ChangeWordsOptions` :335
@@ -63,10 +64,10 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**269** top-level declarations counted = **239** mirrored + **12** listed as gaps + **18** declared but not read.
+**274** top-level declarations counted = **243** mirrored + **12** listed as gaps + **19** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 1 function, 12 literal constants.
+Not counted, as not schema-bearing: 1 function, 13 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
@@ -79,6 +80,7 @@ Not counted, as not schema-bearing: 1 function, 12 literal constants.
 | `src/open-args.ts` | 12 | 11 | 0 | **1** |
 | `src/resources.ts` | 41 | 33 | 6 | **2** |
 | `src/results.ts` | 5 | 2 | 0 | **3** |
+| `src/transport.ts` | 5 | 4 | 0 | **1** |
 | `src/words.ts` | 31 | 28 | 2 | **1** |
 
 ## Closed sets — declared
@@ -550,6 +552,27 @@ How candidates of a kind are chosen: `one` — at most one `chosen` per video; `
 | `not-found` | `src/reveal.ts:18` |
 | `not-absolute` | `src/reveal.ts:18` |
 | `failed` | `src/reveal.ts:18` |
+
+### `src/transport.JklKey` — `src/transport.ts:27`
+
+*literal union type alias `JklKey` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `J` | `src/transport.ts:27` |
+| `K` | `src/transport.ts:27` |
+| `L` | `src/transport.ts:27` |
+
+### `src/transport.ShuttleAction` — `src/transport.ts:45`
+
+*literal union type alias `ShuttleAction` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `togglePlay` | `src/transport.ts:45` |
+| `playForward` | `src/transport.ts:45` |
+| `playBackward` | `src/transport.ts:45` |
+| `stop` | `src/transport.ts:45` |
 
 ### `src/video-file.VideoFileKind` — `src/video-file.ts:16`
 
@@ -2189,6 +2212,17 @@ Who changed a record, and when (David 2026-09-24: "keep a time updated and a who
 | `at` | `z.iso.datetime({ offset: true })` | — | `src/stamp.ts:10` |
 | `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/stamp.ts:11` |
 
+### `src/transport.ShuttleState` — zod-object — `src/transport.ts:15-18`
+
+Playing or not, and the signed rate: +1 forward at 1×, −2 backward at 2×.
+
+*aliases* `ShuttleState` `src/transport.ts:19`
+
+| field | type | default | at |
+|---|---|---|---|
+| `playing` | `z.boolean()` | — | `src/transport.ts:16` |
+| `rate` | `z.number()` | — | `src/transport.ts:17` |
+
 ### `src/video-file.Ext` — zod-scalar — `src/video-file.ts:14`
 
 Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes the 09-09 numbered shape):
@@ -2598,8 +2632,8 @@ The census found these top-level declarations and the extractor did not mirror t
 | object constant | 7 | `src/classify.LAYOUT_DIRS` `src/classify.ts:111`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
 | class | 3 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/resources.ResourceNotFound` `src/resources.ts:328`<br>`src/results.FliCoreError` `src/results.ts:25` |
+| array constant | 2 | `src/identity.DEFAULT_LANGUAGES` `src/identity.ts:28`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
 | const built by a call (helper or non-zod call) | 2 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164` |
-| array constant | 1 | `src/identity.DEFAULT_LANGUAGES` `src/identity.ts:28` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 
 ## Findings — changes needed in the target application

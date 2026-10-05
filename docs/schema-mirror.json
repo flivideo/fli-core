@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 269,
+    "declared": 274,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -163,6 +163,13 @@
         "not_read": 0,
         "not_schema_bearing": 0
       },
+      "src/transport.ts": {
+        "declared": 5,
+        "gaps": 0,
+        "mirrored": 4,
+        "not_read": 1,
+        "not_schema_bearing": 1
+      },
       "src/video-file.ts": {
         "declared": 11,
         "gaps": 0,
@@ -186,12 +193,12 @@
       }
     },
     "gaps": 12,
-    "mirrored": 239,
-    "not_read": 18,
-    "not_schema_bearing": 13,
+    "mirrored": 243,
+    "not_read": 19,
+    "not_schema_bearing": 14,
     "not_schema_bearing_by_family": {
       "function": 1,
-      "literal constant": 12
+      "literal constant": 13
     }
   },
   "closed_sets": [
@@ -1840,6 +1847,77 @@
       ]
     },
     {
+      "anchor": {
+        "file": "src/transport.ts",
+        "line": 27
+      },
+      "authority": "literal union type alias `JklKey` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/transport.JklKey",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 27
+          },
+          "value": "J"
+        },
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 27
+          },
+          "value": "K"
+        },
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 27
+          },
+          "value": "L"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/transport.ts",
+        "line": 45
+      },
+      "authority": "literal union type alias `ShuttleAction` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/transport.ShuttleAction",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 45
+          },
+          "value": "togglePlay"
+        },
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 45
+          },
+          "value": "playForward"
+        },
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 45
+          },
+          "value": "playBackward"
+        },
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 45
+          },
+          "value": "stop"
+        }
+      ]
+    },
+    {
       "aliases": [
         {
           "anchor": {
@@ -2280,7 +2358,7 @@
       "target": "src/fs-utils.NO_HARD_LINKS"
     }
   ],
-  "generated": "2026-10-04T12:44:19+00:00",
+  "generated": "2026-10-05T05:22:48+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -9621,6 +9699,48 @@
       "kind": "zod-object"
     },
     {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 19
+          },
+          "name": "ShuttleState"
+        }
+      ],
+      "anchor": {
+        "end_line": 18,
+        "file": "src/transport.ts",
+        "line": 15
+      },
+      "bases": [],
+      "doc": "Playing or not, and the signed rate: +1 forward at 1\u00d7, \u22122 backward at 2\u00d7.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 16
+          },
+          "default": null,
+          "name": "playing",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 17
+          },
+          "default": null,
+          "name": "rate",
+          "type": "z.number()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/transport.ShuttleState",
+      "kind": "zod-object"
+    },
+    {
       "anchor": {
         "file": "src/video-file.ts",
         "line": 14
@@ -11522,7 +11642,7 @@
     }
   ],
   "target": {
-    "commit": "779dec3557b947dd13fbeb16cf6a24cc400be047",
+    "commit": "a0ec55919f9157bcbca16d9843986037800a3673",
     "root": "..",
     "stack": "typescript"
   },
@@ -11682,6 +11802,15 @@
     },
     {
       "census": true,
+      "family": "array constant",
+      "looked_at": [
+        "src/transport.ts:25"
+      ],
+      "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/transport.FORWARD_SPEEDS` - declared but not read"
+    },
+    {
+      "census": true,
       "family": "object constant",
       "looked_at": [
         "src/words.ts:151"
@@ -11741,7 +11870,7 @@
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 25,
+    "import": 26,
     "re-export": 0
   }
 }
