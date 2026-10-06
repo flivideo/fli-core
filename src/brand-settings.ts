@@ -19,6 +19,45 @@ export const TranscriptionChoice = z.object({
 });
 export type TranscriptionChoice = z.infer<typeof TranscriptionChoice>;
 
+/**
+ * The brand's publishing settings, authored by the brand (CTAs, affiliates, legal…). Moved verbatim from FliHub's
+ * `server/brand-config.json` (2026-10-06), so the shape is that file's and FliHub's mapper reads it unchanged. Loose:
+ * fields this schema does not name survive a read-modify-write. `playlists` is the legacy `camelKey → playlistId` map,
+ * kept for provenance; the brand's playlist choices live in `youtube`.
+ */
+export const BrandPublishSettings = z.looseObject({
+  brand: z.looseObject({}).optional(),
+  socialLinks: z.record(z.string(), z.string()).optional(),
+  ctas: z.record(z.string(), z.looseObject({ label: z.string(), url: z.string() })).optional(),
+  affiliates: z
+    .array(z.looseObject({ name: z.string(), url: z.string(), active: z.boolean().optional() }))
+    .optional(),
+  playlists: z.record(z.string(), z.string()).optional(),
+  descriptionTemplate: z.looseObject({}).optional(),
+  _meta: z.looseObject({}).optional(),
+});
+export type BrandPublishSettings = z.infer<typeof BrandPublishSettings>;
+
+/**
+ * The brand's YouTube choices, made by a person. Playlist **ids**; titles come from the YouTube mirror. Everything YouTube
+ * itself knows (which playlists exist, their members) is mirrored, never written here.
+ */
+export const BrandYouTubeSettings = z.object({
+  /** The playlists this brand uses: offered in Launch, shown first on the brand's YouTube page. */
+  activePlaylists: z.array(z.string().min(1)).default([]),
+  /** The brand's usual picks, pre-ticked for a new video. */
+  defaultPlaylists: z.array(z.string().min(1)).default([]),
+});
+export type BrandYouTubeSettings = z.infer<typeof BrandYouTubeSettings>;
+
+/** The YouTube Studio defaults a new video starts with (category, audience, language). Each absent → the app's own. */
+export const BrandStudioDefaults = z.object({
+  category: z.string().min(1).optional(),
+  audience: z.string().min(1).optional(),
+  language: z.string().min(1).optional(),
+});
+export type BrandStudioDefaults = z.infer<typeof BrandStudioDefaults>;
+
 export const BrandSettings = z.object({
   schema: z.literal(1),
   brand: z.string().min(1),
@@ -32,6 +71,12 @@ export const BrandSettings = z.object({
    * staging folders…). Optional, so an older reader (FliTools reads this file too) is unaffected. Travels in the repo.
    */
   gitignore: z.array(GitignoreOverlayRule).optional(),
+  /** Publishing settings (CTAs, affiliates, legal…); optional, so older readers are unaffected. */
+  publish: BrandPublishSettings.optional(),
+  /** The brand's YouTube playlist choices. */
+  youtube: BrandYouTubeSettings.optional(),
+  /** YouTube Studio defaults for a new video. */
+  studioDefaults: BrandStudioDefaults.optional(),
 });
 export type BrandSettings = z.infer<typeof BrandSettings>;
 

@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 363,
+    "declared": 397,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -17,9 +17,9 @@
         "not_schema_bearing": 1
       },
       "src/brand-settings.ts": {
-        "declared": 8,
+        "declared": 14,
         "gaps": 2,
-        "mirrored": 6,
+        "mirrored": 12,
         "not_read": 0,
         "not_schema_bearing": 1
       },
@@ -232,23 +232,31 @@
         "mirrored": 28,
         "not_read": 1,
         "not_schema_bearing": 1
+      },
+      "src/youtube.ts": {
+        "declared": 28,
+        "gaps": 6,
+        "mirrored": 19,
+        "not_read": 3,
+        "not_schema_bearing": 8
       }
     },
-    "gaps": 16,
-    "mirrored": 317,
-    "not_read": 30,
-    "not_schema_bearing": 22,
+    "gaps": 22,
+    "mirrored": 342,
+    "not_read": 33,
+    "not_schema_bearing": 30,
     "not_schema_bearing_by_family": {
       "function": 1,
-      "literal constant": 21
+      "function type": 1,
+      "literal constant": 28
     }
   },
   "closed_sets": [
     {
       "anchor": {
-        "end_line": 54,
+        "end_line": 99,
         "file": "src/brand-settings.ts",
-        "line": 46
+        "line": 91
       },
       "authority": "the `kind` discriminator of the union `WriteBrandSettingsResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -257,14 +265,14 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 47
+            "line": 92
           },
           "value": "written"
         },
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 49
+            "line": 94
           },
           "value": "refused"
         }
@@ -273,7 +281,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 50
+        "line": 95
       },
       "authority": "`z.enum` `reason` - a single declaring symbol",
       "grade": "declared",
@@ -282,14 +290,14 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 50
+            "line": 95
           },
           "value": "invalid-input"
         },
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 50
+            "line": 95
           },
           "value": "io-error"
         }
@@ -3457,6 +3465,39 @@
           "value": "busy"
         }
       ]
+    },
+    {
+      "anchor": {
+        "end_line": 449,
+        "file": "src/youtube.ts",
+        "line": 445
+      },
+      "authority": "the `kind` discriminator of the union `SyncYouTubeResult` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/youtube.SyncYouTubeResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 446
+          },
+          "value": "synced"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 447
+          },
+          "value": "failed"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 448
+          },
+          "value": "busy"
+        }
+      ]
     }
   ],
   "extractor": "extract_typescript.py",
@@ -3518,7 +3559,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-10-05T14:42:53+00:00",
+  "generated": "2026-10-06T14:16:02+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -3804,15 +3845,273 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
+            "line": 39
+          },
+          "name": "BrandPublishSettings"
+        }
+      ],
+      "anchor": {
+        "end_line": 38,
+        "file": "src/brand-settings.ts",
+        "line": 28
+      },
+      "bases": [],
+      "doc": "The brand's publishing settings, authored by the brand (CTAs, affiliates, legal\u2026). Moved verbatim from FliHub's",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 29
+          },
+          "default": null,
+          "name": "brand",
+          "type": "z.looseObject({}).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 30
+          },
+          "default": null,
+          "name": "socialLinks",
+          "type": "z.record(z.string(), z.string()).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 31
+          },
+          "default": null,
+          "name": "ctas",
+          "type": "z.record(z.string(), z.looseObject({ label: z.string(), url: z.string() })).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 32
+          },
+          "default": null,
+          "name": "affiliates",
+          "type": "z.array(z.looseObject({ name: z.string(), url: z.string(), active: z.boolean().optional() })).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 35
+          },
+          "default": null,
+          "name": "playlists",
+          "type": "z.record(z.string(), z.string()).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
             "line": 36
+          },
+          "default": null,
+          "name": "descriptionTemplate",
+          "type": "z.looseObject({}).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 37
+          },
+          "default": null,
+          "name": "_meta",
+          "type": "z.looseObject({}).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/brand-settings.BrandPublishSettings",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/brand-settings.ts",
+        "line": 29
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/brand-settings.BrandPublishSettings.brand",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/brand-settings.ts",
+        "line": 32
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 33
+          },
+          "default": null,
+          "name": "name",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 33
+          },
+          "default": null,
+          "name": "url",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 33
+          },
+          "default": null,
+          "name": "active",
+          "type": "z.boolean().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/brand-settings.BrandPublishSettings.affiliates[]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/brand-settings.ts",
+        "line": 36
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/brand-settings.BrandPublishSettings.descriptionTemplate",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/brand-settings.ts",
+        "line": 37
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/brand-settings.BrandPublishSettings._meta",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 51
+          },
+          "name": "BrandYouTubeSettings"
+        }
+      ],
+      "anchor": {
+        "end_line": 50,
+        "file": "src/brand-settings.ts",
+        "line": 45
+      },
+      "bases": [],
+      "doc": "The brand's YouTube choices, made by a person. Playlist **ids**; titles come from the YouTube mirror. Everything YouTube",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 47
+          },
+          "default": "[]",
+          "doc": "The playlists this brand uses: offered in Launch, shown first on the brand's YouTube page.",
+          "name": "activePlaylists",
+          "type": "z.array(z.string().min(1)).default([])"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 49
+          },
+          "default": "[]",
+          "doc": "The brand's usual picks, pre-ticked for a new video.",
+          "name": "defaultPlaylists",
+          "type": "z.array(z.string().min(1)).default([])"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/brand-settings.BrandYouTubeSettings",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 59
+          },
+          "name": "BrandStudioDefaults"
+        }
+      ],
+      "anchor": {
+        "end_line": 58,
+        "file": "src/brand-settings.ts",
+        "line": 54
+      },
+      "bases": [],
+      "doc": "The YouTube Studio defaults a new video starts with (category, audience, language). Each absent \u2192 the app's own.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 55
+          },
+          "default": null,
+          "name": "category",
+          "type": "z.string().min(1).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 56
+          },
+          "default": null,
+          "name": "audience",
+          "type": "z.string().min(1).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 57
+          },
+          "default": null,
+          "name": "language",
+          "type": "z.string().min(1).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/brand-settings.BrandStudioDefaults",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 81
           },
           "name": "BrandSettings"
         }
       ],
       "anchor": {
-        "end_line": 35,
+        "end_line": 80,
         "file": "src/brand-settings.ts",
-        "line": 22
+        "line": 61
       },
       "bases": [],
       "doc": null,
@@ -3821,7 +4120,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 23
+            "line": 62
           },
           "default": null,
           "name": "schema",
@@ -3830,7 +4129,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 24
+            "line": 63
           },
           "default": null,
           "name": "brand",
@@ -3839,7 +4138,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 25
+            "line": 64
           },
           "default": null,
           "name": "colour",
@@ -3848,7 +4147,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 29
+            "line": 68
           },
           "default": null,
           "doc": "The brand's transcription providers, over the suite default; absent \u2192 the suite default.",
@@ -3858,12 +4157,42 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 34
+            "line": 73
           },
           "default": null,
           "doc": "The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's",
           "name": "gitignore",
           "type": "z.array(GitignoreOverlayRule).optional() \u2192 src/gitignore-rules.GitignoreOverlayRule"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 75
+          },
+          "default": null,
+          "doc": "Publishing settings (CTAs, affiliates, legal\u2026); optional, so older readers are unaffected.",
+          "name": "publish",
+          "type": "BrandPublishSettings.optional() \u2192 src/brand-settings.BrandPublishSettings"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 77
+          },
+          "default": null,
+          "doc": "The brand's YouTube playlist choices.",
+          "name": "youtube",
+          "type": "BrandYouTubeSettings.optional() \u2192 src/brand-settings.BrandYouTubeSettings"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 79
+          },
+          "default": null,
+          "doc": "YouTube Studio defaults for a new video.",
+          "name": "studioDefaults",
+          "type": "BrandStudioDefaults.optional() \u2192 src/brand-settings.BrandStudioDefaults"
         }
       ],
       "grade": "declared",
@@ -3875,15 +4204,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 55
+            "line": 100
           },
           "name": "WriteBrandSettingsResult"
         }
       ],
       "anchor": {
-        "end_line": 54,
+        "end_line": 99,
         "file": "src/brand-settings.ts",
-        "line": 46
+        "line": 91
       },
       "bases": [],
       "doc": null,
@@ -3892,7 +4221,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 47
+            "line": 92
           },
           "default": null,
           "name": "written",
@@ -3901,7 +4230,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 49
+            "line": 94
           },
           "default": null,
           "name": "refused",
@@ -3915,7 +4244,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 47
+        "line": 92
       },
       "bases": [],
       "doc": null,
@@ -3923,7 +4252,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 47
+            "line": 92
           },
           "default": null,
           "name": "kind",
@@ -3932,7 +4261,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 47
+            "line": 92
           },
           "default": null,
           "name": "path",
@@ -3945,9 +4274,9 @@
     },
     {
       "anchor": {
-        "end_line": 53,
+        "end_line": 98,
         "file": "src/brand-settings.ts",
-        "line": 48
+        "line": 93
       },
       "bases": [],
       "doc": null,
@@ -3955,7 +4284,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 49
+            "line": 94
           },
           "default": null,
           "name": "kind",
@@ -3964,7 +4293,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 50
+            "line": 95
           },
           "default": null,
           "name": "reason",
@@ -3973,7 +4302,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 51
+            "line": 96
           },
           "default": null,
           "name": "path",
@@ -3982,7 +4311,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 52
+            "line": 97
           },
           "default": null,
           "name": "message",
@@ -15465,10 +15794,1105 @@
       "grade": "declared",
       "id": "src/words.ChangeWordsOptions",
       "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 46
+          },
+          "name": "YouTubeChannel"
+        }
+      ],
+      "anchor": {
+        "end_line": 45,
+        "file": "src/youtube.ts",
+        "line": 34
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 35
+          },
+          "default": null,
+          "name": "id",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 36
+          },
+          "default": null,
+          "name": "handle",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 37
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 38
+          },
+          "default": null,
+          "name": "description",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 39
+          },
+          "default": null,
+          "name": "publishedAt",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 40
+          },
+          "default": null,
+          "name": "uploadsPlaylistId",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 41
+          },
+          "default": null,
+          "name": "subscriberCount",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 42
+          },
+          "default": null,
+          "name": "viewCount",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 43
+          },
+          "default": null,
+          "name": "videoCount",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 44
+          },
+          "default": null,
+          "name": "fetchedAt",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.YouTubeChannel",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 55
+          },
+          "name": "YouTubePlaylistItem"
+        }
+      ],
+      "anchor": {
+        "end_line": 54,
+        "file": "src/youtube.ts",
+        "line": 48
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 49
+          },
+          "default": null,
+          "name": "videoId",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 50
+          },
+          "default": null,
+          "name": "position",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 52
+          },
+          "default": null,
+          "doc": "When the video was added to the playlist (`snippet.publishedAt` of the playlist item).",
+          "name": "addedAt",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 53
+          },
+          "default": null,
+          "name": "videoPublishedAt",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.YouTubePlaylistItem",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 70
+          },
+          "name": "YouTubePlaylist"
+        }
+      ],
+      "anchor": {
+        "end_line": 69,
+        "file": "src/youtube.ts",
+        "line": 57
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 58
+          },
+          "default": null,
+          "name": "id",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 59
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 60
+          },
+          "default": null,
+          "name": "description",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 61
+          },
+          "default": null,
+          "name": "itemCount",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 63
+          },
+          "default": null,
+          "doc": "`public` | `unlisted` | `private`, as YouTube reports it.",
+          "name": "privacy",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 64
+          },
+          "default": null,
+          "name": "publishedAt",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 65
+          },
+          "default": null,
+          "name": "thumbnailUrl",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 67
+          },
+          "default": null,
+          "doc": "The playlistItems listing's HTTP ETag, sent back as If-None-Match on the next sync.",
+          "name": "itemsEtag",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 68
+          },
+          "default": null,
+          "name": "items",
+          "type": "z.array(YouTubePlaylistItem) \u2192 src/youtube.YouTubePlaylistItem"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.YouTubePlaylist",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 76
+          },
+          "name": "YouTubePlaylistsFile"
+        }
+      ],
+      "anchor": {
+        "end_line": 75,
+        "file": "src/youtube.ts",
+        "line": 72
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "fetchedAt",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 74
+          },
+          "default": null,
+          "name": "playlists",
+          "type": "z.array(YouTubePlaylist) \u2192 src/youtube.YouTubePlaylist"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.YouTubePlaylistsFile",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 97
+          },
+          "name": "YouTubeVideo"
+        }
+      ],
+      "anchor": {
+        "end_line": 96,
+        "file": "src/youtube.ts",
+        "line": 79
+      },
+      "bases": [],
+      "doc": "A mirrored video. The fields before `privacy` are the retired yt-mirror's shape, so its files still read.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 80
+          },
+          "default": null,
+          "name": "id",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 81
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 82
+          },
+          "default": null,
+          "name": "description",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 83
+          },
+          "default": null,
+          "name": "publishedAt",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 84
+          },
+          "default": null,
+          "name": "channelId",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 85
+          },
+          "default": "[]",
+          "name": "tags",
+          "type": "z.array(z.string()).default([])"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 86
+          },
+          "default": null,
+          "name": "categoryId",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 88
+          },
+          "default": null,
+          "doc": "ISO 8601 duration (`PT12M3S`).",
+          "name": "duration",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 89
+          },
+          "default": null,
+          "name": "viewCount",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 90
+          },
+          "default": null,
+          "name": "likeCount",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 91
+          },
+          "default": null,
+          "name": "commentCount",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 92
+          },
+          "default": null,
+          "name": "thumbnailUrl",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 93
+          },
+          "default": null,
+          "name": "fetchedAt",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 95
+          },
+          "default": null,
+          "doc": "`public` | `unlisted` | `private`; absent in files written before playlists were mirrored.",
+          "name": "privacy",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.YouTubeVideo",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 105
+          },
+          "name": "YouTubeSyncCounts"
+        }
+      ],
+      "anchor": {
+        "end_line": 104,
+        "file": "src/youtube.ts",
+        "line": 99
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 100
+          },
+          "default": null,
+          "name": "videos",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 101
+          },
+          "default": null,
+          "name": "playlists",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 102
+          },
+          "default": null,
+          "name": "memberships",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 103
+          },
+          "default": null,
+          "name": "thumbnailsDownloaded",
+          "type": "z.number().int()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.YouTubeSyncCounts",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 120
+          },
+          "name": "YouTubeSyncRecord"
+        }
+      ],
+      "anchor": {
+        "end_line": 119,
+        "file": "src/youtube.ts",
+        "line": 107
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 108
+          },
+          "default": null,
+          "name": "lastSyncAt",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 109
+          },
+          "default": null,
+          "name": "ok",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 110
+          },
+          "default": null,
+          "name": "durationMs",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 112
+          },
+          "default": null,
+          "doc": "API calls made, each 1 unit.",
+          "name": "quotaUnits",
+          "type": "z.number().int()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 113
+          },
+          "default": null,
+          "name": "channelId",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 114
+          },
+          "default": null,
+          "name": "counts",
+          "type": "YouTubeSyncCounts \u2192 src/youtube.YouTubeSyncCounts"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 115
+          },
+          "default": null,
+          "name": "warnings",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 117
+          },
+          "default": null,
+          "doc": "Why the sync stopped, when `ok` is false. The mirror keeps what the last good sync wrote.",
+          "name": "error",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 118
+          },
+          "default": null,
+          "name": "by",
+          "type": "Stamp.optional() \u2192 src/stamp.Stamp"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.YouTubeSyncRecord",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 167
+          },
+          "name": "YouTubeVideoListing"
+        }
+      ],
+      "anchor": {
+        "end_line": 166,
+        "file": "src/youtube.ts",
+        "line": 156
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 157
+          },
+          "default": null,
+          "name": "videos",
+          "type": "z.array(YouTubeVideo.extend({ /** Absolute path of the thumbnail when one is mirrored. */ thumbnailPath: z.string().nullable(), hasTranscri\u2026 \u2192 src/youtube.YouTubeVideo"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 165
+          },
+          "default": null,
+          "doc": "Video folders whose metadata.json is missing or malformed, as `<id>: <message>`.",
+          "name": "issues",
+          "type": "z.array(z.string())"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.YouTubeVideoListing",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/youtube.ts",
+        "line": 157
+      },
+      "bases": [
+        "YouTubeVideo"
+      ],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 80
+          },
+          "default": null,
+          "inherited_from": "YouTubeVideo",
+          "name": "id",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 81
+          },
+          "default": null,
+          "inherited_from": "YouTubeVideo",
+          "name": "title",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 82
+          },
+          "default": null,
+          "inherited_from": "YouTubeVideo",
+          "name": "description",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 83
+          },
+          "default": null,
+          "inherited_from": "YouTubeVideo",
+          "name": "publishedAt",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 84
+          },
+          "default": null,
+          "inherited_from": "YouTubeVideo",
+          "name": "channelId",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 85
+          },
+          "default": "[]",
+          "inherited_from": "YouTubeVideo",
+          "name": "tags",
+          "type": "z.array(z.string()).default([])"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 86
+          },
+          "default": null,
+          "inherited_from": "YouTubeVideo",
+          "name": "categoryId",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 88
+          },
+          "default": null,
+          "doc": "ISO 8601 duration (`PT12M3S`).",
+          "inherited_from": "YouTubeVideo",
+          "name": "duration",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 89
+          },
+          "default": null,
+          "inherited_from": "YouTubeVideo",
+          "name": "viewCount",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 90
+          },
+          "default": null,
+          "inherited_from": "YouTubeVideo",
+          "name": "likeCount",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 91
+          },
+          "default": null,
+          "inherited_from": "YouTubeVideo",
+          "name": "commentCount",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 92
+          },
+          "default": null,
+          "inherited_from": "YouTubeVideo",
+          "name": "thumbnailUrl",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 93
+          },
+          "default": null,
+          "inherited_from": "YouTubeVideo",
+          "name": "fetchedAt",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 95
+          },
+          "default": null,
+          "doc": "`public` | `unlisted` | `private`; absent in files written before playlists were mirrored.",
+          "inherited_from": "YouTubeVideo",
+          "name": "privacy",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 160
+          },
+          "default": null,
+          "doc": "Absolute path of the thumbnail when one is mirrored.",
+          "name": "thumbnailPath",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 161
+          },
+          "default": null,
+          "name": "hasTranscript",
+          "type": "z.boolean()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.YouTubeVideoListing.videos[]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 443,
+        "file": "src/youtube.ts",
+        "line": 432
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 433
+          },
+          "default": null,
+          "name": "mirrorRoot",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 434
+          },
+          "default": null,
+          "name": "brandKey",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 436
+          },
+          "default": null,
+          "doc": "The channel's id from the brand registry (preferred), or its handle.",
+          "name": "channel",
+          "type": "{ id: string } | { handle: string }"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 437
+          },
+          "default": null,
+          "name": "apiKey",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 438
+          },
+          "default": null,
+          "name": "fetch",
+          "type": "?: YouTubeFetch \u2192 src/youtube.YouTubeFetch"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 440
+          },
+          "default": null,
+          "doc": "Downloads thumbnails; defaults to `fetch`.",
+          "name": "download",
+          "type": "?: (url: string) => Promise<Response> \u2192 Response (@types/node)"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 441
+          },
+          "default": null,
+          "name": "now",
+          "type": "?: () => Date"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 442
+          },
+          "default": null,
+          "name": "by",
+          "type": "?: Stamp \u2192 src/stamp.Stamp"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.SyncYouTubeOptions",
+      "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 450
+          },
+          "name": "SyncYouTubeResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 449,
+        "file": "src/youtube.ts",
+        "line": 445
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 446
+          },
+          "default": null,
+          "name": "synced",
+          "type": "z.object({ kind: z.literal('synced'), record: YouTubeSyncRecord }) \u2192 src/youtube.YouTubeSyncRecord"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 447
+          },
+          "default": null,
+          "name": "failed",
+          "type": "z.object({ kind: z.literal('failed'), record: YouTubeSyncRecord }) \u2192 src/youtube.YouTubeSyncRecord"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 448
+          },
+          "default": null,
+          "name": "busy",
+          "type": "z.object({ kind: z.literal('busy'), message: z.string() })"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.SyncYouTubeResult",
+      "kind": "zod-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/youtube.ts",
+        "line": 446
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 446
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('synced')"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 446
+          },
+          "default": null,
+          "name": "record",
+          "type": "YouTubeSyncRecord \u2192 src/youtube.YouTubeSyncRecord"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.SyncYouTubeResult[kind=synced]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/youtube.ts",
+        "line": 447
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 447
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('failed')"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 447
+          },
+          "default": null,
+          "name": "record",
+          "type": "YouTubeSyncRecord \u2192 src/youtube.YouTubeSyncRecord"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.SyncYouTubeResult[kind=failed]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/youtube.ts",
+        "line": 448
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 448
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('busy')"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 448
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/youtube.SyncYouTubeResult[kind=busy]",
+      "kind": "zod-object"
     }
   ],
   "target": {
-    "commit": "0cc8aa646bd1af14c140280cc4008971d9d338d9",
+    "commit": "bea2cdf5395dc1048cbb6b46e745ed2eb7ff68f1",
     "root": "..",
     "stack": "typescript"
   },
@@ -15744,6 +17168,33 @@
       "subject": "`src/words.EMPTY_WORDS` - declared but not read"
     },
     {
+      "census": true,
+      "family": "utility-type alias (`Pick` / `Omit` / `Record` / generic instance)",
+      "looked_at": [
+        "src/youtube.ts:227"
+      ],
+      "reason": "declared but not read: utility-type alias (`Pick` / `Omit` / `Record` / generic instance). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/youtube.Thumbs` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "class",
+      "looked_at": [
+        "src/youtube.ts:216"
+      ],
+      "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/youtube.YouTubeApiError` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "class",
+      "looked_at": [
+        "src/youtube.ts:232"
+      ],
+      "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/youtube.YouTubeReader` - declared but not read"
+    },
+    {
       "looked_at": [
         "OneLine('a note').optional() (src/gitignore-rules.ts:41)"
       ],
@@ -15771,14 +17222,17 @@
     },
     {
       "looked_at": [
-        "readFileResult(BrandSettings) (src/brand-settings.ts:38)",
+        "readFileResult(BrandSettings) (src/brand-settings.ts:83)",
         "readFileResult(ProjectIdentity) (src/identity.ts:49)",
         "readFileResult(ResourcesFile) (src/resources.ts:135)",
         "readFileResult(SeriesFile) (src/series.ts:43)",
-        "readFileResult(WordsFile) (src/words.ts:68)"
+        "readFileResult(WordsFile) (src/words.ts:68)",
+        "readFileResult(YouTubeChannel) (src/youtube.ts:122)",
+        "readFileResult(YouTubePlaylistsFile) (src/youtube.ts:124)",
+        "readFileResult(YouTubeSyncRecord) (src/youtube.ts:126)"
       ],
       "reason": "built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here",
-      "subject": "schemas built by `readFileResult(...)` (5 uses)"
+      "subject": "schemas built by `readFileResult(...)` (8 uses)"
     },
     {
       "looked_at": [
@@ -15820,7 +17274,7 @@
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 32,
+    "import": 33,
     "re-export": 0
   }
 }

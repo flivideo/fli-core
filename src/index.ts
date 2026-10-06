@@ -116,7 +116,10 @@ export {
 
 export {
   BRAND_SETTINGS_FILE,
+  BrandPublishSettings,
   BrandSettings,
+  BrandStudioDefaults,
+  BrandYouTubeSettings,
   ReadBrandSettingsResult,
   TranscriptionChoice,
   readBrandSettings,
@@ -463,3 +466,35 @@ export {
  * zod 3 (Teletubby, FliCut): a zod 3 schema is not a `z.ZodType` here, and a copy of zod 4 from elsewhere may not be.
  */
 export { z } from 'zod';
+
+export {
+  ReadYouTubeChannelResult,
+  ReadYouTubePlaylistsResult,
+  ReadYouTubeSyncResult,
+  SyncYouTubeResult,
+  YOUTUBE_API_BASE,
+  YOUTUBE_CHANNEL_FILE,
+  YOUTUBE_PLAYLISTS_FILE,
+  YOUTUBE_SYNC_FILE,
+  YOUTUBE_THUMBNAIL_FILE,
+  YOUTUBE_VIDEO_FILE,
+  YOUTUBE_VIDEOS_FOLDER,
+  YouTubeApiError,
+  YouTubeChannel,
+  YouTubePlaylist,
+  YouTubePlaylistItem,
+  YouTubePlaylistsFile,
+  YouTubeReader,
+  YouTubeSyncCounts,
+  YouTubeSyncRecord,
+  YouTubeVideo,
+  YouTubeVideoListing,
+  readYouTubeChannel,
+  readYouTubePlaylists,
+  readYouTubeSync,
+  readYouTubeVideos,
+  syncYouTubeChannel,
+  youtubeMirrorDir,
+  type SyncYouTubeOptions,
+  type YouTubeFetch,
+} from './youtube.js';

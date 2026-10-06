@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `0cc8aa646bd1` · **generated** 2026-10-05T14:42:53+00:00
+- **commit** `bea2cdf5395d` · **generated** 2026-10-06T14:16:02+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 32 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 33 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 247 | 73 | 6 | 9 | 30 | 6 |
+| 268 | 74 | 6 | 9 | 33 | 6 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -19,7 +19,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 
 - `src/api-page.ts` — `ApiPageOptions` :16
 - `src/app-file.ts` — `AppName` :15 · `AppSubject` :19 · `AppFile` :26
-- `src/brand-settings.ts` — `TranscriptionChoice` :14 · `BrandSettings` :22 · `WriteBrandSettingsResult` :46
+- `src/brand-settings.ts` — `TranscriptionChoice` :14 · `BrandPublishSettings` :28 · `BrandYouTubeSettings` :45 · `BrandStudioDefaults` :54 · `BrandSettings` :61 · `WriteBrandSettingsResult` :91
 - `src/brands.ts` — `Brand` :9 · `RegistryEntry` :20 · `BrandsFile` :28 · `SkippedBrand` :32 · `BrandsRead` :35 · `ReadBrandsResult` :45 · `ReadBrandsOptions` :48 · `ResolveBrandRootOptions` :92
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
 - `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :63 · `LEGACY_FOLDERS` (set) :66 · `MOTION_MACHINERY` (set) :122 · `ProjectTier` (set) :136 · `OverlayRole` (set) :147 · `ProjectEntry` :150 · `ProjectLayout` (set) :245 · `ProjectLayoutPaths` :248
@@ -51,6 +51,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/video-file.ts` — `Ext` :15 · `VideoFileKind` (set) :17 · `VideoPart` (set) :21 · `VideoFile` :24 · `UnknownVideoFile` :38 · `ParsedVideoFile` :45 · `VideoFolder` :80 · `VideoFolderName` :92
 - `src/window-state.ts` — `WindowRect` :16 · `SavedWindow` :24 · `WindowStateFile` :32 · `DisplayArea` :39 · `PlaceOptions` :47 · `TrackedWindow` :255 · `TrackOptions` :264
 - `src/words.ts` — `WordLevel` (set) :25 · `Text` :29 · `WordName` :32 · `WordRule` :40 · `WordFiller` :44 · `WordKind` (set) :52 · `WordOff` :56 · `WordsFile` :59 · `WordInput` :72 · `WordRef` :95 · `MergedWords` :99 · `WordsRead` :108 · `ReadWordsOptions` :121 · `WriteWordsResult` :287 · `ChangeWordsResult` :320 · `ChangeWordsOptions` :335
+- `src/youtube.ts` — `YouTubeChannel` :34 · `YouTubePlaylistItem` :48 · `YouTubePlaylist` :57 · `YouTubePlaylistsFile` :72 · `YouTubeVideo` :79 · `YouTubeSyncCounts` :99 · `YouTubeSyncRecord` :107 · `YouTubeVideoListing` :156 · `SyncYouTubeOptions` :432 · `SyncYouTubeResult` :445
 
 ## Never read by this extractor
 
@@ -70,10 +71,10 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**363** top-level declarations counted = **317** mirrored + **16** listed as gaps + **30** declared but not read.
+**397** top-level declarations counted = **342** mirrored + **22** listed as gaps + **33** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 1 function, 21 literal constants.
+Not counted, as not schema-bearing: 1 function, 1 function type, 28 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
@@ -92,28 +93,29 @@ Not counted, as not schema-bearing: 1 function, 21 literal constants.
 | `src/series.ts` | 12 | 9 | 2 | **1** |
 | `src/transport.ts` | 5 | 4 | 0 | **1** |
 | `src/words.ts` | 31 | 28 | 2 | **1** |
+| `src/youtube.ts` | 28 | 19 | 6 | **3** |
 
 ## Closed sets — declared
 
 One symbol states each set. Adding a member changes that symbol, so these cannot drift.
 
-### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:46-54`
+### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:91-99`
 
 *the `kind` discriminator of the union `WriteBrandSettingsResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/brand-settings.ts:47` |
-| `refused` | `src/brand-settings.ts:49` |
+| `written` | `src/brand-settings.ts:92` |
+| `refused` | `src/brand-settings.ts:94` |
 
-### `src/brand-settings.WriteBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:50`
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:95`
 
 *`z.enum` `reason` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `invalid-input` | `src/brand-settings.ts:50` |
-| `io-error` | `src/brand-settings.ts:50` |
+| `invalid-input` | `src/brand-settings.ts:95` |
+| `io-error` | `src/brand-settings.ts:95` |
 
 ### `src/brands.ReadBrandsResult.kind` — `src/brands.ts:45`
 
@@ -956,6 +958,16 @@ Which section of a video a `part` file is. A closed set: `<name>-part-<intro|bod
 | `not-found` | `src/words.ts:328` |
 | `busy` | `src/words.ts:328` |
 
+### `src/youtube.SyncYouTubeResult.kind` — `src/youtube.ts:445-449`
+
+*the `kind` discriminator of the union `SyncYouTubeResult` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `synced` | `src/youtube.ts:446` |
+| `failed` | `src/youtube.ts:447` |
+| `busy` | `src/youtube.ts:448` |
+
 ## Closed sets — derived (no declaring symbol)
 
 Each set below was read out of the real authority — control flow, membership tests, dispatch tables — because nothing declares it. **Correct as of this commit and fragile after it.** Each carries the refactor that would make it declared.
@@ -1103,42 +1115,104 @@ A level's transcription providers (FliTools reads them: global `flitools.json` �
 | `fast` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:16` | Pass 1 (fast): `auto`, `groq-whisper`, `mlx-whisper`, … |
 | `editGrade` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:18` | Pass 2 (edit-grade): `crisperwhisper`, `elevenlabs`, `off`, … |
 
-### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:22-35`
+### `src/brand-settings.BrandPublishSettings` — zod-object — `src/brand-settings.ts:28-38`
 
-*aliases* `BrandSettings` `src/brand-settings.ts:36`
+The brand's publishing settings, authored by the brand (CTAs, affiliates, legal…). Moved verbatim from FliHub's
+
+*aliases* `BrandPublishSettings` `src/brand-settings.ts:39`
+
+| field | type | default | at |
+|---|---|---|---|
+| `brand` | `z.looseObject({}).optional()` | — | `src/brand-settings.ts:29` |
+| `socialLinks` | `z.record(z.string(), z.string()).optional()` | — | `src/brand-settings.ts:30` |
+| `ctas` | `z.record(z.string(), z.looseObject({ label: z.string(), url: z.string() })).optional()` | — | `src/brand-settings.ts:31` |
+| `affiliates` | `z.array(z.looseObject({ name: z.string(), url: z.string(), active: z.boolean().optional() })).optional()` | — | `src/brand-settings.ts:32` |
+| `playlists` | `z.record(z.string(), z.string()).optional()` | — | `src/brand-settings.ts:35` |
+| `descriptionTemplate` | `z.looseObject({}).optional()` | — | `src/brand-settings.ts:36` |
+| `_meta` | `z.looseObject({}).optional()` | — | `src/brand-settings.ts:37` |
+
+### `src/brand-settings.BrandPublishSettings.brand` — zod-object — `src/brand-settings.ts:29`
+
+*No annotated fields found — this shape declares its fields elsewhere.*
+
+### `src/brand-settings.BrandPublishSettings.affiliates[]` — zod-object — `src/brand-settings.ts:32`
+
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `z.string()` | — | `src/brand-settings.ts:33` |
+| `url` | `z.string()` | — | `src/brand-settings.ts:33` |
+| `active` | `z.boolean().optional()` | — | `src/brand-settings.ts:33` |
+
+### `src/brand-settings.BrandPublishSettings.descriptionTemplate` — zod-object — `src/brand-settings.ts:36`
+
+*No annotated fields found — this shape declares its fields elsewhere.*
+
+### `src/brand-settings.BrandPublishSettings._meta` — zod-object — `src/brand-settings.ts:37`
+
+*No annotated fields found — this shape declares its fields elsewhere.*
+
+### `src/brand-settings.BrandYouTubeSettings` — zod-object — `src/brand-settings.ts:45-50`
+
+The brand's YouTube choices, made by a person. Playlist **ids**; titles come from the YouTube mirror. Everything YouTube
+
+*aliases* `BrandYouTubeSettings` `src/brand-settings.ts:51`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:23` |  |
-| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:24` |  |
-| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:25` |  |
-| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/brand-settings.ts:29` | The brand's transcription providers, over the suite default; absent → the suite default. |
-| `gitignore` | `z.array(GitignoreOverlayRule).optional() → src/gitignore-rules.GitignoreOverlayRule` | — | `src/brand-settings.ts:34` | The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's |
+| `activePlaylists` | `z.array(z.string().min(1)).default([])` | `[]` | `src/brand-settings.ts:47` | The playlists this brand uses: offered in Launch, shown first on the brand's YouTube page. |
+| `defaultPlaylists` | `z.array(z.string().min(1)).default([])` | `[]` | `src/brand-settings.ts:49` | The brand's usual picks, pre-ticked for a new video. |
 
-### `src/brand-settings.WriteBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:46-54`
+### `src/brand-settings.BrandStudioDefaults` — zod-object — `src/brand-settings.ts:54-58`
 
-*aliases* `WriteBrandSettingsResult` `src/brand-settings.ts:55`
+The YouTube Studio defaults a new video starts with (category, audience, language). Each absent → the app's own.
+
+*aliases* `BrandStudioDefaults` `src/brand-settings.ts:59`
+
+| field | type | default | at |
+|---|---|---|---|
+| `category` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:55` |
+| `audience` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:56` |
+| `language` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:57` |
+
+### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:61-80`
+
+*aliases* `BrandSettings` `src/brand-settings.ts:81`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:62` |  |
+| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:63` |  |
+| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:64` |  |
+| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/brand-settings.ts:68` | The brand's transcription providers, over the suite default; absent → the suite default. |
+| `gitignore` | `z.array(GitignoreOverlayRule).optional() → src/gitignore-rules.GitignoreOverlayRule` | — | `src/brand-settings.ts:73` | The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's |
+| `publish` | `BrandPublishSettings.optional() → src/brand-settings.BrandPublishSettings` | — | `src/brand-settings.ts:75` | Publishing settings (CTAs, affiliates, legal…); optional, so older readers are unaffected. |
+| `youtube` | `BrandYouTubeSettings.optional() → src/brand-settings.BrandYouTubeSettings` | — | `src/brand-settings.ts:77` | The brand's YouTube playlist choices. |
+| `studioDefaults` | `BrandStudioDefaults.optional() → src/brand-settings.BrandStudioDefaults` | — | `src/brand-settings.ts:79` | YouTube Studio defaults for a new video. |
+
+### `src/brand-settings.WriteBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:91-99`
+
+*aliases* `WriteBrandSettingsResult` `src/brand-settings.ts:100`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/brand-settings.ts:47` |
-| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/brand-settings.ts:49` |
+| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/brand-settings.ts:92` |
+| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/brand-settings.ts:94` |
 
-### `src/brand-settings.WriteBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:47`
-
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:47` |
-| `path` | `z.string()` | — | `src/brand-settings.ts:47` |
-
-### `src/brand-settings.WriteBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:48-53`
+### `src/brand-settings.WriteBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:92`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:49` |
-| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/brand-settings.ts:50` |
-| `path` | `z.string()` | — | `src/brand-settings.ts:51` |
-| `message` | `z.string()` | — | `src/brand-settings.ts:52` |
+| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:92` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:92` |
+
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:93-98`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:94` |
+| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/brand-settings.ts:95` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:96` |
+| `message` | `z.string()` | — | `src/brand-settings.ts:97` |
 
 ### `src/brands.Brand` — zod-object — `src/brands.ts:9-17`
 
@@ -3417,6 +3491,185 @@ Which entry to remove: its kind (or `off`) and its text, as `wordKey` reads it.
 | `waitMs` | `?: number` | — | `src/words.ts:339` | How long to wait for another writer's lock (default 3 s). |
 | `staleMs` | `?: number` | — | `src/words.ts:341` | A lock older than this is a crashed writer's and is broken (default 10 s). |
 
+### `src/youtube.YouTubeChannel` — zod-object — `src/youtube.ts:34-45`
+
+*aliases* `YouTubeChannel` `src/youtube.ts:46`
+
+| field | type | default | at |
+|---|---|---|---|
+| `id` | `z.string().min(1)` | — | `src/youtube.ts:35` |
+| `handle` | `z.string()` | — | `src/youtube.ts:36` |
+| `title` | `z.string()` | — | `src/youtube.ts:37` |
+| `description` | `z.string()` | — | `src/youtube.ts:38` |
+| `publishedAt` | `z.string()` | — | `src/youtube.ts:39` |
+| `uploadsPlaylistId` | `z.string().min(1)` | — | `src/youtube.ts:40` |
+| `subscriberCount` | `z.number()` | — | `src/youtube.ts:41` |
+| `viewCount` | `z.number()` | — | `src/youtube.ts:42` |
+| `videoCount` | `z.number()` | — | `src/youtube.ts:43` |
+| `fetchedAt` | `z.string()` | — | `src/youtube.ts:44` |
+
+### `src/youtube.YouTubePlaylistItem` — zod-object — `src/youtube.ts:48-54`
+
+*aliases* `YouTubePlaylistItem` `src/youtube.ts:55`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `videoId` | `z.string().min(1)` | — | `src/youtube.ts:49` |  |
+| `position` | `z.number().int()` | — | `src/youtube.ts:50` |  |
+| `addedAt` | `z.string().optional()` | — | `src/youtube.ts:52` | When the video was added to the playlist (`snippet.publishedAt` of the playlist item). |
+| `videoPublishedAt` | `z.string().optional()` | — | `src/youtube.ts:53` |  |
+
+### `src/youtube.YouTubePlaylist` — zod-object — `src/youtube.ts:57-69`
+
+*aliases* `YouTubePlaylist` `src/youtube.ts:70`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `z.string().min(1)` | — | `src/youtube.ts:58` |  |
+| `title` | `z.string()` | — | `src/youtube.ts:59` |  |
+| `description` | `z.string()` | — | `src/youtube.ts:60` |  |
+| `itemCount` | `z.number().int()` | — | `src/youtube.ts:61` |  |
+| `privacy` | `z.string()` | — | `src/youtube.ts:63` | `public` \| `unlisted` \| `private`, as YouTube reports it. |
+| `publishedAt` | `z.string()` | — | `src/youtube.ts:64` |  |
+| `thumbnailUrl` | `z.string()` | — | `src/youtube.ts:65` |  |
+| `itemsEtag` | `z.string().optional()` | — | `src/youtube.ts:67` | The playlistItems listing's HTTP ETag, sent back as If-None-Match on the next sync. |
+| `items` | `z.array(YouTubePlaylistItem) → src/youtube.YouTubePlaylistItem` | — | `src/youtube.ts:68` |  |
+
+### `src/youtube.YouTubePlaylistsFile` — zod-object — `src/youtube.ts:72-75`
+
+*aliases* `YouTubePlaylistsFile` `src/youtube.ts:76`
+
+| field | type | default | at |
+|---|---|---|---|
+| `fetchedAt` | `z.string()` | — | `src/youtube.ts:73` |
+| `playlists` | `z.array(YouTubePlaylist) → src/youtube.YouTubePlaylist` | — | `src/youtube.ts:74` |
+
+### `src/youtube.YouTubeVideo` — zod-object — `src/youtube.ts:79-96`
+
+A mirrored video. The fields before `privacy` are the retired yt-mirror's shape, so its files still read.
+
+*aliases* `YouTubeVideo` `src/youtube.ts:97`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `z.string().min(1)` | — | `src/youtube.ts:80` |  |
+| `title` | `z.string()` | — | `src/youtube.ts:81` |  |
+| `description` | `z.string()` | — | `src/youtube.ts:82` |  |
+| `publishedAt` | `z.string()` | — | `src/youtube.ts:83` |  |
+| `channelId` | `z.string()` | — | `src/youtube.ts:84` |  |
+| `tags` | `z.array(z.string()).default([])` | `[]` | `src/youtube.ts:85` |  |
+| `categoryId` | `z.string().optional()` | — | `src/youtube.ts:86` |  |
+| `duration` | `z.string()` | — | `src/youtube.ts:88` | ISO 8601 duration (`PT12M3S`). |
+| `viewCount` | `z.number()` | — | `src/youtube.ts:89` |  |
+| `likeCount` | `z.number()` | — | `src/youtube.ts:90` |  |
+| `commentCount` | `z.number()` | — | `src/youtube.ts:91` |  |
+| `thumbnailUrl` | `z.string()` | — | `src/youtube.ts:92` |  |
+| `fetchedAt` | `z.string()` | — | `src/youtube.ts:93` |  |
+| `privacy` | `z.string().optional()` | — | `src/youtube.ts:95` | `public` \| `unlisted` \| `private`; absent in files written before playlists were mirrored. |
+
+### `src/youtube.YouTubeSyncCounts` — zod-object — `src/youtube.ts:99-104`
+
+*aliases* `YouTubeSyncCounts` `src/youtube.ts:105`
+
+| field | type | default | at |
+|---|---|---|---|
+| `videos` | `z.number().int()` | — | `src/youtube.ts:100` |
+| `playlists` | `z.number().int()` | — | `src/youtube.ts:101` |
+| `memberships` | `z.number().int()` | — | `src/youtube.ts:102` |
+| `thumbnailsDownloaded` | `z.number().int()` | — | `src/youtube.ts:103` |
+
+### `src/youtube.YouTubeSyncRecord` — zod-object — `src/youtube.ts:107-119`
+
+*aliases* `YouTubeSyncRecord` `src/youtube.ts:120`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `lastSyncAt` | `z.string()` | — | `src/youtube.ts:108` |  |
+| `ok` | `z.boolean()` | — | `src/youtube.ts:109` |  |
+| `durationMs` | `z.number().int()` | — | `src/youtube.ts:110` |  |
+| `quotaUnits` | `z.number().int()` | — | `src/youtube.ts:112` | API calls made, each 1 unit. |
+| `channelId` | `z.string().optional()` | — | `src/youtube.ts:113` |  |
+| `counts` | `YouTubeSyncCounts → src/youtube.YouTubeSyncCounts` | — | `src/youtube.ts:114` |  |
+| `warnings` | `z.array(z.string())` | — | `src/youtube.ts:115` |  |
+| `error` | `z.string().optional()` | — | `src/youtube.ts:117` | Why the sync stopped, when `ok` is false. The mirror keeps what the last good sync wrote. |
+| `by` | `Stamp.optional() → src/stamp.Stamp` | — | `src/youtube.ts:118` |  |
+
+### `src/youtube.YouTubeVideoListing` — zod-object — `src/youtube.ts:156-166`
+
+*aliases* `YouTubeVideoListing` `src/youtube.ts:167`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `videos` | `z.array(YouTubeVideo.extend({ /** Absolute path of the thumbnail when one is mirrored. */ thumbnailPath: z.string().nullable(), hasTranscri… → src/youtube.YouTubeVideo` | — | `src/youtube.ts:157` |  |
+| `issues` | `z.array(z.string())` | — | `src/youtube.ts:165` | Video folders whose metadata.json is missing or malformed, as `<id>: <message>`. |
+
+### `src/youtube.YouTubeVideoListing.videos[]` — zod-object — `src/youtube.ts:157`
+
+*extends* `YouTubeVideo`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `z.string().min(1)` | — | `src/youtube.ts:80` |  |
+| `title` | `z.string()` | — | `src/youtube.ts:81` |  |
+| `description` | `z.string()` | — | `src/youtube.ts:82` |  |
+| `publishedAt` | `z.string()` | — | `src/youtube.ts:83` |  |
+| `channelId` | `z.string()` | — | `src/youtube.ts:84` |  |
+| `tags` | `z.array(z.string()).default([])` | `[]` | `src/youtube.ts:85` |  |
+| `categoryId` | `z.string().optional()` | — | `src/youtube.ts:86` |  |
+| `duration` | `z.string()` | — | `src/youtube.ts:88` | ISO 8601 duration (`PT12M3S`). |
+| `viewCount` | `z.number()` | — | `src/youtube.ts:89` |  |
+| `likeCount` | `z.number()` | — | `src/youtube.ts:90` |  |
+| `commentCount` | `z.number()` | — | `src/youtube.ts:91` |  |
+| `thumbnailUrl` | `z.string()` | — | `src/youtube.ts:92` |  |
+| `fetchedAt` | `z.string()` | — | `src/youtube.ts:93` |  |
+| `privacy` | `z.string().optional()` | — | `src/youtube.ts:95` | `public` \| `unlisted` \| `private`; absent in files written before playlists were mirrored. |
+| `thumbnailPath` | `z.string().nullable()` | — | `src/youtube.ts:160` | Absolute path of the thumbnail when one is mirrored. |
+| `hasTranscript` | `z.boolean()` | — | `src/youtube.ts:161` |  |
+
+### `src/youtube.SyncYouTubeOptions` — interface — `src/youtube.ts:432-443`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `mirrorRoot` | `string` | — | `src/youtube.ts:433` |  |
+| `brandKey` | `string` | — | `src/youtube.ts:434` |  |
+| `channel` | `{ id: string } \| { handle: string }` | — | `src/youtube.ts:436` | The channel's id from the brand registry (preferred), or its handle. |
+| `apiKey` | `string` | — | `src/youtube.ts:437` |  |
+| `fetch` | `?: YouTubeFetch → src/youtube.YouTubeFetch` | — | `src/youtube.ts:438` |  |
+| `download` | `?: (url: string) => Promise<Response> → Response (@types/node)` | — | `src/youtube.ts:440` | Downloads thumbnails; defaults to `fetch`. |
+| `now` | `?: () => Date` | — | `src/youtube.ts:441` |  |
+| `by` | `?: Stamp → src/stamp.Stamp` | — | `src/youtube.ts:442` |  |
+
+### `src/youtube.SyncYouTubeResult` — zod-union on `kind` — `src/youtube.ts:445-449`
+
+*aliases* `SyncYouTubeResult` `src/youtube.ts:450`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `synced` | `z.object({ kind: z.literal('synced'), record: YouTubeSyncRecord }) → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:446` |
+| `failed` | `z.object({ kind: z.literal('failed'), record: YouTubeSyncRecord }) → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:447` |
+| `busy` | `z.object({ kind: z.literal('busy'), message: z.string() })` | — | `src/youtube.ts:448` |
+
+### `src/youtube.SyncYouTubeResult[kind=synced]` — zod-object — `src/youtube.ts:446`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('synced')` | — | `src/youtube.ts:446` |
+| `record` | `YouTubeSyncRecord → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:446` |
+
+### `src/youtube.SyncYouTubeResult[kind=failed]` — zod-object — `src/youtube.ts:447`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('failed')` | — | `src/youtube.ts:447` |
+| `record` | `YouTubeSyncRecord → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:447` |
+
+### `src/youtube.SyncYouTubeResult[kind=busy]` — zod-object — `src/youtube.ts:448`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('busy')` | — | `src/youtube.ts:448` |
+| `message` | `z.string()` | — | `src/youtube.ts:448` |
+
 ## Cannot be mirrored
 
 These were looked at and could not be resolved to an authority. **Nothing is guessed for them.** Each is a real gap in this page.
@@ -3426,7 +3679,7 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 | schemas built by `OneLine(...)` (1 use) | built by calling `OneLine(...)`, which does not return a single zod expression this reader can follow | `OneLine('a note').optional() (src/gitignore-rules.ts:41)` |
 | schemas built by `Refused(...)` (6 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:67)`<br>`Refused('existing-invalid') (src/identity.ts:69)`<br>`Refused('io-error') (src/identity.ts:70)`<br>`Refused('invalid-input') (src/identity.ts:185)`<br>`Refused('existing-invalid') (src/identity.ts:187)`<br>`Refused('io-error') (src/identity.ts:188)` |
 | schemas built by `promisify(...)` (1 use) | built by calling `promisify(...)` imported from `node:util`; package helpers are not expanded - see that package's own mirror | `promisify(execFile) (src/gitignore.ts:17)` |
-| schemas built by `readFileResult(...)` (5 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:38)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)` |
+| schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:83)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:122)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:124)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:126)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
 | src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:460)` |
@@ -3441,11 +3694,12 @@ The census found these top-level declarations and the extractor did not mirror t
 |---|---|---|
 | object constant | 8 | `src/classify.LAYOUT_DIRS` `src/classify.ts:259`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
 | array constant | 6 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:30`<br>`src/publish.READY_STATES` `src/publish.ts:65`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:67`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
+| class | 6 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:789`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:216`<br>`src/youtube.YouTubeReader` `src/youtube.ts:232` |
 | const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:177`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
-| class | 4 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:789`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 | union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:201` |
+| utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 1 | `src/youtube.Thumbs` `src/youtube.ts:227` |
 
 ## Findings — changes needed in the target application
 
