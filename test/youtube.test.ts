@@ -411,7 +411,9 @@ describe('fli.brand.json publish, youtube and studioDefaults blocks', () => {
       },
       youtube: { activePlaylists: ['PLa'] },
       studioDefaults: { category: '26 Howto & Style' },
+      research: { autocomplete: false, allowUnofficial: false },
     });
+    expect(settings.research).toEqual({ autocomplete: false, allowUnofficial: false });
     expect(settings.youtube).toEqual({ activePlaylists: ['PLa'], defaultPlaylists: [] });
     expect((await writeBrandSettings(root, settings)).kind).toBe('written');
     const read = await readBrandSettings(root);

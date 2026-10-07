@@ -58,6 +58,19 @@ export const BrandStudioDefaults = z.object({
 });
 export type BrandStudioDefaults = z.infer<typeof BrandStudioDefaults>;
 
+/**
+ * The brand's research switches (FliStudio `research.*`, docs/briefs/research-keywords-build-brief.md). Sources that
+ * are not an official API can vanish or be blocked, and YouTube's Developer Policies bar undocumented APIs for an API
+ * client, so each is a switch a person sets per brand. Absent → the default named on each field.
+ */
+export const BrandResearchSettings = z.object({
+  /** YouTube autocomplete (undocumented endpoint). Absent → on. */
+  autocomplete: z.boolean().optional(),
+  /** Unofficial sources that are off by default (Google Trends, YouTube filter). Absent → off. */
+  allowUnofficial: z.boolean().optional(),
+});
+export type BrandResearchSettings = z.infer<typeof BrandResearchSettings>;
+
 export const BrandSettings = z.object({
   schema: z.literal(1),
   brand: z.string().min(1),
@@ -77,6 +90,8 @@ export const BrandSettings = z.object({
   youtube: BrandYouTubeSettings.optional(),
   /** YouTube Studio defaults for a new video. */
   studioDefaults: BrandStudioDefaults.optional(),
+  /** Which research sources the brand allows. */
+  research: BrandResearchSettings.optional(),
 });
 export type BrandSettings = z.infer<typeof BrandSettings>;
 

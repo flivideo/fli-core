@@ -117,6 +117,7 @@ export {
 export {
   BRAND_SETTINGS_FILE,
   BrandPublishSettings,
+  BrandResearchSettings,
   BrandSettings,
   BrandStudioDefaults,
   BrandYouTubeSettings,

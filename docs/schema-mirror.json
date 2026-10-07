@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 397,
+    "declared": 399,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -17,9 +17,9 @@
         "not_schema_bearing": 1
       },
       "src/brand-settings.ts": {
-        "declared": 14,
+        "declared": 16,
         "gaps": 2,
-        "mirrored": 12,
+        "mirrored": 14,
         "not_read": 0,
         "not_schema_bearing": 1
       },
@@ -242,7 +242,7 @@
       }
     },
     "gaps": 22,
-    "mirrored": 342,
+    "mirrored": 344,
     "not_read": 33,
     "not_schema_bearing": 31,
     "not_schema_bearing_by_family": {
@@ -254,9 +254,9 @@
   "closed_sets": [
     {
       "anchor": {
-        "end_line": 99,
+        "end_line": 114,
         "file": "src/brand-settings.ts",
-        "line": 91
+        "line": 106
       },
       "authority": "the `kind` discriminator of the union `WriteBrandSettingsResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -265,14 +265,14 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 92
+            "line": 107
           },
           "value": "written"
         },
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 94
+            "line": 109
           },
           "value": "refused"
         }
@@ -281,7 +281,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 95
+        "line": 110
       },
       "authority": "`z.enum` `reason` - a single declaring symbol",
       "grade": "declared",
@@ -290,14 +290,14 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 95
+            "line": 110
           },
           "value": "invalid-input"
         },
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 95
+            "line": 110
           },
           "value": "io-error"
         }
@@ -3559,7 +3559,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-10-07T02:50:48+00:00",
+  "generated": "2026-10-07T03:30:39+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -4103,15 +4103,59 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 81
+            "line": 72
+          },
+          "name": "BrandResearchSettings"
+        }
+      ],
+      "anchor": {
+        "end_line": 71,
+        "file": "src/brand-settings.ts",
+        "line": 66
+      },
+      "bases": [],
+      "doc": "The brand's research switches (FliStudio `research.*`, docs/briefs/research-keywords-build-brief.md). Sources that",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 68
+          },
+          "default": null,
+          "doc": "YouTube autocomplete (undocumented endpoint). Absent \u2192 on.",
+          "name": "autocomplete",
+          "type": "z.boolean().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 70
+          },
+          "default": null,
+          "doc": "Unofficial sources that are off by default (Google Trends, YouTube filter). Absent \u2192 off.",
+          "name": "allowUnofficial",
+          "type": "z.boolean().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/brand-settings.BrandResearchSettings",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 96
           },
           "name": "BrandSettings"
         }
       ],
       "anchor": {
-        "end_line": 80,
+        "end_line": 95,
         "file": "src/brand-settings.ts",
-        "line": 61
+        "line": 74
       },
       "bases": [],
       "doc": null,
@@ -4120,7 +4164,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 62
+            "line": 75
           },
           "default": null,
           "name": "schema",
@@ -4129,7 +4173,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 63
+            "line": 76
           },
           "default": null,
           "name": "brand",
@@ -4138,7 +4182,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 64
+            "line": 77
           },
           "default": null,
           "name": "colour",
@@ -4147,7 +4191,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 68
+            "line": 81
           },
           "default": null,
           "doc": "The brand's transcription providers, over the suite default; absent \u2192 the suite default.",
@@ -4157,7 +4201,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 73
+            "line": 86
           },
           "default": null,
           "doc": "The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's",
@@ -4167,7 +4211,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 75
+            "line": 88
           },
           "default": null,
           "doc": "Publishing settings (CTAs, affiliates, legal\u2026); optional, so older readers are unaffected.",
@@ -4177,7 +4221,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 77
+            "line": 90
           },
           "default": null,
           "doc": "The brand's YouTube playlist choices.",
@@ -4187,12 +4231,22 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 79
+            "line": 92
           },
           "default": null,
           "doc": "YouTube Studio defaults for a new video.",
           "name": "studioDefaults",
           "type": "BrandStudioDefaults.optional() \u2192 src/brand-settings.BrandStudioDefaults"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 94
+          },
+          "default": null,
+          "doc": "Which research sources the brand allows.",
+          "name": "research",
+          "type": "BrandResearchSettings.optional() \u2192 src/brand-settings.BrandResearchSettings"
         }
       ],
       "grade": "declared",
@@ -4204,15 +4258,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 100
+            "line": 115
           },
           "name": "WriteBrandSettingsResult"
         }
       ],
       "anchor": {
-        "end_line": 99,
+        "end_line": 114,
         "file": "src/brand-settings.ts",
-        "line": 91
+        "line": 106
       },
       "bases": [],
       "doc": null,
@@ -4221,7 +4275,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 92
+            "line": 107
           },
           "default": null,
           "name": "written",
@@ -4230,7 +4284,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 94
+            "line": 109
           },
           "default": null,
           "name": "refused",
@@ -4244,7 +4298,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 92
+        "line": 107
       },
       "bases": [],
       "doc": null,
@@ -4252,7 +4306,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 92
+            "line": 107
           },
           "default": null,
           "name": "kind",
@@ -4261,7 +4315,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 92
+            "line": 107
           },
           "default": null,
           "name": "path",
@@ -4274,9 +4328,9 @@
     },
     {
       "anchor": {
-        "end_line": 98,
+        "end_line": 113,
         "file": "src/brand-settings.ts",
-        "line": 93
+        "line": 108
       },
       "bases": [],
       "doc": null,
@@ -4284,7 +4338,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 94
+            "line": 109
           },
           "default": null,
           "name": "kind",
@@ -4293,7 +4347,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 95
+            "line": 110
           },
           "default": null,
           "name": "reason",
@@ -4302,7 +4356,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 96
+            "line": 111
           },
           "default": null,
           "name": "path",
@@ -4311,7 +4365,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 97
+            "line": 112
           },
           "default": null,
           "name": "message",
@@ -16902,7 +16956,7 @@
     }
   ],
   "target": {
-    "commit": "749025781ff05ca8a0b49ef5cf02a13eb1405aff",
+    "commit": "c04c7c3f63487ebb3056e52208ab255175329044",
     "root": "..",
     "stack": "typescript"
   },
@@ -17232,7 +17286,7 @@
     },
     {
       "looked_at": [
-        "readFileResult(BrandSettings) (src/brand-settings.ts:83)",
+        "readFileResult(BrandSettings) (src/brand-settings.ts:98)",
         "readFileResult(ProjectIdentity) (src/identity.ts:49)",
         "readFileResult(ResourcesFile) (src/resources.ts:135)",
         "readFileResult(SeriesFile) (src/series.ts:43)",

@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `749025781ff0` · **generated** 2026-10-07T02:50:48+00:00
+- **commit** `c04c7c3f6348` · **generated** 2026-10-07T03:30:39+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 33 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 268 | 74 | 6 | 9 | 33 | 6 |
+| 269 | 74 | 6 | 9 | 33 | 6 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -19,7 +19,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 
 - `src/api-page.ts` — `ApiPageOptions` :16
 - `src/app-file.ts` — `AppName` :15 · `AppSubject` :19 · `AppFile` :26
-- `src/brand-settings.ts` — `TranscriptionChoice` :14 · `BrandPublishSettings` :28 · `BrandYouTubeSettings` :45 · `BrandStudioDefaults` :54 · `BrandSettings` :61 · `WriteBrandSettingsResult` :91
+- `src/brand-settings.ts` — `TranscriptionChoice` :14 · `BrandPublishSettings` :28 · `BrandYouTubeSettings` :45 · `BrandStudioDefaults` :54 · `BrandResearchSettings` :66 · `BrandSettings` :74 · `WriteBrandSettingsResult` :106
 - `src/brands.ts` — `Brand` :9 · `RegistryEntry` :20 · `BrandsFile` :28 · `SkippedBrand` :32 · `BrandsRead` :35 · `ReadBrandsResult` :45 · `ReadBrandsOptions` :48 · `ResolveBrandRootOptions` :92
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
 - `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :63 · `LEGACY_FOLDERS` (set) :66 · `MOTION_MACHINERY` (set) :122 · `ProjectTier` (set) :136 · `OverlayRole` (set) :147 · `ProjectEntry` :150 · `ProjectLayout` (set) :245 · `ProjectLayoutPaths` :248
@@ -71,7 +71,7 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**397** top-level declarations counted = **342** mirrored + **22** listed as gaps + **33** declared but not read.
+**399** top-level declarations counted = **344** mirrored + **22** listed as gaps + **33** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
 Not counted, as not schema-bearing: 1 function, 1 function type, 29 literal constants.
@@ -99,23 +99,23 @@ Not counted, as not schema-bearing: 1 function, 1 function type, 29 literal cons
 
 One symbol states each set. Adding a member changes that symbol, so these cannot drift.
 
-### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:91-99`
+### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:106-114`
 
 *the `kind` discriminator of the union `WriteBrandSettingsResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/brand-settings.ts:92` |
-| `refused` | `src/brand-settings.ts:94` |
+| `written` | `src/brand-settings.ts:107` |
+| `refused` | `src/brand-settings.ts:109` |
 
-### `src/brand-settings.WriteBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:95`
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:110`
 
 *`z.enum` `reason` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `invalid-input` | `src/brand-settings.ts:95` |
-| `io-error` | `src/brand-settings.ts:95` |
+| `invalid-input` | `src/brand-settings.ts:110` |
+| `io-error` | `src/brand-settings.ts:110` |
 
 ### `src/brands.ReadBrandsResult.kind` — `src/brands.ts:45`
 
@@ -1174,45 +1174,57 @@ The YouTube Studio defaults a new video starts with (category, audience, languag
 | `audience` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:56` |
 | `language` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:57` |
 
-### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:61-80`
+### `src/brand-settings.BrandResearchSettings` — zod-object — `src/brand-settings.ts:66-71`
 
-*aliases* `BrandSettings` `src/brand-settings.ts:81`
+The brand's research switches (FliStudio `research.*`, docs/briefs/research-keywords-build-brief.md). Sources that
+
+*aliases* `BrandResearchSettings` `src/brand-settings.ts:72`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:62` |  |
-| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:63` |  |
-| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:64` |  |
-| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/brand-settings.ts:68` | The brand's transcription providers, over the suite default; absent → the suite default. |
-| `gitignore` | `z.array(GitignoreOverlayRule).optional() → src/gitignore-rules.GitignoreOverlayRule` | — | `src/brand-settings.ts:73` | The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's |
-| `publish` | `BrandPublishSettings.optional() → src/brand-settings.BrandPublishSettings` | — | `src/brand-settings.ts:75` | Publishing settings (CTAs, affiliates, legal…); optional, so older readers are unaffected. |
-| `youtube` | `BrandYouTubeSettings.optional() → src/brand-settings.BrandYouTubeSettings` | — | `src/brand-settings.ts:77` | The brand's YouTube playlist choices. |
-| `studioDefaults` | `BrandStudioDefaults.optional() → src/brand-settings.BrandStudioDefaults` | — | `src/brand-settings.ts:79` | YouTube Studio defaults for a new video. |
+| `autocomplete` | `z.boolean().optional()` | — | `src/brand-settings.ts:68` | YouTube autocomplete (undocumented endpoint). Absent → on. |
+| `allowUnofficial` | `z.boolean().optional()` | — | `src/brand-settings.ts:70` | Unofficial sources that are off by default (Google Trends, YouTube filter). Absent → off. |
 
-### `src/brand-settings.WriteBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:91-99`
+### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:74-95`
 
-*aliases* `WriteBrandSettingsResult` `src/brand-settings.ts:100`
+*aliases* `BrandSettings` `src/brand-settings.ts:96`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:75` |  |
+| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:76` |  |
+| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:77` |  |
+| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/brand-settings.ts:81` | The brand's transcription providers, over the suite default; absent → the suite default. |
+| `gitignore` | `z.array(GitignoreOverlayRule).optional() → src/gitignore-rules.GitignoreOverlayRule` | — | `src/brand-settings.ts:86` | The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's |
+| `publish` | `BrandPublishSettings.optional() → src/brand-settings.BrandPublishSettings` | — | `src/brand-settings.ts:88` | Publishing settings (CTAs, affiliates, legal…); optional, so older readers are unaffected. |
+| `youtube` | `BrandYouTubeSettings.optional() → src/brand-settings.BrandYouTubeSettings` | — | `src/brand-settings.ts:90` | The brand's YouTube playlist choices. |
+| `studioDefaults` | `BrandStudioDefaults.optional() → src/brand-settings.BrandStudioDefaults` | — | `src/brand-settings.ts:92` | YouTube Studio defaults for a new video. |
+| `research` | `BrandResearchSettings.optional() → src/brand-settings.BrandResearchSettings` | — | `src/brand-settings.ts:94` | Which research sources the brand allows. |
+
+### `src/brand-settings.WriteBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:106-114`
+
+*aliases* `WriteBrandSettingsResult` `src/brand-settings.ts:115`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/brand-settings.ts:92` |
-| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/brand-settings.ts:94` |
+| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/brand-settings.ts:107` |
+| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/brand-settings.ts:109` |
 
-### `src/brand-settings.WriteBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:92`
-
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:92` |
-| `path` | `z.string()` | — | `src/brand-settings.ts:92` |
-
-### `src/brand-settings.WriteBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:93-98`
+### `src/brand-settings.WriteBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:107`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:94` |
-| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/brand-settings.ts:95` |
-| `path` | `z.string()` | — | `src/brand-settings.ts:96` |
-| `message` | `z.string()` | — | `src/brand-settings.ts:97` |
+| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:107` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:107` |
+
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:108-113`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:109` |
+| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/brand-settings.ts:110` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:111` |
+| `message` | `z.string()` | — | `src/brand-settings.ts:112` |
 
 ### `src/brands.Brand` — zod-object — `src/brands.ts:9-17`
 
@@ -3680,7 +3692,7 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 | schemas built by `OneLine(...)` (1 use) | built by calling `OneLine(...)`, which does not return a single zod expression this reader can follow | `OneLine('a note').optional() (src/gitignore-rules.ts:41)` |
 | schemas built by `Refused(...)` (6 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:67)`<br>`Refused('existing-invalid') (src/identity.ts:69)`<br>`Refused('io-error') (src/identity.ts:70)`<br>`Refused('invalid-input') (src/identity.ts:185)`<br>`Refused('existing-invalid') (src/identity.ts:187)`<br>`Refused('io-error') (src/identity.ts:188)` |
 | schemas built by `promisify(...)` (1 use) | built by calling `promisify(...)` imported from `node:util`; package helpers are not expanded - see that package's own mirror | `promisify(execFile) (src/gitignore.ts:17)` |
-| schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:83)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:126)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:130)` |
+| schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:98)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:126)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:130)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
 | src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:460)` |
