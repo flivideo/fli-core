@@ -64,6 +64,7 @@ function fakeYouTube(opts: FakeOptions = {}) {
               description: 'd',
               publishedAt: '2023-01-01T00:00:00Z',
               customUrl: '@fixture',
+              thumbnails: { high: { url: 'https://yt3.ggpht.com/avatar-s800' } },
             },
             statistics: {
               subscriberCount: '10',
@@ -168,6 +169,10 @@ describe('syncYouTubeChannel', () => {
       handle: 'fixture',
       videoCount: 3,
     });
+    expect(channel?.kind === 'valid' && channel.value.avatarUrl).toBe(
+      'https://yt3.ggpht.com/avatar-s800',
+    );
+    await expect(fs.stat(path.join(root, 'fixture', 'avatar.jpg'))).resolves.toBeTruthy();
     const playlists = await readYouTubePlaylists(root, 'fixture');
     expect(
       playlists?.kind === 'valid' &&
@@ -330,6 +335,9 @@ describe('syncYouTubeChannel', () => {
     expect(
       result.kind === 'synced' && result.record.warnings.filter((w) => w.startsWith('thumbnail')),
     ).toHaveLength(3);
+    expect(result.kind === 'synced' && result.record.warnings).toContain(
+      'channel avatar: HTTP 404',
+    );
   });
 });
 

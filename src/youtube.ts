@@ -28,6 +28,8 @@ export const YOUTUBE_SYNC_FILE = 'sync.json';
 export const YOUTUBE_VIDEOS_FOLDER = 'videos';
 export const YOUTUBE_VIDEO_FILE = 'metadata.json';
 export const YOUTUBE_THUMBNAIL_FILE = 'thumbnail.jpg';
+/** The channel's own picture (its avatar), beside channel.json. */
+export const YOUTUBE_AVATAR_FILE = 'avatar.jpg';
 
 const VIDEO_ID = /^[A-Za-z0-9_-]{11}$/;
 
@@ -42,6 +44,8 @@ export const YouTubeChannel = z.object({
   viewCount: z.number(),
   videoCount: z.number(),
   fetchedAt: z.string(),
+  /** The channel's picture (snippet.thumbnails, largest); absent in files written before v0.21.0. */
+  avatarUrl: z.string().optional(),
 });
 export type YouTubeChannel = z.infer<typeof YouTubeChannel>;
 
@@ -285,7 +289,13 @@ export class YouTubeReader {
   ): Promise<YouTubeChannel | null> {
     type Item = {
       id: string;
-      snippet: { title: string; description: string; publishedAt: string; customUrl?: string };
+      snippet: {
+        title: string;
+        description: string;
+        publishedAt: string;
+        customUrl?: string;
+        thumbnails?: Thumbs;
+      };
       statistics: { subscriberCount?: string; viewCount?: string; videoCount?: string };
       contentDetails: { relatedPlaylists: { uploads: string } };
     };
@@ -308,6 +318,9 @@ export class YouTubeReader {
       viewCount: Number(item.statistics.viewCount ?? 0),
       videoCount: Number(item.statistics.videoCount ?? 0),
       fetchedAt: now.toISOString(),
+      ...(bestThumb(item.snippet.thumbnails)
+        ? { avatarUrl: bestThumb(item.snippet.thumbnails) }
+        : {}),
     };
   }
 
@@ -561,6 +574,26 @@ export async function syncYouTubeChannel(options: SyncYouTubeOptions): Promise<S
       path.join(dir, YOUTUBE_PLAYLISTS_FILE),
       json({ fetchedAt: started.toISOString(), playlists } satisfies YouTubePlaylistsFile),
     );
+    const avatar = path.join(dir, YOUTUBE_AVATAR_FILE);
+    const beforeChannel = await readJsonFile(path.join(dir, YOUTUBE_CHANNEL_FILE), YouTubeChannel);
+    const haveAvatar = await fs.stat(avatar).then(
+      () => true,
+      () => false,
+    );
+    if (
+      channel.avatarUrl &&
+      (!haveAvatar ||
+        beforeChannel?.kind !== 'valid' ||
+        beforeChannel.value.avatarUrl !== channel.avatarUrl)
+    ) {
+      try {
+        const res = await download(channel.avatarUrl);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        await atomicWriteBytes(avatar, new Uint8Array(await res.arrayBuffer()));
+      } catch (error) {
+        warnings.push(`channel avatar: ${errorMessage(error)}`);
+      }
+    }
     await atomicWrite(path.join(dir, YOUTUBE_CHANNEL_FILE), json(channel));
 
     counts.videos = videos.length;

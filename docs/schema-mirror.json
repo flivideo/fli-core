@@ -238,17 +238,17 @@
         "gaps": 6,
         "mirrored": 19,
         "not_read": 3,
-        "not_schema_bearing": 8
+        "not_schema_bearing": 9
       }
     },
     "gaps": 22,
     "mirrored": 342,
     "not_read": 33,
-    "not_schema_bearing": 30,
+    "not_schema_bearing": 31,
     "not_schema_bearing_by_family": {
       "function": 1,
       "function type": 1,
-      "literal constant": 28
+      "literal constant": 29
     }
   },
   "closed_sets": [
@@ -3468,9 +3468,9 @@
     },
     {
       "anchor": {
-        "end_line": 449,
+        "end_line": 462,
         "file": "src/youtube.ts",
-        "line": 445
+        "line": 458
       },
       "authority": "the `kind` discriminator of the union `SyncYouTubeResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -3479,21 +3479,21 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 446
+            "line": 459
           },
           "value": "synced"
         },
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 447
+            "line": 460
           },
           "value": "failed"
         },
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 448
+            "line": 461
           },
           "value": "busy"
         }
@@ -3559,7 +3559,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-10-06T14:16:02+00:00",
+  "generated": "2026-10-07T02:50:48+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -15800,15 +15800,15 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 46
+            "line": 50
           },
           "name": "YouTubeChannel"
         }
       ],
       "anchor": {
-        "end_line": 45,
+        "end_line": 49,
         "file": "src/youtube.ts",
-        "line": 34
+        "line": 36
       },
       "bases": [],
       "doc": null,
@@ -15817,7 +15817,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 35
+            "line": 37
           },
           "default": null,
           "name": "id",
@@ -15826,7 +15826,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 36
+            "line": 38
           },
           "default": null,
           "name": "handle",
@@ -15835,7 +15835,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 37
+            "line": 39
           },
           "default": null,
           "name": "title",
@@ -15844,7 +15844,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 38
+            "line": 40
           },
           "default": null,
           "name": "description",
@@ -15853,7 +15853,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 39
+            "line": 41
           },
           "default": null,
           "name": "publishedAt",
@@ -15862,7 +15862,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 40
+            "line": 42
           },
           "default": null,
           "name": "uploadsPlaylistId",
@@ -15871,7 +15871,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 41
+            "line": 43
           },
           "default": null,
           "name": "subscriberCount",
@@ -15880,7 +15880,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 42
+            "line": 44
           },
           "default": null,
           "name": "viewCount",
@@ -15889,7 +15889,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 43
+            "line": 45
           },
           "default": null,
           "name": "videoCount",
@@ -15898,11 +15898,21 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 44
+            "line": 46
           },
           "default": null,
           "name": "fetchedAt",
           "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/youtube.ts",
+            "line": 48
+          },
+          "default": null,
+          "doc": "The channel's picture (snippet.thumbnails, largest); absent in files written before v0.21.0.",
+          "name": "avatarUrl",
+          "type": "z.string().optional()"
         }
       ],
       "grade": "declared",
@@ -15914,15 +15924,15 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 55
+            "line": 59
           },
           "name": "YouTubePlaylistItem"
         }
       ],
       "anchor": {
-        "end_line": 54,
+        "end_line": 58,
         "file": "src/youtube.ts",
-        "line": 48
+        "line": 52
       },
       "bases": [],
       "doc": null,
@@ -15931,7 +15941,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 49
+            "line": 53
           },
           "default": null,
           "name": "videoId",
@@ -15940,7 +15950,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 50
+            "line": 54
           },
           "default": null,
           "name": "position",
@@ -15949,7 +15959,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 52
+            "line": 56
           },
           "default": null,
           "doc": "When the video was added to the playlist (`snippet.publishedAt` of the playlist item).",
@@ -15959,7 +15969,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 53
+            "line": 57
           },
           "default": null,
           "name": "videoPublishedAt",
@@ -15975,15 +15985,15 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 70
+            "line": 74
           },
           "name": "YouTubePlaylist"
         }
       ],
       "anchor": {
-        "end_line": 69,
+        "end_line": 73,
         "file": "src/youtube.ts",
-        "line": 57
+        "line": 61
       },
       "bases": [],
       "doc": null,
@@ -15992,7 +16002,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 58
+            "line": 62
           },
           "default": null,
           "name": "id",
@@ -16001,7 +16011,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 59
+            "line": 63
           },
           "default": null,
           "name": "title",
@@ -16010,7 +16020,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 60
+            "line": 64
           },
           "default": null,
           "name": "description",
@@ -16019,7 +16029,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 61
+            "line": 65
           },
           "default": null,
           "name": "itemCount",
@@ -16028,7 +16038,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 63
+            "line": 67
           },
           "default": null,
           "doc": "`public` | `unlisted` | `private`, as YouTube reports it.",
@@ -16038,7 +16048,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 64
+            "line": 68
           },
           "default": null,
           "name": "publishedAt",
@@ -16047,7 +16057,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 65
+            "line": 69
           },
           "default": null,
           "name": "thumbnailUrl",
@@ -16056,7 +16066,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 67
+            "line": 71
           },
           "default": null,
           "doc": "The playlistItems listing's HTTP ETag, sent back as If-None-Match on the next sync.",
@@ -16066,7 +16076,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 68
+            "line": 72
           },
           "default": null,
           "name": "items",
@@ -16082,15 +16092,15 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 76
+            "line": 80
           },
           "name": "YouTubePlaylistsFile"
         }
       ],
       "anchor": {
-        "end_line": 75,
+        "end_line": 79,
         "file": "src/youtube.ts",
-        "line": 72
+        "line": 76
       },
       "bases": [],
       "doc": null,
@@ -16099,7 +16109,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 73
+            "line": 77
           },
           "default": null,
           "name": "fetchedAt",
@@ -16108,7 +16118,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 74
+            "line": 78
           },
           "default": null,
           "name": "playlists",
@@ -16124,15 +16134,15 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 97
+            "line": 101
           },
           "name": "YouTubeVideo"
         }
       ],
       "anchor": {
-        "end_line": 96,
+        "end_line": 100,
         "file": "src/youtube.ts",
-        "line": 79
+        "line": 83
       },
       "bases": [],
       "doc": "A mirrored video. The fields before `privacy` are the retired yt-mirror's shape, so its files still read.",
@@ -16141,7 +16151,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 80
+            "line": 84
           },
           "default": null,
           "name": "id",
@@ -16150,7 +16160,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 81
+            "line": 85
           },
           "default": null,
           "name": "title",
@@ -16159,7 +16169,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 82
+            "line": 86
           },
           "default": null,
           "name": "description",
@@ -16168,7 +16178,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 83
+            "line": 87
           },
           "default": null,
           "name": "publishedAt",
@@ -16177,7 +16187,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 84
+            "line": 88
           },
           "default": null,
           "name": "channelId",
@@ -16186,7 +16196,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 85
+            "line": 89
           },
           "default": "[]",
           "name": "tags",
@@ -16195,7 +16205,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 86
+            "line": 90
           },
           "default": null,
           "name": "categoryId",
@@ -16204,7 +16214,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 88
+            "line": 92
           },
           "default": null,
           "doc": "ISO 8601 duration (`PT12M3S`).",
@@ -16214,7 +16224,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 89
+            "line": 93
           },
           "default": null,
           "name": "viewCount",
@@ -16223,7 +16233,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 90
+            "line": 94
           },
           "default": null,
           "name": "likeCount",
@@ -16232,7 +16242,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 91
+            "line": 95
           },
           "default": null,
           "name": "commentCount",
@@ -16241,7 +16251,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 92
+            "line": 96
           },
           "default": null,
           "name": "thumbnailUrl",
@@ -16250,7 +16260,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 93
+            "line": 97
           },
           "default": null,
           "name": "fetchedAt",
@@ -16259,7 +16269,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 95
+            "line": 99
           },
           "default": null,
           "doc": "`public` | `unlisted` | `private`; absent in files written before playlists were mirrored.",
@@ -16276,15 +16286,15 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 105
+            "line": 109
           },
           "name": "YouTubeSyncCounts"
         }
       ],
       "anchor": {
-        "end_line": 104,
+        "end_line": 108,
         "file": "src/youtube.ts",
-        "line": 99
+        "line": 103
       },
       "bases": [],
       "doc": null,
@@ -16293,7 +16303,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 100
+            "line": 104
           },
           "default": null,
           "name": "videos",
@@ -16302,7 +16312,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 101
+            "line": 105
           },
           "default": null,
           "name": "playlists",
@@ -16311,7 +16321,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 102
+            "line": 106
           },
           "default": null,
           "name": "memberships",
@@ -16320,7 +16330,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 103
+            "line": 107
           },
           "default": null,
           "name": "thumbnailsDownloaded",
@@ -16336,15 +16346,15 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 120
+            "line": 124
           },
           "name": "YouTubeSyncRecord"
         }
       ],
       "anchor": {
-        "end_line": 119,
+        "end_line": 123,
         "file": "src/youtube.ts",
-        "line": 107
+        "line": 111
       },
       "bases": [],
       "doc": null,
@@ -16353,7 +16363,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 108
+            "line": 112
           },
           "default": null,
           "name": "lastSyncAt",
@@ -16362,7 +16372,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 109
+            "line": 113
           },
           "default": null,
           "name": "ok",
@@ -16371,7 +16381,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 110
+            "line": 114
           },
           "default": null,
           "name": "durationMs",
@@ -16380,7 +16390,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 112
+            "line": 116
           },
           "default": null,
           "doc": "API calls made, each 1 unit.",
@@ -16390,7 +16400,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 113
+            "line": 117
           },
           "default": null,
           "name": "channelId",
@@ -16399,7 +16409,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 114
+            "line": 118
           },
           "default": null,
           "name": "counts",
@@ -16408,7 +16418,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 115
+            "line": 119
           },
           "default": null,
           "name": "warnings",
@@ -16417,7 +16427,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 117
+            "line": 121
           },
           "default": null,
           "doc": "Why the sync stopped, when `ok` is false. The mirror keeps what the last good sync wrote.",
@@ -16427,7 +16437,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 118
+            "line": 122
           },
           "default": null,
           "name": "by",
@@ -16443,15 +16453,15 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 167
+            "line": 171
           },
           "name": "YouTubeVideoListing"
         }
       ],
       "anchor": {
-        "end_line": 166,
+        "end_line": 170,
         "file": "src/youtube.ts",
-        "line": 156
+        "line": 160
       },
       "bases": [],
       "doc": null,
@@ -16460,7 +16470,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 157
+            "line": 161
           },
           "default": null,
           "name": "videos",
@@ -16469,7 +16479,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 165
+            "line": 169
           },
           "default": null,
           "doc": "Video folders whose metadata.json is missing or malformed, as `<id>: <message>`.",
@@ -16484,7 +16494,7 @@
     {
       "anchor": {
         "file": "src/youtube.ts",
-        "line": 157
+        "line": 161
       },
       "bases": [
         "YouTubeVideo"
@@ -16494,7 +16504,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 80
+            "line": 84
           },
           "default": null,
           "inherited_from": "YouTubeVideo",
@@ -16504,7 +16514,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 81
+            "line": 85
           },
           "default": null,
           "inherited_from": "YouTubeVideo",
@@ -16514,7 +16524,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 82
+            "line": 86
           },
           "default": null,
           "inherited_from": "YouTubeVideo",
@@ -16524,7 +16534,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 83
+            "line": 87
           },
           "default": null,
           "inherited_from": "YouTubeVideo",
@@ -16534,7 +16544,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 84
+            "line": 88
           },
           "default": null,
           "inherited_from": "YouTubeVideo",
@@ -16544,7 +16554,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 85
+            "line": 89
           },
           "default": "[]",
           "inherited_from": "YouTubeVideo",
@@ -16554,7 +16564,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 86
+            "line": 90
           },
           "default": null,
           "inherited_from": "YouTubeVideo",
@@ -16564,7 +16574,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 88
+            "line": 92
           },
           "default": null,
           "doc": "ISO 8601 duration (`PT12M3S`).",
@@ -16575,7 +16585,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 89
+            "line": 93
           },
           "default": null,
           "inherited_from": "YouTubeVideo",
@@ -16585,7 +16595,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 90
+            "line": 94
           },
           "default": null,
           "inherited_from": "YouTubeVideo",
@@ -16595,7 +16605,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 91
+            "line": 95
           },
           "default": null,
           "inherited_from": "YouTubeVideo",
@@ -16605,7 +16615,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 92
+            "line": 96
           },
           "default": null,
           "inherited_from": "YouTubeVideo",
@@ -16615,7 +16625,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 93
+            "line": 97
           },
           "default": null,
           "inherited_from": "YouTubeVideo",
@@ -16625,7 +16635,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 95
+            "line": 99
           },
           "default": null,
           "doc": "`public` | `unlisted` | `private`; absent in files written before playlists were mirrored.",
@@ -16636,7 +16646,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 160
+            "line": 164
           },
           "default": null,
           "doc": "Absolute path of the thumbnail when one is mirrored.",
@@ -16646,7 +16656,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 161
+            "line": 165
           },
           "default": null,
           "name": "hasTranscript",
@@ -16659,9 +16669,9 @@
     },
     {
       "anchor": {
-        "end_line": 443,
+        "end_line": 456,
         "file": "src/youtube.ts",
-        "line": 432
+        "line": 445
       },
       "bases": [],
       "doc": null,
@@ -16670,7 +16680,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 433
+            "line": 446
           },
           "default": null,
           "name": "mirrorRoot",
@@ -16679,7 +16689,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 434
+            "line": 447
           },
           "default": null,
           "name": "brandKey",
@@ -16688,7 +16698,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 436
+            "line": 449
           },
           "default": null,
           "doc": "The channel's id from the brand registry (preferred), or its handle.",
@@ -16698,7 +16708,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 437
+            "line": 450
           },
           "default": null,
           "name": "apiKey",
@@ -16707,7 +16717,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 438
+            "line": 451
           },
           "default": null,
           "name": "fetch",
@@ -16716,7 +16726,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 440
+            "line": 453
           },
           "default": null,
           "doc": "Downloads thumbnails; defaults to `fetch`.",
@@ -16726,7 +16736,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 441
+            "line": 454
           },
           "default": null,
           "name": "now",
@@ -16735,7 +16745,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 442
+            "line": 455
           },
           "default": null,
           "name": "by",
@@ -16751,15 +16761,15 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 450
+            "line": 463
           },
           "name": "SyncYouTubeResult"
         }
       ],
       "anchor": {
-        "end_line": 449,
+        "end_line": 462,
         "file": "src/youtube.ts",
-        "line": 445
+        "line": 458
       },
       "bases": [],
       "doc": null,
@@ -16768,7 +16778,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 446
+            "line": 459
           },
           "default": null,
           "name": "synced",
@@ -16777,7 +16787,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 447
+            "line": 460
           },
           "default": null,
           "name": "failed",
@@ -16786,7 +16796,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 448
+            "line": 461
           },
           "default": null,
           "name": "busy",
@@ -16800,7 +16810,7 @@
     {
       "anchor": {
         "file": "src/youtube.ts",
-        "line": 446
+        "line": 459
       },
       "bases": [],
       "doc": null,
@@ -16808,7 +16818,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 446
+            "line": 459
           },
           "default": null,
           "name": "kind",
@@ -16817,7 +16827,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 446
+            "line": 459
           },
           "default": null,
           "name": "record",
@@ -16831,7 +16841,7 @@
     {
       "anchor": {
         "file": "src/youtube.ts",
-        "line": 447
+        "line": 460
       },
       "bases": [],
       "doc": null,
@@ -16839,7 +16849,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 447
+            "line": 460
           },
           "default": null,
           "name": "kind",
@@ -16848,7 +16858,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 447
+            "line": 460
           },
           "default": null,
           "name": "record",
@@ -16862,7 +16872,7 @@
     {
       "anchor": {
         "file": "src/youtube.ts",
-        "line": 448
+        "line": 461
       },
       "bases": [],
       "doc": null,
@@ -16870,7 +16880,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 448
+            "line": 461
           },
           "default": null,
           "name": "kind",
@@ -16879,7 +16889,7 @@
         {
           "anchor": {
             "file": "src/youtube.ts",
-            "line": 448
+            "line": 461
           },
           "default": null,
           "name": "message",
@@ -16892,7 +16902,7 @@
     }
   ],
   "target": {
-    "commit": "bea2cdf5395dc1048cbb6b46e745ed2eb7ff68f1",
+    "commit": "749025781ff05ca8a0b49ef5cf02a13eb1405aff",
     "root": "..",
     "stack": "typescript"
   },
@@ -17171,7 +17181,7 @@
       "census": true,
       "family": "utility-type alias (`Pick` / `Omit` / `Record` / generic instance)",
       "looked_at": [
-        "src/youtube.ts:227"
+        "src/youtube.ts:231"
       ],
       "reason": "declared but not read: utility-type alias (`Pick` / `Omit` / `Record` / generic instance). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/youtube.Thumbs` - declared but not read"
@@ -17180,7 +17190,7 @@
       "census": true,
       "family": "class",
       "looked_at": [
-        "src/youtube.ts:216"
+        "src/youtube.ts:220"
       ],
       "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/youtube.YouTubeApiError` - declared but not read"
@@ -17189,7 +17199,7 @@
       "census": true,
       "family": "class",
       "looked_at": [
-        "src/youtube.ts:232"
+        "src/youtube.ts:236"
       ],
       "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/youtube.YouTubeReader` - declared but not read"
@@ -17227,9 +17237,9 @@
         "readFileResult(ResourcesFile) (src/resources.ts:135)",
         "readFileResult(SeriesFile) (src/series.ts:43)",
         "readFileResult(WordsFile) (src/words.ts:68)",
-        "readFileResult(YouTubeChannel) (src/youtube.ts:122)",
-        "readFileResult(YouTubePlaylistsFile) (src/youtube.ts:124)",
-        "readFileResult(YouTubeSyncRecord) (src/youtube.ts:126)"
+        "readFileResult(YouTubeChannel) (src/youtube.ts:126)",
+        "readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)",
+        "readFileResult(YouTubeSyncRecord) (src/youtube.ts:130)"
       ],
       "reason": "built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here",
       "subject": "schemas built by `readFileResult(...)` (8 uses)"

@@ -260,7 +260,7 @@ MIT
 ## YouTube mirror (read side)
 
 A local copy of a brand's channel, playlists with members and public videos, at `<mirrorRoot>/<brandKey>/` (`channel.json`,
-`playlists.json`, `videos/<id>/metadata.json` + `thumbnail.jpg`, `sync.json`). YouTube stays the truth; apps read the copy.
+`playlists.json`, `avatar.jpg` (the channel picture, v0.21.0), `videos/<id>/metadata.json` + `thumbnail.jpg`, `sync.json`). YouTube stays the truth; apps read the copy.
 Design: `flivideo/docs/youtube-channel-architecture.md`.
 
 | Export                                                                                       | What it does                                                                                                       |

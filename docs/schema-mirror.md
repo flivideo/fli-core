@@ -3,7 +3,7 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `bea2cdf5395d` · **generated** 2026-10-06T14:16:02+00:00
+- **commit** `749025781ff0` · **generated** 2026-10-07T02:50:48+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 33 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
@@ -51,7 +51,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/video-file.ts` — `Ext` :15 · `VideoFileKind` (set) :17 · `VideoPart` (set) :21 · `VideoFile` :24 · `UnknownVideoFile` :38 · `ParsedVideoFile` :45 · `VideoFolder` :80 · `VideoFolderName` :92
 - `src/window-state.ts` — `WindowRect` :16 · `SavedWindow` :24 · `WindowStateFile` :32 · `DisplayArea` :39 · `PlaceOptions` :47 · `TrackedWindow` :255 · `TrackOptions` :264
 - `src/words.ts` — `WordLevel` (set) :25 · `Text` :29 · `WordName` :32 · `WordRule` :40 · `WordFiller` :44 · `WordKind` (set) :52 · `WordOff` :56 · `WordsFile` :59 · `WordInput` :72 · `WordRef` :95 · `MergedWords` :99 · `WordsRead` :108 · `ReadWordsOptions` :121 · `WriteWordsResult` :287 · `ChangeWordsResult` :320 · `ChangeWordsOptions` :335
-- `src/youtube.ts` — `YouTubeChannel` :34 · `YouTubePlaylistItem` :48 · `YouTubePlaylist` :57 · `YouTubePlaylistsFile` :72 · `YouTubeVideo` :79 · `YouTubeSyncCounts` :99 · `YouTubeSyncRecord` :107 · `YouTubeVideoListing` :156 · `SyncYouTubeOptions` :432 · `SyncYouTubeResult` :445
+- `src/youtube.ts` — `YouTubeChannel` :36 · `YouTubePlaylistItem` :52 · `YouTubePlaylist` :61 · `YouTubePlaylistsFile` :76 · `YouTubeVideo` :83 · `YouTubeSyncCounts` :103 · `YouTubeSyncRecord` :111 · `YouTubeVideoListing` :160 · `SyncYouTubeOptions` :445 · `SyncYouTubeResult` :458
 
 ## Never read by this extractor
 
@@ -74,7 +74,7 @@ These constructs are outside what this extractor reads **on every run, in every 
 **397** top-level declarations counted = **342** mirrored + **22** listed as gaps + **33** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 1 function, 1 function type, 28 literal constants.
+Not counted, as not schema-bearing: 1 function, 1 function type, 29 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
@@ -958,15 +958,15 @@ Which section of a video a `part` file is. A closed set: `<name>-part-<intro|bod
 | `not-found` | `src/words.ts:328` |
 | `busy` | `src/words.ts:328` |
 
-### `src/youtube.SyncYouTubeResult.kind` — `src/youtube.ts:445-449`
+### `src/youtube.SyncYouTubeResult.kind` — `src/youtube.ts:458-462`
 
 *the `kind` discriminator of the union `SyncYouTubeResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `synced` | `src/youtube.ts:446` |
-| `failed` | `src/youtube.ts:447` |
-| `busy` | `src/youtube.ts:448` |
+| `synced` | `src/youtube.ts:459` |
+| `failed` | `src/youtube.ts:460` |
+| `busy` | `src/youtube.ts:461` |
 
 ## Closed sets — derived (no declaring symbol)
 
@@ -3491,184 +3491,185 @@ Which entry to remove: its kind (or `off`) and its text, as `wordKey` reads it.
 | `waitMs` | `?: number` | — | `src/words.ts:339` | How long to wait for another writer's lock (default 3 s). |
 | `staleMs` | `?: number` | — | `src/words.ts:341` | A lock older than this is a crashed writer's and is broken (default 10 s). |
 
-### `src/youtube.YouTubeChannel` — zod-object — `src/youtube.ts:34-45`
+### `src/youtube.YouTubeChannel` — zod-object — `src/youtube.ts:36-49`
 
-*aliases* `YouTubeChannel` `src/youtube.ts:46`
-
-| field | type | default | at |
-|---|---|---|---|
-| `id` | `z.string().min(1)` | — | `src/youtube.ts:35` |
-| `handle` | `z.string()` | — | `src/youtube.ts:36` |
-| `title` | `z.string()` | — | `src/youtube.ts:37` |
-| `description` | `z.string()` | — | `src/youtube.ts:38` |
-| `publishedAt` | `z.string()` | — | `src/youtube.ts:39` |
-| `uploadsPlaylistId` | `z.string().min(1)` | — | `src/youtube.ts:40` |
-| `subscriberCount` | `z.number()` | — | `src/youtube.ts:41` |
-| `viewCount` | `z.number()` | — | `src/youtube.ts:42` |
-| `videoCount` | `z.number()` | — | `src/youtube.ts:43` |
-| `fetchedAt` | `z.string()` | — | `src/youtube.ts:44` |
-
-### `src/youtube.YouTubePlaylistItem` — zod-object — `src/youtube.ts:48-54`
-
-*aliases* `YouTubePlaylistItem` `src/youtube.ts:55`
+*aliases* `YouTubeChannel` `src/youtube.ts:50`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `videoId` | `z.string().min(1)` | — | `src/youtube.ts:49` |  |
-| `position` | `z.number().int()` | — | `src/youtube.ts:50` |  |
-| `addedAt` | `z.string().optional()` | — | `src/youtube.ts:52` | When the video was added to the playlist (`snippet.publishedAt` of the playlist item). |
-| `videoPublishedAt` | `z.string().optional()` | — | `src/youtube.ts:53` |  |
+| `id` | `z.string().min(1)` | — | `src/youtube.ts:37` |  |
+| `handle` | `z.string()` | — | `src/youtube.ts:38` |  |
+| `title` | `z.string()` | — | `src/youtube.ts:39` |  |
+| `description` | `z.string()` | — | `src/youtube.ts:40` |  |
+| `publishedAt` | `z.string()` | — | `src/youtube.ts:41` |  |
+| `uploadsPlaylistId` | `z.string().min(1)` | — | `src/youtube.ts:42` |  |
+| `subscriberCount` | `z.number()` | — | `src/youtube.ts:43` |  |
+| `viewCount` | `z.number()` | — | `src/youtube.ts:44` |  |
+| `videoCount` | `z.number()` | — | `src/youtube.ts:45` |  |
+| `fetchedAt` | `z.string()` | — | `src/youtube.ts:46` |  |
+| `avatarUrl` | `z.string().optional()` | — | `src/youtube.ts:48` | The channel's picture (snippet.thumbnails, largest); absent in files written before v0.21.0. |
 
-### `src/youtube.YouTubePlaylist` — zod-object — `src/youtube.ts:57-69`
+### `src/youtube.YouTubePlaylistItem` — zod-object — `src/youtube.ts:52-58`
 
-*aliases* `YouTubePlaylist` `src/youtube.ts:70`
+*aliases* `YouTubePlaylistItem` `src/youtube.ts:59`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `id` | `z.string().min(1)` | — | `src/youtube.ts:58` |  |
-| `title` | `z.string()` | — | `src/youtube.ts:59` |  |
-| `description` | `z.string()` | — | `src/youtube.ts:60` |  |
-| `itemCount` | `z.number().int()` | — | `src/youtube.ts:61` |  |
-| `privacy` | `z.string()` | — | `src/youtube.ts:63` | `public` \| `unlisted` \| `private`, as YouTube reports it. |
-| `publishedAt` | `z.string()` | — | `src/youtube.ts:64` |  |
-| `thumbnailUrl` | `z.string()` | — | `src/youtube.ts:65` |  |
-| `itemsEtag` | `z.string().optional()` | — | `src/youtube.ts:67` | The playlistItems listing's HTTP ETag, sent back as If-None-Match on the next sync. |
-| `items` | `z.array(YouTubePlaylistItem) → src/youtube.YouTubePlaylistItem` | — | `src/youtube.ts:68` |  |
+| `videoId` | `z.string().min(1)` | — | `src/youtube.ts:53` |  |
+| `position` | `z.number().int()` | — | `src/youtube.ts:54` |  |
+| `addedAt` | `z.string().optional()` | — | `src/youtube.ts:56` | When the video was added to the playlist (`snippet.publishedAt` of the playlist item). |
+| `videoPublishedAt` | `z.string().optional()` | — | `src/youtube.ts:57` |  |
 
-### `src/youtube.YouTubePlaylistsFile` — zod-object — `src/youtube.ts:72-75`
+### `src/youtube.YouTubePlaylist` — zod-object — `src/youtube.ts:61-73`
 
-*aliases* `YouTubePlaylistsFile` `src/youtube.ts:76`
+*aliases* `YouTubePlaylist` `src/youtube.ts:74`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `z.string().min(1)` | — | `src/youtube.ts:62` |  |
+| `title` | `z.string()` | — | `src/youtube.ts:63` |  |
+| `description` | `z.string()` | — | `src/youtube.ts:64` |  |
+| `itemCount` | `z.number().int()` | — | `src/youtube.ts:65` |  |
+| `privacy` | `z.string()` | — | `src/youtube.ts:67` | `public` \| `unlisted` \| `private`, as YouTube reports it. |
+| `publishedAt` | `z.string()` | — | `src/youtube.ts:68` |  |
+| `thumbnailUrl` | `z.string()` | — | `src/youtube.ts:69` |  |
+| `itemsEtag` | `z.string().optional()` | — | `src/youtube.ts:71` | The playlistItems listing's HTTP ETag, sent back as If-None-Match on the next sync. |
+| `items` | `z.array(YouTubePlaylistItem) → src/youtube.YouTubePlaylistItem` | — | `src/youtube.ts:72` |  |
+
+### `src/youtube.YouTubePlaylistsFile` — zod-object — `src/youtube.ts:76-79`
+
+*aliases* `YouTubePlaylistsFile` `src/youtube.ts:80`
 
 | field | type | default | at |
 |---|---|---|---|
-| `fetchedAt` | `z.string()` | — | `src/youtube.ts:73` |
-| `playlists` | `z.array(YouTubePlaylist) → src/youtube.YouTubePlaylist` | — | `src/youtube.ts:74` |
+| `fetchedAt` | `z.string()` | — | `src/youtube.ts:77` |
+| `playlists` | `z.array(YouTubePlaylist) → src/youtube.YouTubePlaylist` | — | `src/youtube.ts:78` |
 
-### `src/youtube.YouTubeVideo` — zod-object — `src/youtube.ts:79-96`
+### `src/youtube.YouTubeVideo` — zod-object — `src/youtube.ts:83-100`
 
 A mirrored video. The fields before `privacy` are the retired yt-mirror's shape, so its files still read.
 
-*aliases* `YouTubeVideo` `src/youtube.ts:97`
+*aliases* `YouTubeVideo` `src/youtube.ts:101`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `id` | `z.string().min(1)` | — | `src/youtube.ts:80` |  |
-| `title` | `z.string()` | — | `src/youtube.ts:81` |  |
-| `description` | `z.string()` | — | `src/youtube.ts:82` |  |
-| `publishedAt` | `z.string()` | — | `src/youtube.ts:83` |  |
-| `channelId` | `z.string()` | — | `src/youtube.ts:84` |  |
-| `tags` | `z.array(z.string()).default([])` | `[]` | `src/youtube.ts:85` |  |
-| `categoryId` | `z.string().optional()` | — | `src/youtube.ts:86` |  |
-| `duration` | `z.string()` | — | `src/youtube.ts:88` | ISO 8601 duration (`PT12M3S`). |
-| `viewCount` | `z.number()` | — | `src/youtube.ts:89` |  |
-| `likeCount` | `z.number()` | — | `src/youtube.ts:90` |  |
-| `commentCount` | `z.number()` | — | `src/youtube.ts:91` |  |
-| `thumbnailUrl` | `z.string()` | — | `src/youtube.ts:92` |  |
-| `fetchedAt` | `z.string()` | — | `src/youtube.ts:93` |  |
-| `privacy` | `z.string().optional()` | — | `src/youtube.ts:95` | `public` \| `unlisted` \| `private`; absent in files written before playlists were mirrored. |
+| `id` | `z.string().min(1)` | — | `src/youtube.ts:84` |  |
+| `title` | `z.string()` | — | `src/youtube.ts:85` |  |
+| `description` | `z.string()` | — | `src/youtube.ts:86` |  |
+| `publishedAt` | `z.string()` | — | `src/youtube.ts:87` |  |
+| `channelId` | `z.string()` | — | `src/youtube.ts:88` |  |
+| `tags` | `z.array(z.string()).default([])` | `[]` | `src/youtube.ts:89` |  |
+| `categoryId` | `z.string().optional()` | — | `src/youtube.ts:90` |  |
+| `duration` | `z.string()` | — | `src/youtube.ts:92` | ISO 8601 duration (`PT12M3S`). |
+| `viewCount` | `z.number()` | — | `src/youtube.ts:93` |  |
+| `likeCount` | `z.number()` | — | `src/youtube.ts:94` |  |
+| `commentCount` | `z.number()` | — | `src/youtube.ts:95` |  |
+| `thumbnailUrl` | `z.string()` | — | `src/youtube.ts:96` |  |
+| `fetchedAt` | `z.string()` | — | `src/youtube.ts:97` |  |
+| `privacy` | `z.string().optional()` | — | `src/youtube.ts:99` | `public` \| `unlisted` \| `private`; absent in files written before playlists were mirrored. |
 
-### `src/youtube.YouTubeSyncCounts` — zod-object — `src/youtube.ts:99-104`
+### `src/youtube.YouTubeSyncCounts` — zod-object — `src/youtube.ts:103-108`
 
-*aliases* `YouTubeSyncCounts` `src/youtube.ts:105`
+*aliases* `YouTubeSyncCounts` `src/youtube.ts:109`
 
 | field | type | default | at |
 |---|---|---|---|
-| `videos` | `z.number().int()` | — | `src/youtube.ts:100` |
-| `playlists` | `z.number().int()` | — | `src/youtube.ts:101` |
-| `memberships` | `z.number().int()` | — | `src/youtube.ts:102` |
-| `thumbnailsDownloaded` | `z.number().int()` | — | `src/youtube.ts:103` |
+| `videos` | `z.number().int()` | — | `src/youtube.ts:104` |
+| `playlists` | `z.number().int()` | — | `src/youtube.ts:105` |
+| `memberships` | `z.number().int()` | — | `src/youtube.ts:106` |
+| `thumbnailsDownloaded` | `z.number().int()` | — | `src/youtube.ts:107` |
 
-### `src/youtube.YouTubeSyncRecord` — zod-object — `src/youtube.ts:107-119`
+### `src/youtube.YouTubeSyncRecord` — zod-object — `src/youtube.ts:111-123`
 
-*aliases* `YouTubeSyncRecord` `src/youtube.ts:120`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `lastSyncAt` | `z.string()` | — | `src/youtube.ts:108` |  |
-| `ok` | `z.boolean()` | — | `src/youtube.ts:109` |  |
-| `durationMs` | `z.number().int()` | — | `src/youtube.ts:110` |  |
-| `quotaUnits` | `z.number().int()` | — | `src/youtube.ts:112` | API calls made, each 1 unit. |
-| `channelId` | `z.string().optional()` | — | `src/youtube.ts:113` |  |
-| `counts` | `YouTubeSyncCounts → src/youtube.YouTubeSyncCounts` | — | `src/youtube.ts:114` |  |
-| `warnings` | `z.array(z.string())` | — | `src/youtube.ts:115` |  |
-| `error` | `z.string().optional()` | — | `src/youtube.ts:117` | Why the sync stopped, when `ok` is false. The mirror keeps what the last good sync wrote. |
-| `by` | `Stamp.optional() → src/stamp.Stamp` | — | `src/youtube.ts:118` |  |
-
-### `src/youtube.YouTubeVideoListing` — zod-object — `src/youtube.ts:156-166`
-
-*aliases* `YouTubeVideoListing` `src/youtube.ts:167`
+*aliases* `YouTubeSyncRecord` `src/youtube.ts:124`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `videos` | `z.array(YouTubeVideo.extend({ /** Absolute path of the thumbnail when one is mirrored. */ thumbnailPath: z.string().nullable(), hasTranscri… → src/youtube.YouTubeVideo` | — | `src/youtube.ts:157` |  |
-| `issues` | `z.array(z.string())` | — | `src/youtube.ts:165` | Video folders whose metadata.json is missing or malformed, as `<id>: <message>`. |
+| `lastSyncAt` | `z.string()` | — | `src/youtube.ts:112` |  |
+| `ok` | `z.boolean()` | — | `src/youtube.ts:113` |  |
+| `durationMs` | `z.number().int()` | — | `src/youtube.ts:114` |  |
+| `quotaUnits` | `z.number().int()` | — | `src/youtube.ts:116` | API calls made, each 1 unit. |
+| `channelId` | `z.string().optional()` | — | `src/youtube.ts:117` |  |
+| `counts` | `YouTubeSyncCounts → src/youtube.YouTubeSyncCounts` | — | `src/youtube.ts:118` |  |
+| `warnings` | `z.array(z.string())` | — | `src/youtube.ts:119` |  |
+| `error` | `z.string().optional()` | — | `src/youtube.ts:121` | Why the sync stopped, when `ok` is false. The mirror keeps what the last good sync wrote. |
+| `by` | `Stamp.optional() → src/stamp.Stamp` | — | `src/youtube.ts:122` |  |
 
-### `src/youtube.YouTubeVideoListing.videos[]` — zod-object — `src/youtube.ts:157`
+### `src/youtube.YouTubeVideoListing` — zod-object — `src/youtube.ts:160-170`
+
+*aliases* `YouTubeVideoListing` `src/youtube.ts:171`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `videos` | `z.array(YouTubeVideo.extend({ /** Absolute path of the thumbnail when one is mirrored. */ thumbnailPath: z.string().nullable(), hasTranscri… → src/youtube.YouTubeVideo` | — | `src/youtube.ts:161` |  |
+| `issues` | `z.array(z.string())` | — | `src/youtube.ts:169` | Video folders whose metadata.json is missing or malformed, as `<id>: <message>`. |
+
+### `src/youtube.YouTubeVideoListing.videos[]` — zod-object — `src/youtube.ts:161`
 
 *extends* `YouTubeVideo`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `id` | `z.string().min(1)` | — | `src/youtube.ts:80` |  |
-| `title` | `z.string()` | — | `src/youtube.ts:81` |  |
-| `description` | `z.string()` | — | `src/youtube.ts:82` |  |
-| `publishedAt` | `z.string()` | — | `src/youtube.ts:83` |  |
-| `channelId` | `z.string()` | — | `src/youtube.ts:84` |  |
-| `tags` | `z.array(z.string()).default([])` | `[]` | `src/youtube.ts:85` |  |
-| `categoryId` | `z.string().optional()` | — | `src/youtube.ts:86` |  |
-| `duration` | `z.string()` | — | `src/youtube.ts:88` | ISO 8601 duration (`PT12M3S`). |
-| `viewCount` | `z.number()` | — | `src/youtube.ts:89` |  |
-| `likeCount` | `z.number()` | — | `src/youtube.ts:90` |  |
-| `commentCount` | `z.number()` | — | `src/youtube.ts:91` |  |
-| `thumbnailUrl` | `z.string()` | — | `src/youtube.ts:92` |  |
-| `fetchedAt` | `z.string()` | — | `src/youtube.ts:93` |  |
-| `privacy` | `z.string().optional()` | — | `src/youtube.ts:95` | `public` \| `unlisted` \| `private`; absent in files written before playlists were mirrored. |
-| `thumbnailPath` | `z.string().nullable()` | — | `src/youtube.ts:160` | Absolute path of the thumbnail when one is mirrored. |
-| `hasTranscript` | `z.boolean()` | — | `src/youtube.ts:161` |  |
+| `id` | `z.string().min(1)` | — | `src/youtube.ts:84` |  |
+| `title` | `z.string()` | — | `src/youtube.ts:85` |  |
+| `description` | `z.string()` | — | `src/youtube.ts:86` |  |
+| `publishedAt` | `z.string()` | — | `src/youtube.ts:87` |  |
+| `channelId` | `z.string()` | — | `src/youtube.ts:88` |  |
+| `tags` | `z.array(z.string()).default([])` | `[]` | `src/youtube.ts:89` |  |
+| `categoryId` | `z.string().optional()` | — | `src/youtube.ts:90` |  |
+| `duration` | `z.string()` | — | `src/youtube.ts:92` | ISO 8601 duration (`PT12M3S`). |
+| `viewCount` | `z.number()` | — | `src/youtube.ts:93` |  |
+| `likeCount` | `z.number()` | — | `src/youtube.ts:94` |  |
+| `commentCount` | `z.number()` | — | `src/youtube.ts:95` |  |
+| `thumbnailUrl` | `z.string()` | — | `src/youtube.ts:96` |  |
+| `fetchedAt` | `z.string()` | — | `src/youtube.ts:97` |  |
+| `privacy` | `z.string().optional()` | — | `src/youtube.ts:99` | `public` \| `unlisted` \| `private`; absent in files written before playlists were mirrored. |
+| `thumbnailPath` | `z.string().nullable()` | — | `src/youtube.ts:164` | Absolute path of the thumbnail when one is mirrored. |
+| `hasTranscript` | `z.boolean()` | — | `src/youtube.ts:165` |  |
 
-### `src/youtube.SyncYouTubeOptions` — interface — `src/youtube.ts:432-443`
+### `src/youtube.SyncYouTubeOptions` — interface — `src/youtube.ts:445-456`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `mirrorRoot` | `string` | — | `src/youtube.ts:433` |  |
-| `brandKey` | `string` | — | `src/youtube.ts:434` |  |
-| `channel` | `{ id: string } \| { handle: string }` | — | `src/youtube.ts:436` | The channel's id from the brand registry (preferred), or its handle. |
-| `apiKey` | `string` | — | `src/youtube.ts:437` |  |
-| `fetch` | `?: YouTubeFetch → src/youtube.YouTubeFetch` | — | `src/youtube.ts:438` |  |
-| `download` | `?: (url: string) => Promise<Response> → Response (@types/node)` | — | `src/youtube.ts:440` | Downloads thumbnails; defaults to `fetch`. |
-| `now` | `?: () => Date` | — | `src/youtube.ts:441` |  |
-| `by` | `?: Stamp → src/stamp.Stamp` | — | `src/youtube.ts:442` |  |
+| `mirrorRoot` | `string` | — | `src/youtube.ts:446` |  |
+| `brandKey` | `string` | — | `src/youtube.ts:447` |  |
+| `channel` | `{ id: string } \| { handle: string }` | — | `src/youtube.ts:449` | The channel's id from the brand registry (preferred), or its handle. |
+| `apiKey` | `string` | — | `src/youtube.ts:450` |  |
+| `fetch` | `?: YouTubeFetch → src/youtube.YouTubeFetch` | — | `src/youtube.ts:451` |  |
+| `download` | `?: (url: string) => Promise<Response> → Response (@types/node)` | — | `src/youtube.ts:453` | Downloads thumbnails; defaults to `fetch`. |
+| `now` | `?: () => Date` | — | `src/youtube.ts:454` |  |
+| `by` | `?: Stamp → src/stamp.Stamp` | — | `src/youtube.ts:455` |  |
 
-### `src/youtube.SyncYouTubeResult` — zod-union on `kind` — `src/youtube.ts:445-449`
+### `src/youtube.SyncYouTubeResult` — zod-union on `kind` — `src/youtube.ts:458-462`
 
-*aliases* `SyncYouTubeResult` `src/youtube.ts:450`
+*aliases* `SyncYouTubeResult` `src/youtube.ts:463`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `synced` | `z.object({ kind: z.literal('synced'), record: YouTubeSyncRecord }) → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:446` |
-| `failed` | `z.object({ kind: z.literal('failed'), record: YouTubeSyncRecord }) → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:447` |
-| `busy` | `z.object({ kind: z.literal('busy'), message: z.string() })` | — | `src/youtube.ts:448` |
+| `synced` | `z.object({ kind: z.literal('synced'), record: YouTubeSyncRecord }) → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:459` |
+| `failed` | `z.object({ kind: z.literal('failed'), record: YouTubeSyncRecord }) → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:460` |
+| `busy` | `z.object({ kind: z.literal('busy'), message: z.string() })` | — | `src/youtube.ts:461` |
 
-### `src/youtube.SyncYouTubeResult[kind=synced]` — zod-object — `src/youtube.ts:446`
-
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('synced')` | — | `src/youtube.ts:446` |
-| `record` | `YouTubeSyncRecord → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:446` |
-
-### `src/youtube.SyncYouTubeResult[kind=failed]` — zod-object — `src/youtube.ts:447`
+### `src/youtube.SyncYouTubeResult[kind=synced]` — zod-object — `src/youtube.ts:459`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('failed')` | — | `src/youtube.ts:447` |
-| `record` | `YouTubeSyncRecord → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:447` |
+| `kind` | `z.literal('synced')` | — | `src/youtube.ts:459` |
+| `record` | `YouTubeSyncRecord → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:459` |
 
-### `src/youtube.SyncYouTubeResult[kind=busy]` — zod-object — `src/youtube.ts:448`
+### `src/youtube.SyncYouTubeResult[kind=failed]` — zod-object — `src/youtube.ts:460`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('busy')` | — | `src/youtube.ts:448` |
-| `message` | `z.string()` | — | `src/youtube.ts:448` |
+| `kind` | `z.literal('failed')` | — | `src/youtube.ts:460` |
+| `record` | `YouTubeSyncRecord → src/youtube.YouTubeSyncRecord` | — | `src/youtube.ts:460` |
+
+### `src/youtube.SyncYouTubeResult[kind=busy]` — zod-object — `src/youtube.ts:461`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('busy')` | — | `src/youtube.ts:461` |
+| `message` | `z.string()` | — | `src/youtube.ts:461` |
 
 ## Cannot be mirrored
 
@@ -3679,7 +3680,7 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 | schemas built by `OneLine(...)` (1 use) | built by calling `OneLine(...)`, which does not return a single zod expression this reader can follow | `OneLine('a note').optional() (src/gitignore-rules.ts:41)` |
 | schemas built by `Refused(...)` (6 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:67)`<br>`Refused('existing-invalid') (src/identity.ts:69)`<br>`Refused('io-error') (src/identity.ts:70)`<br>`Refused('invalid-input') (src/identity.ts:185)`<br>`Refused('existing-invalid') (src/identity.ts:187)`<br>`Refused('io-error') (src/identity.ts:188)` |
 | schemas built by `promisify(...)` (1 use) | built by calling `promisify(...)` imported from `node:util`; package helpers are not expanded - see that package's own mirror | `promisify(execFile) (src/gitignore.ts:17)` |
-| schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:83)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:122)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:124)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:126)` |
+| schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:83)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:126)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:130)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
 | src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:460)` |
@@ -3694,12 +3695,12 @@ The census found these top-level declarations and the extractor did not mirror t
 |---|---|---|
 | object constant | 8 | `src/classify.LAYOUT_DIRS` `src/classify.ts:259`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
 | array constant | 6 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:30`<br>`src/publish.READY_STATES` `src/publish.ts:65`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:67`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
-| class | 6 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:789`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:216`<br>`src/youtube.YouTubeReader` `src/youtube.ts:232` |
+| class | 6 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:789`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:220`<br>`src/youtube.YouTubeReader` `src/youtube.ts:236` |
 | const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:177`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 | union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:201` |
-| utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 1 | `src/youtube.Thumbs` `src/youtube.ts:227` |
+| utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 1 | `src/youtube.Thumbs` `src/youtube.ts:231` |
 
 ## Findings — changes needed in the target application
 
