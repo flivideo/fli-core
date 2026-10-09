@@ -571,6 +571,83 @@ describe('renderApiPage — reference and console', () => {
   });
 });
 
+describe('answerJsonRpc — refuseNotifications', () => {
+  it('runs nothing and answers when asked to refuse a request with no id', async () => {
+    let calls = 0;
+    const call = async (): Promise<CallAnswer> => {
+      calls += 1;
+      return { ok: true, value: 1 };
+    };
+    const silent = await answerJsonRpc({ jsonrpc: '2.0', method: 'x.y', params: {} }, call, {
+      codes: CODES,
+    });
+    expect(silent).toBeNull();
+    expect(calls).toBe(1);
+    const refused = (await answerJsonRpc({ jsonrpc: '2.0', method: 'x.y', params: {} }, call, {
+      codes: CODES,
+      refuseNotifications: true,
+    })) as { id: unknown; error: { code: number; message: string } };
+    expect(calls).toBe(1);
+    expect(refused.id).toBeNull();
+    expect(refused.error.code).toBe(-32600);
+    expect(refused.error.message).toContain('notifications');
+  });
+});
+
+describe('renderApiPage — the console a person can learn on (dry run first, undo, which copy)', () => {
+  const doc = toOpenRpc({
+    title: 'App',
+    version: '2',
+    servers: [],
+    capabilities: SET,
+    codes: CODES,
+  });
+  const config = (html: string) =>
+    JSON.parse(
+      must(
+        /<script id="fli-config" type="application\/json">(.*?)<\/script>/s.exec(html)?.[1],
+        'config',
+      ),
+    ) as Record<string, unknown>;
+
+  it('a page rendered without the new options is byte-identical to one rendered before they existed', () => {
+    const html = renderApiPage(doc, { console: { rpcPath: '/rpc', dryRun: true } });
+    expect(config(html)).toEqual({
+      mode: 'console',
+      rpcPath: '/rpc',
+      principal: 'agent:console',
+      tokenPath: null,
+      dryRun: true,
+    });
+    expect(html).not.toContain('id="surface"');
+    expect(html).not.toContain('.surface {');
+  });
+
+  it('carries dry-run-by-default, the undo verb and the surface into the page config', () => {
+    const html = renderApiPage(doc, {
+      console: { rpcPath: '/rpc', dryRun: true, dryRunDefault: true, undoBy: 'history.undoBy' },
+      surface: { generatedAt: '2026-10-09', consoleHint: 'Help → Capability console…' },
+    });
+    expect(config(html)).toMatchObject({
+      dryRunDefault: true,
+      undoBy: 'history.undoBy',
+      surface: { generatedAt: '2026-10-09', consoleHint: 'Help → Capability console…' },
+    });
+    expect(html).toContain('<div class="surface" id="surface" role="status"></div>');
+    expect(html).toContain('if (dry && cfg.dryRunDefault) dry.checked = true;');
+    expect(html).toContain('fire(cfg.undoBy, { principal: cfg.principal, n: 1 }, false)');
+    const script = must(/<script>([\s\S]*?)<\/script>/.exec(html)?.[1], 'inline script');
+    expect(() => new Function(script)).not.toThrow();
+    expect(html).not.toContain('prefers-color-scheme');
+  });
+
+  it('a reference page with a surface names all three copies it could be', () => {
+    const html = renderApiPage(doc, { surface: { generatedAt: '2026-10-09' } });
+    for (const head of ['CONSOLE — LIVE', 'LIVE — THIS MACHINE', 'SNAPSHOT'])
+      expect(html).toContain(head);
+  });
+});
+
 describe('lifecycle — status, quit, restart', () => {
   it('every app registers the same three contracts', () => {
     expect(Object.keys(LIFECYCLE_CAPABILITIES)).toEqual([

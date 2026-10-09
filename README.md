@@ -12,7 +12,7 @@ brand and project to open. It holds no business logic and no app code.
 - Source of the rules: FliStudio's spec §3–§5, roadmap §1 and open contract §5 — `~/dev/ad/flivideo/flistudio/docs/`
   (`specification.md`, `roadmap.md`, `open-contract.md`).
 
-**Status:** active, v0.19.0 · True at v0.19.0 (2026-10-05)
+**Status:** active, v0.23.0 · True at v0.23.0 (2026-10-09)
 
 ## Install
 
@@ -21,7 +21,7 @@ Pin a tag. Never use a `file:` path.
 ```json
 {
   "dependencies": {
-    "@flivideo/core": "github:flivideo/fli-core#v0.19.0"
+    "@flivideo/core": "github:flivideo/fli-core#v0.23.0"
   }
 }
 ```
@@ -103,10 +103,14 @@ const gate = authorize('project.empty-trash', CAPS['project.empty-trash'], 'agen
 - **Discovery**: `controlFilePath(app)` (`~/Library/Application Support/<app>/control.json`), `writeControlFile`
   (0600), `readControlFile` (`live` / `stale` when the pid is gone / `absent` / `invalid`), `bearerMatches`.
 - **Spec and door**: `toOpenRpc(...)` + `openRpcText` for a committed `api/openrpc.json`; `answerJsonRpc(body, seam,
-{ codes })` answers JSON-RPC 2.0 with `data.failureMode` on every error.
+{ codes })` answers JSON-RPC 2.0 with `data.failureMode` on every error; `refuseNotifications: true` answers a
+  request with no `id` with −32600 instead of running it unheard (v0.23.0).
 - **Page**: `renderApiPage(doc)` is the read-only reference; `renderApiPage(doc, { console: { rpcPath } })` is the
   console — pick a verb, fill the fields, fire it as a principal, see the answer (human-only verbs refuse in front of
-  you). `console.dryRun: true` adds a Dry run box (v0.7.1). Self-contained, light-only.
+  you). `console.dryRun: true` adds a Dry run box (v0.7.1). v0.23.0: `console.dryRunDefault` ticks it from the start,
+  `console.undoBy: 'history.undoBy'` puts an Undo (this console's principal, n 1) beside every applied write, and
+  `surface: { generatedAt, consoleHint }` adds the "which copy" banner — CONSOLE / LIVE — THIS MACHINE / SNAPSHOT,
+  worked out at load. All three are opt-in; a page rendered without them is byte-identical. Self-contained, light-only.
 - **Lifecycle**: `LIFECYCLE_CAPABILITIES` (`system.status`, `system.quit`, `system.restart`; `force` is human-only;
   a busy app refuses `app-busy`) and `appScriptArgs(verb, open?)` for driving `scripts/app.sh` from outside.
 

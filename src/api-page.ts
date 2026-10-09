@@ -27,9 +27,31 @@ export interface ApiPageOptions {
      * an `x-fli-dry-run: 1` header — offer it only when the app's seam honours one of them.
      */
     dryRun?: boolean;
+    /**
+     * Tick the dry-run box from the start (needs `dryRun`). A console whose readers are finding out what a verb does
+     * should preview first and apply on purpose (FliCast ADR-0008 §6).
+     */
+    dryRunDefault?: boolean;
+    /**
+     * The app's undo-by-principal verb, e.g. `history.undoBy`. Set → an applied (not dry-run) write that succeeded
+     * offers an Undo button that fires `{ principal: <this console's principal>, n: 1 }`, so a person exploring can
+     * always get back and only the console's own edits come off.
+     */
+    undoBy?: string;
   };
   /** A link back to the other mode (reference ↔ console). */
   otherPage?: { href: string; label: string };
+  /**
+   * The "which copy am I reading" banner. Set → the page works out at load whether it is the in-app console (a bridge
+   * or console mode), the copy a running app serves on loopback, or a saved/published snapshot, and says so with the
+   * method and human-only counts. Byte-identical pages that cannot tell their copies apart have misled people.
+   */
+  surface?: {
+    /** When the bytes were generated (ISO date) — shown on a snapshot. */
+    generatedAt?: string;
+    /** Where a reader of the read-only copy goes to fire a verb, e.g. "Help → Capability console… in FliEdit". */
+    consoleHint?: string;
+  };
 }
 
 /** JSON inside a <script> tag: `<` escaped so no string in the document can close the tag. */
@@ -51,6 +73,17 @@ export function renderApiPage(doc: OpenRpcDocument, options: ApiPageOptions = {}
     principal: options.console?.principal ?? 'agent:console',
     tokenPath: options.console?.tokenPath ?? null,
     dryRun: options.console?.dryRun ?? false,
+    // additive keys only when asked for, so a page rendered without them is byte-identical to before
+    ...(options.console?.dryRunDefault ? { dryRunDefault: true } : {}),
+    ...(options.console?.undoBy ? { undoBy: options.console.undoBy } : {}),
+    ...(options.surface
+      ? {
+          surface: {
+            generatedAt: options.surface.generatedAt ?? null,
+            consoleHint: options.surface.consoleHint ?? null,
+          },
+        }
+      : {}),
   };
   const title = `${doc.info.title} — ${mode === 'console' ? 'console' : 'reference'}`;
   const other = options.otherPage
@@ -98,10 +131,18 @@ button { justify-self:start; font:600 13px "Oswald", sans-serif; text-transform:
 pre.out { margin:8px 0 0; padding:10px; border-radius:6px; background:var(--surface); border-left:4px solid var(--line); overflow:auto; font-size:12.5px; max-height:360px; }
 pre.out.ok { border-left-color:var(--ok); } pre.out.bad { border-left-color:var(--bad); }
 .empty { color:var(--muted); padding:20px 0; }
-label.dry { display:flex; gap:6px; align-items:center; }
+label.dry { display:flex; gap:6px; align-items:center; }${
+    options.surface
+      ? `
+.surface { background:var(--chrome); color:#f0ebe4; padding:10px 16px; font:13px/1.45 ui-monospace, "Roboto Mono", Menlo, monospace; }
+.surface b { color:var(--yellow); letter-spacing:.06em; }
+.surface.snapshot b { color:#e8b45c; }
+button.undo { background:var(--card); border-color:var(--line); }`
+      : ''
+  }
 </style>
 </head>
-<body>
+<body>${options.surface ? '\n<div class="surface" id="surface" role="status"></div>' : ''}
 <header>
   <h1>${escapeHtml(doc.info.title)}</h1>
   <p class="sub" id="desc"></p>
@@ -150,6 +191,29 @@ label.dry { display:flex; gap:6px; align-items:center; }
     const limits = [s.format, s.pattern && '/' + s.pattern + '/', s.minLength !== undefined && 'min ' + s.minLength].filter(Boolean);
     return (s.type || 'any') + (limits.length ? ' (' + limits.join(', ') + ')' : '');
   }
+  if (cfg.surface) {
+    // Which copy is this? Decided from where the page finds itself, never from a flag the server rewrites.
+    const el = document.getElementById('surface');
+    const total = doc.methods.length;
+    const stars = doc.methods.filter((m) => m['x-human-only']).length;
+    const counts = total + ' methods · ' + stars + ' ★ human-only (always or conditionally)';
+    const app = doc.info.title + ' ' + doc.info.version;
+    const bridged = Boolean(window.fliConsole && typeof window.fliConsole.call === 'function');
+    const loopback = /^https?:$/.test(location.protocol) && ['127.0.0.1', 'localhost', '[::1]'].includes(location.hostname);
+    let head, text;
+    if (cfg.mode === 'console' && (bridged || loopback)) {
+      head = 'CONSOLE — LIVE';
+      text = 'inside ' + app + ', calling as ' + cfg.principal + '. ' + counts + '. Every verb is callable; ★ verbs are refused on purpose.' + (cfg.dryRunDefault ? ' Writes preview first (dry run) — untick to apply.' : '');
+    } else if (loopback) {
+      head = 'LIVE — THIS MACHINE';
+      text = 'served by the ' + app + ' running at ' + location.origin + '. Read-only here. ' + counts + '.' + (cfg.surface.consoleHint ? ' To fire a verb: ' + cfg.surface.consoleHint + '.' : '');
+    } else {
+      head = 'SNAPSHOT';
+      el.classList.add('snapshot');
+      text = 'generated ' + (cfg.surface.generatedAt || 'at an unknown date') + ' from ' + app + ' — a saved copy, not a running app. ' + counts + '; the running app may have moved on.';
+    }
+    el.append($('b', { text: head }), ' · ' + text);
+  }
   const starOf = (m) => m['x-human-only'] === true ? '★ human-only' : (m['x-human-only'] && m['x-human-only'].when ? '★ human-only when ' + m['x-human-only'].when : null);
 
   let token = null;
@@ -195,6 +259,8 @@ label.dry { display:flex; gap:6px; align-items:center; }
     for (const p of m.params) form.append(field(p));
     const out = $('pre', { class: 'out', hidden: '' });
     const dry = cfg.dryRun ? $('input', { type: 'checkbox', 'data-dry-run': '' }) : null;
+    if (dry && cfg.dryRunDefault) dry.checked = true;
+    const writes = m['x-side-effects'] && m['x-side-effects'] !== 'read-only';
     if (dry) form.append($('label', { class: 'dry' }, dry, $('span', { text: 'Dry run — preview, change nothing' })));
     form.append($('button', { type: 'submit', text: 'Fire' }), out);
     form.addEventListener('submit', async (e) => {
@@ -208,11 +274,23 @@ label.dry { display:flex; gap:6px; align-items:center; }
         }
       } catch (err) { out.hidden = false; out.className = 'out bad'; out.textContent = 'Not JSON: ' + err.message; return; }
       out.hidden = false; out.className = 'out'; out.textContent = '…';
+      for (const old of form.querySelectorAll('button.undo')) old.remove();
       try {
         const answer = await fire(m.name, params, Boolean(dry && dry.checked));
         const bad = answer && (answer.error || answer.ok === false);
         out.className = 'out ' + (bad ? 'bad' : 'ok');
         out.textContent = JSON.stringify(answer, null, 2);
+        const applied = !bad && writes && !(dry && dry.checked);
+        if (applied && cfg.undoBy && m.name !== cfg.undoBy) {
+          const undo = $('button', { type: 'button', class: 'undo', text: 'Undo — ' + cfg.undoBy + ' ' + cfg.principal });
+          undo.addEventListener('click', async () => {
+            undo.disabled = true;
+            const back = await fire(cfg.undoBy, { principal: cfg.principal, n: 1 }, false);
+            undo.textContent = back && (back.error || back.ok === false) ? 'Undo refused — see below' : 'Undone';
+            out.textContent += '\\n\\n— ' + cfg.undoBy + ' —\\n' + JSON.stringify(back, null, 2);
+          });
+          out.after(undo);
+        }
       } catch (err) { out.className = 'out bad'; out.textContent = String(err); }
     });
     return form;

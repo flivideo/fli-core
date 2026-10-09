@@ -186,6 +186,12 @@ export interface JsonRpcOptions {
   codes: Readonly<Record<string, number>>;
   /** The app's names for the three standard cases, when it does not use these. */
   names?: { unknownCapability?: string; invalidInput?: string; internal?: string };
+  /**
+   * Refuse a notification (a request with no `id`) instead of running it. JSON-RPC lets a server stay silent on one,
+   * but on a seam whose verbs edit a document and mint undo entries, fire-and-forget means a write lands and its
+   * refusal — or its success — is never heard. Off by default: the spec behaviour stays the default.
+   */
+  refuseNotifications?: boolean;
 }
 
 /**
@@ -226,6 +232,17 @@ async function answerOne(
   }
   const { method, params, id } = request.data;
   const invalidName = options.names?.invalidInput ?? 'invalid-input';
+  if (id === undefined && options.refuseNotifications) {
+    return {
+      jsonrpc: '2.0',
+      id: null,
+      error: {
+        code: JSONRPC_CODES.invalidRequest,
+        message: `${method}: notifications (no "id") are refused here — a write would land unheard. Send an "id".`,
+        data: { failureMode: invalidName },
+      },
+    };
+  }
   let answer: CallAnswer;
   if (Array.isArray(params)) {
     answer = {
