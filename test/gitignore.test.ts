@@ -78,6 +78,8 @@ describe('gitignore.render: the §3 test vectors, proven with git check-ignore',
     'a01-x/render.log',
     'a01-x/.DS_Store',
     'a01-x/.claude/settings.local.json',
+    'a01-x/fli.cut.a01-x/history/0001.json', // FliCut undo stack: machine-local (flicut ADR-0011)
+    'a01-x/fli.cut.a01-x/viewState.json', // JSON, so this proves the deny beats the metadata re-include
   ];
   const trackedBase = [
     'a01-x/final/README.md',
@@ -93,6 +95,8 @@ describe('gitignore.render: the §3 test vectors, proven with git check-ignore',
     'a01-x/videos/intro/intro-cut.srt',
     'a01-x/assets/thumb.png',
     'a01-x/fli.studio.cut-draft.json', // only a brand overlay ignores it
+    'a01-x/fli.cut.a01-x.json', // the FliCut EDL itself is a decision: tracked
+    'a01-x/fli.cut.a01-x/last-export.json',
   ];
 
   it('ignores and tracks what the design says, in a brand with no overlay', async () => {
