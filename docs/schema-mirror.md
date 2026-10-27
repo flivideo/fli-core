@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `c04c7c3f6348` · **generated** 2026-10-07T03:30:39+00:00
+- **commit** `fc555183fb2b` · **generated** 2026-10-27T16:08:03+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 33 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 269 | 74 | 6 | 9 | 33 | 6 |
+| 270 | 74 | 6 | 9 | 33 | 6 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -19,7 +19,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 
 - `src/api-page.ts` — `ApiPageOptions` :16
 - `src/app-file.ts` — `AppName` :15 · `AppSubject` :19 · `AppFile` :26
-- `src/brand-settings.ts` — `TranscriptionChoice` :14 · `BrandPublishSettings` :28 · `BrandYouTubeSettings` :45 · `BrandStudioDefaults` :54 · `BrandResearchSettings` :66 · `BrandSettings` :74 · `WriteBrandSettingsResult` :106
+- `src/brand-settings.ts` — `TranscriptionChoice` :14 · `BrandPublishSettings` :28 · `BrandYouTubeSettings` :45 · `BrandStudioDefaults` :57 · `BrandResearchSettings` :73 · `BrandSettings` :81 · `WriteBrandSettingsResult` :113
 - `src/brands.ts` — `Brand` :9 · `RegistryEntry` :20 · `BrandsFile` :28 · `SkippedBrand` :32 · `BrandsRead` :35 · `ReadBrandsResult` :45 · `ReadBrandsOptions` :48 · `ResolveBrandRootOptions` :92
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
 - `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :63 · `LEGACY_FOLDERS` (set) :66 · `MOTION_MACHINERY` (set) :122 · `ProjectTier` (set) :136 · `OverlayRole` (set) :147 · `ProjectEntry` :150 · `ProjectLayout` (set) :245 · `ProjectLayoutPaths` :248
@@ -28,7 +28,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
 - `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
 - `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :32
-- `src/gitignore-rules.ts` — `GITIGNORE_BASE_VERSION` :19 · `Tag` :24 · `GitignoreOverlayRule` :38 · `GitignoreGroup` :45 · `GitignoreRenderOptions` :161 · `Located` :194 · `GitignoreRenderResult` :238 · `GitignoreCheckResult` :334
+- `src/gitignore-rules.ts` — `GITIGNORE_BASE_VERSION` :19 · `Tag` :24 · `GitignoreOverlayRule` :38 · `GitignoreGroup` :45 · `GitignoreRenderOptions` :166 · `Located` :199 · `GitignoreRenderResult` :243 · `GitignoreCheckResult` :339
 - `src/gitignore.ts` — `TrackedIgnored` :23 · `GitignoreOptions` :31 · `GitignoreRefusal` :42 · `GitignoreRenderedFile` :49 · `GitignoreCheckedFile` :57 · `GitignoreResult` :63
 - `src/identity.ts` — `ProjectAspect` (set) :13 · `ProjectShape` (set) :23 · `ProjectLanguage` :28 · `ProjectIdentity` :31 · `Refused()` :57 · `WriteIdentityResult` :65 · `AdoptIdentityResult` :178 · `AdoptIdentityInput` :193
 - `src/lab-path.ts` — `PathSegment` :8 · `LabPathInput` :16 · `ResolvedLabPath` :84
@@ -60,6 +60,7 @@ These constructs are outside what this extractor reads **on every run, in every 
 - classes - a class's fields are never mirrored (the census lists each one)
 - generic, mapped and conditional type aliases
 - template-literal types, and unions that contain one
+- unions of object types where a variant has no discriminator, type name or property of its own (listed as gaps where met)
 - aliases of another type or value (`X = Y`), and utility-type aliases (`Pick<>`, `Omit<>`, `Record<>`)
 - `keyof typeof X` / indexed-access types, unless X itself is read as a closed set
 - results of `.pick` / `.omit` / `.partial` / `.required` (listed as gaps where met)
@@ -99,23 +100,23 @@ Not counted, as not schema-bearing: 1 function, 1 function type, 29 literal cons
 
 One symbol states each set. Adding a member changes that symbol, so these cannot drift.
 
-### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:106-114`
+### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:113-121`
 
 *the `kind` discriminator of the union `WriteBrandSettingsResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/brand-settings.ts:107` |
-| `refused` | `src/brand-settings.ts:109` |
+| `written` | `src/brand-settings.ts:114` |
+| `refused` | `src/brand-settings.ts:116` |
 
-### `src/brand-settings.WriteBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:110`
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:117`
 
 *`z.enum` `reason` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `invalid-input` | `src/brand-settings.ts:110` |
-| `io-error` | `src/brand-settings.ts:110` |
+| `invalid-input` | `src/brand-settings.ts:117` |
+| `io-error` | `src/brand-settings.ts:117` |
 
 ### `src/brands.ReadBrandsResult.kind` — `src/brands.ts:45`
 
@@ -383,27 +384,27 @@ What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are 
 | `refused` | `src/flitools.ts:46` |
 | `unavailable` | `src/flitools.ts:47` |
 
-### `src/gitignore-rules.GitignoreRenderResult.status` — `src/gitignore-rules.ts:239`
+### `src/gitignore-rules.GitignoreRenderResult.status` — `src/gitignore-rules.ts:244`
 
 *`z.enum` `status` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `created` | `src/gitignore-rules.ts:239` |
-| `updated` | `src/gitignore-rules.ts:239` |
-| `unchanged` | `src/gitignore-rules.ts:239` |
-| `refused` | `src/gitignore-rules.ts:239` |
+| `created` | `src/gitignore-rules.ts:244` |
+| `updated` | `src/gitignore-rules.ts:244` |
+| `unchanged` | `src/gitignore-rules.ts:244` |
+| `refused` | `src/gitignore-rules.ts:244` |
 
-### `src/gitignore-rules.GitignoreCheckResult.status` — `src/gitignore-rules.ts:336`
+### `src/gitignore-rules.GitignoreCheckResult.status` — `src/gitignore-rules.ts:341`
 
 *`z.enum` `status` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `ok` | `src/gitignore-rules.ts:336` |
-| `drift` | `src/gitignore-rules.ts:336` |
-| `no-block` | `src/gitignore-rules.ts:336` |
-| `broken-markers` | `src/gitignore-rules.ts:336` |
+| `ok` | `src/gitignore-rules.ts:341` |
+| `drift` | `src/gitignore-rules.ts:341` |
+| `no-block` | `src/gitignore-rules.ts:341` |
+| `broken-markers` | `src/gitignore-rules.ts:341` |
 
 ### `src/gitignore.GitignoreRefusal.reason` — `src/gitignore.ts:44`
 
@@ -1056,22 +1057,23 @@ Each set below was read out of the real authority — control flow, membership t
 
 | constant | value in code | declared at |
 |---|---|---|
-| `src/gitignore-rules.GITIGNORE_BASE_VERSION` | `1` | `src/gitignore-rules.ts:19` |
+| `src/gitignore-rules.GITIGNORE_BASE_VERSION` | `2` | `src/gitignore-rules.ts:19` |
 
 > These are what the **code** says. This mirror does not read the data on disk, so a disagreement between the two is still invisible here.
 
 ## Shapes
 
-### `src/api-page.ApiPageOptions` — interface — `src/api-page.ts:16-33`
+### `src/api-page.ApiPageOptions` — interface — `src/api-page.ts:16-55`
 
 The self-describing surface as ONE served HTML page (agent-drivable step 2). Two modes from one renderer:
 
 | field | type | default | at | note |
 |---|---|---|---|---|
 | `console` | `?: { /** Same-origin JSON-RPC endpoint, e.g. `/api/rpc`. */ rpcPath: string; /** Principal the console fires as; an agent name shows the fence…` | — | `src/api-page.ts:18` | Present → the console; absent → the read-only reference. |
-| `otherPage` | `?: { href: string; label: string }` | — | `src/api-page.ts:32` | A link back to the other mode (reference ↔ console). |
+| `otherPage` | `?: { href: string; label: string }` | — | `src/api-page.ts:43` | A link back to the other mode (reference ↔ console). |
+| `surface` | `?: { /** When the bytes were generated (ISO date) — shown on a snapshot. */ generatedAt?: string; /** Where a reader of the read-only copy goe…` | — | `src/api-page.ts:49` | The "which copy am I reading" banner. Set → the page works out at load whether it is the in-app console (a bridge |
 
-### `src/api-page.ApiPageOptions.console` — type — `src/api-page.ts:18-30`
+### `src/api-page.ApiPageOptions.console` — type — `src/api-page.ts:18-41`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
@@ -1079,13 +1081,22 @@ The self-describing surface as ONE served HTML page (agent-drivable step 2). Two
 | `principal` | `?: string` | — | `src/api-page.ts:22` | Principal the console fires as; an agent name shows the fence working. Default `agent:console`. |
 | `tokenPath` | `?: string` | — | `src/api-page.ts:24` | Same-origin GET answering `{ token }`, when the door needs a bearer token and there is no bridge. |
 | `dryRun` | `?: boolean` | — | `src/api-page.ts:29` | Show a "Dry run" box. Ticked, a call goes as `window.fliConsole.call(method, params, { dryRun: true })` or with |
+| `dryRunDefault` | `?: boolean` | — | `src/api-page.ts:34` | Tick the dry-run box from the start (needs `dryRun`). A console whose readers are finding out what a verb does |
+| `undoBy` | `?: string` | — | `src/api-page.ts:40` | The app's undo-by-principal verb, e.g. `history.undoBy`. Set → an applied (not dry-run) write that succeeded |
 
-### `src/api-page.ApiPageOptions.otherPage` — type — `src/api-page.ts:32`
+### `src/api-page.ApiPageOptions.otherPage` — type — `src/api-page.ts:43`
 
 | field | type | default | at |
 |---|---|---|---|
-| `href` | `string` | — | `src/api-page.ts:32` |
-| `label` | `string` | — | `src/api-page.ts:32` |
+| `href` | `string` | — | `src/api-page.ts:43` |
+| `label` | `string` | — | `src/api-page.ts:43` |
+
+### `src/api-page.ApiPageOptions.surface` — type — `src/api-page.ts:49-54`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `generatedAt` | `?: string` | — | `src/api-page.ts:51` | When the bytes were generated (ISO date) — shown on a snapshot. |
+| `consoleHint` | `?: string` | — | `src/api-page.ts:53` | Where a reader of the read-only copy goes to fire a verb, e.g. "Help → Capability console… in FliEdit". |
 
 ### `src/app-file.AppName` — zod-scalar — `src/app-file.ts:15-18`
 
@@ -1162,69 +1173,71 @@ The brand's YouTube choices, made by a person. Playlist **ids**; titles come fro
 | `activePlaylists` | `z.array(z.string().min(1)).default([])` | `[]` | `src/brand-settings.ts:47` | The playlists this brand uses: offered in Launch, shown first on the brand's YouTube page. |
 | `defaultPlaylists` | `z.array(z.string().min(1)).default([])` | `[]` | `src/brand-settings.ts:49` | The brand's usual picks, pre-ticked for a new video. |
 
-### `src/brand-settings.BrandStudioDefaults` — zod-object — `src/brand-settings.ts:54-58`
+### `src/brand-settings.BrandStudioDefaults` — zod-object — `src/brand-settings.ts:57-65`
 
-The YouTube Studio defaults a new video starts with (category, audience, language). Each absent → the app's own.
+The YouTube Studio defaults a new video starts with (category, audience, language, the AI-use and paid-promotion
 
-*aliases* `BrandStudioDefaults` `src/brand-settings.ts:59`
+*aliases* `BrandStudioDefaults` `src/brand-settings.ts:66`
 
-| field | type | default | at |
-|---|---|---|---|
-| `category` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:55` |
-| `audience` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:56` |
-| `language` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:57` |
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `category` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:58` |  |
+| `audience` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:59` |  |
+| `language` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:60` |  |
+| `aiUse` | `z.boolean().optional()` | — | `src/brand-settings.ts:62` | Studio 'AI use' default (altered or synthetic content); absent → undecided, the app never guesses. |
+| `paidPromotion` | `z.boolean().optional()` | — | `src/brand-settings.ts:64` | Studio 'Paid promotion' default; absent → undecided, the app never guesses. |
 
-### `src/brand-settings.BrandResearchSettings` — zod-object — `src/brand-settings.ts:66-71`
+### `src/brand-settings.BrandResearchSettings` — zod-object — `src/brand-settings.ts:73-78`
 
 The brand's research switches (FliStudio `research.*`, docs/briefs/research-keywords-build-brief.md). Sources that
 
-*aliases* `BrandResearchSettings` `src/brand-settings.ts:72`
+*aliases* `BrandResearchSettings` `src/brand-settings.ts:79`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `autocomplete` | `z.boolean().optional()` | — | `src/brand-settings.ts:68` | YouTube autocomplete (undocumented endpoint). Absent → on. |
-| `allowUnofficial` | `z.boolean().optional()` | — | `src/brand-settings.ts:70` | Unofficial sources that are off by default (Google Trends, YouTube filter). Absent → off. |
+| `autocomplete` | `z.boolean().optional()` | — | `src/brand-settings.ts:75` | YouTube autocomplete (undocumented endpoint). Absent → on. |
+| `allowUnofficial` | `z.boolean().optional()` | — | `src/brand-settings.ts:77` | Unofficial sources that are off by default (Google Trends, YouTube filter). Absent → off. |
 
-### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:74-95`
+### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:81-102`
 
-*aliases* `BrandSettings` `src/brand-settings.ts:96`
+*aliases* `BrandSettings` `src/brand-settings.ts:103`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:75` |  |
-| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:76` |  |
-| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:77` |  |
-| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/brand-settings.ts:81` | The brand's transcription providers, over the suite default; absent → the suite default. |
-| `gitignore` | `z.array(GitignoreOverlayRule).optional() → src/gitignore-rules.GitignoreOverlayRule` | — | `src/brand-settings.ts:86` | The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's |
-| `publish` | `BrandPublishSettings.optional() → src/brand-settings.BrandPublishSettings` | — | `src/brand-settings.ts:88` | Publishing settings (CTAs, affiliates, legal…); optional, so older readers are unaffected. |
-| `youtube` | `BrandYouTubeSettings.optional() → src/brand-settings.BrandYouTubeSettings` | — | `src/brand-settings.ts:90` | The brand's YouTube playlist choices. |
-| `studioDefaults` | `BrandStudioDefaults.optional() → src/brand-settings.BrandStudioDefaults` | — | `src/brand-settings.ts:92` | YouTube Studio defaults for a new video. |
-| `research` | `BrandResearchSettings.optional() → src/brand-settings.BrandResearchSettings` | — | `src/brand-settings.ts:94` | Which research sources the brand allows. |
+| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:82` |  |
+| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:83` |  |
+| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:84` |  |
+| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/brand-settings.ts:88` | The brand's transcription providers, over the suite default; absent → the suite default. |
+| `gitignore` | `z.array(GitignoreOverlayRule).optional() → src/gitignore-rules.GitignoreOverlayRule` | — | `src/brand-settings.ts:93` | The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's |
+| `publish` | `BrandPublishSettings.optional() → src/brand-settings.BrandPublishSettings` | — | `src/brand-settings.ts:95` | Publishing settings (CTAs, affiliates, legal…); optional, so older readers are unaffected. |
+| `youtube` | `BrandYouTubeSettings.optional() → src/brand-settings.BrandYouTubeSettings` | — | `src/brand-settings.ts:97` | The brand's YouTube playlist choices. |
+| `studioDefaults` | `BrandStudioDefaults.optional() → src/brand-settings.BrandStudioDefaults` | — | `src/brand-settings.ts:99` | YouTube Studio defaults for a new video. |
+| `research` | `BrandResearchSettings.optional() → src/brand-settings.BrandResearchSettings` | — | `src/brand-settings.ts:101` | Which research sources the brand allows. |
 
-### `src/brand-settings.WriteBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:106-114`
+### `src/brand-settings.WriteBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:113-121`
 
-*aliases* `WriteBrandSettingsResult` `src/brand-settings.ts:115`
+*aliases* `WriteBrandSettingsResult` `src/brand-settings.ts:122`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/brand-settings.ts:107` |
-| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/brand-settings.ts:109` |
+| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/brand-settings.ts:114` |
+| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/brand-settings.ts:116` |
 
-### `src/brand-settings.WriteBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:107`
-
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:107` |
-| `path` | `z.string()` | — | `src/brand-settings.ts:107` |
-
-### `src/brand-settings.WriteBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:108-113`
+### `src/brand-settings.WriteBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:114`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:109` |
-| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/brand-settings.ts:110` |
-| `path` | `z.string()` | — | `src/brand-settings.ts:111` |
-| `message` | `z.string()` | — | `src/brand-settings.ts:112` |
+| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:114` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:114` |
+
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:115-120`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:116` |
+| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/brand-settings.ts:117` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:118` |
+| `message` | `z.string()` | — | `src/brand-settings.ts:119` |
 
 ### `src/brands.Brand` — zod-object — `src/brands.ts:9-17`
 
@@ -1876,49 +1889,49 @@ A brand's own rule, kept in its `fli.brand.json` (`gitignore: [...]`) so it trav
 | `note` | `z.string()` | — | `src/gitignore-rules.ts:47` |
 | `patterns` | `z.array(z.string())` | — | `src/gitignore-rules.ts:48` |
 
-### `src/gitignore-rules.GitignoreRenderOptions` — interface — `src/gitignore-rules.ts:161-165`
+### `src/gitignore-rules.GitignoreRenderOptions` — interface — `src/gitignore-rules.ts:166-170`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `brand` | `string` | — | `src/gitignore-rules.ts:163` | The brand key (`aitldr`), as in `fli.brand.json`. Named in the marker; no path, host or user ever is. |
-| `overlay` | `?: readonly GitignoreOverlayRule[] → src/gitignore-rules.GitignoreOverlayRule` | — | `src/gitignore-rules.ts:164` |  |
+| `brand` | `string` | — | `src/gitignore-rules.ts:168` | The brand key (`aitldr`), as in `fli.brand.json`. Named in the marker; no path, host or user ever is. |
+| `overlay` | `?: readonly GitignoreOverlayRule[] → src/gitignore-rules.GitignoreOverlayRule` | — | `src/gitignore-rules.ts:169` |  |
 
-### `src/gitignore-rules.Located` — interface — `src/gitignore-rules.ts:194-199`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `start` | `number` | — | `src/gitignore-rules.ts:196` | Offset of the BEGIN line's first character. |
-| `end` | `number` | — | `src/gitignore-rules.ts:198` | Offset just past the END line's newline (or the end of the file). |
-
-### `src/gitignore-rules.GitignoreRenderResult` — zod-object — `src/gitignore-rules.ts:238-252`
-
-*aliases* `GitignoreRenderResult` `src/gitignore-rules.ts:253`
+### `src/gitignore-rules.Located` — interface — `src/gitignore-rules.ts:199-204`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `status` | `z.enum(['created', 'updated', 'unchanged', 'refused'])` | — | `src/gitignore-rules.ts:239` |  |
-| `content` | `z.string()` | — | `src/gitignore-rules.ts:241` | The whole file after the render (the existing text, untouched, when refused). |
-| `added` | `z.array(z.string())` | — | `src/gitignore-rules.ts:243` | Lines in the new block that were not in the old one. |
-| `removed` | `z.array(z.string())` | — | `src/gitignore-rules.ts:245` | Lines in the old block that are not in the new one. |
-| `legacyDuplicates` | `z.array(z.string())` | — | `src/gitignore-rules.ts:247` | Hand-written pattern lines outside the block that the block now also emits: reported, never deleted. |
-| `blockNotLast` | `z.boolean()` | — | `src/gitignore-rules.ts:249` | The block is not the last thing in the file: a hand rule after it could undo a re-include. Reported, not moved. |
-| `message` | `z.string().optional()` | — | `src/gitignore-rules.ts:251` | Why a render was refused: the markers are broken. |
+| `start` | `number` | — | `src/gitignore-rules.ts:201` | Offset of the BEGIN line's first character. |
+| `end` | `number` | — | `src/gitignore-rules.ts:203` | Offset just past the END line's newline (or the end of the file). |
 
-### `src/gitignore-rules.GitignoreCheckResult` — zod-object — `src/gitignore-rules.ts:334-350`
+### `src/gitignore-rules.GitignoreRenderResult` — zod-object — `src/gitignore-rules.ts:243-257`
 
-*aliases* `GitignoreCheckResult` `src/gitignore-rules.ts:351`
+*aliases* `GitignoreRenderResult` `src/gitignore-rules.ts:258`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `status` | `z.enum(['ok', 'drift', 'no-block', 'broken-markers'])` | — | `src/gitignore-rules.ts:336` | `ok`: the block is what would be rendered. `drift`: it differs. `no-block`: never generated. `broken-markers`. |
-| `ok` | `z.boolean()` | — | `src/gitignore-rules.ts:338` | `status === 'ok'`: the exit code of a hook or a fleet sweep is non-zero for everything else. |
-| `missing` | `z.array(z.string())` | — | `src/gitignore-rules.ts:340` | Lines the rendered block has that the file's does not. |
-| `extra` | `z.array(z.string())` | — | `src/gitignore-rules.ts:342` | Lines the file's block has that the rendered one does not (someone edited between the markers). |
-| `fileBaseVersion` | `z.number().int().nullable()` | — | `src/gitignore-rules.ts:344` | The base version in the file's marker, when there is one. |
-| `baseVersion` | `z.number().int()` | — | `src/gitignore-rules.ts:345` |  |
-| `reason` | `z.string().optional()` | — | `src/gitignore-rules.ts:347` | Why, in a sentence, when not ok. |
-| `legacyDuplicates` | `z.array(z.string())` | — | `src/gitignore-rules.ts:348` |  |
-| `blockNotLast` | `z.boolean()` | — | `src/gitignore-rules.ts:349` |  |
+| `status` | `z.enum(['created', 'updated', 'unchanged', 'refused'])` | — | `src/gitignore-rules.ts:244` |  |
+| `content` | `z.string()` | — | `src/gitignore-rules.ts:246` | The whole file after the render (the existing text, untouched, when refused). |
+| `added` | `z.array(z.string())` | — | `src/gitignore-rules.ts:248` | Lines in the new block that were not in the old one. |
+| `removed` | `z.array(z.string())` | — | `src/gitignore-rules.ts:250` | Lines in the old block that are not in the new one. |
+| `legacyDuplicates` | `z.array(z.string())` | — | `src/gitignore-rules.ts:252` | Hand-written pattern lines outside the block that the block now also emits: reported, never deleted. |
+| `blockNotLast` | `z.boolean()` | — | `src/gitignore-rules.ts:254` | The block is not the last thing in the file: a hand rule after it could undo a re-include. Reported, not moved. |
+| `message` | `z.string().optional()` | — | `src/gitignore-rules.ts:256` | Why a render was refused: the markers are broken. |
+
+### `src/gitignore-rules.GitignoreCheckResult` — zod-object — `src/gitignore-rules.ts:339-355`
+
+*aliases* `GitignoreCheckResult` `src/gitignore-rules.ts:356`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `status` | `z.enum(['ok', 'drift', 'no-block', 'broken-markers'])` | — | `src/gitignore-rules.ts:341` | `ok`: the block is what would be rendered. `drift`: it differs. `no-block`: never generated. `broken-markers`. |
+| `ok` | `z.boolean()` | — | `src/gitignore-rules.ts:343` | `status === 'ok'`: the exit code of a hook or a fleet sweep is non-zero for everything else. |
+| `missing` | `z.array(z.string())` | — | `src/gitignore-rules.ts:345` | Lines the rendered block has that the file's does not. |
+| `extra` | `z.array(z.string())` | — | `src/gitignore-rules.ts:347` | Lines the file's block has that the rendered one does not (someone edited between the markers). |
+| `fileBaseVersion` | `z.number().int().nullable()` | — | `src/gitignore-rules.ts:349` | The base version in the file's marker, when there is one. |
+| `baseVersion` | `z.number().int()` | — | `src/gitignore-rules.ts:350` |  |
+| `reason` | `z.string().optional()` | — | `src/gitignore-rules.ts:352` | Why, in a sentence, when not ok. |
+| `legacyDuplicates` | `z.array(z.string())` | — | `src/gitignore-rules.ts:353` |  |
+| `blockNotLast` | `z.boolean()` | — | `src/gitignore-rules.ts:354` |  |
 
 ### `src/gitignore.TrackedIgnored` — zod-object — `src/gitignore.ts:23-28`
 
@@ -2484,12 +2497,13 @@ What an app's seam answers: the value, or a named refusal.
 | `ok` | `true` | — | `src/openrpc.ts:183` |
 | `value` | `unknown` | — | `src/openrpc.ts:183` |
 
-### `src/openrpc.JsonRpcOptions` — interface — `src/openrpc.ts:185-189`
+### `src/openrpc.JsonRpcOptions` — interface — `src/openrpc.ts:185-195`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
 | `codes` | `Readonly<Record<string, number>>` | — | `src/openrpc.ts:186` |  |
 | `names` | `?: { unknownCapability?: string; invalidInput?: string; internal?: string }` | — | `src/openrpc.ts:188` | The app's names for the three standard cases, when it does not use these. |
+| `refuseNotifications` | `?: boolean` | — | `src/openrpc.ts:194` | Refuse a notification (a request with no `id`) instead of running it. JSON-RPC lets a server stay silent on one, |
 
 ### `src/openrpc.JsonRpcOptions.names` — type — `src/openrpc.ts:188`
 
@@ -3692,7 +3706,7 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 | schemas built by `OneLine(...)` (1 use) | built by calling `OneLine(...)`, which does not return a single zod expression this reader can follow | `OneLine('a note').optional() (src/gitignore-rules.ts:41)` |
 | schemas built by `Refused(...)` (6 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:67)`<br>`Refused('existing-invalid') (src/identity.ts:69)`<br>`Refused('io-error') (src/identity.ts:70)`<br>`Refused('invalid-input') (src/identity.ts:185)`<br>`Refused('existing-invalid') (src/identity.ts:187)`<br>`Refused('io-error') (src/identity.ts:188)` |
 | schemas built by `promisify(...)` (1 use) | built by calling `promisify(...)` imported from `node:util`; package helpers are not expanded - see that package's own mirror | `promisify(execFile) (src/gitignore.ts:17)` |
-| schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:98)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:126)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:130)` |
+| schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:105)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:126)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:130)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
 | src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:460)` |
@@ -3711,7 +3725,7 @@ The census found these top-level declarations and the extractor did not mirror t
 | const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:177`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
-| union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:201` |
+| union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:206` |
 | utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 1 | `src/youtube.Thumbs` `src/youtube.ts:231` |
 
 ## Findings — changes needed in the target application

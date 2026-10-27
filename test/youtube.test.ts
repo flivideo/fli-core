@@ -422,4 +422,37 @@ describe('fli.brand.json publish, youtube and studioDefaults blocks', () => {
       read?.kind === 'valid' && (read.value.publish as Record<string, unknown>).somethingNew,
     ).toEqual({ kept: true });
   });
+
+  it('keep the AI-use and paid-promotion disclosures through parse, write and read (v0.24.0)', async () => {
+    const root = await tempDir();
+    const settings = BrandSettings.parse({
+      schema: 1,
+      brand: 'appydave',
+      colour: '#ffde59',
+      studioDefaults: { category: '28', aiUse: false, paidPromotion: true },
+    });
+    expect(settings.studioDefaults).toEqual({ category: '28', aiUse: false, paidPromotion: true });
+    expect((await writeBrandSettings(root, settings)).kind).toBe('written');
+    const onDisk = JSON.parse(await fs.readFile(path.join(root, 'fli.brand.json'), 'utf8')) as {
+      studioDefaults: Record<string, unknown>;
+    };
+    expect(onDisk.studioDefaults).toEqual({ category: '28', aiUse: false, paidPromotion: true });
+    const read = await readBrandSettings(root);
+    expect(read?.kind === 'valid' && read.value.studioDefaults).toEqual({
+      category: '28',
+      aiUse: false,
+      paidPromotion: true,
+    });
+  });
+
+  it('leave an absent disclosure absent (undecided), never defaulted', () => {
+    const settings = BrandSettings.parse({
+      schema: 1,
+      brand: 'b',
+      colour: '#000',
+      studioDefaults: {},
+    });
+    expect(settings.studioDefaults).toEqual({});
+    expect('aiUse' in (settings.studioDefaults ?? {})).toBe(false);
+  });
 });

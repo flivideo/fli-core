@@ -254,9 +254,9 @@
   "closed_sets": [
     {
       "anchor": {
-        "end_line": 114,
+        "end_line": 121,
         "file": "src/brand-settings.ts",
-        "line": 106
+        "line": 113
       },
       "authority": "the `kind` discriminator of the union `WriteBrandSettingsResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -265,14 +265,14 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 107
+            "line": 114
           },
           "value": "written"
         },
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 109
+            "line": 116
           },
           "value": "refused"
         }
@@ -281,7 +281,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 110
+        "line": 117
       },
       "authority": "`z.enum` `reason` - a single declaring symbol",
       "grade": "declared",
@@ -290,14 +290,14 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 110
+            "line": 117
           },
           "value": "invalid-input"
         },
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 110
+            "line": 117
           },
           "value": "io-error"
         }
@@ -1415,7 +1415,7 @@
     {
       "anchor": {
         "file": "src/gitignore-rules.ts",
-        "line": 239
+        "line": 244
       },
       "authority": "`z.enum` `status` - a single declaring symbol",
       "grade": "declared",
@@ -1424,28 +1424,28 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 239
+            "line": 244
           },
           "value": "created"
         },
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 239
+            "line": 244
           },
           "value": "updated"
         },
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 239
+            "line": 244
           },
           "value": "unchanged"
         },
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 239
+            "line": 244
           },
           "value": "refused"
         }
@@ -1454,7 +1454,7 @@
     {
       "anchor": {
         "file": "src/gitignore-rules.ts",
-        "line": 336
+        "line": 341
       },
       "authority": "`z.enum` `status` - a single declaring symbol",
       "grade": "declared",
@@ -1463,28 +1463,28 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 336
+            "line": 341
           },
           "value": "ok"
         },
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 336
+            "line": 341
           },
           "value": "drift"
         },
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 336
+            "line": 341
           },
           "value": "no-block"
         },
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 336
+            "line": 341
           },
           "value": "broken-markers"
         }
@@ -3559,13 +3559,14 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-10-07T03:30:39+00:00",
+  "generated": "2026-10-27T16:08:03+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
     "classes - a class's fields are never mirrored (the census lists each one)",
     "generic, mapped and conditional type aliases",
     "template-literal types, and unions that contain one",
+    "unions of object types where a variant has no discriminator, type name or property of its own (listed as gaps where met)",
     "aliases of another type or value (`X = Y`), and utility-type aliases (`Pick<>`, `Omit<>`, `Record<>`)",
     "`keyof typeof X` / indexed-access types, unless X itself is read as a closed set",
     "results of `.pick` / `.omit` / `.partial` / `.required` (listed as gaps where met)",
@@ -3603,7 +3604,7 @@
   "structures": [
     {
       "anchor": {
-        "end_line": 33,
+        "end_line": 55,
         "file": "src/api-page.ts",
         "line": 16
       },
@@ -3624,12 +3625,22 @@
         {
           "anchor": {
             "file": "src/api-page.ts",
-            "line": 32
+            "line": 43
           },
           "default": null,
           "doc": "A link back to the other mode (reference \u2194 console).",
           "name": "otherPage",
           "type": "?: { href: string; label: string }"
+        },
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 49
+          },
+          "default": null,
+          "doc": "The \"which copy am I reading\" banner. Set \u2192 the page works out at load whether it is the in-app console (a bridge",
+          "name": "surface",
+          "type": "?: { /** When the bytes were generated (ISO date) \u2014 shown on a snapshot. */ generatedAt?: string; /** Where a reader of the read-only copy goe\u2026"
         }
       ],
       "grade": "declared",
@@ -3638,7 +3649,7 @@
     },
     {
       "anchor": {
-        "end_line": 30,
+        "end_line": 41,
         "file": "src/api-page.ts",
         "line": 18
       },
@@ -3684,6 +3695,26 @@
           "doc": "Show a \"Dry run\" box. Ticked, a call goes as `window.fliConsole.call(method, params, { dryRun: true })` or with",
           "name": "dryRun",
           "type": "?: boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 34
+          },
+          "default": null,
+          "doc": "Tick the dry-run box from the start (needs `dryRun`). A console whose readers are finding out what a verb does",
+          "name": "dryRunDefault",
+          "type": "?: boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 40
+          },
+          "default": null,
+          "doc": "The app's undo-by-principal verb, e.g. `history.undoBy`. Set \u2192 an applied (not dry-run) write that succeeded",
+          "name": "undoBy",
+          "type": "?: string"
         }
       ],
       "grade": "declared",
@@ -3693,7 +3724,7 @@
     {
       "anchor": {
         "file": "src/api-page.ts",
-        "line": 32
+        "line": 43
       },
       "bases": [],
       "doc": null,
@@ -3701,7 +3732,7 @@
         {
           "anchor": {
             "file": "src/api-page.ts",
-            "line": 32
+            "line": 43
           },
           "default": null,
           "name": "href",
@@ -3710,7 +3741,7 @@
         {
           "anchor": {
             "file": "src/api-page.ts",
-            "line": 32
+            "line": 43
           },
           "default": null,
           "name": "label",
@@ -3719,6 +3750,40 @@
       ],
       "grade": "declared",
       "id": "src/api-page.ApiPageOptions.otherPage",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "end_line": 54,
+        "file": "src/api-page.ts",
+        "line": 49
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 51
+          },
+          "default": null,
+          "doc": "When the bytes were generated (ISO date) \u2014 shown on a snapshot.",
+          "name": "generatedAt",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/api-page.ts",
+            "line": 53
+          },
+          "default": null,
+          "doc": "Where a reader of the read-only copy goes to fire a verb, e.g. \"Help \u2192 Capability console\u2026 in FliEdit\".",
+          "name": "consoleHint",
+          "type": "?: string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/api-page.ApiPageOptions.surface",
       "kind": "type"
     },
     {
@@ -4052,24 +4117,24 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 59
+            "line": 66
           },
           "name": "BrandStudioDefaults"
         }
       ],
       "anchor": {
-        "end_line": 58,
+        "end_line": 65,
         "file": "src/brand-settings.ts",
-        "line": 54
+        "line": 57
       },
       "bases": [],
-      "doc": "The YouTube Studio defaults a new video starts with (category, audience, language). Each absent \u2192 the app's own.",
+      "doc": "The YouTube Studio defaults a new video starts with (category, audience, language, the AI-use and paid-promotion",
       "exported": true,
       "fields": [
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 55
+            "line": 58
           },
           "default": null,
           "name": "category",
@@ -4078,7 +4143,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 56
+            "line": 59
           },
           "default": null,
           "name": "audience",
@@ -4087,11 +4152,31 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 57
+            "line": 60
           },
           "default": null,
           "name": "language",
           "type": "z.string().min(1).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 62
+          },
+          "default": null,
+          "doc": "Studio 'AI use' default (altered or synthetic content); absent \u2192 undecided, the app never guesses.",
+          "name": "aiUse",
+          "type": "z.boolean().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 64
+          },
+          "default": null,
+          "doc": "Studio 'Paid promotion' default; absent \u2192 undecided, the app never guesses.",
+          "name": "paidPromotion",
+          "type": "z.boolean().optional()"
         }
       ],
       "grade": "declared",
@@ -4103,15 +4188,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 72
+            "line": 79
           },
           "name": "BrandResearchSettings"
         }
       ],
       "anchor": {
-        "end_line": 71,
+        "end_line": 78,
         "file": "src/brand-settings.ts",
-        "line": 66
+        "line": 73
       },
       "bases": [],
       "doc": "The brand's research switches (FliStudio `research.*`, docs/briefs/research-keywords-build-brief.md). Sources that",
@@ -4120,7 +4205,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 68
+            "line": 75
           },
           "default": null,
           "doc": "YouTube autocomplete (undocumented endpoint). Absent \u2192 on.",
@@ -4130,7 +4215,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 70
+            "line": 77
           },
           "default": null,
           "doc": "Unofficial sources that are off by default (Google Trends, YouTube filter). Absent \u2192 off.",
@@ -4147,15 +4232,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 96
+            "line": 103
           },
           "name": "BrandSettings"
         }
       ],
       "anchor": {
-        "end_line": 95,
+        "end_line": 102,
         "file": "src/brand-settings.ts",
-        "line": 74
+        "line": 81
       },
       "bases": [],
       "doc": null,
@@ -4164,7 +4249,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 75
+            "line": 82
           },
           "default": null,
           "name": "schema",
@@ -4173,7 +4258,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 76
+            "line": 83
           },
           "default": null,
           "name": "brand",
@@ -4182,7 +4267,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 77
+            "line": 84
           },
           "default": null,
           "name": "colour",
@@ -4191,7 +4276,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 81
+            "line": 88
           },
           "default": null,
           "doc": "The brand's transcription providers, over the suite default; absent \u2192 the suite default.",
@@ -4201,7 +4286,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 86
+            "line": 93
           },
           "default": null,
           "doc": "The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's",
@@ -4211,7 +4296,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 88
+            "line": 95
           },
           "default": null,
           "doc": "Publishing settings (CTAs, affiliates, legal\u2026); optional, so older readers are unaffected.",
@@ -4221,7 +4306,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 90
+            "line": 97
           },
           "default": null,
           "doc": "The brand's YouTube playlist choices.",
@@ -4231,7 +4316,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 92
+            "line": 99
           },
           "default": null,
           "doc": "YouTube Studio defaults for a new video.",
@@ -4241,7 +4326,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 94
+            "line": 101
           },
           "default": null,
           "doc": "Which research sources the brand allows.",
@@ -4258,15 +4343,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 115
+            "line": 122
           },
           "name": "WriteBrandSettingsResult"
         }
       ],
       "anchor": {
-        "end_line": 114,
+        "end_line": 121,
         "file": "src/brand-settings.ts",
-        "line": 106
+        "line": 113
       },
       "bases": [],
       "doc": null,
@@ -4275,7 +4360,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 107
+            "line": 114
           },
           "default": null,
           "name": "written",
@@ -4284,7 +4369,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 109
+            "line": 116
           },
           "default": null,
           "name": "refused",
@@ -4298,7 +4383,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 107
+        "line": 114
       },
       "bases": [],
       "doc": null,
@@ -4306,7 +4391,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 107
+            "line": 114
           },
           "default": null,
           "name": "kind",
@@ -4315,7 +4400,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 107
+            "line": 114
           },
           "default": null,
           "name": "path",
@@ -4328,9 +4413,9 @@
     },
     {
       "anchor": {
-        "end_line": 113,
+        "end_line": 120,
         "file": "src/brand-settings.ts",
-        "line": 108
+        "line": 115
       },
       "bases": [],
       "doc": null,
@@ -4338,7 +4423,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 109
+            "line": 116
           },
           "default": null,
           "name": "kind",
@@ -4347,7 +4432,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 110
+            "line": 117
           },
           "default": null,
           "name": "reason",
@@ -4356,7 +4441,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 111
+            "line": 118
           },
           "default": null,
           "name": "path",
@@ -4365,7 +4450,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 112
+            "line": 119
           },
           "default": null,
           "name": "message",
@@ -7440,7 +7525,7 @@
       "id": "src/gitignore-rules.GITIGNORE_BASE_VERSION",
       "kind": "constant",
       "note": "declared in code; compare against what is actually on disk",
-      "value": 1
+      "value": 2
     },
     {
       "anchor": {
@@ -7560,9 +7645,9 @@
     },
     {
       "anchor": {
-        "end_line": 165,
+        "end_line": 170,
         "file": "src/gitignore-rules.ts",
-        "line": 161
+        "line": 166
       },
       "bases": [],
       "doc": null,
@@ -7571,7 +7656,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 163
+            "line": 168
           },
           "default": null,
           "doc": "The brand key (`aitldr`), as in `fli.brand.json`. Named in the marker; no path, host or user ever is.",
@@ -7581,7 +7666,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 164
+            "line": 169
           },
           "default": null,
           "name": "overlay",
@@ -7594,9 +7679,9 @@
     },
     {
       "anchor": {
-        "end_line": 199,
+        "end_line": 204,
         "file": "src/gitignore-rules.ts",
-        "line": 194
+        "line": 199
       },
       "bases": [],
       "doc": null,
@@ -7605,7 +7690,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 196
+            "line": 201
           },
           "default": null,
           "doc": "Offset of the BEGIN line's first character.",
@@ -7615,7 +7700,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 198
+            "line": 203
           },
           "default": null,
           "doc": "Offset just past the END line's newline (or the end of the file).",
@@ -7632,15 +7717,15 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 253
+            "line": 258
           },
           "name": "GitignoreRenderResult"
         }
       ],
       "anchor": {
-        "end_line": 252,
+        "end_line": 257,
         "file": "src/gitignore-rules.ts",
-        "line": 238
+        "line": 243
       },
       "bases": [],
       "doc": null,
@@ -7649,7 +7734,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 239
+            "line": 244
           },
           "default": null,
           "name": "status",
@@ -7658,7 +7743,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 241
+            "line": 246
           },
           "default": null,
           "doc": "The whole file after the render (the existing text, untouched, when refused).",
@@ -7668,7 +7753,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 243
+            "line": 248
           },
           "default": null,
           "doc": "Lines in the new block that were not in the old one.",
@@ -7678,7 +7763,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 245
+            "line": 250
           },
           "default": null,
           "doc": "Lines in the old block that are not in the new one.",
@@ -7688,7 +7773,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 247
+            "line": 252
           },
           "default": null,
           "doc": "Hand-written pattern lines outside the block that the block now also emits: reported, never deleted.",
@@ -7698,7 +7783,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 249
+            "line": 254
           },
           "default": null,
           "doc": "The block is not the last thing in the file: a hand rule after it could undo a re-include. Reported, not moved.",
@@ -7708,7 +7793,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 251
+            "line": 256
           },
           "default": null,
           "doc": "Why a render was refused: the markers are broken.",
@@ -7725,15 +7810,15 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 351
+            "line": 356
           },
           "name": "GitignoreCheckResult"
         }
       ],
       "anchor": {
-        "end_line": 350,
+        "end_line": 355,
         "file": "src/gitignore-rules.ts",
-        "line": 334
+        "line": 339
       },
       "bases": [],
       "doc": null,
@@ -7742,7 +7827,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 336
+            "line": 341
           },
           "default": null,
           "doc": "`ok`: the block is what would be rendered. `drift`: it differs. `no-block`: never generated. `broken-markers`.",
@@ -7752,7 +7837,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 338
+            "line": 343
           },
           "default": null,
           "doc": "`status === 'ok'`: the exit code of a hook or a fleet sweep is non-zero for everything else.",
@@ -7762,7 +7847,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 340
+            "line": 345
           },
           "default": null,
           "doc": "Lines the rendered block has that the file's does not.",
@@ -7772,7 +7857,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 342
+            "line": 347
           },
           "default": null,
           "doc": "Lines the file's block has that the rendered one does not (someone edited between the markers).",
@@ -7782,7 +7867,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 344
+            "line": 349
           },
           "default": null,
           "doc": "The base version in the file's marker, when there is one.",
@@ -7792,7 +7877,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 345
+            "line": 350
           },
           "default": null,
           "name": "baseVersion",
@@ -7801,7 +7886,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 347
+            "line": 352
           },
           "default": null,
           "doc": "Why, in a sentence, when not ok.",
@@ -7811,7 +7896,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 348
+            "line": 353
           },
           "default": null,
           "name": "legacyDuplicates",
@@ -7820,7 +7905,7 @@
         {
           "anchor": {
             "file": "src/gitignore-rules.ts",
-            "line": 349
+            "line": 354
           },
           "default": null,
           "name": "blockNotLast",
@@ -10720,7 +10805,7 @@
     },
     {
       "anchor": {
-        "end_line": 189,
+        "end_line": 195,
         "file": "src/openrpc.ts",
         "line": 185
       },
@@ -10746,6 +10831,16 @@
           "doc": "The app's names for the three standard cases, when it does not use these.",
           "name": "names",
           "type": "?: { unknownCapability?: string; invalidInput?: string; internal?: string }"
+        },
+        {
+          "anchor": {
+            "file": "src/openrpc.ts",
+            "line": 194
+          },
+          "default": null,
+          "doc": "Refuse a notification (a request with no `id`) instead of running it. JSON-RPC lets a server stay silent on one,",
+          "name": "refuseNotifications",
+          "type": "?: boolean"
         }
       ],
       "grade": "declared",
@@ -16956,7 +17051,7 @@
     }
   ],
   "target": {
-    "commit": "c04c7c3f63487ebb3056e52208ab255175329044",
+    "commit": "fc555183fb2b3419aec6368a343fc40293ff676c",
     "root": "..",
     "stack": "typescript"
   },
@@ -17046,7 +17141,7 @@
       "census": true,
       "family": "union of named or mixed types",
       "looked_at": [
-        "src/gitignore-rules.ts:201"
+        "src/gitignore-rules.ts:206"
       ],
       "reason": "declared but not read: union of named or mixed types. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/gitignore-rules.BlockLocation` - declared but not read"
@@ -17286,7 +17381,7 @@
     },
     {
       "looked_at": [
-        "readFileResult(BrandSettings) (src/brand-settings.ts:98)",
+        "readFileResult(BrandSettings) (src/brand-settings.ts:105)",
         "readFileResult(ProjectIdentity) (src/identity.ts:49)",
         "readFileResult(ResourcesFile) (src/resources.ts:135)",
         "readFileResult(SeriesFile) (src/series.ts:43)",

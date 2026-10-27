@@ -50,11 +50,18 @@ export const BrandYouTubeSettings = z.object({
 });
 export type BrandYouTubeSettings = z.infer<typeof BrandYouTubeSettings>;
 
-/** The YouTube Studio defaults a new video starts with (category, audience, language). Each absent → the app's own. */
+/**
+ * The YouTube Studio defaults a new video starts with (category, audience, language, the AI-use and paid-promotion
+ * disclosures). Category, audience and language absent → the app's own; a disclosure absent → undecided.
+ */
 export const BrandStudioDefaults = z.object({
   category: z.string().min(1).optional(),
   audience: z.string().min(1).optional(),
   language: z.string().min(1).optional(),
+  /** Studio 'AI use' default (altered or synthetic content); absent → undecided, the app never guesses. */
+  aiUse: z.boolean().optional(),
+  /** Studio 'Paid promotion' default; absent → undecided, the app never guesses. */
+  paidPromotion: z.boolean().optional(),
 });
 export type BrandStudioDefaults = z.infer<typeof BrandStudioDefaults>;
 
