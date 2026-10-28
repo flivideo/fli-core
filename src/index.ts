@@ -53,7 +53,9 @@ export {
 export { Recording, RecordingTag, parseRecording, recordingFileName } from './recording.js';
 
 export {
+  LegacyVideoFile,
   ParsedVideoFile,
+  RetiredVideoTag,
   UnknownVideoFile,
   VIDEO_FOLDER_PATTERN,
   VideoFile,
@@ -82,6 +84,8 @@ export {
   LAYOUT_DIRS,
   LEGACY_FOLDERS,
   MOTION_MACHINERY,
+  OVERLAY_FOLDER,
+  OverlayPaths,
   OverlayRole,
   ProjectEntry,
   ProjectLayout,
@@ -92,6 +96,7 @@ export {
   TRASH_FOLDER,
   classifyProjectEntry,
   describeProjectEntry,
+  overlayPaths,
   projectLayout,
   projectLayoutPaths,
   projectLayoutPathsSync,

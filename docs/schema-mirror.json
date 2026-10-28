@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 399,
+    "declared": 405,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -38,11 +38,11 @@
         "not_schema_bearing": 2
       },
       "src/classify.ts": {
-        "declared": 16,
+        "declared": 18,
         "gaps": 0,
-        "mirrored": 15,
+        "mirrored": 17,
         "not_read": 1,
-        "not_schema_bearing": 3
+        "not_schema_bearing": 4
       },
       "src/control-file.ts": {
         "declared": 5,
@@ -213,9 +213,9 @@
         "not_schema_bearing": 1
       },
       "src/video-file.ts": {
-        "declared": 13,
+        "declared": 17,
         "gaps": 0,
-        "mirrored": 13,
+        "mirrored": 17,
         "not_read": 0,
         "not_schema_bearing": 1
       },
@@ -242,13 +242,13 @@
       }
     },
     "gaps": 22,
-    "mirrored": 344,
+    "mirrored": 350,
     "not_read": 33,
-    "not_schema_bearing": 31,
+    "not_schema_bearing": 32,
     "not_schema_bearing_by_family": {
       "function": 1,
       "function type": 1,
-      "literal constant": 29
+      "literal constant": 30
     }
   },
   "closed_sets": [
@@ -532,13 +532,13 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 41
+            "line": 45
           },
           "name": "ProjectZone"
         }
       ],
       "anchor": {
-        "end_line": 36,
+        "end_line": 40,
         "file": "src/classify.ts",
         "line": 11
       },
@@ -613,56 +613,56 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 24
+            "line": 28
           },
           "value": "overlay"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 26
+            "line": 30
           },
           "value": "framing"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 28
+            "line": 32
           },
           "value": "assembly"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 30
+            "line": 34
           },
           "value": "renders"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 31
+            "line": 35
           },
           "value": "videos"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 32
+            "line": 36
           },
           "value": "legacy"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 34
+            "line": 38
           },
           "value": "trash"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 35
+            "line": 39
           },
           "value": "other"
         }
@@ -671,39 +671,12 @@
     {
       "anchor": {
         "file": "src/classify.ts",
-        "line": 63
+        "line": 67
       },
       "authority": "module constant `ASSEMBLY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:63 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "finding": "REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:67 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "grade": "derived",
       "id": "src/classify.ASSEMBLY_FOLDERS",
-      "members": [
-        {
-          "anchor": {
-            "file": "src/classify.ts",
-            "line": 63
-          },
-          "value": "first-edit"
-        },
-        {
-          "anchor": {
-            "file": "src/classify.ts",
-            "line": 63
-          },
-          "value": "edit"
-        }
-      ]
-    },
-    {
-      "anchor": {
-        "end_line": 73,
-        "file": "src/classify.ts",
-        "line": 66
-      },
-      "authority": "module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:66 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
-      "grade": "derived",
-      "id": "src/classify.LEGACY_FOLDERS",
       "members": [
         {
           "anchor": {
@@ -715,35 +688,62 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 68
+            "line": 67
+          },
+          "value": "edit"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 77,
+        "file": "src/classify.ts",
+        "line": 70
+      },
+      "authority": "module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
+      "finding": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:70 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "grade": "derived",
+      "id": "src/classify.LEGACY_FOLDERS",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 71
+          },
+          "value": "first-edit"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 72
           },
           "value": "edits"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 69
+            "line": 73
           },
           "value": "edit-1st"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 70
+            "line": 74
           },
           "value": "final"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 71
+            "line": 75
           },
           "value": "pipeline"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 72
+            "line": 76
           },
           "value": "animation"
         }
@@ -751,54 +751,54 @@
     },
     {
       "anchor": {
-        "end_line": 129,
+        "end_line": 133,
         "file": "src/classify.ts",
-        "line": 122
+        "line": 126
       },
       "authority": "module constant `MOTION_MACHINERY` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:122 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.",
+      "finding": "REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.",
       "grade": "derived",
       "id": "src/classify.MOTION_MACHINERY",
       "members": [
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 123
+            "line": 127
           },
           "value": "out"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 124
+            "line": 128
           },
           "value": ".cache"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 125
+            "line": 129
           },
           "value": ".transcode-cache"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 126
+            "line": 130
           },
           "value": "dist"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 127
+            "line": 131
           },
           "value": "build"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 128
+            "line": 132
           },
           "value": "node_modules"
         }
@@ -809,15 +809,15 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 144
+            "line": 148
           },
           "name": "ProjectTier"
         }
       ],
       "anchor": {
-        "end_line": 143,
+        "end_line": 147,
         "file": "src/classify.ts",
-        "line": 136
+        "line": 140
       },
       "authority": "`z.enum` `ProjectTier` - a single declaring symbol",
       "doc": "How much a path matters (the plan \u00a71.1 tier test: \"if you deleted it, could you get it back by re-running a tool?\"):",
@@ -827,42 +827,42 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 137
+            "line": 141
           },
           "value": "authored"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 138
+            "line": 142
           },
           "value": "input"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 139
+            "line": 143
           },
           "value": "generated"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 140
+            "line": 144
           },
           "value": "regenerable"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 141
+            "line": 145
           },
           "value": "output"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 142
+            "line": 146
           },
           "value": "other"
         }
@@ -873,14 +873,14 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 148
+            "line": 152
           },
           "name": "OverlayRole"
         }
       ],
       "anchor": {
         "file": "src/classify.ts",
-        "line": 147
+        "line": 151
       },
       "authority": "`z.enum` `OverlayRole` - a single declaring symbol",
       "doc": "What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are authored, `spec.json` is generated.",
@@ -890,28 +890,28 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 147
+            "line": 151
           },
           "value": "beats"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 147
+            "line": 151
           },
           "value": "framing"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 147
+            "line": 151
           },
           "value": "spec"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 147
+            "line": 151
           },
           "value": "variant-file"
         }
@@ -922,14 +922,14 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 246
+            "line": 297
           },
           "name": "ProjectLayout"
         }
       ],
       "anchor": {
         "file": "src/classify.ts",
-        "line": 245
+        "line": 296
       },
       "authority": "`z.enum` `ProjectLayout` - a single declaring symbol",
       "grade": "declared",
@@ -938,14 +938,14 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 245
+            "line": 296
           },
           "value": "hub"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 245
+            "line": 296
           },
           "value": "legacy"
         }
@@ -1936,14 +1936,14 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 42
+            "line": 44
           },
           "name": "PublishPiece"
         }
       ],
       "anchor": {
         "file": "src/publish.ts",
-        "line": 41
+        "line": 43
       },
       "authority": "`z.enum` `PublishPiece` - members read through `PUBLISH_PIECES` (src/publish.PUBLISH_PIECES) - a single declaring symbol",
       "grade": "declared",
@@ -1952,63 +1952,63 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 31
+            "line": 33
           },
           "value": "video"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 32
+            "line": 34
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 33
+            "line": 35
           },
           "value": "captions"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 34
+            "line": 36
           },
           "value": "thumbnail"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 35
+            "line": 37
           },
           "value": "title"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 36
+            "line": 38
           },
           "value": "description"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 37
+            "line": 39
           },
           "value": "chapters"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 38
+            "line": 40
           },
           "value": "studio"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 39
+            "line": 41
           },
           "value": "published"
         }
@@ -2019,14 +2019,14 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 62
+            "line": 64
           },
           "name": "PublishState"
         }
       ],
       "anchor": {
         "file": "src/publish.ts",
-        "line": 61
+        "line": 63
       },
       "authority": "`z.enum` `PublishState` - a single declaring symbol",
       "doc": "Human vs AI must be visible (David 2026-10-05): `set` \u2014 a person's choice; `suggested` \u2014 an agent's choice (Tuber,",
@@ -2036,42 +2036,42 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 61
+            "line": 63
           },
           "value": "set"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 61
+            "line": 63
           },
           "value": "suggested"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 61
+            "line": 63
           },
           "value": "inferred"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 61
+            "line": 63
           },
           "value": "default"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 61
+            "line": 63
           },
           "value": "missing"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 61
+            "line": 63
           },
           "value": "stale"
         }
@@ -2079,9 +2079,9 @@
     },
     {
       "anchor": {
-        "end_line": 81,
+        "end_line": 83,
         "file": "src/publish.ts",
-        "line": 75
+        "line": 77
       },
       "authority": "`as const` object keys `PUBLISH_RULES`, typed from by `keyof typeof PUBLISH_RULES` - a single declaring symbol",
       "grade": "declared",
@@ -2090,35 +2090,35 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 76
+            "line": 78
           },
           "value": "newest-export"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 77
+            "line": 79
           },
           "value": "audio-from-name"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 78
+            "line": 80
           },
           "value": "same-export-captions"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 79
+            "line": 81
           },
           "value": "ylo-launch"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 80
+            "line": 82
           },
           "value": "brand-default"
         }
@@ -2129,31 +2129,31 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 86
+            "line": 88
           },
           "name": "EditApp"
         }
       ],
       "anchor": {
         "file": "src/publish.ts",
-        "line": 85
+        "line": 87
       },
       "authority": "`z.enum` `EditApp` - a single declaring symbol",
-      "doc": "The app that writes an export kind: FliCut writes `-cut` and `-audio-<treatment>`, FliEdit `-final` (+ overlays).",
+      "doc": "The edit apps: FliCut writes `-cut`, `-audio-<treatment>` and `-part-\u2026`; FliEdit wrote the legacy `-final`.",
       "grade": "declared",
       "id": "src/publish.EditApp",
       "members": [
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 85
+            "line": 87
           },
           "value": "flicut"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 85
+            "line": 87
           },
           "value": "fliedit"
         }
@@ -2162,7 +2162,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 95
+        "line": 100
       },
       "authority": "`z.enum` `kind` - a single declaring symbol",
       "grade": "declared",
@@ -2171,44 +2171,44 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 95
+            "line": 100
           },
           "value": "cut"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 95
+            "line": 100
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 95
-          },
-          "value": "final"
-        },
-        {
-          "anchor": {
-            "file": "src/publish.ts",
-            "line": 95
+            "line": 100
           },
           "value": "overlay"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 95
+            "line": 100
           },
           "value": "part"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 100
+          },
+          "value": "legacy"
         }
       ]
     },
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 148
+        "line": 153
       },
       "authority": "`z.enum` `source` - a single declaring symbol",
       "grade": "declared",
@@ -2217,35 +2217,35 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 148
+            "line": 153
           },
           "value": "choice"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 148
+            "line": 153
           },
           "value": "rule"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 148
+            "line": 153
           },
           "value": "brand"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 148
+            "line": 153
           },
           "value": "ylo"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 148
+            "line": 153
           },
           "value": "none"
         }
@@ -2254,24 +2254,24 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 193
+        "line": 201
       },
       "authority": "module constant `LIVE` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `LIVE` at src/publish.ts:193 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
+      "finding": "REFACTOR (minor): `LIVE` at src/publish.ts:201 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
       "grade": "derived",
       "id": "src/publish.LIVE",
       "members": [
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 193
+            "line": 201
           },
           "value": "chosen"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 193
+            "line": 201
           },
           "value": "published"
         }
@@ -2990,14 +2990,14 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 18
+            "line": 24
           },
           "name": "VideoFileKind"
         }
       ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 17
+        "line": 23
       },
       "authority": "`z.enum` `VideoFileKind` - a single declaring symbol",
       "grade": "declared",
@@ -3006,35 +3006,28 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 17
+            "line": 23
           },
           "value": "cut"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 17
+            "line": 23
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 17
+            "line": 23
           },
           "value": "overlay"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 17
-          },
-          "value": "final"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 17
+            "line": 23
           },
           "value": "part"
         }
@@ -3045,14 +3038,14 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 22
+            "line": 28
           },
           "name": "VideoPart"
         }
       ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 21
+        "line": 27
       },
       "authority": "`z.enum` `VideoPart` - a single declaring symbol",
       "doc": "Which section of a video a `part` file is. A closed set: `<name>-part-<intro|body|outro>`.",
@@ -3062,21 +3055,21 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 21
+            "line": 27
           },
           "value": "intro"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 21
+            "line": 27
           },
           "value": "body"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 21
+            "line": 27
           },
           "value": "outro"
         }
@@ -3086,7 +3079,7 @@
       "anchor": {
         "end_line": 35,
         "file": "src/video-file.ts",
-        "line": 24
+        "line": 30
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `VideoFile` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -3095,16 +3088,9 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 25
+            "line": 31
           },
           "value": "cut"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 28
-          },
-          "value": "final"
         },
         {
           "anchor": {
@@ -3130,9 +3116,37 @@
       ]
     },
     {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 47
+          },
+          "name": "RetiredVideoTag"
+        }
+      ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 45
+        "line": 46
+      },
+      "authority": "`z.enum` `RetiredVideoTag` - a single declaring symbol",
+      "doc": "Tags a file name may still carry from before a ruling retired them (R11: `-final`). Read, never written.",
+      "grade": "declared",
+      "id": "src/video-file.RetiredVideoTag",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 46
+          },
+          "value": "final"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/video-file.ts",
+        "line": 59
       },
       "authority": "the `kind` discriminator of the union `ParsedVideoFile` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -3141,16 +3155,9 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 25
+            "line": 31
           },
           "value": "cut"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 28
-          },
-          "value": "final"
         },
         {
           "anchor": {
@@ -3172,6 +3179,13 @@
             "line": 34
           },
           "value": "part"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 52
+          },
+          "value": "legacy"
         },
         {
           "anchor": {
@@ -3505,30 +3519,30 @@
     {
       "anchor": {
         "file": "src/classify.ts",
-        "line": 63
+        "line": 67
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:63 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:67 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/classify.ASSEMBLY_FOLDERS"
     },
     {
       "anchor": {
-        "end_line": 73,
+        "end_line": 77,
         "file": "src/classify.ts",
-        "line": 66
+        "line": 70
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:66 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:70 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/classify.LEGACY_FOLDERS"
     },
     {
       "anchor": {
-        "end_line": 129,
+        "end_line": 133,
         "file": "src/classify.ts",
-        "line": 122
+        "line": 126
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:122 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/classify.MOTION_MACHINERY"
     },
     {
@@ -3543,10 +3557,10 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 193
+        "line": 201
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `LIVE` at src/publish.ts:193 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `LIVE` at src/publish.ts:201 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/publish.LIVE"
     },
     {
@@ -3559,7 +3573,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-10-27T16:08:03+00:00",
+  "generated": "2026-10-28T06:20:49+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -5344,15 +5358,15 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 159
+            "line": 168
           },
           "name": "ProjectEntry"
         }
       ],
       "anchor": {
-        "end_line": 158,
+        "end_line": 167,
         "file": "src/classify.ts",
-        "line": 150
+        "line": 154
       },
       "bases": [],
       "doc": null,
@@ -5361,7 +5375,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 151
+            "line": 155
           },
           "default": null,
           "name": "zone",
@@ -5370,7 +5384,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 152
+            "line": 156
           },
           "default": null,
           "name": "tier",
@@ -5379,27 +5393,36 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 154
+            "line": 158
           },
           "default": null,
-          "doc": "`overlay/<chapter>/\u2026` only; null for a flat overlay (`ships` = one video) and for every other zone.",
+          "doc": "`overlay/<video>/\u2026` only (R9): the video the overlay work is for; null for a flat overlay and every other zone.",
+          "name": "video",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 163
+          },
+          "default": null,
           "name": "chapter",
           "type": "z.string().nullable()"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 156
+            "line": 165
           },
           "default": null,
-          "doc": "`overlay/[<chapter>/]<variant>/\u2026` only.",
+          "doc": "`overlay/[<video>/]<variant>/\u2026` only.",
           "name": "variant",
           "type": "z.string().nullable()"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 157
+            "line": 166
           },
           "default": null,
           "name": "role",
@@ -5415,15 +5438,15 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 256
+            "line": 211
           },
-          "name": "ProjectLayoutPaths"
+          "name": "OverlayPaths"
         }
       ],
       "anchor": {
-        "end_line": 255,
+        "end_line": 210,
         "file": "src/classify.ts",
-        "line": 248
+        "line": 201
       },
       "bases": [],
       "doc": null,
@@ -5432,7 +5455,79 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 250
+            "line": 203
+          },
+          "default": null,
+          "doc": "`<project>/overlay/<video>/`",
+          "name": "dir",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 204
+          },
+          "default": null,
+          "name": "beats",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 205
+          },
+          "default": null,
+          "name": "framing",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 207
+          },
+          "default": null,
+          "doc": "`<project>/overlay/<video>/<variant>/` \u2014 null when no variant was asked for.",
+          "name": "variantDir",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 209
+          },
+          "default": null,
+          "doc": "`<project>/overlay/<video>/<variant>/spec.json` \u2014 null when no variant was asked for.",
+          "name": "spec",
+          "type": "z.string().nullable()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/classify.OverlayPaths",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 307
+          },
+          "name": "ProjectLayoutPaths"
+        }
+      ],
+      "anchor": {
+        "end_line": 306,
+        "file": "src/classify.ts",
+        "line": 299
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 301
           },
           "default": null,
           "doc": "Detected by `projectLayout` (D14).",
@@ -5442,7 +5537,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 252
+            "line": 303
           },
           "default": null,
           "doc": "Absolute path of the recordings folder for this layout (it may not exist yet).",
@@ -5452,7 +5547,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 254
+            "line": 305
           },
           "default": null,
           "doc": "Absolute path of the transcripts folder for this layout (it may not exist yet).",
@@ -10970,7 +11065,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 88
+        "line": 90
       },
       "bases": [],
       "doc": null,
@@ -10986,15 +11081,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 109
+            "line": 114
           },
           "name": "PublishExport"
         }
       ],
       "anchor": {
-        "end_line": 108,
+        "end_line": 113,
         "file": "src/publish.ts",
-        "line": 91
+        "line": 93
       },
       "bases": [],
       "doc": "One file in `videos/<name>/` that a person could ship, with its caption file beside it (same stem) if any.",
@@ -11003,7 +11098,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 93
+            "line": 95
           },
           "default": null,
           "doc": "Project-relative, `/`-separated.",
@@ -11013,17 +11108,17 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 95
+            "line": 100
           },
           "default": null,
-          "doc": "`cut` \u00b7 `audio` \u00b7 `final` \u00b7 `overlay` (D15) \u00b7 `part`, or null for a file that does not parse.",
+          "doc": "`cut` \u00b7 `audio` \u00b7 `overlay` (D15) \u00b7 `part`; `legacy` for a file named with a retired tag (`-final`, R11) \u2014 a whole",
           "name": "kind",
-          "type": "z.enum(['cut', 'audio', 'final', 'overlay', 'part']).nullable()"
+          "type": "z.enum(['cut', 'audio', 'overlay', 'part', 'legacy']).nullable()"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 96
+            "line": 101
           },
           "default": null,
           "name": "variant",
@@ -11032,7 +11127,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 97
+            "line": 102
           },
           "default": null,
           "name": "app",
@@ -11041,7 +11136,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 102
+            "line": 107
           },
           "default": "null",
           "doc": "Where the file came from, in words, when the app knows better than the kind does (\"FliCut export\", \"FliEdit",
@@ -11051,7 +11146,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 103
+            "line": 108
           },
           "default": null,
           "name": "modifiedAt",
@@ -11060,7 +11155,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 104
+            "line": 109
           },
           "default": null,
           "name": "durationSec",
@@ -11069,7 +11164,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 105
+            "line": 110
           },
           "default": null,
           "name": "srt",
@@ -11083,7 +11178,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 105
+        "line": 110
       },
       "bases": [],
       "doc": null,
@@ -11091,7 +11186,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 106
+            "line": 111
           },
           "default": null,
           "name": "file",
@@ -11100,7 +11195,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 106
+            "line": 111
           },
           "default": null,
           "name": "modifiedAt",
@@ -11109,7 +11204,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 106
+            "line": 111
           },
           "default": null,
           "name": "durationSec",
@@ -11125,14 +11220,14 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 113
+            "line": 118
           },
           "name": "PublishEdit"
         }
       ],
       "anchor": {
         "file": "src/publish.ts",
-        "line": 112
+        "line": 117
       },
       "bases": [],
       "doc": "An edit document for the video: FliCut's `fli.cut.<name>.json` or FliEdit's `fli.edit.<name>.json`.",
@@ -11141,7 +11236,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 112
+            "line": 117
           },
           "default": null,
           "name": "file",
@@ -11150,7 +11245,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 112
+            "line": 117
           },
           "default": null,
           "name": "app",
@@ -11159,7 +11254,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 112
+            "line": 117
           },
           "default": null,
           "name": "modifiedAt",
@@ -11175,15 +11270,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 126
+            "line": 131
           },
           "name": "PublishLaunch"
         }
       ],
       "anchor": {
-        "end_line": 125,
+        "end_line": 130,
         "file": "src/publish.ts",
-        "line": 116
+        "line": 121
       },
       "bases": [],
       "doc": "What YLO's `launch.json` (the workshop) offers, reduced to what the rules need.",
@@ -11192,7 +11287,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 117
+            "line": 122
           },
           "default": null,
           "name": "file",
@@ -11201,7 +11296,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 119
+            "line": 124
           },
           "default": null,
           "doc": "When its texts were made (`updated_at`, else the file's time).",
@@ -11211,7 +11306,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 121
+            "line": 126
           },
           "default": null,
           "doc": "The titles bound to YLO's variant slots, slot 1 first.",
@@ -11221,7 +11316,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 122
+            "line": 127
           },
           "default": null,
           "name": "description",
@@ -11230,7 +11325,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 124
+            "line": 129
           },
           "default": null,
           "doc": "YLO's `Chapter{n,title,timestamp}` list (empty when none).",
@@ -11245,7 +11340,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 121
+        "line": 126
       },
       "bases": [],
       "doc": null,
@@ -11253,7 +11348,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 121
+            "line": 126
           },
           "default": null,
           "name": "id",
@@ -11262,7 +11357,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 121
+            "line": 126
           },
           "default": null,
           "name": "text",
@@ -11278,15 +11373,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 137
+            "line": 142
           },
           "name": "PublishFacts"
         }
       ],
       "anchor": {
-        "end_line": 136,
+        "end_line": 141,
         "file": "src/publish.ts",
-        "line": 128
+        "line": 133
       },
       "bases": [],
       "doc": null,
@@ -11295,7 +11390,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 130
+            "line": 135
           },
           "default": null,
           "doc": "The video folder name, or null for a project with no video yet.",
@@ -11305,7 +11400,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 131
+            "line": 136
           },
           "default": null,
           "name": "exports",
@@ -11314,7 +11409,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 132
+            "line": 137
           },
           "default": null,
           "name": "edits",
@@ -11323,7 +11418,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 134
+            "line": 139
           },
           "default": null,
           "doc": "The project's resources for this video (and the project's own, `video: null`).",
@@ -11333,7 +11428,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 135
+            "line": 140
           },
           "default": null,
           "name": "launch",
@@ -11349,15 +11444,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 158
+            "line": 163
           },
           "name": "PublishRow"
         }
       ],
       "anchor": {
-        "end_line": 157,
+        "end_line": 162,
         "file": "src/publish.ts",
-        "line": 139
+        "line": 144
       },
       "bases": [],
       "doc": null,
@@ -11366,7 +11461,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 140
+            "line": 145
           },
           "default": null,
           "name": "piece",
@@ -11375,7 +11470,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 141
+            "line": 146
           },
           "default": null,
           "name": "label",
@@ -11384,7 +11479,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 142
+            "line": 147
           },
           "default": null,
           "name": "state",
@@ -11393,7 +11488,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 144
+            "line": 149
           },
           "default": null,
           "doc": "What would ship, in a few words (a file name, a title, \"Strong noise removal\").",
@@ -11403,7 +11498,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 146
+            "line": 151
           },
           "default": null,
           "doc": "The project-relative file behind it, when there is one.",
@@ -11413,7 +11508,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 148
+            "line": 153
           },
           "default": null,
           "doc": "Where the answer came from: `choice`, `rule`, `brand`, `ylo`, or `none`.",
@@ -11423,7 +11518,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 150
+            "line": 155
           },
           "default": null,
           "doc": "One line: why this state. Kept for the audit trail.",
@@ -11433,7 +11528,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 152
+            "line": 157
           },
           "default": null,
           "doc": "The resource behind a choice, so a person or agent can change it.",
@@ -11443,7 +11538,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 154
+            "line": 159
           },
           "default": null,
           "doc": "Who made it: a principal (`human:ui`, `agent:tuber`, `cli`) or `rule:<id>`; null when nothing is there.",
@@ -11453,7 +11548,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 156
+            "line": 161
           },
           "default": null,
           "doc": "When the thing behind it was made or chosen (for an \u24d8, never shown as a timestamp).",
@@ -11470,15 +11565,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 174
+            "line": 179
           },
           "name": "PublishReadiness"
         }
       ],
       "anchor": {
-        "end_line": 173,
+        "end_line": 178,
         "file": "src/publish.ts",
-        "line": 160
+        "line": 165
       },
       "bases": [],
       "doc": null,
@@ -11487,7 +11582,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 161
+            "line": 166
           },
           "default": null,
           "name": "video",
@@ -11496,7 +11591,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 162
+            "line": 167
           },
           "default": null,
           "name": "rows",
@@ -11505,7 +11600,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 163
+            "line": 168
           },
           "default": null,
           "name": "ready",
@@ -11514,7 +11609,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 164
+            "line": 169
           },
           "default": null,
           "name": "total",
@@ -11523,7 +11618,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 166
+            "line": 171
           },
           "default": null,
           "doc": "Ready rows a person has not decided (agent choices + rule guesses).",
@@ -11533,7 +11628,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 167
+            "line": 172
           },
           "default": null,
           "name": "counts",
@@ -11547,7 +11642,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 167
+        "line": 172
       },
       "bases": [],
       "doc": null,
@@ -11555,7 +11650,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 168
+            "line": 173
           },
           "default": null,
           "name": "set",
@@ -11564,7 +11659,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 169
+            "line": 174
           },
           "default": null,
           "name": "suggested",
@@ -11573,7 +11668,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 170
+            "line": 175
           },
           "default": null,
           "name": "inferred",
@@ -11582,7 +11677,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 171
+            "line": 176
           },
           "default": null,
           "name": "notReady",
@@ -11598,15 +11693,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 689
+            "line": 696
           },
           "name": "PublishedVideo"
         }
       ],
       "anchor": {
-        "end_line": 688,
+        "end_line": 695,
         "file": "src/publish.ts",
-        "line": 680
+        "line": 687
       },
       "bases": [],
       "doc": "The hook for whatever comes after publishing (post-publish posts, YLO's related-videos linking): every published",
@@ -11615,7 +11710,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 681
+            "line": 688
           },
           "default": null,
           "name": "resourceId",
@@ -11624,7 +11719,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 682
+            "line": 689
           },
           "default": null,
           "name": "video",
@@ -11633,7 +11728,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 683
+            "line": 690
           },
           "default": null,
           "name": "path",
@@ -11642,7 +11737,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 684
+            "line": 691
           },
           "default": null,
           "name": "youtubeId",
@@ -11651,7 +11746,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 685
+            "line": 692
           },
           "default": null,
           "name": "url",
@@ -11660,7 +11755,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 686
+            "line": 693
           },
           "default": null,
           "name": "publishedAt",
@@ -11669,7 +11764,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 687
+            "line": 694
           },
           "default": null,
           "name": "by",
@@ -13989,7 +14084,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 15
+        "line": 21
       },
       "bases": [],
       "doc": "Video files and folders (ruling \"B only\", \ud83d\udc64 David 2026-09-22 \u2014 supersedes the 09-09 numbered shape):",
@@ -14013,7 +14108,7 @@
       "anchor": {
         "end_line": 35,
         "file": "src/video-file.ts",
-        "line": 24
+        "line": 30
       },
       "bases": [],
       "doc": null,
@@ -14022,20 +14117,11 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 25
+            "line": 31
           },
           "default": null,
           "name": "cut",
           "type": "z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) \u2192 src/project-folder.KebabSlug, src/video-file.Ext"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 28
-          },
-          "default": null,
-          "name": "final",
-          "type": "z.object({ name: KebabSlug, kind: z.literal('final'), variant: z.null().default(null), ext: Ext }) \u2192 src/project-folder.KebabSlug, src/video-file.Ext"
         },
         {
           "anchor": {
@@ -14072,7 +14158,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 25
+        "line": 31
       },
       "bases": [],
       "doc": null,
@@ -14080,7 +14166,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 25
+            "line": 31
           },
           "default": null,
           "name": "name",
@@ -14089,7 +14175,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 25
+            "line": 31
           },
           "default": null,
           "name": "kind",
@@ -14098,7 +14184,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 25
+            "line": 31
           },
           "default": "null",
           "name": "variant",
@@ -14107,7 +14193,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 25
+            "line": 31
           },
           "default": null,
           "name": "ext",
@@ -14116,56 +14202,6 @@
       ],
       "grade": "declared",
       "id": "src/video-file.VideoFile[kind=cut]",
-      "kind": "zod-object"
-    },
-    {
-      "anchor": {
-        "end_line": 31,
-        "file": "src/video-file.ts",
-        "line": 26
-      },
-      "bases": [],
-      "doc": null,
-      "fields": [
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 27
-          },
-          "default": null,
-          "name": "name",
-          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 28
-          },
-          "default": null,
-          "name": "kind",
-          "type": "z.literal('final')"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 29
-          },
-          "default": "null",
-          "name": "variant",
-          "type": "z.null().default(null)"
-        },
-        {
-          "anchor": {
-            "file": "src/video-file.ts",
-            "line": 30
-          },
-          "default": null,
-          "name": "ext",
-          "type": "Ext \u2192 src/video-file.Ext"
-        }
-      ],
-      "grade": "declared",
-      "id": "src/video-file.VideoFile[kind=final]",
       "kind": "zod-object"
     },
     {
@@ -14371,14 +14407,83 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 46
+            "line": 57
+          },
+          "name": "LegacyVideoFile"
+        }
+      ],
+      "anchor": {
+        "end_line": 56,
+        "file": "src/video-file.ts",
+        "line": 50
+      },
+      "bases": [],
+      "doc": "`<name>-final.<ext>`: a whole-video candidate written before R11. Its name says nothing about being the final.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 51
+          },
+          "default": null,
+          "name": "name",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 52
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('legacy')"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 53
+          },
+          "default": null,
+          "name": "tag",
+          "type": "RetiredVideoTag \u2192 src/video-file.RetiredVideoTag"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 54
+          },
+          "default": "null",
+          "name": "variant",
+          "type": "z.null().default(null)"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 55
+          },
+          "default": null,
+          "name": "ext",
+          "type": "Ext \u2192 src/video-file.Ext"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/video-file.LegacyVideoFile",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 60
           },
           "name": "ParsedVideoFile"
         }
       ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 45
+        "line": 59
       },
       "bases": [],
       "doc": null,
@@ -14387,7 +14492,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 45
+            "line": 59
           },
           "default": null,
           "name": "VideoFile",
@@ -14396,7 +14501,16 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 45
+            "line": 59
+          },
+          "default": null,
+          "name": "LegacyVideoFile",
+          "type": "LegacyVideoFile \u2192 src/video-file.LegacyVideoFile"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 59
           },
           "default": null,
           "name": "UnknownVideoFile",
@@ -14412,15 +14526,15 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 86
+            "line": 110
           },
           "name": "VideoFolder"
         }
       ],
       "anchor": {
-        "end_line": 85,
+        "end_line": 109,
         "file": "src/video-file.ts",
-        "line": 80
+        "line": 104
       },
       "bases": [],
       "doc": null,
@@ -14429,7 +14543,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 81
+            "line": 105
           },
           "default": null,
           "name": "name",
@@ -14442,9 +14556,9 @@
     },
     {
       "anchor": {
-        "end_line": 97,
+        "end_line": 121,
         "file": "src/video-file.ts",
-        "line": 92
+        "line": 116
       },
       "bases": [],
       "doc": "The same rule as a string schema, for contexts that carry the folder name (`OpenContext.video`).",
@@ -17051,7 +17165,7 @@
     }
   ],
   "target": {
-    "commit": "fc555183fb2b3419aec6368a343fc40293ff676c",
+    "commit": "1c234c05a5b3de1edda6e1c580ad8006f7b6a92a",
     "root": "..",
     "stack": "typescript"
   },
@@ -17069,7 +17183,7 @@
       "census": true,
       "family": "object constant",
       "looked_at": [
-        "src/classify.ts:259"
+        "src/classify.ts:310"
       ],
       "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/classify.LAYOUT_DIRS` - declared but not read"
@@ -17195,7 +17309,7 @@
       "census": true,
       "family": "const built by a call (helper or non-zod call)",
       "looked_at": [
-        "src/publish.ts:177"
+        "src/publish.ts:182"
       ],
       "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.AUDIO_TREATMENTS` - declared but not read"
@@ -17204,7 +17318,7 @@
       "census": true,
       "family": "class",
       "looked_at": [
-        "src/publish.ts:789"
+        "src/publish.ts:796"
       ],
       "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.NoFinalVideo` - declared but not read"
@@ -17213,7 +17327,7 @@
       "census": true,
       "family": "array constant",
       "looked_at": [
-        "src/publish.ts:30"
+        "src/publish.ts:32"
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.PUBLISH_PIECES` - declared but not read"
@@ -17222,7 +17336,7 @@
       "census": true,
       "family": "array constant",
       "looked_at": [
-        "src/publish.ts:65"
+        "src/publish.ts:67"
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.READY_STATES` - declared but not read"
@@ -17231,7 +17345,7 @@
       "census": true,
       "family": "array constant",
       "looked_at": [
-        "src/publish.ts:67"
+        "src/publish.ts:69"
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.SUGGESTION_STATES` - declared but not read"

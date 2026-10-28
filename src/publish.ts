@@ -20,7 +20,9 @@ import { stampOf } from './stamp.js';
  * The rules (mock §"Readiness rules"):
  * 1. A choice always wins over a guess, and stays until it is changed.
  * 2. Video: the newest export of the newest edit, from whichever app made it (FliCut alone is a complete edit). It must
- *    be newer than that edit's last change, or it is stale.
+ *    be newer than that edit's last change, or it is stale. An overlay render newer than that wins (R8, David
+ *    2026-10-28: an overlay is newer work on the finished video, and a person can always override). No file is final
+ *    by its name (R11): the final is this calculation, and a person's override is a `chosen` video resource.
  * 3. Captions must come from the same export as the video, and their length must match it.
  * 4. Titles, description and chapters are stale if they were made before the final video.
  * 5. Thumbnail and visibility are always a person's: the rules never mark them ready.
@@ -81,7 +83,7 @@ export const PUBLISH_RULES = {
 } as const;
 export type PublishRuleId = keyof typeof PUBLISH_RULES;
 
-/** The app that writes an export kind: FliCut writes `-cut` and `-audio-<treatment>`, FliEdit `-final` (+ overlays). */
+/** The edit apps: FliCut writes `-cut`, `-audio-<treatment>` and `-part-…`; FliEdit wrote the legacy `-final`. */
 export const EditApp = z.enum(['flicut', 'fliedit']);
 export type EditApp = z.infer<typeof EditApp>;
 
@@ -91,8 +93,11 @@ const Iso = z.iso.datetime({ offset: true });
 export const PublishExport = z.object({
   /** Project-relative, `/`-separated. */
   file: z.string().min(1),
-  /** `cut` · `audio` · `final` · `overlay` (D15) · `part`, or null for a file that does not parse. */
-  kind: z.enum(['cut', 'audio', 'final', 'overlay', 'part']).nullable(),
+  /**
+   * `cut` · `audio` · `overlay` (D15) · `part`; `legacy` for a file named with a retired tag (`-final`, R11) — a whole
+   * video like any other; null for a file that does not parse.
+   */
+  kind: z.enum(['cut', 'audio', 'overlay', 'part', 'legacy']).nullable(),
   variant: z.string().nullable(),
   app: EditApp.nullable(),
   /**
@@ -182,10 +187,13 @@ export const AUDIO_TREATMENTS: Readonly<Record<string, string>> = Object.freeze(
   auphonic: 'Server enhancement',
 });
 
-/** The app that writes a D15 export kind. */
+/**
+ * The edit app that writes an export kind. An overlay is null: FliEdit or FliStudio's Overlay Pilot renders one, and the
+ * name cannot tell which (the gatherer says so in `source`).
+ */
 export function exportApp(kind: PublishExport['kind']): EditApp | null {
   if (kind === 'cut' || kind === 'audio' || kind === 'part') return 'flicut';
-  if (kind === 'final' || kind === 'overlay') return 'fliedit';
+  if (kind === 'legacy') return 'fliedit';
   return null;
 }
 
@@ -304,20 +312,19 @@ function videoRow(f: PublishFacts): { row: PublishRow; final: PublishExport | nu
     };
   }
   const edit = newestFirst(f.edits)[0] ?? null;
-  // A part or an overlay is a piece of a video, never the video that ships.
-  const shippable = f.exports.filter((e) => e.kind !== 'part' && e.kind !== 'overlay');
+  // A part is a piece of a video, never the video that ships. An overlay can be the final (R5/R6, David 2026-10-28).
+  const shippable = f.exports.filter((e) => e.kind !== 'part');
   if (shippable.length === 0) {
     return {
       final: null,
-      row: row(
-        'video',
-        'missing',
-        'Only parts and overlays in videos/; no whole video to ship yet.',
-      ),
+      row: row('video', 'missing', 'Only parts in videos/; no whole video to ship yet.'),
     };
   }
   const fromEdit = edit ? newestFirst(shippable.filter((e) => e.app === edit.app)) : [];
-  const final = fromEdit[0] ?? (newestFirst(shippable)[0] as PublishExport);
+  const byRule = fromEdit[0] ?? (newestFirst(shippable)[0] as PublishExport);
+  // R8: an overlay render is made from a finished video, so a newer one is the newer work on it.
+  const overlay = newestFirst(shippable.filter((e) => e.kind === 'overlay'))[0];
+  const final = overlay && overlay.modifiedAt > byRule.modifiedAt ? overlay : byRule;
   const more = {
     value: base(final.file),
     file: final.file,
@@ -325,7 +332,7 @@ function videoRow(f: PublishFacts): { row: PublishRow; final: PublishExport | nu
     by: rule('newest-export'),
     at: final.modifiedAt,
   };
-  if (edit && fromEdit.length === 0) {
+  if (edit && fromEdit.length === 0 && final.kind !== 'overlay') {
     return {
       final,
       row: row(
@@ -393,7 +400,7 @@ function audioRow(f: PublishFacts, final: PublishExport | null): PublishRow {
       value: AUDIO_TREATMENTS.none as string,
     });
   }
-  if (final.kind === 'final') {
+  if (final.kind === 'legacy' || final.kind === 'overlay') {
     if (final.app === 'fliedit') {
       return row('audio', 'inferred', 'As mixed in FliEdit.', {
         ...at,

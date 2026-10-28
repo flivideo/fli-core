@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `fc555183fb2b` · **generated** 2026-10-27T16:08:03+00:00
+- **commit** `1c234c05a5b3` · **generated** 2026-10-28T06:20:49+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 33 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 270 | 74 | 6 | 9 | 33 | 6 |
+| 271 | 75 | 6 | 9 | 33 | 6 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -22,7 +22,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/brand-settings.ts` — `TranscriptionChoice` :14 · `BrandPublishSettings` :28 · `BrandYouTubeSettings` :45 · `BrandStudioDefaults` :57 · `BrandResearchSettings` :73 · `BrandSettings` :81 · `WriteBrandSettingsResult` :113
 - `src/brands.ts` — `Brand` :9 · `RegistryEntry` :20 · `BrandsFile` :28 · `SkippedBrand` :32 · `BrandsRead` :35 · `ReadBrandsResult` :45 · `ReadBrandsOptions` :48 · `ResolveBrandRootOptions` :92
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
-- `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :63 · `LEGACY_FOLDERS` (set) :66 · `MOTION_MACHINERY` (set) :122 · `ProjectTier` (set) :136 · `OverlayRole` (set) :147 · `ProjectEntry` :150 · `ProjectLayout` (set) :245 · `ProjectLayoutPaths` :248
+- `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :67 · `LEGACY_FOLDERS` (set) :70 · `MOTION_MACHINERY` (set) :126 · `ProjectTier` (set) :140 · `OverlayRole` (set) :151 · `ProjectEntry` :154 · `OverlayPaths` :201 · `ProjectLayout` (set) :296 · `ProjectLayoutPaths` :299
 - `src/control-file.ts` — `ControlFile` :18 · `ControlFileRead` :30 · `ControlFileOptions` :39
 - `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
@@ -38,7 +38,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/open-context.ts` — `OpenContextResult` :16 · `ResolveOpenContextOptions` :33
 - `src/openrpc.ts` — `OpenRpcServer` :18 · `OpenRpcDocument` :29 · `OpenRpcOptions` :52 · `JsonRpcRequest` :174 · `CallAnswer` :183 · `JsonRpcOptions` :185
 - `src/project-folder.ts` — `ProjectCode` :5 · `KebabSlug` :11 · `ProjectFolder` :15
-- `src/publish.ts` — `PublishPiece` (set) :41 · `PublishState` (set) :61 · `PUBLISH_RULES` (set) :75 · `EditApp` (set) :85 · `Iso` :88 · `PublishExport` :91 · `PublishEdit` :112 · `PublishLaunch` :116 · `PublishFacts` :128 · `PublishRow` :139 · `PublishReadiness` :160 · `LIVE` (set) :193 · `PublishedVideo` :680
+- `src/publish.ts` — `PublishPiece` (set) :43 · `PublishState` (set) :63 · `PUBLISH_RULES` (set) :77 · `EditApp` (set) :87 · `Iso` :90 · `PublishExport` :93 · `PublishEdit` :117 · `PublishLaunch` :121 · `PublishFacts` :133 · `PublishRow` :144 · `PublishReadiness` :165 · `LIVE` (set) :201 · `PublishedVideo` :687
 - `src/recipe-paths.ts` — `RecipePathProblem` (set) :15 · `RecipePathWarning` :18 · `SKIP` (set) :77
 - `src/recording.ts` — `RecordingTag` :14 · `Recording` :18
 - `src/renders.ts` — `PathSegment` :15 · `RendersPathInput` :23 · `RendersTool` :52 · `RendersTally` :59 · `ClearRendersResult` :121
@@ -48,7 +48,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/series.ts` — `SeriesMember` :22 · `SeriesFile` :32 · `SeriesListing` :74 · `Refusal` :102 · `ChangeSeriesResult` :117 · `ChangeSeriesOptions` :123 · `SeriesRef` :271 · `Changed` :272
 - `src/stamp.ts` — `Stamp` :9
 - `src/transport.ts` — `ShuttleState` :15 · `JklKey` (set) :27 · `ShuttleAction` (set) :45
-- `src/video-file.ts` — `Ext` :15 · `VideoFileKind` (set) :17 · `VideoPart` (set) :21 · `VideoFile` :24 · `UnknownVideoFile` :38 · `ParsedVideoFile` :45 · `VideoFolder` :80 · `VideoFolderName` :92
+- `src/video-file.ts` — `Ext` :21 · `VideoFileKind` (set) :23 · `VideoPart` (set) :27 · `VideoFile` :30 · `UnknownVideoFile` :38 · `RetiredVideoTag` (set) :46 · `LegacyVideoFile` :50 · `ParsedVideoFile` :59 · `VideoFolder` :104 · `VideoFolderName` :116
 - `src/window-state.ts` — `WindowRect` :16 · `SavedWindow` :24 · `WindowStateFile` :32 · `DisplayArea` :39 · `PlaceOptions` :47 · `TrackedWindow` :255 · `TrackOptions` :264
 - `src/words.ts` — `WordLevel` (set) :25 · `Text` :29 · `WordName` :32 · `WordRule` :40 · `WordFiller` :44 · `WordKind` (set) :52 · `WordOff` :56 · `WordsFile` :59 · `WordInput` :72 · `WordRef` :95 · `MergedWords` :99 · `WordsRead` :108 · `ReadWordsOptions` :121 · `WriteWordsResult` :287 · `ChangeWordsResult` :320 · `ChangeWordsOptions` :335
 - `src/youtube.ts` — `YouTubeChannel` :36 · `YouTubePlaylistItem` :52 · `YouTubePlaylist` :61 · `YouTubePlaylistsFile` :76 · `YouTubeVideo` :83 · `YouTubeSyncCounts` :103 · `YouTubeSyncRecord` :111 · `YouTubeVideoListing` :160 · `SyncYouTubeOptions` :445 · `SyncYouTubeResult` :458
@@ -72,15 +72,15 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**399** top-level declarations counted = **344** mirrored + **22** listed as gaps + **33** declared but not read.
+**405** top-level declarations counted = **350** mirrored + **22** listed as gaps + **33** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 1 function, 1 function type, 29 literal constants.
+Not counted, as not schema-bearing: 1 function, 1 function type, 30 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
 | `src/capability.ts` | 17 | 16 | 0 | **1** |
-| `src/classify.ts` | 16 | 15 | 0 | **1** |
+| `src/classify.ts` | 18 | 17 | 0 | **1** |
 | `src/estate.ts` | 15 | 14 | 0 | **1** |
 | `src/failure-codes.ts` | 18 | 12 | 0 | **6** |
 | `src/gitignore-rules.ts` | 13 | 10 | 0 | **3** |
@@ -189,13 +189,13 @@ What calling it does to the world: nothing, an edit that can be taken back, one 
 | `true` | `src/capability.ts:122` |
 | `false` | `src/capability.ts:122` |
 
-### `src/classify.ProjectZone` — `src/classify.ts:11-36`
+### `src/classify.ProjectZone` — `src/classify.ts:11-40`
 
 Which zone of the project layout (spec §3, roadmap §1) a path inside a project belongs to.
 
 *`z.enum` `ProjectZone` - a single declaring symbol*
 
-*aliases* `ProjectZone` `src/classify.ts:41`
+*aliases* `ProjectZone` `src/classify.ts:45`
 
 | value | declared at |
 |---|---|
@@ -208,57 +208,57 @@ Which zone of the project layout (spec §3, roadmap §1) a path inside a project
 | `avatar` | `src/classify.ts:19` |
 | `script` | `src/classify.ts:20` |
 | `motion` | `src/classify.ts:22` |
-| `overlay` | `src/classify.ts:24` |
-| `framing` | `src/classify.ts:26` |
-| `assembly` | `src/classify.ts:28` |
-| `renders` | `src/classify.ts:30` |
-| `videos` | `src/classify.ts:31` |
-| `legacy` | `src/classify.ts:32` |
-| `trash` | `src/classify.ts:34` |
-| `other` | `src/classify.ts:35` |
+| `overlay` | `src/classify.ts:28` |
+| `framing` | `src/classify.ts:30` |
+| `assembly` | `src/classify.ts:32` |
+| `renders` | `src/classify.ts:34` |
+| `videos` | `src/classify.ts:35` |
+| `legacy` | `src/classify.ts:36` |
+| `trash` | `src/classify.ts:38` |
+| `other` | `src/classify.ts:39` |
 
-### `src/classify.ProjectTier` — `src/classify.ts:136-143`
+### `src/classify.ProjectTier` — `src/classify.ts:140-147`
 
 How much a path matters (the plan §1.1 tier test: "if you deleted it, could you get it back by re-running a tool?"):
 
 *`z.enum` `ProjectTier` - a single declaring symbol*
 
-*aliases* `ProjectTier` `src/classify.ts:144`
+*aliases* `ProjectTier` `src/classify.ts:148`
 
 | value | declared at |
 |---|---|
-| `authored` | `src/classify.ts:137` |
-| `input` | `src/classify.ts:138` |
-| `generated` | `src/classify.ts:139` |
-| `regenerable` | `src/classify.ts:140` |
-| `output` | `src/classify.ts:141` |
-| `other` | `src/classify.ts:142` |
+| `authored` | `src/classify.ts:141` |
+| `input` | `src/classify.ts:142` |
+| `generated` | `src/classify.ts:143` |
+| `regenerable` | `src/classify.ts:144` |
+| `output` | `src/classify.ts:145` |
+| `other` | `src/classify.ts:146` |
 
-### `src/classify.OverlayRole` — `src/classify.ts:147`
+### `src/classify.OverlayRole` — `src/classify.ts:151`
 
 What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are authored, `spec.json` is generated.
 
 *`z.enum` `OverlayRole` - a single declaring symbol*
 
-*aliases* `OverlayRole` `src/classify.ts:148`
+*aliases* `OverlayRole` `src/classify.ts:152`
 
 | value | declared at |
 |---|---|
-| `beats` | `src/classify.ts:147` |
-| `framing` | `src/classify.ts:147` |
-| `spec` | `src/classify.ts:147` |
-| `variant-file` | `src/classify.ts:147` |
+| `beats` | `src/classify.ts:151` |
+| `framing` | `src/classify.ts:151` |
+| `spec` | `src/classify.ts:151` |
+| `variant-file` | `src/classify.ts:151` |
 
-### `src/classify.ProjectLayout` — `src/classify.ts:245`
+### `src/classify.ProjectLayout` — `src/classify.ts:296`
 
 *`z.enum` `ProjectLayout` - a single declaring symbol*
 
-*aliases* `ProjectLayout` `src/classify.ts:246`
+*aliases* `ProjectLayout` `src/classify.ts:297`
 
 | value | declared at |
 |---|---|
-| `hub` | `src/classify.ts:245` |
-| `legacy` | `src/classify.ts:245` |
+| `hub` | `src/classify.ts:296` |
+| `legacy` | `src/classify.ts:296` |
 
 ### `src/control-file.ControlFileRead.kind` — `src/control-file.ts:30-36`
 
@@ -542,89 +542,89 @@ The lifecycle verb contract (agent-drivable step 2, David 2026-09-23: "Do we hav
 | `true` | `src/openrpc.ts:183` |
 | `false` | `src/openrpc.ts:183` |
 
-### `src/publish.PublishPiece` — `src/publish.ts:41`
+### `src/publish.PublishPiece` — `src/publish.ts:43`
 
 *`z.enum` `PublishPiece` - members read through `PUBLISH_PIECES` (src/publish.PUBLISH_PIECES) - a single declaring symbol*
 
-*aliases* `PublishPiece` `src/publish.ts:42`
+*aliases* `PublishPiece` `src/publish.ts:44`
 
 | value | declared at |
 |---|---|
-| `video` | `src/publish.ts:31` |
-| `audio` | `src/publish.ts:32` |
-| `captions` | `src/publish.ts:33` |
-| `thumbnail` | `src/publish.ts:34` |
-| `title` | `src/publish.ts:35` |
-| `description` | `src/publish.ts:36` |
-| `chapters` | `src/publish.ts:37` |
-| `studio` | `src/publish.ts:38` |
-| `published` | `src/publish.ts:39` |
+| `video` | `src/publish.ts:33` |
+| `audio` | `src/publish.ts:34` |
+| `captions` | `src/publish.ts:35` |
+| `thumbnail` | `src/publish.ts:36` |
+| `title` | `src/publish.ts:37` |
+| `description` | `src/publish.ts:38` |
+| `chapters` | `src/publish.ts:39` |
+| `studio` | `src/publish.ts:40` |
+| `published` | `src/publish.ts:41` |
 
-### `src/publish.PublishState` — `src/publish.ts:61`
+### `src/publish.PublishState` — `src/publish.ts:63`
 
 Human vs AI must be visible (David 2026-10-05): `set` — a person's choice; `suggested` — an agent's choice (Tuber,
 
 *`z.enum` `PublishState` - a single declaring symbol*
 
-*aliases* `PublishState` `src/publish.ts:62`
+*aliases* `PublishState` `src/publish.ts:64`
 
 | value | declared at |
 |---|---|
-| `set` | `src/publish.ts:61` |
-| `suggested` | `src/publish.ts:61` |
-| `inferred` | `src/publish.ts:61` |
-| `default` | `src/publish.ts:61` |
-| `missing` | `src/publish.ts:61` |
-| `stale` | `src/publish.ts:61` |
+| `set` | `src/publish.ts:63` |
+| `suggested` | `src/publish.ts:63` |
+| `inferred` | `src/publish.ts:63` |
+| `default` | `src/publish.ts:63` |
+| `missing` | `src/publish.ts:63` |
+| `stale` | `src/publish.ts:63` |
 
-### `src/publish.PUBLISH_RULES` — `src/publish.ts:75-81`
+### `src/publish.PUBLISH_RULES` — `src/publish.ts:77-83`
 
 *`as const` object keys `PUBLISH_RULES`, typed from by `keyof typeof PUBLISH_RULES` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `newest-export` | `src/publish.ts:76` |
-| `audio-from-name` | `src/publish.ts:77` |
-| `same-export-captions` | `src/publish.ts:78` |
-| `ylo-launch` | `src/publish.ts:79` |
-| `brand-default` | `src/publish.ts:80` |
+| `newest-export` | `src/publish.ts:78` |
+| `audio-from-name` | `src/publish.ts:79` |
+| `same-export-captions` | `src/publish.ts:80` |
+| `ylo-launch` | `src/publish.ts:81` |
+| `brand-default` | `src/publish.ts:82` |
 
-### `src/publish.EditApp` — `src/publish.ts:85`
+### `src/publish.EditApp` — `src/publish.ts:87`
 
-The app that writes an export kind: FliCut writes `-cut` and `-audio-<treatment>`, FliEdit `-final` (+ overlays).
+The edit apps: FliCut writes `-cut`, `-audio-<treatment>` and `-part-…`; FliEdit wrote the legacy `-final`.
 
 *`z.enum` `EditApp` - a single declaring symbol*
 
-*aliases* `EditApp` `src/publish.ts:86`
+*aliases* `EditApp` `src/publish.ts:88`
 
 | value | declared at |
 |---|---|
-| `flicut` | `src/publish.ts:85` |
-| `fliedit` | `src/publish.ts:85` |
+| `flicut` | `src/publish.ts:87` |
+| `fliedit` | `src/publish.ts:87` |
 
-### `src/publish.PublishExport.kind` — `src/publish.ts:95`
+### `src/publish.PublishExport.kind` — `src/publish.ts:100`
 
 *`z.enum` `kind` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `cut` | `src/publish.ts:95` |
-| `audio` | `src/publish.ts:95` |
-| `final` | `src/publish.ts:95` |
-| `overlay` | `src/publish.ts:95` |
-| `part` | `src/publish.ts:95` |
+| `cut` | `src/publish.ts:100` |
+| `audio` | `src/publish.ts:100` |
+| `overlay` | `src/publish.ts:100` |
+| `part` | `src/publish.ts:100` |
+| `legacy` | `src/publish.ts:100` |
 
-### `src/publish.PublishRow.source` — `src/publish.ts:148`
+### `src/publish.PublishRow.source` — `src/publish.ts:153`
 
 *`z.enum` `source` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `choice` | `src/publish.ts:148` |
-| `rule` | `src/publish.ts:148` |
-| `brand` | `src/publish.ts:148` |
-| `ylo` | `src/publish.ts:148` |
-| `none` | `src/publish.ts:148` |
+| `choice` | `src/publish.ts:153` |
+| `rule` | `src/publish.ts:153` |
+| `brand` | `src/publish.ts:153` |
+| `ylo` | `src/publish.ts:153` |
+| `none` | `src/publish.ts:153` |
 
 ### `src/recipe-paths.RecipePathProblem` — `src/recipe-paths.ts:15`
 
@@ -821,57 +821,67 @@ How candidates of a kind are chosen: `one` — at most one `chosen` per video; `
 | `playBackward` | `src/transport.ts:45` |
 | `stop` | `src/transport.ts:45` |
 
-### `src/video-file.VideoFileKind` — `src/video-file.ts:17`
+### `src/video-file.VideoFileKind` — `src/video-file.ts:23`
 
 *`z.enum` `VideoFileKind` - a single declaring symbol*
 
-*aliases* `VideoFileKind` `src/video-file.ts:18`
+*aliases* `VideoFileKind` `src/video-file.ts:24`
 
 | value | declared at |
 |---|---|
-| `cut` | `src/video-file.ts:17` |
-| `audio` | `src/video-file.ts:17` |
-| `overlay` | `src/video-file.ts:17` |
-| `final` | `src/video-file.ts:17` |
-| `part` | `src/video-file.ts:17` |
+| `cut` | `src/video-file.ts:23` |
+| `audio` | `src/video-file.ts:23` |
+| `overlay` | `src/video-file.ts:23` |
+| `part` | `src/video-file.ts:23` |
 
-### `src/video-file.VideoPart` — `src/video-file.ts:21`
+### `src/video-file.VideoPart` — `src/video-file.ts:27`
 
 Which section of a video a `part` file is. A closed set: `<name>-part-<intro|body|outro>`.
 
 *`z.enum` `VideoPart` - a single declaring symbol*
 
-*aliases* `VideoPart` `src/video-file.ts:22`
+*aliases* `VideoPart` `src/video-file.ts:28`
 
 | value | declared at |
 |---|---|
-| `intro` | `src/video-file.ts:21` |
-| `body` | `src/video-file.ts:21` |
-| `outro` | `src/video-file.ts:21` |
+| `intro` | `src/video-file.ts:27` |
+| `body` | `src/video-file.ts:27` |
+| `outro` | `src/video-file.ts:27` |
 
-### `src/video-file.VideoFile.kind` — `src/video-file.ts:24-35`
+### `src/video-file.VideoFile.kind` — `src/video-file.ts:30-35`
 
 *the `kind` discriminator of `z.discriminatedUnion` `VideoFile` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `cut` | `src/video-file.ts:25` |
-| `final` | `src/video-file.ts:28` |
+| `cut` | `src/video-file.ts:31` |
 | `audio` | `src/video-file.ts:32` |
 | `overlay` | `src/video-file.ts:33` |
 | `part` | `src/video-file.ts:34` |
 
-### `src/video-file.ParsedVideoFile.kind` — `src/video-file.ts:45`
+### `src/video-file.RetiredVideoTag` — `src/video-file.ts:46`
+
+Tags a file name may still carry from before a ruling retired them (R11: `-final`). Read, never written.
+
+*`z.enum` `RetiredVideoTag` - a single declaring symbol*
+
+*aliases* `RetiredVideoTag` `src/video-file.ts:47`
+
+| value | declared at |
+|---|---|
+| `final` | `src/video-file.ts:46` |
+
+### `src/video-file.ParsedVideoFile.kind` — `src/video-file.ts:59`
 
 *the `kind` discriminator of the union `ParsedVideoFile` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `cut` | `src/video-file.ts:25` |
-| `final` | `src/video-file.ts:28` |
+| `cut` | `src/video-file.ts:31` |
 | `audio` | `src/video-file.ts:32` |
 | `overlay` | `src/video-file.ts:33` |
 | `part` | `src/video-file.ts:34` |
+| `legacy` | `src/video-file.ts:52` |
 | `unknown-kind` | `src/video-file.ts:39` |
 
 ### `src/words.WordLevel` — `src/words.ts:25`
@@ -973,46 +983,46 @@ Which section of a video a `part` file is. A closed set: `<name>-part-<intro|bod
 
 Each set below was read out of the real authority — control flow, membership tests, dispatch tables — because nothing declares it. **Correct as of this commit and fragile after it.** Each carries the refactor that would make it declared.
 
-### `src/classify.ASSEMBLY_FOLDERS` — `src/classify.ts:63`
+### `src/classify.ASSEMBLY_FOLDERS` — `src/classify.ts:67`
 
 *module constant `ASSEMBLY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `first-edit` | `src/classify.ts:63` |
-| `edit` | `src/classify.ts:63` |
+| `first-edit` | `src/classify.ts:67` |
+| `edit` | `src/classify.ts:67` |
 
-> **REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:63 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:67 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
 
-### `src/classify.LEGACY_FOLDERS` — `src/classify.ts:66-73`
+### `src/classify.LEGACY_FOLDERS` — `src/classify.ts:70-77`
 
 *module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `first-edit` | `src/classify.ts:67` |
-| `edits` | `src/classify.ts:68` |
-| `edit-1st` | `src/classify.ts:69` |
-| `final` | `src/classify.ts:70` |
-| `pipeline` | `src/classify.ts:71` |
-| `animation` | `src/classify.ts:72` |
+| `first-edit` | `src/classify.ts:71` |
+| `edits` | `src/classify.ts:72` |
+| `edit-1st` | `src/classify.ts:73` |
+| `final` | `src/classify.ts:74` |
+| `pipeline` | `src/classify.ts:75` |
+| `animation` | `src/classify.ts:76` |
 
-> **REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:66 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:70 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
 
-### `src/classify.MOTION_MACHINERY` — `src/classify.ts:122-129`
+### `src/classify.MOTION_MACHINERY` — `src/classify.ts:126-133`
 
 *module constant `MOTION_MACHINERY` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `out` | `src/classify.ts:123` |
-| `.cache` | `src/classify.ts:124` |
-| `.transcode-cache` | `src/classify.ts:125` |
-| `dist` | `src/classify.ts:126` |
-| `build` | `src/classify.ts:127` |
-| `node_modules` | `src/classify.ts:128` |
+| `out` | `src/classify.ts:127` |
+| `.cache` | `src/classify.ts:128` |
+| `.transcode-cache` | `src/classify.ts:129` |
+| `dist` | `src/classify.ts:130` |
+| `build` | `src/classify.ts:131` |
+| `node_modules` | `src/classify.ts:132` |
 
-> **REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:122 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.**
 
 ### `src/fs-utils.NO_HARD_LINKS` — `src/fs-utils.ts:32`
 
@@ -1028,16 +1038,16 @@ Each set below was read out of the real authority — control flow, membership t
 
 > **REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.**
 
-### `src/publish.LIVE` — `src/publish.ts:193`
+### `src/publish.LIVE` — `src/publish.ts:201`
 
 *module constant `LIVE` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `chosen` | `src/publish.ts:193` |
-| `published` | `src/publish.ts:193` |
+| `chosen` | `src/publish.ts:201` |
+| `published` | `src/publish.ts:201` |
 
-> **REFACTOR (minor): `LIVE` at src/publish.ts:193 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `LIVE` at src/publish.ts:201 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.**
 
 ### `src/recipe-paths.SKIP` — `src/recipe-paths.ts:77`
 
@@ -1419,27 +1429,40 @@ One capability as data, for `GET …/capabilities`, a CLI's `list` and the OpenR
 |---|---|---|---|
 | `when` | `z.string()` | — | `src/capability.ts:199` |
 
-### `src/classify.ProjectEntry` — zod-object — `src/classify.ts:150-158`
+### `src/classify.ProjectEntry` — zod-object — `src/classify.ts:154-167`
 
-*aliases* `ProjectEntry` `src/classify.ts:159`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `zone` | `ProjectZone → src/classify.ProjectZone` | — | `src/classify.ts:151` |  |
-| `tier` | `ProjectTier → src/classify.ProjectTier` | — | `src/classify.ts:152` |  |
-| `chapter` | `z.string().nullable()` | — | `src/classify.ts:154` | `overlay/<chapter>/…` only; null for a flat overlay (`ships` = one video) and for every other zone. |
-| `variant` | `z.string().nullable()` | — | `src/classify.ts:156` | `overlay/[<chapter>/]<variant>/…` only. |
-| `role` | `OverlayRole.nullable() → src/classify.OverlayRole` | — | `src/classify.ts:157` |  |
-
-### `src/classify.ProjectLayoutPaths` — zod-object — `src/classify.ts:248-255`
-
-*aliases* `ProjectLayoutPaths` `src/classify.ts:256`
+*aliases* `ProjectEntry` `src/classify.ts:168`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `layout` | `ProjectLayout → src/classify.ProjectLayout` | — | `src/classify.ts:250` | Detected by `projectLayout` (D14). |
-| `recordings` | `z.string()` | — | `src/classify.ts:252` | Absolute path of the recordings folder for this layout (it may not exist yet). |
-| `transcripts` | `z.string()` | — | `src/classify.ts:254` | Absolute path of the transcripts folder for this layout (it may not exist yet). |
+| `zone` | `ProjectZone → src/classify.ProjectZone` | — | `src/classify.ts:155` |  |
+| `tier` | `ProjectTier → src/classify.ProjectTier` | — | `src/classify.ts:156` |  |
+| `video` | `z.string().nullable()` | — | `src/classify.ts:158` | `overlay/<video>/…` only (R9): the video the overlay work is for; null for a flat overlay and every other zone. |
+| `chapter` | `z.string().nullable()` | — | `src/classify.ts:163` |  |
+| `variant` | `z.string().nullable()` | — | `src/classify.ts:165` | `overlay/[<video>/]<variant>/…` only. |
+| `role` | `OverlayRole.nullable() → src/classify.OverlayRole` | — | `src/classify.ts:166` |  |
+
+### `src/classify.OverlayPaths` — zod-object — `src/classify.ts:201-210`
+
+*aliases* `OverlayPaths` `src/classify.ts:211`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `dir` | `z.string()` | — | `src/classify.ts:203` | `<project>/overlay/<video>/` |
+| `beats` | `z.string()` | — | `src/classify.ts:204` |  |
+| `framing` | `z.string()` | — | `src/classify.ts:205` |  |
+| `variantDir` | `z.string().nullable()` | — | `src/classify.ts:207` | `<project>/overlay/<video>/<variant>/` — null when no variant was asked for. |
+| `spec` | `z.string().nullable()` | — | `src/classify.ts:209` | `<project>/overlay/<video>/<variant>/spec.json` — null when no variant was asked for. |
+
+### `src/classify.ProjectLayoutPaths` — zod-object — `src/classify.ts:299-306`
+
+*aliases* `ProjectLayoutPaths` `src/classify.ts:307`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `layout` | `ProjectLayout → src/classify.ProjectLayout` | — | `src/classify.ts:301` | Detected by `projectLayout` (D14). |
+| `recordings` | `z.string()` | — | `src/classify.ts:303` | Absolute path of the recordings folder for this layout (it may not exist yet). |
+| `transcripts` | `z.string()` | — | `src/classify.ts:305` | Absolute path of the transcripts folder for this layout (it may not exist yet). |
 
 ### `src/control-file.ControlFile` — zod-object — `src/control-file.ts:18-27`
 
@@ -2536,134 +2559,134 @@ Kebab-case: lowercase letters and digits, single hyphens between words.
 | `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/project-folder.ts:15` |
 | `slug` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/project-folder.ts:15` |
 
-### `src/publish.Iso` — zod-scalar — `src/publish.ts:88`
+### `src/publish.Iso` — zod-scalar — `src/publish.ts:90`
 
 `z.iso.datetime({ offset: true })`
 
-### `src/publish.PublishExport` — zod-object — `src/publish.ts:91-108`
+### `src/publish.PublishExport` — zod-object — `src/publish.ts:93-113`
 
 One file in `videos/<name>/` that a person could ship, with its caption file beside it (same stem) if any.
 
-*aliases* `PublishExport` `src/publish.ts:109`
+*aliases* `PublishExport` `src/publish.ts:114`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `file` | `z.string().min(1)` | — | `src/publish.ts:93` | Project-relative, `/`-separated. |
-| `kind` | `z.enum(['cut', 'audio', 'final', 'overlay', 'part']).nullable()` | — | `src/publish.ts:95` | `cut` · `audio` · `final` · `overlay` (D15) · `part`, or null for a file that does not parse. |
-| `variant` | `z.string().nullable()` | — | `src/publish.ts:96` |  |
-| `app` | `EditApp.nullable() → src/publish.EditApp` | — | `src/publish.ts:97` |  |
-| `source` | `z.string().nullable().default(null)` | `null` | `src/publish.ts:102` | Where the file came from, in words, when the app knows better than the kind does ("FliCut export", "FliEdit |
-| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:103` |  |
-| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:104` |  |
-| `srt` | `z.object({ file: z.string().min(1), modifiedAt: Iso, durationSec: z.number().nullable() }).nullable() → src/publish.Iso` | — | `src/publish.ts:105` |  |
+| `file` | `z.string().min(1)` | — | `src/publish.ts:95` | Project-relative, `/`-separated. |
+| `kind` | `z.enum(['cut', 'audio', 'overlay', 'part', 'legacy']).nullable()` | — | `src/publish.ts:100` | `cut` · `audio` · `overlay` (D15) · `part`; `legacy` for a file named with a retired tag (`-final`, R11) — a whole |
+| `variant` | `z.string().nullable()` | — | `src/publish.ts:101` |  |
+| `app` | `EditApp.nullable() → src/publish.EditApp` | — | `src/publish.ts:102` |  |
+| `source` | `z.string().nullable().default(null)` | `null` | `src/publish.ts:107` | Where the file came from, in words, when the app knows better than the kind does ("FliCut export", "FliEdit |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:108` |  |
+| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:109` |  |
+| `srt` | `z.object({ file: z.string().min(1), modifiedAt: Iso, durationSec: z.number().nullable() }).nullable() → src/publish.Iso` | — | `src/publish.ts:110` |  |
 
-### `src/publish.PublishExport.srt` — zod-object — `src/publish.ts:105`
+### `src/publish.PublishExport.srt` — zod-object — `src/publish.ts:110`
 
 | field | type | default | at |
 |---|---|---|---|
-| `file` | `z.string().min(1)` | — | `src/publish.ts:106` |
-| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:106` |
-| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:106` |
+| `file` | `z.string().min(1)` | — | `src/publish.ts:111` |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:111` |
+| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:111` |
 
-### `src/publish.PublishEdit` — zod-object — `src/publish.ts:112`
+### `src/publish.PublishEdit` — zod-object — `src/publish.ts:117`
 
 An edit document for the video: FliCut's `fli.cut.<name>.json` or FliEdit's `fli.edit.<name>.json`.
 
-*aliases* `PublishEdit` `src/publish.ts:113`
+*aliases* `PublishEdit` `src/publish.ts:118`
 
 | field | type | default | at |
 |---|---|---|---|
-| `file` | `z.string().min(1)` | — | `src/publish.ts:112` |
-| `app` | `EditApp → src/publish.EditApp` | — | `src/publish.ts:112` |
-| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:112` |
+| `file` | `z.string().min(1)` | — | `src/publish.ts:117` |
+| `app` | `EditApp → src/publish.EditApp` | — | `src/publish.ts:117` |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:117` |
 
-### `src/publish.PublishLaunch` — zod-object — `src/publish.ts:116-125`
+### `src/publish.PublishLaunch` — zod-object — `src/publish.ts:121-130`
 
 What YLO's `launch.json` (the workshop) offers, reduced to what the rules need.
 
-*aliases* `PublishLaunch` `src/publish.ts:126`
+*aliases* `PublishLaunch` `src/publish.ts:131`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `file` | `z.string().min(1)` | — | `src/publish.ts:117` |  |
-| `madeAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:119` | When its texts were made (`updated_at`, else the file's time). |
-| `titles` | `z.array(z.object({ id: z.string().nullable(), text: z.string() }))` | — | `src/publish.ts:121` | The titles bound to YLO's variant slots, slot 1 first. |
-| `description` | `z.string().nullable()` | — | `src/publish.ts:122` |  |
-| `chapters` | `z.array(z.record(z.string(), z.unknown()))` | — | `src/publish.ts:124` | YLO's `Chapter{n,title,timestamp}` list (empty when none). |
+| `file` | `z.string().min(1)` | — | `src/publish.ts:122` |  |
+| `madeAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:124` | When its texts were made (`updated_at`, else the file's time). |
+| `titles` | `z.array(z.object({ id: z.string().nullable(), text: z.string() }))` | — | `src/publish.ts:126` | The titles bound to YLO's variant slots, slot 1 first. |
+| `description` | `z.string().nullable()` | — | `src/publish.ts:127` |  |
+| `chapters` | `z.array(z.record(z.string(), z.unknown()))` | — | `src/publish.ts:129` | YLO's `Chapter{n,title,timestamp}` list (empty when none). |
 
-### `src/publish.PublishLaunch.titles[]` — zod-object — `src/publish.ts:121`
+### `src/publish.PublishLaunch.titles[]` — zod-object — `src/publish.ts:126`
 
 | field | type | default | at |
 |---|---|---|---|
-| `id` | `z.string().nullable()` | — | `src/publish.ts:121` |
-| `text` | `z.string()` | — | `src/publish.ts:121` |
+| `id` | `z.string().nullable()` | — | `src/publish.ts:126` |
+| `text` | `z.string()` | — | `src/publish.ts:126` |
 
-### `src/publish.PublishFacts` — zod-object — `src/publish.ts:128-136`
+### `src/publish.PublishFacts` — zod-object — `src/publish.ts:133-141`
 
-*aliases* `PublishFacts` `src/publish.ts:137`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `video` | `z.string().nullable()` | — | `src/publish.ts:130` | The video folder name, or null for a project with no video yet. |
-| `exports` | `z.array(PublishExport) → src/publish.PublishExport` | — | `src/publish.ts:131` |  |
-| `edits` | `z.array(PublishEdit) → src/publish.PublishEdit` | — | `src/publish.ts:132` |  |
-| `resources` | `z.array(Resource) → src/resources.Resource` | — | `src/publish.ts:134` | The project's resources for this video (and the project's own, `video: null`). |
-| `launch` | `PublishLaunch.nullable() → src/publish.PublishLaunch` | — | `src/publish.ts:135` |  |
-
-### `src/publish.PublishRow` — zod-object — `src/publish.ts:139-157`
-
-*aliases* `PublishRow` `src/publish.ts:158`
+*aliases* `PublishFacts` `src/publish.ts:142`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `piece` | `PublishPiece → src/publish.PublishPiece` | — | `src/publish.ts:140` |  |
-| `label` | `z.string()` | — | `src/publish.ts:141` |  |
-| `state` | `PublishState → src/publish.PublishState` | — | `src/publish.ts:142` |  |
-| `value` | `z.string().nullable()` | — | `src/publish.ts:144` | What would ship, in a few words (a file name, a title, "Strong noise removal"). |
-| `file` | `z.string().nullable()` | — | `src/publish.ts:146` | The project-relative file behind it, when there is one. |
-| `source` | `z.enum(['choice', 'rule', 'brand', 'ylo', 'none'])` | — | `src/publish.ts:148` | Where the answer came from: `choice`, `rule`, `brand`, `ylo`, or `none`. |
-| `why` | `z.string()` | — | `src/publish.ts:150` | One line: why this state. Kept for the audit trail. |
-| `resourceId` | `z.string().nullable()` | — | `src/publish.ts:152` | The resource behind a choice, so a person or agent can change it. |
-| `by` | `z.string().nullable()` | — | `src/publish.ts:154` | Who made it: a principal (`human:ui`, `agent:tuber`, `cli`) or `rule:<id>`; null when nothing is there. |
-| `at` | `Iso.nullable() → src/publish.Iso` | — | `src/publish.ts:156` | When the thing behind it was made or chosen (for an ⓘ, never shown as a timestamp). |
+| `video` | `z.string().nullable()` | — | `src/publish.ts:135` | The video folder name, or null for a project with no video yet. |
+| `exports` | `z.array(PublishExport) → src/publish.PublishExport` | — | `src/publish.ts:136` |  |
+| `edits` | `z.array(PublishEdit) → src/publish.PublishEdit` | — | `src/publish.ts:137` |  |
+| `resources` | `z.array(Resource) → src/resources.Resource` | — | `src/publish.ts:139` | The project's resources for this video (and the project's own, `video: null`). |
+| `launch` | `PublishLaunch.nullable() → src/publish.PublishLaunch` | — | `src/publish.ts:140` |  |
 
-### `src/publish.PublishReadiness` — zod-object — `src/publish.ts:160-173`
+### `src/publish.PublishRow` — zod-object — `src/publish.ts:144-162`
 
-*aliases* `PublishReadiness` `src/publish.ts:174`
+*aliases* `PublishRow` `src/publish.ts:163`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `video` | `z.string().nullable()` | — | `src/publish.ts:161` |  |
-| `rows` | `z.array(PublishRow) → src/publish.PublishRow` | — | `src/publish.ts:162` |  |
-| `ready` | `z.number().int()` | — | `src/publish.ts:163` |  |
-| `total` | `z.number().int()` | — | `src/publish.ts:164` |  |
-| `suggestions` | `z.number().int()` | — | `src/publish.ts:166` | Ready rows a person has not decided (agent choices + rule guesses). |
-| `counts` | `z.object({ set: z.number().int(), suggested: z.number().int(), inferred: z.number().int(), notReady: z.number().int() })` | — | `src/publish.ts:167` |  |
+| `piece` | `PublishPiece → src/publish.PublishPiece` | — | `src/publish.ts:145` |  |
+| `label` | `z.string()` | — | `src/publish.ts:146` |  |
+| `state` | `PublishState → src/publish.PublishState` | — | `src/publish.ts:147` |  |
+| `value` | `z.string().nullable()` | — | `src/publish.ts:149` | What would ship, in a few words (a file name, a title, "Strong noise removal"). |
+| `file` | `z.string().nullable()` | — | `src/publish.ts:151` | The project-relative file behind it, when there is one. |
+| `source` | `z.enum(['choice', 'rule', 'brand', 'ylo', 'none'])` | — | `src/publish.ts:153` | Where the answer came from: `choice`, `rule`, `brand`, `ylo`, or `none`. |
+| `why` | `z.string()` | — | `src/publish.ts:155` | One line: why this state. Kept for the audit trail. |
+| `resourceId` | `z.string().nullable()` | — | `src/publish.ts:157` | The resource behind a choice, so a person or agent can change it. |
+| `by` | `z.string().nullable()` | — | `src/publish.ts:159` | Who made it: a principal (`human:ui`, `agent:tuber`, `cli`) or `rule:<id>`; null when nothing is there. |
+| `at` | `Iso.nullable() → src/publish.Iso` | — | `src/publish.ts:161` | When the thing behind it was made or chosen (for an ⓘ, never shown as a timestamp). |
 
-### `src/publish.PublishReadiness.counts` — zod-object — `src/publish.ts:167`
+### `src/publish.PublishReadiness` — zod-object — `src/publish.ts:165-178`
+
+*aliases* `PublishReadiness` `src/publish.ts:179`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `video` | `z.string().nullable()` | — | `src/publish.ts:166` |  |
+| `rows` | `z.array(PublishRow) → src/publish.PublishRow` | — | `src/publish.ts:167` |  |
+| `ready` | `z.number().int()` | — | `src/publish.ts:168` |  |
+| `total` | `z.number().int()` | — | `src/publish.ts:169` |  |
+| `suggestions` | `z.number().int()` | — | `src/publish.ts:171` | Ready rows a person has not decided (agent choices + rule guesses). |
+| `counts` | `z.object({ set: z.number().int(), suggested: z.number().int(), inferred: z.number().int(), notReady: z.number().int() })` | — | `src/publish.ts:172` |  |
+
+### `src/publish.PublishReadiness.counts` — zod-object — `src/publish.ts:172`
 
 | field | type | default | at |
 |---|---|---|---|
-| `set` | `z.number().int()` | — | `src/publish.ts:168` |
-| `suggested` | `z.number().int()` | — | `src/publish.ts:169` |
-| `inferred` | `z.number().int()` | — | `src/publish.ts:170` |
-| `notReady` | `z.number().int()` | — | `src/publish.ts:171` |
+| `set` | `z.number().int()` | — | `src/publish.ts:173` |
+| `suggested` | `z.number().int()` | — | `src/publish.ts:174` |
+| `inferred` | `z.number().int()` | — | `src/publish.ts:175` |
+| `notReady` | `z.number().int()` | — | `src/publish.ts:176` |
 
-### `src/publish.PublishedVideo` — zod-object — `src/publish.ts:680-688`
+### `src/publish.PublishedVideo` — zod-object — `src/publish.ts:687-695`
 
 The hook for whatever comes after publishing (post-publish posts, YLO's related-videos linking): every published
 
-*aliases* `PublishedVideo` `src/publish.ts:689`
+*aliases* `PublishedVideo` `src/publish.ts:696`
 
 | field | type | default | at |
 |---|---|---|---|
-| `resourceId` | `z.string()` | — | `src/publish.ts:681` |
-| `video` | `z.string().nullable()` | — | `src/publish.ts:682` |
-| `path` | `z.string().nullable()` | — | `src/publish.ts:683` |
-| `youtubeId` | `z.string()` | — | `src/publish.ts:684` |
-| `url` | `z.string()` | — | `src/publish.ts:685` |
-| `publishedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:686` |
-| `by` | `z.string()` | — | `src/publish.ts:687` |
+| `resourceId` | `z.string()` | — | `src/publish.ts:688` |
+| `video` | `z.string().nullable()` | — | `src/publish.ts:689` |
+| `path` | `z.string().nullable()` | — | `src/publish.ts:690` |
+| `youtubeId` | `z.string()` | — | `src/publish.ts:691` |
+| `url` | `z.string()` | — | `src/publish.ts:692` |
+| `publishedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:693` |
+| `by` | `z.string()` | — | `src/publish.ts:694` |
 
 ### `src/recipe-paths.RecipePathWarning` — zod-object — `src/recipe-paths.ts:18-27`
 
@@ -3120,41 +3143,31 @@ Playing or not, and the signed rate: +1 forward at 1×, −2 backward at 2×.
 | `playing` | `z.boolean()` | — | `src/transport.ts:16` |
 | `rate` | `z.number()` | — | `src/transport.ts:17` |
 
-### `src/video-file.Ext` — zod-scalar — `src/video-file.ts:15`
+### `src/video-file.Ext` — zod-scalar — `src/video-file.ts:21`
 
 Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes the 09-09 numbered shape):
 
 `z.string().regex(/^[A-Za-z0-9]+$/, 'ext must be letters/digits, without the dot')`
 
-### `src/video-file.VideoFile` — zod-discriminated-union on `kind` — `src/video-file.ts:24-35`
+### `src/video-file.VideoFile` — zod-discriminated-union on `kind` — `src/video-file.ts:30-35`
 
 *aliases* `VideoFile` `src/video-file.ts:36`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `cut` | `z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:25` |
-| `final` | `z.object({ name: KebabSlug, kind: z.literal('final'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:28` |
+| `cut` | `z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:31` |
 | `audio` | `z.object({ name: KebabSlug, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:32` |
 | `overlay` | `z.object({ name: KebabSlug, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:33` |
 | `part` | `z.object({ name: KebabSlug, kind: z.literal('part'), variant: VideoPart, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.VideoPart, src/video-file.Ext` | — | `src/video-file.ts:34` |
 
-### `src/video-file.VideoFile[kind=cut]` — zod-object — `src/video-file.ts:25`
+### `src/video-file.VideoFile[kind=cut]` — zod-object — `src/video-file.ts:31`
 
 | field | type | default | at |
 |---|---|---|---|
-| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:25` |
-| `kind` | `z.literal('cut')` | — | `src/video-file.ts:25` |
-| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:25` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:25` |
-
-### `src/video-file.VideoFile[kind=final]` — zod-object — `src/video-file.ts:26-31`
-
-| field | type | default | at |
-|---|---|---|---|
-| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:27` |
-| `kind` | `z.literal('final')` | — | `src/video-file.ts:28` |
-| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:29` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:30` |
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:31` |
+| `kind` | `z.literal('cut')` | — | `src/video-file.ts:31` |
+| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:31` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:31` |
 
 ### `src/video-file.VideoFile[kind=audio]` — zod-object — `src/video-file.ts:32`
 
@@ -3193,24 +3206,39 @@ Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes t
 | `name` | `z.string()` | — | `src/video-file.ts:40` |
 | `ext` | `z.string().nullable()` | — | `src/video-file.ts:41` |
 
-### `src/video-file.ParsedVideoFile` — zod-union on `kind` — `src/video-file.ts:45`
+### `src/video-file.LegacyVideoFile` — zod-object — `src/video-file.ts:50-56`
 
-*aliases* `ParsedVideoFile` `src/video-file.ts:46`
+`<name>-final.<ext>`: a whole-video candidate written before R11. Its name says nothing about being the final.
 
-| variant | shape | default | at |
-|---|---|---|---|
-| `VideoFile` | `VideoFile → src/video-file.VideoFile` | — | `src/video-file.ts:45` |
-| `UnknownVideoFile` | `UnknownVideoFile → src/video-file.UnknownVideoFile` | — | `src/video-file.ts:45` |
-
-### `src/video-file.VideoFolder` — zod-object — `src/video-file.ts:80-85`
-
-*aliases* `VideoFolder` `src/video-file.ts:86`
+*aliases* `LegacyVideoFile` `src/video-file.ts:57`
 
 | field | type | default | at |
 |---|---|---|---|
-| `name` | `KebabSlug.refine((name) => !LEGACY_FOLDERS.includes(name), 'a legacy layout name (first-edit, edits, …) is never a video') → src/project-folder.KebabSlug, src/classify.LEGACY_FOLDERS` | — | `src/video-file.ts:81` |
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:51` |
+| `kind` | `z.literal('legacy')` | — | `src/video-file.ts:52` |
+| `tag` | `RetiredVideoTag → src/video-file.RetiredVideoTag` | — | `src/video-file.ts:53` |
+| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:54` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:55` |
 
-### `src/video-file.VideoFolderName` — zod-scalar — `src/video-file.ts:92-97`
+### `src/video-file.ParsedVideoFile` — zod-union on `kind` — `src/video-file.ts:59`
+
+*aliases* `ParsedVideoFile` `src/video-file.ts:60`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `VideoFile` | `VideoFile → src/video-file.VideoFile` | — | `src/video-file.ts:59` |
+| `LegacyVideoFile` | `LegacyVideoFile → src/video-file.LegacyVideoFile` | — | `src/video-file.ts:59` |
+| `UnknownVideoFile` | `UnknownVideoFile → src/video-file.UnknownVideoFile` | — | `src/video-file.ts:59` |
+
+### `src/video-file.VideoFolder` — zod-object — `src/video-file.ts:104-109`
+
+*aliases* `VideoFolder` `src/video-file.ts:110`
+
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `KebabSlug.refine((name) => !LEGACY_FOLDERS.includes(name), 'a legacy layout name (first-edit, edits, …) is never a video') → src/project-folder.KebabSlug, src/classify.LEGACY_FOLDERS` | — | `src/video-file.ts:105` |
+
+### `src/video-file.VideoFolderName` — zod-scalar — `src/video-file.ts:116-121`
 
 The same rule as a string schema, for contexts that carry the folder name (`OpenContext.video`).
 
@@ -3719,10 +3747,10 @@ The census found these top-level declarations and the extractor did not mirror t
 
 | family | count | declarations |
 |---|---|---|
-| object constant | 8 | `src/classify.LAYOUT_DIRS` `src/classify.ts:259`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
-| array constant | 6 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:30`<br>`src/publish.READY_STATES` `src/publish.ts:65`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:67`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
-| class | 6 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:789`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:220`<br>`src/youtube.YouTubeReader` `src/youtube.ts:236` |
-| const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:177`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
+| object constant | 8 | `src/classify.LAYOUT_DIRS` `src/classify.ts:310`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
+| array constant | 6 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:32`<br>`src/publish.READY_STATES` `src/publish.ts:67`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:69`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
+| class | 6 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:796`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:220`<br>`src/youtube.YouTubeReader` `src/youtube.ts:236` |
+| const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:182`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 | union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:206` |
@@ -3732,11 +3760,11 @@ The census found these top-level declarations and the extractor did not mirror t
 
 These are refactors of the **application**, not of this mirror. Each one converts a derived section into a declared one.
 
-1. `src/classify.ts:63` — REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:63 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
-2. `src/classify.ts:66-73` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:66 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
-3. `src/classify.ts:122-129` — REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:122 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.
+1. `src/classify.ts:67` — REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:67 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
+2. `src/classify.ts:70-77` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:70 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
+3. `src/classify.ts:126-133` — REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.
 4. `src/fs-utils.ts:32` — REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.
-5. `src/publish.ts:193` — REFACTOR (minor): `LIVE` at src/publish.ts:193 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.
+5. `src/publish.ts:201` — REFACTOR (minor): `LIVE` at src/publish.ts:201 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.
 6. `src/recipe-paths.ts:77` — REFACTOR (minor): `SKIP` at src/recipe-paths.ts:77 names the set but does not type it. A z.enum or `as const` + `typeof SKIP[number]` would make a wrong value a static error rather than a runtime miss.
 
 ---

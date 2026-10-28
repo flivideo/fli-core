@@ -7,14 +7,20 @@ import { parseOrThrow } from './results.js';
  * Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes the 09-09 numbered shape):
  * `videos/<name>/<name>-<kind>[-<variant>].<ext>`, e.g. `videos/flivideo-tour/flivideo-tour-audio-a100.m4a`.
  * No numbers. The video's name is on every file, so a file explains itself outside its folder.
- * Kinds: `cut`, `final` (no variant), `audio-<treatment>`, `overlay-<variant>` (variant required), and (video-structure
- * plan §4C, 2026-10-05) `part-<intro|body|outro>` — one piece of a video made in sections, joined later.
+ * Kinds: `cut`, `audio-<treatment>`, `overlay-<variant>` (variant required), and (video-structure plan §4C,
+ * 2026-10-05) `part-<intro|body|outro>` — one piece of a video made in sections, joined later.
  * Anything else is `unknown-kind`: shown, never hidden, and `parseVideoFile` never throws.
+ *
+ * **`final` is retired as a kind** (David 2026-10-28, Overlay Pilot R11: "it should be calculated and state should manage
+ * if something overrides calculation"). No file is final by its name: the final is calculated from the candidates, and
+ * a person's override is stored state (a `chosen` video resource). A file already named `<name>-final.<ext>` still
+ * reads — as `{ kind: 'legacy', tag: 'final' }`, a whole-video candidate like any other — and is never renamed;
+ * `videoFileName` can no longer write one.
  */
 
 const Ext = z.string().regex(/^[A-Za-z0-9]+$/, 'ext must be letters/digits, without the dot');
 
-export const VideoFileKind = z.enum(['cut', 'audio', 'overlay', 'final', 'part']);
+export const VideoFileKind = z.enum(['cut', 'audio', 'overlay', 'part']);
 export type VideoFileKind = z.infer<typeof VideoFileKind>;
 
 /** Which section of a video a `part` file is. A closed set: `<name>-part-<intro|body|outro>`. */
@@ -23,12 +29,6 @@ export type VideoPart = z.infer<typeof VideoPart>;
 
 export const VideoFile = z.discriminatedUnion('kind', [
   z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }),
-  z.object({
-    name: KebabSlug,
-    kind: z.literal('final'),
-    variant: z.null().default(null),
-    ext: Ext,
-  }),
   z.object({ name: KebabSlug, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }),
   z.object({ name: KebabSlug, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }),
   z.object({ name: KebabSlug, kind: z.literal('part'), variant: VideoPart, ext: Ext }),
@@ -42,7 +42,21 @@ export const UnknownVideoFile = z.object({
 });
 export type UnknownVideoFile = z.infer<typeof UnknownVideoFile>;
 
-export const ParsedVideoFile = z.union([VideoFile, UnknownVideoFile]);
+/** Tags a file name may still carry from before a ruling retired them (R11: `-final`). Read, never written. */
+export const RetiredVideoTag = z.enum(['final']);
+export type RetiredVideoTag = z.infer<typeof RetiredVideoTag>;
+
+/** `<name>-final.<ext>`: a whole-video candidate written before R11. Its name says nothing about being the final. */
+export const LegacyVideoFile = z.object({
+  name: KebabSlug,
+  kind: z.literal('legacy'),
+  tag: RetiredVideoTag,
+  variant: z.null().default(null),
+  ext: Ext,
+});
+export type LegacyVideoFile = z.infer<typeof LegacyVideoFile>;
+
+export const ParsedVideoFile = z.union([VideoFile, LegacyVideoFile, UnknownVideoFile]);
 export type ParsedVideoFile = z.infer<typeof ParsedVideoFile>;
 
 /** What follows `<name>-`: `<kind>[-<variant>].<ext>`. */
@@ -65,6 +79,16 @@ export function parseVideoFile(fileName: string, videoName: string): ParsedVideo
         ext: match[3],
       });
       if (parsed.success) return parsed.data;
+      const legacy = RetiredVideoTag.safeParse(match[1]);
+      if (legacy.success && match[2] === undefined) {
+        return {
+          name: videoName,
+          kind: 'legacy',
+          tag: legacy.data,
+          variant: null,
+          ext: match[3] as string,
+        };
+      }
     }
   }
   const extMatch = /\.([A-Za-z0-9]+)$/.exec(fileName);

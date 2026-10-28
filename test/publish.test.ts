@@ -104,10 +104,10 @@ describe('rule 2 — the video: the newest export of the newest edit', () => {
     expect(r.counts).toEqual({ set: 1, suggested: 0, inferred: 2, notReady: 6 });
   });
 
-  it('prefers the newest edit’s app: a newer FliEdit edit with a -final wins over a later FliCut export', () => {
+  it('prefers the newest edit’s app: a newer FliEdit edit with a legacy -final wins over a later FliCut export', () => {
     const final = exp({
       file: `videos/${V}/${V}-final.mp4`,
-      kind: 'final',
+      kind: 'legacy',
       app: 'fliedit',
       modifiedAt: '2026-10-05T05:00:00.000Z',
     });
@@ -159,7 +159,7 @@ describe('rule 2 — the video: the newest export of the newest edit', () => {
 describe('the final is a whole video, and says where it came from (AITLDR b05, 2026-10-05)', () => {
   const generated = exp({
     file: 'videos/title-lab/title-lab-final.mp4',
-    kind: 'final',
+    kind: 'legacy',
     app: null,
     source: 'generated render',
     modifiedAt: '2026-10-05T04:00:00.000Z',
@@ -185,6 +185,57 @@ describe('the final is a whole video, and says where it came from (AITLDR b05, 2
     expect(rowOf(facts({ exports: [placed], edits: [] }), 'audio').value).toBe(
       'As in the placed file',
     );
+  });
+});
+
+describe('an overlay render can be the final (R5, R6, R8 — David 2026-10-28)', () => {
+  const ov = (at: string) =>
+    exp({
+      file: `videos/${V}/${V}-overlay-v1-typeset.mp4`,
+      kind: 'overlay',
+      variant: 'v1-typeset',
+      app: null,
+      source: 'Overlay Pilot render',
+      modifiedAt: at,
+    });
+  const edits = [
+    { file: `fli.cut.${V}.json`, app: 'flicut' as const, modifiedAt: '2026-10-05T03:00:00.000Z' },
+  ];
+
+  it('the newest overlay wins over the plain export it was made from, and says where it came from', () => {
+    const overlay = ov('2026-10-05T09:00:00.000Z');
+    const f = facts({ exports: [a100, overlay], edits });
+    expect(rowOf(f, 'video')).toMatchObject({
+      state: 'inferred',
+      file: overlay.file,
+      by: 'rule:newest-export',
+    });
+    expect(rowOf(f, 'video').why).toContain('Overlay Pilot render');
+    expect(rowOf(f, 'audio')).toMatchObject({ value: 'As in the Overlay Pilot render' });
+  });
+
+  it('an overlay older than the newest edit export does not win; only overlays still make a final', () => {
+    const old = ov('2026-10-01T00:00:00.000Z');
+    expect(rowOf(facts({ exports: [a100, old], edits }), 'video')).toMatchObject({
+      file: a100.file,
+    });
+    expect(rowOf(facts({ exports: [old], edits: [] }), 'video')).toMatchObject({
+      state: 'inferred',
+      file: old.file,
+    });
+  });
+
+  it('a person can still override it with an older plain export', () => {
+    const overlay = ov('2026-10-05T09:00:00.000Z');
+    const chosen = promoteFile(
+      EMPTY_RESOURCES,
+      { kind: 'video', video: V, path: a100.file },
+      registry,
+      'human:ui',
+      NOW,
+    );
+    const f = facts({ exports: [a100, overlay], edits, resources: chosen.file.resources });
+    expect(rowOf(f, 'video')).toMatchObject({ state: 'set', file: a100.file, by: 'human:ui' });
   });
 });
 
@@ -620,7 +671,8 @@ describe('small helpers', () => {
     expect(clock(344)).toBe('5:44');
     expect(clock(3725)).toBe('1:02:05');
     expect(exportApp('audio')).toBe('flicut');
-    expect(exportApp('overlay')).toBe('fliedit');
+    expect(exportApp('overlay')).toBeNull();
+    expect(exportApp('legacy')).toBe('fliedit');
     expect(exportApp(null)).toBeNull();
   });
 });

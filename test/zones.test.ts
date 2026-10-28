@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { classifyProjectEntry, describeProjectEntry, type ProjectEntry } from '../src/classify.js';
+import {
+  classifyProjectEntry,
+  describeProjectEntry,
+  overlayPaths,
+  type ProjectEntry,
+} from '../src/classify.js';
 import {
   parseVideoFile,
   parseVideoFolder,
@@ -73,6 +78,48 @@ describe('describeProjectEntry: tiers', () => {
       variant: 'v5-frame',
       role: 'spec',
     });
+  });
+
+  it('overlay/<video>/… is keyed by video (R9); a legacy chapter key reads the same, never renamed', () => {
+    expect(describeProjectEntry('overlay/nail-art/beats.json')).toMatchObject({
+      zone: 'overlay',
+      tier: 'authored',
+      video: 'nail-art',
+      role: 'beats',
+    });
+    expect(describeProjectEntry('overlay/nail-art/framing.json')).toMatchObject({
+      tier: 'authored',
+      video: 'nail-art',
+      role: 'framing',
+    });
+    expect(describeProjectEntry('overlay/nail-art/v1-typeset/spec.json')).toMatchObject({
+      tier: 'generated',
+      video: 'nail-art',
+      variant: 'v1-typeset',
+      role: 'spec',
+    });
+    expect(describeProjectEntry('overlay/ch01/v5-frame/spec.json')).toMatchObject({
+      video: 'ch01',
+      chapter: 'ch01',
+      role: 'spec',
+    });
+    expect(describeProjectEntry('videos/x/x-cut.mp4')).toMatchObject({
+      video: null,
+      chapter: null,
+    });
+  });
+
+  it("overlayPaths builds one video's overlay paths and refuses a key that is not kebab", () => {
+    expect(overlayPaths('/p', 'nail-art', 'v1-typeset')).toEqual({
+      dir: '/p/overlay/nail-art',
+      beats: '/p/overlay/nail-art/beats.json',
+      framing: '/p/overlay/nail-art/framing.json',
+      variantDir: '/p/overlay/nail-art/v1-typeset',
+      spec: '/p/overlay/nail-art/v1-typeset/spec.json',
+    });
+    expect(overlayPaths('/p', 'nail-art')).toMatchObject({ variantDir: null, spec: null });
+    expect(() => overlayPaths('/p', '../x')).toThrow(/kebab/);
+    expect(() => overlayPaths('/p', 'ok', 'A/B')).toThrow(/kebab/);
   });
 
   it('a flat overlay (ships = one video) has no chapter', () => {
@@ -167,6 +214,7 @@ describe('the part video kind (plan §4C item 2)', () => {
 
   it('is a kind, written by FliCut (it sits on the assembly)', () => {
     expect(VideoFileKind.options).toContain('part');
+    expect(VideoFileKind.options).not.toContain('final'); // R11: retired as a kind
     expect(exportApp('part')).toBe('flicut');
   });
 

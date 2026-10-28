@@ -227,9 +227,11 @@ describe('parseVideoFile / videoFileName (ruling "B only", 2026-09-22)', () => {
       variant: 'v5-frame',
       ext: 'mp4',
     });
+    // R11 (2026-10-28): `final` is retired as a kind; a legacy -final file still reads, as a candidate.
     expect(parseVideoFile('flivideo-tour-final.mp4', v)).toEqual({
       name: v,
-      kind: 'final',
+      kind: 'legacy',
+      tag: 'final',
       variant: null,
       ext: 'mp4',
     });
@@ -238,10 +240,12 @@ describe('parseVideoFile / videoFileName (ruling "B only", 2026-09-22)', () => {
   it('splits a name that contains kind words, because it knows the name', () => {
     expect(parseVideoFile('the-final-cut-final.mp4', 'the-final-cut')).toEqual({
       name: 'the-final-cut',
-      kind: 'final',
+      kind: 'legacy',
+      tag: 'final',
       variant: null,
       ext: 'mp4',
     });
+    expect(parseVideoFile('the-final-cut-cut.mp4', 'the-final-cut')).toMatchObject({ kind: 'cut' });
     expect(parseVideoFile('cut-audio-audio-dfn100.m4a', 'cut-audio')).toEqual({
       name: 'cut-audio',
       kind: 'audio',
@@ -270,15 +274,18 @@ describe('parseVideoFile / videoFileName (ruling "B only", 2026-09-22)', () => {
       { name: 'flivideo-tour', kind: 'cut', variant: null, ext: 'mp4' },
       { name: 'flivideo-tour', kind: 'audio', variant: 'a100', ext: 'm4a' },
       { name: 'flihub-demo', kind: 'overlay', variant: 'v5-frame', ext: 'mp4' },
-      { name: 'flihub-demo', kind: 'final', variant: null, ext: 'mov' },
+      { name: 'flihub-demo', kind: 'part', variant: 'intro', ext: 'mov' },
     ];
     for (const file of cases) expect(parseVideoFile(videoFileName(file), file.name)).toEqual(file);
   });
 
-  it('lets cut and final omit the variant', () => {
-    expect(videoFileName({ name: 'flihub-demo', kind: 'final', ext: 'mp4' })).toBe(
-      'flihub-demo-final.mp4',
+  it('lets cut omit the variant, and can no longer write a -final (R11)', () => {
+    expect(videoFileName({ name: 'flihub-demo', kind: 'cut', ext: 'mp4' })).toBe(
+      'flihub-demo-cut.mp4',
     );
+    expect(() =>
+      videoFileName({ name: 'flihub-demo', kind: 'final', ext: 'mp4' } as never),
+    ).toThrow(FliCoreError);
   });
 
   it('refuses to build a bad name', () => {

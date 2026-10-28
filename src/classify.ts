@@ -20,7 +20,11 @@ export const ProjectZone = z.enum([
   'script',
   /** Motion-scene source (R1): `motion/<tool>/`. Machinery inside it is regenerable (`motionMachinery`). */
   'motion',
-  /** Overlay recipes (plan §3, B ruling): `overlay/<chapter>/beats.json` + `overlay/<chapter>/<variant>/spec.json`. */
+  /**
+   * Overlay recipes, keyed by VIDEO (David 2026-10-28, Overlay Pilot R9): `overlay/<video>/beats.json`,
+   * `overlay/<video>/framing.json`, `overlay/<video>/<variant>/spec.json`. Folders written before R9 are keyed by
+   * chapter (`overlay/ch01/…`, plan §3) — the same shapes, still read, never renamed.
+   */
   'overlay',
   /** Per-video geometry, confirmed by a person (B ruling): tier 1, authored. */
   'framing',
@@ -150,9 +154,14 @@ export type OverlayRole = z.infer<typeof OverlayRole>;
 export const ProjectEntry = z.object({
   zone: ProjectZone,
   tier: ProjectTier,
-  /** `overlay/<chapter>/…` only; null for a flat overlay (`ships` = one video) and for every other zone. */
+  /** `overlay/<video>/…` only (R9): the video the overlay work is for; null for a flat overlay and every other zone. */
+  video: z.string().nullable(),
+  /**
+   * @deprecated R9 keys overlay work by video: read `video`. The same key, kept for readers of folders written before
+   * R9, which are keyed by chapter (`overlay/ch01/…`); a path alone cannot tell which a key is.
+   */
   chapter: z.string().nullable(),
-  /** `overlay/[<chapter>/]<variant>/…` only. */
+  /** `overlay/[<video>/]<variant>/…` only. */
   variant: z.string().nullable(),
   role: OverlayRole.nullable(),
 });
@@ -165,19 +174,61 @@ const OVERLAY_AUTHORED_FILES: Record<string, OverlayRole> = {
 
 function overlayEntry(rest: string[], directory: boolean | undefined): Omit<ProjectEntry, 'zone'> {
   const file = directory !== true ? rest[rest.length - 1] : undefined;
-  // `overlay/beats.json` (flat, `ships` = one video) or `overlay/<chapter>/beats.json`.
+  // `overlay/beats.json` (flat, one video) or `overlay/<video>/beats.json` (legacy: `overlay/<chapter>/beats.json`).
   const authored = file === undefined ? undefined : OVERLAY_AUTHORED_FILES[file];
   if (authored !== undefined && rest.length <= 2) {
-    const chapter = rest.length === 2 ? (rest[0] as string) : null;
-    return { tier: 'authored', chapter, variant: null, role: authored };
+    const key = rest.length === 2 ? (rest[0] as string) : null;
+    return { tier: 'authored', video: key, chapter: key, variant: null, role: authored };
   }
-  // `overlay/<variant>/spec.json` (flat) or `overlay/<chapter>/<variant>/spec.json`. Only these two shapes name their
-  // chapter and variant outright; anything deeper is the variant's own files, whose owner a path alone cannot tell.
+  // `overlay/<variant>/spec.json` (flat) or `overlay/<video>/<variant>/spec.json`. Only these two shapes name their
+  // video and variant outright; anything deeper is the variant's own files, whose owner a path alone cannot tell.
   if (file === 'spec.json' && (rest.length === 2 || rest.length === 3)) {
-    const chapter = rest.length === 3 ? (rest[0] as string) : null;
-    return { tier: 'generated', chapter, variant: rest[rest.length - 2] as string, role: 'spec' };
+    const key = rest.length === 3 ? (rest[0] as string) : null;
+    return {
+      tier: 'generated',
+      video: key,
+      chapter: key,
+      variant: rest[rest.length - 2] as string,
+      role: 'spec',
+    };
   }
-  return { tier: 'generated', chapter: null, variant: null, role: 'variant-file' };
+  return { tier: 'generated', video: null, chapter: null, variant: null, role: 'variant-file' };
+}
+
+/** The overlay zone's folder name. */
+export const OVERLAY_FOLDER = 'overlay';
+
+export const OverlayPaths = z.object({
+  /** `<project>/overlay/<video>/` */
+  dir: z.string(),
+  beats: z.string(),
+  framing: z.string(),
+  /** `<project>/overlay/<video>/<variant>/` — null when no variant was asked for. */
+  variantDir: z.string().nullable(),
+  /** `<project>/overlay/<video>/<variant>/spec.json` — null when no variant was asked for. */
+  spec: z.string().nullable(),
+});
+export type OverlayPaths = z.infer<typeof OverlayPaths>;
+
+/**
+ * Where one video's overlay work lives (R9): `overlay/<video>/{beats.json,framing.json}` (authored) and
+ * `overlay/<video>/<variant>/spec.json` (generated). Pure; the folders may not exist. `video` and `variant` must be
+ * kebab names (a video folder name; a variant such as `v1-typeset`) — anything else throws, so no path escapes.
+ */
+export function overlayPaths(projectDir: string, video: string, variant?: string): OverlayPaths {
+  const kebab = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+  if (!kebab.test(video)) throw new Error(`overlay video must be a kebab name: ${video}`);
+  if (variant !== undefined && !kebab.test(variant))
+    throw new Error(`overlay variant must be a kebab name: ${variant}`);
+  const dir = path.join(projectDir, OVERLAY_FOLDER, video);
+  const variantDir = variant === undefined ? null : path.join(dir, variant);
+  return {
+    dir,
+    beats: path.join(dir, 'beats.json'),
+    framing: path.join(dir, 'framing.json'),
+    variantDir,
+    spec: variantDir === null ? null : path.join(variantDir, 'spec.json'),
+  };
 }
 
 function tierOf(
@@ -185,7 +236,7 @@ function tierOf(
   segments: string[],
   directory: boolean | undefined,
 ): Omit<ProjectEntry, 'zone'> {
-  const none = { chapter: null, variant: null, role: null };
+  const none = { video: null, chapter: null, variant: null, role: null };
   switch (zone) {
     case 'identity':
     case 'app-decisions':
@@ -224,8 +275,8 @@ function tierOf(
 }
 
 /**
- * `classifyProjectEntry` plus how much the path matters and, under `overlay/`, which chapter, variant and role it is.
- * Pure. `overlay/kybernesis-ch01/beats.json` is `authored`; `overlay/ch01/v5-frame/spec.json` is `generated`.
+ * `classifyProjectEntry` plus how much the path matters and, under `overlay/`, which video, variant and role it is.
+ * Pure. `overlay/nail-art/beats.json` is `authored`; `overlay/nail-art/v1-typeset/spec.json` is `generated`.
  */
 export function describeProjectEntry(relPath: string, isDirectory?: boolean): ProjectEntry {
   const zone = classifyProjectEntry(relPath, isDirectory);
