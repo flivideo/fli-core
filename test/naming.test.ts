@@ -275,8 +275,32 @@ describe('parseVideoFile / videoFileName (ruling "B only", 2026-09-22)', () => {
       { name: 'flivideo-tour', kind: 'audio', variant: 'a100', ext: 'm4a' },
       { name: 'flihub-demo', kind: 'overlay', variant: 'v5-frame', ext: 'mp4' },
       { name: 'flihub-demo', kind: 'part', variant: 'intro', ext: 'mov' },
+      // v0.26.0: a whole video an app made is named after how it was made.
+      { name: 'flivideo-tour', kind: 'edit', variant: null, ext: 'mp4' },
+      { name: 'flivideo-tour', kind: 'cast', variant: null, ext: 'mov' },
     ];
     for (const file of cases) expect(parseVideoFile(videoFileName(file), file.name)).toEqual(file);
+  });
+
+  it('names FliEdit and FliCast exports -edit and -cast, with no variant (v0.26.0)', () => {
+    expect(videoFileName({ name: 'flivideo-tour', kind: 'edit', ext: 'mp4' })).toBe(
+      'flivideo-tour-edit.mp4',
+    );
+    expect(videoFileName({ name: 'flivideo-tour', kind: 'cast', ext: 'mp4' })).toBe(
+      'flivideo-tour-cast.mp4',
+    );
+    expect(parseVideoFile('flivideo-tour-cast.mp4', 'flivideo-tour')).toEqual({
+      name: 'flivideo-tour',
+      kind: 'cast',
+      variant: null,
+      ext: 'mp4',
+    });
+    expect(parseVideoFile('flivideo-tour-edit-v2.mp4', 'flivideo-tour')).toMatchObject({
+      kind: 'unknown-kind',
+    });
+    expect(() =>
+      videoFileName({ name: 'x', kind: 'cast', variant: 'v2', ext: 'mp4' } as never),
+    ).toThrow(FliCoreError);
   });
 
   it('lets cut omit the variant, and can no longer write a -final (R11)', () => {

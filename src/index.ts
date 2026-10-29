@@ -63,11 +63,14 @@ export {
   VideoFolder,
   VideoFolderName,
   VideoPart,
+  WholeVideoApp,
   parseVideoFile,
   parseVideoFolder,
   videoFileName,
   videoFolderName,
 } from './video-file.js';
+
+export { WholeVideoOwner, wholeVideoOwner } from './whole-video.js';
 
 export {
   AppFile,
@@ -131,6 +134,10 @@ export {
   readBrandSettings,
   WriteBrandSettingsResult,
   writeBrandSettings,
+  UpdateBrandSettingsResult,
+  brandSettingsVersion,
+  updateBrandSettings,
+  type UpdateBrandSettingsOptions,
 } from './brand-settings.js';
 
 export {
@@ -324,7 +331,7 @@ export {
   type GitignoreOptions,
 } from './gitignore.js';
 
-export { cloneFile } from './fs-utils.js';
+export { cloneFile, takeLock } from './fs-utils.js';
 
 export {
   OPEN_ENV,

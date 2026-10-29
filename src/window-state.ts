@@ -1,7 +1,8 @@
-import { promises as fs, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
+import { promises as fs, mkdirSync, readFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { z } from 'zod';
+import { atomicWrite, atomicWriteSync } from './fs-utils.js';
 
 /**
  * Window positions that survive a restart (David, 2026-09-22): every Fli app window reopens where he last put it —
@@ -178,7 +179,8 @@ export function loadWindow(key: string, file: string = windowStatePath()): Saved
 }
 
 /**
- * Save one window: read-modify-write of its key, atomic rename, so several apps (and a test run) saving at once never
+ * Save one window: read-modify-write of its key, written through `atomicWrite` (a hidden, unique temp file, removed on
+ * failure), so several apps (and a test run) saving at once never
  * leave a torn file. Never throws — a window that cannot remember its spot is not worth an error. `false` = not saved.
  */
 export async function saveWindow(
@@ -190,9 +192,7 @@ export async function saveWindow(
     const text = await fs.readFile(file, 'utf8').catch(() => '');
     const windows = { ...entries(text), [key]: state };
     await fs.mkdir(path.dirname(file), { recursive: true });
-    const tmp = `${file}.${process.pid}.${Date.now()}.tmp`;
-    await fs.writeFile(tmp, serialise(windows));
-    await fs.rename(tmp, file);
+    await atomicWrite(file, serialise(windows));
     return true;
   } catch {
     return false;
@@ -208,9 +208,7 @@ export function saveWindowSync(
   try {
     const windows = { ...readSync(file), [key]: state };
     mkdirSync(path.dirname(file), { recursive: true });
-    const tmp = `${file}.${process.pid}.${Date.now()}.tmp`;
-    writeFileSync(tmp, serialise(windows));
-    renameSync(tmp, file);
+    atomicWriteSync(file, serialise(windows));
     return true;
   } catch {
     return false;
@@ -239,9 +237,7 @@ export function importWindowState(
   if (imported === 0) return 0;
   try {
     mkdirSync(path.dirname(file), { recursive: true });
-    const tmp = `${file}.${process.pid}.${Date.now()}.tmp`;
-    writeFileSync(tmp, serialise(windows));
-    renameSync(tmp, file);
+    atomicWriteSync(file, serialise(windows));
     return imported;
   } catch {
     return 0;

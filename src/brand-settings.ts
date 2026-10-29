@@ -1,6 +1,8 @@
+import { createHash } from 'node:crypto';
+import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { z } from 'zod';
-import { atomicWrite, errorMessage, readJsonFile } from './fs-utils.js';
+import { atomicWrite, errorCode, errorMessage, readJsonFile, takeLock } from './fs-utils.js';
 import { GitignoreOverlayRule } from './gitignore-rules.js';
 import { issuesOf, readFileResult } from './results.js';
 
@@ -110,6 +112,9 @@ export function readBrandSettings(brandRoot: string): Promise<ReadBrandSettingsR
   return readJsonFile(path.join(brandRoot, BRAND_SETTINGS_FILE), BrandSettings);
 }
 
+/** The bytes `writeBrandSettings` puts on disk, so a written version is known without reading the file back. */
+const serialise = (settings: BrandSettings): string => `${JSON.stringify(settings, null, 2)}\n`;
+
 export const WriteBrandSettingsResult = z.union([
   z.object({ kind: z.literal('written'), path: z.string() }),
   z.object({
@@ -137,9 +142,96 @@ export async function writeBrandSettings(
     };
   }
   try {
-    await atomicWrite(file, `${JSON.stringify(parsed.data, null, 2)}\n`);
+    await atomicWrite(file, serialise(parsed.data));
     return { kind: 'written', path: file };
   } catch (error) {
     return { kind: 'refused', reason: 'io-error', path: file, message: errorMessage(error) };
   }
 }
+
+export const UpdateBrandSettingsResult = z.union([
+  z.object({
+    kind: z.literal('written'),
+    path: z.string(),
+    settings: BrandSettings,
+    /** `brandSettingsVersion` of what was written: the version a caller hands back on its next write. */
+    version: z.string(),
+  }),
+  z.object({
+    kind: z.literal('refused'),
+    /**
+     * `unusable-file`: `fli.brand.json` exists but does not read as BrandSettings — never overwritten, fix it by hand.
+     * `busy`: another writer held the lock past the wait.
+     */
+    reason: z.enum(['invalid-input', 'io-error', 'unusable-file', 'busy']),
+    path: z.string(),
+    message: z.string(),
+  }),
+]);
+export type UpdateBrandSettingsResult = z.infer<typeof UpdateBrandSettingsResult>;
+
+export interface UpdateBrandSettingsOptions {
+  /** How long to wait for another writer's lock (default 3 s). */
+  waitMs?: number;
+  /** A lock older than this is a crashed writer's and is broken (default 10 s). */
+  staleMs?: number;
+}
+
+/**
+ * The one write path for `fli.brand.json` (W8, 2026-10-29: FliHub's Save and FliStudio's publish.set lost each other's
+ * changes). Under `fli.brand.json.lock` beside it, it re-reads the file, hands what is on disk NOW to `mutate`, and
+ * writes the result atomically — so two writers never lose each other's change. `mutate` gets `null` when the file is
+ * absent; it may be async, and it may throw to give up (the lock is released and the error rethrown, nothing written).
+ * An unusable file is refused, never overwritten. Never throws for its own reasons.
+ */
+export async function updateBrandSettings(
+  brandRoot: string,
+  mutate: (current: BrandSettings | null) => BrandSettings | Promise<BrandSettings>,
+  options: UpdateBrandSettingsOptions = {},
+): Promise<UpdateBrandSettingsResult> {
+  const file = path.join(brandRoot, BRAND_SETTINGS_FILE);
+  const refuse = (
+    reason: Extract<UpdateBrandSettingsResult, { kind: 'refused' }>['reason'],
+    message: string,
+  ) => ({ kind: 'refused', reason, path: file, message }) as const;
+  const lock = `${file}.lock`;
+  try {
+    if (!(await takeLock(lock, options.waitMs ?? 3000, options.staleMs ?? 10_000))) {
+      return refuse('busy', `${file} is being changed by another writer (${lock}); try again.`);
+    }
+  } catch (error) {
+    return refuse('io-error', errorMessage(error));
+  }
+  try {
+    const read = await readBrandSettings(brandRoot);
+    if (read?.kind === 'invalid') {
+      return refuse(
+        'unusable-file',
+        `${file} is not usable brand settings (${read.reason}: ${read.message}); fix it by hand first.`,
+      );
+    }
+    const next = await mutate(read?.value ?? null);
+    const written = await writeBrandSettings(brandRoot, next);
+    if (written.kind === 'refused') return refuse(written.reason, written.message);
+    const settings = BrandSettings.parse(next);
+    return { kind: 'written', path: file, settings, version: versionOf(serialise(settings)) };
+  } finally {
+    await fs.rm(lock, { force: true });
+  }
+}
+
+/**
+ * A version of `fli.brand.json` for optimistic concurrency: the sha256 (hex) of its bytes. A reader keeps the version it
+ * loaded and hands it back with its write; a different version now means the file changed elsewhere. Absent → `null`.
+ */
+export async function brandSettingsVersion(file: string): Promise<string | null> {
+  try {
+    return versionOf(await fs.readFile(file));
+  } catch (error) {
+    if (errorCode(error) === 'ENOENT') return null;
+    throw error;
+  }
+}
+
+const versionOf = (bytes: string | Buffer): string =>
+  createHash('sha256').update(bytes).digest('hex');

@@ -9,9 +9,10 @@ import {
   markPublished,
   parseYoutubeId,
   promoteFile,
+  PublishEdit,
+  PublishExport,
   publishReadiness,
   publishedVideos,
-  type PublishExport,
   type PublishFacts,
   type PublishReadiness,
   type PublishRow,
@@ -670,9 +671,61 @@ describe('small helpers', () => {
   it('clock and exportApp', () => {
     expect(clock(344)).toBe('5:44');
     expect(clock(3725)).toBe('1:02:05');
-    expect(exportApp('audio')).toBe('flicut');
-    expect(exportApp('overlay')).toBeNull();
-    expect(exportApp('legacy')).toBe('fliedit');
     expect(exportApp(null)).toBeNull();
+  });
+
+  // v0.26.0: exportApp is the name-only half of wholeVideoOwner and never claims more than the name says.
+  it.each([
+    ['cut', 'flicut'],
+    ['audio', 'flicut'],
+    ['edit', 'fliedit'],
+    ['cast', 'flicast'],
+    ['overlay', 'flistudio'],
+    // A -final may be FliEdit's or FliCast's; only the decision files can say (wholeVideoOwner).
+    ['legacy', null],
+    // A part is placed by hand (FliStudio export.place); no app writes one.
+    ['part', null],
+  ] as const)('exportApp(%s) → %s', (kind, app) => {
+    expect(exportApp(kind)).toBe(app);
+  });
+});
+
+describe('-edit and -cast exports (v0.26.0)', () => {
+  const cast = exp({
+    file: `videos/${V}/${V}-cast.mp4`,
+    kind: 'cast',
+    app: 'flicast',
+    source: 'FliCast export',
+    modifiedAt: '2026-10-05T05:30:00.000Z',
+  });
+  const castEdit = {
+    file: `fli.cast.${V}.json`,
+    app: 'flicast',
+    modifiedAt: '2026-10-05T05:20:00.000Z',
+  } as const;
+
+  it('a PublishExport carries the new kinds and every whole-video app', () => {
+    expect(PublishExport.parse(cast)).toMatchObject({ kind: 'cast', app: 'flicast' });
+    expect(PublishExport.parse({ ...cast, kind: 'edit', app: 'fliedit' })).toMatchObject({
+      kind: 'edit',
+    });
+    expect(PublishExport.parse({ ...cast, kind: 'overlay', app: 'flistudio' })).toMatchObject({
+      app: 'flistudio',
+    });
+    expect(PublishEdit.parse(castEdit).app).toBe('flicast');
+  });
+
+  it('the newest FliCast edit picks its -cast export as the final', () => {
+    const r = rowOf(
+      facts({ exports: [a100, cut, cast], edits: [...facts().edits, castEdit] }),
+      'video',
+    );
+    expect(r).toMatchObject({ state: 'inferred', file: cast.file });
+    expect(r.why).toContain('FliCast export');
+  });
+
+  it('a FliCast edit with no export yet says so by name', () => {
+    const r = rowOf(facts({ exports: [], edits: [castEdit] }), 'video');
+    expect(r.why).toContain('export from FliCast');
   });
 });

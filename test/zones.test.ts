@@ -212,10 +212,10 @@ describe('the part video kind (plan §4C item 2)', () => {
     expect(parseVideoFile('x-part.mp4', 'x').kind).toBe('unknown-kind');
   });
 
-  it('is a kind, written by FliCut (it sits on the assembly)', () => {
+  it('is a kind, placed by hand (v0.26.0: no app writes one — FliStudio export.place copies it in)', () => {
     expect(VideoFileKind.options).toContain('part');
     expect(VideoFileKind.options).not.toContain('final'); // R11: retired as a kind
-    expect(exportApp('part')).toBe('flicut');
+    expect(exportApp('part')).toBeNull();
   });
 
   it('a video named like a part still splits once its name is known', () => {

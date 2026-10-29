@@ -10,6 +10,7 @@ import {
   type ResourcesFile,
 } from './resources.js';
 import { stampOf } from './stamp.js';
+import { WholeVideoApp } from './video-file.js';
 
 /**
  * Ready for YouTube (David 2026-10-05, mock https://claude.ai/artifact/9hLAvSeF9b6DJWEX3yMEmP): a VIEW over files and
@@ -83,8 +84,11 @@ export const PUBLISH_RULES = {
 } as const;
 export type PublishRuleId = keyof typeof PUBLISH_RULES;
 
-/** The edit apps: FliCut writes `-cut`, `-audio-<treatment>` and `-part-…`; FliEdit wrote the legacy `-final`. */
-export const EditApp = z.enum(['flicut', 'fliedit']);
+/**
+ * The apps with an edit document (`fli.<cut|edit|cast>.<video>.json`): FliCut writes `-cut` and `-audio-<treatment>`,
+ * FliEdit `-edit`, FliCast `-cast` (v0.26.0). A legacy `-final` was FliEdit's or FliCast's.
+ */
+export const EditApp = z.enum(['flicut', 'fliedit', 'flicast']);
 export type EditApp = z.infer<typeof EditApp>;
 
 const Iso = z.iso.datetime({ offset: true });
@@ -94,12 +98,13 @@ export const PublishExport = z.object({
   /** Project-relative, `/`-separated. */
   file: z.string().min(1),
   /**
-   * `cut` · `audio` · `overlay` (D15) · `part`; `legacy` for a file named with a retired tag (`-final`, R11) — a whole
-   * video like any other; null for a file that does not parse.
+   * `cut` · `audio` · `overlay` (D15) · `part` · `edit` · `cast` (v0.26.0); `legacy` for a file named with a retired
+   * tag (`-final`, R11) — a whole video like any other; null for a file that does not parse.
    */
-  kind: z.enum(['cut', 'audio', 'overlay', 'part', 'legacy']).nullable(),
+  kind: z.enum(['cut', 'audio', 'overlay', 'part', 'edit', 'cast', 'legacy']).nullable(),
   variant: z.string().nullable(),
-  app: EditApp.nullable(),
+  /** Who made it: `wholeVideoOwner`'s answer (the gatherer has the project), else `exportApp(kind)`. */
+  app: WholeVideoApp.nullable(),
   /**
    * Where the file came from, in words, when the app knows better than the kind does ("FliCut export", "FliEdit
    * export", "generated render", "placed file"). Shown instead of guessing an app from the name.
@@ -188,16 +193,26 @@ export const AUDIO_TREATMENTS: Readonly<Record<string, string>> = Object.freeze(
 });
 
 /**
- * The edit app that writes an export kind. An overlay is null: FliEdit or FliStudio's Overlay Pilot renders one, and the
- * name cannot tell which (the gatherer says so in `source`).
+ * The app a file's KIND names, without looking at the project: the name-only half of `wholeVideoOwner`, for a caller
+ * with no project folder. It never claims more than the name says: a `legacy` `-final` may be FliEdit's or FliCast's
+ * and a `part` is placed by hand (no app writes one), so both are null — ask `wholeVideoOwner`, which reads the
+ * decision files, for those. Where the two can be asked, `wholeVideoOwner` wins: a kind without its decision file is a
+ * placed file.
  */
-export function exportApp(kind: PublishExport['kind']): EditApp | null {
-  if (kind === 'cut' || kind === 'audio' || kind === 'part') return 'flicut';
-  if (kind === 'legacy') return 'fliedit';
+export function exportApp(kind: PublishExport['kind']): WholeVideoApp | null {
+  if (kind === 'cut' || kind === 'audio') return 'flicut';
+  if (kind === 'edit') return 'fliedit';
+  if (kind === 'cast') return 'flicast';
+  if (kind === 'overlay') return 'flistudio';
   return null;
 }
 
-const APP_NAMES: Record<EditApp, string> = { flicut: 'FliCut', fliedit: 'FliEdit' };
+const APP_NAMES: Record<WholeVideoApp, string> = {
+  flicut: 'FliCut',
+  fliedit: 'FliEdit',
+  flicast: 'FliCast',
+  flistudio: 'FliStudio',
+};
 const LIVE = new Set(['chosen', 'published']);
 const base = (file: string) => file.split('/').pop() as string;
 

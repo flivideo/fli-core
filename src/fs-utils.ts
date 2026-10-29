@@ -1,5 +1,5 @@
 import { randomBytes } from 'node:crypto';
-import { constants, promises as fs } from 'node:fs';
+import { constants, promises as fs, renameSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import type { z } from 'zod';
 import { issuesOf, type ReadFileResult } from './results.js';
@@ -25,6 +25,18 @@ export async function atomicWrite(target: string, content: string): Promise<void
     await fs.rename(tmp, target);
   } catch (error) {
     await fs.rm(tmp, { force: true });
+    throw error;
+  }
+}
+
+/** `atomicWrite`, synchronously: for a write that must land before the process exits (a window's close-time save). */
+export function atomicWriteSync(target: string, content: string): void {
+  const tmp = tempPathFor(target);
+  try {
+    writeFileSync(tmp, content, { flag: 'wx' });
+    renameSync(tmp, target);
+  } catch (error) {
+    rmSync(tmp, { force: true });
     throw error;
   }
 }

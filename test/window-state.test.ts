@@ -129,6 +129,25 @@ describe('the store — one file, keyed by <app>/<role>', () => {
     expect((await fs.readdir(path.dirname(file))).filter((f) => f.endsWith('.tmp'))).toEqual([]);
   });
 
+  it('writes through fli-core atomicWrite: many saves in the same millisecond all land, no temp file left', async () => {
+    // W7 (2026-10-29): the hand-rolled `<file>.<pid>.<Date.now()>.tmp` collided within a millisecond.
+    const source = await fs.readFile(
+      path.join(import.meta.dirname, '..', 'src', 'window-state.ts'),
+      'utf8',
+    );
+    expect(source).toMatch(/import \{ atomicWrite, atomicWriteSync \} from '\.\/fs-utils\.js'/);
+    const file = path.join(await tempDir(), 'window-state.json');
+    const saved = await Promise.all(
+      Array.from({ length: 8 }, (_, i) =>
+        saveWindow(`flicut/w${i}`, { x: i, y: i, width: 300, height: 200 }, file),
+      ),
+    );
+    expect(saved.every(Boolean)).toBe(true);
+    for (let i = 0; i < 8; i++)
+      expect(saveWindowSync(`flicast/s${i}`, { x: i, y: 0, width: 9, height: 9 }, file)).toBe(true);
+    expect(await fs.readdir(path.dirname(file))).toEqual(['window-state.json']);
+  });
+
   it('a torn or foreign file reads as empty and is rewritten; a bad entry is skipped', async () => {
     const file = path.join(await tempDir(), 'window-state.json');
     await fs.writeFile(file, '{');
