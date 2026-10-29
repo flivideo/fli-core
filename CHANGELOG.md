@@ -2,6 +2,10 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.26.0 — 2026-10-29
+
+Released from v0.26.0-rc.1 unchanged (merged to `main` after the overnight gates passed).
+
 ## v0.26.0-rc.1 — 2026-10-29
 
 Release candidate for the overnight build (`flivideo/docs/briefs/overnight-2026-10-29-build-spec.md`, W3 + W7 + W8).
