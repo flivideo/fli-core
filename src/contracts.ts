@@ -21,6 +21,38 @@ export {
 
 export { Recording, RecordingTag, parseRecording, recordingFileName } from './recording.js';
 
+export { Stamp, stampOf } from './stamp.js';
+
+export {
+  NOTES_FILE,
+  NOTE_ENTITY,
+  NOTE_EXCERPT_CONTEXT,
+  NOTE_FULL_LIMIT,
+  ChangeInput,
+  ChangeSnapshot,
+  NoteChannel,
+  NoteExcerpt,
+  NoteFilter,
+  NoteForm,
+  NoteInput,
+  NoteKind,
+  NoteLinks,
+  NoteProducer,
+  NoteRecord,
+  NoteScope,
+  NoteState,
+  NoteStatus,
+  NoteTarget,
+  NoteWhere,
+  ResolveAskInput,
+  matchesNote,
+  noteChannelOf,
+  noteRecordOf,
+  noteStates,
+  snapshotChange,
+  type SnapshotOptions,
+} from './note-record.js';
+
 export {
   AppFile,
   AppName,

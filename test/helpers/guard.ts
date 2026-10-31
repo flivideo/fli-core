@@ -76,6 +76,7 @@ const ONE_PATH = [
   'stat',
   'lstat',
   'writeFile',
+  'appendFile',
   'mkdir',
   'rm',
   'open',

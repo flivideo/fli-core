@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 405,
+    "declared": 461,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -17,9 +17,9 @@
         "not_schema_bearing": 1
       },
       "src/brand-settings.ts": {
-        "declared": 16,
+        "declared": 19,
         "gaps": 2,
-        "mirrored": 14,
+        "mirrored": 17,
         "not_read": 0,
         "not_schema_bearing": 1
       },
@@ -112,6 +112,20 @@
         "gaps": 0,
         "mirrored": 7,
         "not_read": 0,
+        "not_schema_bearing": 0
+      },
+      "src/note-record.ts": {
+        "declared": 35,
+        "gaps": 0,
+        "mirrored": 35,
+        "not_read": 0,
+        "not_schema_bearing": 4
+      },
+      "src/notes.ts": {
+        "declared": 13,
+        "gaps": 0,
+        "mirrored": 12,
+        "not_read": 1,
         "not_schema_bearing": 0
       },
       "src/open-args.ts": {
@@ -213,11 +227,18 @@
         "not_schema_bearing": 1
       },
       "src/video-file.ts": {
-        "declared": 17,
+        "declared": 19,
         "gaps": 0,
-        "mirrored": 17,
+        "mirrored": 19,
         "not_read": 0,
         "not_schema_bearing": 1
+      },
+      "src/whole-video.ts": {
+        "declared": 3,
+        "gaps": 0,
+        "mirrored": 3,
+        "not_read": 0,
+        "not_schema_bearing": 0
       },
       "src/window-state.ts": {
         "declared": 11,
@@ -242,21 +263,21 @@
       }
     },
     "gaps": 22,
-    "mirrored": 350,
-    "not_read": 33,
-    "not_schema_bearing": 32,
+    "mirrored": 405,
+    "not_read": 34,
+    "not_schema_bearing": 36,
     "not_schema_bearing_by_family": {
       "function": 1,
       "function type": 1,
-      "literal constant": 30
+      "literal constant": 34
     }
   },
   "closed_sets": [
     {
       "anchor": {
-        "end_line": 121,
+        "end_line": 126,
         "file": "src/brand-settings.ts",
-        "line": 113
+        "line": 118
       },
       "authority": "the `kind` discriminator of the union `WriteBrandSettingsResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -265,14 +286,14 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 114
+            "line": 119
           },
           "value": "written"
         },
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 116
+            "line": 121
           },
           "value": "refused"
         }
@@ -281,7 +302,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 117
+        "line": 122
       },
       "authority": "`z.enum` `reason` - a single declaring symbol",
       "grade": "declared",
@@ -290,16 +311,81 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 117
+            "line": 122
           },
           "value": "invalid-input"
         },
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 117
+            "line": 122
           },
           "value": "io-error"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 170,
+        "file": "src/brand-settings.ts",
+        "line": 152
+      },
+      "authority": "the `kind` discriminator of the union `UpdateBrandSettingsResult` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/brand-settings.UpdateBrandSettingsResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 154
+          },
+          "value": "written"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 161
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/brand-settings.ts",
+        "line": 166
+      },
+      "authority": "`z.enum` `reason` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/brand-settings.UpdateBrandSettingsResult[kind=refused].reason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 166
+          },
+          "value": "invalid-input"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 166
+          },
+          "value": "io-error"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 166
+          },
+          "value": "unusable-file"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 166
+          },
+          "value": "busy"
         }
       ]
     },
@@ -1368,45 +1454,45 @@
     {
       "anchor": {
         "file": "src/fs-utils.ts",
-        "line": 32
+        "line": 44
       },
       "authority": "module constant `NO_HARD_LINKS` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "finding": "REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:44 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.",
       "grade": "derived",
       "id": "src/fs-utils.NO_HARD_LINKS",
       "members": [
         {
           "anchor": {
             "file": "src/fs-utils.ts",
-            "line": 32
+            "line": 44
           },
           "value": "EPERM"
         },
         {
           "anchor": {
             "file": "src/fs-utils.ts",
-            "line": 32
+            "line": 44
           },
           "value": "ENOTSUP"
         },
         {
           "anchor": {
             "file": "src/fs-utils.ts",
-            "line": 32
+            "line": 44
           },
           "value": "EOPNOTSUPP"
         },
         {
           "anchor": {
             "file": "src/fs-utils.ts",
-            "line": 32
+            "line": 44
           },
           "value": "ENOSYS"
         },
         {
           "anchor": {
             "file": "src/fs-utils.ts",
-            "line": 32
+            "line": 44
           },
           "value": "EXDEV"
         }
@@ -1808,6 +1894,302 @@
       "aliases": [
         {
           "anchor": {
+            "file": "src/note-record.ts",
+            "line": 23
+          },
+          "name": "NoteKind"
+        }
+      ],
+      "anchor": {
+        "file": "src/note-record.ts",
+        "line": 22
+      },
+      "authority": "`z.enum` `NoteKind` - a single declaring symbol",
+      "doc": "`note`: kept, never nags. `ask`: a to-do until done. `change`: written by the app when a record changes.",
+      "grade": "declared",
+      "id": "src/note-record.NoteKind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 22
+          },
+          "value": "note"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 22
+          },
+          "value": "ask"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 22
+          },
+          "value": "change"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 27
+          },
+          "name": "NoteChannel"
+        }
+      ],
+      "anchor": {
+        "file": "src/note-record.ts",
+        "line": 26
+      },
+      "authority": "`z.enum` `NoteChannel` - a single declaring symbol",
+      "doc": "How the words arrived.",
+      "grade": "declared",
+      "id": "src/note-record.NoteChannel",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 26
+          },
+          "value": "ui"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 26
+          },
+          "value": "chat"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 26
+          },
+          "value": "voice"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 26
+          },
+          "value": "agent"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 31
+          },
+          "name": "NoteStatus"
+        }
+      ],
+      "anchor": {
+        "file": "src/note-record.ts",
+        "line": 30
+      },
+      "authority": "`z.enum` `NoteStatus` - a single declaring symbol",
+      "doc": "`kept` (a note) \u00b7 `open` \u2192 `done` (an ask). A `change` has no status.",
+      "grade": "declared",
+      "id": "src/note-record.NoteStatus",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 30
+          },
+          "value": "kept"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 30
+          },
+          "value": "open"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 30
+          },
+          "value": "done"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 35
+          },
+          "name": "NoteScope"
+        }
+      ],
+      "anchor": {
+        "file": "src/note-record.ts",
+        "line": 34
+      },
+      "authority": "`z.enum` `NoteScope` - a single declaring symbol",
+      "doc": "`one` entity (`entityId`), `many` (`entityIds`), or an `aggregate` described by a query in words (`query`).",
+      "grade": "declared",
+      "id": "src/note-record.NoteScope",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 34
+          },
+          "value": "one"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 34
+          },
+          "value": "many"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 34
+          },
+          "value": "aggregate"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 105
+          },
+          "name": "NoteForm"
+        }
+      ],
+      "anchor": {
+        "file": "src/note-record.ts",
+        "line": 104
+      },
+      "authority": "`z.enum` `NoteForm` - a single declaring symbol",
+      "doc": "How `before` / `after` are held on a `change`. `full`: the values themselves. `excerpt`: two text excerpts",
+      "grade": "declared",
+      "id": "src/note-record.NoteForm",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 104
+          },
+          "value": "full"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 104
+          },
+          "value": "excerpt"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 104
+          },
+          "value": "keys"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 59,
+        "file": "src/notes.ts",
+        "line": 40
+      },
+      "authority": "the `kind` discriminator of `z.discriminatedUnion` `AddNoteResult` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/notes.AddNoteResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 41
+          },
+          "value": "written"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 43
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/notes.ts",
+        "line": 48
+      },
+      "authority": "`z.enum` `reason` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/notes.AddNoteResult[kind=refused].reason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 49
+          },
+          "value": "invalid-input"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 50
+          },
+          "value": "io-error"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 51
+          },
+          "value": "busy"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 52
+          },
+          "value": "not-found"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 53
+          },
+          "value": "not-an-ask"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 54
+          },
+          "value": "already-done"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
             "file": "src/open-args.ts",
             "line": 37
           },
@@ -1936,14 +2318,14 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 44
+            "line": 45
           },
           "name": "PublishPiece"
         }
       ],
       "anchor": {
         "file": "src/publish.ts",
-        "line": 43
+        "line": 44
       },
       "authority": "`z.enum` `PublishPiece` - members read through `PUBLISH_PIECES` (src/publish.PUBLISH_PIECES) - a single declaring symbol",
       "grade": "declared",
@@ -1952,63 +2334,63 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 33
+            "line": 34
           },
           "value": "video"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 34
+            "line": 35
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 35
+            "line": 36
           },
           "value": "captions"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 36
+            "line": 37
           },
           "value": "thumbnail"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 37
+            "line": 38
           },
           "value": "title"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 38
+            "line": 39
           },
           "value": "description"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 39
+            "line": 40
           },
           "value": "chapters"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 40
+            "line": 41
           },
           "value": "studio"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 41
+            "line": 42
           },
           "value": "published"
         }
@@ -2019,14 +2401,14 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 64
+            "line": 65
           },
           "name": "PublishState"
         }
       ],
       "anchor": {
         "file": "src/publish.ts",
-        "line": 63
+        "line": 64
       },
       "authority": "`z.enum` `PublishState` - a single declaring symbol",
       "doc": "Human vs AI must be visible (David 2026-10-05): `set` \u2014 a person's choice; `suggested` \u2014 an agent's choice (Tuber,",
@@ -2036,42 +2418,42 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 63
+            "line": 64
           },
           "value": "set"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 63
+            "line": 64
           },
           "value": "suggested"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 63
+            "line": 64
           },
           "value": "inferred"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 63
+            "line": 64
           },
           "value": "default"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 63
+            "line": 64
           },
           "value": "missing"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 63
+            "line": 64
           },
           "value": "stale"
         }
@@ -2079,9 +2461,9 @@
     },
     {
       "anchor": {
-        "end_line": 83,
+        "end_line": 84,
         "file": "src/publish.ts",
-        "line": 77
+        "line": 78
       },
       "authority": "`as const` object keys `PUBLISH_RULES`, typed from by `keyof typeof PUBLISH_RULES` - a single declaring symbol",
       "grade": "declared",
@@ -2090,35 +2472,35 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 78
+            "line": 79
           },
           "value": "newest-export"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 79
+            "line": 80
           },
           "value": "audio-from-name"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 80
+            "line": 81
           },
           "value": "same-export-captions"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 81
+            "line": 82
           },
           "value": "ylo-launch"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 82
+            "line": 83
           },
           "value": "brand-default"
         }
@@ -2129,40 +2511,47 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 88
+            "line": 92
           },
           "name": "EditApp"
         }
       ],
       "anchor": {
         "file": "src/publish.ts",
-        "line": 87
+        "line": 91
       },
       "authority": "`z.enum` `EditApp` - a single declaring symbol",
-      "doc": "The edit apps: FliCut writes `-cut`, `-audio-<treatment>` and `-part-\u2026`; FliEdit wrote the legacy `-final`.",
+      "doc": "The apps with an edit document (`fli.<cut|edit|cast>.<video>.json`): FliCut writes `-cut` and `-audio-<treatment>`,",
       "grade": "declared",
       "id": "src/publish.EditApp",
       "members": [
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 87
+            "line": 91
           },
           "value": "flicut"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 87
+            "line": 91
           },
           "value": "fliedit"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 91
+          },
+          "value": "flicast"
         }
       ]
     },
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 100
+        "line": 104
       },
       "authority": "`z.enum` `kind` - a single declaring symbol",
       "grade": "declared",
@@ -2171,35 +2560,49 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 100
+            "line": 104
           },
           "value": "cut"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 100
+            "line": 104
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 100
+            "line": 104
           },
           "value": "overlay"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 100
+            "line": 104
           },
           "value": "part"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 100
+            "line": 104
+          },
+          "value": "edit"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 104
+          },
+          "value": "cast"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 104
           },
           "value": "legacy"
         }
@@ -2208,7 +2611,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 153
+        "line": 158
       },
       "authority": "`z.enum` `source` - a single declaring symbol",
       "grade": "declared",
@@ -2217,35 +2620,35 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 153
+            "line": 158
           },
           "value": "choice"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 153
+            "line": 158
           },
           "value": "rule"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 153
+            "line": 158
           },
           "value": "brand"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 153
+            "line": 158
           },
           "value": "ylo"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 153
+            "line": 158
           },
           "value": "none"
         }
@@ -2254,24 +2657,24 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 201
+        "line": 216
       },
       "authority": "module constant `LIVE` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `LIVE` at src/publish.ts:201 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
+      "finding": "REFACTOR (minor): `LIVE` at src/publish.ts:216 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
       "grade": "derived",
       "id": "src/publish.LIVE",
       "members": [
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 201
+            "line": 216
           },
           "value": "chosen"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 201
+            "line": 216
           },
           "value": "published"
         }
@@ -2990,14 +3393,14 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 24
+            "line": 26
           },
           "name": "VideoFileKind"
         }
       ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 23
+        "line": 25
       },
       "authority": "`z.enum` `VideoFileKind` - a single declaring symbol",
       "grade": "declared",
@@ -3006,30 +3409,44 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 23
+            "line": 25
           },
           "value": "cut"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 23
+            "line": 25
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 23
+            "line": 25
           },
           "value": "overlay"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 23
+            "line": 25
           },
           "value": "part"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 25
+          },
+          "value": "edit"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 25
+          },
+          "value": "cast"
         }
       ]
     },
@@ -3038,14 +3455,63 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 28
+            "line": 33
+          },
+          "name": "WholeVideoApp"
+        }
+      ],
+      "anchor": {
+        "file": "src/video-file.ts",
+        "line": 32
+      },
+      "authority": "`z.enum` `WholeVideoApp` - a single declaring symbol",
+      "doc": "The apps that make a whole video (v0.26.0): FliCut (`-cut`, `-audio-\u2026`), FliEdit (`-edit`), FliCast (`-cast`) and",
+      "grade": "declared",
+      "id": "src/video-file.WholeVideoApp",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 32
+          },
+          "value": "flicut"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 32
+          },
+          "value": "fliedit"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 32
+          },
+          "value": "flicast"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 32
+          },
+          "value": "flistudio"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 37
           },
           "name": "VideoPart"
         }
       ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 27
+        "line": 36
       },
       "authority": "`z.enum` `VideoPart` - a single declaring symbol",
       "doc": "Which section of a video a `part` file is. A closed set: `<name>-part-<intro|body|outro>`.",
@@ -3055,21 +3521,21 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 27
+            "line": 36
           },
           "value": "intro"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 27
+            "line": 36
           },
           "value": "body"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 27
+            "line": 36
           },
           "value": "outro"
         }
@@ -3077,9 +3543,9 @@
     },
     {
       "anchor": {
-        "end_line": 35,
+        "end_line": 46,
         "file": "src/video-file.ts",
-        "line": 30
+        "line": 39
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `VideoFile` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -3088,30 +3554,44 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 40
           },
           "value": "cut"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 32
+            "line": 41
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 33
+            "line": 42
           },
           "value": "overlay"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 34
+            "line": 43
           },
           "value": "part"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 44
+          },
+          "value": "edit"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 45
+          },
+          "value": "cast"
         }
       ]
     },
@@ -3120,14 +3600,14 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 47
+            "line": 58
           },
           "name": "RetiredVideoTag"
         }
       ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 46
+        "line": 57
       },
       "authority": "`z.enum` `RetiredVideoTag` - a single declaring symbol",
       "doc": "Tags a file name may still carry from before a ruling retired them (R11: `-final`). Read, never written.",
@@ -3137,7 +3617,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 46
+            "line": 57
           },
           "value": "final"
         }
@@ -3146,7 +3626,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 59
+        "line": 70
       },
       "authority": "the `kind` discriminator of the union `ParsedVideoFile` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -3155,44 +3635,91 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 40
           },
           "value": "cut"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 32
+            "line": 41
           },
           "value": "audio"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 33
+            "line": 42
           },
           "value": "overlay"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 34
+            "line": 43
           },
           "value": "part"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 52
+            "line": 44
+          },
+          "value": "edit"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 45
+          },
+          "value": "cast"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 63
           },
           "value": "legacy"
         },
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 39
+            "line": 50
           },
           "value": "unknown-kind"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 36,
+        "file": "src/whole-video.ts",
+        "line": 32
+      },
+      "authority": "`as const` object keys `MAKERS`, typed from by `keyof typeof MAKERS` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/whole-video.MAKERS",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/whole-video.ts",
+            "line": 33
+          },
+          "value": "flicut"
+        },
+        {
+          "anchor": {
+            "file": "src/whole-video.ts",
+            "line": 34
+          },
+          "value": "fliedit"
+        },
+        {
+          "anchor": {
+            "file": "src/whole-video.ts",
+            "line": 35
+          },
+          "value": "flicast"
         }
       ]
     },
@@ -3548,19 +4075,19 @@
     {
       "anchor": {
         "file": "src/fs-utils.ts",
-        "line": 32
+        "line": 44
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:44 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/fs-utils.NO_HARD_LINKS"
     },
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 201
+        "line": 216
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `LIVE` at src/publish.ts:201 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `LIVE` at src/publish.ts:216 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/publish.LIVE"
     },
     {
@@ -3573,7 +4100,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-10-28T06:20:49+00:00",
+  "generated": "2026-10-31T16:14:55+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -3880,15 +4407,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 20
+            "line": 22
           },
           "name": "TranscriptionChoice"
         }
       ],
       "anchor": {
-        "end_line": 19,
+        "end_line": 21,
         "file": "src/brand-settings.ts",
-        "line": 14
+        "line": 16
       },
       "bases": [],
       "doc": "A level's transcription providers (FliTools reads them: global `flitools.json` \u2192 brand `fli.brand.json` \u2192 project",
@@ -3897,7 +4424,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 16
+            "line": 18
           },
           "default": null,
           "doc": "Pass 1 (fast): `auto`, `groq-whisper`, `mlx-whisper`, \u2026",
@@ -3907,7 +4434,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 18
+            "line": 20
           },
           "default": null,
           "doc": "Pass 2 (edit-grade): `crisperwhisper`, `elevenlabs`, `off`, \u2026",
@@ -3924,15 +4451,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 39
+            "line": 41
           },
           "name": "BrandPublishSettings"
         }
       ],
       "anchor": {
-        "end_line": 38,
+        "end_line": 40,
         "file": "src/brand-settings.ts",
-        "line": 28
+        "line": 30
       },
       "bases": [],
       "doc": "The brand's publishing settings, authored by the brand (CTAs, affiliates, legal\u2026). Moved verbatim from FliHub's",
@@ -3941,7 +4468,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 29
+            "line": 31
           },
           "default": null,
           "name": "brand",
@@ -3950,7 +4477,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 30
+            "line": 32
           },
           "default": null,
           "name": "socialLinks",
@@ -3959,7 +4486,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 31
+            "line": 33
           },
           "default": null,
           "name": "ctas",
@@ -3968,7 +4495,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 32
+            "line": 34
           },
           "default": null,
           "name": "affiliates",
@@ -3977,7 +4504,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 35
+            "line": 37
           },
           "default": null,
           "name": "playlists",
@@ -3986,7 +4513,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 36
+            "line": 38
           },
           "default": null,
           "name": "descriptionTemplate",
@@ -3995,7 +4522,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 37
+            "line": 39
           },
           "default": null,
           "name": "_meta",
@@ -4009,7 +4536,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 29
+        "line": 31
       },
       "bases": [],
       "doc": null,
@@ -4021,7 +4548,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 32
+        "line": 34
       },
       "bases": [],
       "doc": null,
@@ -4029,7 +4556,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 33
+            "line": 35
           },
           "default": null,
           "name": "name",
@@ -4038,7 +4565,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 33
+            "line": 35
           },
           "default": null,
           "name": "url",
@@ -4047,7 +4574,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 33
+            "line": 35
           },
           "default": null,
           "name": "active",
@@ -4061,7 +4588,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 36
+        "line": 38
       },
       "bases": [],
       "doc": null,
@@ -4073,7 +4600,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 37
+        "line": 39
       },
       "bases": [],
       "doc": null,
@@ -4087,15 +4614,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 51
+            "line": 53
           },
           "name": "BrandYouTubeSettings"
         }
       ],
       "anchor": {
-        "end_line": 50,
+        "end_line": 52,
         "file": "src/brand-settings.ts",
-        "line": 45
+        "line": 47
       },
       "bases": [],
       "doc": "The brand's YouTube choices, made by a person. Playlist **ids**; titles come from the YouTube mirror. Everything YouTube",
@@ -4104,7 +4631,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 47
+            "line": 49
           },
           "default": "[]",
           "doc": "The playlists this brand uses: offered in Launch, shown first on the brand's YouTube page.",
@@ -4114,7 +4641,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 49
+            "line": 51
           },
           "default": "[]",
           "doc": "The brand's usual picks, pre-ticked for a new video.",
@@ -4131,15 +4658,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 66
+            "line": 68
           },
           "name": "BrandStudioDefaults"
         }
       ],
       "anchor": {
-        "end_line": 65,
+        "end_line": 67,
         "file": "src/brand-settings.ts",
-        "line": 57
+        "line": 59
       },
       "bases": [],
       "doc": "The YouTube Studio defaults a new video starts with (category, audience, language, the AI-use and paid-promotion",
@@ -4148,7 +4675,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 58
+            "line": 60
           },
           "default": null,
           "name": "category",
@@ -4157,7 +4684,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 59
+            "line": 61
           },
           "default": null,
           "name": "audience",
@@ -4166,7 +4693,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 60
+            "line": 62
           },
           "default": null,
           "name": "language",
@@ -4175,7 +4702,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 62
+            "line": 64
           },
           "default": null,
           "doc": "Studio 'AI use' default (altered or synthetic content); absent \u2192 undecided, the app never guesses.",
@@ -4185,7 +4712,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 64
+            "line": 66
           },
           "default": null,
           "doc": "Studio 'Paid promotion' default; absent \u2192 undecided, the app never guesses.",
@@ -4202,15 +4729,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 79
+            "line": 81
           },
           "name": "BrandResearchSettings"
         }
       ],
       "anchor": {
-        "end_line": 78,
+        "end_line": 80,
         "file": "src/brand-settings.ts",
-        "line": 73
+        "line": 75
       },
       "bases": [],
       "doc": "The brand's research switches (FliStudio `research.*`, docs/briefs/research-keywords-build-brief.md). Sources that",
@@ -4219,7 +4746,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 75
+            "line": 77
           },
           "default": null,
           "doc": "YouTube autocomplete (undocumented endpoint). Absent \u2192 on.",
@@ -4229,7 +4756,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 77
+            "line": 79
           },
           "default": null,
           "doc": "Unofficial sources that are off by default (Google Trends, YouTube filter). Absent \u2192 off.",
@@ -4246,15 +4773,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 103
+            "line": 105
           },
           "name": "BrandSettings"
         }
       ],
       "anchor": {
-        "end_line": 102,
+        "end_line": 104,
         "file": "src/brand-settings.ts",
-        "line": 81
+        "line": 83
       },
       "bases": [],
       "doc": null,
@@ -4263,7 +4790,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 82
+            "line": 84
           },
           "default": null,
           "name": "schema",
@@ -4272,7 +4799,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 83
+            "line": 85
           },
           "default": null,
           "name": "brand",
@@ -4281,7 +4808,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 84
+            "line": 86
           },
           "default": null,
           "name": "colour",
@@ -4290,7 +4817,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 88
+            "line": 90
           },
           "default": null,
           "doc": "The brand's transcription providers, over the suite default; absent \u2192 the suite default.",
@@ -4300,7 +4827,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 93
+            "line": 95
           },
           "default": null,
           "doc": "The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's",
@@ -4310,7 +4837,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 95
+            "line": 97
           },
           "default": null,
           "doc": "Publishing settings (CTAs, affiliates, legal\u2026); optional, so older readers are unaffected.",
@@ -4320,7 +4847,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 97
+            "line": 99
           },
           "default": null,
           "doc": "The brand's YouTube playlist choices.",
@@ -4330,7 +4857,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 99
+            "line": 101
           },
           "default": null,
           "doc": "YouTube Studio defaults for a new video.",
@@ -4340,7 +4867,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 101
+            "line": 103
           },
           "default": null,
           "doc": "Which research sources the brand allows.",
@@ -4357,15 +4884,15 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 122
+            "line": 127
           },
           "name": "WriteBrandSettingsResult"
         }
       ],
       "anchor": {
-        "end_line": 121,
+        "end_line": 126,
         "file": "src/brand-settings.ts",
-        "line": 113
+        "line": 118
       },
       "bases": [],
       "doc": null,
@@ -4374,7 +4901,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 114
+            "line": 119
           },
           "default": null,
           "name": "written",
@@ -4383,7 +4910,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 116
+            "line": 121
           },
           "default": null,
           "name": "refused",
@@ -4397,7 +4924,7 @@
     {
       "anchor": {
         "file": "src/brand-settings.ts",
-        "line": 114
+        "line": 119
       },
       "bases": [],
       "doc": null,
@@ -4405,7 +4932,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 114
+            "line": 119
           },
           "default": null,
           "name": "kind",
@@ -4414,7 +4941,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 114
+            "line": 119
           },
           "default": null,
           "name": "path",
@@ -4427,9 +4954,9 @@
     },
     {
       "anchor": {
-        "end_line": 120,
+        "end_line": 125,
         "file": "src/brand-settings.ts",
-        "line": 115
+        "line": 120
       },
       "bases": [],
       "doc": null,
@@ -4437,7 +4964,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 116
+            "line": 121
           },
           "default": null,
           "name": "kind",
@@ -4446,7 +4973,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 117
+            "line": 122
           },
           "default": null,
           "name": "reason",
@@ -4455,7 +4982,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 118
+            "line": 123
           },
           "default": null,
           "name": "path",
@@ -4464,7 +4991,7 @@
         {
           "anchor": {
             "file": "src/brand-settings.ts",
-            "line": 119
+            "line": 124
           },
           "default": null,
           "name": "message",
@@ -4474,6 +5001,185 @@
       "grade": "declared",
       "id": "src/brand-settings.WriteBrandSettingsResult[kind=refused]",
       "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 171
+          },
+          "name": "UpdateBrandSettingsResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 170,
+        "file": "src/brand-settings.ts",
+        "line": 152
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 154
+          },
+          "default": null,
+          "name": "written",
+          "type": "z.object({ kind: z.literal('written'), path: z.string(), settings: BrandSettings, /** `brandSettingsVersion` of what was written: the versi\u2026 \u2192 src/brand-settings.BrandSettings"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 161
+          },
+          "default": null,
+          "name": "refused",
+          "type": "z.object({ kind: z.literal('refused'), /** * `unusable-file`: `fli.brand.json` exists but does not read as BrandSettings \u2014 never overwritte\u2026"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/brand-settings.UpdateBrandSettingsResult",
+      "kind": "zod-union on `kind`"
+    },
+    {
+      "anchor": {
+        "end_line": 159,
+        "file": "src/brand-settings.ts",
+        "line": 153
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 154
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('written')"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 155
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 156
+          },
+          "default": null,
+          "name": "settings",
+          "type": "BrandSettings \u2192 src/brand-settings.BrandSettings"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 158
+          },
+          "default": null,
+          "doc": "`brandSettingsVersion` of what was written: the version a caller hands back on its next write.",
+          "name": "version",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/brand-settings.UpdateBrandSettingsResult[kind=written]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 169,
+        "file": "src/brand-settings.ts",
+        "line": 160
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 161
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('refused')"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 166
+          },
+          "default": null,
+          "doc": "`unusable-file`: `fli.brand.json` exists but does not read as BrandSettings \u2014 never overwritten, fix it by hand.",
+          "name": "reason",
+          "type": "z.enum(['invalid-input', 'io-error', 'unusable-file', 'busy'])"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 167
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 168
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/brand-settings.UpdateBrandSettingsResult[kind=refused]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 178,
+        "file": "src/brand-settings.ts",
+        "line": 173
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 175
+          },
+          "default": null,
+          "doc": "How long to wait for another writer's lock (default 3 s).",
+          "name": "waitMs",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-settings.ts",
+            "line": 177
+          },
+          "default": null,
+          "doc": "A lock older than this is a crashed writer's and is broken (default 10 s).",
+          "name": "staleMs",
+          "type": "?: number"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/brand-settings.UpdateBrandSettingsOptions",
+      "kind": "interface"
     },
     {
       "aliases": [
@@ -9597,6 +10303,1722 @@
       "kind": "zod-object"
     },
     {
+      "anchor": {
+        "file": "src/note-record.ts",
+        "line": 37
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/note-record.Name",
+      "kind": "zod-scalar",
+      "value": "z.string().trim().min(1)"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 67
+          },
+          "name": "NoteTarget"
+        }
+      ],
+      "anchor": {
+        "end_line": 66,
+        "file": "src/note-record.ts",
+        "line": 43
+      },
+      "bases": [],
+      "doc": "What the record is about. Plain strings, synthetic keys allowed (`entityType: 'beat'`, `entityId: 'd13/beat-4'`).",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 46
+          },
+          "default": null,
+          "doc": "The app the target lives in (`flistudio`, `flicut`).",
+          "name": "app",
+          "type": "Name \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 47
+          },
+          "default": null,
+          "name": "entityType",
+          "type": "Name \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 48
+          },
+          "default": "'one'",
+          "name": "scope",
+          "type": "NoteScope.default('one') \u2192 src/note-record.NoteScope"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 49
+          },
+          "default": null,
+          "name": "entityId",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 50
+          },
+          "default": null,
+          "name": "entityIds",
+          "type": "z.array(Name).min(1).optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 52
+          },
+          "default": null,
+          "doc": "For `aggregate`: the query, described (\"every StoryPilot script in v-appydave\").",
+          "name": "query",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 53
+          },
+          "default": null,
+          "name": "field",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 54
+          },
+          "default": null,
+          "name": "region",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.NoteTarget",
+      "kind": "zod-object",
+      "refinements": [
+        "superRefine at line 56"
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 75
+          },
+          "name": "NoteWhere"
+        }
+      ],
+      "anchor": {
+        "end_line": 74,
+        "file": "src/note-record.ts",
+        "line": 70
+      },
+      "bases": [],
+      "doc": "Where in the estate. All optional: a note on an app itself has none.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 71
+          },
+          "default": null,
+          "name": "brand",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 72
+          },
+          "default": null,
+          "name": "project",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "video",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.NoteWhere",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 84
+          },
+          "name": "NoteProducer"
+        }
+      ],
+      "anchor": {
+        "end_line": 83,
+        "file": "src/note-record.ts",
+        "line": 78
+      },
+      "bases": [],
+      "doc": "What produced the \"before\" (the prompt, skill, model and version), where known.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 79
+          },
+          "default": null,
+          "name": "prompt",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 80
+          },
+          "default": null,
+          "name": "skill",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 81
+          },
+          "default": null,
+          "name": "model",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 82
+          },
+          "default": null,
+          "name": "version",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.NoteProducer",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 97
+          },
+          "name": "NoteLinks"
+        }
+      ],
+      "anchor": {
+        "end_line": 96,
+        "file": "src/note-record.ts",
+        "line": 86
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 88
+          },
+          "default": null,
+          "doc": "The Claude Code session id the words or the change came from.",
+          "name": "session",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 90
+          },
+          "default": null,
+          "doc": "A Captain's Log capture code (`B535`).",
+          "name": "capture",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 91
+          },
+          "default": null,
+          "name": "commit",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 93
+          },
+          "default": null,
+          "doc": "On a `change`: the ask it fulfilled.",
+          "name": "answers",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 95
+          },
+          "default": null,
+          "doc": "The record this one follows on from (on a status change: the change that did the work).",
+          "name": "follows",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.NoteLinks",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 120
+          },
+          "name": "NoteExcerpt"
+        }
+      ],
+      "anchor": {
+        "end_line": 119,
+        "file": "src/note-record.ts",
+        "line": 108
+      },
+      "bases": [],
+      "doc": "The words around a change, kept because paragraph numbers move. Offsets are in UTF-16 units of the full text.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 109
+          },
+          "default": null,
+          "name": "text",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 111
+          },
+          "default": null,
+          "doc": "Where `text` starts in the full value.",
+          "name": "start",
+          "type": "z.int().min(0)"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 113
+          },
+          "default": null,
+          "doc": "The 1-based line the changed part starts on, in the full value.",
+          "name": "line",
+          "type": "z.int().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 115
+          },
+          "default": null,
+          "doc": "The full value's length.",
+          "name": "length",
+          "type": "z.int().min(0)"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 117
+          },
+          "default": null,
+          "doc": "The changed part, within `text`: `[from, to)`.",
+          "name": "from",
+          "type": "z.int().min(0)"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 118
+          },
+          "default": null,
+          "name": "to",
+          "type": "z.int().min(0)"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.NoteExcerpt",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 157
+          },
+          "name": "NoteRecord"
+        }
+      ],
+      "anchor": {
+        "end_line": 156,
+        "file": "src/note-record.ts",
+        "line": 122
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 124
+          },
+          "default": null,
+          "name": "schema",
+          "type": "z.literal(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 125
+          },
+          "default": null,
+          "name": "id",
+          "type": "Name \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 126
+          },
+          "default": null,
+          "name": "at",
+          "type": "z.iso.datetime({ offset: true })"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 127
+          },
+          "default": null,
+          "name": "by",
+          "type": "PrincipalName \u2192 src/capability.PrincipalName"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 128
+          },
+          "default": null,
+          "name": "kind",
+          "type": "NoteKind \u2192 src/note-record.NoteKind"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 129
+          },
+          "default": null,
+          "name": "channel",
+          "type": "NoteChannel \u2192 src/note-record.NoteChannel"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 131
+          },
+          "default": null,
+          "doc": "Present on `note` (`kept`) and `ask` (`open` when written); absent on `change`.",
+          "name": "status",
+          "type": "NoteStatus.optional() \u2192 src/note-record.NoteStatus"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 132
+          },
+          "default": "{}",
+          "name": "where",
+          "type": "NoteWhere.default({}) \u2192 src/note-record.NoteWhere"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 133
+          },
+          "default": null,
+          "name": "target",
+          "type": "NoteTarget \u2192 src/note-record.NoteTarget"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 135
+          },
+          "default": null,
+          "doc": "The human's words, verbatim \u2014 the most valuable field. On a `change`: the `because`, when one was given.",
+          "name": "text",
+          "type": "z.string().min(1).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 136
+          },
+          "default": null,
+          "name": "before",
+          "type": "z.unknown().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 137
+          },
+          "default": null,
+          "name": "after",
+          "type": "z.unknown().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 138
+          },
+          "default": null,
+          "name": "form",
+          "type": "NoteForm.optional() \u2192 src/note-record.NoteForm"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 139
+          },
+          "default": null,
+          "name": "producer",
+          "type": "NoteProducer.optional() \u2192 src/note-record.NoteProducer"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 140
+          },
+          "default": null,
+          "name": "links",
+          "type": "NoteLinks.optional() \u2192 src/note-record.NoteLinks"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 141
+          },
+          "default": null,
+          "name": "meta",
+          "type": "z.record(z.string(), z.unknown()).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.NoteRecord",
+      "kind": "zod-object",
+      "refinements": [
+        "superRefine at line 143"
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 177
+          },
+          "name": "NoteInput"
+        }
+      ],
+      "anchor": {
+        "end_line": 176,
+        "file": "src/note-record.ts",
+        "line": 163
+      },
+      "bases": [],
+      "doc": "What a caller hands `addNote`: the record without `schema`, `id`, `at` and `status` (the helper fills them).",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 164
+          },
+          "default": null,
+          "name": "by",
+          "type": "PrincipalName \u2192 src/capability.PrincipalName"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 165
+          },
+          "default": null,
+          "name": "kind",
+          "type": "NoteKind \u2192 src/note-record.NoteKind"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 166
+          },
+          "default": null,
+          "name": "channel",
+          "type": "NoteChannel.optional() \u2192 src/note-record.NoteChannel"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 167
+          },
+          "default": null,
+          "name": "where",
+          "type": "NoteWhere.optional() \u2192 src/note-record.NoteWhere"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 168
+          },
+          "default": null,
+          "name": "target",
+          "type": "NoteTarget \u2192 src/note-record.NoteTarget"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 169
+          },
+          "default": null,
+          "name": "text",
+          "type": "z.string().min(1).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 170
+          },
+          "default": null,
+          "name": "before",
+          "type": "z.unknown().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 171
+          },
+          "default": null,
+          "name": "after",
+          "type": "z.unknown().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 172
+          },
+          "default": null,
+          "name": "form",
+          "type": "NoteForm.optional() \u2192 src/note-record.NoteForm"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 173
+          },
+          "default": null,
+          "name": "producer",
+          "type": "NoteProducer.optional() \u2192 src/note-record.NoteProducer"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 174
+          },
+          "default": null,
+          "name": "links",
+          "type": "NoteLinks.optional() \u2192 src/note-record.NoteLinks"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 175
+          },
+          "default": null,
+          "name": "meta",
+          "type": "z.record(z.string(), z.unknown()).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.NoteInput",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 196
+          },
+          "name": "ChangeInput"
+        }
+      ],
+      "anchor": {
+        "end_line": 195,
+        "file": "src/note-record.ts",
+        "line": 180
+      },
+      "bases": [],
+      "doc": "What a write command knows at the door, for `logChange`.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 181
+          },
+          "default": null,
+          "name": "by",
+          "type": "PrincipalName \u2192 src/capability.PrincipalName"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 182
+          },
+          "default": null,
+          "name": "target",
+          "type": "NoteTarget \u2192 src/note-record.NoteTarget"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 183
+          },
+          "default": null,
+          "name": "where",
+          "type": "NoteWhere.optional() \u2192 src/note-record.NoteWhere"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 184
+          },
+          "default": null,
+          "name": "before",
+          "type": "z.unknown().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 185
+          },
+          "default": null,
+          "name": "after",
+          "type": "z.unknown().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 187
+          },
+          "default": null,
+          "doc": "The human's words for why, verbatim. Missing \u2192 still logged, just no why.",
+          "name": "because",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 189
+          },
+          "default": null,
+          "doc": "The Claude Code session id.",
+          "name": "session",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 191
+          },
+          "default": null,
+          "doc": "The ask this change fulfils (`links.answers`).",
+          "name": "answers",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 192
+          },
+          "default": null,
+          "name": "producer",
+          "type": "NoteProducer.optional() \u2192 src/note-record.NoteProducer"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 193
+          },
+          "default": null,
+          "name": "links",
+          "type": "NoteLinks.optional() \u2192 src/note-record.NoteLinks"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 194
+          },
+          "default": null,
+          "name": "meta",
+          "type": "z.record(z.string(), z.unknown()).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.ChangeInput",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 206
+          },
+          "name": "ResolveAskInput"
+        }
+      ],
+      "anchor": {
+        "end_line": 205,
+        "file": "src/note-record.ts",
+        "line": 199
+      },
+      "bases": [],
+      "doc": "What closing an ask takes, for `resolveAsk` (and an app's `notes.resolve`).",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 200
+          },
+          "default": null,
+          "name": "by",
+          "type": "PrincipalName \u2192 src/capability.PrincipalName"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 202
+          },
+          "default": null,
+          "doc": "The change that did the work (linked as `follows`).",
+          "name": "change",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 203
+          },
+          "default": null,
+          "name": "because",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 204
+          },
+          "default": null,
+          "name": "session",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.ResolveAskInput",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 254,
+        "file": "src/note-record.ts",
+        "line": 249
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 251
+          },
+          "default": null,
+          "doc": "Keep values whole up to this size (default `NOTE_FULL_LIMIT`).",
+          "name": "limit",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 253
+          },
+          "default": null,
+          "doc": "Unchanged characters kept either side of a text change (default `NOTE_EXCERPT_CONTEXT`).",
+          "name": "context",
+          "type": "?: number"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.SnapshotOptions",
+      "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 261
+          },
+          "name": "ChangeSnapshot"
+        }
+      ],
+      "anchor": {
+        "end_line": 260,
+        "file": "src/note-record.ts",
+        "line": 256
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 257
+          },
+          "default": null,
+          "name": "before",
+          "type": "z.unknown().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 258
+          },
+          "default": null,
+          "name": "after",
+          "type": "z.unknown().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 259
+          },
+          "default": null,
+          "name": "form",
+          "type": "NoteForm \u2192 src/note-record.NoteForm"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.ChangeSnapshot",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 347
+          },
+          "name": "NoteState"
+        }
+      ],
+      "anchor": {
+        "end_line": 346,
+        "file": "src/note-record.ts",
+        "line": 340
+      },
+      "bases": [],
+      "doc": "Where a note or ask stands after every line of its file is read.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 341
+          },
+          "default": null,
+          "name": "status",
+          "type": "NoteStatus \u2192 src/note-record.NoteStatus"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 343
+          },
+          "default": null,
+          "doc": "The status change that set `status`, when one did.",
+          "name": "statusBy",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 345
+          },
+          "default": null,
+          "doc": "Ids of the changes whose `links.answers` names this ask.",
+          "name": "answeredBy",
+          "type": "z.array(z.string())"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.NoteState",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 394
+          },
+          "name": "NoteFilter"
+        }
+      ],
+      "anchor": {
+        "end_line": 393,
+        "file": "src/note-record.ts",
+        "line": 375
+      },
+      "bases": [],
+      "doc": "Which records to answer with. Every field is optional and they all have to match.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 376
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.union([NoteKind, z.array(NoteKind)]).optional() \u2192 src/note-record.NoteKind"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 378
+          },
+          "default": null,
+          "doc": "Only asks still open (implies `kind: 'ask'`).",
+          "name": "open",
+          "type": "z.boolean().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 379
+          },
+          "default": null,
+          "name": "app",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 380
+          },
+          "default": null,
+          "name": "entityType",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 382
+          },
+          "default": null,
+          "doc": "Matches `entityId`, or any of `entityIds`.",
+          "name": "entityId",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 383
+          },
+          "default": null,
+          "name": "field",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 384
+          },
+          "default": null,
+          "name": "brand",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 385
+          },
+          "default": null,
+          "name": "project",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 386
+          },
+          "default": null,
+          "name": "video",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 387
+          },
+          "default": null,
+          "name": "by",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 389
+          },
+          "default": null,
+          "doc": "ISO times, inclusive.",
+          "name": "since",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 390
+          },
+          "default": null,
+          "name": "until",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 392
+          },
+          "default": null,
+          "doc": "A case-insensitive substring of `text`.",
+          "name": "text",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.NoteFilter",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/note-record.ts",
+        "line": 376
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 376
+          },
+          "default": null,
+          "name": "NoteKind",
+          "type": "NoteKind \u2192 src/note-record.NoteKind"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 376
+          },
+          "default": null,
+          "name": "array",
+          "type": "z.array(NoteKind) \u2192 src/note-record.NoteKind"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.NoteFilter.kind",
+      "kind": "zod-union"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 60
+          },
+          "name": "AddNoteResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 59,
+        "file": "src/notes.ts",
+        "line": 40
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 41
+          },
+          "default": null,
+          "name": "written",
+          "type": "z.object({ kind: z.literal('written'), path: z.string(), record: NoteRecord }) \u2192 src/note-record.NoteRecord"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 43
+          },
+          "default": null,
+          "name": "refused",
+          "type": "z.object({ kind: z.literal('refused'), /** * `busy`: another writer held the lock past the wait. `not-found` / `not-an-ask` / `already-done\u2026"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/notes.AddNoteResult",
+      "kind": "zod-discriminated-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/notes.ts",
+        "line": 41
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 41
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('written')"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 41
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 41
+          },
+          "default": null,
+          "name": "record",
+          "type": "NoteRecord \u2192 src/note-record.NoteRecord"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/notes.AddNoteResult[kind=written]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 58,
+        "file": "src/notes.ts",
+        "line": 42
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 43
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('refused')"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 48
+          },
+          "default": null,
+          "doc": "`busy`: another writer held the lock past the wait. `not-found` / `not-an-ask` / `already-done`: `resolveAsk`",
+          "name": "reason",
+          "type": "z.enum(['invalid-input', 'io-error', 'busy', 'not-found', 'not-an-ask', 'already-done'])"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 56
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 57
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/notes.AddNoteResult[kind=refused]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 74,
+        "file": "src/notes.ts",
+        "line": 63
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 65
+          },
+          "default": null,
+          "doc": "Create `dir` first (an app's data folder). A project folder is never created: leave this off for one.",
+          "name": "createDir",
+          "type": "?: boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 67
+          },
+          "default": null,
+          "doc": "How long to wait for another writer's lock (default 3 s).",
+          "name": "waitMs",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 69
+          },
+          "default": null,
+          "doc": "A lock older than this is a crashed writer's and is broken (default 10 s).",
+          "name": "staleMs",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 71
+          },
+          "default": null,
+          "doc": "The record's time (default now).",
+          "name": "now",
+          "type": "?: Date"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 73
+          },
+          "default": null,
+          "doc": "The record's id (default `newNoteId()`).",
+          "name": "id",
+          "type": "?: string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/notes.AddNoteOptions",
+      "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 250
+          },
+          "name": "NoteLineProblem"
+        }
+      ],
+      "anchor": {
+        "file": "src/notes.ts",
+        "line": 249
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 249
+          },
+          "default": null,
+          "name": "line",
+          "type": "z.int().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 249
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/notes.NoteLineProblem",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 263
+          },
+          "name": "NotesRead"
+        }
+      ],
+      "anchor": {
+        "end_line": 262,
+        "file": "src/notes.ts",
+        "line": 252
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 253
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 255
+          },
+          "default": null,
+          "doc": "False when there is no notes file. An empty file and no file both have no records: this tells them apart.",
+          "name": "exists",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 257
+          },
+          "default": null,
+          "doc": "Every valid line, in file order.",
+          "name": "records",
+          "type": "z.array(NoteRecord) \u2192 src/note-record.NoteRecord"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 259
+          },
+          "default": null,
+          "doc": "Lines that are not a record: listed, never hidden, never fatal.",
+          "name": "invalid",
+          "type": "z.array(NoteLineProblem) \u2192 src/notes.NoteLineProblem"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 261
+          },
+          "default": null,
+          "doc": "The file exists but could not be read.",
+          "name": "error",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/notes.NotesRead",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 300
+          },
+          "name": "ScannedNote"
+        }
+      ],
+      "anchor": {
+        "end_line": 299,
+        "file": "src/notes.ts",
+        "line": 293
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 295
+          },
+          "default": null,
+          "doc": "The notes file the record is in.",
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 296
+          },
+          "default": null,
+          "name": "record",
+          "type": "NoteRecord \u2192 src/note-record.NoteRecord"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 298
+          },
+          "default": null,
+          "doc": "For a note or ask: where it stands now (`noteStates`).",
+          "name": "state",
+          "type": "NoteState.optional() \u2192 src/note-record.NoteState"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/notes.ScannedNote",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 311
+          },
+          "name": "NotesScan"
+        }
+      ],
+      "anchor": {
+        "end_line": 310,
+        "file": "src/notes.ts",
+        "line": 302
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 304
+          },
+          "default": null,
+          "doc": "Matching records across every file, oldest first.",
+          "name": "notes",
+          "type": "z.array(ScannedNote) \u2192 src/notes.ScannedNote"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 306
+          },
+          "default": null,
+          "doc": "Every notes file read.",
+          "name": "files",
+          "type": "z.array(z.string())"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 307
+          },
+          "default": null,
+          "name": "invalid",
+          "type": "z.array(NoteLineProblem.extend({ path: z.string() })) \u2192 src/notes.NoteLineProblem"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 309
+          },
+          "default": null,
+          "doc": "Files or folders that could not be read: a scan that missed them says so.",
+          "name": "errors",
+          "type": "z.array(z.object({ path: z.string(), message: z.string() }))"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/notes.NotesScan",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/notes.ts",
+        "line": 307
+      },
+      "bases": [
+        "NoteLineProblem"
+      ],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 249
+          },
+          "default": null,
+          "inherited_from": "NoteLineProblem",
+          "name": "line",
+          "type": "z.int().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 249
+          },
+          "default": null,
+          "inherited_from": "NoteLineProblem",
+          "name": "message",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 307
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/notes.NotesScan.invalid[]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/notes.ts",
+        "line": 309
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 309
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 309
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/notes.NotesScan.errors[]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 316,
+        "file": "src/notes.ts",
+        "line": 313
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 315
+          },
+          "default": null,
+          "doc": "How many folder levels below each root to look (default 4: estate \u2192 brand \u2192 archived \u2192 bucket \u2192 project).",
+          "name": "maxDepth",
+          "type": "?: number"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/notes.ScanNotesOptions",
+      "kind": "interface"
+    },
+    {
       "aliases": [
         {
           "anchor": {
@@ -11065,7 +13487,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 90
+        "line": 94
       },
       "bases": [],
       "doc": null,
@@ -11081,15 +13503,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 114
+            "line": 119
           },
           "name": "PublishExport"
         }
       ],
       "anchor": {
-        "end_line": 113,
+        "end_line": 118,
         "file": "src/publish.ts",
-        "line": 93
+        "line": 97
       },
       "bases": [],
       "doc": "One file in `videos/<name>/` that a person could ship, with its caption file beside it (same stem) if any.",
@@ -11098,7 +13520,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 95
+            "line": 99
           },
           "default": null,
           "doc": "Project-relative, `/`-separated.",
@@ -11108,17 +13530,17 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 100
+            "line": 104
           },
           "default": null,
-          "doc": "`cut` \u00b7 `audio` \u00b7 `overlay` (D15) \u00b7 `part`; `legacy` for a file named with a retired tag (`-final`, R11) \u2014 a whole",
+          "doc": "`cut` \u00b7 `audio` \u00b7 `overlay` (D15) \u00b7 `part` \u00b7 `edit` \u00b7 `cast` (v0.26.0); `legacy` for a file named with a retired",
           "name": "kind",
-          "type": "z.enum(['cut', 'audio', 'overlay', 'part', 'legacy']).nullable()"
+          "type": "z.enum(['cut', 'audio', 'overlay', 'part', 'edit', 'cast', 'legacy']).nullable()"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 101
+            "line": 105
           },
           "default": null,
           "name": "variant",
@@ -11127,16 +13549,17 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 102
+            "line": 107
           },
           "default": null,
+          "doc": "Who made it: `wholeVideoOwner`'s answer (the gatherer has the project), else `exportApp(kind)`.",
           "name": "app",
-          "type": "EditApp.nullable() \u2192 src/publish.EditApp"
+          "type": "WholeVideoApp.nullable() \u2192 src/video-file.WholeVideoApp"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 107
+            "line": 112
           },
           "default": "null",
           "doc": "Where the file came from, in words, when the app knows better than the kind does (\"FliCut export\", \"FliEdit",
@@ -11146,7 +13569,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 108
+            "line": 113
           },
           "default": null,
           "name": "modifiedAt",
@@ -11155,7 +13578,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 109
+            "line": 114
           },
           "default": null,
           "name": "durationSec",
@@ -11164,7 +13587,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 110
+            "line": 115
           },
           "default": null,
           "name": "srt",
@@ -11178,7 +13601,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 110
+        "line": 115
       },
       "bases": [],
       "doc": null,
@@ -11186,7 +13609,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 111
+            "line": 116
           },
           "default": null,
           "name": "file",
@@ -11195,7 +13618,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 111
+            "line": 116
           },
           "default": null,
           "name": "modifiedAt",
@@ -11204,7 +13627,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 111
+            "line": 116
           },
           "default": null,
           "name": "durationSec",
@@ -11220,14 +13643,14 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 118
+            "line": 123
           },
           "name": "PublishEdit"
         }
       ],
       "anchor": {
         "file": "src/publish.ts",
-        "line": 117
+        "line": 122
       },
       "bases": [],
       "doc": "An edit document for the video: FliCut's `fli.cut.<name>.json` or FliEdit's `fli.edit.<name>.json`.",
@@ -11236,7 +13659,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 117
+            "line": 122
           },
           "default": null,
           "name": "file",
@@ -11245,7 +13668,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 117
+            "line": 122
           },
           "default": null,
           "name": "app",
@@ -11254,7 +13677,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 117
+            "line": 122
           },
           "default": null,
           "name": "modifiedAt",
@@ -11270,15 +13693,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 131
+            "line": 136
           },
           "name": "PublishLaunch"
         }
       ],
       "anchor": {
-        "end_line": 130,
+        "end_line": 135,
         "file": "src/publish.ts",
-        "line": 121
+        "line": 126
       },
       "bases": [],
       "doc": "What YLO's `launch.json` (the workshop) offers, reduced to what the rules need.",
@@ -11287,7 +13710,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 122
+            "line": 127
           },
           "default": null,
           "name": "file",
@@ -11296,7 +13719,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 124
+            "line": 129
           },
           "default": null,
           "doc": "When its texts were made (`updated_at`, else the file's time).",
@@ -11306,7 +13729,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 126
+            "line": 131
           },
           "default": null,
           "doc": "The titles bound to YLO's variant slots, slot 1 first.",
@@ -11316,7 +13739,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 127
+            "line": 132
           },
           "default": null,
           "name": "description",
@@ -11325,7 +13748,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 129
+            "line": 134
           },
           "default": null,
           "doc": "YLO's `Chapter{n,title,timestamp}` list (empty when none).",
@@ -11340,7 +13763,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 126
+        "line": 131
       },
       "bases": [],
       "doc": null,
@@ -11348,7 +13771,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 126
+            "line": 131
           },
           "default": null,
           "name": "id",
@@ -11357,7 +13780,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 126
+            "line": 131
           },
           "default": null,
           "name": "text",
@@ -11373,15 +13796,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 142
+            "line": 147
           },
           "name": "PublishFacts"
         }
       ],
       "anchor": {
-        "end_line": 141,
+        "end_line": 146,
         "file": "src/publish.ts",
-        "line": 133
+        "line": 138
       },
       "bases": [],
       "doc": null,
@@ -11390,7 +13813,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 135
+            "line": 140
           },
           "default": null,
           "doc": "The video folder name, or null for a project with no video yet.",
@@ -11400,7 +13823,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 136
+            "line": 141
           },
           "default": null,
           "name": "exports",
@@ -11409,7 +13832,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 137
+            "line": 142
           },
           "default": null,
           "name": "edits",
@@ -11418,7 +13841,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 139
+            "line": 144
           },
           "default": null,
           "doc": "The project's resources for this video (and the project's own, `video: null`).",
@@ -11428,7 +13851,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 140
+            "line": 145
           },
           "default": null,
           "name": "launch",
@@ -11444,15 +13867,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 163
+            "line": 168
           },
           "name": "PublishRow"
         }
       ],
       "anchor": {
-        "end_line": 162,
+        "end_line": 167,
         "file": "src/publish.ts",
-        "line": 144
+        "line": 149
       },
       "bases": [],
       "doc": null,
@@ -11461,7 +13884,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 145
+            "line": 150
           },
           "default": null,
           "name": "piece",
@@ -11470,7 +13893,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 146
+            "line": 151
           },
           "default": null,
           "name": "label",
@@ -11479,7 +13902,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 147
+            "line": 152
           },
           "default": null,
           "name": "state",
@@ -11488,7 +13911,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 149
+            "line": 154
           },
           "default": null,
           "doc": "What would ship, in a few words (a file name, a title, \"Strong noise removal\").",
@@ -11498,7 +13921,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 151
+            "line": 156
           },
           "default": null,
           "doc": "The project-relative file behind it, when there is one.",
@@ -11508,7 +13931,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 153
+            "line": 158
           },
           "default": null,
           "doc": "Where the answer came from: `choice`, `rule`, `brand`, `ylo`, or `none`.",
@@ -11518,7 +13941,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 155
+            "line": 160
           },
           "default": null,
           "doc": "One line: why this state. Kept for the audit trail.",
@@ -11528,7 +13951,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 157
+            "line": 162
           },
           "default": null,
           "doc": "The resource behind a choice, so a person or agent can change it.",
@@ -11538,7 +13961,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 159
+            "line": 164
           },
           "default": null,
           "doc": "Who made it: a principal (`human:ui`, `agent:tuber`, `cli`) or `rule:<id>`; null when nothing is there.",
@@ -11548,7 +13971,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 161
+            "line": 166
           },
           "default": null,
           "doc": "When the thing behind it was made or chosen (for an \u24d8, never shown as a timestamp).",
@@ -11565,15 +13988,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 179
+            "line": 184
           },
           "name": "PublishReadiness"
         }
       ],
       "anchor": {
-        "end_line": 178,
+        "end_line": 183,
         "file": "src/publish.ts",
-        "line": 165
+        "line": 170
       },
       "bases": [],
       "doc": null,
@@ -11582,7 +14005,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 166
+            "line": 171
           },
           "default": null,
           "name": "video",
@@ -11591,7 +14014,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 167
+            "line": 172
           },
           "default": null,
           "name": "rows",
@@ -11600,7 +14023,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 168
+            "line": 173
           },
           "default": null,
           "name": "ready",
@@ -11609,7 +14032,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 169
+            "line": 174
           },
           "default": null,
           "name": "total",
@@ -11618,7 +14041,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 171
+            "line": 176
           },
           "default": null,
           "doc": "Ready rows a person has not decided (agent choices + rule guesses).",
@@ -11628,7 +14051,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 172
+            "line": 177
           },
           "default": null,
           "name": "counts",
@@ -11642,7 +14065,7 @@
     {
       "anchor": {
         "file": "src/publish.ts",
-        "line": 172
+        "line": 177
       },
       "bases": [],
       "doc": null,
@@ -11650,7 +14073,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 173
+            "line": 178
           },
           "default": null,
           "name": "set",
@@ -11659,7 +14082,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 174
+            "line": 179
           },
           "default": null,
           "name": "suggested",
@@ -11668,7 +14091,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 175
+            "line": 180
           },
           "default": null,
           "name": "inferred",
@@ -11677,7 +14100,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 176
+            "line": 181
           },
           "default": null,
           "name": "notReady",
@@ -11693,15 +14116,15 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 696
+            "line": 711
           },
           "name": "PublishedVideo"
         }
       ],
       "anchor": {
-        "end_line": 695,
+        "end_line": 710,
         "file": "src/publish.ts",
-        "line": 687
+        "line": 702
       },
       "bases": [],
       "doc": "The hook for whatever comes after publishing (post-publish posts, YLO's related-videos linking): every published",
@@ -11710,7 +14133,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 688
+            "line": 703
           },
           "default": null,
           "name": "resourceId",
@@ -11719,7 +14142,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 689
+            "line": 704
           },
           "default": null,
           "name": "video",
@@ -11728,7 +14151,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 690
+            "line": 705
           },
           "default": null,
           "name": "path",
@@ -11737,7 +14160,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 691
+            "line": 706
           },
           "default": null,
           "name": "youtubeId",
@@ -11746,7 +14169,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 692
+            "line": 707
           },
           "default": null,
           "name": "url",
@@ -11755,7 +14178,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 693
+            "line": 708
           },
           "default": null,
           "name": "publishedAt",
@@ -11764,7 +14187,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 694
+            "line": 709
           },
           "default": null,
           "name": "by",
@@ -14084,7 +16507,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 21
+        "line": 23
       },
       "bases": [],
       "doc": "Video files and folders (ruling \"B only\", \ud83d\udc64 David 2026-09-22 \u2014 supersedes the 09-09 numbered shape):",
@@ -14100,15 +16523,15 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 36
+            "line": 47
           },
           "name": "VideoFile"
         }
       ],
       "anchor": {
-        "end_line": 35,
+        "end_line": 46,
         "file": "src/video-file.ts",
-        "line": 30
+        "line": 39
       },
       "bases": [],
       "doc": null,
@@ -14117,7 +16540,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 40
           },
           "default": null,
           "name": "cut",
@@ -14126,7 +16549,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 32
+            "line": 41
           },
           "default": null,
           "name": "audio",
@@ -14135,7 +16558,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 33
+            "line": 42
           },
           "default": null,
           "name": "overlay",
@@ -14144,11 +16567,29 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 34
+            "line": 43
           },
           "default": null,
           "name": "part",
           "type": "z.object({ name: KebabSlug, kind: z.literal('part'), variant: VideoPart, ext: Ext }) \u2192 src/project-folder.KebabSlug, src/video-file.VideoPart, src/video-file.Ext"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 44
+          },
+          "default": null,
+          "name": "edit",
+          "type": "z.object({ name: KebabSlug, kind: z.literal('edit'), variant: z.null().default(null), ext: Ext }) \u2192 src/project-folder.KebabSlug, src/video-file.Ext"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 45
+          },
+          "default": null,
+          "name": "cast",
+          "type": "z.object({ name: KebabSlug, kind: z.literal('cast'), variant: z.null().default(null), ext: Ext }) \u2192 src/project-folder.KebabSlug, src/video-file.Ext"
         }
       ],
       "grade": "declared",
@@ -14158,7 +16599,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 31
+        "line": 40
       },
       "bases": [],
       "doc": null,
@@ -14166,7 +16607,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 40
           },
           "default": null,
           "name": "name",
@@ -14175,7 +16616,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 40
           },
           "default": null,
           "name": "kind",
@@ -14184,7 +16625,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 40
           },
           "default": "null",
           "name": "variant",
@@ -14193,7 +16634,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 31
+            "line": 40
           },
           "default": null,
           "name": "ext",
@@ -14207,7 +16648,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 32
+        "line": 41
       },
       "bases": [],
       "doc": null,
@@ -14215,7 +16656,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 32
+            "line": 41
           },
           "default": null,
           "name": "name",
@@ -14224,7 +16665,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 32
+            "line": 41
           },
           "default": null,
           "name": "kind",
@@ -14233,7 +16674,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 32
+            "line": 41
           },
           "default": null,
           "name": "variant",
@@ -14242,7 +16683,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 32
+            "line": 41
           },
           "default": null,
           "name": "ext",
@@ -14256,7 +16697,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 33
+        "line": 42
       },
       "bases": [],
       "doc": null,
@@ -14264,7 +16705,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 33
+            "line": 42
           },
           "default": null,
           "name": "name",
@@ -14273,7 +16714,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 33
+            "line": 42
           },
           "default": null,
           "name": "kind",
@@ -14282,7 +16723,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 33
+            "line": 42
           },
           "default": null,
           "name": "variant",
@@ -14291,7 +16732,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 33
+            "line": 42
           },
           "default": null,
           "name": "ext",
@@ -14305,7 +16746,7 @@
     {
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 34
+        "line": 43
       },
       "bases": [],
       "doc": null,
@@ -14313,7 +16754,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 34
+            "line": 43
           },
           "default": null,
           "name": "name",
@@ -14322,7 +16763,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 34
+            "line": 43
           },
           "default": null,
           "name": "kind",
@@ -14331,7 +16772,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 34
+            "line": 43
           },
           "default": null,
           "name": "variant",
@@ -14340,7 +16781,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 34
+            "line": 43
           },
           "default": null,
           "name": "ext",
@@ -14352,19 +16793,117 @@
       "kind": "zod-object"
     },
     {
+      "anchor": {
+        "file": "src/video-file.ts",
+        "line": 44
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 44
+          },
+          "default": null,
+          "name": "name",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 44
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('edit')"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 44
+          },
+          "default": "null",
+          "name": "variant",
+          "type": "z.null().default(null)"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 44
+          },
+          "default": null,
+          "name": "ext",
+          "type": "Ext \u2192 src/video-file.Ext"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/video-file.VideoFile[kind=edit]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/video-file.ts",
+        "line": 45
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 45
+          },
+          "default": null,
+          "name": "name",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 45
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('cast')"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 45
+          },
+          "default": "null",
+          "name": "variant",
+          "type": "z.null().default(null)"
+        },
+        {
+          "anchor": {
+            "file": "src/video-file.ts",
+            "line": 45
+          },
+          "default": null,
+          "name": "ext",
+          "type": "Ext \u2192 src/video-file.Ext"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/video-file.VideoFile[kind=cast]",
+      "kind": "zod-object"
+    },
+    {
       "aliases": [
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 43
+            "line": 54
           },
           "name": "UnknownVideoFile"
         }
       ],
       "anchor": {
-        "end_line": 42,
+        "end_line": 53,
         "file": "src/video-file.ts",
-        "line": 38
+        "line": 49
       },
       "bases": [],
       "doc": null,
@@ -14373,7 +16912,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 39
+            "line": 50
           },
           "default": null,
           "name": "kind",
@@ -14382,7 +16921,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 40
+            "line": 51
           },
           "default": null,
           "name": "name",
@@ -14391,7 +16930,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 41
+            "line": 52
           },
           "default": null,
           "name": "ext",
@@ -14407,15 +16946,15 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 57
+            "line": 68
           },
           "name": "LegacyVideoFile"
         }
       ],
       "anchor": {
-        "end_line": 56,
+        "end_line": 67,
         "file": "src/video-file.ts",
-        "line": 50
+        "line": 61
       },
       "bases": [],
       "doc": "`<name>-final.<ext>`: a whole-video candidate written before R11. Its name says nothing about being the final.",
@@ -14424,7 +16963,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 51
+            "line": 62
           },
           "default": null,
           "name": "name",
@@ -14433,7 +16972,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 52
+            "line": 63
           },
           "default": null,
           "name": "kind",
@@ -14442,7 +16981,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 53
+            "line": 64
           },
           "default": null,
           "name": "tag",
@@ -14451,7 +16990,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 54
+            "line": 65
           },
           "default": "null",
           "name": "variant",
@@ -14460,7 +16999,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 55
+            "line": 66
           },
           "default": null,
           "name": "ext",
@@ -14476,14 +17015,14 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 60
+            "line": 71
           },
           "name": "ParsedVideoFile"
         }
       ],
       "anchor": {
         "file": "src/video-file.ts",
-        "line": 59
+        "line": 70
       },
       "bases": [],
       "doc": null,
@@ -14492,7 +17031,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 59
+            "line": 70
           },
           "default": null,
           "name": "VideoFile",
@@ -14501,7 +17040,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 59
+            "line": 70
           },
           "default": null,
           "name": "LegacyVideoFile",
@@ -14510,7 +17049,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 59
+            "line": 70
           },
           "default": null,
           "name": "UnknownVideoFile",
@@ -14526,15 +17065,15 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 110
+            "line": 121
           },
           "name": "VideoFolder"
         }
       ],
       "anchor": {
-        "end_line": 109,
+        "end_line": 120,
         "file": "src/video-file.ts",
-        "line": 104
+        "line": 115
       },
       "bases": [],
       "doc": null,
@@ -14543,7 +17082,7 @@
         {
           "anchor": {
             "file": "src/video-file.ts",
-            "line": 105
+            "line": 116
           },
           "default": null,
           "name": "name",
@@ -14556,9 +17095,9 @@
     },
     {
       "anchor": {
-        "end_line": 121,
+        "end_line": 132,
         "file": "src/video-file.ts",
-        "line": 116
+        "line": 127
       },
       "bases": [],
       "doc": "The same rule as a string schema, for contexts that carry the folder name (`OpenContext.video`).",
@@ -14573,16 +17112,59 @@
       "aliases": [
         {
           "anchor": {
+            "file": "src/whole-video.ts",
+            "line": 29
+          },
+          "name": "WholeVideoOwner"
+        }
+      ],
+      "anchor": {
+        "end_line": 28,
+        "file": "src/whole-video.ts",
+        "line": 24
+      },
+      "bases": [],
+      "doc": "Who made a whole-video file in `videos/<video>/` (v0.26.0, ruling by flivideo-arch-rsch on David's delegation,",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/whole-video.ts",
+            "line": 25
+          },
+          "default": null,
+          "name": "app",
+          "type": "WholeVideoApp.nullable() \u2192 src/video-file.WholeVideoApp"
+        },
+        {
+          "anchor": {
+            "file": "src/whole-video.ts",
+            "line": 27
+          },
+          "default": null,
+          "doc": "Said to a person: `FliCut export`, `Overlay Pilot render`, `placed file`, `two candidates: fliedit, flicast`\u2026",
+          "name": "source",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/whole-video.WholeVideoOwner",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
             "file": "src/window-state.ts",
-            "line": 22
+            "line": 23
           },
           "name": "WindowRect"
         }
       ],
       "anchor": {
-        "end_line": 21,
+        "end_line": 22,
         "file": "src/window-state.ts",
-        "line": 16
+        "line": 17
       },
       "bases": [],
       "doc": "Window positions that survive a restart (David, 2026-09-22): every Fli app window reopens where he last put it \u2014",
@@ -14591,7 +17173,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 17
+            "line": 18
           },
           "default": null,
           "name": "x",
@@ -14600,7 +17182,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 18
+            "line": 19
           },
           "default": null,
           "name": "y",
@@ -14609,7 +17191,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 19
+            "line": 20
           },
           "default": null,
           "name": "width",
@@ -14618,7 +17200,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 20
+            "line": 21
           },
           "default": null,
           "name": "height",
@@ -14634,15 +17216,15 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 29
+            "line": 30
           },
           "name": "SavedWindow"
         }
       ],
       "anchor": {
-        "end_line": 28,
+        "end_line": 29,
         "file": "src/window-state.ts",
-        "line": 24
+        "line": 25
       },
       "bases": [
         "WindowRect"
@@ -14653,7 +17235,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 17
+            "line": 18
           },
           "default": null,
           "inherited_from": "WindowRect",
@@ -14663,7 +17245,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 18
+            "line": 19
           },
           "default": null,
           "inherited_from": "WindowRect",
@@ -14673,7 +17255,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 19
+            "line": 20
           },
           "default": null,
           "inherited_from": "WindowRect",
@@ -14683,7 +17265,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 20
+            "line": 21
           },
           "default": null,
           "inherited_from": "WindowRect",
@@ -14693,7 +17275,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 25
+            "line": 26
           },
           "default": null,
           "name": "maximized",
@@ -14702,7 +17284,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 27
+            "line": 28
           },
           "default": null,
           "doc": "Electron display id the window was on \u2014 informational; placement is decided by geometry.",
@@ -14719,15 +17301,15 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 36
+            "line": 37
           },
           "name": "WindowStateFile"
         }
       ],
       "anchor": {
-        "end_line": 35,
+        "end_line": 36,
         "file": "src/window-state.ts",
-        "line": 32
+        "line": 33
       },
       "bases": [],
       "doc": "The store: `{ schema: 1, windows: { \"<app>/<role>\": SavedWindow } }`.",
@@ -14736,7 +17318,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 33
+            "line": 34
           },
           "default": null,
           "name": "schema",
@@ -14745,7 +17327,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 34
+            "line": 35
           },
           "default": null,
           "name": "windows",
@@ -14761,15 +17343,15 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 45
+            "line": 46
           },
           "name": "DisplayArea"
         }
       ],
       "anchor": {
-        "end_line": 44,
+        "end_line": 45,
         "file": "src/window-state.ts",
-        "line": 39
+        "line": 40
       },
       "bases": [],
       "doc": "One display as the app sees it: Electron's `display.id`, `display.workArea` and whether it is the primary one.",
@@ -14778,7 +17360,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 40
+            "line": 41
           },
           "default": null,
           "name": "id",
@@ -14787,7 +17369,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 42
+            "line": 43
           },
           "default": null,
           "doc": "The display's work area (excludes the menu bar and Dock).",
@@ -14797,7 +17379,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 43
+            "line": 44
           },
           "default": null,
           "name": "primary",
@@ -14810,9 +17392,9 @@
     },
     {
       "anchor": {
-        "end_line": 57,
+        "end_line": 58,
         "file": "src/window-state.ts",
-        "line": 47
+        "line": 48
       },
       "bases": [],
       "doc": null,
@@ -14821,7 +17403,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 48
+            "line": 49
           },
           "default": null,
           "name": "width",
@@ -14830,7 +17412,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 49
+            "line": 50
           },
           "default": null,
           "name": "height",
@@ -14839,7 +17421,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 50
+            "line": 51
           },
           "default": null,
           "name": "minWidth",
@@ -14848,7 +17430,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 51
+            "line": 52
           },
           "default": null,
           "name": "minHeight",
@@ -14857,7 +17439,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 56
+            "line": 57
           },
           "default": null,
           "doc": "`false`: restore the monitor and position but open at `width` \u00d7 `height` (FliCast's uat harness \u2014 its layout",
@@ -14871,9 +17453,9 @@
     },
     {
       "anchor": {
-        "end_line": 262,
+        "end_line": 258,
         "file": "src/window-state.ts",
-        "line": 255
+        "line": 251
       },
       "bases": [],
       "doc": "The part of an Electron `BrowserWindow` that `trackWindow` needs. Methods, not data \u2014 so a structural type rather",
@@ -14882,7 +17464,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 256
+            "line": 252
           },
           "default": null,
           "name": "on",
@@ -14891,7 +17473,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 257
+            "line": 253
           },
           "default": null,
           "name": "isDestroyed",
@@ -14900,7 +17482,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 258
+            "line": 254
           },
           "default": null,
           "name": "isMinimized",
@@ -14909,7 +17491,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 259
+            "line": 255
           },
           "default": null,
           "name": "isFullScreen",
@@ -14918,7 +17500,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 260
+            "line": 256
           },
           "default": null,
           "name": "isMaximized",
@@ -14927,7 +17509,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 261
+            "line": 257
           },
           "default": null,
           "name": "getNormalBounds",
@@ -14940,9 +17522,9 @@
     },
     {
       "anchor": {
-        "end_line": 270,
+        "end_line": 266,
         "file": "src/window-state.ts",
-        "line": 264
+        "line": 260
       },
       "bases": [],
       "doc": null,
@@ -14951,7 +17533,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 266
+            "line": 262
           },
           "default": null,
           "doc": "`screen.getDisplayMatching(bounds).id`, to record which monitor it was on.",
@@ -14961,7 +17543,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 267
+            "line": 263
           },
           "default": null,
           "name": "file",
@@ -14970,7 +17552,7 @@
         {
           "anchor": {
             "file": "src/window-state.ts",
-            "line": 269
+            "line": 265
           },
           "default": null,
           "doc": "Wait this long after the last move/resize before saving; default 400 ms.",
@@ -17165,7 +19747,7 @@
     }
   ],
   "target": {
-    "commit": "1c234c05a5b3de1edda6e1c580ad8006f7b6a92a",
+    "commit": "4fb29cea4304f4fd4e544b4006a405254ebc3b17",
     "root": "..",
     "stack": "typescript"
   },
@@ -17298,6 +19880,15 @@
     },
     {
       "census": true,
+      "family": "utility-type alias (`Pick` / `Omit` / `Record` / generic instance)",
+      "looked_at": [
+        "src/notes.ts:61"
+      ],
+      "reason": "declared but not read: utility-type alias (`Pick` / `Omit` / `Record` / generic instance). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/notes.Refused` - declared but not read"
+    },
+    {
+      "census": true,
       "family": "object constant",
       "looked_at": [
         "src/open-args.ts:47"
@@ -17309,7 +19900,7 @@
       "census": true,
       "family": "const built by a call (helper or non-zod call)",
       "looked_at": [
-        "src/publish.ts:182"
+        "src/publish.ts:187"
       ],
       "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.AUDIO_TREATMENTS` - declared but not read"
@@ -17318,7 +19909,7 @@
       "census": true,
       "family": "class",
       "looked_at": [
-        "src/publish.ts:796"
+        "src/publish.ts:811"
       ],
       "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.NoFinalVideo` - declared but not read"
@@ -17327,7 +19918,7 @@
       "census": true,
       "family": "array constant",
       "looked_at": [
-        "src/publish.ts:32"
+        "src/publish.ts:33"
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.PUBLISH_PIECES` - declared but not read"
@@ -17336,7 +19927,7 @@
       "census": true,
       "family": "array constant",
       "looked_at": [
-        "src/publish.ts:67"
+        "src/publish.ts:68"
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.READY_STATES` - declared but not read"
@@ -17345,7 +19936,7 @@
       "census": true,
       "family": "array constant",
       "looked_at": [
-        "src/publish.ts:69"
+        "src/publish.ts:70"
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.SUGGESTION_STATES` - declared but not read"
@@ -17495,7 +20086,7 @@
     },
     {
       "looked_at": [
-        "readFileResult(BrandSettings) (src/brand-settings.ts:105)",
+        "readFileResult(BrandSettings) (src/brand-settings.ts:107)",
         "readFileResult(ProjectIdentity) (src/identity.ts:49)",
         "readFileResult(ResourcesFile) (src/resources.ts:135)",
         "readFileResult(SeriesFile) (src/series.ts:43)",
@@ -17547,7 +20138,7 @@
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 33,
+    "import": 36,
     "re-export": 0
   }
 }

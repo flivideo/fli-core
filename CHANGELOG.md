@@ -2,6 +2,31 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.27.0-rc.1 — 2026-10-31
+
+Release candidate for fli-notes (`flivideo/docs/briefs/fli-notes-suite-record-2026-10-31.md` §4A, workplan
+`fli-notes-orch-workplan-2026-10-31.md`). Consumers pin `github:flivideo/fli-core#v0.27.0-rc.1`; `v0.27.0` is tagged
+on `main` after merge.
+
+### Added
+
+- fli-notes: `NoteRecord` and its parts (`NoteKind` `note | ask | change`, `NoteChannel`, `NoteStatus`, `NoteScope`,
+  `NoteTarget`, `NoteWhere`, `NoteProducer`, `NoteLinks`, `NoteForm`, `NoteExcerpt`, `NoteInput`, `ChangeInput`,
+  `ResolveAskInput`, `NoteFilter`, `NoteState`), browser-safe in `note-record.ts` and on `@flivideo/core/contracts`.
+  `NOTES_FILE` = `fli.notes.jsonl`, one record per line, append-only.
+- `addNote(dir, input, opts?)`, `logChange(dir, change, opts?)` (the door log), `resolveAsk(dir, askId, input, opts?)`,
+  `readNotes(dir)`, `scanNotes(roots, filter?, opts?)`, `notesFilePath`, `newNoteId`, `AddNoteResult`, `NotesRead`,
+  `NotesScan`, `ScannedNote`, `NoteLineProblem`: locked (`fli.notes.jsonl.lock`, `takeLock`) appends that start a fresh
+  line after a torn one, and never-throwing reads.
+- Pure helpers: `snapshotChange(before, after, opts?)` (`full` / `excerpt` / `keys`, limit `NOTE_FULL_LIMIT` = 2000,
+  context `NOTE_EXCERPT_CONTEXT` = 240), `noteStates(records)`, `matchesNote(record, filter, state?)`,
+  `noteChannelOf(by)`, `noteRecordOf(input, id, at)`, `NOTE_ENTITY`.
+- `Stamp` / `stampOf` are on `@flivideo/core/contracts` too.
+
+### Changed
+
+- Test guard also wraps `fs.appendFile`.
+
 ## v0.26.0 — 2026-10-29
 
 Released from v0.26.0-rc.1 unchanged (merged to `main` after the overnight gates passed).

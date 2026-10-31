@@ -154,6 +154,54 @@ export { RevealResult, revealPath, type RevealOptions } from './reveal.js';
 
 export { Stamp, stampOf } from './stamp.js';
 
+// fli-notes (v0.27.0): notes, asks and changes, one line each in fli.notes.jsonl.
+export {
+  NOTES_FILE,
+  NOTE_ENTITY,
+  NOTE_EXCERPT_CONTEXT,
+  NOTE_FULL_LIMIT,
+  ChangeInput,
+  ChangeSnapshot,
+  NoteChannel,
+  NoteExcerpt,
+  NoteFilter,
+  NoteForm,
+  NoteInput,
+  NoteKind,
+  NoteLinks,
+  NoteProducer,
+  NoteRecord,
+  NoteScope,
+  NoteState,
+  NoteStatus,
+  NoteTarget,
+  NoteWhere,
+  ResolveAskInput,
+  matchesNote,
+  noteChannelOf,
+  noteRecordOf,
+  noteStates,
+  snapshotChange,
+  type SnapshotOptions,
+} from './note-record.js';
+
+export {
+  AddNoteResult,
+  NoteLineProblem,
+  NotesRead,
+  NotesScan,
+  ScannedNote,
+  addNote,
+  logChange,
+  newNoteId,
+  notesFilePath,
+  readNotes,
+  resolveAsk,
+  scanNotes,
+  type AddNoteOptions,
+  type ScanNotesOptions,
+} from './notes.js';
+
 export {
   EMPTY_RESOURCES,
   GroupInput,

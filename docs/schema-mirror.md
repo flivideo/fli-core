@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `1c234c05a5b3` · **generated** 2026-10-28T06:20:49+00:00
+- **commit** `4fb29cea4304` · **generated** 2026-10-31T16:14:55+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 33 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 36 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 271 | 75 | 6 | 9 | 33 | 6 |
+| 304 | 86 | 6 | 9 | 34 | 6 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -19,7 +19,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 
 - `src/api-page.ts` — `ApiPageOptions` :16
 - `src/app-file.ts` — `AppName` :15 · `AppSubject` :19 · `AppFile` :26
-- `src/brand-settings.ts` — `TranscriptionChoice` :14 · `BrandPublishSettings` :28 · `BrandYouTubeSettings` :45 · `BrandStudioDefaults` :57 · `BrandResearchSettings` :73 · `BrandSettings` :81 · `WriteBrandSettingsResult` :113
+- `src/brand-settings.ts` — `TranscriptionChoice` :16 · `BrandPublishSettings` :30 · `BrandYouTubeSettings` :47 · `BrandStudioDefaults` :59 · `BrandResearchSettings` :75 · `BrandSettings` :83 · `WriteBrandSettingsResult` :118 · `UpdateBrandSettingsResult` :152 · `UpdateBrandSettingsOptions` :173
 - `src/brands.ts` — `Brand` :9 · `RegistryEntry` :20 · `BrandsFile` :28 · `SkippedBrand` :32 · `BrandsRead` :35 · `ReadBrandsResult` :45 · `ReadBrandsOptions` :48 · `ResolveBrandRootOptions` :92
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
 - `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :67 · `LEGACY_FOLDERS` (set) :70 · `MOTION_MACHINERY` (set) :126 · `ProjectTier` (set) :140 · `OverlayRole` (set) :151 · `ProjectEntry` :154 · `OverlayPaths` :201 · `ProjectLayout` (set) :296 · `ProjectLayoutPaths` :299
@@ -27,18 +27,20 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
 - `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
-- `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :32
+- `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :44
 - `src/gitignore-rules.ts` — `GITIGNORE_BASE_VERSION` :19 · `Tag` :24 · `GitignoreOverlayRule` :38 · `GitignoreGroup` :45 · `GitignoreRenderOptions` :166 · `Located` :199 · `GitignoreRenderResult` :243 · `GitignoreCheckResult` :339
 - `src/gitignore.ts` — `TrackedIgnored` :23 · `GitignoreOptions` :31 · `GitignoreRefusal` :42 · `GitignoreRenderedFile` :49 · `GitignoreCheckedFile` :57 · `GitignoreResult` :63
 - `src/identity.ts` — `ProjectAspect` (set) :13 · `ProjectShape` (set) :23 · `ProjectLanguage` :28 · `ProjectIdentity` :31 · `Refused()` :57 · `WriteIdentityResult` :65 · `AdoptIdentityResult` :178 · `AdoptIdentityInput` :193
 - `src/lab-path.ts` — `PathSegment` :8 · `LabPathInput` :16 · `ResolvedLabPath` :84
 - `src/lifecycle.ts` — `LifecycleVerb` (set) :18 · `SystemStatus` :21 · `SystemQuitInput` :34 · `SystemQuitOutput` :40 · `AppScriptOpen` :84
 - `src/machine.ts` — `AbsolutePath` :7 · `MachineSettings` :12 · `ResolvedMachineSettings` :24 · `MachineSettingsOptions` :27 · `MachineSettingsResult` :32
+- `src/note-record.ts` — `NoteKind` (set) :22 · `NoteChannel` (set) :26 · `NoteStatus` (set) :30 · `NoteScope` (set) :34 · `Name` :37 · `NoteTarget` :43 · `NoteWhere` :70 · `NoteProducer` :78 · `NoteLinks` :86 · `NoteForm` (set) :104 · `NoteExcerpt` :108 · `NoteRecord` :122 · `NoteInput` :163 · `ChangeInput` :180 · `ResolveAskInput` :199 · `SnapshotOptions` :249 · `ChangeSnapshot` :256 · `NoteState` :340 · `NoteFilter` :375
+- `src/notes.ts` — `AddNoteResult` :40 · `AddNoteOptions` :63 · `NoteLineProblem` :249 · `NotesRead` :252 · `ScannedNote` :293 · `NotesScan` :302 · `ScanNotesOptions` :313
 - `src/open-args.ts` — `OpenContext` :11 · `OpenArgs` :27 · `OpenArgName` (set) :36 · `RawOpenArgs` :40 · `ParseOpenArgsOptions` :53 · `ParsedOpenArgs` :58
 - `src/open-context.ts` — `OpenContextResult` :16 · `ResolveOpenContextOptions` :33
 - `src/openrpc.ts` — `OpenRpcServer` :18 · `OpenRpcDocument` :29 · `OpenRpcOptions` :52 · `JsonRpcRequest` :174 · `CallAnswer` :183 · `JsonRpcOptions` :185
 - `src/project-folder.ts` — `ProjectCode` :5 · `KebabSlug` :11 · `ProjectFolder` :15
-- `src/publish.ts` — `PublishPiece` (set) :43 · `PublishState` (set) :63 · `PUBLISH_RULES` (set) :77 · `EditApp` (set) :87 · `Iso` :90 · `PublishExport` :93 · `PublishEdit` :117 · `PublishLaunch` :121 · `PublishFacts` :133 · `PublishRow` :144 · `PublishReadiness` :165 · `LIVE` (set) :201 · `PublishedVideo` :687
+- `src/publish.ts` — `PublishPiece` (set) :44 · `PublishState` (set) :64 · `PUBLISH_RULES` (set) :78 · `EditApp` (set) :91 · `Iso` :94 · `PublishExport` :97 · `PublishEdit` :122 · `PublishLaunch` :126 · `PublishFacts` :138 · `PublishRow` :149 · `PublishReadiness` :170 · `LIVE` (set) :216 · `PublishedVideo` :702
 - `src/recipe-paths.ts` — `RecipePathProblem` (set) :15 · `RecipePathWarning` :18 · `SKIP` (set) :77
 - `src/recording.ts` — `RecordingTag` :14 · `Recording` :18
 - `src/renders.ts` — `PathSegment` :15 · `RendersPathInput` :23 · `RendersTool` :52 · `RendersTally` :59 · `ClearRendersResult` :121
@@ -48,8 +50,9 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/series.ts` — `SeriesMember` :22 · `SeriesFile` :32 · `SeriesListing` :74 · `Refusal` :102 · `ChangeSeriesResult` :117 · `ChangeSeriesOptions` :123 · `SeriesRef` :271 · `Changed` :272
 - `src/stamp.ts` — `Stamp` :9
 - `src/transport.ts` — `ShuttleState` :15 · `JklKey` (set) :27 · `ShuttleAction` (set) :45
-- `src/video-file.ts` — `Ext` :21 · `VideoFileKind` (set) :23 · `VideoPart` (set) :27 · `VideoFile` :30 · `UnknownVideoFile` :38 · `RetiredVideoTag` (set) :46 · `LegacyVideoFile` :50 · `ParsedVideoFile` :59 · `VideoFolder` :104 · `VideoFolderName` :116
-- `src/window-state.ts` — `WindowRect` :16 · `SavedWindow` :24 · `WindowStateFile` :32 · `DisplayArea` :39 · `PlaceOptions` :47 · `TrackedWindow` :255 · `TrackOptions` :264
+- `src/video-file.ts` — `Ext` :23 · `VideoFileKind` (set) :25 · `WholeVideoApp` (set) :32 · `VideoPart` (set) :36 · `VideoFile` :39 · `UnknownVideoFile` :49 · `RetiredVideoTag` (set) :57 · `LegacyVideoFile` :61 · `ParsedVideoFile` :70 · `VideoFolder` :115 · `VideoFolderName` :127
+- `src/whole-video.ts` — `WholeVideoOwner` :24 · `MAKERS` (set) :32
+- `src/window-state.ts` — `WindowRect` :17 · `SavedWindow` :25 · `WindowStateFile` :33 · `DisplayArea` :40 · `PlaceOptions` :48 · `TrackedWindow` :251 · `TrackOptions` :260
 - `src/words.ts` — `WordLevel` (set) :25 · `Text` :29 · `WordName` :32 · `WordRule` :40 · `WordFiller` :44 · `WordKind` (set) :52 · `WordOff` :56 · `WordsFile` :59 · `WordInput` :72 · `WordRef` :95 · `MergedWords` :99 · `WordsRead` :108 · `ReadWordsOptions` :121 · `WriteWordsResult` :287 · `ChangeWordsResult` :320 · `ChangeWordsOptions` :335
 - `src/youtube.ts` — `YouTubeChannel` :36 · `YouTubePlaylistItem` :52 · `YouTubePlaylist` :61 · `YouTubePlaylistsFile` :76 · `YouTubeVideo` :83 · `YouTubeSyncCounts` :103 · `YouTubeSyncRecord` :111 · `YouTubeVideoListing` :160 · `SyncYouTubeOptions` :445 · `SyncYouTubeResult` :458
 
@@ -72,10 +75,10 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**405** top-level declarations counted = **350** mirrored + **22** listed as gaps + **33** declared but not read.
+**461** top-level declarations counted = **405** mirrored + **22** listed as gaps + **34** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 1 function, 1 function type, 30 literal constants.
+Not counted, as not schema-bearing: 1 function, 1 function type, 34 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
@@ -86,6 +89,7 @@ Not counted, as not schema-bearing: 1 function, 1 function type, 30 literal cons
 | `src/gitignore-rules.ts` | 13 | 10 | 0 | **3** |
 | `src/identity.ts` | 15 | 12 | 2 | **1** |
 | `src/lifecycle.ts` | 11 | 10 | 0 | **1** |
+| `src/notes.ts` | 13 | 12 | 0 | **1** |
 | `src/open-args.ts` | 12 | 11 | 0 | **1** |
 | `src/publish.ts` | 27 | 22 | 0 | **5** |
 | `src/renders.ts` | 9 | 8 | 0 | **1** |
@@ -100,23 +104,43 @@ Not counted, as not schema-bearing: 1 function, 1 function type, 30 literal cons
 
 One symbol states each set. Adding a member changes that symbol, so these cannot drift.
 
-### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:113-121`
+### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:118-126`
 
 *the `kind` discriminator of the union `WriteBrandSettingsResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/brand-settings.ts:114` |
-| `refused` | `src/brand-settings.ts:116` |
+| `written` | `src/brand-settings.ts:119` |
+| `refused` | `src/brand-settings.ts:121` |
 
-### `src/brand-settings.WriteBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:117`
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:122`
 
 *`z.enum` `reason` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `invalid-input` | `src/brand-settings.ts:117` |
-| `io-error` | `src/brand-settings.ts:117` |
+| `invalid-input` | `src/brand-settings.ts:122` |
+| `io-error` | `src/brand-settings.ts:122` |
+
+### `src/brand-settings.UpdateBrandSettingsResult.kind` — `src/brand-settings.ts:152-170`
+
+*the `kind` discriminator of the union `UpdateBrandSettingsResult` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `written` | `src/brand-settings.ts:154` |
+| `refused` | `src/brand-settings.ts:161` |
+
+### `src/brand-settings.UpdateBrandSettingsResult[kind=refused].reason` — `src/brand-settings.ts:166`
+
+*`z.enum` `reason` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `invalid-input` | `src/brand-settings.ts:166` |
+| `io-error` | `src/brand-settings.ts:166` |
+| `unusable-file` | `src/brand-settings.ts:166` |
+| `busy` | `src/brand-settings.ts:166` |
 
 ### `src/brands.ReadBrandsResult.kind` — `src/brands.ts:45`
 
@@ -507,6 +531,99 @@ The lifecycle verb contract (agent-drivable step 2, David 2026-09-23: "Do we hav
 | `file` | `src/machine.ts:36` |
 | `default` | `src/machine.ts:36` |
 
+### `src/note-record.NoteKind` — `src/note-record.ts:22`
+
+`note`: kept, never nags. `ask`: a to-do until done. `change`: written by the app when a record changes.
+
+*`z.enum` `NoteKind` - a single declaring symbol*
+
+*aliases* `NoteKind` `src/note-record.ts:23`
+
+| value | declared at |
+|---|---|
+| `note` | `src/note-record.ts:22` |
+| `ask` | `src/note-record.ts:22` |
+| `change` | `src/note-record.ts:22` |
+
+### `src/note-record.NoteChannel` — `src/note-record.ts:26`
+
+How the words arrived.
+
+*`z.enum` `NoteChannel` - a single declaring symbol*
+
+*aliases* `NoteChannel` `src/note-record.ts:27`
+
+| value | declared at |
+|---|---|
+| `ui` | `src/note-record.ts:26` |
+| `chat` | `src/note-record.ts:26` |
+| `voice` | `src/note-record.ts:26` |
+| `agent` | `src/note-record.ts:26` |
+
+### `src/note-record.NoteStatus` — `src/note-record.ts:30`
+
+`kept` (a note) · `open` → `done` (an ask). A `change` has no status.
+
+*`z.enum` `NoteStatus` - a single declaring symbol*
+
+*aliases* `NoteStatus` `src/note-record.ts:31`
+
+| value | declared at |
+|---|---|
+| `kept` | `src/note-record.ts:30` |
+| `open` | `src/note-record.ts:30` |
+| `done` | `src/note-record.ts:30` |
+
+### `src/note-record.NoteScope` — `src/note-record.ts:34`
+
+`one` entity (`entityId`), `many` (`entityIds`), or an `aggregate` described by a query in words (`query`).
+
+*`z.enum` `NoteScope` - a single declaring symbol*
+
+*aliases* `NoteScope` `src/note-record.ts:35`
+
+| value | declared at |
+|---|---|
+| `one` | `src/note-record.ts:34` |
+| `many` | `src/note-record.ts:34` |
+| `aggregate` | `src/note-record.ts:34` |
+
+### `src/note-record.NoteForm` — `src/note-record.ts:104`
+
+How `before` / `after` are held on a `change`. `full`: the values themselves. `excerpt`: two text excerpts
+
+*`z.enum` `NoteForm` - a single declaring symbol*
+
+*aliases* `NoteForm` `src/note-record.ts:105`
+
+| value | declared at |
+|---|---|
+| `full` | `src/note-record.ts:104` |
+| `excerpt` | `src/note-record.ts:104` |
+| `keys` | `src/note-record.ts:104` |
+
+### `src/notes.AddNoteResult.kind` — `src/notes.ts:40-59`
+
+*the `kind` discriminator of `z.discriminatedUnion` `AddNoteResult` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `written` | `src/notes.ts:41` |
+| `refused` | `src/notes.ts:43` |
+
+### `src/notes.AddNoteResult[kind=refused].reason` — `src/notes.ts:48`
+
+*`z.enum` `reason` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `invalid-input` | `src/notes.ts:49` |
+| `io-error` | `src/notes.ts:50` |
+| `busy` | `src/notes.ts:51` |
+| `not-found` | `src/notes.ts:52` |
+| `not-an-ask` | `src/notes.ts:53` |
+| `already-done` | `src/notes.ts:54` |
+
 ### `src/open-args.OpenArgName` — `src/open-args.ts:36`
 
 *`z.enum` `OpenArgName` - a single declaring symbol*
@@ -542,89 +659,92 @@ The lifecycle verb contract (agent-drivable step 2, David 2026-09-23: "Do we hav
 | `true` | `src/openrpc.ts:183` |
 | `false` | `src/openrpc.ts:183` |
 
-### `src/publish.PublishPiece` — `src/publish.ts:43`
+### `src/publish.PublishPiece` — `src/publish.ts:44`
 
 *`z.enum` `PublishPiece` - members read through `PUBLISH_PIECES` (src/publish.PUBLISH_PIECES) - a single declaring symbol*
 
-*aliases* `PublishPiece` `src/publish.ts:44`
+*aliases* `PublishPiece` `src/publish.ts:45`
 
 | value | declared at |
 |---|---|
-| `video` | `src/publish.ts:33` |
-| `audio` | `src/publish.ts:34` |
-| `captions` | `src/publish.ts:35` |
-| `thumbnail` | `src/publish.ts:36` |
-| `title` | `src/publish.ts:37` |
-| `description` | `src/publish.ts:38` |
-| `chapters` | `src/publish.ts:39` |
-| `studio` | `src/publish.ts:40` |
-| `published` | `src/publish.ts:41` |
+| `video` | `src/publish.ts:34` |
+| `audio` | `src/publish.ts:35` |
+| `captions` | `src/publish.ts:36` |
+| `thumbnail` | `src/publish.ts:37` |
+| `title` | `src/publish.ts:38` |
+| `description` | `src/publish.ts:39` |
+| `chapters` | `src/publish.ts:40` |
+| `studio` | `src/publish.ts:41` |
+| `published` | `src/publish.ts:42` |
 
-### `src/publish.PublishState` — `src/publish.ts:63`
+### `src/publish.PublishState` — `src/publish.ts:64`
 
 Human vs AI must be visible (David 2026-10-05): `set` — a person's choice; `suggested` — an agent's choice (Tuber,
 
 *`z.enum` `PublishState` - a single declaring symbol*
 
-*aliases* `PublishState` `src/publish.ts:64`
+*aliases* `PublishState` `src/publish.ts:65`
 
 | value | declared at |
 |---|---|
-| `set` | `src/publish.ts:63` |
-| `suggested` | `src/publish.ts:63` |
-| `inferred` | `src/publish.ts:63` |
-| `default` | `src/publish.ts:63` |
-| `missing` | `src/publish.ts:63` |
-| `stale` | `src/publish.ts:63` |
+| `set` | `src/publish.ts:64` |
+| `suggested` | `src/publish.ts:64` |
+| `inferred` | `src/publish.ts:64` |
+| `default` | `src/publish.ts:64` |
+| `missing` | `src/publish.ts:64` |
+| `stale` | `src/publish.ts:64` |
 
-### `src/publish.PUBLISH_RULES` — `src/publish.ts:77-83`
+### `src/publish.PUBLISH_RULES` — `src/publish.ts:78-84`
 
 *`as const` object keys `PUBLISH_RULES`, typed from by `keyof typeof PUBLISH_RULES` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `newest-export` | `src/publish.ts:78` |
-| `audio-from-name` | `src/publish.ts:79` |
-| `same-export-captions` | `src/publish.ts:80` |
-| `ylo-launch` | `src/publish.ts:81` |
-| `brand-default` | `src/publish.ts:82` |
+| `newest-export` | `src/publish.ts:79` |
+| `audio-from-name` | `src/publish.ts:80` |
+| `same-export-captions` | `src/publish.ts:81` |
+| `ylo-launch` | `src/publish.ts:82` |
+| `brand-default` | `src/publish.ts:83` |
 
-### `src/publish.EditApp` — `src/publish.ts:87`
+### `src/publish.EditApp` — `src/publish.ts:91`
 
-The edit apps: FliCut writes `-cut`, `-audio-<treatment>` and `-part-…`; FliEdit wrote the legacy `-final`.
+The apps with an edit document (`fli.<cut|edit|cast>.<video>.json`): FliCut writes `-cut` and `-audio-<treatment>`,
 
 *`z.enum` `EditApp` - a single declaring symbol*
 
-*aliases* `EditApp` `src/publish.ts:88`
+*aliases* `EditApp` `src/publish.ts:92`
 
 | value | declared at |
 |---|---|
-| `flicut` | `src/publish.ts:87` |
-| `fliedit` | `src/publish.ts:87` |
+| `flicut` | `src/publish.ts:91` |
+| `fliedit` | `src/publish.ts:91` |
+| `flicast` | `src/publish.ts:91` |
 
-### `src/publish.PublishExport.kind` — `src/publish.ts:100`
+### `src/publish.PublishExport.kind` — `src/publish.ts:104`
 
 *`z.enum` `kind` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `cut` | `src/publish.ts:100` |
-| `audio` | `src/publish.ts:100` |
-| `overlay` | `src/publish.ts:100` |
-| `part` | `src/publish.ts:100` |
-| `legacy` | `src/publish.ts:100` |
+| `cut` | `src/publish.ts:104` |
+| `audio` | `src/publish.ts:104` |
+| `overlay` | `src/publish.ts:104` |
+| `part` | `src/publish.ts:104` |
+| `edit` | `src/publish.ts:104` |
+| `cast` | `src/publish.ts:104` |
+| `legacy` | `src/publish.ts:104` |
 
-### `src/publish.PublishRow.source` — `src/publish.ts:153`
+### `src/publish.PublishRow.source` — `src/publish.ts:158`
 
 *`z.enum` `source` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `choice` | `src/publish.ts:153` |
-| `rule` | `src/publish.ts:153` |
-| `brand` | `src/publish.ts:153` |
-| `ylo` | `src/publish.ts:153` |
-| `none` | `src/publish.ts:153` |
+| `choice` | `src/publish.ts:158` |
+| `rule` | `src/publish.ts:158` |
+| `brand` | `src/publish.ts:158` |
+| `ylo` | `src/publish.ts:158` |
+| `none` | `src/publish.ts:158` |
 
 ### `src/recipe-paths.RecipePathProblem` — `src/recipe-paths.ts:15`
 
@@ -821,68 +941,99 @@ How candidates of a kind are chosen: `one` — at most one `chosen` per video; `
 | `playBackward` | `src/transport.ts:45` |
 | `stop` | `src/transport.ts:45` |
 
-### `src/video-file.VideoFileKind` — `src/video-file.ts:23`
+### `src/video-file.VideoFileKind` — `src/video-file.ts:25`
 
 *`z.enum` `VideoFileKind` - a single declaring symbol*
 
-*aliases* `VideoFileKind` `src/video-file.ts:24`
+*aliases* `VideoFileKind` `src/video-file.ts:26`
 
 | value | declared at |
 |---|---|
-| `cut` | `src/video-file.ts:23` |
-| `audio` | `src/video-file.ts:23` |
-| `overlay` | `src/video-file.ts:23` |
-| `part` | `src/video-file.ts:23` |
+| `cut` | `src/video-file.ts:25` |
+| `audio` | `src/video-file.ts:25` |
+| `overlay` | `src/video-file.ts:25` |
+| `part` | `src/video-file.ts:25` |
+| `edit` | `src/video-file.ts:25` |
+| `cast` | `src/video-file.ts:25` |
 
-### `src/video-file.VideoPart` — `src/video-file.ts:27`
+### `src/video-file.WholeVideoApp` — `src/video-file.ts:32`
+
+The apps that make a whole video (v0.26.0): FliCut (`-cut`, `-audio-…`), FliEdit (`-edit`), FliCast (`-cast`) and
+
+*`z.enum` `WholeVideoApp` - a single declaring symbol*
+
+*aliases* `WholeVideoApp` `src/video-file.ts:33`
+
+| value | declared at |
+|---|---|
+| `flicut` | `src/video-file.ts:32` |
+| `fliedit` | `src/video-file.ts:32` |
+| `flicast` | `src/video-file.ts:32` |
+| `flistudio` | `src/video-file.ts:32` |
+
+### `src/video-file.VideoPart` — `src/video-file.ts:36`
 
 Which section of a video a `part` file is. A closed set: `<name>-part-<intro|body|outro>`.
 
 *`z.enum` `VideoPart` - a single declaring symbol*
 
-*aliases* `VideoPart` `src/video-file.ts:28`
+*aliases* `VideoPart` `src/video-file.ts:37`
 
 | value | declared at |
 |---|---|
-| `intro` | `src/video-file.ts:27` |
-| `body` | `src/video-file.ts:27` |
-| `outro` | `src/video-file.ts:27` |
+| `intro` | `src/video-file.ts:36` |
+| `body` | `src/video-file.ts:36` |
+| `outro` | `src/video-file.ts:36` |
 
-### `src/video-file.VideoFile.kind` — `src/video-file.ts:30-35`
+### `src/video-file.VideoFile.kind` — `src/video-file.ts:39-46`
 
 *the `kind` discriminator of `z.discriminatedUnion` `VideoFile` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `cut` | `src/video-file.ts:31` |
-| `audio` | `src/video-file.ts:32` |
-| `overlay` | `src/video-file.ts:33` |
-| `part` | `src/video-file.ts:34` |
+| `cut` | `src/video-file.ts:40` |
+| `audio` | `src/video-file.ts:41` |
+| `overlay` | `src/video-file.ts:42` |
+| `part` | `src/video-file.ts:43` |
+| `edit` | `src/video-file.ts:44` |
+| `cast` | `src/video-file.ts:45` |
 
-### `src/video-file.RetiredVideoTag` — `src/video-file.ts:46`
+### `src/video-file.RetiredVideoTag` — `src/video-file.ts:57`
 
 Tags a file name may still carry from before a ruling retired them (R11: `-final`). Read, never written.
 
 *`z.enum` `RetiredVideoTag` - a single declaring symbol*
 
-*aliases* `RetiredVideoTag` `src/video-file.ts:47`
+*aliases* `RetiredVideoTag` `src/video-file.ts:58`
 
 | value | declared at |
 |---|---|
-| `final` | `src/video-file.ts:46` |
+| `final` | `src/video-file.ts:57` |
 
-### `src/video-file.ParsedVideoFile.kind` — `src/video-file.ts:59`
+### `src/video-file.ParsedVideoFile.kind` — `src/video-file.ts:70`
 
 *the `kind` discriminator of the union `ParsedVideoFile` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `cut` | `src/video-file.ts:31` |
-| `audio` | `src/video-file.ts:32` |
-| `overlay` | `src/video-file.ts:33` |
-| `part` | `src/video-file.ts:34` |
-| `legacy` | `src/video-file.ts:52` |
-| `unknown-kind` | `src/video-file.ts:39` |
+| `cut` | `src/video-file.ts:40` |
+| `audio` | `src/video-file.ts:41` |
+| `overlay` | `src/video-file.ts:42` |
+| `part` | `src/video-file.ts:43` |
+| `edit` | `src/video-file.ts:44` |
+| `cast` | `src/video-file.ts:45` |
+| `legacy` | `src/video-file.ts:63` |
+| `unknown-kind` | `src/video-file.ts:50` |
+
+### `src/whole-video.MAKERS` — `src/whole-video.ts:32-36`
+
+*`as const` object keys `MAKERS`, typed from by `keyof typeof MAKERS` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `flicut` | `src/whole-video.ts:33` |
+| `fliedit` | `src/whole-video.ts:34` |
+| `flicast` | `src/whole-video.ts:35` |
 
 ### `src/words.WordLevel` — `src/words.ts:25`
 
@@ -1024,30 +1175,30 @@ Each set below was read out of the real authority — control flow, membership t
 
 > **REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.**
 
-### `src/fs-utils.NO_HARD_LINKS` — `src/fs-utils.ts:32`
+### `src/fs-utils.NO_HARD_LINKS` — `src/fs-utils.ts:44`
 
 *module constant `NO_HARD_LINKS` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `EPERM` | `src/fs-utils.ts:32` |
-| `ENOTSUP` | `src/fs-utils.ts:32` |
-| `EOPNOTSUPP` | `src/fs-utils.ts:32` |
-| `ENOSYS` | `src/fs-utils.ts:32` |
-| `EXDEV` | `src/fs-utils.ts:32` |
+| `EPERM` | `src/fs-utils.ts:44` |
+| `ENOTSUP` | `src/fs-utils.ts:44` |
+| `EOPNOTSUPP` | `src/fs-utils.ts:44` |
+| `ENOSYS` | `src/fs-utils.ts:44` |
+| `EXDEV` | `src/fs-utils.ts:44` |
 
-> **REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:44 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.**
 
-### `src/publish.LIVE` — `src/publish.ts:201`
+### `src/publish.LIVE` — `src/publish.ts:216`
 
 *module constant `LIVE` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `chosen` | `src/publish.ts:201` |
-| `published` | `src/publish.ts:201` |
+| `chosen` | `src/publish.ts:216` |
+| `published` | `src/publish.ts:216` |
 
-> **REFACTOR (minor): `LIVE` at src/publish.ts:201 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `LIVE` at src/publish.ts:216 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.**
 
 ### `src/recipe-paths.SKIP` — `src/recipe-paths.ts:77`
 
@@ -1125,129 +1276,163 @@ The self-describing surface as ONE served HTML page (agent-drivable step 2). Two
 | `app` | `AppName → src/app-file.AppName` | — | `src/app-file.ts:27` |
 | `subject` | `AppSubject.optional() → src/app-file.AppSubject` | — | `src/app-file.ts:27` |
 
-### `src/brand-settings.TranscriptionChoice` — zod-object — `src/brand-settings.ts:14-19`
+### `src/brand-settings.TranscriptionChoice` — zod-object — `src/brand-settings.ts:16-21`
 
 A level's transcription providers (FliTools reads them: global `flitools.json` → brand `fli.brand.json` → project
 
-*aliases* `TranscriptionChoice` `src/brand-settings.ts:20`
+*aliases* `TranscriptionChoice` `src/brand-settings.ts:22`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `fast` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:16` | Pass 1 (fast): `auto`, `groq-whisper`, `mlx-whisper`, … |
-| `editGrade` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:18` | Pass 2 (edit-grade): `crisperwhisper`, `elevenlabs`, `off`, … |
+| `fast` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:18` | Pass 1 (fast): `auto`, `groq-whisper`, `mlx-whisper`, … |
+| `editGrade` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:20` | Pass 2 (edit-grade): `crisperwhisper`, `elevenlabs`, `off`, … |
 
-### `src/brand-settings.BrandPublishSettings` — zod-object — `src/brand-settings.ts:28-38`
+### `src/brand-settings.BrandPublishSettings` — zod-object — `src/brand-settings.ts:30-40`
 
 The brand's publishing settings, authored by the brand (CTAs, affiliates, legal…). Moved verbatim from FliHub's
 
-*aliases* `BrandPublishSettings` `src/brand-settings.ts:39`
+*aliases* `BrandPublishSettings` `src/brand-settings.ts:41`
 
 | field | type | default | at |
 |---|---|---|---|
-| `brand` | `z.looseObject({}).optional()` | — | `src/brand-settings.ts:29` |
-| `socialLinks` | `z.record(z.string(), z.string()).optional()` | — | `src/brand-settings.ts:30` |
-| `ctas` | `z.record(z.string(), z.looseObject({ label: z.string(), url: z.string() })).optional()` | — | `src/brand-settings.ts:31` |
-| `affiliates` | `z.array(z.looseObject({ name: z.string(), url: z.string(), active: z.boolean().optional() })).optional()` | — | `src/brand-settings.ts:32` |
-| `playlists` | `z.record(z.string(), z.string()).optional()` | — | `src/brand-settings.ts:35` |
-| `descriptionTemplate` | `z.looseObject({}).optional()` | — | `src/brand-settings.ts:36` |
-| `_meta` | `z.looseObject({}).optional()` | — | `src/brand-settings.ts:37` |
+| `brand` | `z.looseObject({}).optional()` | — | `src/brand-settings.ts:31` |
+| `socialLinks` | `z.record(z.string(), z.string()).optional()` | — | `src/brand-settings.ts:32` |
+| `ctas` | `z.record(z.string(), z.looseObject({ label: z.string(), url: z.string() })).optional()` | — | `src/brand-settings.ts:33` |
+| `affiliates` | `z.array(z.looseObject({ name: z.string(), url: z.string(), active: z.boolean().optional() })).optional()` | — | `src/brand-settings.ts:34` |
+| `playlists` | `z.record(z.string(), z.string()).optional()` | — | `src/brand-settings.ts:37` |
+| `descriptionTemplate` | `z.looseObject({}).optional()` | — | `src/brand-settings.ts:38` |
+| `_meta` | `z.looseObject({}).optional()` | — | `src/brand-settings.ts:39` |
 
-### `src/brand-settings.BrandPublishSettings.brand` — zod-object — `src/brand-settings.ts:29`
+### `src/brand-settings.BrandPublishSettings.brand` — zod-object — `src/brand-settings.ts:31`
 
 *No annotated fields found — this shape declares its fields elsewhere.*
 
-### `src/brand-settings.BrandPublishSettings.affiliates[]` — zod-object — `src/brand-settings.ts:32`
+### `src/brand-settings.BrandPublishSettings.affiliates[]` — zod-object — `src/brand-settings.ts:34`
 
 | field | type | default | at |
 |---|---|---|---|
-| `name` | `z.string()` | — | `src/brand-settings.ts:33` |
-| `url` | `z.string()` | — | `src/brand-settings.ts:33` |
-| `active` | `z.boolean().optional()` | — | `src/brand-settings.ts:33` |
+| `name` | `z.string()` | — | `src/brand-settings.ts:35` |
+| `url` | `z.string()` | — | `src/brand-settings.ts:35` |
+| `active` | `z.boolean().optional()` | — | `src/brand-settings.ts:35` |
 
-### `src/brand-settings.BrandPublishSettings.descriptionTemplate` — zod-object — `src/brand-settings.ts:36`
-
-*No annotated fields found — this shape declares its fields elsewhere.*
-
-### `src/brand-settings.BrandPublishSettings._meta` — zod-object — `src/brand-settings.ts:37`
+### `src/brand-settings.BrandPublishSettings.descriptionTemplate` — zod-object — `src/brand-settings.ts:38`
 
 *No annotated fields found — this shape declares its fields elsewhere.*
 
-### `src/brand-settings.BrandYouTubeSettings` — zod-object — `src/brand-settings.ts:45-50`
+### `src/brand-settings.BrandPublishSettings._meta` — zod-object — `src/brand-settings.ts:39`
+
+*No annotated fields found — this shape declares its fields elsewhere.*
+
+### `src/brand-settings.BrandYouTubeSettings` — zod-object — `src/brand-settings.ts:47-52`
 
 The brand's YouTube choices, made by a person. Playlist **ids**; titles come from the YouTube mirror. Everything YouTube
 
-*aliases* `BrandYouTubeSettings` `src/brand-settings.ts:51`
+*aliases* `BrandYouTubeSettings` `src/brand-settings.ts:53`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `activePlaylists` | `z.array(z.string().min(1)).default([])` | `[]` | `src/brand-settings.ts:47` | The playlists this brand uses: offered in Launch, shown first on the brand's YouTube page. |
-| `defaultPlaylists` | `z.array(z.string().min(1)).default([])` | `[]` | `src/brand-settings.ts:49` | The brand's usual picks, pre-ticked for a new video. |
+| `activePlaylists` | `z.array(z.string().min(1)).default([])` | `[]` | `src/brand-settings.ts:49` | The playlists this brand uses: offered in Launch, shown first on the brand's YouTube page. |
+| `defaultPlaylists` | `z.array(z.string().min(1)).default([])` | `[]` | `src/brand-settings.ts:51` | The brand's usual picks, pre-ticked for a new video. |
 
-### `src/brand-settings.BrandStudioDefaults` — zod-object — `src/brand-settings.ts:57-65`
+### `src/brand-settings.BrandStudioDefaults` — zod-object — `src/brand-settings.ts:59-67`
 
 The YouTube Studio defaults a new video starts with (category, audience, language, the AI-use and paid-promotion
 
-*aliases* `BrandStudioDefaults` `src/brand-settings.ts:66`
+*aliases* `BrandStudioDefaults` `src/brand-settings.ts:68`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `category` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:58` |  |
-| `audience` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:59` |  |
-| `language` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:60` |  |
-| `aiUse` | `z.boolean().optional()` | — | `src/brand-settings.ts:62` | Studio 'AI use' default (altered or synthetic content); absent → undecided, the app never guesses. |
-| `paidPromotion` | `z.boolean().optional()` | — | `src/brand-settings.ts:64` | Studio 'Paid promotion' default; absent → undecided, the app never guesses. |
+| `category` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:60` |  |
+| `audience` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:61` |  |
+| `language` | `z.string().min(1).optional()` | — | `src/brand-settings.ts:62` |  |
+| `aiUse` | `z.boolean().optional()` | — | `src/brand-settings.ts:64` | Studio 'AI use' default (altered or synthetic content); absent → undecided, the app never guesses. |
+| `paidPromotion` | `z.boolean().optional()` | — | `src/brand-settings.ts:66` | Studio 'Paid promotion' default; absent → undecided, the app never guesses. |
 
-### `src/brand-settings.BrandResearchSettings` — zod-object — `src/brand-settings.ts:73-78`
+### `src/brand-settings.BrandResearchSettings` — zod-object — `src/brand-settings.ts:75-80`
 
 The brand's research switches (FliStudio `research.*`, docs/briefs/research-keywords-build-brief.md). Sources that
 
-*aliases* `BrandResearchSettings` `src/brand-settings.ts:79`
+*aliases* `BrandResearchSettings` `src/brand-settings.ts:81`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `autocomplete` | `z.boolean().optional()` | — | `src/brand-settings.ts:75` | YouTube autocomplete (undocumented endpoint). Absent → on. |
-| `allowUnofficial` | `z.boolean().optional()` | — | `src/brand-settings.ts:77` | Unofficial sources that are off by default (Google Trends, YouTube filter). Absent → off. |
+| `autocomplete` | `z.boolean().optional()` | — | `src/brand-settings.ts:77` | YouTube autocomplete (undocumented endpoint). Absent → on. |
+| `allowUnofficial` | `z.boolean().optional()` | — | `src/brand-settings.ts:79` | Unofficial sources that are off by default (Google Trends, YouTube filter). Absent → off. |
 
-### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:81-102`
+### `src/brand-settings.BrandSettings` — zod-object — `src/brand-settings.ts:83-104`
 
-*aliases* `BrandSettings` `src/brand-settings.ts:103`
+*aliases* `BrandSettings` `src/brand-settings.ts:105`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:82` |  |
-| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:83` |  |
-| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:84` |  |
-| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/brand-settings.ts:88` | The brand's transcription providers, over the suite default; absent → the suite default. |
-| `gitignore` | `z.array(GitignoreOverlayRule).optional() → src/gitignore-rules.GitignoreOverlayRule` | — | `src/brand-settings.ts:93` | The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's |
-| `publish` | `BrandPublishSettings.optional() → src/brand-settings.BrandPublishSettings` | — | `src/brand-settings.ts:95` | Publishing settings (CTAs, affiliates, legal…); optional, so older readers are unaffected. |
-| `youtube` | `BrandYouTubeSettings.optional() → src/brand-settings.BrandYouTubeSettings` | — | `src/brand-settings.ts:97` | The brand's YouTube playlist choices. |
-| `studioDefaults` | `BrandStudioDefaults.optional() → src/brand-settings.BrandStudioDefaults` | — | `src/brand-settings.ts:99` | YouTube Studio defaults for a new video. |
-| `research` | `BrandResearchSettings.optional() → src/brand-settings.BrandResearchSettings` | — | `src/brand-settings.ts:101` | Which research sources the brand allows. |
+| `schema` | `z.literal(1)` | — | `src/brand-settings.ts:84` |  |
+| `brand` | `z.string().min(1)` | — | `src/brand-settings.ts:85` |  |
+| `colour` | `z.string().regex(/^#(?:[0-9a-fA-F]{3}\|[0-9a-fA-F]{6})$/, 'colour must be a hex colour (#rgb or #rrggbb)')` | — | `src/brand-settings.ts:86` |  |
+| `transcription` | `TranscriptionChoice.optional() → src/brand-settings.TranscriptionChoice` | — | `src/brand-settings.ts:90` | The brand's transcription providers, over the suite default; absent → the suite default. |
+| `gitignore` | `z.array(GitignoreOverlayRule).optional() → src/gitignore-rules.GitignoreOverlayRule` | — | `src/brand-settings.ts:95` | The brand's own `.gitignore` rules, on top of the base `gitignore.render` generates (`broll/` clips, a recipe's |
+| `publish` | `BrandPublishSettings.optional() → src/brand-settings.BrandPublishSettings` | — | `src/brand-settings.ts:97` | Publishing settings (CTAs, affiliates, legal…); optional, so older readers are unaffected. |
+| `youtube` | `BrandYouTubeSettings.optional() → src/brand-settings.BrandYouTubeSettings` | — | `src/brand-settings.ts:99` | The brand's YouTube playlist choices. |
+| `studioDefaults` | `BrandStudioDefaults.optional() → src/brand-settings.BrandStudioDefaults` | — | `src/brand-settings.ts:101` | YouTube Studio defaults for a new video. |
+| `research` | `BrandResearchSettings.optional() → src/brand-settings.BrandResearchSettings` | — | `src/brand-settings.ts:103` | Which research sources the brand allows. |
 
-### `src/brand-settings.WriteBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:113-121`
+### `src/brand-settings.WriteBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:118-126`
 
-*aliases* `WriteBrandSettingsResult` `src/brand-settings.ts:122`
+*aliases* `WriteBrandSettingsResult` `src/brand-settings.ts:127`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/brand-settings.ts:114` |
-| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/brand-settings.ts:116` |
+| `written` | `z.object({ kind: z.literal('written'), path: z.string() })` | — | `src/brand-settings.ts:119` |
+| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-input', 'io-error']), path: z.string(), message: z.string() })` | — | `src/brand-settings.ts:121` |
 
-### `src/brand-settings.WriteBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:114`
-
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:114` |
-| `path` | `z.string()` | — | `src/brand-settings.ts:114` |
-
-### `src/brand-settings.WriteBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:115-120`
+### `src/brand-settings.WriteBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:119`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:116` |
-| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/brand-settings.ts:117` |
-| `path` | `z.string()` | — | `src/brand-settings.ts:118` |
-| `message` | `z.string()` | — | `src/brand-settings.ts:119` |
+| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:119` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:119` |
+
+### `src/brand-settings.WriteBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:120-125`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:121` |
+| `reason` | `z.enum(['invalid-input', 'io-error'])` | — | `src/brand-settings.ts:122` |
+| `path` | `z.string()` | — | `src/brand-settings.ts:123` |
+| `message` | `z.string()` | — | `src/brand-settings.ts:124` |
+
+### `src/brand-settings.UpdateBrandSettingsResult` — zod-union on `kind` — `src/brand-settings.ts:152-170`
+
+*aliases* `UpdateBrandSettingsResult` `src/brand-settings.ts:171`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `written` | `z.object({ kind: z.literal('written'), path: z.string(), settings: BrandSettings, /** `brandSettingsVersion` of what was written: the versi… → src/brand-settings.BrandSettings` | — | `src/brand-settings.ts:154` |
+| `refused` | `z.object({ kind: z.literal('refused'), /** * `unusable-file`: `fli.brand.json` exists but does not read as BrandSettings — never overwritte…` | — | `src/brand-settings.ts:161` |
+
+### `src/brand-settings.UpdateBrandSettingsResult[kind=written]` — zod-object — `src/brand-settings.ts:153-159`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `z.literal('written')` | — | `src/brand-settings.ts:154` |  |
+| `path` | `z.string()` | — | `src/brand-settings.ts:155` |  |
+| `settings` | `BrandSettings → src/brand-settings.BrandSettings` | — | `src/brand-settings.ts:156` |  |
+| `version` | `z.string()` | — | `src/brand-settings.ts:158` | `brandSettingsVersion` of what was written: the version a caller hands back on its next write. |
+
+### `src/brand-settings.UpdateBrandSettingsResult[kind=refused]` — zod-object — `src/brand-settings.ts:160-169`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/brand-settings.ts:161` |  |
+| `reason` | `z.enum(['invalid-input', 'io-error', 'unusable-file', 'busy'])` | — | `src/brand-settings.ts:166` | `unusable-file`: `fli.brand.json` exists but does not read as BrandSettings — never overwritten, fix it by hand. |
+| `path` | `z.string()` | — | `src/brand-settings.ts:167` |  |
+| `message` | `z.string()` | — | `src/brand-settings.ts:168` |  |
+
+### `src/brand-settings.UpdateBrandSettingsOptions` — interface — `src/brand-settings.ts:173-178`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `waitMs` | `?: number` | — | `src/brand-settings.ts:175` | How long to wait for another writer's lock (default 3 s). |
+| `staleMs` | `?: number` | — | `src/brand-settings.ts:177` | A lock older than this is a crashed writer's and is broken (default 10 s). |
 
 ### `src/brands.Brand` — zod-object — `src/brands.ts:9-17`
 
@@ -2255,6 +2440,315 @@ Machine settings with the defaults filled in.
 | `source` | `z.enum(['file', 'default'])` | — | `src/machine.ts:36` |
 | `value` | `ResolvedMachineSettings → src/machine.ResolvedMachineSettings` | — | `src/machine.ts:37` |
 
+### `src/note-record.Name` — zod-scalar — `src/note-record.ts:37`
+
+`z.string().trim().min(1)`
+
+### `src/note-record.NoteTarget` — zod-object — `src/note-record.ts:43-66`
+
+What the record is about. Plain strings, synthetic keys allowed (`entityType: 'beat'`, `entityId: 'd13/beat-4'`).
+
+*aliases* `NoteTarget` `src/note-record.ts:67`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `app` | `Name → src/note-record.Name` | — | `src/note-record.ts:46` | The app the target lives in (`flistudio`, `flicut`). |
+| `entityType` | `Name → src/note-record.Name` | — | `src/note-record.ts:47` |  |
+| `scope` | `NoteScope.default('one') → src/note-record.NoteScope` | `'one'` | `src/note-record.ts:48` |  |
+| `entityId` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:49` |  |
+| `entityIds` | `z.array(Name).min(1).optional() → src/note-record.Name` | — | `src/note-record.ts:50` |  |
+| `query` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:52` | For `aggregate`: the query, described ("every StoryPilot script in v-appydave"). |
+| `field` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:53` |  |
+| `region` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:54` |  |
+
+### `src/note-record.NoteWhere` — zod-object — `src/note-record.ts:70-74`
+
+Where in the estate. All optional: a note on an app itself has none.
+
+*aliases* `NoteWhere` `src/note-record.ts:75`
+
+| field | type | default | at |
+|---|---|---|---|
+| `brand` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:71` |
+| `project` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:72` |
+| `video` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:73` |
+
+### `src/note-record.NoteProducer` — zod-object — `src/note-record.ts:78-83`
+
+What produced the "before" (the prompt, skill, model and version), where known.
+
+*aliases* `NoteProducer` `src/note-record.ts:84`
+
+| field | type | default | at |
+|---|---|---|---|
+| `prompt` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:79` |
+| `skill` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:80` |
+| `model` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:81` |
+| `version` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:82` |
+
+### `src/note-record.NoteLinks` — zod-object — `src/note-record.ts:86-96`
+
+*aliases* `NoteLinks` `src/note-record.ts:97`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `session` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:88` | The Claude Code session id the words or the change came from. |
+| `capture` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:90` | A Captain's Log capture code (`B535`). |
+| `commit` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:91` |  |
+| `answers` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:93` | On a `change`: the ask it fulfilled. |
+| `follows` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:95` | The record this one follows on from (on a status change: the change that did the work). |
+
+### `src/note-record.NoteExcerpt` — zod-object — `src/note-record.ts:108-119`
+
+The words around a change, kept because paragraph numbers move. Offsets are in UTF-16 units of the full text.
+
+*aliases* `NoteExcerpt` `src/note-record.ts:120`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `text` | `z.string()` | — | `src/note-record.ts:109` |  |
+| `start` | `z.int().min(0)` | — | `src/note-record.ts:111` | Where `text` starts in the full value. |
+| `line` | `z.int().min(1)` | — | `src/note-record.ts:113` | The 1-based line the changed part starts on, in the full value. |
+| `length` | `z.int().min(0)` | — | `src/note-record.ts:115` | The full value's length. |
+| `from` | `z.int().min(0)` | — | `src/note-record.ts:117` | The changed part, within `text`: `[from, to)`. |
+| `to` | `z.int().min(0)` | — | `src/note-record.ts:118` |  |
+
+### `src/note-record.NoteRecord` — zod-object — `src/note-record.ts:122-156`
+
+*aliases* `NoteRecord` `src/note-record.ts:157`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `schema` | `z.literal(1)` | — | `src/note-record.ts:124` |  |
+| `id` | `Name → src/note-record.Name` | — | `src/note-record.ts:125` |  |
+| `at` | `z.iso.datetime({ offset: true })` | — | `src/note-record.ts:126` |  |
+| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:127` |  |
+| `kind` | `NoteKind → src/note-record.NoteKind` | — | `src/note-record.ts:128` |  |
+| `channel` | `NoteChannel → src/note-record.NoteChannel` | — | `src/note-record.ts:129` |  |
+| `status` | `NoteStatus.optional() → src/note-record.NoteStatus` | — | `src/note-record.ts:131` | Present on `note` (`kept`) and `ask` (`open` when written); absent on `change`. |
+| `where` | `NoteWhere.default({}) → src/note-record.NoteWhere` | `{}` | `src/note-record.ts:132` |  |
+| `target` | `NoteTarget → src/note-record.NoteTarget` | — | `src/note-record.ts:133` |  |
+| `text` | `z.string().min(1).optional()` | — | `src/note-record.ts:135` | The human's words, verbatim — the most valuable field. On a `change`: the `because`, when one was given. |
+| `before` | `z.unknown().optional()` | — | `src/note-record.ts:136` |  |
+| `after` | `z.unknown().optional()` | — | `src/note-record.ts:137` |  |
+| `form` | `NoteForm.optional() → src/note-record.NoteForm` | — | `src/note-record.ts:138` |  |
+| `producer` | `NoteProducer.optional() → src/note-record.NoteProducer` | — | `src/note-record.ts:139` |  |
+| `links` | `NoteLinks.optional() → src/note-record.NoteLinks` | — | `src/note-record.ts:140` |  |
+| `meta` | `z.record(z.string(), z.unknown()).optional()` | — | `src/note-record.ts:141` |  |
+
+### `src/note-record.NoteInput` — zod-object — `src/note-record.ts:163-176`
+
+What a caller hands `addNote`: the record without `schema`, `id`, `at` and `status` (the helper fills them).
+
+*aliases* `NoteInput` `src/note-record.ts:177`
+
+| field | type | default | at |
+|---|---|---|---|
+| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:164` |
+| `kind` | `NoteKind → src/note-record.NoteKind` | — | `src/note-record.ts:165` |
+| `channel` | `NoteChannel.optional() → src/note-record.NoteChannel` | — | `src/note-record.ts:166` |
+| `where` | `NoteWhere.optional() → src/note-record.NoteWhere` | — | `src/note-record.ts:167` |
+| `target` | `NoteTarget → src/note-record.NoteTarget` | — | `src/note-record.ts:168` |
+| `text` | `z.string().min(1).optional()` | — | `src/note-record.ts:169` |
+| `before` | `z.unknown().optional()` | — | `src/note-record.ts:170` |
+| `after` | `z.unknown().optional()` | — | `src/note-record.ts:171` |
+| `form` | `NoteForm.optional() → src/note-record.NoteForm` | — | `src/note-record.ts:172` |
+| `producer` | `NoteProducer.optional() → src/note-record.NoteProducer` | — | `src/note-record.ts:173` |
+| `links` | `NoteLinks.optional() → src/note-record.NoteLinks` | — | `src/note-record.ts:174` |
+| `meta` | `z.record(z.string(), z.unknown()).optional()` | — | `src/note-record.ts:175` |
+
+### `src/note-record.ChangeInput` — zod-object — `src/note-record.ts:180-195`
+
+What a write command knows at the door, for `logChange`.
+
+*aliases* `ChangeInput` `src/note-record.ts:196`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:181` |  |
+| `target` | `NoteTarget → src/note-record.NoteTarget` | — | `src/note-record.ts:182` |  |
+| `where` | `NoteWhere.optional() → src/note-record.NoteWhere` | — | `src/note-record.ts:183` |  |
+| `before` | `z.unknown().optional()` | — | `src/note-record.ts:184` |  |
+| `after` | `z.unknown().optional()` | — | `src/note-record.ts:185` |  |
+| `because` | `z.string().optional()` | — | `src/note-record.ts:187` | The human's words for why, verbatim. Missing → still logged, just no why. |
+| `session` | `z.string().optional()` | — | `src/note-record.ts:189` | The Claude Code session id. |
+| `answers` | `z.string().optional()` | — | `src/note-record.ts:191` | The ask this change fulfils (`links.answers`). |
+| `producer` | `NoteProducer.optional() → src/note-record.NoteProducer` | — | `src/note-record.ts:192` |  |
+| `links` | `NoteLinks.optional() → src/note-record.NoteLinks` | — | `src/note-record.ts:193` |  |
+| `meta` | `z.record(z.string(), z.unknown()).optional()` | — | `src/note-record.ts:194` |  |
+
+### `src/note-record.ResolveAskInput` — zod-object — `src/note-record.ts:199-205`
+
+What closing an ask takes, for `resolveAsk` (and an app's `notes.resolve`).
+
+*aliases* `ResolveAskInput` `src/note-record.ts:206`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:200` |  |
+| `change` | `z.string().optional()` | — | `src/note-record.ts:202` | The change that did the work (linked as `follows`). |
+| `because` | `z.string().optional()` | — | `src/note-record.ts:203` |  |
+| `session` | `z.string().optional()` | — | `src/note-record.ts:204` |  |
+
+### `src/note-record.SnapshotOptions` — interface — `src/note-record.ts:249-254`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `limit` | `?: number` | — | `src/note-record.ts:251` | Keep values whole up to this size (default `NOTE_FULL_LIMIT`). |
+| `context` | `?: number` | — | `src/note-record.ts:253` | Unchanged characters kept either side of a text change (default `NOTE_EXCERPT_CONTEXT`). |
+
+### `src/note-record.ChangeSnapshot` — zod-object — `src/note-record.ts:256-260`
+
+*aliases* `ChangeSnapshot` `src/note-record.ts:261`
+
+| field | type | default | at |
+|---|---|---|---|
+| `before` | `z.unknown().optional()` | — | `src/note-record.ts:257` |
+| `after` | `z.unknown().optional()` | — | `src/note-record.ts:258` |
+| `form` | `NoteForm → src/note-record.NoteForm` | — | `src/note-record.ts:259` |
+
+### `src/note-record.NoteState` — zod-object — `src/note-record.ts:340-346`
+
+Where a note or ask stands after every line of its file is read.
+
+*aliases* `NoteState` `src/note-record.ts:347`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `status` | `NoteStatus → src/note-record.NoteStatus` | — | `src/note-record.ts:341` |  |
+| `statusBy` | `z.string().optional()` | — | `src/note-record.ts:343` | The status change that set `status`, when one did. |
+| `answeredBy` | `z.array(z.string())` | — | `src/note-record.ts:345` | Ids of the changes whose `links.answers` names this ask. |
+
+### `src/note-record.NoteFilter` — zod-object — `src/note-record.ts:375-393`
+
+Which records to answer with. Every field is optional and they all have to match.
+
+*aliases* `NoteFilter` `src/note-record.ts:394`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `z.union([NoteKind, z.array(NoteKind)]).optional() → src/note-record.NoteKind` | — | `src/note-record.ts:376` |  |
+| `open` | `z.boolean().optional()` | — | `src/note-record.ts:378` | Only asks still open (implies `kind: 'ask'`). |
+| `app` | `z.string().optional()` | — | `src/note-record.ts:379` |  |
+| `entityType` | `z.string().optional()` | — | `src/note-record.ts:380` |  |
+| `entityId` | `z.string().optional()` | — | `src/note-record.ts:382` | Matches `entityId`, or any of `entityIds`. |
+| `field` | `z.string().optional()` | — | `src/note-record.ts:383` |  |
+| `brand` | `z.string().optional()` | — | `src/note-record.ts:384` |  |
+| `project` | `z.string().optional()` | — | `src/note-record.ts:385` |  |
+| `video` | `z.string().optional()` | — | `src/note-record.ts:386` |  |
+| `by` | `z.string().optional()` | — | `src/note-record.ts:387` |  |
+| `since` | `z.string().optional()` | — | `src/note-record.ts:389` | ISO times, inclusive. |
+| `until` | `z.string().optional()` | — | `src/note-record.ts:390` |  |
+| `text` | `z.string().optional()` | — | `src/note-record.ts:392` | A case-insensitive substring of `text`. |
+
+### `src/note-record.NoteFilter.kind` — zod-union — `src/note-record.ts:376`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `NoteKind` | `NoteKind → src/note-record.NoteKind` | — | `src/note-record.ts:376` |
+| `array` | `z.array(NoteKind) → src/note-record.NoteKind` | — | `src/note-record.ts:376` |
+
+### `src/notes.AddNoteResult` — zod-discriminated-union on `kind` — `src/notes.ts:40-59`
+
+*aliases* `AddNoteResult` `src/notes.ts:60`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `written` | `z.object({ kind: z.literal('written'), path: z.string(), record: NoteRecord }) → src/note-record.NoteRecord` | — | `src/notes.ts:41` |
+| `refused` | `z.object({ kind: z.literal('refused'), /** * `busy`: another writer held the lock past the wait. `not-found` / `not-an-ask` / `already-done…` | — | `src/notes.ts:43` |
+
+### `src/notes.AddNoteResult[kind=written]` — zod-object — `src/notes.ts:41`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('written')` | — | `src/notes.ts:41` |
+| `path` | `z.string()` | — | `src/notes.ts:41` |
+| `record` | `NoteRecord → src/note-record.NoteRecord` | — | `src/notes.ts:41` |
+
+### `src/notes.AddNoteResult[kind=refused]` — zod-object — `src/notes.ts:42-58`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/notes.ts:43` |  |
+| `reason` | `z.enum(['invalid-input', 'io-error', 'busy', 'not-found', 'not-an-ask', 'already-done'])` | — | `src/notes.ts:48` | `busy`: another writer held the lock past the wait. `not-found` / `not-an-ask` / `already-done`: `resolveAsk` |
+| `path` | `z.string()` | — | `src/notes.ts:56` |  |
+| `message` | `z.string()` | — | `src/notes.ts:57` |  |
+
+### `src/notes.AddNoteOptions` — interface — `src/notes.ts:63-74`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `createDir` | `?: boolean` | — | `src/notes.ts:65` | Create `dir` first (an app's data folder). A project folder is never created: leave this off for one. |
+| `waitMs` | `?: number` | — | `src/notes.ts:67` | How long to wait for another writer's lock (default 3 s). |
+| `staleMs` | `?: number` | — | `src/notes.ts:69` | A lock older than this is a crashed writer's and is broken (default 10 s). |
+| `now` | `?: Date` | — | `src/notes.ts:71` | The record's time (default now). |
+| `id` | `?: string` | — | `src/notes.ts:73` | The record's id (default `newNoteId()`). |
+
+### `src/notes.NoteLineProblem` — zod-object — `src/notes.ts:249`
+
+*aliases* `NoteLineProblem` `src/notes.ts:250`
+
+| field | type | default | at |
+|---|---|---|---|
+| `line` | `z.int().min(1)` | — | `src/notes.ts:249` |
+| `message` | `z.string()` | — | `src/notes.ts:249` |
+
+### `src/notes.NotesRead` — zod-object — `src/notes.ts:252-262`
+
+*aliases* `NotesRead` `src/notes.ts:263`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `path` | `z.string()` | — | `src/notes.ts:253` |  |
+| `exists` | `z.boolean()` | — | `src/notes.ts:255` | False when there is no notes file. An empty file and no file both have no records: this tells them apart. |
+| `records` | `z.array(NoteRecord) → src/note-record.NoteRecord` | — | `src/notes.ts:257` | Every valid line, in file order. |
+| `invalid` | `z.array(NoteLineProblem) → src/notes.NoteLineProblem` | — | `src/notes.ts:259` | Lines that are not a record: listed, never hidden, never fatal. |
+| `error` | `z.string().optional()` | — | `src/notes.ts:261` | The file exists but could not be read. |
+
+### `src/notes.ScannedNote` — zod-object — `src/notes.ts:293-299`
+
+*aliases* `ScannedNote` `src/notes.ts:300`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `path` | `z.string()` | — | `src/notes.ts:295` | The notes file the record is in. |
+| `record` | `NoteRecord → src/note-record.NoteRecord` | — | `src/notes.ts:296` |  |
+| `state` | `NoteState.optional() → src/note-record.NoteState` | — | `src/notes.ts:298` | For a note or ask: where it stands now (`noteStates`). |
+
+### `src/notes.NotesScan` — zod-object — `src/notes.ts:302-310`
+
+*aliases* `NotesScan` `src/notes.ts:311`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `notes` | `z.array(ScannedNote) → src/notes.ScannedNote` | — | `src/notes.ts:304` | Matching records across every file, oldest first. |
+| `files` | `z.array(z.string())` | — | `src/notes.ts:306` | Every notes file read. |
+| `invalid` | `z.array(NoteLineProblem.extend({ path: z.string() })) → src/notes.NoteLineProblem` | — | `src/notes.ts:307` |  |
+| `errors` | `z.array(z.object({ path: z.string(), message: z.string() }))` | — | `src/notes.ts:309` | Files or folders that could not be read: a scan that missed them says so. |
+
+### `src/notes.NotesScan.invalid[]` — zod-object — `src/notes.ts:307`
+
+*extends* `NoteLineProblem`
+
+| field | type | default | at |
+|---|---|---|---|
+| `line` | `z.int().min(1)` | — | `src/notes.ts:249` |
+| `message` | `z.string()` | — | `src/notes.ts:249` |
+| `path` | `z.string()` | — | `src/notes.ts:307` |
+
+### `src/notes.NotesScan.errors[]` — zod-object — `src/notes.ts:309`
+
+| field | type | default | at |
+|---|---|---|---|
+| `path` | `z.string()` | — | `src/notes.ts:309` |
+| `message` | `z.string()` | — | `src/notes.ts:309` |
+
+### `src/notes.ScanNotesOptions` — interface — `src/notes.ts:313-316`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `maxDepth` | `?: number` | — | `src/notes.ts:315` | How many folder levels below each root to look (default 4: estate → brand → archived → bucket → project). |
+
 ### `src/open-args.OpenContext` — zod-object — `src/open-args.ts:11-23`
 
 The resolved context an app is pointed at.
@@ -2559,134 +3053,134 @@ Kebab-case: lowercase letters and digits, single hyphens between words.
 | `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/project-folder.ts:15` |
 | `slug` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/project-folder.ts:15` |
 
-### `src/publish.Iso` — zod-scalar — `src/publish.ts:90`
+### `src/publish.Iso` — zod-scalar — `src/publish.ts:94`
 
 `z.iso.datetime({ offset: true })`
 
-### `src/publish.PublishExport` — zod-object — `src/publish.ts:93-113`
+### `src/publish.PublishExport` — zod-object — `src/publish.ts:97-118`
 
 One file in `videos/<name>/` that a person could ship, with its caption file beside it (same stem) if any.
 
-*aliases* `PublishExport` `src/publish.ts:114`
+*aliases* `PublishExport` `src/publish.ts:119`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `file` | `z.string().min(1)` | — | `src/publish.ts:95` | Project-relative, `/`-separated. |
-| `kind` | `z.enum(['cut', 'audio', 'overlay', 'part', 'legacy']).nullable()` | — | `src/publish.ts:100` | `cut` · `audio` · `overlay` (D15) · `part`; `legacy` for a file named with a retired tag (`-final`, R11) — a whole |
-| `variant` | `z.string().nullable()` | — | `src/publish.ts:101` |  |
-| `app` | `EditApp.nullable() → src/publish.EditApp` | — | `src/publish.ts:102` |  |
-| `source` | `z.string().nullable().default(null)` | `null` | `src/publish.ts:107` | Where the file came from, in words, when the app knows better than the kind does ("FliCut export", "FliEdit |
-| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:108` |  |
-| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:109` |  |
-| `srt` | `z.object({ file: z.string().min(1), modifiedAt: Iso, durationSec: z.number().nullable() }).nullable() → src/publish.Iso` | — | `src/publish.ts:110` |  |
+| `file` | `z.string().min(1)` | — | `src/publish.ts:99` | Project-relative, `/`-separated. |
+| `kind` | `z.enum(['cut', 'audio', 'overlay', 'part', 'edit', 'cast', 'legacy']).nullable()` | — | `src/publish.ts:104` | `cut` · `audio` · `overlay` (D15) · `part` · `edit` · `cast` (v0.26.0); `legacy` for a file named with a retired |
+| `variant` | `z.string().nullable()` | — | `src/publish.ts:105` |  |
+| `app` | `WholeVideoApp.nullable() → src/video-file.WholeVideoApp` | — | `src/publish.ts:107` | Who made it: `wholeVideoOwner`'s answer (the gatherer has the project), else `exportApp(kind)`. |
+| `source` | `z.string().nullable().default(null)` | `null` | `src/publish.ts:112` | Where the file came from, in words, when the app knows better than the kind does ("FliCut export", "FliEdit |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:113` |  |
+| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:114` |  |
+| `srt` | `z.object({ file: z.string().min(1), modifiedAt: Iso, durationSec: z.number().nullable() }).nullable() → src/publish.Iso` | — | `src/publish.ts:115` |  |
 
-### `src/publish.PublishExport.srt` — zod-object — `src/publish.ts:110`
+### `src/publish.PublishExport.srt` — zod-object — `src/publish.ts:115`
 
 | field | type | default | at |
 |---|---|---|---|
-| `file` | `z.string().min(1)` | — | `src/publish.ts:111` |
-| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:111` |
-| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:111` |
+| `file` | `z.string().min(1)` | — | `src/publish.ts:116` |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:116` |
+| `durationSec` | `z.number().nullable()` | — | `src/publish.ts:116` |
 
-### `src/publish.PublishEdit` — zod-object — `src/publish.ts:117`
+### `src/publish.PublishEdit` — zod-object — `src/publish.ts:122`
 
 An edit document for the video: FliCut's `fli.cut.<name>.json` or FliEdit's `fli.edit.<name>.json`.
 
-*aliases* `PublishEdit` `src/publish.ts:118`
+*aliases* `PublishEdit` `src/publish.ts:123`
 
 | field | type | default | at |
 |---|---|---|---|
-| `file` | `z.string().min(1)` | — | `src/publish.ts:117` |
-| `app` | `EditApp → src/publish.EditApp` | — | `src/publish.ts:117` |
-| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:117` |
+| `file` | `z.string().min(1)` | — | `src/publish.ts:122` |
+| `app` | `EditApp → src/publish.EditApp` | — | `src/publish.ts:122` |
+| `modifiedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:122` |
 
-### `src/publish.PublishLaunch` — zod-object — `src/publish.ts:121-130`
+### `src/publish.PublishLaunch` — zod-object — `src/publish.ts:126-135`
 
 What YLO's `launch.json` (the workshop) offers, reduced to what the rules need.
 
-*aliases* `PublishLaunch` `src/publish.ts:131`
+*aliases* `PublishLaunch` `src/publish.ts:136`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `file` | `z.string().min(1)` | — | `src/publish.ts:122` |  |
-| `madeAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:124` | When its texts were made (`updated_at`, else the file's time). |
-| `titles` | `z.array(z.object({ id: z.string().nullable(), text: z.string() }))` | — | `src/publish.ts:126` | The titles bound to YLO's variant slots, slot 1 first. |
-| `description` | `z.string().nullable()` | — | `src/publish.ts:127` |  |
-| `chapters` | `z.array(z.record(z.string(), z.unknown()))` | — | `src/publish.ts:129` | YLO's `Chapter{n,title,timestamp}` list (empty when none). |
+| `file` | `z.string().min(1)` | — | `src/publish.ts:127` |  |
+| `madeAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:129` | When its texts were made (`updated_at`, else the file's time). |
+| `titles` | `z.array(z.object({ id: z.string().nullable(), text: z.string() }))` | — | `src/publish.ts:131` | The titles bound to YLO's variant slots, slot 1 first. |
+| `description` | `z.string().nullable()` | — | `src/publish.ts:132` |  |
+| `chapters` | `z.array(z.record(z.string(), z.unknown()))` | — | `src/publish.ts:134` | YLO's `Chapter{n,title,timestamp}` list (empty when none). |
 
-### `src/publish.PublishLaunch.titles[]` — zod-object — `src/publish.ts:126`
+### `src/publish.PublishLaunch.titles[]` — zod-object — `src/publish.ts:131`
 
 | field | type | default | at |
 |---|---|---|---|
-| `id` | `z.string().nullable()` | — | `src/publish.ts:126` |
-| `text` | `z.string()` | — | `src/publish.ts:126` |
+| `id` | `z.string().nullable()` | — | `src/publish.ts:131` |
+| `text` | `z.string()` | — | `src/publish.ts:131` |
 
-### `src/publish.PublishFacts` — zod-object — `src/publish.ts:133-141`
+### `src/publish.PublishFacts` — zod-object — `src/publish.ts:138-146`
 
-*aliases* `PublishFacts` `src/publish.ts:142`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `video` | `z.string().nullable()` | — | `src/publish.ts:135` | The video folder name, or null for a project with no video yet. |
-| `exports` | `z.array(PublishExport) → src/publish.PublishExport` | — | `src/publish.ts:136` |  |
-| `edits` | `z.array(PublishEdit) → src/publish.PublishEdit` | — | `src/publish.ts:137` |  |
-| `resources` | `z.array(Resource) → src/resources.Resource` | — | `src/publish.ts:139` | The project's resources for this video (and the project's own, `video: null`). |
-| `launch` | `PublishLaunch.nullable() → src/publish.PublishLaunch` | — | `src/publish.ts:140` |  |
-
-### `src/publish.PublishRow` — zod-object — `src/publish.ts:144-162`
-
-*aliases* `PublishRow` `src/publish.ts:163`
+*aliases* `PublishFacts` `src/publish.ts:147`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `piece` | `PublishPiece → src/publish.PublishPiece` | — | `src/publish.ts:145` |  |
-| `label` | `z.string()` | — | `src/publish.ts:146` |  |
-| `state` | `PublishState → src/publish.PublishState` | — | `src/publish.ts:147` |  |
-| `value` | `z.string().nullable()` | — | `src/publish.ts:149` | What would ship, in a few words (a file name, a title, "Strong noise removal"). |
-| `file` | `z.string().nullable()` | — | `src/publish.ts:151` | The project-relative file behind it, when there is one. |
-| `source` | `z.enum(['choice', 'rule', 'brand', 'ylo', 'none'])` | — | `src/publish.ts:153` | Where the answer came from: `choice`, `rule`, `brand`, `ylo`, or `none`. |
-| `why` | `z.string()` | — | `src/publish.ts:155` | One line: why this state. Kept for the audit trail. |
-| `resourceId` | `z.string().nullable()` | — | `src/publish.ts:157` | The resource behind a choice, so a person or agent can change it. |
-| `by` | `z.string().nullable()` | — | `src/publish.ts:159` | Who made it: a principal (`human:ui`, `agent:tuber`, `cli`) or `rule:<id>`; null when nothing is there. |
-| `at` | `Iso.nullable() → src/publish.Iso` | — | `src/publish.ts:161` | When the thing behind it was made or chosen (for an ⓘ, never shown as a timestamp). |
+| `video` | `z.string().nullable()` | — | `src/publish.ts:140` | The video folder name, or null for a project with no video yet. |
+| `exports` | `z.array(PublishExport) → src/publish.PublishExport` | — | `src/publish.ts:141` |  |
+| `edits` | `z.array(PublishEdit) → src/publish.PublishEdit` | — | `src/publish.ts:142` |  |
+| `resources` | `z.array(Resource) → src/resources.Resource` | — | `src/publish.ts:144` | The project's resources for this video (and the project's own, `video: null`). |
+| `launch` | `PublishLaunch.nullable() → src/publish.PublishLaunch` | — | `src/publish.ts:145` |  |
 
-### `src/publish.PublishReadiness` — zod-object — `src/publish.ts:165-178`
+### `src/publish.PublishRow` — zod-object — `src/publish.ts:149-167`
 
-*aliases* `PublishReadiness` `src/publish.ts:179`
+*aliases* `PublishRow` `src/publish.ts:168`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `video` | `z.string().nullable()` | — | `src/publish.ts:166` |  |
-| `rows` | `z.array(PublishRow) → src/publish.PublishRow` | — | `src/publish.ts:167` |  |
-| `ready` | `z.number().int()` | — | `src/publish.ts:168` |  |
-| `total` | `z.number().int()` | — | `src/publish.ts:169` |  |
-| `suggestions` | `z.number().int()` | — | `src/publish.ts:171` | Ready rows a person has not decided (agent choices + rule guesses). |
-| `counts` | `z.object({ set: z.number().int(), suggested: z.number().int(), inferred: z.number().int(), notReady: z.number().int() })` | — | `src/publish.ts:172` |  |
+| `piece` | `PublishPiece → src/publish.PublishPiece` | — | `src/publish.ts:150` |  |
+| `label` | `z.string()` | — | `src/publish.ts:151` |  |
+| `state` | `PublishState → src/publish.PublishState` | — | `src/publish.ts:152` |  |
+| `value` | `z.string().nullable()` | — | `src/publish.ts:154` | What would ship, in a few words (a file name, a title, "Strong noise removal"). |
+| `file` | `z.string().nullable()` | — | `src/publish.ts:156` | The project-relative file behind it, when there is one. |
+| `source` | `z.enum(['choice', 'rule', 'brand', 'ylo', 'none'])` | — | `src/publish.ts:158` | Where the answer came from: `choice`, `rule`, `brand`, `ylo`, or `none`. |
+| `why` | `z.string()` | — | `src/publish.ts:160` | One line: why this state. Kept for the audit trail. |
+| `resourceId` | `z.string().nullable()` | — | `src/publish.ts:162` | The resource behind a choice, so a person or agent can change it. |
+| `by` | `z.string().nullable()` | — | `src/publish.ts:164` | Who made it: a principal (`human:ui`, `agent:tuber`, `cli`) or `rule:<id>`; null when nothing is there. |
+| `at` | `Iso.nullable() → src/publish.Iso` | — | `src/publish.ts:166` | When the thing behind it was made or chosen (for an ⓘ, never shown as a timestamp). |
 
-### `src/publish.PublishReadiness.counts` — zod-object — `src/publish.ts:172`
+### `src/publish.PublishReadiness` — zod-object — `src/publish.ts:170-183`
+
+*aliases* `PublishReadiness` `src/publish.ts:184`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `video` | `z.string().nullable()` | — | `src/publish.ts:171` |  |
+| `rows` | `z.array(PublishRow) → src/publish.PublishRow` | — | `src/publish.ts:172` |  |
+| `ready` | `z.number().int()` | — | `src/publish.ts:173` |  |
+| `total` | `z.number().int()` | — | `src/publish.ts:174` |  |
+| `suggestions` | `z.number().int()` | — | `src/publish.ts:176` | Ready rows a person has not decided (agent choices + rule guesses). |
+| `counts` | `z.object({ set: z.number().int(), suggested: z.number().int(), inferred: z.number().int(), notReady: z.number().int() })` | — | `src/publish.ts:177` |  |
+
+### `src/publish.PublishReadiness.counts` — zod-object — `src/publish.ts:177`
 
 | field | type | default | at |
 |---|---|---|---|
-| `set` | `z.number().int()` | — | `src/publish.ts:173` |
-| `suggested` | `z.number().int()` | — | `src/publish.ts:174` |
-| `inferred` | `z.number().int()` | — | `src/publish.ts:175` |
-| `notReady` | `z.number().int()` | — | `src/publish.ts:176` |
+| `set` | `z.number().int()` | — | `src/publish.ts:178` |
+| `suggested` | `z.number().int()` | — | `src/publish.ts:179` |
+| `inferred` | `z.number().int()` | — | `src/publish.ts:180` |
+| `notReady` | `z.number().int()` | — | `src/publish.ts:181` |
 
-### `src/publish.PublishedVideo` — zod-object — `src/publish.ts:687-695`
+### `src/publish.PublishedVideo` — zod-object — `src/publish.ts:702-710`
 
 The hook for whatever comes after publishing (post-publish posts, YLO's related-videos linking): every published
 
-*aliases* `PublishedVideo` `src/publish.ts:696`
+*aliases* `PublishedVideo` `src/publish.ts:711`
 
 | field | type | default | at |
 |---|---|---|---|
-| `resourceId` | `z.string()` | — | `src/publish.ts:688` |
-| `video` | `z.string().nullable()` | — | `src/publish.ts:689` |
-| `path` | `z.string().nullable()` | — | `src/publish.ts:690` |
-| `youtubeId` | `z.string()` | — | `src/publish.ts:691` |
-| `url` | `z.string()` | — | `src/publish.ts:692` |
-| `publishedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:693` |
-| `by` | `z.string()` | — | `src/publish.ts:694` |
+| `resourceId` | `z.string()` | — | `src/publish.ts:703` |
+| `video` | `z.string().nullable()` | — | `src/publish.ts:704` |
+| `path` | `z.string().nullable()` | — | `src/publish.ts:705` |
+| `youtubeId` | `z.string()` | — | `src/publish.ts:706` |
+| `url` | `z.string()` | — | `src/publish.ts:707` |
+| `publishedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:708` |
+| `by` | `z.string()` | — | `src/publish.ts:709` |
 
 ### `src/recipe-paths.RecipePathWarning` — zod-object — `src/recipe-paths.ts:18-27`
 
@@ -3143,188 +3637,219 @@ Playing or not, and the signed rate: +1 forward at 1×, −2 backward at 2×.
 | `playing` | `z.boolean()` | — | `src/transport.ts:16` |
 | `rate` | `z.number()` | — | `src/transport.ts:17` |
 
-### `src/video-file.Ext` — zod-scalar — `src/video-file.ts:21`
+### `src/video-file.Ext` — zod-scalar — `src/video-file.ts:23`
 
 Video files and folders (ruling "B only", 👤 David 2026-09-22 — supersedes the 09-09 numbered shape):
 
 `z.string().regex(/^[A-Za-z0-9]+$/, 'ext must be letters/digits, without the dot')`
 
-### `src/video-file.VideoFile` — zod-discriminated-union on `kind` — `src/video-file.ts:30-35`
+### `src/video-file.VideoFile` — zod-discriminated-union on `kind` — `src/video-file.ts:39-46`
 
-*aliases* `VideoFile` `src/video-file.ts:36`
+*aliases* `VideoFile` `src/video-file.ts:47`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `cut` | `z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:31` |
-| `audio` | `z.object({ name: KebabSlug, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:32` |
-| `overlay` | `z.object({ name: KebabSlug, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:33` |
-| `part` | `z.object({ name: KebabSlug, kind: z.literal('part'), variant: VideoPart, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.VideoPart, src/video-file.Ext` | — | `src/video-file.ts:34` |
+| `cut` | `z.object({ name: KebabSlug, kind: z.literal('cut'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:40` |
+| `audio` | `z.object({ name: KebabSlug, kind: z.literal('audio'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:41` |
+| `overlay` | `z.object({ name: KebabSlug, kind: z.literal('overlay'), variant: KebabSlug, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:42` |
+| `part` | `z.object({ name: KebabSlug, kind: z.literal('part'), variant: VideoPart, ext: Ext }) → src/project-folder.KebabSlug, src/video-file.VideoPart, src/video-file.Ext` | — | `src/video-file.ts:43` |
+| `edit` | `z.object({ name: KebabSlug, kind: z.literal('edit'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:44` |
+| `cast` | `z.object({ name: KebabSlug, kind: z.literal('cast'), variant: z.null().default(null), ext: Ext }) → src/project-folder.KebabSlug, src/video-file.Ext` | — | `src/video-file.ts:45` |
 
-### `src/video-file.VideoFile[kind=cut]` — zod-object — `src/video-file.ts:31`
-
-| field | type | default | at |
-|---|---|---|---|
-| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:31` |
-| `kind` | `z.literal('cut')` | — | `src/video-file.ts:31` |
-| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:31` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:31` |
-
-### `src/video-file.VideoFile[kind=audio]` — zod-object — `src/video-file.ts:32`
+### `src/video-file.VideoFile[kind=cut]` — zod-object — `src/video-file.ts:40`
 
 | field | type | default | at |
 |---|---|---|---|
-| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:32` |
-| `kind` | `z.literal('audio')` | — | `src/video-file.ts:32` |
-| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:32` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:32` |
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:40` |
+| `kind` | `z.literal('cut')` | — | `src/video-file.ts:40` |
+| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:40` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:40` |
 
-### `src/video-file.VideoFile[kind=overlay]` — zod-object — `src/video-file.ts:33`
-
-| field | type | default | at |
-|---|---|---|---|
-| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:33` |
-| `kind` | `z.literal('overlay')` | — | `src/video-file.ts:33` |
-| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:33` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:33` |
-
-### `src/video-file.VideoFile[kind=part]` — zod-object — `src/video-file.ts:34`
+### `src/video-file.VideoFile[kind=audio]` — zod-object — `src/video-file.ts:41`
 
 | field | type | default | at |
 |---|---|---|---|
-| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:34` |
-| `kind` | `z.literal('part')` | — | `src/video-file.ts:34` |
-| `variant` | `VideoPart → src/video-file.VideoPart` | — | `src/video-file.ts:34` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:34` |
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:41` |
+| `kind` | `z.literal('audio')` | — | `src/video-file.ts:41` |
+| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:41` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:41` |
 
-### `src/video-file.UnknownVideoFile` — zod-object — `src/video-file.ts:38-42`
-
-*aliases* `UnknownVideoFile` `src/video-file.ts:43`
+### `src/video-file.VideoFile[kind=overlay]` — zod-object — `src/video-file.ts:42`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('unknown-kind')` | — | `src/video-file.ts:39` |
-| `name` | `z.string()` | — | `src/video-file.ts:40` |
-| `ext` | `z.string().nullable()` | — | `src/video-file.ts:41` |
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:42` |
+| `kind` | `z.literal('overlay')` | — | `src/video-file.ts:42` |
+| `variant` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:42` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:42` |
 
-### `src/video-file.LegacyVideoFile` — zod-object — `src/video-file.ts:50-56`
+### `src/video-file.VideoFile[kind=part]` — zod-object — `src/video-file.ts:43`
+
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:43` |
+| `kind` | `z.literal('part')` | — | `src/video-file.ts:43` |
+| `variant` | `VideoPart → src/video-file.VideoPart` | — | `src/video-file.ts:43` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:43` |
+
+### `src/video-file.VideoFile[kind=edit]` — zod-object — `src/video-file.ts:44`
+
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:44` |
+| `kind` | `z.literal('edit')` | — | `src/video-file.ts:44` |
+| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:44` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:44` |
+
+### `src/video-file.VideoFile[kind=cast]` — zod-object — `src/video-file.ts:45`
+
+| field | type | default | at |
+|---|---|---|---|
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:45` |
+| `kind` | `z.literal('cast')` | — | `src/video-file.ts:45` |
+| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:45` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:45` |
+
+### `src/video-file.UnknownVideoFile` — zod-object — `src/video-file.ts:49-53`
+
+*aliases* `UnknownVideoFile` `src/video-file.ts:54`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('unknown-kind')` | — | `src/video-file.ts:50` |
+| `name` | `z.string()` | — | `src/video-file.ts:51` |
+| `ext` | `z.string().nullable()` | — | `src/video-file.ts:52` |
+
+### `src/video-file.LegacyVideoFile` — zod-object — `src/video-file.ts:61-67`
 
 `<name>-final.<ext>`: a whole-video candidate written before R11. Its name says nothing about being the final.
 
-*aliases* `LegacyVideoFile` `src/video-file.ts:57`
+*aliases* `LegacyVideoFile` `src/video-file.ts:68`
 
 | field | type | default | at |
 |---|---|---|---|
-| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:51` |
-| `kind` | `z.literal('legacy')` | — | `src/video-file.ts:52` |
-| `tag` | `RetiredVideoTag → src/video-file.RetiredVideoTag` | — | `src/video-file.ts:53` |
-| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:54` |
-| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:55` |
+| `name` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/video-file.ts:62` |
+| `kind` | `z.literal('legacy')` | — | `src/video-file.ts:63` |
+| `tag` | `RetiredVideoTag → src/video-file.RetiredVideoTag` | — | `src/video-file.ts:64` |
+| `variant` | `z.null().default(null)` | `null` | `src/video-file.ts:65` |
+| `ext` | `Ext → src/video-file.Ext` | — | `src/video-file.ts:66` |
 
-### `src/video-file.ParsedVideoFile` — zod-union on `kind` — `src/video-file.ts:59`
+### `src/video-file.ParsedVideoFile` — zod-union on `kind` — `src/video-file.ts:70`
 
-*aliases* `ParsedVideoFile` `src/video-file.ts:60`
+*aliases* `ParsedVideoFile` `src/video-file.ts:71`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `VideoFile` | `VideoFile → src/video-file.VideoFile` | — | `src/video-file.ts:59` |
-| `LegacyVideoFile` | `LegacyVideoFile → src/video-file.LegacyVideoFile` | — | `src/video-file.ts:59` |
-| `UnknownVideoFile` | `UnknownVideoFile → src/video-file.UnknownVideoFile` | — | `src/video-file.ts:59` |
+| `VideoFile` | `VideoFile → src/video-file.VideoFile` | — | `src/video-file.ts:70` |
+| `LegacyVideoFile` | `LegacyVideoFile → src/video-file.LegacyVideoFile` | — | `src/video-file.ts:70` |
+| `UnknownVideoFile` | `UnknownVideoFile → src/video-file.UnknownVideoFile` | — | `src/video-file.ts:70` |
 
-### `src/video-file.VideoFolder` — zod-object — `src/video-file.ts:104-109`
+### `src/video-file.VideoFolder` — zod-object — `src/video-file.ts:115-120`
 
-*aliases* `VideoFolder` `src/video-file.ts:110`
+*aliases* `VideoFolder` `src/video-file.ts:121`
 
 | field | type | default | at |
 |---|---|---|---|
-| `name` | `KebabSlug.refine((name) => !LEGACY_FOLDERS.includes(name), 'a legacy layout name (first-edit, edits, …) is never a video') → src/project-folder.KebabSlug, src/classify.LEGACY_FOLDERS` | — | `src/video-file.ts:105` |
+| `name` | `KebabSlug.refine((name) => !LEGACY_FOLDERS.includes(name), 'a legacy layout name (first-edit, edits, …) is never a video') → src/project-folder.KebabSlug, src/classify.LEGACY_FOLDERS` | — | `src/video-file.ts:116` |
 
-### `src/video-file.VideoFolderName` — zod-scalar — `src/video-file.ts:116-121`
+### `src/video-file.VideoFolderName` — zod-scalar — `src/video-file.ts:127-132`
 
 The same rule as a string schema, for contexts that carry the folder name (`OpenContext.video`).
 
 `z.string().regex(VIDEO_FOLDER_PATTERN, 'video must be a video folder name: a kebab-case name, e.g. flivideo-tour')`
 
-### `src/window-state.WindowRect` — zod-object — `src/window-state.ts:16-21`
+### `src/whole-video.WholeVideoOwner` — zod-object — `src/whole-video.ts:24-28`
+
+Who made a whole-video file in `videos/<video>/` (v0.26.0, ruling by flivideo-arch-rsch on David's delegation,
+
+*aliases* `WholeVideoOwner` `src/whole-video.ts:29`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `app` | `WholeVideoApp.nullable() → src/video-file.WholeVideoApp` | — | `src/whole-video.ts:25` |  |
+| `source` | `z.string()` | — | `src/whole-video.ts:27` | Said to a person: `FliCut export`, `Overlay Pilot render`, `placed file`, `two candidates: fliedit, flicast`… |
+
+### `src/window-state.WindowRect` — zod-object — `src/window-state.ts:17-22`
 
 Window positions that survive a restart (David, 2026-09-22): every Fli app window reopens where he last put it —
 
-*aliases* `WindowRect` `src/window-state.ts:22`
+*aliases* `WindowRect` `src/window-state.ts:23`
 
 | field | type | default | at |
 |---|---|---|---|
-| `x` | `z.number()` | — | `src/window-state.ts:17` |
-| `y` | `z.number()` | — | `src/window-state.ts:18` |
-| `width` | `z.number()` | — | `src/window-state.ts:19` |
-| `height` | `z.number()` | — | `src/window-state.ts:20` |
+| `x` | `z.number()` | — | `src/window-state.ts:18` |
+| `y` | `z.number()` | — | `src/window-state.ts:19` |
+| `width` | `z.number()` | — | `src/window-state.ts:20` |
+| `height` | `z.number()` | — | `src/window-state.ts:21` |
 
-### `src/window-state.SavedWindow` — zod-object — `src/window-state.ts:24-28`
+### `src/window-state.SavedWindow` — zod-object — `src/window-state.ts:25-29`
 
 *extends* `WindowRect`
 
-*aliases* `SavedWindow` `src/window-state.ts:29`
+*aliases* `SavedWindow` `src/window-state.ts:30`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `x` | `z.number()` | — | `src/window-state.ts:17` |  |
-| `y` | `z.number()` | — | `src/window-state.ts:18` |  |
-| `width` | `z.number()` | — | `src/window-state.ts:19` |  |
-| `height` | `z.number()` | — | `src/window-state.ts:20` |  |
-| `maximized` | `z.boolean().optional()` | — | `src/window-state.ts:25` |  |
-| `displayId` | `z.number().optional()` | — | `src/window-state.ts:27` | Electron display id the window was on — informational; placement is decided by geometry. |
+| `x` | `z.number()` | — | `src/window-state.ts:18` |  |
+| `y` | `z.number()` | — | `src/window-state.ts:19` |  |
+| `width` | `z.number()` | — | `src/window-state.ts:20` |  |
+| `height` | `z.number()` | — | `src/window-state.ts:21` |  |
+| `maximized` | `z.boolean().optional()` | — | `src/window-state.ts:26` |  |
+| `displayId` | `z.number().optional()` | — | `src/window-state.ts:28` | Electron display id the window was on — informational; placement is decided by geometry. |
 
-### `src/window-state.WindowStateFile` — zod-object — `src/window-state.ts:32-35`
+### `src/window-state.WindowStateFile` — zod-object — `src/window-state.ts:33-36`
 
 The store: `{ schema: 1, windows: { "<app>/<role>": SavedWindow } }`.
 
-*aliases* `WindowStateFile` `src/window-state.ts:36`
+*aliases* `WindowStateFile` `src/window-state.ts:37`
 
 | field | type | default | at |
 |---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/window-state.ts:33` |
-| `windows` | `z.record(z.string(), SavedWindow) → src/window-state.SavedWindow` | — | `src/window-state.ts:34` |
+| `schema` | `z.literal(1)` | — | `src/window-state.ts:34` |
+| `windows` | `z.record(z.string(), SavedWindow) → src/window-state.SavedWindow` | — | `src/window-state.ts:35` |
 
-### `src/window-state.DisplayArea` — zod-object — `src/window-state.ts:39-44`
+### `src/window-state.DisplayArea` — zod-object — `src/window-state.ts:40-45`
 
 One display as the app sees it: Electron's `display.id`, `display.workArea` and whether it is the primary one.
 
-*aliases* `DisplayArea` `src/window-state.ts:45`
+*aliases* `DisplayArea` `src/window-state.ts:46`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `id` | `z.number()` | — | `src/window-state.ts:40` |  |
-| `workArea` | `WindowRect → src/window-state.WindowRect` | — | `src/window-state.ts:42` | The display's work area (excludes the menu bar and Dock). |
-| `primary` | `z.boolean().optional()` | — | `src/window-state.ts:43` |  |
+| `id` | `z.number()` | — | `src/window-state.ts:41` |  |
+| `workArea` | `WindowRect → src/window-state.WindowRect` | — | `src/window-state.ts:43` | The display's work area (excludes the menu bar and Dock). |
+| `primary` | `z.boolean().optional()` | — | `src/window-state.ts:44` |  |
 
-### `src/window-state.PlaceOptions` — interface — `src/window-state.ts:47-57`
+### `src/window-state.PlaceOptions` — interface — `src/window-state.ts:48-58`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `width` | `number` | — | `src/window-state.ts:48` |  |
-| `height` | `number` | — | `src/window-state.ts:49` |  |
-| `minWidth` | `?: number` | — | `src/window-state.ts:50` |  |
-| `minHeight` | `?: number` | — | `src/window-state.ts:51` |  |
-| `keepSize` | `?: boolean` | — | `src/window-state.ts:56` | `false`: restore the monitor and position but open at `width` × `height` (FliCast's uat harness — its layout |
+| `width` | `number` | — | `src/window-state.ts:49` |  |
+| `height` | `number` | — | `src/window-state.ts:50` |  |
+| `minWidth` | `?: number` | — | `src/window-state.ts:51` |  |
+| `minHeight` | `?: number` | — | `src/window-state.ts:52` |  |
+| `keepSize` | `?: boolean` | — | `src/window-state.ts:57` | `false`: restore the monitor and position but open at `width` × `height` (FliCast's uat harness — its layout |
 
-### `src/window-state.TrackedWindow` — type — `src/window-state.ts:255-262`
+### `src/window-state.TrackedWindow` — type — `src/window-state.ts:251-258`
 
 The part of an Electron `BrowserWindow` that `trackWindow` needs. Methods, not data — so a structural type rather
 
 | field | type | default | at |
 |---|---|---|---|
-| `on` | `(event: 'move' \| 'resize' \| 'close', listener: () => void): unknown` | — | `src/window-state.ts:256` |
-| `isDestroyed` | `(): boolean` | — | `src/window-state.ts:257` |
-| `isMinimized` | `(): boolean` | — | `src/window-state.ts:258` |
-| `isFullScreen` | `(): boolean` | — | `src/window-state.ts:259` |
-| `isMaximized` | `(): boolean` | — | `src/window-state.ts:260` |
-| `getNormalBounds` | `(): WindowRect` | — | `src/window-state.ts:261` |
+| `on` | `(event: 'move' \| 'resize' \| 'close', listener: () => void): unknown` | — | `src/window-state.ts:252` |
+| `isDestroyed` | `(): boolean` | — | `src/window-state.ts:253` |
+| `isMinimized` | `(): boolean` | — | `src/window-state.ts:254` |
+| `isFullScreen` | `(): boolean` | — | `src/window-state.ts:255` |
+| `isMaximized` | `(): boolean` | — | `src/window-state.ts:256` |
+| `getNormalBounds` | `(): WindowRect` | — | `src/window-state.ts:257` |
 
-### `src/window-state.TrackOptions` — interface — `src/window-state.ts:264-270`
+### `src/window-state.TrackOptions` — interface — `src/window-state.ts:260-266`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `displayIdOf` | `?: (bounds: WindowRect) => number → src/window-state.WindowRect` | — | `src/window-state.ts:266` | `screen.getDisplayMatching(bounds).id`, to record which monitor it was on. |
-| `file` | `?: string` | — | `src/window-state.ts:267` |  |
-| `debounceMs` | `?: number` | — | `src/window-state.ts:269` | Wait this long after the last move/resize before saving; default 400 ms. |
+| `displayIdOf` | `?: (bounds: WindowRect) => number → src/window-state.WindowRect` | — | `src/window-state.ts:262` | `screen.getDisplayMatching(bounds).id`, to record which monitor it was on. |
+| `file` | `?: string` | — | `src/window-state.ts:263` |  |
+| `debounceMs` | `?: number` | — | `src/window-state.ts:265` | Wait this long after the last move/resize before saving; default 400 ms. |
 
 ### `src/words.Text` — zod-scalar — `src/words.ts:29`
 
@@ -3734,7 +4259,7 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 | schemas built by `OneLine(...)` (1 use) | built by calling `OneLine(...)`, which does not return a single zod expression this reader can follow | `OneLine('a note').optional() (src/gitignore-rules.ts:41)` |
 | schemas built by `Refused(...)` (6 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:67)`<br>`Refused('existing-invalid') (src/identity.ts:69)`<br>`Refused('io-error') (src/identity.ts:70)`<br>`Refused('invalid-input') (src/identity.ts:185)`<br>`Refused('existing-invalid') (src/identity.ts:187)`<br>`Refused('io-error') (src/identity.ts:188)` |
 | schemas built by `promisify(...)` (1 use) | built by calling `promisify(...)` imported from `node:util`; package helpers are not expanded - see that package's own mirror | `promisify(execFile) (src/gitignore.ts:17)` |
-| schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:105)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:126)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:130)` |
+| schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:107)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:126)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:130)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
 | src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:460)` |
@@ -3748,13 +4273,13 @@ The census found these top-level declarations and the extractor did not mirror t
 | family | count | declarations |
 |---|---|---|
 | object constant | 8 | `src/classify.LAYOUT_DIRS` `src/classify.ts:310`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
-| array constant | 6 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:32`<br>`src/publish.READY_STATES` `src/publish.ts:67`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:69`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
-| class | 6 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:796`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:220`<br>`src/youtube.YouTubeReader` `src/youtube.ts:236` |
-| const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:182`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
+| array constant | 6 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:33`<br>`src/publish.READY_STATES` `src/publish.ts:68`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:70`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
+| class | 6 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:811`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:220`<br>`src/youtube.YouTubeReader` `src/youtube.ts:236` |
+| const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:187`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
+| utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 2 | `src/notes.Refused` `src/notes.ts:61`<br>`src/youtube.Thumbs` `src/youtube.ts:231` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 | union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:206` |
-| utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 1 | `src/youtube.Thumbs` `src/youtube.ts:231` |
 
 ## Findings — changes needed in the target application
 
@@ -3763,8 +4288,8 @@ These are refactors of the **application**, not of this mirror. Each one convert
 1. `src/classify.ts:67` — REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:67 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
 2. `src/classify.ts:70-77` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:70 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
 3. `src/classify.ts:126-133` — REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.
-4. `src/fs-utils.ts:32` — REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:32 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.
-5. `src/publish.ts:201` — REFACTOR (minor): `LIVE` at src/publish.ts:201 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.
+4. `src/fs-utils.ts:44` — REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:44 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.
+5. `src/publish.ts:216` — REFACTOR (minor): `LIVE` at src/publish.ts:216 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.
 6. `src/recipe-paths.ts:77` — REFACTOR (minor): `SKIP` at src/recipe-paths.ts:77 names the set but does not type it. A z.enum or `as const` + `typeof SKIP[number]` would make a wrong value a static error rather than a runtime miss.
 
 ---
