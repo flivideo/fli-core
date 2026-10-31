@@ -2,6 +2,10 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.27.0 — 2026-10-31
+
+Released from v0.27.0-rc.1 unchanged (fli-notes overnight, `flivideo/docs/briefs/fli-notes-suite-record-2026-10-31.md` §4A).
+
 ## v0.27.0-rc.1 — 2026-10-31
 
 Release candidate for fli-notes (`flivideo/docs/briefs/fli-notes-suite-record-2026-10-31.md` §4A, workplan
