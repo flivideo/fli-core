@@ -9,7 +9,11 @@ import {
   NOTES_FILE,
   NoteFilter,
   NoteRecord,
+  NoteRefusal,
   NoteState,
+  SETTLE_FIELD,
+  SettleInput,
+  isSettleLine,
   matchesNote,
   noteRecordOf,
   noteStates,
@@ -41,18 +45,8 @@ export const AddNoteResult = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('written'), path: z.string(), record: NoteRecord }),
   z.object({
     kind: z.literal('refused'),
-    /**
-     * `busy`: another writer held the lock past the wait. `not-found` / `not-an-ask` / `already-done`: `resolveAsk`
-     * found no such record, a record that is not an ask, or an ask already done.
-     */
-    reason: z.enum([
-      'invalid-input',
-      'io-error',
-      'busy',
-      'not-found',
-      'not-an-ask',
-      'already-done',
-    ]),
+    /** `NOTE_REFUSALS`: the suite's names; each app maps them to its own failure codes. */
+    reason: NoteRefusal,
     path: z.string(),
     message: z.string(),
   }),
@@ -99,12 +93,12 @@ async function appendNote(
   }
   const lock = `${file}.lock`;
   if (!(await takeLock(lock, options.waitMs ?? 3000, options.staleMs ?? 10_000))) {
-    return refuse('busy', `${file} is being written by another writer (${lock}); try again.`);
+    return refuse('notes-busy', `${file} is being written by another writer (${lock}); try again.`);
   }
   try {
     let records: NoteRecord[] = [];
     if (needsRead) {
-      const read = await readNotes(dir);
+      const read = await readNotes(dir, { history: true });
       if (read.error) return refuse('io-error', read.error);
       records = read.records;
     }
@@ -195,48 +189,69 @@ export function logChange(
 }
 
 /**
- * Close an open ask: append a `change` that targets the ask (`entityType: 'note'`, `field: 'status'`, `open` → `done`).
- * The ask's line is never rewritten. Refuses `not-found`, `not-an-ask` and `already-done`, checked under the lock.
+ * Settle a record: append a `change` that targets it (`entityType: 'note'`, `field: 'state'`, before → after life
+ * state, `text` = the reason, `links.to` = the pointer). The record's own line is never rewritten. Any record can be
+ * settled (note, ask or change), to any state — `live` re-opens. Checked under the lock: refuses `invalid-input`
+ * (`stale` without a reason, `used` / `replaced` without `to`), `note-not-found`, and `already-settled` (already in
+ * that state).
  */
-export function resolveAsk(
+export function settleNote(
   dir: string,
-  askId: string,
-  input: ResolveAskInput,
+  id: string,
+  input: SettleInput,
   options: AddNoteOptions = {},
+): Promise<AddNoteResult> {
+  return settleWith(dir, id, input, options, () => null);
+}
+
+function settleWith(
+  dir: string,
+  id: string,
+  input: SettleInput,
+  options: AddNoteOptions,
+  check: (
+    target: NoteRecord,
+    refused: (reason: NoteRefusal, message: string) => Refused,
+  ) => Refused | null,
 ): Promise<AddNoteResult> {
   const file = notesFilePath(dir);
   return appendNote(dir, options, true, (records) => {
-    const refused = (reason: Refused['reason'], message: string): Refused => ({
+    const refused = (reason: NoteRefusal, message: string): Refused => ({
       kind: 'refused',
       reason,
       path: file,
       message,
     });
-    const ask = records.find((r) => r.id === askId && r.kind !== 'change');
-    if (!ask) return refused('not-found', `No note or ask "${askId}" in ${file}.`);
-    if (ask.kind !== 'ask')
-      return refused('not-an-ask', `"${askId}" is a ${ask.kind}, not an ask.`);
-    const state = noteStates(records).get(askId);
-    if (state?.status === 'done') {
-      return refused(
-        'already-done',
-        `"${askId}" is already done (${state.statusBy ?? 'unknown'}).`,
-      );
+    const parsed = SettleInput.safeParse(input);
+    if (!parsed.success) return refused('invalid-input', issuesOf(parsed.error).join('; '));
+    const i = parsed.data;
+    const target = records.find((r) => r.id === id && !isSettleLine(r));
+    if (!target) return refused('note-not-found', `No record "${id}" in ${file}.`);
+    const blocked = check(target, refused);
+    if (blocked) return blocked;
+    const before = noteStates(records).get(id)?.life ?? 'live';
+    if (before === i.state) {
+      return refused('already-settled', `"${id}" is already ${i.state}.`);
     }
-    const because = input.because?.trim() ? input.because : undefined;
+    const reason = i.reason?.trim() ? i.reason : undefined;
     const links = {
-      ...(input.change ? { follows: input.change } : {}),
-      ...(input.session ? { session: input.session } : {}),
+      ...(i.to?.trim() ? { to: i.to } : {}),
+      ...(i.session ? { session: i.session } : {}),
     };
     return noteRecordOf(
       {
-        by: input.by,
+        by: i.by,
         kind: 'change',
-        where: ask.where,
-        target: { app: ask.target.app, entityType: NOTE_ENTITY, entityId: askId, field: 'status' },
-        ...(because ? { text: because } : {}),
-        before: 'open',
-        after: 'done',
+        where: target.where,
+        target: {
+          app: target.target.app,
+          entityType: NOTE_ENTITY,
+          entityId: id,
+          field: SETTLE_FIELD,
+        },
+        ...(reason ? { text: reason } : {}),
+        before,
+        after: i.state,
         form: 'full',
         ...(Object.keys(links).length > 0 ? { links } : {}),
       },
@@ -246,6 +261,34 @@ export function resolveAsk(
   });
 }
 
+/**
+ * v1's close-an-ask, kept as an alias: `settleNote` to `done`, asks only (`not-an-ask` otherwise), with `change` as the
+ * pointer (`links.to`) and `because` as the reason. Refuses `already-settled` when the ask is already done.
+ */
+export function resolveAsk(
+  dir: string,
+  askId: string,
+  input: ResolveAskInput,
+  options: AddNoteOptions = {},
+): Promise<AddNoteResult> {
+  return settleWith(
+    dir,
+    askId,
+    {
+      by: input.by,
+      state: 'done',
+      ...(input.because !== undefined ? { reason: input.because } : {}),
+      ...(input.change !== undefined ? { to: input.change } : {}),
+      ...(input.session !== undefined ? { session: input.session } : {}),
+    },
+    options,
+    (target, refused) =>
+      target.kind === 'ask'
+        ? null
+        : refused('not-an-ask', `"${askId}" is a ${target.kind}, not an ask.`),
+  );
+}
+
 export const NoteLineProblem = z.object({ line: z.int().min(1), message: z.string() });
 export type NoteLineProblem = z.infer<typeof NoteLineProblem>;
 
@@ -253,8 +296,13 @@ export const NotesRead = z.object({
   path: z.string(),
   /** False when there is no notes file. An empty file and no file both have no records: this tells them apart. */
   exists: z.boolean(),
-  /** Every valid line, in file order. */
+  /**
+   * The records the filter answers with, in file order. Default: the `live` ones (settle lines left out). With
+   * `history: true`: every valid line, settle lines included.
+   */
   records: z.array(NoteRecord),
+  /** Where every record in the file stands (by id), whatever the filter. */
+  states: z.record(z.string(), NoteState),
   /** Lines that are not a record: listed, never hidden, never fatal. */
   invalid: z.array(NoteLineProblem),
   /** The file exists but could not be read. */
@@ -262,18 +310,30 @@ export const NotesRead = z.object({
 });
 export type NotesRead = z.infer<typeof NotesRead>;
 
-/** Read `<dir>/fli.notes.jsonl`, line by line. Never throws: no file → `exists: false`; a bad line → `invalid`. */
-export async function readNotes(dir: string): Promise<NotesRead> {
+/**
+ * Read `<dir>/fli.notes.jsonl`, line by line, folding settle lines into `states`. Answers the `live` records by default;
+ * pass `{ history: true }` for the whole file, or any `NoteFilter`. Never throws: no file → `exists: false`; a bad line
+ * → `invalid`. v1 files read: their asks' `open` / `done` map to `live` / `done`.
+ */
+export async function readNotes(dir: string, filter: NoteFilter = {}): Promise<NotesRead> {
+  const f = NoteFilter.parse(filter);
   const file = notesFilePath(dir);
   let text: string;
   try {
     text = await fs.readFile(file, 'utf8');
   } catch (error) {
     if (errorCode(error) === 'ENOENT')
-      return { path: file, exists: false, records: [], invalid: [] };
-    return { path: file, exists: true, records: [], invalid: [], error: errorMessage(error) };
+      return { path: file, exists: false, records: [], states: {}, invalid: [] };
+    return {
+      path: file,
+      exists: true,
+      records: [],
+      states: {},
+      invalid: [],
+      error: errorMessage(error),
+    };
   }
-  const read: NotesRead = { path: file, exists: true, records: [], invalid: [] };
+  const read: NotesRead = { path: file, exists: true, records: [], states: {}, invalid: [] };
   text.split('\n').forEach((raw, i) => {
     if (raw.trim() === '') return;
     let json: unknown;
@@ -287,6 +347,9 @@ export async function readNotes(dir: string): Promise<NotesRead> {
     if (parsed.success) read.records.push(parsed.data);
     else read.invalid.push({ line: i + 1, message: issuesOf(parsed.error).join('; ') });
   });
+  const states = noteStates(read.records);
+  read.states = Object.fromEntries(states);
+  read.records = read.records.filter((r) => matchesNote(r, f, states.get(r.id)));
   return read;
 }
 
@@ -294,7 +357,7 @@ export const ScannedNote = z.object({
   /** The notes file the record is in. */
   path: z.string(),
   record: NoteRecord,
-  /** For a note or ask: where it stands now (`noteStates`). */
+  /** Where the record stands now (`noteStates`); absent on a settle line. */
   state: NoteState.optional(),
 });
 export type ScannedNote = z.infer<typeof ScannedNote>;
@@ -346,7 +409,7 @@ export async function scanNotes(
     }
     const names = new Set(entries.map((e) => e.name));
     if (names.has(NOTES_FILE)) {
-      const read = await readNotes(resolved);
+      const read = await readNotes(resolved, { history: true });
       scan.files.push(read.path);
       if (read.error) scan.errors.push({ path: read.path, message: read.error });
       scan.invalid.push(...read.invalid.map((p) => ({ ...p, path: read.path })));

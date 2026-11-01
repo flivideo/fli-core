@@ -2,6 +2,34 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.28.0-rc.1 — 2026-11-01
+
+Release candidate for fli-notes v2 life states (`flivideo/docs/briefs/fli-notes-v2-quiet-capture-and-lab-2026-11-01.md`
+§3, workplan `fli-notes-v2-orch-workplan-2026-11-01.md`). Consumers pin `github:flivideo/fli-core#v0.28.0-rc.1`;
+`v0.28.0` is tagged on `main` after merge.
+
+### Added
+
+- `LifeState` (`live | done | used | stale | replaced`): every record starts `live`; a settle line (a `change`
+  targeting it, `entityType: 'note'`, `field: 'state'` = `SETTLE_FIELD`) moves it, with the reason as `text` and the
+  pointer as the new `links.to`. Any record can be settled, to any state; `live` re-opens.
+- `settleNote(dir, id, input, opts?)` with `SettleInput` (`stale` needs `reason`; `used` / `replaced` need `to`).
+  `isSettleLine(record)`.
+- `NOTE_REFUSALS` / `NoteRefusal`: the refusal names, no numbers (each app keeps its own failure codes).
+- `NotesRead.states`: where every record in the file stands, whatever the filter.
+
+### Changed
+
+- `readNotes(dir, filter?)` and `scanNotes` answer `live` records by default. `NoteFilter` gains `state` (one or many)
+  and `history` (the whole file, settle lines included). `open` means a `live` ask.
+- `NoteState` is `{ life, settledBy?, reason?, to?, answeredBy }` (was `{ status, statusBy?, answeredBy }`).
+- New lines are `schema: 2` and carry no `status`. Schema 1 lines still read: `kept` / `open` → `live`, a v1 status
+  change to `done` → `done` (its `links.follows` read as the pointer).
+- `resolveAsk` is settle-to-`done` for asks; its line uses `field: 'state'`, `before: 'live'` and `links.to` (was
+  `field: 'status'`, `before: 'open'`, `links.follows`).
+- Refusal reasons renamed: `busy` → `notes-busy`, `not-found` → `note-not-found`, `already-done` → `already-settled`.
+- `NoteWhere` takes any string key beside `brand` / `project` / `video` (app-neutral).
+
 ## v0.27.0 — 2026-10-31
 
 Released from v0.27.0-rc.1 unchanged (fli-notes overnight, `flivideo/docs/briefs/fli-notes-suite-record-2026-10-31.md` §4A).

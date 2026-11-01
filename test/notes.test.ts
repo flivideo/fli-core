@@ -123,16 +123,17 @@ describe('addNote', () => {
       kind: 'written',
       path: path.join(dir, NOTES_FILE),
       record: {
-        schema: 1,
+        schema: 2,
         kind: 'note',
-        status: 'kept',
         channel: 'ui',
         at: now.toISOString(),
         where: d13,
       },
     });
-    expect(ask).toMatchObject({ record: { kind: 'ask', status: 'open', channel: 'chat' } });
-    expect(change.kind === 'written' && change.record).not.toHaveProperty('status');
+    expect(ask).toMatchObject({ record: { kind: 'ask', channel: 'chat' } });
+    for (const r of [note, ask, change]) {
+      expect(r.kind === 'written' && r.record).not.toHaveProperty('status');
+    }
     const written = await lines(dir);
     expect(written).toHaveLength(3);
     expect(written.map((l) => (l as { id: string }).id)).toEqual(
@@ -192,7 +193,7 @@ describe('addNote', () => {
       { by: 'cli', kind: 'note', target: script, text: 'x' },
       { waitMs: 30 },
     );
-    expect(r).toMatchObject({ kind: 'refused', reason: 'busy' });
+    expect(r).toMatchObject({ kind: 'refused', reason: 'notes-busy' });
   });
 
   it('starts a fresh line after a torn last line', async () => {
@@ -212,6 +213,7 @@ describe('readNotes', () => {
       path: notesFilePath(dir),
       exists: false,
       records: [],
+      states: {},
       invalid: [],
     });
     await fs.writeFile(notesFilePath(dir), '');
@@ -344,7 +346,7 @@ describe('asks: open until done', () => {
     expect(change.record.links).toEqual({ answers: ask.record.id });
 
     let states = noteStates((await readNotes(dir)).records);
-    expect(states.get(ask.record.id)).toEqual({ status: 'open', answeredBy: [change.record.id] });
+    expect(states.get(ask.record.id)).toEqual({ life: 'live', answeredBy: [change.record.id] });
 
     const done = await resolveAsk(dir, ask.record.id, {
       by: 'agent:roamy',
@@ -355,22 +357,26 @@ describe('asks: open until done', () => {
       record: {
         kind: 'change',
         where: d13,
-        target: { app: 'flistudio', entityType: 'note', entityId: ask.record.id, field: 'status' },
-        before: 'open',
+        target: { app: 'flistudio', entityType: 'note', entityId: ask.record.id, field: 'state' },
+        before: 'live',
         after: 'done',
-        links: { follows: change.record.id },
+        links: { to: change.record.id },
       },
     });
-    const read = await readNotes(dir);
+    const read = await readNotes(dir, { history: true });
     expect(read.records[0]).toEqual(ask.record);
     states = noteStates(read.records);
     expect(states.get(ask.record.id)).toMatchObject({
-      status: 'done',
+      life: 'done',
+      to: change.record.id,
       answeredBy: [change.record.id],
     });
+    expect(read.states[ask.record.id]).toEqual(states.get(ask.record.id));
+    // The default read answers live records only: the done ask and its settle line are history.
+    expect((await readNotes(dir)).records.map((r) => r.id)).toEqual([change.record.id]);
 
     expect(await resolveAsk(dir, ask.record.id, { by: 'cli' })).toMatchObject({
-      reason: 'already-done',
+      reason: 'already-settled',
     });
   });
 
@@ -378,7 +384,9 @@ describe('asks: open until done', () => {
     const dir = await tempDir();
     const note = await addNote(dir, { by: 'cli', kind: 'note', target: script, text: 'x' });
     if (note.kind !== 'written') throw new Error(note.message);
-    expect(await resolveAsk(dir, 'n_nope', { by: 'cli' })).toMatchObject({ reason: 'not-found' });
+    expect(await resolveAsk(dir, 'n_nope', { by: 'cli' })).toMatchObject({
+      reason: 'note-not-found',
+    });
     expect(await resolveAsk(dir, note.record.id, { by: 'cli' })).toMatchObject({
       reason: 'not-an-ask',
     });
@@ -459,11 +467,15 @@ describe('scanNotes', () => {
     const { root, brand, d13dir, askId } = await estate();
     const open = await scanNotes(root, { open: true });
     expect(open.notes.map((n) => n.record.id)).toEqual([askId]);
-    expect(open.notes[0]?.state).toEqual({ status: 'open', answeredBy: [] });
+    expect(open.notes[0]?.state).toEqual({ life: 'live', answeredBy: [] });
     await resolveAsk(d13dir, askId, { by: 'cli' });
     expect((await scanNotes(brand, { open: true })).notes).toEqual([]);
     expect((await scanNotes(brand, { project: 'd14', text: 'GAP' })).notes).toHaveLength(1);
-    expect((await scanNotes(brand, { kind: ['note', 'ask'] })).notes).toHaveLength(2);
+    // The ask is done now: live-only by default, every state with history.
+    expect((await scanNotes(brand, { kind: ['note', 'ask'] })).notes).toHaveLength(1);
+    expect((await scanNotes(brand, { kind: ['note', 'ask'], history: true })).notes).toHaveLength(
+      2,
+    );
   });
 
   it('lists a root it cannot read instead of answering empty', async () => {

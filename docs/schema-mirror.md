@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `4fb29cea4304` · **generated** 2026-10-31T16:14:55+00:00
+- **commit** `00bc4bb56b08` · **generated** 2026-11-01T00:46:22+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 36 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 304 | 86 | 6 | 9 | 34 | 6 |
+| 306 | 88 | 6 | 9 | 35 | 6 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -34,8 +34,8 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/lab-path.ts` — `PathSegment` :8 · `LabPathInput` :16 · `ResolvedLabPath` :84
 - `src/lifecycle.ts` — `LifecycleVerb` (set) :18 · `SystemStatus` :21 · `SystemQuitInput` :34 · `SystemQuitOutput` :40 · `AppScriptOpen` :84
 - `src/machine.ts` — `AbsolutePath` :7 · `MachineSettings` :12 · `ResolvedMachineSettings` :24 · `MachineSettingsOptions` :27 · `MachineSettingsResult` :32
-- `src/note-record.ts` — `NoteKind` (set) :22 · `NoteChannel` (set) :26 · `NoteStatus` (set) :30 · `NoteScope` (set) :34 · `Name` :37 · `NoteTarget` :43 · `NoteWhere` :70 · `NoteProducer` :78 · `NoteLinks` :86 · `NoteForm` (set) :104 · `NoteExcerpt` :108 · `NoteRecord` :122 · `NoteInput` :163 · `ChangeInput` :180 · `ResolveAskInput` :199 · `SnapshotOptions` :249 · `ChangeSnapshot` :256 · `NoteState` :340 · `NoteFilter` :375
-- `src/notes.ts` — `AddNoteResult` :40 · `AddNoteOptions` :63 · `NoteLineProblem` :249 · `NotesRead` :252 · `ScannedNote` :293 · `NotesScan` :302 · `ScanNotesOptions` :313
+- `src/note-record.ts` — `NoteKind` (set) :30 · `NoteChannel` (set) :34 · `NoteStatus` (set) :38 · `LifeState` (set) :45 · `NoteScope` (set) :49 · `Name` :52 · `NoteTarget` :58 · `NoteWhere` :88 · `NoteProducer` :98 · `NoteLinks` :106 · `NoteForm` (set) :129 · `NoteExcerpt` :133 · `NoteRecord` :147 · `NoteInput` :194 · `ChangeInput` :211 · `SettleInput` :234 · `ResolveAskInput` :270 · `SnapshotOptions` :318 · `ChangeSnapshot` :325 · `NoteState` :411 · `NoteRefusal` (set) :484 · `NoteFilter` :488
+- `src/notes.ts` — `AddNoteResult` :44 · `AddNoteOptions` :57 · `NoteLineProblem` :292 · `NotesRead` :295 · `ScannedNote` :356 · `NotesScan` :365 · `ScanNotesOptions` :376
 - `src/open-args.ts` — `OpenContext` :11 · `OpenArgs` :27 · `OpenArgName` (set) :36 · `RawOpenArgs` :40 · `ParseOpenArgsOptions` :53 · `ParsedOpenArgs` :58
 - `src/open-context.ts` — `OpenContextResult` :16 · `ResolveOpenContextOptions` :33
 - `src/openrpc.ts` — `OpenRpcServer` :18 · `OpenRpcDocument` :29 · `OpenRpcOptions` :52 · `JsonRpcRequest` :174 · `CallAnswer` :183 · `JsonRpcOptions` :185
@@ -75,10 +75,10 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**461** top-level declarations counted = **405** mirrored + **22** listed as gaps + **34** declared but not read.
+**468** top-level declarations counted = **411** mirrored + **22** listed as gaps + **35** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 1 function, 1 function type, 34 literal constants.
+Not counted, as not schema-bearing: 1 function, 1 function type, 35 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
@@ -89,6 +89,7 @@ Not counted, as not schema-bearing: 1 function, 1 function type, 34 literal cons
 | `src/gitignore-rules.ts` | 13 | 10 | 0 | **3** |
 | `src/identity.ts` | 15 | 12 | 2 | **1** |
 | `src/lifecycle.ts` | 11 | 10 | 0 | **1** |
+| `src/note-record.ts` | 42 | 41 | 0 | **1** |
 | `src/notes.ts` | 13 | 12 | 0 | **1** |
 | `src/open-args.ts` | 12 | 11 | 0 | **1** |
 | `src/publish.ts` | 27 | 22 | 0 | **5** |
@@ -531,98 +532,125 @@ The lifecycle verb contract (agent-drivable step 2, David 2026-09-23: "Do we hav
 | `file` | `src/machine.ts:36` |
 | `default` | `src/machine.ts:36` |
 
-### `src/note-record.NoteKind` — `src/note-record.ts:22`
+### `src/note-record.NoteKind` — `src/note-record.ts:30`
 
 `note`: kept, never nags. `ask`: a to-do until done. `change`: written by the app when a record changes.
 
 *`z.enum` `NoteKind` - a single declaring symbol*
 
-*aliases* `NoteKind` `src/note-record.ts:23`
+*aliases* `NoteKind` `src/note-record.ts:31`
 
 | value | declared at |
 |---|---|
-| `note` | `src/note-record.ts:22` |
-| `ask` | `src/note-record.ts:22` |
-| `change` | `src/note-record.ts:22` |
+| `note` | `src/note-record.ts:30` |
+| `ask` | `src/note-record.ts:30` |
+| `change` | `src/note-record.ts:30` |
 
-### `src/note-record.NoteChannel` — `src/note-record.ts:26`
+### `src/note-record.NoteChannel` — `src/note-record.ts:34`
 
 How the words arrived.
 
 *`z.enum` `NoteChannel` - a single declaring symbol*
 
-*aliases* `NoteChannel` `src/note-record.ts:27`
+*aliases* `NoteChannel` `src/note-record.ts:35`
 
 | value | declared at |
 |---|---|
-| `ui` | `src/note-record.ts:26` |
-| `chat` | `src/note-record.ts:26` |
-| `voice` | `src/note-record.ts:26` |
-| `agent` | `src/note-record.ts:26` |
+| `ui` | `src/note-record.ts:34` |
+| `chat` | `src/note-record.ts:34` |
+| `voice` | `src/note-record.ts:34` |
+| `agent` | `src/note-record.ts:34` |
 
-### `src/note-record.NoteStatus` — `src/note-record.ts:30`
+### `src/note-record.NoteStatus` — `src/note-record.ts:38`
 
-`kept` (a note) · `open` → `done` (an ask). A `change` has no status.
+v1's written status (schema 1 lines only): `kept` (a note) · `open` / `done` (an ask). Superseded by `LifeState`.
 
 *`z.enum` `NoteStatus` - a single declaring symbol*
 
-*aliases* `NoteStatus` `src/note-record.ts:31`
+*aliases* `NoteStatus` `src/note-record.ts:39`
 
 | value | declared at |
 |---|---|
-| `kept` | `src/note-record.ts:30` |
-| `open` | `src/note-record.ts:30` |
-| `done` | `src/note-record.ts:30` |
+| `kept` | `src/note-record.ts:38` |
+| `open` | `src/note-record.ts:38` |
+| `done` | `src/note-record.ts:38` |
 
-### `src/note-record.NoteScope` — `src/note-record.ts:34`
+### `src/note-record.LifeState` — `src/note-record.ts:45`
+
+Where a record stands. `live`: relevant, agents read it (every record starts here). `done`: implemented. `used`:
+
+*`z.enum` `LifeState` - a single declaring symbol*
+
+*aliases* `LifeState` `src/note-record.ts:46`
+
+| value | declared at |
+|---|---|
+| `live` | `src/note-record.ts:45` |
+| `done` | `src/note-record.ts:45` |
+| `used` | `src/note-record.ts:45` |
+| `stale` | `src/note-record.ts:45` |
+| `replaced` | `src/note-record.ts:45` |
+
+### `src/note-record.NoteScope` — `src/note-record.ts:49`
 
 `one` entity (`entityId`), `many` (`entityIds`), or an `aggregate` described by a query in words (`query`).
 
 *`z.enum` `NoteScope` - a single declaring symbol*
 
-*aliases* `NoteScope` `src/note-record.ts:35`
+*aliases* `NoteScope` `src/note-record.ts:50`
 
 | value | declared at |
 |---|---|
-| `one` | `src/note-record.ts:34` |
-| `many` | `src/note-record.ts:34` |
-| `aggregate` | `src/note-record.ts:34` |
+| `one` | `src/note-record.ts:49` |
+| `many` | `src/note-record.ts:49` |
+| `aggregate` | `src/note-record.ts:49` |
 
-### `src/note-record.NoteForm` — `src/note-record.ts:104`
+### `src/note-record.NoteForm` — `src/note-record.ts:129`
 
 How `before` / `after` are held on a `change`. `full`: the values themselves. `excerpt`: two text excerpts
 
 *`z.enum` `NoteForm` - a single declaring symbol*
 
-*aliases* `NoteForm` `src/note-record.ts:105`
+*aliases* `NoteForm` `src/note-record.ts:130`
 
 | value | declared at |
 |---|---|
-| `full` | `src/note-record.ts:104` |
-| `excerpt` | `src/note-record.ts:104` |
-| `keys` | `src/note-record.ts:104` |
+| `full` | `src/note-record.ts:129` |
+| `excerpt` | `src/note-record.ts:129` |
+| `keys` | `src/note-record.ts:129` |
 
-### `src/notes.AddNoteResult.kind` — `src/notes.ts:40-59`
+### `src/note-record.NoteRecord.schema` — `src/note-record.ts:150`
+
+*`z.union` of `z.literal`s `schema` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `1` | `src/note-record.ts:150` |
+| `2` | `src/note-record.ts:150` |
+
+### `src/note-record.NoteRefusal` — `src/note-record.ts:484`
+
+*`z.enum` `NoteRefusal` - members read through `NOTE_REFUSALS` (src/note-record.NOTE_REFUSALS) - a single declaring symbol*
+
+*aliases* `NoteRefusal` `src/note-record.ts:485`
+
+| value | declared at |
+|---|---|
+| `invalid-input` | `src/note-record.ts:477` |
+| `io-error` | `src/note-record.ts:478` |
+| `notes-busy` | `src/note-record.ts:479` |
+| `note-not-found` | `src/note-record.ts:480` |
+| `not-an-ask` | `src/note-record.ts:481` |
+| `already-settled` | `src/note-record.ts:482` |
+
+### `src/notes.AddNoteResult.kind` — `src/notes.ts:44-53`
 
 *the `kind` discriminator of `z.discriminatedUnion` `AddNoteResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/notes.ts:41` |
-| `refused` | `src/notes.ts:43` |
-
-### `src/notes.AddNoteResult[kind=refused].reason` — `src/notes.ts:48`
-
-*`z.enum` `reason` - a single declaring symbol*
-
-| value | declared at |
-|---|---|
-| `invalid-input` | `src/notes.ts:49` |
-| `io-error` | `src/notes.ts:50` |
-| `busy` | `src/notes.ts:51` |
-| `not-found` | `src/notes.ts:52` |
-| `not-an-ask` | `src/notes.ts:53` |
-| `already-done` | `src/notes.ts:54` |
+| `written` | `src/notes.ts:45` |
+| `refused` | `src/notes.ts:47` |
 
 ### `src/open-args.OpenArgName` — `src/open-args.ts:36`
 
@@ -2440,314 +2468,341 @@ Machine settings with the defaults filled in.
 | `source` | `z.enum(['file', 'default'])` | — | `src/machine.ts:36` |
 | `value` | `ResolvedMachineSettings → src/machine.ResolvedMachineSettings` | — | `src/machine.ts:37` |
 
-### `src/note-record.Name` — zod-scalar — `src/note-record.ts:37`
+### `src/note-record.Name` — zod-scalar — `src/note-record.ts:52`
 
 `z.string().trim().min(1)`
 
-### `src/note-record.NoteTarget` — zod-object — `src/note-record.ts:43-66`
+### `src/note-record.NoteTarget` — zod-object — `src/note-record.ts:58-81`
 
 What the record is about. Plain strings, synthetic keys allowed (`entityType: 'beat'`, `entityId: 'd13/beat-4'`).
 
-*aliases* `NoteTarget` `src/note-record.ts:67`
+*aliases* `NoteTarget` `src/note-record.ts:82`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `app` | `Name → src/note-record.Name` | — | `src/note-record.ts:46` | The app the target lives in (`flistudio`, `flicut`). |
-| `entityType` | `Name → src/note-record.Name` | — | `src/note-record.ts:47` |  |
-| `scope` | `NoteScope.default('one') → src/note-record.NoteScope` | `'one'` | `src/note-record.ts:48` |  |
-| `entityId` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:49` |  |
-| `entityIds` | `z.array(Name).min(1).optional() → src/note-record.Name` | — | `src/note-record.ts:50` |  |
-| `query` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:52` | For `aggregate`: the query, described ("every StoryPilot script in v-appydave"). |
-| `field` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:53` |  |
-| `region` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:54` |  |
+| `app` | `Name → src/note-record.Name` | — | `src/note-record.ts:61` | The app the target lives in (`flistudio`, `flicut`). |
+| `entityType` | `Name → src/note-record.Name` | — | `src/note-record.ts:62` |  |
+| `scope` | `NoteScope.default('one') → src/note-record.NoteScope` | `'one'` | `src/note-record.ts:63` |  |
+| `entityId` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:64` |  |
+| `entityIds` | `z.array(Name).min(1).optional() → src/note-record.Name` | — | `src/note-record.ts:65` |  |
+| `query` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:67` | For `aggregate`: the query, described ("every StoryPilot script in v-appydave"). |
+| `field` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:68` |  |
+| `region` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:69` |  |
 
-### `src/note-record.NoteWhere` — zod-object — `src/note-record.ts:70-74`
+### `src/note-record.NoteWhere` — zod-object — `src/note-record.ts:88-94`
 
-Where in the estate. All optional: a note on an app itself has none.
+Where the target sits. All optional: a note on an app itself has none. `brand` / `project` / `video` are the keys the
 
-*aliases* `NoteWhere` `src/note-record.ts:75`
+*aliases* `NoteWhere` `src/note-record.ts:95`
 
 | field | type | default | at |
 |---|---|---|---|
-| `brand` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:71` |
-| `project` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:72` |
-| `video` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:73` |
+| `brand` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:90` |
+| `project` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:91` |
+| `video` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:92` |
 
-### `src/note-record.NoteProducer` — zod-object — `src/note-record.ts:78-83`
+### `src/note-record.NoteProducer` — zod-object — `src/note-record.ts:98-103`
 
 What produced the "before" (the prompt, skill, model and version), where known.
 
-*aliases* `NoteProducer` `src/note-record.ts:84`
+*aliases* `NoteProducer` `src/note-record.ts:104`
 
 | field | type | default | at |
 |---|---|---|---|
-| `prompt` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:79` |
-| `skill` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:80` |
-| `model` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:81` |
-| `version` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:82` |
+| `prompt` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:99` |
+| `skill` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:100` |
+| `model` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:101` |
+| `version` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:102` |
 
-### `src/note-record.NoteLinks` — zod-object — `src/note-record.ts:86-96`
+### `src/note-record.NoteLinks` — zod-object — `src/note-record.ts:106-121`
 
-*aliases* `NoteLinks` `src/note-record.ts:97`
+*aliases* `NoteLinks` `src/note-record.ts:122`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `session` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:88` | The Claude Code session id the words or the change came from. |
-| `capture` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:90` | A Captain's Log capture code (`B535`). |
-| `commit` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:91` |  |
-| `answers` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:93` | On a `change`: the ask it fulfilled. |
-| `follows` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:95` | The record this one follows on from (on a status change: the change that did the work). |
+| `session` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:108` | The Claude Code session id the words or the change came from. |
+| `capture` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:110` | A Captain's Log capture code (`B535`). |
+| `commit` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:111` |  |
+| `answers` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:113` | On a `change`: the ask it fulfilled. |
+| `follows` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:115` | The record this one follows on from (v1's resolve: the change that did the work). |
+| `to` | `Name.optional() → src/note-record.Name` | — | `src/note-record.ts:120` | On a settle line: what the record went to — the record that `replaced` it, what it was `used` in (a prompt |
 
-### `src/note-record.NoteExcerpt` — zod-object — `src/note-record.ts:108-119`
+### `src/note-record.NoteExcerpt` — zod-object — `src/note-record.ts:133-144`
 
 The words around a change, kept because paragraph numbers move. Offsets are in UTF-16 units of the full text.
 
-*aliases* `NoteExcerpt` `src/note-record.ts:120`
+*aliases* `NoteExcerpt` `src/note-record.ts:145`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `text` | `z.string()` | — | `src/note-record.ts:109` |  |
-| `start` | `z.int().min(0)` | — | `src/note-record.ts:111` | Where `text` starts in the full value. |
-| `line` | `z.int().min(1)` | — | `src/note-record.ts:113` | The 1-based line the changed part starts on, in the full value. |
-| `length` | `z.int().min(0)` | — | `src/note-record.ts:115` | The full value's length. |
-| `from` | `z.int().min(0)` | — | `src/note-record.ts:117` | The changed part, within `text`: `[from, to)`. |
-| `to` | `z.int().min(0)` | — | `src/note-record.ts:118` |  |
+| `text` | `z.string()` | — | `src/note-record.ts:134` |  |
+| `start` | `z.int().min(0)` | — | `src/note-record.ts:136` | Where `text` starts in the full value. |
+| `line` | `z.int().min(1)` | — | `src/note-record.ts:138` | The 1-based line the changed part starts on, in the full value. |
+| `length` | `z.int().min(0)` | — | `src/note-record.ts:140` | The full value's length. |
+| `from` | `z.int().min(0)` | — | `src/note-record.ts:142` | The changed part, within `text`: `[from, to)`. |
+| `to` | `z.int().min(0)` | — | `src/note-record.ts:143` |  |
 
-### `src/note-record.NoteRecord` — zod-object — `src/note-record.ts:122-156`
+### `src/note-record.NoteRecord` — zod-object — `src/note-record.ts:147-187`
 
-*aliases* `NoteRecord` `src/note-record.ts:157`
+*aliases* `NoteRecord` `src/note-record.ts:188`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/note-record.ts:124` |  |
-| `id` | `Name → src/note-record.Name` | — | `src/note-record.ts:125` |  |
-| `at` | `z.iso.datetime({ offset: true })` | — | `src/note-record.ts:126` |  |
-| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:127` |  |
-| `kind` | `NoteKind → src/note-record.NoteKind` | — | `src/note-record.ts:128` |  |
-| `channel` | `NoteChannel → src/note-record.NoteChannel` | — | `src/note-record.ts:129` |  |
-| `status` | `NoteStatus.optional() → src/note-record.NoteStatus` | — | `src/note-record.ts:131` | Present on `note` (`kept`) and `ask` (`open` when written); absent on `change`. |
-| `where` | `NoteWhere.default({}) → src/note-record.NoteWhere` | `{}` | `src/note-record.ts:132` |  |
-| `target` | `NoteTarget → src/note-record.NoteTarget` | — | `src/note-record.ts:133` |  |
-| `text` | `z.string().min(1).optional()` | — | `src/note-record.ts:135` | The human's words, verbatim — the most valuable field. On a `change`: the `because`, when one was given. |
-| `before` | `z.unknown().optional()` | — | `src/note-record.ts:136` |  |
-| `after` | `z.unknown().optional()` | — | `src/note-record.ts:137` |  |
-| `form` | `NoteForm.optional() → src/note-record.NoteForm` | — | `src/note-record.ts:138` |  |
-| `producer` | `NoteProducer.optional() → src/note-record.NoteProducer` | — | `src/note-record.ts:139` |  |
-| `links` | `NoteLinks.optional() → src/note-record.NoteLinks` | — | `src/note-record.ts:140` |  |
-| `meta` | `z.record(z.string(), z.unknown()).optional()` | — | `src/note-record.ts:141` |  |
+| `schema` | `z.union([z.literal(1), z.literal(2)])` | — | `src/note-record.ts:150` | 1: v1 (carries `status`). 2: v0.28.0 on (no `status`; the life state is folded from settle lines). |
+| `id` | `Name → src/note-record.Name` | — | `src/note-record.ts:151` |  |
+| `at` | `z.iso.datetime({ offset: true })` | — | `src/note-record.ts:152` |  |
+| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:153` |  |
+| `kind` | `NoteKind → src/note-record.NoteKind` | — | `src/note-record.ts:154` |  |
+| `channel` | `NoteChannel → src/note-record.NoteChannel` | — | `src/note-record.ts:155` |  |
+| `status` | `NoteStatus.optional() → src/note-record.NoteStatus` | — | `src/note-record.ts:157` | Schema 1 only: `kept` on a note, `open` on an ask. Never written from v0.28.0. |
+| `where` | `NoteWhere.default({}) → src/note-record.NoteWhere` | `{}` | `src/note-record.ts:158` |  |
+| `target` | `NoteTarget → src/note-record.NoteTarget` | — | `src/note-record.ts:159` |  |
+| `text` | `z.string().min(1).optional()` | — | `src/note-record.ts:161` | The human's words, verbatim — the most valuable field. On a `change`: the `because`, when one was given. |
+| `before` | `z.unknown().optional()` | — | `src/note-record.ts:162` |  |
+| `after` | `z.unknown().optional()` | — | `src/note-record.ts:163` |  |
+| `form` | `NoteForm.optional() → src/note-record.NoteForm` | — | `src/note-record.ts:164` |  |
+| `producer` | `NoteProducer.optional() → src/note-record.NoteProducer` | — | `src/note-record.ts:165` |  |
+| `links` | `NoteLinks.optional() → src/note-record.NoteLinks` | — | `src/note-record.ts:166` |  |
+| `meta` | `z.record(z.string(), z.unknown()).optional()` | — | `src/note-record.ts:167` |  |
 
-### `src/note-record.NoteInput` — zod-object — `src/note-record.ts:163-176`
+### `src/note-record.NoteInput` — zod-object — `src/note-record.ts:194-207`
 
 What a caller hands `addNote`: the record without `schema`, `id`, `at` and `status` (the helper fills them).
 
-*aliases* `NoteInput` `src/note-record.ts:177`
+*aliases* `NoteInput` `src/note-record.ts:208`
 
 | field | type | default | at |
 |---|---|---|---|
-| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:164` |
-| `kind` | `NoteKind → src/note-record.NoteKind` | — | `src/note-record.ts:165` |
-| `channel` | `NoteChannel.optional() → src/note-record.NoteChannel` | — | `src/note-record.ts:166` |
-| `where` | `NoteWhere.optional() → src/note-record.NoteWhere` | — | `src/note-record.ts:167` |
-| `target` | `NoteTarget → src/note-record.NoteTarget` | — | `src/note-record.ts:168` |
-| `text` | `z.string().min(1).optional()` | — | `src/note-record.ts:169` |
-| `before` | `z.unknown().optional()` | — | `src/note-record.ts:170` |
-| `after` | `z.unknown().optional()` | — | `src/note-record.ts:171` |
-| `form` | `NoteForm.optional() → src/note-record.NoteForm` | — | `src/note-record.ts:172` |
-| `producer` | `NoteProducer.optional() → src/note-record.NoteProducer` | — | `src/note-record.ts:173` |
-| `links` | `NoteLinks.optional() → src/note-record.NoteLinks` | — | `src/note-record.ts:174` |
-| `meta` | `z.record(z.string(), z.unknown()).optional()` | — | `src/note-record.ts:175` |
+| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:195` |
+| `kind` | `NoteKind → src/note-record.NoteKind` | — | `src/note-record.ts:196` |
+| `channel` | `NoteChannel.optional() → src/note-record.NoteChannel` | — | `src/note-record.ts:197` |
+| `where` | `NoteWhere.optional() → src/note-record.NoteWhere` | — | `src/note-record.ts:198` |
+| `target` | `NoteTarget → src/note-record.NoteTarget` | — | `src/note-record.ts:199` |
+| `text` | `z.string().min(1).optional()` | — | `src/note-record.ts:200` |
+| `before` | `z.unknown().optional()` | — | `src/note-record.ts:201` |
+| `after` | `z.unknown().optional()` | — | `src/note-record.ts:202` |
+| `form` | `NoteForm.optional() → src/note-record.NoteForm` | — | `src/note-record.ts:203` |
+| `producer` | `NoteProducer.optional() → src/note-record.NoteProducer` | — | `src/note-record.ts:204` |
+| `links` | `NoteLinks.optional() → src/note-record.NoteLinks` | — | `src/note-record.ts:205` |
+| `meta` | `z.record(z.string(), z.unknown()).optional()` | — | `src/note-record.ts:206` |
 
-### `src/note-record.ChangeInput` — zod-object — `src/note-record.ts:180-195`
+### `src/note-record.ChangeInput` — zod-object — `src/note-record.ts:211-226`
 
 What a write command knows at the door, for `logChange`.
 
-*aliases* `ChangeInput` `src/note-record.ts:196`
+*aliases* `ChangeInput` `src/note-record.ts:227`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:181` |  |
-| `target` | `NoteTarget → src/note-record.NoteTarget` | — | `src/note-record.ts:182` |  |
-| `where` | `NoteWhere.optional() → src/note-record.NoteWhere` | — | `src/note-record.ts:183` |  |
-| `before` | `z.unknown().optional()` | — | `src/note-record.ts:184` |  |
-| `after` | `z.unknown().optional()` | — | `src/note-record.ts:185` |  |
-| `because` | `z.string().optional()` | — | `src/note-record.ts:187` | The human's words for why, verbatim. Missing → still logged, just no why. |
-| `session` | `z.string().optional()` | — | `src/note-record.ts:189` | The Claude Code session id. |
-| `answers` | `z.string().optional()` | — | `src/note-record.ts:191` | The ask this change fulfils (`links.answers`). |
-| `producer` | `NoteProducer.optional() → src/note-record.NoteProducer` | — | `src/note-record.ts:192` |  |
-| `links` | `NoteLinks.optional() → src/note-record.NoteLinks` | — | `src/note-record.ts:193` |  |
-| `meta` | `z.record(z.string(), z.unknown()).optional()` | — | `src/note-record.ts:194` |  |
+| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:212` |  |
+| `target` | `NoteTarget → src/note-record.NoteTarget` | — | `src/note-record.ts:213` |  |
+| `where` | `NoteWhere.optional() → src/note-record.NoteWhere` | — | `src/note-record.ts:214` |  |
+| `before` | `z.unknown().optional()` | — | `src/note-record.ts:215` |  |
+| `after` | `z.unknown().optional()` | — | `src/note-record.ts:216` |  |
+| `because` | `z.string().optional()` | — | `src/note-record.ts:218` | The human's words for why, verbatim. Missing → still logged, just no why. |
+| `session` | `z.string().optional()` | — | `src/note-record.ts:220` | The Claude Code session id. |
+| `answers` | `z.string().optional()` | — | `src/note-record.ts:222` | The ask this change fulfils (`links.answers`). |
+| `producer` | `NoteProducer.optional() → src/note-record.NoteProducer` | — | `src/note-record.ts:223` |  |
+| `links` | `NoteLinks.optional() → src/note-record.NoteLinks` | — | `src/note-record.ts:224` |  |
+| `meta` | `z.record(z.string(), z.unknown()).optional()` | — | `src/note-record.ts:225` |  |
 
-### `src/note-record.ResolveAskInput` — zod-object — `src/note-record.ts:199-205`
+### `src/note-record.SettleInput` — zod-object — `src/note-record.ts:234-266`
 
-What closing an ask takes, for `resolveAsk` (and an app's `notes.resolve`).
+What settling a record takes, for `settleNote` (and an app's settle verb). `reason` is the human's words (stored as
 
-*aliases* `ResolveAskInput` `src/note-record.ts:206`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:200` |  |
-| `change` | `z.string().optional()` | — | `src/note-record.ts:202` | The change that did the work (linked as `follows`). |
-| `because` | `z.string().optional()` | — | `src/note-record.ts:203` |  |
-| `session` | `z.string().optional()` | — | `src/note-record.ts:204` |  |
-
-### `src/note-record.SnapshotOptions` — interface — `src/note-record.ts:249-254`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `limit` | `?: number` | — | `src/note-record.ts:251` | Keep values whole up to this size (default `NOTE_FULL_LIMIT`). |
-| `context` | `?: number` | — | `src/note-record.ts:253` | Unchanged characters kept either side of a text change (default `NOTE_EXCERPT_CONTEXT`). |
-
-### `src/note-record.ChangeSnapshot` — zod-object — `src/note-record.ts:256-260`
-
-*aliases* `ChangeSnapshot` `src/note-record.ts:261`
+*aliases* `SettleInput` `src/note-record.ts:267`
 
 | field | type | default | at |
 |---|---|---|---|
-| `before` | `z.unknown().optional()` | — | `src/note-record.ts:257` |
-| `after` | `z.unknown().optional()` | — | `src/note-record.ts:258` |
-| `form` | `NoteForm → src/note-record.NoteForm` | — | `src/note-record.ts:259` |
+| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:236` |
+| `state` | `LifeState → src/note-record.LifeState` | — | `src/note-record.ts:237` |
+| `reason` | `z.string().optional()` | — | `src/note-record.ts:238` |
+| `to` | `z.string().optional()` | — | `src/note-record.ts:239` |
+| `session` | `z.string().optional()` | — | `src/note-record.ts:240` |
 
-### `src/note-record.NoteState` — zod-object — `src/note-record.ts:340-346`
+### `src/note-record.ResolveAskInput` — zod-object — `src/note-record.ts:270-276`
 
-Where a note or ask stands after every line of its file is read.
+What closing an ask takes, for `resolveAsk` (an app's `notes.resolve`): `settleNote` to `done`, asks only.
 
-*aliases* `NoteState` `src/note-record.ts:347`
+*aliases* `ResolveAskInput` `src/note-record.ts:277`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `status` | `NoteStatus → src/note-record.NoteStatus` | — | `src/note-record.ts:341` |  |
-| `statusBy` | `z.string().optional()` | — | `src/note-record.ts:343` | The status change that set `status`, when one did. |
-| `answeredBy` | `z.array(z.string())` | — | `src/note-record.ts:345` | Ids of the changes whose `links.answers` names this ask. |
+| `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/note-record.ts:271` |  |
+| `change` | `z.string().optional()` | — | `src/note-record.ts:273` | The change that did the work (linked as `to`). |
+| `because` | `z.string().optional()` | — | `src/note-record.ts:274` |  |
+| `session` | `z.string().optional()` | — | `src/note-record.ts:275` |  |
 
-### `src/note-record.NoteFilter` — zod-object — `src/note-record.ts:375-393`
+### `src/note-record.SnapshotOptions` — interface — `src/note-record.ts:318-323`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `limit` | `?: number` | — | `src/note-record.ts:320` | Keep values whole up to this size (default `NOTE_FULL_LIMIT`). |
+| `context` | `?: number` | — | `src/note-record.ts:322` | Unchanged characters kept either side of a text change (default `NOTE_EXCERPT_CONTEXT`). |
+
+### `src/note-record.ChangeSnapshot` — zod-object — `src/note-record.ts:325-329`
+
+*aliases* `ChangeSnapshot` `src/note-record.ts:330`
+
+| field | type | default | at |
+|---|---|---|---|
+| `before` | `z.unknown().optional()` | — | `src/note-record.ts:326` |
+| `after` | `z.unknown().optional()` | — | `src/note-record.ts:327` |
+| `form` | `NoteForm → src/note-record.NoteForm` | — | `src/note-record.ts:328` |
+
+### `src/note-record.NoteState` — zod-object — `src/note-record.ts:411-421`
+
+Where a record stands after every line of its file is read.
+
+*aliases* `NoteState` `src/note-record.ts:422`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `life` | `LifeState → src/note-record.LifeState` | — | `src/note-record.ts:412` |  |
+| `settledBy` | `z.string().optional()` | — | `src/note-record.ts:414` | The settle line that set `life`, when one did. |
+| `reason` | `z.string().optional()` | — | `src/note-record.ts:416` | That line's words: why. |
+| `to` | `z.string().optional()` | — | `src/note-record.ts:418` | That line's pointer (`links.to`). |
+| `answeredBy` | `z.array(z.string())` | — | `src/note-record.ts:420` | Ids of the changes whose `links.answers` names this record. |
+
+### `src/note-record.NoteFilter` — zod-object — `src/note-record.ts:488-512`
 
 Which records to answer with. Every field is optional and they all have to match.
 
-*aliases* `NoteFilter` `src/note-record.ts:394`
+*aliases* `NoteFilter` `src/note-record.ts:513`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `kind` | `z.union([NoteKind, z.array(NoteKind)]).optional() → src/note-record.NoteKind` | — | `src/note-record.ts:376` |  |
-| `open` | `z.boolean().optional()` | — | `src/note-record.ts:378` | Only asks still open (implies `kind: 'ask'`). |
-| `app` | `z.string().optional()` | — | `src/note-record.ts:379` |  |
-| `entityType` | `z.string().optional()` | — | `src/note-record.ts:380` |  |
-| `entityId` | `z.string().optional()` | — | `src/note-record.ts:382` | Matches `entityId`, or any of `entityIds`. |
-| `field` | `z.string().optional()` | — | `src/note-record.ts:383` |  |
-| `brand` | `z.string().optional()` | — | `src/note-record.ts:384` |  |
-| `project` | `z.string().optional()` | — | `src/note-record.ts:385` |  |
-| `video` | `z.string().optional()` | — | `src/note-record.ts:386` |  |
-| `by` | `z.string().optional()` | — | `src/note-record.ts:387` |  |
-| `since` | `z.string().optional()` | — | `src/note-record.ts:389` | ISO times, inclusive. |
-| `until` | `z.string().optional()` | — | `src/note-record.ts:390` |  |
-| `text` | `z.string().optional()` | — | `src/note-record.ts:392` | A case-insensitive substring of `text`. |
+| `kind` | `z.union([NoteKind, z.array(NoteKind)]).optional() → src/note-record.NoteKind` | — | `src/note-record.ts:489` |  |
+| `state` | `z.union([LifeState, z.array(LifeState)]).optional() → src/note-record.LifeState` | — | `src/note-record.ts:494` | Which life states to answer with. Default: `live` only — unless `history` is on, which answers every state AND the |
+| `history` | `z.boolean().optional()` | — | `src/note-record.ts:495` |  |
+| `open` | `z.boolean().optional()` | — | `src/note-record.ts:497` | Only asks still live (v1's "open asks"; implies `kind: 'ask'`). |
+| `app` | `z.string().optional()` | — | `src/note-record.ts:498` |  |
+| `entityType` | `z.string().optional()` | — | `src/note-record.ts:499` |  |
+| `entityId` | `z.string().optional()` | — | `src/note-record.ts:501` | Matches `entityId`, or any of `entityIds`. |
+| `field` | `z.string().optional()` | — | `src/note-record.ts:502` |  |
+| `brand` | `z.string().optional()` | — | `src/note-record.ts:503` |  |
+| `project` | `z.string().optional()` | — | `src/note-record.ts:504` |  |
+| `video` | `z.string().optional()` | — | `src/note-record.ts:505` |  |
+| `by` | `z.string().optional()` | — | `src/note-record.ts:506` |  |
+| `since` | `z.string().optional()` | — | `src/note-record.ts:508` | ISO times, inclusive. |
+| `until` | `z.string().optional()` | — | `src/note-record.ts:509` |  |
+| `text` | `z.string().optional()` | — | `src/note-record.ts:511` | A case-insensitive substring of `text`. |
 
-### `src/note-record.NoteFilter.kind` — zod-union — `src/note-record.ts:376`
+### `src/note-record.NoteFilter.kind` — zod-union — `src/note-record.ts:489`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `NoteKind` | `NoteKind → src/note-record.NoteKind` | — | `src/note-record.ts:376` |
-| `array` | `z.array(NoteKind) → src/note-record.NoteKind` | — | `src/note-record.ts:376` |
+| `NoteKind` | `NoteKind → src/note-record.NoteKind` | — | `src/note-record.ts:489` |
+| `array` | `z.array(NoteKind) → src/note-record.NoteKind` | — | `src/note-record.ts:489` |
 
-### `src/notes.AddNoteResult` — zod-discriminated-union on `kind` — `src/notes.ts:40-59`
-
-*aliases* `AddNoteResult` `src/notes.ts:60`
+### `src/note-record.NoteFilter.state` — zod-union — `src/note-record.ts:494`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string(), record: NoteRecord }) → src/note-record.NoteRecord` | — | `src/notes.ts:41` |
-| `refused` | `z.object({ kind: z.literal('refused'), /** * `busy`: another writer held the lock past the wait. `not-found` / `not-an-ask` / `already-done…` | — | `src/notes.ts:43` |
+| `LifeState` | `LifeState → src/note-record.LifeState` | — | `src/note-record.ts:494` |
+| `array` | `z.array(LifeState) → src/note-record.LifeState` | — | `src/note-record.ts:494` |
 
-### `src/notes.AddNoteResult[kind=written]` — zod-object — `src/notes.ts:41`
+### `src/notes.AddNoteResult` — zod-discriminated-union on `kind` — `src/notes.ts:44-53`
+
+*aliases* `AddNoteResult` `src/notes.ts:54`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `written` | `z.object({ kind: z.literal('written'), path: z.string(), record: NoteRecord }) → src/note-record.NoteRecord` | — | `src/notes.ts:45` |
+| `refused` | `z.object({ kind: z.literal('refused'), /** `NOTE_REFUSALS`: the suite's names; each app maps them to its own failure codes. */ reason: Note… → src/note-record.NoteRefusal` | — | `src/notes.ts:47` |
+
+### `src/notes.AddNoteResult[kind=written]` — zod-object — `src/notes.ts:45`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/notes.ts:41` |
-| `path` | `z.string()` | — | `src/notes.ts:41` |
-| `record` | `NoteRecord → src/note-record.NoteRecord` | — | `src/notes.ts:41` |
+| `kind` | `z.literal('written')` | — | `src/notes.ts:45` |
+| `path` | `z.string()` | — | `src/notes.ts:45` |
+| `record` | `NoteRecord → src/note-record.NoteRecord` | — | `src/notes.ts:45` |
 
-### `src/notes.AddNoteResult[kind=refused]` — zod-object — `src/notes.ts:42-58`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/notes.ts:43` |  |
-| `reason` | `z.enum(['invalid-input', 'io-error', 'busy', 'not-found', 'not-an-ask', 'already-done'])` | — | `src/notes.ts:48` | `busy`: another writer held the lock past the wait. `not-found` / `not-an-ask` / `already-done`: `resolveAsk` |
-| `path` | `z.string()` | — | `src/notes.ts:56` |  |
-| `message` | `z.string()` | — | `src/notes.ts:57` |  |
-
-### `src/notes.AddNoteOptions` — interface — `src/notes.ts:63-74`
+### `src/notes.AddNoteResult[kind=refused]` — zod-object — `src/notes.ts:46-52`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `createDir` | `?: boolean` | — | `src/notes.ts:65` | Create `dir` first (an app's data folder). A project folder is never created: leave this off for one. |
-| `waitMs` | `?: number` | — | `src/notes.ts:67` | How long to wait for another writer's lock (default 3 s). |
-| `staleMs` | `?: number` | — | `src/notes.ts:69` | A lock older than this is a crashed writer's and is broken (default 10 s). |
-| `now` | `?: Date` | — | `src/notes.ts:71` | The record's time (default now). |
-| `id` | `?: string` | — | `src/notes.ts:73` | The record's id (default `newNoteId()`). |
+| `kind` | `z.literal('refused')` | — | `src/notes.ts:47` |  |
+| `reason` | `NoteRefusal → src/note-record.NoteRefusal` | — | `src/notes.ts:49` | `NOTE_REFUSALS`: the suite's names; each app maps them to its own failure codes. |
+| `path` | `z.string()` | — | `src/notes.ts:50` |  |
+| `message` | `z.string()` | — | `src/notes.ts:51` |  |
 
-### `src/notes.NoteLineProblem` — zod-object — `src/notes.ts:249`
+### `src/notes.AddNoteOptions` — interface — `src/notes.ts:57-68`
 
-*aliases* `NoteLineProblem` `src/notes.ts:250`
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `createDir` | `?: boolean` | — | `src/notes.ts:59` | Create `dir` first (an app's data folder). A project folder is never created: leave this off for one. |
+| `waitMs` | `?: number` | — | `src/notes.ts:61` | How long to wait for another writer's lock (default 3 s). |
+| `staleMs` | `?: number` | — | `src/notes.ts:63` | A lock older than this is a crashed writer's and is broken (default 10 s). |
+| `now` | `?: Date` | — | `src/notes.ts:65` | The record's time (default now). |
+| `id` | `?: string` | — | `src/notes.ts:67` | The record's id (default `newNoteId()`). |
+
+### `src/notes.NoteLineProblem` — zod-object — `src/notes.ts:292`
+
+*aliases* `NoteLineProblem` `src/notes.ts:293`
 
 | field | type | default | at |
 |---|---|---|---|
-| `line` | `z.int().min(1)` | — | `src/notes.ts:249` |
-| `message` | `z.string()` | — | `src/notes.ts:249` |
+| `line` | `z.int().min(1)` | — | `src/notes.ts:292` |
+| `message` | `z.string()` | — | `src/notes.ts:292` |
 
-### `src/notes.NotesRead` — zod-object — `src/notes.ts:252-262`
+### `src/notes.NotesRead` — zod-object — `src/notes.ts:295-310`
 
-*aliases* `NotesRead` `src/notes.ts:263`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `path` | `z.string()` | — | `src/notes.ts:253` |  |
-| `exists` | `z.boolean()` | — | `src/notes.ts:255` | False when there is no notes file. An empty file and no file both have no records: this tells them apart. |
-| `records` | `z.array(NoteRecord) → src/note-record.NoteRecord` | — | `src/notes.ts:257` | Every valid line, in file order. |
-| `invalid` | `z.array(NoteLineProblem) → src/notes.NoteLineProblem` | — | `src/notes.ts:259` | Lines that are not a record: listed, never hidden, never fatal. |
-| `error` | `z.string().optional()` | — | `src/notes.ts:261` | The file exists but could not be read. |
-
-### `src/notes.ScannedNote` — zod-object — `src/notes.ts:293-299`
-
-*aliases* `ScannedNote` `src/notes.ts:300`
+*aliases* `NotesRead` `src/notes.ts:311`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `path` | `z.string()` | — | `src/notes.ts:295` | The notes file the record is in. |
-| `record` | `NoteRecord → src/note-record.NoteRecord` | — | `src/notes.ts:296` |  |
-| `state` | `NoteState.optional() → src/note-record.NoteState` | — | `src/notes.ts:298` | For a note or ask: where it stands now (`noteStates`). |
+| `path` | `z.string()` | — | `src/notes.ts:296` |  |
+| `exists` | `z.boolean()` | — | `src/notes.ts:298` | False when there is no notes file. An empty file and no file both have no records: this tells them apart. |
+| `records` | `z.array(NoteRecord) → src/note-record.NoteRecord` | — | `src/notes.ts:303` | The records the filter answers with, in file order. Default: the `live` ones (settle lines left out). With |
+| `states` | `z.record(z.string(), NoteState) → src/note-record.NoteState` | — | `src/notes.ts:305` | Where every record in the file stands (by id), whatever the filter. |
+| `invalid` | `z.array(NoteLineProblem) → src/notes.NoteLineProblem` | — | `src/notes.ts:307` | Lines that are not a record: listed, never hidden, never fatal. |
+| `error` | `z.string().optional()` | — | `src/notes.ts:309` | The file exists but could not be read. |
 
-### `src/notes.NotesScan` — zod-object — `src/notes.ts:302-310`
+### `src/notes.ScannedNote` — zod-object — `src/notes.ts:356-362`
 
-*aliases* `NotesScan` `src/notes.ts:311`
+*aliases* `ScannedNote` `src/notes.ts:363`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `notes` | `z.array(ScannedNote) → src/notes.ScannedNote` | — | `src/notes.ts:304` | Matching records across every file, oldest first. |
-| `files` | `z.array(z.string())` | — | `src/notes.ts:306` | Every notes file read. |
-| `invalid` | `z.array(NoteLineProblem.extend({ path: z.string() })) → src/notes.NoteLineProblem` | — | `src/notes.ts:307` |  |
-| `errors` | `z.array(z.object({ path: z.string(), message: z.string() }))` | — | `src/notes.ts:309` | Files or folders that could not be read: a scan that missed them says so. |
+| `path` | `z.string()` | — | `src/notes.ts:358` | The notes file the record is in. |
+| `record` | `NoteRecord → src/note-record.NoteRecord` | — | `src/notes.ts:359` |  |
+| `state` | `NoteState.optional() → src/note-record.NoteState` | — | `src/notes.ts:361` | Where the record stands now (`noteStates`); absent on a settle line. |
 
-### `src/notes.NotesScan.invalid[]` — zod-object — `src/notes.ts:307`
+### `src/notes.NotesScan` — zod-object — `src/notes.ts:365-373`
+
+*aliases* `NotesScan` `src/notes.ts:374`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `notes` | `z.array(ScannedNote) → src/notes.ScannedNote` | — | `src/notes.ts:367` | Matching records across every file, oldest first. |
+| `files` | `z.array(z.string())` | — | `src/notes.ts:369` | Every notes file read. |
+| `invalid` | `z.array(NoteLineProblem.extend({ path: z.string() })) → src/notes.NoteLineProblem` | — | `src/notes.ts:370` |  |
+| `errors` | `z.array(z.object({ path: z.string(), message: z.string() }))` | — | `src/notes.ts:372` | Files or folders that could not be read: a scan that missed them says so. |
+
+### `src/notes.NotesScan.invalid[]` — zod-object — `src/notes.ts:370`
 
 *extends* `NoteLineProblem`
 
 | field | type | default | at |
 |---|---|---|---|
-| `line` | `z.int().min(1)` | — | `src/notes.ts:249` |
-| `message` | `z.string()` | — | `src/notes.ts:249` |
-| `path` | `z.string()` | — | `src/notes.ts:307` |
+| `line` | `z.int().min(1)` | — | `src/notes.ts:292` |
+| `message` | `z.string()` | — | `src/notes.ts:292` |
+| `path` | `z.string()` | — | `src/notes.ts:370` |
 
-### `src/notes.NotesScan.errors[]` — zod-object — `src/notes.ts:309`
+### `src/notes.NotesScan.errors[]` — zod-object — `src/notes.ts:372`
 
 | field | type | default | at |
 |---|---|---|---|
-| `path` | `z.string()` | — | `src/notes.ts:309` |
-| `message` | `z.string()` | — | `src/notes.ts:309` |
+| `path` | `z.string()` | — | `src/notes.ts:372` |
+| `message` | `z.string()` | — | `src/notes.ts:372` |
 
-### `src/notes.ScanNotesOptions` — interface — `src/notes.ts:313-316`
+### `src/notes.ScanNotesOptions` — interface — `src/notes.ts:376-379`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `maxDepth` | `?: number` | — | `src/notes.ts:315` | How many folder levels below each root to look (default 4: estate → brand → archived → bucket → project). |
+| `maxDepth` | `?: number` | — | `src/notes.ts:378` | How many folder levels below each root to look (default 4: estate → brand → archived → bucket → project). |
 
 ### `src/open-args.OpenContext` — zod-object — `src/open-args.ts:11-23`
 
@@ -4273,11 +4328,11 @@ The census found these top-level declarations and the extractor did not mirror t
 | family | count | declarations |
 |---|---|---|
 | object constant | 8 | `src/classify.LAYOUT_DIRS` `src/classify.ts:310`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
-| array constant | 6 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:33`<br>`src/publish.READY_STATES` `src/publish.ts:68`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:70`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
+| array constant | 7 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/note-record.NOTE_REFUSALS` `src/note-record.ts:476`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:33`<br>`src/publish.READY_STATES` `src/publish.ts:68`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:70`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
 | class | 6 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:811`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:220`<br>`src/youtube.YouTubeReader` `src/youtube.ts:236` |
 | const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:187`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
-| utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 2 | `src/notes.Refused` `src/notes.ts:61`<br>`src/youtube.Thumbs` `src/youtube.ts:231` |
+| utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 2 | `src/notes.Refused` `src/notes.ts:55`<br>`src/youtube.Thumbs` `src/youtube.ts:231` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 | union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:206` |
 

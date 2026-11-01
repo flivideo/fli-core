@@ -6,8 +6,16 @@ import { issuesOf } from './results.js';
  * fli-notes (brief `flivideo/docs/briefs/fli-notes-suite-record-2026-10-31.md`): a lasting record of what a person or
  * agent **noticed** (`note`), **asked for** (`ask`) or **changed** (`change`), attached to anything in the Fli apps and
  * kept forever. One JSON record per line in `fli.notes.jsonl`: in the project folder for notes on a project, in the
- * app's own data folder for notes on the app itself. Append-only — history is never rewritten; a status change is a new
- * `change` line that targets the old record's id.
+ * app's own data folder for notes on the app itself. Append-only — history is never rewritten.
+ *
+ * Life states (v0.28.0, brief `fli-notes-v2-quiet-capture-and-lab-2026-11-01.md` §3): every record is `live` until a
+ * settle line says otherwise — `done`, `used` (fed into something: `links.to` says what), `stale` (no longer true:
+ * `text` says why) or `replaced` (a newer record covers it: `links.to` points at it). A settle line is a `change` that
+ * targets the settled record (`entityType: 'note'`, `field: 'state'`). Readers answer `live` by default; history is an
+ * option. v1 files still read: an ask's `open` is `live`, `done` is `done`, a note's `kept` is `live`.
+ *
+ * The field names are app-neutral on purpose (no video words), so the record can later move to a shared core. `where`
+ * keeps v1's `brand` / `project` / `video` and takes any other string key.
  *
  * Rulings (David 2026-10-31, not to be re-opened): no thumbs or ratings, three kinds only, the app writes `change`
  * itself at the door, kept apart from decisions (never in `fli.status.json`).
@@ -26,9 +34,16 @@ export type NoteKind = z.infer<typeof NoteKind>;
 export const NoteChannel = z.enum(['ui', 'chat', 'voice', 'agent']);
 export type NoteChannel = z.infer<typeof NoteChannel>;
 
-/** `kept` (a note) · `open` → `done` (an ask). A `change` has no status. */
+/** v1's written status (schema 1 lines only): `kept` (a note) · `open` / `done` (an ask). Superseded by `LifeState`. */
 export const NoteStatus = z.enum(['kept', 'open', 'done']);
 export type NoteStatus = z.infer<typeof NoteStatus>;
+
+/**
+ * Where a record stands. `live`: relevant, agents read it (every record starts here). `done`: implemented. `used`:
+ * already fed into something. `stale`: no longer true. `replaced`: a newer record covers it.
+ */
+export const LifeState = z.enum(['live', 'done', 'used', 'stale', 'replaced']);
+export type LifeState = z.infer<typeof LifeState>;
 
 /** `one` entity (`entityId`), `many` (`entityIds`), or an `aggregate` described by a query in words (`query`). */
 export const NoteScope = z.enum(['one', 'many', 'aggregate']);
@@ -66,12 +81,17 @@ export const NoteTarget = z
   });
 export type NoteTarget = z.infer<typeof NoteTarget>;
 
-/** Where in the estate. All optional: a note on an app itself has none. */
-export const NoteWhere = z.object({
-  brand: Name.optional(),
-  project: Name.optional(),
-  video: Name.optional(),
-});
+/**
+ * Where the target sits. All optional: a note on an app itself has none. `brand` / `project` / `video` are the keys the
+ * Fli apps use; any other app adds its own string keys (`where: { workspace: 'acme' }`).
+ */
+export const NoteWhere = z
+  .object({
+    brand: Name.optional(),
+    project: Name.optional(),
+    video: Name.optional(),
+  })
+  .catchall(z.string());
 export type NoteWhere = z.infer<typeof NoteWhere>;
 
 /** What produced the "before" (the prompt, skill, model and version), where known. */
@@ -91,8 +111,13 @@ export const NoteLinks = z.looseObject({
   commit: Name.optional(),
   /** On a `change`: the ask it fulfilled. */
   answers: Name.optional(),
-  /** The record this one follows on from (on a status change: the change that did the work). */
+  /** The record this one follows on from (v1's resolve: the change that did the work). */
   follows: Name.optional(),
+  /**
+   * On a settle line: what the record went to — the record that `replaced` it, what it was `used` in (a prompt
+   * version, a page), or the change that made it `done`.
+   */
+  to: Name.optional(),
 });
 export type NoteLinks = z.infer<typeof NoteLinks>;
 
@@ -121,13 +146,14 @@ export type NoteExcerpt = z.infer<typeof NoteExcerpt>;
 
 export const NoteRecord = z
   .object({
-    schema: z.literal(1),
+    /** 1: v1 (carries `status`). 2: v0.28.0 on (no `status`; the life state is folded from settle lines). */
+    schema: z.union([z.literal(1), z.literal(2)]),
     id: Name,
     at: z.iso.datetime({ offset: true }),
     by: PrincipalName,
     kind: NoteKind,
     channel: NoteChannel,
-    /** Present on `note` (`kept`) and `ask` (`open` when written); absent on `change`. */
+    /** Schema 1 only: `kept` on a note, `open` on an ask. Never written from v0.28.0. */
     status: NoteStatus.optional(),
     where: NoteWhere.default({}),
     target: NoteTarget,
@@ -143,12 +169,17 @@ export const NoteRecord = z
   .superRefine((record, ctx) => {
     const issue = (path: string, message: string) =>
       ctx.addIssue({ code: 'custom', path: [path], message });
-    if (record.kind === 'change') {
-      if (record.status !== undefined) issue('status', 'a change has no status');
-    } else {
+    if (record.kind === 'change' || record.schema === 2) {
+      if (record.status !== undefined) {
+        issue('status', record.kind === 'change' ? 'a change has no status' : 'status is v1 only');
+      }
+    }
+    if (record.kind !== 'change') {
       if (record.text === undefined) issue('text', `a ${record.kind} needs its words`);
       const want = record.kind === 'note' ? 'kept' : 'open';
-      if (record.status !== want) issue('status', `a ${record.kind} is written "${want}"`);
+      if (record.schema === 1 && record.status !== want) {
+        issue('status', `a v1 ${record.kind} is written "${want}"`);
+      }
       for (const key of ['before', 'after', 'form'] as const) {
         if (record[key] !== undefined) issue(key, `only a change carries ${key}`);
       }
@@ -195,10 +226,50 @@ export const ChangeInput = z.object({
 });
 export type ChangeInput = z.input<typeof ChangeInput>;
 
-/** What closing an ask takes, for `resolveAsk` (and an app's `notes.resolve`). */
+/**
+ * What settling a record takes, for `settleNote` (and an app's settle verb). `reason` is the human's words (stored as
+ * the settle line's `text`); `to` is the pointer (stored as `links.to`). `stale` needs a reason; `used` and `replaced`
+ * need a `to`. `live` re-opens.
+ */
+export const SettleInput = z
+  .object({
+    by: PrincipalName,
+    state: LifeState,
+    reason: z.string().optional(),
+    to: z.string().optional(),
+    session: z.string().optional(),
+  })
+  .superRefine((input, ctx) => {
+    const reason = input.reason?.trim();
+    const to = input.to?.trim();
+    if (input.state === 'stale' && !reason) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['reason'],
+        message: 'stale needs a reason: why is it no longer true?',
+      });
+    }
+    if (input.state === 'used' && !to) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['to'],
+        message: 'used needs `to`: what was it fed into?',
+      });
+    }
+    if (input.state === 'replaced' && !to) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['to'],
+        message: 'replaced needs `to`: the record that covers it',
+      });
+    }
+  });
+export type SettleInput = z.input<typeof SettleInput>;
+
+/** What closing an ask takes, for `resolveAsk` (an app's `notes.resolve`): `settleNote` to `done`, asks only. */
 export const ResolveAskInput = z.object({
   by: PrincipalName,
-  /** The change that did the work (linked as `follows`). */
+  /** The change that did the work (linked as `to`). */
   change: z.string().optional(),
   because: z.string().optional(),
   session: z.string().optional(),
@@ -216,15 +287,13 @@ export function noteChannelOf(by: PrincipalName): NoteChannel {
 /** Build a valid record from an input, or throw with the issues. Pure: the id and time are passed in. */
 export function noteRecordOf(input: NoteInput, id: string, at: string): NoteRecord {
   const i = NoteInput.parse(input);
-  const status = i.kind === 'note' ? 'kept' : i.kind === 'ask' ? 'open' : undefined;
   const parsed = NoteRecord.safeParse({
-    schema: 1,
+    schema: 2,
     id,
     at,
     by: i.by,
     kind: i.kind,
     channel: i.channel ?? noteChannelOf(i.by),
-    ...(status ? { status } : {}),
     where: i.where ?? {},
     target: i.target,
     ...(i.text !== undefined ? { text: i.text } : {}),
@@ -333,48 +402,98 @@ export function snapshotChange(
 
 // ── reading ─────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-/** A status change targets the note it changes with this entity type and `field: 'status'`. */
+/** A settle line targets the record it settles with this entity type and `field: 'state'` (v1: `'status'`). */
 export const NOTE_ENTITY = 'note';
+/** The `target.field` of a settle line. */
+export const SETTLE_FIELD = 'state';
 
-/** Where a note or ask stands after every line of its file is read. */
+/** Where a record stands after every line of its file is read. */
 export const NoteState = z.object({
-  status: NoteStatus,
-  /** The status change that set `status`, when one did. */
-  statusBy: z.string().optional(),
-  /** Ids of the changes whose `links.answers` names this ask. */
+  life: LifeState,
+  /** The settle line that set `life`, when one did. */
+  settledBy: z.string().optional(),
+  /** That line's words: why. */
+  reason: z.string().optional(),
+  /** That line's pointer (`links.to`). */
+  to: z.string().optional(),
+  /** Ids of the changes whose `links.answers` names this record. */
   answeredBy: z.array(z.string()),
 });
 export type NoteState = z.infer<typeof NoteState>;
 
-const isStatusChange = (r: NoteRecord): boolean =>
-  r.kind === 'change' && r.target.entityType === NOTE_ENTITY && r.target.field === 'status';
+/** True for a settle line (v0.28.0 `field: 'state'`, or v1's ask status change `field: 'status'`). */
+export function isSettleLine(r: NoteRecord): boolean {
+  return (
+    r.kind === 'change' &&
+    r.target.entityType === NOTE_ENTITY &&
+    (r.target.field === SETTLE_FIELD || r.target.field === 'status') &&
+    r.target.entityId !== undefined
+  );
+}
 
-/** Fold a file's lines into the state of each note and ask (by id). Later lines win; unknown targets are ignored. */
+/** A settle line's new state; v1's `open` → `live`, `kept` → `live`, `done` → `done`. */
+function lifeOf(after: unknown): LifeState | null {
+  if (after === 'open' || after === 'kept') return 'live';
+  const parsed = LifeState.safeParse(after);
+  return parsed.success ? parsed.data : null;
+}
+
+/**
+ * Fold a file's lines into the state of each record (by id; settle lines themselves get none). Every record starts
+ * `live`; settle lines apply oldest first, so the latest wins. A settle line for an id not in the file is ignored.
+ */
 export function noteStates(records: readonly NoteRecord[]): Map<string, NoteState> {
   const states = new Map<string, NoteState>();
   for (const r of records) {
-    if (r.kind !== 'change' && r.status) states.set(r.id, { status: r.status, answeredBy: [] });
+    if (!isSettleLine(r)) states.set(r.id, { life: 'live', answeredBy: [] });
   }
-  for (const r of [...records].sort((x, y) => x.at.localeCompare(y.at))) {
+  for (const r of [...records].sort((x, y) => Date.parse(x.at) - Date.parse(y.at))) {
     if (r.kind !== 'change') continue;
     const answered = r.links?.answers;
     if (answered) states.get(answered)?.answeredBy.push(r.id);
-    if (isStatusChange(r) && r.target.entityId) {
-      const state = states.get(r.target.entityId);
-      const next = NoteStatus.safeParse(r.after);
-      if (state && next.success) {
-        state.status = next.data;
-        state.statusBy = r.id;
-      }
-    }
+    if (!isSettleLine(r)) continue;
+    const state = states.get(r.target.entityId as string);
+    const life = lifeOf(r.after);
+    if (!state || !life) continue;
+    state.life = life;
+    state.settledBy = r.id;
+    const to = r.links?.to ?? r.links?.follows;
+    if (r.text !== undefined) state.reason = r.text;
+    else delete state.reason;
+    if (to !== undefined) state.to = to;
+    else delete state.to;
   }
   return states;
 }
 
+/**
+ * Why a notes write was refused — the suite's names, returned as `reason`. Each app maps them onto its own failure
+ * codes (`defineFailureCodes`); the name is canonical, so fli-core carries no numbers for them.
+ * `notes-busy`: another writer held the lock past the wait. `note-not-found`: no such record in the file (settle lines
+ * cannot be settled). `not-an-ask`: `resolveAsk` on a note or change. `already-settled`: the record is already in that
+ * state (v1's `already-done`).
+ */
+export const NOTE_REFUSALS = [
+  'invalid-input',
+  'io-error',
+  'notes-busy',
+  'note-not-found',
+  'not-an-ask',
+  'already-settled',
+] as const;
+export const NoteRefusal = z.enum(NOTE_REFUSALS);
+export type NoteRefusal = z.infer<typeof NoteRefusal>;
+
 /** Which records to answer with. Every field is optional and they all have to match. */
 export const NoteFilter = z.object({
   kind: z.union([NoteKind, z.array(NoteKind)]).optional(),
-  /** Only asks still open (implies `kind: 'ask'`). */
+  /**
+   * Which life states to answer with. Default: `live` only — unless `history` is on, which answers every state AND the
+   * settle lines themselves (the whole file, in order).
+   */
+  state: z.union([LifeState, z.array(LifeState)]).optional(),
+  history: z.boolean().optional(),
+  /** Only asks still live (v1's "open asks"; implies `kind: 'ask'`). */
   open: z.boolean().optional(),
   app: z.string().optional(),
   entityType: z.string().optional(),
@@ -393,14 +512,23 @@ export const NoteFilter = z.object({
 });
 export type NoteFilter = z.infer<typeof NoteFilter>;
 
-/** True when `record` passes `filter`. `state` is the record's folded state (needed for `open`). Pure. */
+/**
+ * True when `record` passes `filter`. `state` is the record's folded state (`noteStates`); without one a record counts
+ * as `live`. Settle lines pass only with `history`. Pure.
+ */
 export function matchesNote(record: NoteRecord, filter: NoteFilter, state?: NoteState): boolean {
   const f = filter;
   const t = record.target;
-  if (f.kind !== undefined && ![f.kind].flat().includes(record.kind)) return false;
-  if (f.open && (record.kind !== 'ask' || (state?.status ?? record.status) !== 'open')) {
+  const life = state?.life ?? 'live';
+  if (isSettleLine(record)) {
+    if (!f.history || f.state !== undefined || f.open) return false;
+  } else if (f.state !== undefined) {
+    if (![f.state].flat().includes(life)) return false;
+  } else if (!f.history && life !== 'live') {
     return false;
   }
+  if (f.kind !== undefined && ![f.kind].flat().includes(record.kind)) return false;
+  if (f.open && (record.kind !== 'ask' || life !== 'live')) return false;
   if (f.app !== undefined && t.app !== f.app) return false;
   if (f.entityType !== undefined && t.entityType !== f.entityType) return false;
   if (f.entityId !== undefined && t.entityId !== f.entityId && !t.entityIds?.includes(f.entityId)) {

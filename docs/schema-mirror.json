@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 461,
+    "declared": 468,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -115,11 +115,11 @@
         "not_schema_bearing": 0
       },
       "src/note-record.ts": {
-        "declared": 35,
+        "declared": 42,
         "gaps": 0,
-        "mirrored": 35,
-        "not_read": 0,
-        "not_schema_bearing": 4
+        "mirrored": 41,
+        "not_read": 1,
+        "not_schema_bearing": 5
       },
       "src/notes.ts": {
         "declared": 13,
@@ -263,13 +263,13 @@
       }
     },
     "gaps": 22,
-    "mirrored": 405,
-    "not_read": 34,
-    "not_schema_bearing": 36,
+    "mirrored": 411,
+    "not_read": 35,
+    "not_schema_bearing": 37,
     "not_schema_bearing_by_family": {
       "function": 1,
       "function type": 1,
-      "literal constant": 34
+      "literal constant": 35
     }
   },
   "closed_sets": [
@@ -1895,14 +1895,14 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 23
+            "line": 31
           },
           "name": "NoteKind"
         }
       ],
       "anchor": {
         "file": "src/note-record.ts",
-        "line": 22
+        "line": 30
       },
       "authority": "`z.enum` `NoteKind` - a single declaring symbol",
       "doc": "`note`: kept, never nags. `ask`: a to-do until done. `change`: written by the app when a record changes.",
@@ -1912,21 +1912,21 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 22
+            "line": 30
           },
           "value": "note"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 22
+            "line": 30
           },
           "value": "ask"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 22
+            "line": 30
           },
           "value": "change"
         }
@@ -1937,14 +1937,14 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 27
+            "line": 35
           },
           "name": "NoteChannel"
         }
       ],
       "anchor": {
         "file": "src/note-record.ts",
-        "line": 26
+        "line": 34
       },
       "authority": "`z.enum` `NoteChannel` - a single declaring symbol",
       "doc": "How the words arrived.",
@@ -1954,28 +1954,28 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 26
+            "line": 34
           },
           "value": "ui"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 26
+            "line": 34
           },
           "value": "chat"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 26
+            "line": 34
           },
           "value": "voice"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 26
+            "line": 34
           },
           "value": "agent"
         }
@@ -1986,38 +1986,38 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 31
+            "line": 39
           },
           "name": "NoteStatus"
         }
       ],
       "anchor": {
         "file": "src/note-record.ts",
-        "line": 30
+        "line": 38
       },
       "authority": "`z.enum` `NoteStatus` - a single declaring symbol",
-      "doc": "`kept` (a note) \u00b7 `open` \u2192 `done` (an ask). A `change` has no status.",
+      "doc": "v1's written status (schema 1 lines only): `kept` (a note) \u00b7 `open` / `done` (an ask). Superseded by `LifeState`.",
       "grade": "declared",
       "id": "src/note-record.NoteStatus",
       "members": [
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 30
+            "line": 38
           },
           "value": "kept"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 30
+            "line": 38
           },
           "value": "open"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 30
+            "line": 38
           },
           "value": "done"
         }
@@ -2028,14 +2028,70 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 35
+            "line": 46
+          },
+          "name": "LifeState"
+        }
+      ],
+      "anchor": {
+        "file": "src/note-record.ts",
+        "line": 45
+      },
+      "authority": "`z.enum` `LifeState` - a single declaring symbol",
+      "doc": "Where a record stands. `live`: relevant, agents read it (every record starts here). `done`: implemented. `used`:",
+      "grade": "declared",
+      "id": "src/note-record.LifeState",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 45
+          },
+          "value": "live"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 45
+          },
+          "value": "done"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 45
+          },
+          "value": "used"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 45
+          },
+          "value": "stale"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 45
+          },
+          "value": "replaced"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 50
           },
           "name": "NoteScope"
         }
       ],
       "anchor": {
         "file": "src/note-record.ts",
-        "line": 34
+        "line": 49
       },
       "authority": "`z.enum` `NoteScope` - a single declaring symbol",
       "doc": "`one` entity (`entityId`), `many` (`entityIds`), or an `aggregate` described by a query in words (`query`).",
@@ -2045,21 +2101,21 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 34
+            "line": 49
           },
           "value": "one"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 34
+            "line": 49
           },
           "value": "many"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 34
+            "line": 49
           },
           "value": "aggregate"
         }
@@ -2070,14 +2126,14 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 105
+            "line": 130
           },
           "name": "NoteForm"
         }
       ],
       "anchor": {
         "file": "src/note-record.ts",
-        "line": 104
+        "line": 129
       },
       "authority": "`z.enum` `NoteForm` - a single declaring symbol",
       "doc": "How `before` / `after` are held on a `change`. `full`: the values themselves. `excerpt`: two text excerpts",
@@ -2087,21 +2143,21 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 104
+            "line": 129
           },
           "value": "full"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 104
+            "line": 129
           },
           "value": "excerpt"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 104
+            "line": 129
           },
           "value": "keys"
         }
@@ -2109,9 +2165,96 @@
     },
     {
       "anchor": {
-        "end_line": 59,
+        "file": "src/note-record.ts",
+        "line": 150
+      },
+      "authority": "`z.union` of `z.literal`s `schema` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/note-record.NoteRecord.schema",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 150
+          },
+          "value": 1
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 150
+          },
+          "value": 2
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 485
+          },
+          "name": "NoteRefusal"
+        }
+      ],
+      "anchor": {
+        "file": "src/note-record.ts",
+        "line": 484
+      },
+      "authority": "`z.enum` `NoteRefusal` - members read through `NOTE_REFUSALS` (src/note-record.NOTE_REFUSALS) - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/note-record.NoteRefusal",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 477
+          },
+          "value": "invalid-input"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 478
+          },
+          "value": "io-error"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 479
+          },
+          "value": "notes-busy"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 480
+          },
+          "value": "note-not-found"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 481
+          },
+          "value": "not-an-ask"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 482
+          },
+          "value": "already-settled"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 53,
         "file": "src/notes.ts",
-        "line": 40
+        "line": 44
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `AddNoteResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -2120,69 +2263,16 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 41
+            "line": 45
           },
           "value": "written"
         },
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 43
+            "line": 47
           },
           "value": "refused"
-        }
-      ]
-    },
-    {
-      "anchor": {
-        "file": "src/notes.ts",
-        "line": 48
-      },
-      "authority": "`z.enum` `reason` - a single declaring symbol",
-      "grade": "declared",
-      "id": "src/notes.AddNoteResult[kind=refused].reason",
-      "members": [
-        {
-          "anchor": {
-            "file": "src/notes.ts",
-            "line": 49
-          },
-          "value": "invalid-input"
-        },
-        {
-          "anchor": {
-            "file": "src/notes.ts",
-            "line": 50
-          },
-          "value": "io-error"
-        },
-        {
-          "anchor": {
-            "file": "src/notes.ts",
-            "line": 51
-          },
-          "value": "busy"
-        },
-        {
-          "anchor": {
-            "file": "src/notes.ts",
-            "line": 52
-          },
-          "value": "not-found"
-        },
-        {
-          "anchor": {
-            "file": "src/notes.ts",
-            "line": 53
-          },
-          "value": "not-an-ask"
-        },
-        {
-          "anchor": {
-            "file": "src/notes.ts",
-            "line": 54
-          },
-          "value": "already-done"
         }
       ]
     },
@@ -4100,7 +4190,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-10-31T16:14:55+00:00",
+  "generated": "2026-11-01T00:46:22+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -10305,7 +10395,7 @@
     {
       "anchor": {
         "file": "src/note-record.ts",
-        "line": 37
+        "line": 52
       },
       "bases": [],
       "doc": null,
@@ -10321,15 +10411,15 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 67
+            "line": 82
           },
           "name": "NoteTarget"
         }
       ],
       "anchor": {
-        "end_line": 66,
+        "end_line": 81,
         "file": "src/note-record.ts",
-        "line": 43
+        "line": 58
       },
       "bases": [],
       "doc": "What the record is about. Plain strings, synthetic keys allowed (`entityType: 'beat'`, `entityId: 'd13/beat-4'`).",
@@ -10338,7 +10428,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 46
+            "line": 61
           },
           "default": null,
           "doc": "The app the target lives in (`flistudio`, `flicut`).",
@@ -10348,7 +10438,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 47
+            "line": 62
           },
           "default": null,
           "name": "entityType",
@@ -10357,7 +10447,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 48
+            "line": 63
           },
           "default": "'one'",
           "name": "scope",
@@ -10366,7 +10456,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 49
+            "line": 64
           },
           "default": null,
           "name": "entityId",
@@ -10375,7 +10465,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 50
+            "line": 65
           },
           "default": null,
           "name": "entityIds",
@@ -10384,7 +10474,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 52
+            "line": 67
           },
           "default": null,
           "doc": "For `aggregate`: the query, described (\"every StoryPilot script in v-appydave\").",
@@ -10394,7 +10484,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 53
+            "line": 68
           },
           "default": null,
           "name": "field",
@@ -10403,7 +10493,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 54
+            "line": 69
           },
           "default": null,
           "name": "region",
@@ -10414,7 +10504,7 @@
       "id": "src/note-record.NoteTarget",
       "kind": "zod-object",
       "refinements": [
-        "superRefine at line 56"
+        "superRefine at line 71"
       ]
     },
     {
@@ -10422,24 +10512,24 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 75
+            "line": 95
           },
           "name": "NoteWhere"
         }
       ],
       "anchor": {
-        "end_line": 74,
+        "end_line": 94,
         "file": "src/note-record.ts",
-        "line": 70
+        "line": 88
       },
       "bases": [],
-      "doc": "Where in the estate. All optional: a note on an app itself has none.",
+      "doc": "Where the target sits. All optional: a note on an app itself has none. `brand` / `project` / `video` are the keys the",
       "exported": true,
       "fields": [
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 71
+            "line": 90
           },
           "default": null,
           "name": "brand",
@@ -10448,7 +10538,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 72
+            "line": 91
           },
           "default": null,
           "name": "project",
@@ -10457,7 +10547,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 73
+            "line": 92
           },
           "default": null,
           "name": "video",
@@ -10473,15 +10563,15 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 84
+            "line": 104
           },
           "name": "NoteProducer"
         }
       ],
       "anchor": {
-        "end_line": 83,
+        "end_line": 103,
         "file": "src/note-record.ts",
-        "line": 78
+        "line": 98
       },
       "bases": [],
       "doc": "What produced the \"before\" (the prompt, skill, model and version), where known.",
@@ -10490,7 +10580,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 79
+            "line": 99
           },
           "default": null,
           "name": "prompt",
@@ -10499,7 +10589,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 80
+            "line": 100
           },
           "default": null,
           "name": "skill",
@@ -10508,7 +10598,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 81
+            "line": 101
           },
           "default": null,
           "name": "model",
@@ -10517,7 +10607,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 82
+            "line": 102
           },
           "default": null,
           "name": "version",
@@ -10533,15 +10623,15 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 97
+            "line": 122
           },
           "name": "NoteLinks"
         }
       ],
       "anchor": {
-        "end_line": 96,
+        "end_line": 121,
         "file": "src/note-record.ts",
-        "line": 86
+        "line": 106
       },
       "bases": [],
       "doc": null,
@@ -10550,7 +10640,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 88
+            "line": 108
           },
           "default": null,
           "doc": "The Claude Code session id the words or the change came from.",
@@ -10560,7 +10650,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 90
+            "line": 110
           },
           "default": null,
           "doc": "A Captain's Log capture code (`B535`).",
@@ -10570,7 +10660,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 91
+            "line": 111
           },
           "default": null,
           "name": "commit",
@@ -10579,7 +10669,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 93
+            "line": 113
           },
           "default": null,
           "doc": "On a `change`: the ask it fulfilled.",
@@ -10589,11 +10679,21 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 95
+            "line": 115
           },
           "default": null,
-          "doc": "The record this one follows on from (on a status change: the change that did the work).",
+          "doc": "The record this one follows on from (v1's resolve: the change that did the work).",
           "name": "follows",
+          "type": "Name.optional() \u2192 src/note-record.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 120
+          },
+          "default": null,
+          "doc": "On a settle line: what the record went to \u2014 the record that `replaced` it, what it was `used` in (a prompt",
+          "name": "to",
           "type": "Name.optional() \u2192 src/note-record.Name"
         }
       ],
@@ -10606,15 +10706,15 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 120
+            "line": 145
           },
           "name": "NoteExcerpt"
         }
       ],
       "anchor": {
-        "end_line": 119,
+        "end_line": 144,
         "file": "src/note-record.ts",
-        "line": 108
+        "line": 133
       },
       "bases": [],
       "doc": "The words around a change, kept because paragraph numbers move. Offsets are in UTF-16 units of the full text.",
@@ -10623,7 +10723,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 109
+            "line": 134
           },
           "default": null,
           "name": "text",
@@ -10632,7 +10732,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 111
+            "line": 136
           },
           "default": null,
           "doc": "Where `text` starts in the full value.",
@@ -10642,7 +10742,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 113
+            "line": 138
           },
           "default": null,
           "doc": "The 1-based line the changed part starts on, in the full value.",
@@ -10652,7 +10752,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 115
+            "line": 140
           },
           "default": null,
           "doc": "The full value's length.",
@@ -10662,7 +10762,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 117
+            "line": 142
           },
           "default": null,
           "doc": "The changed part, within `text`: `[from, to)`.",
@@ -10672,7 +10772,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 118
+            "line": 143
           },
           "default": null,
           "name": "to",
@@ -10688,15 +10788,15 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 157
+            "line": 188
           },
           "name": "NoteRecord"
         }
       ],
       "anchor": {
-        "end_line": 156,
+        "end_line": 187,
         "file": "src/note-record.ts",
-        "line": 122
+        "line": 147
       },
       "bases": [],
       "doc": null,
@@ -10705,16 +10805,17 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 124
+            "line": 150
           },
           "default": null,
+          "doc": "1: v1 (carries `status`). 2: v0.28.0 on (no `status`; the life state is folded from settle lines).",
           "name": "schema",
-          "type": "z.literal(1)"
+          "type": "z.union([z.literal(1), z.literal(2)])"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 125
+            "line": 151
           },
           "default": null,
           "name": "id",
@@ -10723,7 +10824,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 126
+            "line": 152
           },
           "default": null,
           "name": "at",
@@ -10732,7 +10833,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 127
+            "line": 153
           },
           "default": null,
           "name": "by",
@@ -10741,7 +10842,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 128
+            "line": 154
           },
           "default": null,
           "name": "kind",
@@ -10750,7 +10851,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 129
+            "line": 155
           },
           "default": null,
           "name": "channel",
@@ -10759,17 +10860,17 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 131
+            "line": 157
           },
           "default": null,
-          "doc": "Present on `note` (`kept`) and `ask` (`open` when written); absent on `change`.",
+          "doc": "Schema 1 only: `kept` on a note, `open` on an ask. Never written from v0.28.0.",
           "name": "status",
           "type": "NoteStatus.optional() \u2192 src/note-record.NoteStatus"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 132
+            "line": 158
           },
           "default": "{}",
           "name": "where",
@@ -10778,7 +10879,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 133
+            "line": 159
           },
           "default": null,
           "name": "target",
@@ -10787,7 +10888,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 135
+            "line": 161
           },
           "default": null,
           "doc": "The human's words, verbatim \u2014 the most valuable field. On a `change`: the `because`, when one was given.",
@@ -10797,7 +10898,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 136
+            "line": 162
           },
           "default": null,
           "name": "before",
@@ -10806,7 +10907,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 137
+            "line": 163
           },
           "default": null,
           "name": "after",
@@ -10815,7 +10916,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 138
+            "line": 164
           },
           "default": null,
           "name": "form",
@@ -10824,7 +10925,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 139
+            "line": 165
           },
           "default": null,
           "name": "producer",
@@ -10833,7 +10934,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 140
+            "line": 166
           },
           "default": null,
           "name": "links",
@@ -10842,7 +10943,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 141
+            "line": 167
           },
           "default": null,
           "name": "meta",
@@ -10853,7 +10954,7 @@
       "id": "src/note-record.NoteRecord",
       "kind": "zod-object",
       "refinements": [
-        "superRefine at line 143"
+        "superRefine at line 169"
       ]
     },
     {
@@ -10861,15 +10962,15 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 177
+            "line": 208
           },
           "name": "NoteInput"
         }
       ],
       "anchor": {
-        "end_line": 176,
+        "end_line": 207,
         "file": "src/note-record.ts",
-        "line": 163
+        "line": 194
       },
       "bases": [],
       "doc": "What a caller hands `addNote`: the record without `schema`, `id`, `at` and `status` (the helper fills them).",
@@ -10878,7 +10979,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 164
+            "line": 195
           },
           "default": null,
           "name": "by",
@@ -10887,7 +10988,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 165
+            "line": 196
           },
           "default": null,
           "name": "kind",
@@ -10896,7 +10997,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 166
+            "line": 197
           },
           "default": null,
           "name": "channel",
@@ -10905,7 +11006,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 167
+            "line": 198
           },
           "default": null,
           "name": "where",
@@ -10914,7 +11015,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 168
+            "line": 199
           },
           "default": null,
           "name": "target",
@@ -10923,7 +11024,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 169
+            "line": 200
           },
           "default": null,
           "name": "text",
@@ -10932,7 +11033,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 170
+            "line": 201
           },
           "default": null,
           "name": "before",
@@ -10941,7 +11042,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 171
+            "line": 202
           },
           "default": null,
           "name": "after",
@@ -10950,7 +11051,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 172
+            "line": 203
           },
           "default": null,
           "name": "form",
@@ -10959,7 +11060,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 173
+            "line": 204
           },
           "default": null,
           "name": "producer",
@@ -10968,7 +11069,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 174
+            "line": 205
           },
           "default": null,
           "name": "links",
@@ -10977,7 +11078,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 175
+            "line": 206
           },
           "default": null,
           "name": "meta",
@@ -10993,15 +11094,15 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 196
+            "line": 227
           },
           "name": "ChangeInput"
         }
       ],
       "anchor": {
-        "end_line": 195,
+        "end_line": 226,
         "file": "src/note-record.ts",
-        "line": 180
+        "line": 211
       },
       "bases": [],
       "doc": "What a write command knows at the door, for `logChange`.",
@@ -11010,7 +11111,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 181
+            "line": 212
           },
           "default": null,
           "name": "by",
@@ -11019,7 +11120,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 182
+            "line": 213
           },
           "default": null,
           "name": "target",
@@ -11028,7 +11129,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 183
+            "line": 214
           },
           "default": null,
           "name": "where",
@@ -11037,7 +11138,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 184
+            "line": 215
           },
           "default": null,
           "name": "before",
@@ -11046,7 +11147,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 185
+            "line": 216
           },
           "default": null,
           "name": "after",
@@ -11055,7 +11156,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 187
+            "line": 218
           },
           "default": null,
           "doc": "The human's words for why, verbatim. Missing \u2192 still logged, just no why.",
@@ -11065,7 +11166,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 189
+            "line": 220
           },
           "default": null,
           "doc": "The Claude Code session id.",
@@ -11075,7 +11176,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 191
+            "line": 222
           },
           "default": null,
           "doc": "The ask this change fulfils (`links.answers`).",
@@ -11085,7 +11186,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 192
+            "line": 223
           },
           "default": null,
           "name": "producer",
@@ -11094,7 +11195,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 193
+            "line": 224
           },
           "default": null,
           "name": "links",
@@ -11103,7 +11204,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 194
+            "line": 225
           },
           "default": null,
           "name": "meta",
@@ -11119,24 +11220,24 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 206
+            "line": 267
           },
-          "name": "ResolveAskInput"
+          "name": "SettleInput"
         }
       ],
       "anchor": {
-        "end_line": 205,
+        "end_line": 266,
         "file": "src/note-record.ts",
-        "line": 199
+        "line": 234
       },
       "bases": [],
-      "doc": "What closing an ask takes, for `resolveAsk` (and an app's `notes.resolve`).",
+      "doc": "What settling a record takes, for `settleNote` (and an app's settle verb). `reason` is the human's words (stored as",
       "exported": true,
       "fields": [
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 200
+            "line": 236
           },
           "default": null,
           "name": "by",
@@ -11145,17 +11246,89 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 202
+            "line": 237
           },
           "default": null,
-          "doc": "The change that did the work (linked as `follows`).",
+          "name": "state",
+          "type": "LifeState \u2192 src/note-record.LifeState"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 238
+          },
+          "default": null,
+          "name": "reason",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 239
+          },
+          "default": null,
+          "name": "to",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 240
+          },
+          "default": null,
+          "name": "session",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.SettleInput",
+      "kind": "zod-object",
+      "refinements": [
+        "superRefine at line 242"
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 277
+          },
+          "name": "ResolveAskInput"
+        }
+      ],
+      "anchor": {
+        "end_line": 276,
+        "file": "src/note-record.ts",
+        "line": 270
+      },
+      "bases": [],
+      "doc": "What closing an ask takes, for `resolveAsk` (an app's `notes.resolve`): `settleNote` to `done`, asks only.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 271
+          },
+          "default": null,
+          "name": "by",
+          "type": "PrincipalName \u2192 src/capability.PrincipalName"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 273
+          },
+          "default": null,
+          "doc": "The change that did the work (linked as `to`).",
           "name": "change",
           "type": "z.string().optional()"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 203
+            "line": 274
           },
           "default": null,
           "name": "because",
@@ -11164,7 +11337,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 204
+            "line": 275
           },
           "default": null,
           "name": "session",
@@ -11177,9 +11350,9 @@
     },
     {
       "anchor": {
-        "end_line": 254,
+        "end_line": 323,
         "file": "src/note-record.ts",
-        "line": 249
+        "line": 318
       },
       "bases": [],
       "doc": null,
@@ -11188,7 +11361,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 251
+            "line": 320
           },
           "default": null,
           "doc": "Keep values whole up to this size (default `NOTE_FULL_LIMIT`).",
@@ -11198,7 +11371,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 253
+            "line": 322
           },
           "default": null,
           "doc": "Unchanged characters kept either side of a text change (default `NOTE_EXCERPT_CONTEXT`).",
@@ -11215,15 +11388,15 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 261
+            "line": 330
           },
           "name": "ChangeSnapshot"
         }
       ],
       "anchor": {
-        "end_line": 260,
+        "end_line": 329,
         "file": "src/note-record.ts",
-        "line": 256
+        "line": 325
       },
       "bases": [],
       "doc": null,
@@ -11232,7 +11405,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 257
+            "line": 326
           },
           "default": null,
           "name": "before",
@@ -11241,7 +11414,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 258
+            "line": 327
           },
           "default": null,
           "name": "after",
@@ -11250,7 +11423,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 259
+            "line": 328
           },
           "default": null,
           "name": "form",
@@ -11266,46 +11439,66 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 347
+            "line": 422
           },
           "name": "NoteState"
         }
       ],
       "anchor": {
-        "end_line": 346,
+        "end_line": 421,
         "file": "src/note-record.ts",
-        "line": 340
+        "line": 411
       },
       "bases": [],
-      "doc": "Where a note or ask stands after every line of its file is read.",
+      "doc": "Where a record stands after every line of its file is read.",
       "exported": true,
       "fields": [
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 341
+            "line": 412
           },
           "default": null,
-          "name": "status",
-          "type": "NoteStatus \u2192 src/note-record.NoteStatus"
+          "name": "life",
+          "type": "LifeState \u2192 src/note-record.LifeState"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 343
+            "line": 414
           },
           "default": null,
-          "doc": "The status change that set `status`, when one did.",
-          "name": "statusBy",
+          "doc": "The settle line that set `life`, when one did.",
+          "name": "settledBy",
           "type": "z.string().optional()"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 345
+            "line": 416
           },
           "default": null,
-          "doc": "Ids of the changes whose `links.answers` names this ask.",
+          "doc": "That line's words: why.",
+          "name": "reason",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 418
+          },
+          "default": null,
+          "doc": "That line's pointer (`links.to`).",
+          "name": "to",
+          "type": "z.string().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 420
+          },
+          "default": null,
+          "doc": "Ids of the changes whose `links.answers` names this record.",
           "name": "answeredBy",
           "type": "z.array(z.string())"
         }
@@ -11319,15 +11512,15 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 394
+            "line": 513
           },
           "name": "NoteFilter"
         }
       ],
       "anchor": {
-        "end_line": 393,
+        "end_line": 512,
         "file": "src/note-record.ts",
-        "line": 375
+        "line": 488
       },
       "bases": [],
       "doc": "Which records to answer with. Every field is optional and they all have to match.",
@@ -11336,7 +11529,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 376
+            "line": 489
           },
           "default": null,
           "name": "kind",
@@ -11345,17 +11538,36 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 378
+            "line": 494
           },
           "default": null,
-          "doc": "Only asks still open (implies `kind: 'ask'`).",
+          "doc": "Which life states to answer with. Default: `live` only \u2014 unless `history` is on, which answers every state AND the",
+          "name": "state",
+          "type": "z.union([LifeState, z.array(LifeState)]).optional() \u2192 src/note-record.LifeState"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 495
+          },
+          "default": null,
+          "name": "history",
+          "type": "z.boolean().optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 497
+          },
+          "default": null,
+          "doc": "Only asks still live (v1's \"open asks\"; implies `kind: 'ask'`).",
           "name": "open",
           "type": "z.boolean().optional()"
         },
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 379
+            "line": 498
           },
           "default": null,
           "name": "app",
@@ -11364,7 +11576,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 380
+            "line": 499
           },
           "default": null,
           "name": "entityType",
@@ -11373,7 +11585,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 382
+            "line": 501
           },
           "default": null,
           "doc": "Matches `entityId`, or any of `entityIds`.",
@@ -11383,7 +11595,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 383
+            "line": 502
           },
           "default": null,
           "name": "field",
@@ -11392,7 +11604,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 384
+            "line": 503
           },
           "default": null,
           "name": "brand",
@@ -11401,7 +11613,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 385
+            "line": 504
           },
           "default": null,
           "name": "project",
@@ -11410,7 +11622,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 386
+            "line": 505
           },
           "default": null,
           "name": "video",
@@ -11419,7 +11631,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 387
+            "line": 506
           },
           "default": null,
           "name": "by",
@@ -11428,7 +11640,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 389
+            "line": 508
           },
           "default": null,
           "doc": "ISO times, inclusive.",
@@ -11438,7 +11650,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 390
+            "line": 509
           },
           "default": null,
           "name": "until",
@@ -11447,7 +11659,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 392
+            "line": 511
           },
           "default": null,
           "doc": "A case-insensitive substring of `text`.",
@@ -11462,7 +11674,7 @@
     {
       "anchor": {
         "file": "src/note-record.ts",
-        "line": 376
+        "line": 489
       },
       "bases": [],
       "doc": null,
@@ -11470,7 +11682,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 376
+            "line": 489
           },
           "default": null,
           "name": "NoteKind",
@@ -11479,7 +11691,7 @@
         {
           "anchor": {
             "file": "src/note-record.ts",
-            "line": 376
+            "line": 489
           },
           "default": null,
           "name": "array",
@@ -11491,19 +11703,50 @@
       "kind": "zod-union"
     },
     {
+      "anchor": {
+        "file": "src/note-record.ts",
+        "line": 494
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 494
+          },
+          "default": null,
+          "name": "LifeState",
+          "type": "LifeState \u2192 src/note-record.LifeState"
+        },
+        {
+          "anchor": {
+            "file": "src/note-record.ts",
+            "line": 494
+          },
+          "default": null,
+          "name": "array",
+          "type": "z.array(LifeState) \u2192 src/note-record.LifeState"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/note-record.NoteFilter.state",
+      "kind": "zod-union"
+    },
+    {
       "aliases": [
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 60
+            "line": 54
           },
           "name": "AddNoteResult"
         }
       ],
       "anchor": {
-        "end_line": 59,
+        "end_line": 53,
         "file": "src/notes.ts",
-        "line": 40
+        "line": 44
       },
       "bases": [],
       "doc": null,
@@ -11512,7 +11755,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 41
+            "line": 45
           },
           "default": null,
           "name": "written",
@@ -11521,11 +11764,11 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 43
+            "line": 47
           },
           "default": null,
           "name": "refused",
-          "type": "z.object({ kind: z.literal('refused'), /** * `busy`: another writer held the lock past the wait. `not-found` / `not-an-ask` / `already-done\u2026"
+          "type": "z.object({ kind: z.literal('refused'), /** `NOTE_REFUSALS`: the suite's names; each app maps them to its own failure codes. */ reason: Note\u2026 \u2192 src/note-record.NoteRefusal"
         }
       ],
       "grade": "declared",
@@ -11535,7 +11778,7 @@
     {
       "anchor": {
         "file": "src/notes.ts",
-        "line": 41
+        "line": 45
       },
       "bases": [],
       "doc": null,
@@ -11543,7 +11786,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 41
+            "line": 45
           },
           "default": null,
           "name": "kind",
@@ -11552,7 +11795,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 41
+            "line": 45
           },
           "default": null,
           "name": "path",
@@ -11561,7 +11804,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 41
+            "line": 45
           },
           "default": null,
           "name": "record",
@@ -11574,9 +11817,9 @@
     },
     {
       "anchor": {
-        "end_line": 58,
+        "end_line": 52,
         "file": "src/notes.ts",
-        "line": 42
+        "line": 46
       },
       "bases": [],
       "doc": null,
@@ -11584,7 +11827,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 43
+            "line": 47
           },
           "default": null,
           "name": "kind",
@@ -11593,17 +11836,17 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 48
+            "line": 49
           },
           "default": null,
-          "doc": "`busy`: another writer held the lock past the wait. `not-found` / `not-an-ask` / `already-done`: `resolveAsk`",
+          "doc": "`NOTE_REFUSALS`: the suite's names; each app maps them to its own failure codes.",
           "name": "reason",
-          "type": "z.enum(['invalid-input', 'io-error', 'busy', 'not-found', 'not-an-ask', 'already-done'])"
+          "type": "NoteRefusal \u2192 src/note-record.NoteRefusal"
         },
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 56
+            "line": 50
           },
           "default": null,
           "name": "path",
@@ -11612,7 +11855,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 57
+            "line": 51
           },
           "default": null,
           "name": "message",
@@ -11625,9 +11868,9 @@
     },
     {
       "anchor": {
-        "end_line": 74,
+        "end_line": 68,
         "file": "src/notes.ts",
-        "line": 63
+        "line": 57
       },
       "bases": [],
       "doc": null,
@@ -11636,7 +11879,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 65
+            "line": 59
           },
           "default": null,
           "doc": "Create `dir` first (an app's data folder). A project folder is never created: leave this off for one.",
@@ -11646,7 +11889,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 67
+            "line": 61
           },
           "default": null,
           "doc": "How long to wait for another writer's lock (default 3 s).",
@@ -11656,7 +11899,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 69
+            "line": 63
           },
           "default": null,
           "doc": "A lock older than this is a crashed writer's and is broken (default 10 s).",
@@ -11666,7 +11909,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 71
+            "line": 65
           },
           "default": null,
           "doc": "The record's time (default now).",
@@ -11676,7 +11919,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 73
+            "line": 67
           },
           "default": null,
           "doc": "The record's id (default `newNoteId()`).",
@@ -11693,14 +11936,14 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 250
+            "line": 293
           },
           "name": "NoteLineProblem"
         }
       ],
       "anchor": {
         "file": "src/notes.ts",
-        "line": 249
+        "line": 292
       },
       "bases": [],
       "doc": null,
@@ -11709,7 +11952,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 249
+            "line": 292
           },
           "default": null,
           "name": "line",
@@ -11718,7 +11961,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 249
+            "line": 292
           },
           "default": null,
           "name": "message",
@@ -11734,15 +11977,15 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 263
+            "line": 311
           },
           "name": "NotesRead"
         }
       ],
       "anchor": {
-        "end_line": 262,
+        "end_line": 310,
         "file": "src/notes.ts",
-        "line": 252
+        "line": 295
       },
       "bases": [],
       "doc": null,
@@ -11751,7 +11994,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 253
+            "line": 296
           },
           "default": null,
           "name": "path",
@@ -11760,7 +12003,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 255
+            "line": 298
           },
           "default": null,
           "doc": "False when there is no notes file. An empty file and no file both have no records: this tells them apart.",
@@ -11770,17 +12013,27 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 257
+            "line": 303
           },
           "default": null,
-          "doc": "Every valid line, in file order.",
+          "doc": "The records the filter answers with, in file order. Default: the `live` ones (settle lines left out). With",
           "name": "records",
           "type": "z.array(NoteRecord) \u2192 src/note-record.NoteRecord"
         },
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 259
+            "line": 305
+          },
+          "default": null,
+          "doc": "Where every record in the file stands (by id), whatever the filter.",
+          "name": "states",
+          "type": "z.record(z.string(), NoteState) \u2192 src/note-record.NoteState"
+        },
+        {
+          "anchor": {
+            "file": "src/notes.ts",
+            "line": 307
           },
           "default": null,
           "doc": "Lines that are not a record: listed, never hidden, never fatal.",
@@ -11790,7 +12043,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 261
+            "line": 309
           },
           "default": null,
           "doc": "The file exists but could not be read.",
@@ -11807,15 +12060,15 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 300
+            "line": 363
           },
           "name": "ScannedNote"
         }
       ],
       "anchor": {
-        "end_line": 299,
+        "end_line": 362,
         "file": "src/notes.ts",
-        "line": 293
+        "line": 356
       },
       "bases": [],
       "doc": null,
@@ -11824,7 +12077,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 295
+            "line": 358
           },
           "default": null,
           "doc": "The notes file the record is in.",
@@ -11834,7 +12087,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 296
+            "line": 359
           },
           "default": null,
           "name": "record",
@@ -11843,10 +12096,10 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 298
+            "line": 361
           },
           "default": null,
-          "doc": "For a note or ask: where it stands now (`noteStates`).",
+          "doc": "Where the record stands now (`noteStates`); absent on a settle line.",
           "name": "state",
           "type": "NoteState.optional() \u2192 src/note-record.NoteState"
         }
@@ -11860,15 +12113,15 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 311
+            "line": 374
           },
           "name": "NotesScan"
         }
       ],
       "anchor": {
-        "end_line": 310,
+        "end_line": 373,
         "file": "src/notes.ts",
-        "line": 302
+        "line": 365
       },
       "bases": [],
       "doc": null,
@@ -11877,7 +12130,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 304
+            "line": 367
           },
           "default": null,
           "doc": "Matching records across every file, oldest first.",
@@ -11887,7 +12140,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 306
+            "line": 369
           },
           "default": null,
           "doc": "Every notes file read.",
@@ -11897,7 +12150,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 307
+            "line": 370
           },
           "default": null,
           "name": "invalid",
@@ -11906,7 +12159,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 309
+            "line": 372
           },
           "default": null,
           "doc": "Files or folders that could not be read: a scan that missed them says so.",
@@ -11921,7 +12174,7 @@
     {
       "anchor": {
         "file": "src/notes.ts",
-        "line": 307
+        "line": 370
       },
       "bases": [
         "NoteLineProblem"
@@ -11931,7 +12184,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 249
+            "line": 292
           },
           "default": null,
           "inherited_from": "NoteLineProblem",
@@ -11941,7 +12194,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 249
+            "line": 292
           },
           "default": null,
           "inherited_from": "NoteLineProblem",
@@ -11951,7 +12204,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 307
+            "line": 370
           },
           "default": null,
           "name": "path",
@@ -11965,7 +12218,7 @@
     {
       "anchor": {
         "file": "src/notes.ts",
-        "line": 309
+        "line": 372
       },
       "bases": [],
       "doc": null,
@@ -11973,7 +12226,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 309
+            "line": 372
           },
           "default": null,
           "name": "path",
@@ -11982,7 +12235,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 309
+            "line": 372
           },
           "default": null,
           "name": "message",
@@ -11995,9 +12248,9 @@
     },
     {
       "anchor": {
-        "end_line": 316,
+        "end_line": 379,
         "file": "src/notes.ts",
-        "line": 313
+        "line": 376
       },
       "bases": [],
       "doc": null,
@@ -12006,7 +12259,7 @@
         {
           "anchor": {
             "file": "src/notes.ts",
-            "line": 315
+            "line": 378
           },
           "default": null,
           "doc": "How many folder levels below each root to look (default 4: estate \u2192 brand \u2192 archived \u2192 bucket \u2192 project).",
@@ -19747,7 +20000,7 @@
     }
   ],
   "target": {
-    "commit": "4fb29cea4304f4fd4e544b4006a405254ebc3b17",
+    "commit": "00bc4bb56b08cb39f6ed6166b8d49fb7df408cc4",
     "root": "..",
     "stack": "typescript"
   },
@@ -19880,9 +20133,18 @@
     },
     {
       "census": true,
+      "family": "array constant",
+      "looked_at": [
+        "src/note-record.ts:476"
+      ],
+      "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/note-record.NOTE_REFUSALS` - declared but not read"
+    },
+    {
+      "census": true,
       "family": "utility-type alias (`Pick` / `Omit` / `Record` / generic instance)",
       "looked_at": [
-        "src/notes.ts:61"
+        "src/notes.ts:55"
       ],
       "reason": "declared but not read: utility-type alias (`Pick` / `Omit` / `Record` / generic instance). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/notes.Refused` - declared but not read"
