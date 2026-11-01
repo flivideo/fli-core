@@ -2,11 +2,10 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
-## v0.28.0-rc.1 — 2026-11-01
+## v0.28.0 — 2026-11-01
 
-Release candidate for fli-notes v2 life states (`flivideo/docs/briefs/fli-notes-v2-quiet-capture-and-lab-2026-11-01.md`
-§3, workplan `fli-notes-v2-orch-workplan-2026-11-01.md`). Consumers pin `github:flivideo/fli-core#v0.28.0-rc.1`;
-`v0.28.0` is tagged on `main` after merge.
+fli-notes v2 life states (`flivideo/docs/briefs/fli-notes-v2-quiet-capture-and-lab-2026-11-01.md`
+§3, workplan `fli-notes-v2-orch-workplan-2026-11-01.md`). rc.1 promoted unchanged.
 
 ### Added
 
