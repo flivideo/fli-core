@@ -742,7 +742,7 @@ describe('platform-URL publishing (v0.29.0)', () => {
       platform: 'skool',
       publishedAt: NOW.toISOString(),
     });
-    const p = publishedVideos(out.file.resources)[0]!;
+    const p = publishedVideos(out.file.resources)[0] ?? expect.fail("no published video");
     expect(p.platform).toBe('skool');
     expect(p.url).toBe('https://www.skool.com/x/y');
     expect(p.youtubeId).toBeUndefined();
@@ -755,7 +755,7 @@ describe('platform-URL publishing (v0.29.0)', () => {
   });
   it('youtubeId-only resources keep working and report platform youtube', () => {
     const out = markPublished(promoted(), V, 'dQw4w9WgXcQ', 'human:ui', NOW);
-    const p = publishedVideos(out.file.resources)[0]!;
+    const p = publishedVideos(out.file.resources)[0] ?? expect.fail("no published video");
     expect(p).toMatchObject({ platform: 'youtube', youtubeId: 'dQw4w9WgXcQ', url: 'https://youtu.be/dQw4w9WgXcQ' });
   });
 });
