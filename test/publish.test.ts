@@ -553,6 +553,7 @@ describe('ruling 4 — marking published records the YouTube id, link and when',
         video: V,
         path: cut.file,
         youtubeId: 'dQw4w9WgXcQ',
+        platform: 'youtube',
         url: 'https://youtu.be/dQw4w9WgXcQ',
         publishedAt: NOW.toISOString(),
         by: 'agent:tuber',
@@ -727,5 +728,34 @@ describe('-edit and -cast exports (v0.26.0)', () => {
   it('a FliCast edit with no export yet says so by name', () => {
     const r = rowOf(facts({ exports: [], edits: [castEdit] }), 'video');
     expect(r.why).toContain('export from FliCast');
+  });
+});
+
+describe('platform-URL publishing (v0.29.0)', () => {
+  const promoted = () =>
+    promoteFile(EMPTY_RESOURCES, { kind: 'video', video: V, path: cut.file }, registry, 'human:ui', NOW).file;
+
+  it('records a Skool link with no YouTube id, and reads it back', () => {
+    const out = markPublished(promoted(), V, { url: 'https://www.skool.com/x/y', platform: 'skool' }, 'human:ui', NOW);
+    expect(out.video.meta).toEqual({
+      publishedUrl: 'https://www.skool.com/x/y',
+      platform: 'skool',
+      publishedAt: NOW.toISOString(),
+    });
+    const p = publishedVideos(out.file.resources)[0]!;
+    expect(p.platform).toBe('skool');
+    expect(p.url).toBe('https://www.skool.com/x/y');
+    expect(p.youtubeId).toBeUndefined();
+  });
+  it('rejects a non-URL and an unknown platform', () => {
+    expect(() => markPublished(promoted(), V, { url: 'nope', platform: 'skool' }, 'human:ui', NOW)).toThrow(/http/);
+    expect(() =>
+      markPublished(promoted(), V, { url: 'https://a.b/c', platform: 'vimeo' as never }, 'human:ui', NOW),
+    ).toThrow(/platform/);
+  });
+  it('youtubeId-only resources keep working and report platform youtube', () => {
+    const out = markPublished(promoted(), V, 'dQw4w9WgXcQ', 'human:ui', NOW);
+    const p = publishedVideos(out.file.resources)[0]!;
+    expect(p).toMatchObject({ platform: 'youtube', youtubeId: 'dQw4w9WgXcQ', url: 'https://youtu.be/dQw4w9WgXcQ' });
   });
 });

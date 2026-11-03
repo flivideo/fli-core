@@ -269,6 +269,7 @@ export {
   PublishRow,
   PublishState,
   PublishedVideo,
+  PUBLISH_PLATFORMS,
   READY_STATES,
   SUGGESTION_STATES,
   acceptableRows,
@@ -282,6 +283,7 @@ export {
   publishReadiness,
   publishedVideos,
   youtubeUrl,
+  type PublishPlatform,
   type PublishRuleId,
 } from './publish.js';
 

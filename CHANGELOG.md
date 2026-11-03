@@ -2,6 +2,20 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.29.0 — 2026-11-03
+
+Published accepts a platform URL (`flivideo/docs/briefs/flistudio-lastwork-and-platform-published-2026-11-03.md`).
+
+### Added
+
+- `markPublished(file, video, { url, platform }, by)`: records a platform link (`meta.publishedUrl`, `meta.platform`)
+  with no YouTube id. `PUBLISH_PLATFORMS` (`youtube | skool | other`) and `PublishPlatform`.
+
+### Changed
+
+- `publishedVideos()` also returns published videos carrying `meta.publishedUrl`; `PublishedVideo` gains `platform`
+  (`youtube` for every youtubeId resource, as before) and `youtubeId` becomes optional. YouTube-id publishes are unchanged.
+
 ## v0.28.0 — 2026-11-01
 
 fli-notes v2 life states (`flivideo/docs/briefs/fli-notes-v2-quiet-capture-and-lab-2026-11-01.md`

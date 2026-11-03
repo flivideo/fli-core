@@ -699,11 +699,16 @@ export function acceptableRows(readiness: PublishReadiness): PublishRow[] {
  * video in a project's resources, newest first, with its YouTube id, link and when. Read `fli.resources.json` (fli-core
  * `readResources`) and call this; FliStudio's `publish.published` answers the same across a brand.
  */
+export const PUBLISH_PLATFORMS = ['youtube', 'skool', 'other'] as const;
+export type PublishPlatform = (typeof PUBLISH_PLATFORMS)[number];
+
 export const PublishedVideo = z.object({
   resourceId: z.string(),
   video: z.string().nullable(),
   path: z.string().nullable(),
-  youtubeId: z.string(),
+  /** Only for YouTube publishes; a platform-URL publish (Skool, other) has none. */
+  youtubeId: z.string().optional(),
+  platform: z.enum(PUBLISH_PLATFORMS),
   url: z.string(),
   publishedAt: Iso,
   by: z.string(),
@@ -711,24 +716,27 @@ export const PublishedVideo = z.object({
 export type PublishedVideo = z.infer<typeof PublishedVideo>;
 
 export function publishedVideos(resources: Resource[]): PublishedVideo[] {
-  return resources
-    .filter(
-      (r) =>
-        r.kind === 'video' && r.status === 'published' && typeof r.meta?.youtubeId === 'string',
-    )
-    .map((r) => {
-      const youtubeId = r.meta?.youtubeId as string;
-      return {
-        resourceId: r.id,
-        video: r.video,
-        path: r.path ?? null,
+  const out: PublishedVideo[] = [];
+  for (const r of resources) {
+    if (r.kind !== 'video' || r.status !== 'published') continue;
+    const publishedAt =
+      typeof r.meta?.publishedAt === 'string' ? r.meta.publishedAt : r.changed.at;
+    const base = { resourceId: r.id, video: r.video, path: r.path ?? null, publishedAt, by: r.changed.by };
+    if (typeof r.meta?.youtubeId === 'string') {
+      const youtubeId = r.meta.youtubeId;
+      out.push({
+        ...base,
         youtubeId,
-        url: typeof r.meta?.url === 'string' ? r.meta.url : youtubeUrl(youtubeId),
-        publishedAt: typeof r.meta?.publishedAt === 'string' ? r.meta.publishedAt : r.changed.at,
-        by: r.changed.by,
-      };
-    })
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+        platform: 'youtube',
+        url: typeof r.meta.url === 'string' ? r.meta.url : youtubeUrl(youtubeId),
+      });
+    } else if (typeof r.meta?.publishedUrl === 'string' && r.meta.publishedUrl) {
+      const p = r.meta.platform;
+      const platform = PUBLISH_PLATFORMS.find((x) => x === p) ?? 'other';
+      out.push({ ...base, platform, url: r.meta.publishedUrl });
+    }
+  }
+  return out.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }
 
 /** An 11-character YouTube id, from the id itself or a watch / youtu.be / shorts / studio link; null otherwise. */
@@ -822,12 +830,23 @@ export class NoFinalVideo extends Error {
 export function markPublished(
   file: ResourcesFile,
   video: string | null,
-  youtubeId: string,
+  youtubeId: string | { url: string; platform: PublishPlatform },
   by: PrincipalName,
   now: Date = new Date(),
 ): { file: ResourcesFile; video: Resource; published: Resource[] } {
-  const id = parseYoutubeId(youtubeId);
-  if (id === null) throw new Error(`"${youtubeId}" is not a YouTube id or link.`);
+  // A string is the YouTube path (unchanged); `{ url, platform }` records a platform link with no YouTube id.
+  let publishMeta: Record<string, unknown>;
+  if (typeof youtubeId === 'string') {
+    const id = parseYoutubeId(youtubeId);
+    if (id === null) throw new Error(`"${youtubeId}" is not a YouTube id or link.`);
+    publishMeta = { youtubeId: id, url: youtubeUrl(id) };
+  } else {
+    const url = youtubeId.url.trim();
+    if (!/^https?:\/\/\S+$/.test(url)) throw new Error(`"${youtubeId.url}" is not an http(s) link.`);
+    if (!PUBLISH_PLATFORMS.includes(youtubeId.platform))
+      throw new Error(`"${youtubeId.platform}" is not a platform (${PUBLISH_PLATFORMS.join(', ')}).`);
+    publishMeta = { publishedUrl: url, platform: youtubeId.platform };
+  }
   const mine = file.resources.filter((r) => r.video === video);
   const final = liveOf(mine, 'video');
   if (!final) throw new NoFinalVideo(video);
@@ -838,7 +857,7 @@ export function markPublished(
       const next = Resource.parse({
         ...r,
         status: 'published',
-        meta: { ...r.meta, youtubeId: id, url: youtubeUrl(id), publishedAt: stamp.at },
+        meta: { ...r.meta, ...publishMeta, publishedAt: stamp.at },
         changed: stamp,
       });
       published.push(next);
