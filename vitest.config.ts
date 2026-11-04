@@ -6,7 +6,7 @@ export default defineConfig({
     setupFiles: ['test/setup/isolate-home.ts'],
     coverage: {
       provider: 'v8',
-      include: ['src/**/*.ts'],
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
       reporter: ['text', 'json-summary'],
       thresholds: {
         lines: 90,

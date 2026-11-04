@@ -199,6 +199,20 @@ and FliCast unchanged; pure and browser-safe (`@flivideo/core/contracts`). Each 
 | `shuttle(state, action)`, `MAX_SHUTTLE`       | The NLE shuttle (FliCast, FliEdit, FliCut's ⇧J): `playForward` / `playBackward` double to ±8×, `stop`, `togglePlay`                                                                                                     |
 | `shuttleLabel(playing, rate)`, `ShuttleState` | The badge (`❚❚ 1×`, `▶▶ 2×`, `◀ 1×`) and the `{ playing, rate }` shape (signed rate)                                                                                                                                    |
 
+### The speed control — `speedWindow()` and `@flivideo/core/ui` (v0.32.0)
+
+David (2026-11-04): "3 visible everywhere." One control for every player, so it lives here.
+
+| Export                                      | What                                                                                                                                                                                                                        |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `speedWindow(ladder, current, visible = 3)` | Pure. The rungs on show, centred on `current`, pinned (not shrunk) at 0.25× / 4×; `canBack` / `canForward` for the chevrons. An off-ladder rate snaps to the nearest rung with `exact: false`                               |
+| `SpeedControl` (`@flivideo/core/ui`)        | `[‹] [0.75x] [1x] [1.5x] [›]`. Props: `value`, `onChange`, `visible`, `ladder`, `disabled`, `triage`, `trailing`, `className`, `data-testid`. Controlled; **binds no keys** (J / K / L stay in each player through `jkl()`) |
+| `@flivideo/core/ui/speed.css`               | Optional. Class hooks `fli-speed`, `fli-speed__rate`, `fli-speed__edge`, `is-active`, `is-disabled`; colours via `--fli-speed-bg / -fg / -active-bg / -active-fg / -border / -hover-bg / -disabled-fg / -focus`             |
+
+Chevrons step the _rate_ one rung, exactly like J / L; the window follows. Keys live in tooltips (`speedTip()`, `tip()`), never
+inline. `react` (`^18 || ^19`) is an **optional peer dependency**, needed only by apps that import `./ui`. `ui/` is the one
+folder allowed to import react: `test/architecture.test.ts` fails if anything else does, or if anything outside `ui/` imports it.
+
 ## Ready for YouTube — the Publish rules (v0.17.0)
 
 David's four rulings (2026-10-05, mock https://claude.ai/artifact/9hLAvSeF9b6DJWEX3yMEmP): the final video is a

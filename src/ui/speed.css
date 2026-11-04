@@ -1,0 +1,45 @@
+/* @flivideo/core/ui/speed.css — the shared speed control. Every colour is a variable the app maps once; the fallbacks
+   below are the AppyDave light palette. Light only. */
+.fli-speed {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: var(--fli-speed-font, inherit);
+  font-size: var(--fli-speed-size, 13px);
+}
+.fli-speed button {
+  appearance: none;
+  min-width: 2.25em;
+  padding: 3px 8px;
+  border: 1px solid var(--fli-speed-border, #d4cdc4);
+  border-radius: var(--fli-speed-radius, 4px);
+  background: var(--fli-speed-bg, #f0ebe4);
+  color: var(--fli-speed-fg, #342d2d);
+  font: inherit;
+  line-height: 1.3;
+  cursor: pointer;
+}
+.fli-speed button:hover:not(:disabled) {
+  background: var(--fli-speed-hover-bg, #e8e0d4);
+}
+.fli-speed button:focus-visible {
+  outline: 2px solid var(--fli-speed-focus, #2e91fc);
+  outline-offset: 1px;
+}
+.fli-speed__rate.is-active {
+  background: var(--fli-speed-active-bg, #342d2d);
+  border-color: var(--fli-speed-active-bg, #342d2d);
+  color: var(--fli-speed-active-fg, #faf5ec);
+  font-weight: 600;
+}
+.fli-speed__edge {
+  min-width: 1.75em;
+  font-weight: 700;
+}
+.fli-speed button:disabled,
+.fli-speed__edge.is-disabled {
+  background: transparent;
+  color: var(--fli-speed-disabled-fg, #9a8f82);
+  border-color: var(--fli-speed-disabled-border, #e2dbd0);
+  cursor: default;
+}

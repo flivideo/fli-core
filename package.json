@@ -1,6 +1,6 @@
 {
   "name": "@flivideo/core",
-  "version": "0.31.0",
+  "version": "0.32.0",
   "description": "Shared video-project rules for the Fli apps: brands, project identity, layout, naming, lab paths and the open contract.",
   "license": "MIT",
   "repository": {
@@ -19,17 +19,24 @@
       "types": "./dist/contracts.d.ts",
       "import": "./dist/contracts.js"
     },
+    "./ui": {
+      "types": "./dist/ui/index.d.ts",
+      "import": "./dist/ui/index.js"
+    },
+    "./ui/speed.css": "./dist/ui/speed.css",
     "./package.json": "./package.json"
   },
   "files": [
     "dist"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "engines": {
     "node": ">=20.19"
   },
   "scripts": {
-    "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",
+    "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json && node -e \"require('node:fs').copyFileSync('src/ui/speed.css','dist/ui/speed.css')\"",
     "prepare": "npm run build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
@@ -44,11 +51,23 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^24.13.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@vitest/coverage-v8": "^5.0.1",
     "eslint": "^10.10.0",
     "prettier": "^3.9.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.70.0",
     "vitest": "^5.0.1"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
   }
 }
