@@ -144,6 +144,17 @@ export {
   type ShuttleAction,
 } from './transport.js';
 
+export {
+  HELP_SCREENS,
+  HelpGroup,
+  HelpRow,
+  HelpScreen,
+  HelpScreenId,
+  searchHelp,
+  speedTip,
+  tip,
+} from './help.js';
+
 /**
  * The zod this package is built with (v4). Declare capability inputs and outputs with it when the app itself is on
  * zod 3 (Teletubby, FliCut): a zod 3 schema is not a `z.ZodType` here, and a copy of zod 4 from elsewhere may not be.

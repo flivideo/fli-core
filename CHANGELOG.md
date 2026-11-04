@@ -9,7 +9,7 @@ One help system for the Fli apps (`flivideo/docs/briefs/fli-help-system-2026-11-
 ### Added
 
 - `HELP_SCREENS` (keys per screen, grouped by job), `searchHelp`, `tip`, `speedTip`, `HelpScreenId`: the framework-free
-  key data behind FliStudio's `?` cheat sheet. No React in core. Rule: keyboard shortcuts live in tooltips and the `?`
+  key data behind FliStudio's `?` cheat sheet. No React in core; also exported from the browser-safe `@flivideo/core/contracts`. Rule: keyboard shortcuts live in tooltips and the `?`
   sheet, never as inline text beside a control.
 
 ## v0.29.0 — 2026-11-03
