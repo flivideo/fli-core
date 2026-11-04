@@ -62,6 +62,20 @@ export const HELP_SCREENS: Record<HelpScreenId, HelpScreen> = {
       { group: 'Help', rows: [HELP_KEY] },
     ],
   },
+  'upload-wizard': {
+    title: 'Upload wizard',
+    groups: [
+      { group: 'Steps', rows: [row('← →', 'Back / next step')] },
+      {
+        group: 'Copy',
+        rows: [
+          row('C', 'Copy this step’s text or path'),
+          row('S', 'Copy the subtitle file’s path (Subtitles step)'),
+        ],
+      },
+      { group: 'Help', rows: [HELP_KEY] },
+    ],
+  },
   'storypilot-prep': {
     title: 'Story Pilot · Prep',
     groups: [
