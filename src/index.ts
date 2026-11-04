@@ -569,3 +569,14 @@ export {
   type SyncYouTubeOptions,
   type YouTubeFetch,
 } from './youtube.js';
+
+export {
+  HELP_SCREENS,
+  HelpGroup,
+  HelpRow,
+  HelpScreen,
+  HelpScreenId,
+  searchHelp,
+  speedTip,
+  tip,
+} from './help.js';

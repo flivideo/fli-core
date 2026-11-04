@@ -2,6 +2,16 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.30.0 — 2026-11-04
+
+One help system for the Fli apps (`flivideo/docs/briefs/fli-help-system-2026-11-04.md`).
+
+### Added
+
+- `HELP_SCREENS` (keys per screen, grouped by job), `searchHelp`, `tip`, `speedTip`, `HelpScreenId`: the framework-free
+  key data behind FliStudio's `?` cheat sheet. No React in core. Rule: keyboard shortcuts live in tooltips and the `?`
+  sheet, never as inline text beside a control.
+
 ## v0.29.0 — 2026-11-03
 
 Published accepts a platform URL (`flivideo/docs/briefs/flistudio-lastwork-and-platform-published-2026-11-03.md`).
