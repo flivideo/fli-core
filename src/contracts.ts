@@ -160,3 +160,16 @@ export {
  * zod 3 (Teletubby, FliCut): a zod 3 schema is not a `z.ZodType` here, and a copy of zod 4 from elsewhere may not be.
  */
 export { z } from 'zod';
+
+export {
+  GUIDE_REQUIRED,
+  GUIDE_SCHEMA,
+  GuideDoc,
+  GuideDocAppliesTo,
+  GuideDocLevel,
+  GuideDocType,
+  isGuide,
+  parseGuide,
+  splitFrontmatter,
+  type ParsedGuide,
+} from './guide-doc.js';

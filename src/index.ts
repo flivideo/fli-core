@@ -580,3 +580,16 @@ export {
   speedTip,
   tip,
 } from './help.js';
+
+export {
+  GUIDE_REQUIRED,
+  GUIDE_SCHEMA,
+  GuideDoc,
+  GuideDocAppliesTo,
+  GuideDocLevel,
+  GuideDocType,
+  isGuide,
+  parseGuide,
+  splitFrontmatter,
+  type ParsedGuide,
+} from './guide-doc.js';

@@ -2,6 +2,19 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.31.0 — 2026-11-04
+
+Story guides are typed Markdown (`flivideo/.appynet/briefs/typed-guides-dev.md`).
+
+### Added
+
+- `GuideDoc` (zod), `parseGuide(text)` → `{header, body}` or `{error, issues, body, raw}`, `isGuide`, `splitFrontmatter`,
+  `GUIDE_SCHEMA` (`storypilot.guide/1`), `GUIDE_REQUIRED`, `GuideDocType`, `GuideDocLevel`, `GuideDocAppliesTo`. A guide
+  header needs `schema, id, label, type, level, gist` (one line); `appliesTo` and `brands` are optional; every other key
+  is kept and ignored (forge provenance). Errors are card-ready: `no guide header`, `invalid: missing gist`,
+  `invalid: type: …`. Zod only, browser-safe (also on `@flivideo/core/contracts`); the header reader is a small YAML
+  subset, no new dependency.
+
 ## v0.30.0 — 2026-11-04
 
 One help system for the Fli apps (`flivideo/docs/briefs/fli-help-system-2026-11-04.md`).
