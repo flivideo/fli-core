@@ -11,6 +11,7 @@ export const HelpScreenId = z.enum([
   'viewer-triage',
   'storypilot-listen',
   'storypilot-prep',
+  'upload-wizard',
 ]);
 export type HelpScreenId = z.infer<typeof HelpScreenId>;
 
