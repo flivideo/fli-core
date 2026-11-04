@@ -6,6 +6,7 @@ import {
   jkl,
   shuttle,
   shuttleLabel,
+  speedWindow,
 } from '../src/transport.js';
 
 // Pins David's rules exactly as FliCut (test/transport-and-follow.test.ts) and FliCast (test/renderer/transport.test.ts)
@@ -94,5 +95,55 @@ describe('ShuttleState', () => {
   it('is a schema: playing + signed rate', () => {
     expect(ShuttleState.parse({ playing: true, rate: -2 })).toEqual({ playing: true, rate: -2 });
     expect(ShuttleState.safeParse({ playing: 'yes', rate: 1 }).success).toBe(false);
+  });
+});
+
+describe('speedWindow — the 3-visible speed control (David 2026-11-04)', () => {
+  const L = FORWARD_SPEEDS;
+  const rates = (current: number, visible?: number): number[] =>
+    speedWindow(L, current, visible).rates;
+
+  it('centres on the current rate', () => {
+    expect(rates(1)).toEqual([0.75, 1, 1.5]);
+    expect(rates(2)).toEqual([1.5, 2, 2.5]);
+    const w = speedWindow(L, 1);
+    expect(w).toMatchObject({ start: 2, index: 3, exact: true, canBack: true, canForward: true });
+  });
+
+  it('pins at 0.25× — the window slides, it does not shrink — and the slower chevron greys out', () => {
+    expect(rates(0.25)).toEqual([0.25, 0.5, 0.75]);
+    expect(rates(0.5)).toEqual([0.25, 0.5, 0.75]);
+    expect(speedWindow(L, 0.25)).toMatchObject({ canBack: false, canForward: true, index: 0 });
+  });
+
+  it('pins at 4× and the faster chevron greys out', () => {
+    expect(rates(4)).toEqual([3, 3.5, 4]);
+    expect(rates(3.5)).toEqual([3, 3.5, 4]);
+    expect(speedWindow(L, 4)).toMatchObject({ canBack: true, canForward: false, index: 9 });
+  });
+
+  it('shows 5 rungs when asked, pinned the same way', () => {
+    expect(rates(1, 5)).toEqual([0.5, 0.75, 1, 1.5, 2]);
+    expect(rates(0.25, 5)).toEqual([0.25, 0.5, 0.75, 1, 1.5]);
+    expect(rates(4, 5)).toEqual([2, 2.5, 3, 3.5, 4]);
+  });
+
+  it('clamps visible to 1…the whole ladder', () => {
+    expect(rates(1, 0)).toEqual([1]);
+    expect(rates(1, 99)).toEqual([...L]);
+    expect(speedWindow(L, 1, 99).start).toBe(0);
+  });
+
+  it('an unknown rate snaps to the nearest rung, lights none, and still steps from it', () => {
+    const w = speedWindow(L, 1.2);
+    expect(w).toMatchObject({ index: 3, exact: false, rates: [0.75, 1, 1.5] });
+    expect(speedWindow(L, 1.3)).toMatchObject({ index: 4, exact: false });
+    expect(speedWindow(L, 9)).toMatchObject({ index: 9, exact: false, canForward: false });
+    expect(speedWindow(L, 0)).toMatchObject({ index: 0, exact: false, canBack: false });
+  });
+
+  it('works on a custom ladder and an empty one', () => {
+    expect(speedWindow([1, 2], 2, 3)).toMatchObject({ rates: [1, 2], canForward: false });
+    expect(speedWindow([], 1)).toMatchObject({ rates: [], canBack: false, canForward: false });
   });
 });

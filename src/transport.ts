@@ -73,3 +73,45 @@ export function shuttleLabel(playing: boolean, rate: number): string {
   const arrow = rate < 0 ? (Math.abs(rate) > 1 ? '◀◀' : '◀') : Math.abs(rate) > 1 ? '▶▶' : '▶';
   return `${arrow} ${speed}`;
 }
+
+/** Where the speed control's window sits on a ladder (v0.32.0). */
+export type SpeedWindow = {
+  /** The rungs on show: `visible` consecutive rungs, the window pinned (not shrunk) at either end of the ladder. */
+  rates: number[];
+  /** Index in `ladder` of the first rung shown. */
+  start: number;
+  /** Index in `ladder` of the rung nearest the current rate. */
+  index: number;
+  /** True when the current rate is exactly that rung; false for an off-ladder rate (no rung is lit). */
+  exact: boolean;
+  /** False at the first rung: the slower chevron greys out. */
+  canBack: boolean;
+  /** False at the last rung: the faster chevron greys out. */
+  canForward: boolean;
+};
+
+/**
+ * The window the 3-visible speed control shows (David 2026-11-04): `visible` rungs centred on the current rate, pinned
+ * at the first / last rung so it slides rather than shrinks. A rate off the ladder (a stale saved value) builds the
+ * window around the nearest rung and lights none (`exact: false`). `visible` is clamped to 1…ladder length. Pure.
+ */
+export function speedWindow(ladder: readonly number[], current: number, visible = 3): SpeedWindow {
+  const n = ladder.length;
+  if (n === 0)
+    return { rates: [], start: 0, index: 0, exact: false, canBack: false, canForward: false };
+  let index = 0;
+  for (let i = 1; i < n; i++) {
+    if (Math.abs((ladder[i] as number) - current) < Math.abs((ladder[index] as number) - current))
+      index = i;
+  }
+  const size = Math.min(n, Math.max(1, Math.floor(visible)));
+  const start = Math.min(n - size, Math.max(0, index - Math.floor(size / 2)));
+  return {
+    rates: ladder.slice(start, start + size),
+    start,
+    index,
+    exact: Math.abs((ladder[index] as number) - current) < 1e-9,
+    canBack: index > 0,
+    canForward: index < n - 1,
+  };
+}

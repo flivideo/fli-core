@@ -2,6 +2,19 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.32.0 — 2026-11-04
+
+The shared speed control (`flivideo/docs/research/speed-control-plan-2026-11-04.md`, step 1).
+
+### Added
+
+- `speedWindow(ladder, current, visible = 3)` (+ `SpeedWindow`): the rungs on show, centred, pinned at the ends; on
+  `@flivideo/core` and the browser-safe `/contracts`.
+- `@flivideo/core/ui`: `SpeedControl` (3 visible, chevrons step the rate like J / L, edges pin and grey, tooltips carry the
+  keys) and `@flivideo/core/ui/speed.css` (colours via `--fli-speed-*` variables each app supplies).
+- `react` as an optional peer dependency (`^18 || ^19`), `jsx` in the tsconfig. `src/ui/` is the only place react may be
+  imported; the architecture test enforces it.
+
 ## v0.30.0 — 2026-11-04
 
 One help system for the Fli apps (`flivideo/docs/briefs/fli-help-system-2026-11-04.md`).

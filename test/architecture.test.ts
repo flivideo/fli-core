@@ -13,7 +13,7 @@ async function sourceFiles(dir: string): Promise<string[]> {
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) files.push(...(await sourceFiles(full)));
-    else if (entry.name.endsWith('.ts')) files.push(full);
+    else if (/\.tsx?$/.test(entry.name)) files.push(full);
   }
   return files;
 }
@@ -38,15 +38,20 @@ const allowed = (specifier: string): boolean =>
   specifier === 'zod' ||
   specifier.startsWith('node:');
 
+/** react and its JSX runtime — allowed in src/ui/ and nowhere else. */
+const isReact = (specifier: string): boolean =>
+  specifier === 'react' || specifier === 'react/jsx-runtime';
+
 describe('architecture: zero app imports (spec §10)', () => {
-  it('src/**/*.ts imports only relative modules, zod and node:*', async () => {
+  it('src/**/*.ts imports only relative modules, zod and node:* (ui/ may also import react)', async () => {
     const files = await sourceFiles(SRC);
     expect(files.length).toBeGreaterThan(5);
     const offenders: string[] = [];
     for (const file of files) {
       const found = specifiers(await fs.readFile(file, 'utf8'));
       expect(found.length, `${file} should import something`).toBeGreaterThan(0);
-      for (const specifier of found.filter((s) => !allowed(s))) {
+      const inUi = path.relative(SRC, file).startsWith(`ui${path.sep}`);
+      for (const specifier of found.filter((s) => !allowed(s) && !(inUi && isReact(s)))) {
         offenders.push(`${path.relative(SRC, file)} → ${specifier}`);
       }
     }
@@ -75,11 +80,36 @@ describe('architecture: zero app imports (spec §10)', () => {
     ]);
   });
 
-  it('the package depends on zod only at runtime', async () => {
+  it('react is imported only under src/ui/, and nothing outside ui/ imports ui/ (the fence)', async () => {
+    const reactOutside: string[] = [];
+    const uiImporters: string[] = [];
+    let uiFiles = 0;
+    for (const file of await sourceFiles(SRC)) {
+      const rel = path.relative(SRC, file);
+      const inUi = rel.startsWith(`ui${path.sep}`);
+      if (inUi) uiFiles++;
+      for (const spec of specifiers(await fs.readFile(file, 'utf8'))) {
+        if (!inUi && (isReact(spec) || spec.startsWith('react-') || spec.startsWith('react/')))
+          reactOutside.push(`${rel} → ${spec}`);
+        if (!inUi && /(^|\/)ui(\/|$)/.test(spec)) uiImporters.push(`${rel} → ${spec}`);
+      }
+    }
+    expect(uiFiles).toBeGreaterThan(1);
+    expect(reactOutside).toEqual([]);
+    expect(uiImporters).toEqual([]);
+  });
+
+  it('the package depends on zod only at runtime; react is an optional peer', async () => {
     const pkg = JSON.parse(await fs.readFile(path.join(SRC, '..', 'package.json'), 'utf8')) as {
       dependencies?: Record<string, string>;
     };
     expect(Object.keys(pkg.dependencies ?? {})).toEqual(['zod']);
+    const full = JSON.parse(await fs.readFile(path.join(SRC, '..', 'package.json'), 'utf8')) as {
+      peerDependencies?: Record<string, string>;
+      peerDependenciesMeta?: Record<string, { optional?: boolean }>;
+    };
+    expect(Object.keys(full.peerDependencies ?? {})).toEqual(['react']);
+    expect(full.peerDependenciesMeta?.react?.optional).toBe(true);
   });
 });
 
@@ -121,6 +151,7 @@ describe('the browser-safe entry (@flivideo/core/contracts, v0.7.2)', () => {
       'shuttle',
       'shuttleLabel',
       'FORWARD_SPEEDS',
+      'speedWindow',
     ]) {
       expect(contracts[name], name).toBeDefined();
     }

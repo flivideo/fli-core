@@ -140,8 +140,10 @@ export {
   jkl,
   shuttle,
   shuttleLabel,
+  speedWindow,
   type JklKey,
   type ShuttleAction,
+  type SpeedWindow,
 } from './transport.js';
 
 export {
