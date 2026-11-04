@@ -2,6 +2,17 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.33.0 — 2026-11-04
+
+Remembered speed (`flivideo/.appynet/briefs/speed-remember-dev.md`).
+
+### Added
+
+- `@flivideo/core/ui`: `rememberedSpeed(appKey, default, { migrateFrom?, storage? })` → `{ get, set }` on
+  `localStorage['fli:<app>:speed']`, snapped to the nearest `FORWARD_SPEEDS` rung; blocked or absent storage yields the
+  default and never throws; `migrateFrom` moves an old key across once (write new, remove old). Also `snapSpeed`,
+  `speedKey`, `SpeedStorage`. Framework-free (no react), browser-only by intent.
+
 ## v0.32.0 — 2026-11-04
 
 The shared speed control (`flivideo/docs/research/speed-control-plan-2026-11-04.md`, step 1).
