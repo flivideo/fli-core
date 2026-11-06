@@ -2,7 +2,7 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
-## v0.34.0 — unreleased (branch `guide-parts`)
+## v0.34.0 — 2026-11-06
 
 Guide parts: split the old `structure` type, a `sales` form, typed who-for header keys.
 
