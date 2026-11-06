@@ -1,12 +1,21 @@
 import { describe, expect, it } from 'vitest';
 import * as contracts from '../src/contracts.js';
-import { GUIDE_REQUIRED, isGuide, parseGuide, splitFrontmatter } from '../src/index.js';
+import {
+  GUIDE_DOC_TYPES,
+  GUIDE_META_KEYS,
+  GUIDE_REQUIRED,
+  GUIDE_TYPE_ALIASES,
+  isGuide,
+  normaliseGuideType,
+  parseGuide,
+  splitFrontmatter,
+} from '../src/index.js';
 
 const HEADER: Record<(typeof GUIDE_REQUIRED)[number], string> = {
   schema: 'storypilot.guide/1',
   id: 'build-story',
   label: 'Build story (long form)',
-  type: 'structure',
+  type: 'build',
   level: 'global',
   gist: 'Five beats: problem → why → tension → turn → resolution. No invented drama.',
 };
@@ -90,6 +99,63 @@ describe('parseGuide (storypilot.guide/1)', () => {
       retrieval_pool_host: 'mac-mini-m4 (100.82.235.39) — NOT synced: check the M4',
       tags: ['voice', 'verbal'],
     });
+  });
+
+  it.each(['voice', 'verbal', 'build', 'video', 'lens', 'other'])('accepts type %s', (t) => {
+    const p = parseGuide(file({ ...HEADER, type: t }));
+    expect(isGuide(p) ? p.header.type : p.error).toBe(t);
+  });
+
+  it('reads the old type structure as build (alias), and says so in GUIDE_TYPE_ALIASES', () => {
+    const p = parseGuide(file({ ...HEADER, type: 'structure' }));
+    expect(isGuide(p) ? p.header.type : p.error).toBe('build');
+    expect(GUIDE_TYPE_ALIASES).toEqual({ structure: 'build' });
+    expect(normaliseGuideType('structure')).toBe('build');
+    expect(normaliseGuideType('voice')).toBe('voice');
+    expect(GUIDE_DOC_TYPES).not.toContain('structure');
+  });
+
+  it('accepts form sales in appliesTo', () => {
+    const p = parseGuide(file(HEADER, 'appliesTo: {form: sales, length: long}'));
+    expect(isGuide(p) ? p.header.appliesTo : p.error).toEqual({ form: 'sales', length: 'long' });
+  });
+
+  it('reads the who-for keys typed, and keeps every other key', () => {
+    const extra = [
+      'part: voice-profile',
+      'style: example-style',
+      'narrator: Pat Example',
+      'author: a test',
+      'layer: synthesis',
+      'canonical_source: made-up corpus of 3 texts',
+      'distilled_from: 3 texts',
+      'corpus_window: 2020 … 2021',
+      'confidence: low',
+      'evidence: /nowhere/notes.md',
+      'owner: example-library',
+      'promotedTo: [brand-x]',
+      'something_else: kept',
+    ].join('\n');
+    const p = parseGuide(file({ ...HEADER, type: 'voice' }, extra));
+    expect(isGuide(p)).toBe(true);
+    if (!isGuide(p)) return;
+    expect(p.header).toMatchObject({
+      part: 'voice-profile',
+      style: 'example-style',
+      narrator: 'Pat Example',
+      layer: 'synthesis',
+      owner: 'example-library',
+      promotedTo: ['brand-x'],
+      confidence: 'low',
+      something_else: 'kept',
+    });
+    for (const k of GUIDE_META_KEYS) expect(p.header).toHaveProperty(k);
+  });
+
+  it('a bad layer is invalid; a header without any who-for key stays valid', () => {
+    const bad = parseGuide(file(HEADER, 'layer: rumour'));
+    expect(isGuide(bad) ? null : bad.error).toMatch(/^invalid: layer: /);
+    expect(isGuide(parseGuide(file(HEADER)))).toBe(true);
   });
 
   it('a file with no frontmatter: "no guide header", the whole text as body', () => {

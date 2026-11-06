@@ -6,7 +6,8 @@ import { KebabSlug } from './project-folder.js';
  * prose the writer reads as its body (brief `flivideo/.appynet/briefs/typed-guides-dev.md`, research
  * `flivideo/docs/research/storypilot-guide-object-model-2026-11-04.md`).
  *
- * - Required: `schema`, `id`, `label`, `type`, `level`, `gist`. Optional: `appliesTo`, `brands`.
+ * - Required: `schema`, `id`, `label`, `type`, `level`, `gist`. Optional: `appliesTo`, `brands`, and the who-for keys
+ *   in `GUIDE_META_KEYS` (`layer` must be canonical | synthesis; `promotedTo` a list; the rest text).
  * - Other header keys are KEPT and ignored: the forge skills write provenance there (`version`, `distilled_from`,
  *   `corpus_window` …) on purpose. Never strip them.
  * - A new kind of guide is a new file with this header, no code.
@@ -18,17 +19,52 @@ import { KebabSlug } from './project-folder.js';
 
 export const GUIDE_SCHEMA = 'storypilot.guide/1';
 
-export const GuideDocType = z.enum(['verbal', 'voice', 'structure', 'lens', 'other']);
+/**
+ * The parts a script is told with (`voice` = who speaks, `verbal` = how, `build` = the spine, `video` = the package's
+ * slots), plus `lens` (a review check) and `other`. v0.34.0: `structure` split into `build` and `video`.
+ */
+export const GUIDE_DOC_TYPES = ['voice', 'verbal', 'build', 'video', 'lens', 'other'] as const;
+export const GuideDocType = z.enum(GUIDE_DOC_TYPES);
 export type GuideDocType = z.infer<typeof GuideDocType>;
+/** Old type names still read: a file saying `type: structure` reads as `build` (its spine is what most such files held). */
+export const GUIDE_TYPE_ALIASES: Readonly<Record<string, GuideDocType>> = { structure: 'build' };
+/** A header's `type` value with old names mapped (`structure` → `build`); anything else is returned as given. */
+export const normaliseGuideType = (t: unknown): unknown =>
+  typeof t === 'string' && Object.hasOwn(GUIDE_TYPE_ALIASES, t) ? GUIDE_TYPE_ALIASES[t] : t;
 export const GuideDocLevel = z.enum(['global', 'brand', 'series', 'video']);
 export type GuideDocLevel = z.infer<typeof GuideDocLevel>;
 export const GuideDocAppliesTo = z
   .object({
-    form: z.enum(['story', 'tutorial']).optional(),
+    form: z.enum(['story', 'tutorial', 'sales']).optional(),
     length: z.enum(['short', 'long']).optional(),
   })
   .strict();
 export type GuideDocAppliesTo = z.infer<typeof GuideDocAppliesTo>;
+
+/** `canonical` = the owner's own words or rulings; `synthesis` = distilled from a corpus. */
+export const GuideDocLayer = z.enum(['canonical', 'synthesis']);
+export type GuideDocLayer = z.infer<typeof GuideDocLayer>;
+
+/**
+ * Optional "who is it for" keys (v0.34.0). Typed when present; a file without them stays valid. Any other key is kept.
+ * `owner` = who may edit it; `promotedTo` = the brands that use it as their default.
+ */
+export const GUIDE_META_KEYS = [
+  'part',
+  'style',
+  'narrator',
+  'author',
+  'layer',
+  'canonical_source',
+  'distilled_from',
+  'corpus_window',
+  'confidence',
+  'evidence',
+  'owner',
+  'promotedTo',
+] as const;
+
+const OptText = z.string().trim().min(1).nullable().optional();
 
 /** The keys every guide header must carry, in the order the reasons name them. */
 export const GUIDE_REQUIRED = ['schema', 'id', 'label', 'type', 'level', 'gist'] as const;
@@ -37,7 +73,7 @@ export const GuideDoc = z.looseObject({
   schema: z.literal(GUIDE_SCHEMA),
   id: KebabSlug,
   label: z.string().trim().min(1),
-  type: GuideDocType,
+  type: z.preprocess(normaliseGuideType, GuideDocType),
   level: GuideDocLevel,
   /** ONE line: what this guide tells the writer. Shown as the card's one-liner. */
   gist: z
@@ -47,6 +83,14 @@ export const GuideDoc = z.looseObject({
     .refine((s) => !/[\r\n]/.test(s), 'must be one line'),
   appliesTo: GuideDocAppliesTo.optional(),
   brands: z.array(z.string().min(1)).optional(),
+  part: OptText,
+  style: OptText,
+  narrator: OptText,
+  author: OptText,
+  layer: GuideDocLayer.optional(),
+  canonical_source: OptText,
+  owner: OptText,
+  promotedTo: z.array(z.string().min(1)).optional(),
 });
 export type GuideDoc = z.infer<typeof GuideDoc>;
 

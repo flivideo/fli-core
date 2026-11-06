@@ -2,6 +2,24 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.34.0 — unreleased (branch `guide-parts`)
+
+Guide parts: split the old `structure` type, a `sales` form, typed who-for header keys.
+
+### Changed
+
+- `GuideDocType` is now `voice · verbal · build · video · lens · other` (`GUIDE_DOC_TYPES`). `structure` is gone as a
+  value but still READS: `type: structure` parses as `build` (`GUIDE_TYPE_ALIASES`, `normaliseGuideType`). Old files
+  keep working unchanged.
+- `appliesTo.form` gains `sales`.
+
+### Added
+
+- Optional, typed when present: `part`, `style`, `narrator`, `author`, `layer` (`canonical | synthesis`,
+  `GuideDocLayer`), `canonical_source`, `owner`, `promotedTo` (a list). `GUIDE_META_KEYS` lists the who-for keys; the
+  rest (`distilled_from`, `corpus_window`, `confidence`, `evidence`) stay as kept, untyped keys. Unknown keys are still
+  kept.
+
 ## v0.33.0 — 2026-11-04
 
 Remembered speed (`flivideo/.appynet/briefs/speed-remember-dev.md`).
