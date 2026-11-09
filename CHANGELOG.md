@@ -6,6 +6,10 @@ Releases before v0.26.0 are described in their tag's commit message (`git log --
 
 Point and tell: a person marks a moment in an app, says what's wrong and sends it to a live Claude conversation.
 
+### Security
+
+The door trusts a Claude session file only if its `pid` and `procStart` match the running process. A file left by a crash, whose pid has been reused, is not listed.
+
 ### Added
 
 - `TellMessage`, saved on an ordinary note at `meta.tell`, with `tellNoteInput`, `tellLine` and `tellDeliveryChange`. App-neutral; an

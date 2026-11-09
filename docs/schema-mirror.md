@@ -3,7 +3,7 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `81319bdb7d73` · **generated** 2026-11-09T15:10:42+00:00
+- **commit** `5a6d0d334e11` · **generated** 2026-11-09T18:08:20+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 40 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
@@ -24,7 +24,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
 - `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :67 · `LEGACY_FOLDERS` (set) :70 · `MOTION_MACHINERY` (set) :126 · `ProjectTier` (set) :140 · `OverlayRole` (set) :151 · `ProjectEntry` :154 · `OverlayPaths` :201 · `ProjectLayout` (set) :296 · `ProjectLayoutPaths` :299
 - `src/control-file.ts` — `ControlFile` :18 · `ControlFileRead` :30 · `ControlFileOptions` :39
-- `src/conversations.ts` — `ConversationOptions` :37 · `LiveConversation` :47 · `ConversationList` :62 · `AT_PROMPT_STATUSES` (set) :94 · `SessionFile` :96 · `ConversationRefusal` (set) :188 · `SendResult` :198 · `SendOptions` :217 · `TranscriptRow` :328 · `ConversationMessage` :365 · `ConversationTail` :372
+- `src/conversations.ts` — `ConversationOptions` :37 · `LiveConversation` :47 · `ConversationList` :62 · `AT_PROMPT_STATUSES` (set) :94 · `SessionFile` :96 · `ConversationRefusal` (set) :207 · `SendResult` :217 · `SendOptions` :236 · `TranscriptRow` :347 · `ConversationMessage` :384 · `ConversationTail` :391
 - `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
 - `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
@@ -305,38 +305,38 @@ What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are 
 | `absent` | `src/control-file.ts:34` |
 | `invalid` | `src/control-file.ts:35` |
 
-### `src/conversations.ConversationRefusal` — `src/conversations.ts:188-195`
+### `src/conversations.ConversationRefusal` — `src/conversations.ts:207-214`
 
 *`z.enum` `ConversationRefusal` - a single declaring symbol*
 
-*aliases* `ConversationRefusal` `src/conversations.ts:196`
+*aliases* `ConversationRefusal` `src/conversations.ts:215`
 
 | value | declared at |
 |---|---|
-| `no-such-conversation` | `src/conversations.ts:189` |
-| `not-at-prompt` | `src/conversations.ts:190` |
-| `nothing-to-send` | `src/conversations.ts:191` |
-| `too-long` | `src/conversations.ts:192` |
-| `unsafe-start` | `src/conversations.ts:193` |
-| `delivery-failed` | `src/conversations.ts:194` |
+| `no-such-conversation` | `src/conversations.ts:208` |
+| `not-at-prompt` | `src/conversations.ts:209` |
+| `nothing-to-send` | `src/conversations.ts:210` |
+| `too-long` | `src/conversations.ts:211` |
+| `unsafe-start` | `src/conversations.ts:212` |
+| `delivery-failed` | `src/conversations.ts:213` |
 
-### `src/conversations.SendResult[0].outcome` — `src/conversations.ts:200`
+### `src/conversations.SendResult[0].outcome` — `src/conversations.ts:219`
 
 *`z.enum` `outcome` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `confirmed` | `src/conversations.ts:200` |
-| `typed-unconfirmed` | `src/conversations.ts:200` |
+| `confirmed` | `src/conversations.ts:219` |
+| `typed-unconfirmed` | `src/conversations.ts:219` |
 
-### `src/conversations.ConversationMessage.role` — `src/conversations.ts:366`
+### `src/conversations.ConversationMessage.role` — `src/conversations.ts:385`
 
 *`z.enum` `role` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `user` | `src/conversations.ts:366` |
-| `assistant` | `src/conversations.ts:366` |
+| `user` | `src/conversations.ts:385` |
+| `assistant` | `src/conversations.ts:385` |
 
 ### `src/estate.scanned().state` — `src/estate.ts:17-27`
 
@@ -1956,84 +1956,86 @@ Control-file discovery (agent-drivable step 2, David 2026-09-23): a running app 
 | `conversations` | `z.array(LiveConversation) → src/conversations.LiveConversation` | — | `src/conversations.ts:63` |  |
 | `reason` | `z.string().optional()` | — | `src/conversations.ts:65` | Why the list is empty, when it is. |
 
-### `src/conversations.SessionFile` — interface — `src/conversations.ts:96-102`
+### `src/conversations.SessionFile` — interface — `src/conversations.ts:96-104`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `?: unknown` | — | `src/conversations.ts:97` |
-| `sessionId` | `?: unknown` | — | `src/conversations.ts:98` |
-| `status` | `?: unknown` | — | `src/conversations.ts:99` |
-| `waitingFor` | `?: unknown` | — | `src/conversations.ts:100` |
-| `cwd` | `?: unknown` | — | `src/conversations.ts:101` |
+| `pid` | `?: unknown` | — | `src/conversations.ts:97` |
+| `procStart` | `?: unknown` | — | `src/conversations.ts:98` |
+| `kind` | `?: unknown` | — | `src/conversations.ts:99` |
+| `sessionId` | `?: unknown` | — | `src/conversations.ts:100` |
+| `status` | `?: unknown` | — | `src/conversations.ts:101` |
+| `waitingFor` | `?: unknown` | — | `src/conversations.ts:102` |
+| `cwd` | `?: unknown` | — | `src/conversations.ts:103` |
 
-### `src/conversations.SendResult` — zod-union — `src/conversations.ts:198-206`
+### `src/conversations.SendResult` — zod-union — `src/conversations.ts:217-225`
 
-*aliases* `SendResult` `src/conversations.ts:207`
+*aliases* `SendResult` `src/conversations.ts:226`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `z.object` | `z.object({ outcome: z.enum(['confirmed', 'typed-unconfirmed']), conversation: z.string(), label: z.string(), sent: z.int().min(0) })` | — | `src/conversations.ts:199` |
-| `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() })` | `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() }) → src/conversations.ConversationRefusal` | — | `src/conversations.ts:205` |
+| `z.object` | `z.object({ outcome: z.enum(['confirmed', 'typed-unconfirmed']), conversation: z.string(), label: z.string(), sent: z.int().min(0) })` | — | `src/conversations.ts:218` |
+| `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() })` | `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() }) → src/conversations.ConversationRefusal` | — | `src/conversations.ts:224` |
 
-### `src/conversations.SendResult[0]` — zod-object — `src/conversations.ts:199-204`
-
-| field | type | default | at |
-|---|---|---|---|
-| `outcome` | `z.enum(['confirmed', 'typed-unconfirmed'])` | — | `src/conversations.ts:200` |
-| `conversation` | `z.string()` | — | `src/conversations.ts:201` |
-| `label` | `z.string()` | — | `src/conversations.ts:202` |
-| `sent` | `z.int().min(0)` | — | `src/conversations.ts:203` |
-
-### `src/conversations.SendResult[1]` — zod-object — `src/conversations.ts:205`
+### `src/conversations.SendResult[0]` — zod-object — `src/conversations.ts:218-223`
 
 | field | type | default | at |
 |---|---|---|---|
-| `outcome` | `z.literal('refused')` | — | `src/conversations.ts:205` |
-| `reason` | `ConversationRefusal → src/conversations.ConversationRefusal` | — | `src/conversations.ts:205` |
-| `message` | `z.string()` | — | `src/conversations.ts:205` |
+| `outcome` | `z.enum(['confirmed', 'typed-unconfirmed'])` | — | `src/conversations.ts:219` |
+| `conversation` | `z.string()` | — | `src/conversations.ts:220` |
+| `label` | `z.string()` | — | `src/conversations.ts:221` |
+| `sent` | `z.int().min(0)` | — | `src/conversations.ts:222` |
 
-### `src/conversations.SendOptions` — interface — `src/conversations.ts:217-222`
+### `src/conversations.SendResult[1]` — zod-object — `src/conversations.ts:224`
+
+| field | type | default | at |
+|---|---|---|---|
+| `outcome` | `z.literal('refused')` | — | `src/conversations.ts:224` |
+| `reason` | `ConversationRefusal → src/conversations.ConversationRefusal` | — | `src/conversations.ts:224` |
+| `message` | `z.string()` | — | `src/conversations.ts:224` |
+
+### `src/conversations.SendOptions` — interface — `src/conversations.ts:236-241`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `confirmMs` | `?: number` | — | `src/conversations.ts:219` | How long to look for the text in the transcript. Default 5 s. |
-| `maxChars` | `?: number` | — | `src/conversations.ts:221` | Most text this door takes. Default `CONVERSATION_MAX_CHARS`. |
+| `confirmMs` | `?: number` | — | `src/conversations.ts:238` | How long to look for the text in the transcript. Default 5 s. |
+| `maxChars` | `?: number` | — | `src/conversations.ts:240` | Most text this door takes. Default `CONVERSATION_MAX_CHARS`. |
 
-### `src/conversations.TranscriptRow` — interface — `src/conversations.ts:328-334`
-
-| field | type | default | at |
-|---|---|---|---|
-| `type` | `?: string` | — | `src/conversations.ts:329` |
-| `isMeta` | `?: boolean` | — | `src/conversations.ts:330` |
-| `isCompactSummary` | `?: boolean` | — | `src/conversations.ts:331` |
-| `timestamp` | `?: string` | — | `src/conversations.ts:332` |
-| `message` | `?: { content?: unknown }` | — | `src/conversations.ts:333` |
-
-### `src/conversations.TranscriptRow.message` — type — `src/conversations.ts:333`
+### `src/conversations.TranscriptRow` — interface — `src/conversations.ts:347-353`
 
 | field | type | default | at |
 |---|---|---|---|
-| `content` | `?: unknown` | — | `src/conversations.ts:333` |
+| `type` | `?: string` | — | `src/conversations.ts:348` |
+| `isMeta` | `?: boolean` | — | `src/conversations.ts:349` |
+| `isCompactSummary` | `?: boolean` | — | `src/conversations.ts:350` |
+| `timestamp` | `?: string` | — | `src/conversations.ts:351` |
+| `message` | `?: { content?: unknown }` | — | `src/conversations.ts:352` |
 
-### `src/conversations.ConversationMessage` — zod-object — `src/conversations.ts:365-369`
-
-*aliases* `ConversationMessage` `src/conversations.ts:370`
+### `src/conversations.TranscriptRow.message` — type — `src/conversations.ts:352`
 
 | field | type | default | at |
 |---|---|---|---|
-| `role` | `z.enum(['user', 'assistant'])` | — | `src/conversations.ts:366` |
-| `text` | `z.string()` | — | `src/conversations.ts:367` |
-| `at` | `z.string().nullable()` | — | `src/conversations.ts:368` |
+| `content` | `?: unknown` | — | `src/conversations.ts:352` |
 
-### `src/conversations.ConversationTail` — zod-object — `src/conversations.ts:372-377`
+### `src/conversations.ConversationMessage` — zod-object — `src/conversations.ts:384-388`
 
-*aliases* `ConversationTail` `src/conversations.ts:378`
+*aliases* `ConversationMessage` `src/conversations.ts:389`
+
+| field | type | default | at |
+|---|---|---|---|
+| `role` | `z.enum(['user', 'assistant'])` | — | `src/conversations.ts:385` |
+| `text` | `z.string()` | — | `src/conversations.ts:386` |
+| `at` | `z.string().nullable()` | — | `src/conversations.ts:387` |
+
+### `src/conversations.ConversationTail` — zod-object — `src/conversations.ts:391-396`
+
+*aliases* `ConversationTail` `src/conversations.ts:397`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `conversation` | `z.string()` | — | `src/conversations.ts:373` |  |
-| `messages` | `z.array(ConversationMessage) → src/conversations.ConversationMessage` | — | `src/conversations.ts:374` |  |
-| `note` | `z.string().nullable()` | — | `src/conversations.ts:376` | Why there's nothing to show, when there isn't. |
+| `conversation` | `z.string()` | — | `src/conversations.ts:392` |  |
+| `messages` | `z.array(ConversationMessage) → src/conversations.ConversationMessage` | — | `src/conversations.ts:393` |  |
+| `note` | `z.string().nullable()` | — | `src/conversations.ts:395` | Why there's nothing to show, when there isn't. |
 
 ### `src/estate.scanned()` — zod-factory (zod-discriminated-union) on `state` — `src/estate.ts:17-27`
 

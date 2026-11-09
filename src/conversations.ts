@@ -94,11 +94,20 @@ async function tmuxOf(deps: ConversationOptions): Promise<string> {
 export const AT_PROMPT_STATUSES: readonly string[] = ['idle', 'shell'];
 
 interface SessionFile {
+  pid?: unknown;
+  procStart?: unknown;
   kind?: unknown;
   sessionId?: unknown;
   status?: unknown;
   waitingFor?: unknown;
   cwd?: unknown;
+}
+
+/** Whether a session file was written by this process. Anything missing or unreadable is no. */
+function isThisProcess(session: SessionFile, pid: string, started: string): boolean {
+  if (session.pid !== Number(pid) || typeof session.procStart !== 'string' || !started)
+    return false;
+  return session.procStart.trim().split(/\s+/).join(' ') === started;
 }
 
 /** Every live Claude conversation in a tmux pane. A pane holding two is two rows. */
@@ -129,15 +138,23 @@ export async function listLiveConversations(
 
   let processes: string;
   try {
-    processes = await run('/bin/ps', ['-A', '-o', 'pid=,tty=,stat=']);
+    // Claude Code records lstart in the C locale and UTC. Measured on 2.1.319: a local-time ps is hours off and refuses every session.
+    processes = await run('/usr/bin/env', [
+      'LC_ALL=C',
+      'TZ=UTC',
+      '/bin/ps',
+      '-A',
+      '-o',
+      'pid=,tty=,stat=,lstart=',
+    ]);
   } catch (e) {
     return { conversations: [], reason: `Can't list processes: ${message(e)}` };
   }
-  const pidsByTty = new Map<string, Array<{ pid: string; foreground: boolean }>>();
+  const pidsByTty = new Map<string, Array<{ pid: string; foreground: boolean; started: string }>>();
   for (const line of processes.split('\n')) {
-    const [pid, tty, stat = ''] = line.trim().split(/\s+/);
+    const [pid, tty, stat = '', ...lstart] = line.trim().split(/\s+/);
     if (!pid || !tty) continue;
-    const row = { pid, foreground: stat.includes('+') };
+    const row = { pid, foreground: stat.includes('+'), started: lstart.join(' ') };
     pidsByTty.set(tty, [...(pidsByTty.get(tty) ?? []), row]);
   }
 
@@ -150,7 +167,7 @@ export async function listLiveConversations(
 
   const conversations: LiveConversation[] = [];
   for (const pane of panes) {
-    for (const { pid, foreground } of pidsByTty.get(pane.tty) ?? []) {
+    for (const { pid, foreground, started } of pidsByTty.get(pane.tty) ?? []) {
       if (!files.has(`${pid}.json`)) continue;
       let session: SessionFile;
       try {
@@ -161,6 +178,8 @@ export async function listLiveConversations(
         continue;
       }
       if (session.kind !== 'interactive' || typeof session.sessionId !== 'string') continue;
+      // A file left by a crash names a pid that can be reused, by a shell for instance. Same pid and same start time, or it isn't this Claude.
+      if (!isThisProcess(session, pid, started)) continue;
       const status = typeof session.status === 'string' ? session.status : null;
       conversations.push({
         id: session.sessionId,

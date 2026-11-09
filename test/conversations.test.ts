@@ -13,6 +13,9 @@ import {
 } from '../src/index.js';
 import { tempDir } from './helpers/fixtures.js';
 
+/** What `ps -o lstart=` prints, day padded, as Claude Code records it. */
+const STARTED = 'Mon Jan  5 10:00:00 2026';
+
 type Pane = { label: string; paneId: string; tty: string; inMode?: boolean };
 
 /** A fake machine: tmux panes, the processes on their terminals, and Claude's session files. */
@@ -32,7 +35,9 @@ async function machine(opts: {
   for (const [pid, body] of Object.entries(opts.noSessionsDir ? {} : (opts.sessions ?? {}))) {
     await fs.writeFile(
       path.join(home, 'sessions', `${pid}.json`),
-      typeof body === 'string' ? body : JSON.stringify(body),
+      typeof body === 'string'
+        ? body
+        : JSON.stringify({ pid: Number(pid), procStart: STARTED, ...body }),
     );
   }
   const calls: string[][] = [];
@@ -42,11 +47,13 @@ async function machine(opts: {
     sleep: async () => {},
     run: async (file, args) => {
       calls.push([file, ...args]);
-      if (file === '/bin/ps') {
+      if (file === '/usr/bin/env' && args.includes('/bin/ps')) {
         if (opts.psFails) throw new Error('ps failed');
         return Object.entries(opts.pids ?? {})
           .flatMap(([tty, pids]) =>
-            pids.map((p) => `  ${p} ${tty} ${opts.background?.includes(p) ? 'T' : 'S+'}`),
+            pids.map(
+              (p) => `  ${p} ${tty} ${opts.background?.includes(p) ? 'T' : 'S+'} ${STARTED}`,
+            ),
           )
           .join('\n');
       }
@@ -78,6 +85,36 @@ const typed = (calls: string[][]) =>
   calls.filter((c) => ['set-buffer', 'paste-buffer', 'send-keys'].includes(String(c[1])));
 
 describe('listLiveConversations', () => {
+  it.each([
+    [
+      'a stale file whose pid was reused by another process',
+      { procStart: 'Sun Jan  4 09:00:00 2026' },
+    ],
+    ['a file naming another pid', { pid: 999 }],
+    ['a file with no start time', { procStart: undefined }],
+    ['a file with no pid', { pid: undefined }],
+    ['a start time that is not text', { procStart: 12345 }],
+  ])('does not list %s', async (_name, over) => {
+    const m = await machine({ ...one, sessions: { '101': session(over) } });
+    expect((await listLiveConversations(m.deps)).conversations).toEqual([]);
+  });
+
+  it('asks ps for the start time in UTC and the C locale, as the session file records it', async () => {
+    const m = await machine(one);
+    await listLiveConversations(m.deps);
+    expect(m.calls.find((c) => c.includes('/bin/ps'))?.slice(0, 4)).toEqual([
+      '/usr/bin/env',
+      'LC_ALL=C',
+      'TZ=UTC',
+      '/bin/ps',
+    ]);
+  });
+
+  it('lists the session when pid and start time both match', async () => {
+    const m = await machine(one);
+    expect((await listLiveConversations(m.deps)).conversations).toHaveLength(1);
+  });
+
   it('finds a Claude on the pane by its terminal, not its parent or command name', async () => {
     const { deps } = await machine(one);
     expect(await listLiveConversations(deps)).toEqual({
@@ -295,7 +332,36 @@ describe('sendToConversation', () => {
         if (lists === 2)
           await fs.writeFile(
             path.join(m.home, 'sessions', '101.json'),
-            JSON.stringify(session({ status: 'waiting', waitingFor: 'permission prompt' })),
+            JSON.stringify(
+              session({
+                pid: 101,
+                procStart: STARTED,
+                status: 'waiting',
+                waitingFor: 'permission prompt',
+              }),
+            ),
+          );
+      }
+      return real(file, args);
+    };
+    expect(await sendToConversation('sid-1', 'hi', 'n_x', m.deps)).toMatchObject({
+      outcome: 'refused',
+      reason: 'not-at-prompt',
+    });
+    expect(typed(m.calls).some((c) => c.includes('Enter'))).toBe(false);
+  });
+
+  it('refuses if the process stopped being that Claude between the paste and Enter', async () => {
+    const m = await machine(one);
+    let lists = 0;
+    const real = m.deps.run as NonNullable<typeof m.deps.run>;
+    m.deps.run = async (file, args) => {
+      if (args[0] === 'list-panes') {
+        lists += 1;
+        if (lists === 2)
+          await fs.writeFile(
+            path.join(m.home, 'sessions', '101.json'),
+            JSON.stringify(session({ pid: 101, procStart: 'Sun Jan  4 09:00:00 2026' })),
           );
       }
       return real(file, args);
