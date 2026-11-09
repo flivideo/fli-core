@@ -288,7 +288,7 @@ describe('sendToConversation', () => {
   it('does not press Enter if the session stopped being ready after the paste', async () => {
     const m = await machine(one);
     let lists = 0;
-    const real = m.deps.run!;
+    const real = m.deps.run as NonNullable<typeof m.deps.run>;
     m.deps.run = async (file, args) => {
       if (args[0] === 'list-panes') {
         lists += 1;
