@@ -48,7 +48,7 @@ Show the last few messages with `readConversationTail(id, 3)` if it helps.
 | Reason | Meaning |
 |---|---|
 | `no-such-conversation` | Not a live Claude in tmux, or it has ended |
-| `not-at-prompt` | Mid-turn, in copy mode, or a status this version doesn't know |
+| `not-at-prompt` | Mid-turn, waiting on a dialog, in copy mode, not in the foreground, or a status this version doesn't know |
 | `nothing-to-send` | Empty after cleaning |
 | `too-long` | Over the limit |
 | `unsafe-start` | Starts with `/` or `!`, which would run as a command. `tellLine` can't produce this |

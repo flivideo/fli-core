@@ -11,7 +11,7 @@ import { z } from 'zod';
  *  - only a real live Claude session can be chosen: a tmux pane with a process that has a `sessions/<pid>.json` of kind
  *    `interactive`. A pane's command name can't tell you (it's often a version number), and a pane's shell needn't be the
  *    parent, so panes are matched by terminal;
- *  - a send goes only when that session is at its prompt: status `idle`, the pane not in copy mode, and Claude the
+ *  - a send goes only when that session is at its prompt: status `idle` or `shell` with nothing waiting, the pane not in copy mode, and Claude the
  *    foreground process on its terminal. Text and Enter given to a permission prompt could answer it with nobody seeing,
  *    and given to a shell would run there. An unknown status refuses;
  *  - text is flattened to one line and can't start with `/` or `!`, which Claude Code reads as commands;
@@ -54,7 +54,7 @@ export const LiveConversation = z.object({
   status: z.string().nullable(),
   /** The working folder, which also locates the transcript. */
   cwd: z.string().nullable(),
-  /** True only when a send would be allowed now: idle, not in copy mode, and in the foreground of its terminal. */
+  /** True only when a send would be allowed now: at its prompt with nothing waiting, not in copy mode, and in the foreground of its terminal. */
   atPrompt: z.boolean(),
 });
 export type LiveConversation = z.infer<typeof LiveConversation>;
@@ -86,13 +86,18 @@ async function tmuxOf(deps: ConversationOptions): Promise<string> {
   return 'tmux';
 }
 
-/** The status a session must report before anything is typed into it. */
-export const AT_PROMPT_STATUS = 'idle';
+/**
+ * The statuses of a session sitting at its prompt: `idle`, or `shell` when background shells are running. Both only with nothing
+ * in `waitingFor`, which names what a dialog needs. Every other status, or none, refuses. Measured on Claude Code 2.1.319 with a background
+ * shell running: a permission prompt and a question dialog report `waiting`; a turn in progress reports `busy`, never `shell`.
+ */
+export const AT_PROMPT_STATUSES: readonly string[] = ['idle', 'shell'];
 
 interface SessionFile {
   kind?: unknown;
   sessionId?: unknown;
   status?: unknown;
+  waitingFor?: unknown;
   cwd?: unknown;
 }
 
@@ -163,7 +168,12 @@ export async function listLiveConversations(
         paneId: pane.paneId,
         status,
         cwd: typeof session.cwd === 'string' ? session.cwd : null,
-        atPrompt: status === AT_PROMPT_STATUS && !pane.inMode && foreground,
+        atPrompt:
+          status !== null &&
+          AT_PROMPT_STATUSES.includes(status) &&
+          !session.waitingFor &&
+          !pane.inMode &&
+          foreground,
       });
     }
   }

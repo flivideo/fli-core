@@ -413,7 +413,7 @@ export {
 } from './tell.js';
 
 export {
-  AT_PROMPT_STATUS,
+  AT_PROMPT_STATUSES,
   CONVERSATION_MAX_CHARS,
   CONVERSATION_TAIL_BYTES,
   ConversationList,

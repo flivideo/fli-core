@@ -122,9 +122,28 @@ describe('listLiveConversations', () => {
     ]);
   });
 
+  it.each([['idle'], ['shell']])(
+    'is at its prompt when status is %s with nothing waiting',
+    async (status) => {
+      const { deps } = await machine({ ...one, sessions: { '101': session({ status }) } });
+      expect((await listLiveConversations(deps)).conversations[0]?.atPrompt).toBe(true);
+    },
+  );
+
+  it.each([
+    ['shell', 'permission prompt'],
+    ['idle', 'input needed'],
+  ])('is not at its prompt when status is %s but %s is waiting', async (status, waitingFor) => {
+    const { deps } = await machine({
+      ...one,
+      sessions: { '101': session({ status, waitingFor }) },
+    });
+    expect((await listLiveConversations(deps)).conversations[0]?.atPrompt).toBe(false);
+  });
+
   it.each([
     ['busy', {}],
-    ['shell', {}],
+    ['waiting', {}],
     ['some-new-state', {}],
   ])('is not at its prompt when status is %s', async (status) => {
     const { deps } = await machine({ ...one, sessions: { '101': session({ status }) } });
@@ -246,7 +265,7 @@ describe('sendToConversation', () => {
 
   it.each([
     [{ status: 'busy' }, 'writing-desk is busy.'],
-    [{ status: 'shell' }, "writing-desk isn't at its prompt."],
+    [{ status: 'shell', waitingFor: 'permission prompt' }, "writing-desk isn't at its prompt."],
     [{ status: 'waiting' }, "writing-desk isn't at its prompt."],
   ])('refuses %j and types nothing', async (over, why) => {
     const { deps, calls } = await machine({ ...one, sessions: { '101': session(over) } });

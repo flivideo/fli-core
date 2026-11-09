@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `20e202850a27` · **generated** 2026-11-09T12:37:49+00:00
+- **commit** `a5aaaf64f5eb` · **generated** 2026-11-09T14:57:54+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 40 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 343 | 102 | 6 | 9 | 40 | 6 |
+| 343 | 102 | 7 | 9 | 40 | 7 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -24,7 +24,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
 - `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :67 · `LEGACY_FOLDERS` (set) :70 · `MOTION_MACHINERY` (set) :126 · `ProjectTier` (set) :140 · `OverlayRole` (set) :151 · `ProjectEntry` :154 · `OverlayPaths` :201 · `ProjectLayout` (set) :296 · `ProjectLayoutPaths` :299
 - `src/control-file.ts` — `ControlFile` :18 · `ControlFileRead` :30 · `ControlFileOptions` :39
-- `src/conversations.ts` — `ConversationOptions` :37 · `LiveConversation` :47 · `ConversationList` :62 · `SessionFile` :92 · `ConversationRefusal` (set) :178 · `SendResult` :188 · `SendOptions` :207 · `TranscriptRow` :310 · `ConversationMessage` :347 · `ConversationTail` :354
+- `src/conversations.ts` — `ConversationOptions` :37 · `LiveConversation` :47 · `ConversationList` :62 · `AT_PROMPT_STATUSES` (set) :94 · `SessionFile` :96 · `ConversationRefusal` (set) :188 · `SendResult` :198 · `SendOptions` :217 · `TranscriptRow` :320 · `ConversationMessage` :357 · `ConversationTail` :364
 - `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
 - `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
@@ -81,10 +81,10 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**533** top-level declarations counted = **471** mirrored + **22** listed as gaps + **40** declared but not read.
+**534** top-level declarations counted = **472** mirrored + **22** listed as gaps + **40** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 6 functions, 2 function types, 43 literal constants.
+Not counted, as not schema-bearing: 6 functions, 2 function types, 42 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
@@ -305,38 +305,38 @@ What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are 
 | `absent` | `src/control-file.ts:34` |
 | `invalid` | `src/control-file.ts:35` |
 
-### `src/conversations.ConversationRefusal` — `src/conversations.ts:178-185`
+### `src/conversations.ConversationRefusal` — `src/conversations.ts:188-195`
 
 *`z.enum` `ConversationRefusal` - a single declaring symbol*
 
-*aliases* `ConversationRefusal` `src/conversations.ts:186`
+*aliases* `ConversationRefusal` `src/conversations.ts:196`
 
 | value | declared at |
 |---|---|
-| `no-such-conversation` | `src/conversations.ts:179` |
-| `not-at-prompt` | `src/conversations.ts:180` |
-| `nothing-to-send` | `src/conversations.ts:181` |
-| `too-long` | `src/conversations.ts:182` |
-| `unsafe-start` | `src/conversations.ts:183` |
-| `delivery-failed` | `src/conversations.ts:184` |
+| `no-such-conversation` | `src/conversations.ts:189` |
+| `not-at-prompt` | `src/conversations.ts:190` |
+| `nothing-to-send` | `src/conversations.ts:191` |
+| `too-long` | `src/conversations.ts:192` |
+| `unsafe-start` | `src/conversations.ts:193` |
+| `delivery-failed` | `src/conversations.ts:194` |
 
-### `src/conversations.SendResult[0].outcome` — `src/conversations.ts:190`
+### `src/conversations.SendResult[0].outcome` — `src/conversations.ts:200`
 
 *`z.enum` `outcome` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `confirmed` | `src/conversations.ts:190` |
-| `typed-unconfirmed` | `src/conversations.ts:190` |
+| `confirmed` | `src/conversations.ts:200` |
+| `typed-unconfirmed` | `src/conversations.ts:200` |
 
-### `src/conversations.ConversationMessage.role` — `src/conversations.ts:348`
+### `src/conversations.ConversationMessage.role` — `src/conversations.ts:358`
 
 *`z.enum` `role` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `user` | `src/conversations.ts:348` |
-| `assistant` | `src/conversations.ts:348` |
+| `user` | `src/conversations.ts:358` |
+| `assistant` | `src/conversations.ts:358` |
 
 ### `src/estate.scanned().state` — `src/estate.ts:17-27`
 
@@ -1377,6 +1377,17 @@ Each set below was read out of the real authority — control flow, membership t
 
 > **REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.**
 
+### `src/conversations.AT_PROMPT_STATUSES` — `src/conversations.ts:94`
+
+*module constant `AT_PROMPT_STATUSES` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
+
+| value | read from |
+|---|---|
+| `idle` | `src/conversations.ts:94` |
+| `shell` | `src/conversations.ts:94` |
+
+> **REFACTOR (minor): `AT_PROMPT_STATUSES` at src/conversations.ts:94 names the set but does not type it. A z.enum or `as const` + `typeof AT_PROMPT_STATUSES[number]` would make a wrong value a static error rather than a runtime miss.**
+
 ### `src/fs-utils.NO_HARD_LINKS` — `src/fs-utils.ts:44`
 
 *module constant `NO_HARD_LINKS` used in a `.has()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
@@ -1934,7 +1945,7 @@ Control-file discovery (agent-drivable step 2, David 2026-09-23): a running app 
 | `paneId` | `z.string()` | — | `src/conversations.ts:52` |  |
 | `status` | `z.string().nullable()` | — | `src/conversations.ts:54` | As Claude Code reports it. |
 | `cwd` | `z.string().nullable()` | — | `src/conversations.ts:56` | The working folder, which also locates the transcript. |
-| `atPrompt` | `z.boolean()` | — | `src/conversations.ts:58` | True only when a send would be allowed now: idle, not in copy mode, and in the foreground of its terminal. |
+| `atPrompt` | `z.boolean()` | — | `src/conversations.ts:58` | True only when a send would be allowed now: at its prompt with nothing waiting, not in copy mode, and in the foreground of its terminal. |
 
 ### `src/conversations.ConversationList` — zod-object — `src/conversations.ts:62-66`
 
@@ -1945,83 +1956,84 @@ Control-file discovery (agent-drivable step 2, David 2026-09-23): a running app 
 | `conversations` | `z.array(LiveConversation) → src/conversations.LiveConversation` | — | `src/conversations.ts:63` |  |
 | `reason` | `z.string().optional()` | — | `src/conversations.ts:65` | Why the list is empty, when it is. |
 
-### `src/conversations.SessionFile` — interface — `src/conversations.ts:92-97`
+### `src/conversations.SessionFile` — interface — `src/conversations.ts:96-102`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `?: unknown` | — | `src/conversations.ts:93` |
-| `sessionId` | `?: unknown` | — | `src/conversations.ts:94` |
-| `status` | `?: unknown` | — | `src/conversations.ts:95` |
-| `cwd` | `?: unknown` | — | `src/conversations.ts:96` |
+| `kind` | `?: unknown` | — | `src/conversations.ts:97` |
+| `sessionId` | `?: unknown` | — | `src/conversations.ts:98` |
+| `status` | `?: unknown` | — | `src/conversations.ts:99` |
+| `waitingFor` | `?: unknown` | — | `src/conversations.ts:100` |
+| `cwd` | `?: unknown` | — | `src/conversations.ts:101` |
 
-### `src/conversations.SendResult` — zod-union — `src/conversations.ts:188-196`
+### `src/conversations.SendResult` — zod-union — `src/conversations.ts:198-206`
 
-*aliases* `SendResult` `src/conversations.ts:197`
+*aliases* `SendResult` `src/conversations.ts:207`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `z.object` | `z.object({ outcome: z.enum(['confirmed', 'typed-unconfirmed']), conversation: z.string(), label: z.string(), sent: z.int().min(0) })` | — | `src/conversations.ts:189` |
-| `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() })` | `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() }) → src/conversations.ConversationRefusal` | — | `src/conversations.ts:195` |
+| `z.object` | `z.object({ outcome: z.enum(['confirmed', 'typed-unconfirmed']), conversation: z.string(), label: z.string(), sent: z.int().min(0) })` | — | `src/conversations.ts:199` |
+| `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() })` | `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() }) → src/conversations.ConversationRefusal` | — | `src/conversations.ts:205` |
 
-### `src/conversations.SendResult[0]` — zod-object — `src/conversations.ts:189-194`
-
-| field | type | default | at |
-|---|---|---|---|
-| `outcome` | `z.enum(['confirmed', 'typed-unconfirmed'])` | — | `src/conversations.ts:190` |
-| `conversation` | `z.string()` | — | `src/conversations.ts:191` |
-| `label` | `z.string()` | — | `src/conversations.ts:192` |
-| `sent` | `z.int().min(0)` | — | `src/conversations.ts:193` |
-
-### `src/conversations.SendResult[1]` — zod-object — `src/conversations.ts:195`
+### `src/conversations.SendResult[0]` — zod-object — `src/conversations.ts:199-204`
 
 | field | type | default | at |
 |---|---|---|---|
-| `outcome` | `z.literal('refused')` | — | `src/conversations.ts:195` |
-| `reason` | `ConversationRefusal → src/conversations.ConversationRefusal` | — | `src/conversations.ts:195` |
-| `message` | `z.string()` | — | `src/conversations.ts:195` |
+| `outcome` | `z.enum(['confirmed', 'typed-unconfirmed'])` | — | `src/conversations.ts:200` |
+| `conversation` | `z.string()` | — | `src/conversations.ts:201` |
+| `label` | `z.string()` | — | `src/conversations.ts:202` |
+| `sent` | `z.int().min(0)` | — | `src/conversations.ts:203` |
 
-### `src/conversations.SendOptions` — interface — `src/conversations.ts:207-212`
+### `src/conversations.SendResult[1]` — zod-object — `src/conversations.ts:205`
+
+| field | type | default | at |
+|---|---|---|---|
+| `outcome` | `z.literal('refused')` | — | `src/conversations.ts:205` |
+| `reason` | `ConversationRefusal → src/conversations.ConversationRefusal` | — | `src/conversations.ts:205` |
+| `message` | `z.string()` | — | `src/conversations.ts:205` |
+
+### `src/conversations.SendOptions` — interface — `src/conversations.ts:217-222`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `confirmMs` | `?: number` | — | `src/conversations.ts:209` | How long to look for the text in the transcript. Default 5 s. |
-| `maxChars` | `?: number` | — | `src/conversations.ts:211` | Most text this door takes. Default `CONVERSATION_MAX_CHARS`. |
+| `confirmMs` | `?: number` | — | `src/conversations.ts:219` | How long to look for the text in the transcript. Default 5 s. |
+| `maxChars` | `?: number` | — | `src/conversations.ts:221` | Most text this door takes. Default `CONVERSATION_MAX_CHARS`. |
 
-### `src/conversations.TranscriptRow` — interface — `src/conversations.ts:310-316`
-
-| field | type | default | at |
-|---|---|---|---|
-| `type` | `?: string` | — | `src/conversations.ts:311` |
-| `isMeta` | `?: boolean` | — | `src/conversations.ts:312` |
-| `isCompactSummary` | `?: boolean` | — | `src/conversations.ts:313` |
-| `timestamp` | `?: string` | — | `src/conversations.ts:314` |
-| `message` | `?: { content?: unknown }` | — | `src/conversations.ts:315` |
-
-### `src/conversations.TranscriptRow.message` — type — `src/conversations.ts:315`
+### `src/conversations.TranscriptRow` — interface — `src/conversations.ts:320-326`
 
 | field | type | default | at |
 |---|---|---|---|
-| `content` | `?: unknown` | — | `src/conversations.ts:315` |
+| `type` | `?: string` | — | `src/conversations.ts:321` |
+| `isMeta` | `?: boolean` | — | `src/conversations.ts:322` |
+| `isCompactSummary` | `?: boolean` | — | `src/conversations.ts:323` |
+| `timestamp` | `?: string` | — | `src/conversations.ts:324` |
+| `message` | `?: { content?: unknown }` | — | `src/conversations.ts:325` |
 
-### `src/conversations.ConversationMessage` — zod-object — `src/conversations.ts:347-351`
-
-*aliases* `ConversationMessage` `src/conversations.ts:352`
+### `src/conversations.TranscriptRow.message` — type — `src/conversations.ts:325`
 
 | field | type | default | at |
 |---|---|---|---|
-| `role` | `z.enum(['user', 'assistant'])` | — | `src/conversations.ts:348` |
-| `text` | `z.string()` | — | `src/conversations.ts:349` |
-| `at` | `z.string().nullable()` | — | `src/conversations.ts:350` |
+| `content` | `?: unknown` | — | `src/conversations.ts:325` |
 
-### `src/conversations.ConversationTail` — zod-object — `src/conversations.ts:354-359`
+### `src/conversations.ConversationMessage` — zod-object — `src/conversations.ts:357-361`
 
-*aliases* `ConversationTail` `src/conversations.ts:360`
+*aliases* `ConversationMessage` `src/conversations.ts:362`
+
+| field | type | default | at |
+|---|---|---|---|
+| `role` | `z.enum(['user', 'assistant'])` | — | `src/conversations.ts:358` |
+| `text` | `z.string()` | — | `src/conversations.ts:359` |
+| `at` | `z.string().nullable()` | — | `src/conversations.ts:360` |
+
+### `src/conversations.ConversationTail` — zod-object — `src/conversations.ts:364-369`
+
+*aliases* `ConversationTail` `src/conversations.ts:370`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `conversation` | `z.string()` | — | `src/conversations.ts:355` |  |
-| `messages` | `z.array(ConversationMessage) → src/conversations.ConversationMessage` | — | `src/conversations.ts:356` |  |
-| `note` | `z.string().nullable()` | — | `src/conversations.ts:358` | Why there's nothing to show, when there isn't. |
+| `conversation` | `z.string()` | — | `src/conversations.ts:365` |  |
+| `messages` | `z.array(ConversationMessage) → src/conversations.ConversationMessage` | — | `src/conversations.ts:366` |  |
+| `note` | `z.string().nullable()` | — | `src/conversations.ts:368` | Why there's nothing to show, when there isn't. |
 
 ### `src/estate.scanned()` — zod-factory (zod-discriminated-union) on `state` — `src/estate.ts:17-27`
 
@@ -4872,9 +4884,10 @@ These are refactors of the **application**, not of this mirror. Each one convert
 1. `src/classify.ts:67` — REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:67 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
 2. `src/classify.ts:70-77` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:70 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
 3. `src/classify.ts:126-133` — REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.
-4. `src/fs-utils.ts:44` — REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:44 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.
-5. `src/publish.ts:216` — REFACTOR (minor): `LIVE` at src/publish.ts:216 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.
-6. `src/recipe-paths.ts:77` — REFACTOR (minor): `SKIP` at src/recipe-paths.ts:77 names the set but does not type it. A z.enum or `as const` + `typeof SKIP[number]` would make a wrong value a static error rather than a runtime miss.
+4. `src/conversations.ts:94` — REFACTOR (minor): `AT_PROMPT_STATUSES` at src/conversations.ts:94 names the set but does not type it. A z.enum or `as const` + `typeof AT_PROMPT_STATUSES[number]` would make a wrong value a static error rather than a runtime miss.
+5. `src/fs-utils.ts:44` — REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:44 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.
+6. `src/publish.ts:216` — REFACTOR (minor): `LIVE` at src/publish.ts:216 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.
+7. `src/recipe-paths.ts:77` — REFACTOR (minor): `SKIP` at src/recipe-paths.ts:77 names the set but does not type it. A z.enum or `as const` + `typeof SKIP[number]` would make a wrong value a static error rather than a runtime miss.
 
 ---
 

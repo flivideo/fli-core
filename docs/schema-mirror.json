@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 533,
+    "declared": 534,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -52,11 +52,11 @@
         "not_schema_bearing": 0
       },
       "src/conversations.ts": {
-        "declared": 16,
+        "declared": 17,
         "gaps": 0,
-        "mirrored": 16,
+        "mirrored": 17,
         "not_read": 0,
-        "not_schema_bearing": 5
+        "not_schema_bearing": 4
       },
       "src/estate.ts": {
         "declared": 15,
@@ -305,13 +305,13 @@
       }
     },
     "gaps": 22,
-    "mirrored": 471,
+    "mirrored": 472,
     "not_read": 40,
-    "not_schema_bearing": 51,
+    "not_schema_bearing": 50,
     "not_schema_bearing_by_family": {
       "function": 6,
       "function type": 2,
-      "literal constant": 43
+      "literal constant": 42
     }
   },
   "closed_sets": [
@@ -1120,19 +1120,45 @@
       ]
     },
     {
+      "anchor": {
+        "file": "src/conversations.ts",
+        "line": 94
+      },
+      "authority": "module constant `AT_PROMPT_STATUSES` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
+      "finding": "REFACTOR (minor): `AT_PROMPT_STATUSES` at src/conversations.ts:94 names the set but does not type it. A z.enum or `as const` + `typeof AT_PROMPT_STATUSES[number]` would make a wrong value a static error rather than a runtime miss.",
+      "grade": "derived",
+      "id": "src/conversations.AT_PROMPT_STATUSES",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 94
+          },
+          "value": "idle"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 94
+          },
+          "value": "shell"
+        }
+      ]
+    },
+    {
       "aliases": [
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 186
+            "line": 196
           },
           "name": "ConversationRefusal"
         }
       ],
       "anchor": {
-        "end_line": 185,
+        "end_line": 195,
         "file": "src/conversations.ts",
-        "line": 178
+        "line": 188
       },
       "authority": "`z.enum` `ConversationRefusal` - a single declaring symbol",
       "grade": "declared",
@@ -1141,42 +1167,42 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 179
+            "line": 189
           },
           "value": "no-such-conversation"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 180
+            "line": 190
           },
           "value": "not-at-prompt"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 181
+            "line": 191
           },
           "value": "nothing-to-send"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 182
+            "line": 192
           },
           "value": "too-long"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 183
+            "line": 193
           },
           "value": "unsafe-start"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 184
+            "line": 194
           },
           "value": "delivery-failed"
         }
@@ -1185,7 +1211,7 @@
     {
       "anchor": {
         "file": "src/conversations.ts",
-        "line": 190
+        "line": 200
       },
       "authority": "`z.enum` `outcome` - a single declaring symbol",
       "grade": "declared",
@@ -1194,14 +1220,14 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 190
+            "line": 200
           },
           "value": "confirmed"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 190
+            "line": 200
           },
           "value": "typed-unconfirmed"
         }
@@ -1210,7 +1236,7 @@
     {
       "anchor": {
         "file": "src/conversations.ts",
-        "line": 348
+        "line": 358
       },
       "authority": "`z.enum` `role` - a single declaring symbol",
       "grade": "declared",
@@ -1219,14 +1245,14 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 348
+            "line": 358
           },
           "value": "user"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 348
+            "line": 358
           },
           "value": "assistant"
         }
@@ -4762,6 +4788,15 @@
     },
     {
       "anchor": {
+        "file": "src/conversations.ts",
+        "line": 94
+      },
+      "kind": "refactor_required",
+      "message": "REFACTOR (minor): `AT_PROMPT_STATUSES` at src/conversations.ts:94 names the set but does not type it. A z.enum or `as const` + `typeof AT_PROMPT_STATUSES[number]` would make a wrong value a static error rather than a runtime miss.",
+      "target": "src/conversations.AT_PROMPT_STATUSES"
+    },
+    {
+      "anchor": {
         "file": "src/fs-utils.ts",
         "line": 44
       },
@@ -4788,7 +4823,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-11-09T12:37:49+00:00",
+  "generated": "2026-11-09T14:57:54+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -7389,7 +7424,7 @@
             "line": 58
           },
           "default": null,
-          "doc": "True only when a send would be allowed now: idle, not in copy mode, and in the foreground of its terminal.",
+          "doc": "True only when a send would be allowed now: at its prompt with nothing waiting, not in copy mode, and in the foreground of its terminal.",
           "name": "atPrompt",
           "type": "z.boolean()"
         }
@@ -7443,9 +7478,9 @@
     },
     {
       "anchor": {
-        "end_line": 97,
+        "end_line": 102,
         "file": "src/conversations.ts",
-        "line": 92
+        "line": 96
       },
       "bases": [],
       "doc": null,
@@ -7454,7 +7489,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 93
+            "line": 97
           },
           "default": null,
           "name": "kind",
@@ -7463,7 +7498,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 94
+            "line": 98
           },
           "default": null,
           "name": "sessionId",
@@ -7472,7 +7507,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 95
+            "line": 99
           },
           "default": null,
           "name": "status",
@@ -7481,7 +7516,16 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 96
+            "line": 100
+          },
+          "default": null,
+          "name": "waitingFor",
+          "type": "?: unknown"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 101
           },
           "default": null,
           "name": "cwd",
@@ -7497,15 +7541,15 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 197
+            "line": 207
           },
           "name": "SendResult"
         }
       ],
       "anchor": {
-        "end_line": 196,
+        "end_line": 206,
         "file": "src/conversations.ts",
-        "line": 188
+        "line": 198
       },
       "bases": [],
       "doc": null,
@@ -7514,7 +7558,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 189
+            "line": 199
           },
           "default": null,
           "name": "z.object",
@@ -7523,7 +7567,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 195
+            "line": 205
           },
           "default": null,
           "name": "z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() })",
@@ -7536,9 +7580,9 @@
     },
     {
       "anchor": {
-        "end_line": 194,
+        "end_line": 204,
         "file": "src/conversations.ts",
-        "line": 189
+        "line": 199
       },
       "bases": [],
       "doc": null,
@@ -7546,7 +7590,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 190
+            "line": 200
           },
           "default": null,
           "name": "outcome",
@@ -7555,7 +7599,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 191
+            "line": 201
           },
           "default": null,
           "name": "conversation",
@@ -7564,7 +7608,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 192
+            "line": 202
           },
           "default": null,
           "name": "label",
@@ -7573,7 +7617,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 193
+            "line": 203
           },
           "default": null,
           "name": "sent",
@@ -7587,7 +7631,7 @@
     {
       "anchor": {
         "file": "src/conversations.ts",
-        "line": 195
+        "line": 205
       },
       "bases": [],
       "doc": null,
@@ -7595,7 +7639,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 195
+            "line": 205
           },
           "default": null,
           "name": "outcome",
@@ -7604,7 +7648,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 195
+            "line": 205
           },
           "default": null,
           "name": "reason",
@@ -7613,7 +7657,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 195
+            "line": 205
           },
           "default": null,
           "name": "message",
@@ -7626,9 +7670,9 @@
     },
     {
       "anchor": {
-        "end_line": 212,
+        "end_line": 222,
         "file": "src/conversations.ts",
-        "line": 207
+        "line": 217
       },
       "bases": [],
       "doc": null,
@@ -7637,7 +7681,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 209
+            "line": 219
           },
           "default": null,
           "doc": "How long to look for the text in the transcript. Default 5 s.",
@@ -7647,7 +7691,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 211
+            "line": 221
           },
           "default": null,
           "doc": "Most text this door takes. Default `CONVERSATION_MAX_CHARS`.",
@@ -7661,9 +7705,9 @@
     },
     {
       "anchor": {
-        "end_line": 316,
+        "end_line": 326,
         "file": "src/conversations.ts",
-        "line": 310
+        "line": 320
       },
       "bases": [],
       "doc": null,
@@ -7672,7 +7716,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 311
+            "line": 321
           },
           "default": null,
           "name": "type",
@@ -7681,7 +7725,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 312
+            "line": 322
           },
           "default": null,
           "name": "isMeta",
@@ -7690,7 +7734,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 313
+            "line": 323
           },
           "default": null,
           "name": "isCompactSummary",
@@ -7699,7 +7743,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 314
+            "line": 324
           },
           "default": null,
           "name": "timestamp",
@@ -7708,7 +7752,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 315
+            "line": 325
           },
           "default": null,
           "name": "message",
@@ -7722,7 +7766,7 @@
     {
       "anchor": {
         "file": "src/conversations.ts",
-        "line": 315
+        "line": 325
       },
       "bases": [],
       "doc": null,
@@ -7730,7 +7774,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 315
+            "line": 325
           },
           "default": null,
           "name": "content",
@@ -7746,15 +7790,15 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 352
+            "line": 362
           },
           "name": "ConversationMessage"
         }
       ],
       "anchor": {
-        "end_line": 351,
+        "end_line": 361,
         "file": "src/conversations.ts",
-        "line": 347
+        "line": 357
       },
       "bases": [],
       "doc": null,
@@ -7763,7 +7807,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 348
+            "line": 358
           },
           "default": null,
           "name": "role",
@@ -7772,7 +7816,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 349
+            "line": 359
           },
           "default": null,
           "name": "text",
@@ -7781,7 +7825,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 350
+            "line": 360
           },
           "default": null,
           "name": "at",
@@ -7797,15 +7841,15 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 360
+            "line": 370
           },
           "name": "ConversationTail"
         }
       ],
       "anchor": {
-        "end_line": 359,
+        "end_line": 369,
         "file": "src/conversations.ts",
-        "line": 354
+        "line": 364
       },
       "bases": [],
       "doc": null,
@@ -7814,7 +7858,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 355
+            "line": 365
           },
           "default": null,
           "name": "conversation",
@@ -7823,7 +7867,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 356
+            "line": 366
           },
           "default": null,
           "name": "messages",
@@ -7832,7 +7876,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 358
+            "line": 368
           },
           "default": null,
           "doc": "Why there's nothing to show, when there isn't.",
@@ -22487,7 +22531,7 @@
     }
   ],
   "target": {
-    "commit": "20e202850a27156f5098c7f575c346e745484dea",
+    "commit": "a5aaaf64f5eb12fc683965e36b7f101270c26f71",
     "root": "..",
     "stack": "typescript"
   },
