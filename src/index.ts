@@ -390,6 +390,50 @@ export {
 
 export { cloneFile, takeLock } from './fs-utils.js';
 
+// Point and tell (v0.35.0): the message saved on a note and the door for typing into a live conversation.
+// Browser-safe half also in ./contracts. How an app adopts it: docs/point-and-tell.md.
+export {
+  TELL_DELIVERY_FIELD,
+  TELL_ENTITY,
+  TELL_MAX_CHARS,
+  TELL_META_KEY,
+  TellDelivery,
+  TellMessage,
+  TellMoment,
+  TellOpen,
+  TellOutcome,
+  TellPosition,
+  TellSaid,
+  TellTo,
+  tellDeliveryChange,
+  tellLine,
+  tellNoteInput,
+  type TellLineOptions,
+  type TellNoteOptions,
+} from './tell.js';
+
+export {
+  AT_PROMPT_STATUS,
+  CONVERSATION_MAX_CHARS,
+  CONVERSATION_TAIL_BYTES,
+  ConversationList,
+  ConversationMessage,
+  ConversationRefusal,
+  ConversationTail,
+  LiveConversation,
+  SendResult,
+  cleanForPrompt,
+  isLocalRequest,
+  lastConversationMessages,
+  listLiveConversations,
+  readConversationTail,
+  realConversationRun,
+  sendToConversation,
+  type ConversationOptions,
+  type ConversationRun,
+  type SendOptions,
+} from './conversations.js';
+
 export {
   OPEN_ENV,
   OpenArgName,

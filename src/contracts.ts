@@ -60,6 +60,26 @@ export {
 } from './note-record.js';
 
 export {
+  TELL_DELIVERY_FIELD,
+  TELL_ENTITY,
+  TELL_MAX_CHARS,
+  TELL_META_KEY,
+  TellDelivery,
+  TellMessage,
+  TellMoment,
+  TellOpen,
+  TellOutcome,
+  TellPosition,
+  TellSaid,
+  TellTo,
+  tellDeliveryChange,
+  tellLine,
+  tellNoteInput,
+  type TellLineOptions,
+  type TellNoteOptions,
+} from './tell.js';
+
+export {
   AppFile,
   AppName,
   AppSubject,
