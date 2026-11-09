@@ -265,6 +265,11 @@ A whole video an app made is named after **how it was made**, never "final" (R11
 | `brandSettingsVersion(file)`                                                   | sha256 (hex) of the file's bytes, for optimistic concurrency: hand back the version you loaded; a different one means the file changed elsewhere. Absent → `null`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `takeLock(lock, waitMs, staleMs)`                                              | The suite's lock file (`wx` create, waits, breaks a stale lock), now exported                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
+## Point and tell
+
+A person marks a moment in an app, says what's wrong and sends it to a live Claude conversation they choose. The message is saved on a
+note first. How an app adopts it, and the rule that a send only ever starts from a person's action: [`docs/point-and-tell.md`](docs/point-and-tell.md).
+
 ## fli-notes — notes, asks and changes (v0.27.0; life states v0.28.0)
 
 A lasting record of what a person or agent **noticed** (`note`), **asked for** (`ask`, open until done) or **changed**

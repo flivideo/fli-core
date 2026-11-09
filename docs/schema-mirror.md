@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `00bc4bb56b08` · **generated** 2026-11-01T00:46:22+00:00
+- **commit** `376e8872a56b` · **generated** 2026-11-09T12:26:06+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 36 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 40 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 306 | 88 | 6 | 9 | 35 | 6 |
+| 343 | 102 | 6 | 9 | 40 | 6 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -24,12 +24,15 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
 - `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :67 · `LEGACY_FOLDERS` (set) :70 · `MOTION_MACHINERY` (set) :126 · `ProjectTier` (set) :140 · `OverlayRole` (set) :151 · `ProjectEntry` :154 · `OverlayPaths` :201 · `ProjectLayout` (set) :296 · `ProjectLayoutPaths` :299
 - `src/control-file.ts` — `ControlFile` :18 · `ControlFileRead` :30 · `ControlFileOptions` :39
+- `src/conversations.ts` — `ConversationOptions` :36 · `LiveConversation` :46 · `ConversationList` :61 · `SessionFile` :91 · `ConversationRefusal` (set) :176 · `SendResult` :186 · `SendOptions` :205 · `TranscriptRow` :310 · `ConversationMessage` :347 · `ConversationTail` :354
 - `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
 - `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
 - `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :44
 - `src/gitignore-rules.ts` — `GITIGNORE_BASE_VERSION` :19 · `Tag` :24 · `GitignoreOverlayRule` :38 · `GitignoreGroup` :45 · `GitignoreRenderOptions` :166 · `Located` :199 · `GitignoreRenderResult` :243 · `GitignoreCheckResult` :339
 - `src/gitignore.ts` — `TrackedIgnored` :23 · `GitignoreOptions` :31 · `GitignoreRefusal` :42 · `GitignoreRenderedFile` :49 · `GitignoreCheckedFile` :57 · `GitignoreResult` :63
+- `src/guide-doc.ts` — `GUIDE_SCHEMA` :20 · `GuideDocType` (set) :27 · `GuideDocLevel` (set) :34 · `GuideDocAppliesTo` :36 · `GuideDocLayer` (set) :45 · `OptText` :67 · `GUIDE_REQUIRED` (set) :70 · `GuideDoc` :72 · `ParsedGuide` :97
+- `src/help.ts` — `HelpScreenId` (set) :9 · `HelpRow` :19 · `HelpGroup` :22 · `HelpScreen` :25
 - `src/identity.ts` — `ProjectAspect` (set) :13 · `ProjectShape` (set) :23 · `ProjectLanguage` :28 · `ProjectIdentity` :31 · `Refused()` :57 · `WriteIdentityResult` :65 · `AdoptIdentityResult` :178 · `AdoptIdentityInput` :193
 - `src/lab-path.ts` — `PathSegment` :8 · `LabPathInput` :16 · `ResolvedLabPath` :84
 - `src/lifecycle.ts` — `LifecycleVerb` (set) :18 · `SystemStatus` :21 · `SystemQuitInput` :34 · `SystemQuitOutput` :40 · `AppScriptOpen` :84
@@ -40,7 +43,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/open-context.ts` — `OpenContextResult` :16 · `ResolveOpenContextOptions` :33
 - `src/openrpc.ts` — `OpenRpcServer` :18 · `OpenRpcDocument` :29 · `OpenRpcOptions` :52 · `JsonRpcRequest` :174 · `CallAnswer` :183 · `JsonRpcOptions` :185
 - `src/project-folder.ts` — `ProjectCode` :5 · `KebabSlug` :11 · `ProjectFolder` :15
-- `src/publish.ts` — `PublishPiece` (set) :44 · `PublishState` (set) :64 · `PUBLISH_RULES` (set) :78 · `EditApp` (set) :91 · `Iso` :94 · `PublishExport` :97 · `PublishEdit` :122 · `PublishLaunch` :126 · `PublishFacts` :138 · `PublishRow` :149 · `PublishReadiness` :170 · `LIVE` (set) :216 · `PublishedVideo` :702
+- `src/publish.ts` — `PublishPiece` (set) :44 · `PublishState` (set) :64 · `PUBLISH_RULES` (set) :78 · `EditApp` (set) :91 · `Iso` :94 · `PublishExport` :97 · `PublishEdit` :122 · `PublishLaunch` :126 · `PublishFacts` :138 · `PublishRow` :149 · `PublishReadiness` :170 · `LIVE` (set) :216 · `PUBLISH_PLATFORMS` (set) :702 · `PublishedVideo` :705
 - `src/recipe-paths.ts` — `RecipePathProblem` (set) :15 · `RecipePathWarning` :18 · `SKIP` (set) :77
 - `src/recording.ts` — `RecordingTag` :14 · `Recording` :18
 - `src/renders.ts` — `PathSegment` :15 · `RendersPathInput` :23 · `RendersTool` :52 · `RendersTally` :59 · `ClearRendersResult` :121
@@ -49,7 +52,10 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/reveal.ts` — `RevealResult` :13 · `RevealOptions` :24
 - `src/series.ts` — `SeriesMember` :22 · `SeriesFile` :32 · `SeriesListing` :74 · `Refusal` :102 · `ChangeSeriesResult` :117 · `ChangeSeriesOptions` :123 · `SeriesRef` :271 · `Changed` :272
 - `src/stamp.ts` — `Stamp` :9
-- `src/transport.ts` — `ShuttleState` :15 · `JklKey` (set) :27 · `ShuttleAction` (set) :45
+- `src/tell.ts` — `Name` :22 · `TellOpen` :25 · `TellPosition` :33 · `TellMoment` :40 · `TellSaid` :54 · `TellTo` :61 · `TellMessage` :68 · `TellOutcome` (set) :100 · `TellDelivery` :103 · `TellNoteOptions` :112 · `TellLineOptions` :164
+- `src/transport.ts` — `ShuttleState` :15 · `JklKey` (set) :27 · `ShuttleAction` (set) :45 · `SpeedWindow` :78
+- `src/ui/SpeedControl.tsx` — `SpeedControlProps` :12
+- `src/ui/remembered-speed.ts` — `RememberedSpeedOptions` :6 · `RememberedSpeed` :13
 - `src/video-file.ts` — `Ext` :23 · `VideoFileKind` (set) :25 · `WholeVideoApp` (set) :32 · `VideoPart` (set) :36 · `VideoFile` :39 · `UnknownVideoFile` :49 · `RetiredVideoTag` (set) :57 · `LegacyVideoFile` :61 · `ParsedVideoFile` :70 · `VideoFolder` :115 · `VideoFolderName` :127
 - `src/whole-video.ts` — `WholeVideoOwner` :24 · `MAKERS` (set) :32
 - `src/window-state.ts` — `WindowRect` :17 · `SavedWindow` :25 · `WindowStateFile` :33 · `DisplayArea` :40 · `PlaceOptions` :48 · `TrackedWindow` :251 · `TrackOptions` :260
@@ -75,10 +81,10 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**468** top-level declarations counted = **411** mirrored + **22** listed as gaps + **35** declared but not read.
+**533** top-level declarations counted = **471** mirrored + **22** listed as gaps + **40** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 1 function, 1 function type, 35 literal constants.
+Not counted, as not schema-bearing: 6 functions, 2 function types, 43 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
@@ -87,17 +93,20 @@ Not counted, as not schema-bearing: 1 function, 1 function type, 35 literal cons
 | `src/estate.ts` | 15 | 14 | 0 | **1** |
 | `src/failure-codes.ts` | 18 | 12 | 0 | **6** |
 | `src/gitignore-rules.ts` | 13 | 10 | 0 | **3** |
+| `src/guide-doc.ts` | 15 | 12 | 0 | **3** |
+| `src/help.ts` | 9 | 8 | 0 | **1** |
 | `src/identity.ts` | 15 | 12 | 2 | **1** |
 | `src/lifecycle.ts` | 11 | 10 | 0 | **1** |
 | `src/note-record.ts` | 42 | 41 | 0 | **1** |
 | `src/notes.ts` | 13 | 12 | 0 | **1** |
 | `src/open-args.ts` | 12 | 11 | 0 | **1** |
-| `src/publish.ts` | 27 | 22 | 0 | **5** |
+| `src/publish.ts` | 29 | 24 | 0 | **5** |
 | `src/renders.ts` | 9 | 8 | 0 | **1** |
 | `src/resources.ts` | 44 | 33 | 8 | **3** |
 | `src/results.ts` | 5 | 2 | 0 | **3** |
 | `src/series.ts` | 12 | 9 | 2 | **1** |
-| `src/transport.ts` | 5 | 4 | 0 | **1** |
+| `src/transport.ts` | 6 | 5 | 0 | **1** |
+| `src/ui/remembered-speed.ts` | 3 | 2 | 0 | **1** |
 | `src/words.ts` | 31 | 28 | 2 | **1** |
 | `src/youtube.ts` | 28 | 19 | 6 | **3** |
 
@@ -296,6 +305,39 @@ What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are 
 | `absent` | `src/control-file.ts:34` |
 | `invalid` | `src/control-file.ts:35` |
 
+### `src/conversations.ConversationRefusal` — `src/conversations.ts:176-183`
+
+*`z.enum` `ConversationRefusal` - a single declaring symbol*
+
+*aliases* `ConversationRefusal` `src/conversations.ts:184`
+
+| value | declared at |
+|---|---|
+| `no-such-conversation` | `src/conversations.ts:177` |
+| `not-at-prompt` | `src/conversations.ts:178` |
+| `nothing-to-send` | `src/conversations.ts:179` |
+| `too-long` | `src/conversations.ts:180` |
+| `unsafe-start` | `src/conversations.ts:181` |
+| `delivery-failed` | `src/conversations.ts:182` |
+
+### `src/conversations.SendResult[0].outcome` — `src/conversations.ts:188`
+
+*`z.enum` `outcome` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `confirmed` | `src/conversations.ts:188` |
+| `typed-unconfirmed` | `src/conversations.ts:188` |
+
+### `src/conversations.ConversationMessage.role` — `src/conversations.ts:348`
+
+*`z.enum` `role` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `user` | `src/conversations.ts:348` |
+| `assistant` | `src/conversations.ts:348` |
+
 ### `src/estate.scanned().state` — `src/estate.ts:17-27`
 
 *the `state` discriminator of `z.discriminatedUnion` `scanned()` - each value declared by a `z.literal` in one variant*
@@ -451,6 +493,95 @@ What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are 
 | `rendered` | `src/gitignore.ts:50` |
 | `checked` | `src/gitignore.ts:58` |
 | `refused` | `src/gitignore.ts:43` |
+
+### `src/guide-doc.GuideDocType` — `src/guide-doc.ts:27`
+
+*`z.enum` `GuideDocType` - members read through `GUIDE_DOC_TYPES` (src/guide-doc.GUIDE_DOC_TYPES) - a single declaring symbol*
+
+*aliases* `GuideDocType` `src/guide-doc.ts:28`
+
+| value | declared at |
+|---|---|
+| `voice` | `src/guide-doc.ts:26` |
+| `verbal` | `src/guide-doc.ts:26` |
+| `build` | `src/guide-doc.ts:26` |
+| `video` | `src/guide-doc.ts:26` |
+| `lens` | `src/guide-doc.ts:26` |
+| `other` | `src/guide-doc.ts:26` |
+
+### `src/guide-doc.GuideDocLevel` — `src/guide-doc.ts:34`
+
+*`z.enum` `GuideDocLevel` - a single declaring symbol*
+
+*aliases* `GuideDocLevel` `src/guide-doc.ts:35`
+
+| value | declared at |
+|---|---|
+| `global` | `src/guide-doc.ts:34` |
+| `brand` | `src/guide-doc.ts:34` |
+| `series` | `src/guide-doc.ts:34` |
+| `video` | `src/guide-doc.ts:34` |
+
+### `src/guide-doc.GuideDocAppliesTo.form` — `src/guide-doc.ts:38`
+
+*`z.enum` `form` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `story` | `src/guide-doc.ts:38` |
+| `tutorial` | `src/guide-doc.ts:38` |
+| `sales` | `src/guide-doc.ts:38` |
+
+### `src/guide-doc.GuideDocAppliesTo.length` — `src/guide-doc.ts:39`
+
+*`z.enum` `length` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `short` | `src/guide-doc.ts:39` |
+| `long` | `src/guide-doc.ts:39` |
+
+### `src/guide-doc.GuideDocLayer` — `src/guide-doc.ts:45`
+
+`canonical` = the owner's own words or rulings; `synthesis` = distilled from a corpus.
+
+*`z.enum` `GuideDocLayer` - a single declaring symbol*
+
+*aliases* `GuideDocLayer` `src/guide-doc.ts:46`
+
+| value | declared at |
+|---|---|
+| `canonical` | `src/guide-doc.ts:45` |
+| `synthesis` | `src/guide-doc.ts:45` |
+
+### `src/guide-doc.GUIDE_REQUIRED` — `src/guide-doc.ts:70`
+
+*`as const` array `GUIDE_REQUIRED`, typed from by `typeof GUIDE_REQUIRED[number]` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `schema` | `src/guide-doc.ts:70` |
+| `id` | `src/guide-doc.ts:70` |
+| `label` | `src/guide-doc.ts:70` |
+| `type` | `src/guide-doc.ts:70` |
+| `level` | `src/guide-doc.ts:70` |
+| `gist` | `src/guide-doc.ts:70` |
+
+### `src/help.HelpScreenId` — `src/help.ts:9-15`
+
+A screen that has a help sheet. Add one here, then give it groups in HELP_SCREENS.
+
+*`z.enum` `HelpScreenId` - a single declaring symbol*
+
+*aliases* `HelpScreenId` `src/help.ts:16`
+
+| value | declared at |
+|---|---|
+| `viewer` | `src/help.ts:10` |
+| `viewer-triage` | `src/help.ts:11` |
+| `storypilot-listen` | `src/help.ts:12` |
+| `storypilot-prep` | `src/help.ts:13` |
+| `upload-wizard` | `src/help.ts:14` |
 
 ### `src/identity.ProjectAspect` — `src/identity.ts:13`
 
@@ -774,6 +905,26 @@ The apps with an edit document (`fli.<cut|edit|cast>.<video>.json`): FliCut writ
 | `ylo` | `src/publish.ts:158` |
 | `none` | `src/publish.ts:158` |
 
+### `src/publish.PUBLISH_PLATFORMS` — `src/publish.ts:702`
+
+*`as const` array `PUBLISH_PLATFORMS`, typed from by `typeof PUBLISH_PLATFORMS[number]` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `youtube` | `src/publish.ts:702` |
+| `skool` | `src/publish.ts:702` |
+| `other` | `src/publish.ts:702` |
+
+### `src/publish.PublishedVideo.platform` — `src/publish.ts:711`
+
+*`z.enum` `platform` - members read through `PUBLISH_PLATFORMS` (src/publish.PUBLISH_PLATFORMS) - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `youtube` | `src/publish.ts:702` |
+| `skool` | `src/publish.ts:702` |
+| `other` | `src/publish.ts:702` |
+
 ### `src/recipe-paths.RecipePathProblem` — `src/recipe-paths.ts:15`
 
 The ingest rule (workstream B ruling, 2026-10-05): **a recipe may only reference paths inside its own project.**
@@ -947,6 +1098,29 @@ How candidates of a kind are chosen: `one` — at most one `chosen` per video; `
 |---|---|
 | `written` | `src/series.ts:118` |
 | `refused` | `src/series.ts:103` |
+
+### `src/tell.TellOutcome` — `src/tell.ts:100`
+
+*`z.enum` `TellOutcome` - a single declaring symbol*
+
+*aliases* `TellOutcome` `src/tell.ts:101`
+
+| value | declared at |
+|---|---|
+| `confirmed` | `src/tell.ts:100` |
+| `typed-unconfirmed` | `src/tell.ts:100` |
+| `refused` | `src/tell.ts:100` |
+
+### `src/tell.TellNoteOptions.kind` — `src/tell.ts:114`
+
+`note` by default.
+
+*literal union type of `kind` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `note` | `src/tell.ts:114` |
+| `ask` | `src/tell.ts:114` |
 
 ### `src/transport.JklKey` — `src/transport.ts:27`
 
@@ -1247,6 +1421,7 @@ Each set below was read out of the real authority — control flow, membership t
 | constant | value in code | declared at |
 |---|---|---|
 | `src/gitignore-rules.GITIGNORE_BASE_VERSION` | `2` | `src/gitignore-rules.ts:19` |
+| `src/guide-doc.GUIDE_SCHEMA` | `storypilot.guide/1` | `src/guide-doc.ts:20` |
 
 > These are what the **code** says. This mirror does not read the data on disk, so a disagreement between the two is still invisible here.
 
@@ -1739,6 +1914,115 @@ Control-file discovery (agent-drivable step 2, David 2026-09-23): a running app 
 |---|---|---|---|---|
 | `home` | `?: string` | — | `src/control-file.ts:41` | Defaults to `os.homedir()`; tests pass a temp home. |
 
+### `src/conversations.ConversationOptions` — interface — `src/conversations.ts:36-44`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `run` | `?: ConversationRun → src/conversations.ConversationRun` | — | `src/conversations.ts:37` |  |
+| `claudeHome` | `?: string` | — | `src/conversations.ts:39` | Claude Code's folder. Default `~/.claude`. |
+| `tmux` | `?: string` | — | `src/conversations.ts:41` | The tmux binary. Default: the usual install places (an app started from the Finder has a short PATH), then PATH. |
+| `sleep` | `?: (ms: number) => Promise<void>` | — | `src/conversations.ts:43` | Pause while waiting for a read-back. Tests pass a fake. |
+
+### `src/conversations.LiveConversation` — zod-object — `src/conversations.ts:46-58`
+
+*aliases* `LiveConversation` `src/conversations.ts:59`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `z.string()` | — | `src/conversations.ts:48` | The Claude session id: what's sent to and saved. |
+| `label` | `z.string()` | — | `src/conversations.ts:50` | The tmux session name a person reads. A name can pass to a different Claude, so it's never the address. |
+| `paneId` | `z.string()` | — | `src/conversations.ts:51` |  |
+| `status` | `z.string().nullable()` | — | `src/conversations.ts:53` | As Claude Code reports it. |
+| `cwd` | `z.string().nullable()` | — | `src/conversations.ts:55` | The working folder, which also locates the transcript. |
+| `atPrompt` | `z.boolean()` | — | `src/conversations.ts:57` | True only when a send would be allowed now. |
+
+### `src/conversations.ConversationList` — zod-object — `src/conversations.ts:61-65`
+
+*aliases* `ConversationList` `src/conversations.ts:66`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `conversations` | `z.array(LiveConversation) → src/conversations.LiveConversation` | — | `src/conversations.ts:62` |  |
+| `reason` | `z.string().optional()` | — | `src/conversations.ts:64` | Why the list is empty, when it is. |
+
+### `src/conversations.SessionFile` — interface — `src/conversations.ts:91-96`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `?: unknown` | — | `src/conversations.ts:92` |
+| `sessionId` | `?: unknown` | — | `src/conversations.ts:93` |
+| `status` | `?: unknown` | — | `src/conversations.ts:94` |
+| `cwd` | `?: unknown` | — | `src/conversations.ts:95` |
+
+### `src/conversations.SendResult` — zod-union — `src/conversations.ts:186-194`
+
+*aliases* `SendResult` `src/conversations.ts:195`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `z.object` | `z.object({ outcome: z.enum(['confirmed', 'typed-unconfirmed']), conversation: z.string(), label: z.string(), sent: z.int().min(0) })` | — | `src/conversations.ts:187` |
+| `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() })` | `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() }) → src/conversations.ConversationRefusal` | — | `src/conversations.ts:193` |
+
+### `src/conversations.SendResult[0]` — zod-object — `src/conversations.ts:187-192`
+
+| field | type | default | at |
+|---|---|---|---|
+| `outcome` | `z.enum(['confirmed', 'typed-unconfirmed'])` | — | `src/conversations.ts:188` |
+| `conversation` | `z.string()` | — | `src/conversations.ts:189` |
+| `label` | `z.string()` | — | `src/conversations.ts:190` |
+| `sent` | `z.int().min(0)` | — | `src/conversations.ts:191` |
+
+### `src/conversations.SendResult[1]` — zod-object — `src/conversations.ts:193`
+
+| field | type | default | at |
+|---|---|---|---|
+| `outcome` | `z.literal('refused')` | — | `src/conversations.ts:193` |
+| `reason` | `ConversationRefusal → src/conversations.ConversationRefusal` | — | `src/conversations.ts:193` |
+| `message` | `z.string()` | — | `src/conversations.ts:193` |
+
+### `src/conversations.SendOptions` — interface — `src/conversations.ts:205-210`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `confirmMs` | `?: number` | — | `src/conversations.ts:207` | How long to look for the text in the transcript. Default 5 s. |
+| `maxChars` | `?: number` | — | `src/conversations.ts:209` | Most text this door takes. Default `CONVERSATION_MAX_CHARS`. |
+
+### `src/conversations.TranscriptRow` — interface — `src/conversations.ts:310-316`
+
+| field | type | default | at |
+|---|---|---|---|
+| `type` | `?: string` | — | `src/conversations.ts:311` |
+| `isMeta` | `?: boolean` | — | `src/conversations.ts:312` |
+| `isCompactSummary` | `?: boolean` | — | `src/conversations.ts:313` |
+| `timestamp` | `?: string` | — | `src/conversations.ts:314` |
+| `message` | `?: { content?: unknown }` | — | `src/conversations.ts:315` |
+
+### `src/conversations.TranscriptRow.message` — type — `src/conversations.ts:315`
+
+| field | type | default | at |
+|---|---|---|---|
+| `content` | `?: unknown` | — | `src/conversations.ts:315` |
+
+### `src/conversations.ConversationMessage` — zod-object — `src/conversations.ts:347-351`
+
+*aliases* `ConversationMessage` `src/conversations.ts:352`
+
+| field | type | default | at |
+|---|---|---|---|
+| `role` | `z.enum(['user', 'assistant'])` | — | `src/conversations.ts:348` |
+| `text` | `z.string()` | — | `src/conversations.ts:349` |
+| `at` | `z.string().nullable()` | — | `src/conversations.ts:350` |
+
+### `src/conversations.ConversationTail` — zod-object — `src/conversations.ts:354-359`
+
+*aliases* `ConversationTail` `src/conversations.ts:360`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `conversation` | `z.string()` | — | `src/conversations.ts:355` |  |
+| `messages` | `z.array(ConversationMessage) → src/conversations.ConversationMessage` | — | `src/conversations.ts:356` |  |
+| `note` | `z.string().nullable()` | — | `src/conversations.ts:358` | Why there's nothing to show, when there isn't. |
+
 ### `src/estate.scanned()` — zod-factory (zod-discriminated-union) on `state` — `src/estate.ts:17-27`
 
 A collection that was read, or one that could not be (R12): empty and unscanned are never the same thing.
@@ -2224,6 +2508,94 @@ A brand's own rule, kept in its `fli.brand.json` (`gitignore: [...]`) so it trav
 | `GitignoreRenderedFile` | `GitignoreRenderedFile → src/gitignore.GitignoreRenderedFile` | — | `src/gitignore.ts:64` |
 | `GitignoreCheckedFile` | `GitignoreCheckedFile → src/gitignore.GitignoreCheckedFile` | — | `src/gitignore.ts:65` |
 | `GitignoreRefusal` | `GitignoreRefusal → src/gitignore.GitignoreRefusal` | — | `src/gitignore.ts:66` |
+
+### `src/guide-doc.GuideDocAppliesTo` — zod-object — `src/guide-doc.ts:36-41`
+
+*aliases* `GuideDocAppliesTo` `src/guide-doc.ts:42`
+
+| field | type | default | at |
+|---|---|---|---|
+| `form` | `z.enum(['story', 'tutorial', 'sales']).optional()` | — | `src/guide-doc.ts:38` |
+| `length` | `z.enum(['short', 'long']).optional()` | — | `src/guide-doc.ts:39` |
+
+### `src/guide-doc.OptText` — zod-scalar — `src/guide-doc.ts:67`
+
+`z.string().trim().min(1).nullable().optional()`
+
+### `src/guide-doc.GuideDoc` — zod-object — `src/guide-doc.ts:72-94`
+
+*aliases* `GuideDoc` `src/guide-doc.ts:95`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `schema` | `z.literal(GUIDE_SCHEMA) → src/guide-doc.GUIDE_SCHEMA` | — | `src/guide-doc.ts:73` |  |
+| `id` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/guide-doc.ts:74` |  |
+| `label` | `z.string().trim().min(1)` | — | `src/guide-doc.ts:75` |  |
+| `type` | `z.preprocess(normaliseGuideType, GuideDocType) → src/guide-doc.normaliseGuideType, src/guide-doc.GuideDocType` | — | `src/guide-doc.ts:76` |  |
+| `level` | `GuideDocLevel → src/guide-doc.GuideDocLevel` | — | `src/guide-doc.ts:77` |  |
+| `gist` | `z.string().trim().min(1).refine((s) => !/[\r\n]/.test(s), 'must be one line')` | — | `src/guide-doc.ts:79` | ONE line: what this guide tells the writer. Shown as the card's one-liner. |
+| `appliesTo` | `GuideDocAppliesTo.optional() → src/guide-doc.GuideDocAppliesTo` | — | `src/guide-doc.ts:84` |  |
+| `brands` | `z.array(z.string().min(1)).optional()` | — | `src/guide-doc.ts:85` |  |
+| `part` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:86` |  |
+| `style` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:87` |  |
+| `narrator` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:88` |  |
+| `author` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:89` |  |
+| `layer` | `GuideDocLayer.optional() → src/guide-doc.GuideDocLayer` | — | `src/guide-doc.ts:90` |  |
+| `canonical_source` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:91` |  |
+| `owner` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:92` |  |
+| `promotedTo` | `z.array(z.string().min(1)).optional()` | — | `src/guide-doc.ts:93` |  |
+
+### `src/guide-doc.ParsedGuide` — type-union — `src/guide-doc.ts:97-108`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `header` | `{ header: GuideDoc; body: string }` | — | `src/guide-doc.ts:98` |
+| `error` | `{ /** One short reason, for the card: `no guide header`, `invalid: missing gist`, `invalid: type must be …`. */ error: string; /** Every pr…` | — | `src/guide-doc.ts:101` |
+
+### `src/guide-doc.ParsedGuide[0]` — type — `src/guide-doc.ts:98`
+
+| field | type | default | at |
+|---|---|---|---|
+| `header` | `GuideDoc → src/guide-doc.GuideDoc` | — | `src/guide-doc.ts:98` |
+| `body` | `string` | — | `src/guide-doc.ts:98` |
+
+### `src/guide-doc.ParsedGuide[1]` — type — `src/guide-doc.ts:99-108`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `error` | `string` | — | `src/guide-doc.ts:101` | One short reason, for the card: `no guide header`, `invalid: missing gist`, `invalid: type must be …`. |
+| `issues` | `string[]` | — | `src/guide-doc.ts:103` | Every problem found (each `key: message`); empty for a file with no header. |
+| `body` | `string` | — | `src/guide-doc.ts:105` | The file's text after any frontmatter, so a reader can still show or summarise it. |
+| `raw` | `Record<string, unknown> \| null` | — | `src/guide-doc.ts:107` | The header as read, when there was one. |
+
+### `src/help.HelpRow` — zod-object — `src/help.ts:19`
+
+One row of the sheet: the key(s) and what they do.
+
+*aliases* `HelpRow` `src/help.ts:20`
+
+| field | type | default | at |
+|---|---|---|---|
+| `keys` | `z.string()` | — | `src/help.ts:19` |
+| `what` | `z.string()` | — | `src/help.ts:19` |
+
+### `src/help.HelpGroup` — zod-object — `src/help.ts:22`
+
+*aliases* `HelpGroup` `src/help.ts:23`
+
+| field | type | default | at |
+|---|---|---|---|
+| `group` | `z.string()` | — | `src/help.ts:22` |
+| `rows` | `z.array(HelpRow) → src/help.HelpRow` | — | `src/help.ts:22` |
+
+### `src/help.HelpScreen` — zod-object — `src/help.ts:25`
+
+*aliases* `HelpScreen` `src/help.ts:26`
+
+| field | type | default | at |
+|---|---|---|---|
+| `title` | `z.string()` | — | `src/help.ts:25` |
+| `groups` | `z.array(HelpGroup) → src/help.HelpGroup` | — | `src/help.ts:25` |
 
 ### `src/identity.ProjectLanguage` — zod-scalar — `src/identity.ts:28`
 
@@ -3221,21 +3593,20 @@ What YLO's `launch.json` (the workshop) offers, reduced to what the rules need.
 | `inferred` | `z.number().int()` | — | `src/publish.ts:180` |
 | `notReady` | `z.number().int()` | — | `src/publish.ts:181` |
 
-### `src/publish.PublishedVideo` — zod-object — `src/publish.ts:702-710`
+### `src/publish.PublishedVideo` — zod-object — `src/publish.ts:705-715`
 
-The hook for whatever comes after publishing (post-publish posts, YLO's related-videos linking): every published
+*aliases* `PublishedVideo` `src/publish.ts:716`
 
-*aliases* `PublishedVideo` `src/publish.ts:711`
-
-| field | type | default | at |
-|---|---|---|---|
-| `resourceId` | `z.string()` | — | `src/publish.ts:703` |
-| `video` | `z.string().nullable()` | — | `src/publish.ts:704` |
-| `path` | `z.string().nullable()` | — | `src/publish.ts:705` |
-| `youtubeId` | `z.string()` | — | `src/publish.ts:706` |
-| `url` | `z.string()` | — | `src/publish.ts:707` |
-| `publishedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:708` |
-| `by` | `z.string()` | — | `src/publish.ts:709` |
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `resourceId` | `z.string()` | — | `src/publish.ts:706` |  |
+| `video` | `z.string().nullable()` | — | `src/publish.ts:707` |  |
+| `path` | `z.string().nullable()` | — | `src/publish.ts:708` |  |
+| `youtubeId` | `z.string().optional()` | — | `src/publish.ts:710` | Only for YouTube publishes; a platform-URL publish (Skool, other) has none. |
+| `platform` | `z.enum(PUBLISH_PLATFORMS) → src/publish.PUBLISH_PLATFORMS` | — | `src/publish.ts:711` |  |
+| `url` | `z.string()` | — | `src/publish.ts:712` |  |
+| `publishedAt` | `Iso → src/publish.Iso` | — | `src/publish.ts:713` |  |
+| `by` | `z.string()` | — | `src/publish.ts:714` |  |
 
 ### `src/recipe-paths.RecipePathWarning` — zod-object — `src/recipe-paths.ts:18-27`
 
@@ -3681,6 +4052,121 @@ Who changed a record, and when (David 2026-09-24: "keep a time updated and a who
 | `at` | `z.iso.datetime({ offset: true })` | — | `src/stamp.ts:10` |
 | `by` | `PrincipalName → src/capability.PrincipalName` | — | `src/stamp.ts:11` |
 
+### `src/tell.Name` — zod-scalar — `src/tell.ts:22`
+
+Point and tell: a person marks a moment in an app, says what's wrong and sends it to a conversation they choose.
+
+`z.string().trim().min(1)`
+
+### `src/tell.TellOpen` — zod-object — `src/tell.ts:25-29`
+
+What's open in the app: `{ kind: 'document', id: 'chapter-2.md' }`.
+
+*aliases* `TellOpen` `src/tell.ts:30`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `Name → src/tell.Name` | — | `src/tell.ts:26` |
+| `id` | `Name → src/tell.Name` | — | `src/tell.ts:27` |
+| `label` | `Name.optional() → src/tell.Name` | — | `src/tell.ts:28` |
+
+### `src/tell.TellPosition` — zod-object — `src/tell.ts:33-37`
+
+Where the moment sits on the thing being reviewed: `{ unit: 'line', value: 42 }`.
+
+*aliases* `TellPosition` `src/tell.ts:38`
+
+| field | type | default | at |
+|---|---|---|---|
+| `unit` | `Name → src/tell.Name` | — | `src/tell.ts:34` |
+| `value` | `z.number()` | — | `src/tell.ts:35` |
+| `label` | `Name.optional() → src/tell.Name` | — | `src/tell.ts:36` |
+
+### `src/tell.TellMoment` — zod-object — `src/tell.ts:40-50`
+
+*aliases* `TellMoment` `src/tell.ts:51`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `capturedAt` | `z.iso.datetime({ offset: true })` | — | `src/tell.ts:42` | The instant of the person's action, not of finishing typing. |
+| `origin` | `Name → src/tell.Name` | — | `src/tell.ts:44` | How it was marked: `key` or `pointer` today. Open, so a later way of marking fits. |
+| `position` | `TellPosition → src/tell.TellPosition` | — | `src/tell.ts:45` |  |
+| `pointedAt` | `z.looseObject({ entityType: Name, entityId: Name, label: z.string().optional() }).optional() → src/tell.Name` | — | `src/tell.ts:47` | The thing pointed at, when the person pointed at one. |
+
+### `src/tell.TellMoment.pointedAt` — zod-object — `src/tell.ts:47`
+
+| field | type | default | at |
+|---|---|---|---|
+| `entityType` | `Name → src/tell.Name` | — | `src/tell.ts:48` |
+| `entityId` | `Name → src/tell.Name` | — | `src/tell.ts:48` |
+| `label` | `z.string().optional()` | — | `src/tell.ts:48` |
+
+### `src/tell.TellSaid` — zod-object — `src/tell.ts:54-57`
+
+The person's words. Optional so a voice-only moment can be added later; a text box always fills it.
+
+*aliases* `TellSaid` `src/tell.ts:58`
+
+| field | type | default | at |
+|---|---|---|---|
+| `text` | `z.string().min(1).optional()` | — | `src/tell.ts:55` |
+| `channel` | `NoteChannel → src/note-record.NoteChannel` | — | `src/tell.ts:56` |
+
+### `src/tell.TellTo` — zod-object — `src/tell.ts:61-65`
+
+Where it went. For a conversation: `kind: 'conversation'`, `id` the session id, `label` the name a person reads.
+
+*aliases* `TellTo` `src/tell.ts:66`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `Name → src/tell.Name` | — | `src/tell.ts:62` |
+| `id` | `Name → src/tell.Name` | — | `src/tell.ts:63` |
+| `label` | `Name.optional() → src/tell.Name` | — | `src/tell.ts:64` |
+
+### `src/tell.TellMessage` — zod-object — `src/tell.ts:68-90`
+
+*aliases* `TellMessage` `src/tell.ts:91`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `v` | `z.literal(1)` | — | `src/tell.ts:70` |  |
+| `app` | `Name → src/tell.Name` | — | `src/tell.ts:71` |  |
+| `open` | `TellOpen → src/tell.TellOpen` | — | `src/tell.ts:72` |  |
+| `moment` | `TellMoment → src/tell.TellMoment` | — | `src/tell.ts:73` |  |
+| `said` | `TellSaid → src/tell.TellSaid` | — | `src/tell.ts:74` |  |
+| `from` | `PrincipalName → src/capability.PrincipalName` | — | `src/tell.ts:75` |  |
+| `to` | `TellTo.nullable() → src/tell.TellTo` | — | `src/tell.ts:77` | Null when it was only kept. |
+| `detail` | `z.record(z.string(), z.unknown())` | — | `src/tell.ts:79` | The app-owned block: exactly one key, equal to `app`. |
+
+### `src/tell.TellDelivery` — zod-object — `src/tell.ts:103-109`
+
+*aliases* `TellDelivery` `src/tell.ts:110`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `outcome` | `TellOutcome → src/tell.TellOutcome` | — | `src/tell.ts:104` |  |
+| `conversation` | `Name → src/tell.Name` | — | `src/tell.ts:105` |  |
+| `at` | `z.iso.datetime({ offset: true })` | — | `src/tell.ts:106` |  |
+| `error` | `z.string().optional()` | — | `src/tell.ts:108` | Why, on a refusal. |
+
+### `src/tell.TellNoteOptions` — interface — `src/tell.ts:112-118`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `?: 'note' \| 'ask'` | — | `src/tell.ts:114` | `note` by default. |
+| `where` | `?: NoteWhere → src/note-record.NoteWhere` | — | `src/tell.ts:115` |  |
+| `standIn` | `?: string` | — | `src/tell.ts:117` | What goes in `note.text` when the message has no words of its own (a voice-only moment). |
+
+### `src/tell.TellLineOptions` — interface — `src/tell.ts:164-171`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `noteId` | `string` | — | `src/tell.ts:166` | The saved note, always named, so a reader can get the whole record however much was dropped here. |
+| `notesFile` | `string` | — | `src/tell.ts:167` |  |
+| `maxChars` | `?: number` | — | `src/tell.ts:168` |  |
+| `dropOrder` | `?: readonly string[]` | — | `src/tell.ts:170` | `detail.<app>` keys to drop, first to go first, when the line is over the limit. |
+
 ### `src/transport.ShuttleState` — zod-object — `src/transport.ts:15-18`
 
 Playing or not, and the signed rate: +1 forward at 1×, −2 backward at 2×.
@@ -3691,6 +4177,49 @@ Playing or not, and the signed rate: +1 forward at 1×, −2 backward at 2×.
 |---|---|---|---|
 | `playing` | `z.boolean()` | — | `src/transport.ts:16` |
 | `rate` | `z.number()` | — | `src/transport.ts:17` |
+
+### `src/transport.SpeedWindow` — type — `src/transport.ts:78-91`
+
+Where the speed control's window sits on a ladder (v0.32.0).
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `rates` | `number[]` | — | `src/transport.ts:80` | The rungs on show: `visible` consecutive rungs, the window pinned (not shrunk) at either end of the ladder. |
+| `start` | `number` | — | `src/transport.ts:82` | Index in `ladder` of the first rung shown. |
+| `index` | `number` | — | `src/transport.ts:84` | Index in `ladder` of the rung nearest the current rate. |
+| `exact` | `boolean` | — | `src/transport.ts:86` | True when the current rate is exactly that rung; false for an off-ladder rate (no rung is lit). |
+| `canBack` | `boolean` | — | `src/transport.ts:88` | False at the first rung: the slower chevron greys out. |
+| `canForward` | `boolean` | — | `src/transport.ts:90` | False at the last rung: the faster chevron greys out. |
+
+### `src/ui/SpeedControl.SpeedControlProps` — type — `src/ui/SpeedControl.tsx:12-29`
+
+The shared speed control (v0.32.0): `[‹] [0.75x] [1x] [1.5x] [›]`. Three rungs of the ladder are visible, centred on
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `value` | `number` | — | `src/ui/SpeedControl.tsx:14` | The current playback rate. |
+| `onChange` | `(rate: number) => void` | — | `src/ui/SpeedControl.tsx:16` | The user picked a rung or a chevron. |
+| `visible` | `?: number` | — | `src/ui/SpeedControl.tsx:18` | Rungs on show (default 3). |
+| `ladder` | `?: readonly number[]` | — | `src/ui/SpeedControl.tsx:20` | The ladder (default `FORWARD_SPEEDS`). |
+| `disabled` | `?: boolean` | — | `src/ui/SpeedControl.tsx:22` | No media loaded: everything greys out. |
+| `triage` | `?: boolean` | — | `src/ui/SpeedControl.tsx:24` | Footage triage: K keeps there, so the tooltip drops "K 1x". |
+| `trailing` | `?: ReactElement \| null → ReactElement (react)` | — | `src/ui/SpeedControl.tsx:26` | Extra content after the right chevron (FliCut's reverse badge). |
+| `className` | `?: string` | — | `src/ui/SpeedControl.tsx:27` |  |
+| `data-testid` | `?: string` | — | `src/ui/SpeedControl.tsx:28` |  |
+
+### `src/ui/remembered-speed.RememberedSpeedOptions` — type — `src/ui/remembered-speed.ts:6-11`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `migrateFrom` | `?: string[]` | — | `src/ui/remembered-speed.ts:8` | Old keys read once: the first one holding a number is copied to the new key, then every old key is removed. |
+| `storage` | `?: SpeedStorage \| null → src/ui/remembered-speed.SpeedStorage` | — | `src/ui/remembered-speed.ts:10` | Defaults to `globalThis.localStorage`; blocked or absent storage just means "no memory". |
+
+### `src/ui/remembered-speed.RememberedSpeed` — type — `src/ui/remembered-speed.ts:13`
+
+| field | type | default | at |
+|---|---|---|---|
+| `get` | `(): number` | — | `src/ui/remembered-speed.ts:13` |
+| `set` | `(rate: number): void` | — | `src/ui/remembered-speed.ts:13` |
 
 ### `src/video-file.Ext` — zod-scalar — `src/video-file.ts:23`
 
@@ -4327,12 +4856,12 @@ The census found these top-level declarations and the extractor did not mirror t
 
 | family | count | declarations |
 |---|---|---|
-| object constant | 8 | `src/classify.LAYOUT_DIRS` `src/classify.ts:310`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
-| array constant | 7 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/note-record.NOTE_REFUSALS` `src/note-record.ts:476`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:33`<br>`src/publish.READY_STATES` `src/publish.ts:68`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:70`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
-| class | 6 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:811`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:220`<br>`src/youtube.YouTubeReader` `src/youtube.ts:236` |
+| object constant | 10 | `src/classify.LAYOUT_DIRS` `src/classify.ts:310`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/guide-doc.GUIDE_TYPE_ALIASES` `src/guide-doc.ts:30`<br>`src/help.HELP_SCREENS` `src/help.ts:34`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
+| array constant | 9 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/guide-doc.GUIDE_DOC_TYPES` `src/guide-doc.ts:26`<br>`src/guide-doc.GUIDE_META_KEYS` `src/guide-doc.ts:52`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/note-record.NOTE_REFUSALS` `src/note-record.ts:476`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:33`<br>`src/publish.READY_STATES` `src/publish.ts:68`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:70`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
+| class | 6 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:819`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:220`<br>`src/youtube.YouTubeReader` `src/youtube.ts:236` |
 | const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:187`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
-| utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 2 | `src/notes.Refused` `src/notes.ts:55`<br>`src/youtube.Thumbs` `src/youtube.ts:231` |
+| utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 3 | `src/notes.Refused` `src/notes.ts:55`<br>`src/ui/remembered-speed.SpeedStorage` `src/ui/remembered-speed.ts:4`<br>`src/youtube.Thumbs` `src/youtube.ts:231` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 | union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:206` |
 

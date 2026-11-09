@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 468,
+    "declared": 533,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -51,6 +51,13 @@
         "not_read": 0,
         "not_schema_bearing": 0
       },
+      "src/conversations.ts": {
+        "declared": 16,
+        "gaps": 0,
+        "mirrored": 16,
+        "not_read": 0,
+        "not_schema_bearing": 5
+      },
       "src/estate.ts": {
         "declared": 15,
         "gaps": 0,
@@ -85,6 +92,20 @@
         "mirrored": 8,
         "not_read": 0,
         "not_schema_bearing": 1
+      },
+      "src/guide-doc.ts": {
+        "declared": 15,
+        "gaps": 0,
+        "mirrored": 12,
+        "not_read": 3,
+        "not_schema_bearing": 3
+      },
+      "src/help.ts": {
+        "declared": 9,
+        "gaps": 0,
+        "mirrored": 8,
+        "not_read": 1,
+        "not_schema_bearing": 0
       },
       "src/identity.ts": {
         "declared": 15,
@@ -157,9 +178,9 @@
         "not_schema_bearing": 0
       },
       "src/publish.ts": {
-        "declared": 27,
+        "declared": 29,
         "gaps": 0,
-        "mirrored": 22,
+        "mirrored": 24,
         "not_read": 5,
         "not_schema_bearing": 1
       },
@@ -219,10 +240,31 @@
         "not_read": 0,
         "not_schema_bearing": 0
       },
-      "src/transport.ts": {
-        "declared": 5,
+      "src/tell.ts": {
+        "declared": 18,
         "gaps": 0,
-        "mirrored": 4,
+        "mirrored": 18,
+        "not_read": 0,
+        "not_schema_bearing": 4
+      },
+      "src/transport.ts": {
+        "declared": 6,
+        "gaps": 0,
+        "mirrored": 5,
+        "not_read": 1,
+        "not_schema_bearing": 1
+      },
+      "src/ui/SpeedControl.tsx": {
+        "declared": 1,
+        "gaps": 0,
+        "mirrored": 1,
+        "not_read": 0,
+        "not_schema_bearing": 1
+      },
+      "src/ui/remembered-speed.ts": {
+        "declared": 3,
+        "gaps": 0,
+        "mirrored": 2,
         "not_read": 1,
         "not_schema_bearing": 1
       },
@@ -263,13 +305,13 @@
       }
     },
     "gaps": 22,
-    "mirrored": 411,
-    "not_read": 35,
-    "not_schema_bearing": 37,
+    "mirrored": 471,
+    "not_read": 40,
+    "not_schema_bearing": 51,
     "not_schema_bearing_by_family": {
-      "function": 1,
-      "function type": 1,
-      "literal constant": 35
+      "function": 6,
+      "function type": 2,
+      "literal constant": 43
     }
   },
   "closed_sets": [
@@ -1078,6 +1120,119 @@
       ]
     },
     {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 184
+          },
+          "name": "ConversationRefusal"
+        }
+      ],
+      "anchor": {
+        "end_line": 183,
+        "file": "src/conversations.ts",
+        "line": 176
+      },
+      "authority": "`z.enum` `ConversationRefusal` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/conversations.ConversationRefusal",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 177
+          },
+          "value": "no-such-conversation"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 178
+          },
+          "value": "not-at-prompt"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 179
+          },
+          "value": "nothing-to-send"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 180
+          },
+          "value": "too-long"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 181
+          },
+          "value": "unsafe-start"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 182
+          },
+          "value": "delivery-failed"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/conversations.ts",
+        "line": 188
+      },
+      "authority": "`z.enum` `outcome` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/conversations.SendResult[0].outcome",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 188
+          },
+          "value": "confirmed"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 188
+          },
+          "value": "typed-unconfirmed"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/conversations.ts",
+        "line": 348
+      },
+      "authority": "`z.enum` `role` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/conversations.ConversationMessage.role",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 348
+          },
+          "value": "user"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 348
+          },
+          "value": "assistant"
+        }
+      ]
+    },
+    {
       "anchor": {
         "end_line": 27,
         "file": "src/estate.ts",
@@ -1645,6 +1800,318 @@
             "line": 43
           },
           "value": "refused"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 28
+          },
+          "name": "GuideDocType"
+        }
+      ],
+      "anchor": {
+        "file": "src/guide-doc.ts",
+        "line": 27
+      },
+      "authority": "`z.enum` `GuideDocType` - members read through `GUIDE_DOC_TYPES` (src/guide-doc.GUIDE_DOC_TYPES) - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/guide-doc.GuideDocType",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 26
+          },
+          "value": "voice"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 26
+          },
+          "value": "verbal"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 26
+          },
+          "value": "build"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 26
+          },
+          "value": "video"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 26
+          },
+          "value": "lens"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 26
+          },
+          "value": "other"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 35
+          },
+          "name": "GuideDocLevel"
+        }
+      ],
+      "anchor": {
+        "file": "src/guide-doc.ts",
+        "line": 34
+      },
+      "authority": "`z.enum` `GuideDocLevel` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/guide-doc.GuideDocLevel",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 34
+          },
+          "value": "global"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 34
+          },
+          "value": "brand"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 34
+          },
+          "value": "series"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 34
+          },
+          "value": "video"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/guide-doc.ts",
+        "line": 38
+      },
+      "authority": "`z.enum` `form` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/guide-doc.GuideDocAppliesTo.form",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 38
+          },
+          "value": "story"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 38
+          },
+          "value": "tutorial"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 38
+          },
+          "value": "sales"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/guide-doc.ts",
+        "line": 39
+      },
+      "authority": "`z.enum` `length` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/guide-doc.GuideDocAppliesTo.length",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 39
+          },
+          "value": "short"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 39
+          },
+          "value": "long"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 46
+          },
+          "name": "GuideDocLayer"
+        }
+      ],
+      "anchor": {
+        "file": "src/guide-doc.ts",
+        "line": 45
+      },
+      "authority": "`z.enum` `GuideDocLayer` - a single declaring symbol",
+      "doc": "`canonical` = the owner's own words or rulings; `synthesis` = distilled from a corpus.",
+      "grade": "declared",
+      "id": "src/guide-doc.GuideDocLayer",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 45
+          },
+          "value": "canonical"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 45
+          },
+          "value": "synthesis"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/guide-doc.ts",
+        "line": 70
+      },
+      "authority": "`as const` array `GUIDE_REQUIRED`, typed from by `typeof GUIDE_REQUIRED[number]` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/guide-doc.GUIDE_REQUIRED",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 70
+          },
+          "value": "schema"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 70
+          },
+          "value": "id"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 70
+          },
+          "value": "label"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 70
+          },
+          "value": "type"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 70
+          },
+          "value": "level"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 70
+          },
+          "value": "gist"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 16
+          },
+          "name": "HelpScreenId"
+        }
+      ],
+      "anchor": {
+        "end_line": 15,
+        "file": "src/help.ts",
+        "line": 9
+      },
+      "authority": "`z.enum` `HelpScreenId` - a single declaring symbol",
+      "doc": "A screen that has a help sheet. Add one here, then give it groups in HELP_SCREENS.",
+      "grade": "declared",
+      "id": "src/help.HelpScreenId",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 10
+          },
+          "value": "viewer"
+        },
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 11
+          },
+          "value": "viewer-triage"
+        },
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 12
+          },
+          "value": "storypilot-listen"
+        },
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 13
+          },
+          "value": "storypilot-prep"
+        },
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 14
+          },
+          "value": "upload-wizard"
         }
       ]
     },
@@ -2771,6 +3238,70 @@
       ]
     },
     {
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 702
+      },
+      "authority": "`as const` array `PUBLISH_PLATFORMS`, typed from by `typeof PUBLISH_PLATFORMS[number]` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/publish.PUBLISH_PLATFORMS",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 702
+          },
+          "value": "youtube"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 702
+          },
+          "value": "skool"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 702
+          },
+          "value": "other"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/publish.ts",
+        "line": 711
+      },
+      "authority": "`z.enum` `platform` - members read through `PUBLISH_PLATFORMS` (src/publish.PUBLISH_PLATFORMS) - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/publish.PublishedVideo.platform",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 702
+          },
+          "value": "youtube"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 702
+          },
+          "value": "skool"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 702
+          },
+          "value": "other"
+        }
+      ]
+    },
+    {
       "aliases": [
         {
           "anchor": {
@@ -3404,6 +3935,73 @@
             "line": 103
           },
           "value": "refused"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 101
+          },
+          "name": "TellOutcome"
+        }
+      ],
+      "anchor": {
+        "file": "src/tell.ts",
+        "line": 100
+      },
+      "authority": "`z.enum` `TellOutcome` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/tell.TellOutcome",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 100
+          },
+          "value": "confirmed"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 100
+          },
+          "value": "typed-unconfirmed"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 100
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/tell.ts",
+        "line": 114
+      },
+      "authority": "literal union type of `kind` - a single declaring symbol",
+      "doc": "`note` by default.",
+      "grade": "declared",
+      "id": "src/tell.TellNoteOptions.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 114
+          },
+          "value": "note"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 114
+          },
+          "value": "ask"
         }
       ]
     },
@@ -4190,7 +4788,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-11-01T00:46:22+00:00",
+  "generated": "2026-11-09T12:26:06+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -6665,6 +7263,589 @@
     },
     {
       "anchor": {
+        "end_line": 44,
+        "file": "src/conversations.ts",
+        "line": 36
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 37
+          },
+          "default": null,
+          "name": "run",
+          "type": "?: ConversationRun \u2192 src/conversations.ConversationRun"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 39
+          },
+          "default": null,
+          "doc": "Claude Code's folder. Default `~/.claude`.",
+          "name": "claudeHome",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 41
+          },
+          "default": null,
+          "doc": "The tmux binary. Default: the usual install places (an app started from the Finder has a short PATH), then PATH.",
+          "name": "tmux",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 43
+          },
+          "default": null,
+          "doc": "Pause while waiting for a read-back. Tests pass a fake.",
+          "name": "sleep",
+          "type": "?: (ms: number) => Promise<void>"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.ConversationOptions",
+      "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 59
+          },
+          "name": "LiveConversation"
+        }
+      ],
+      "anchor": {
+        "end_line": 58,
+        "file": "src/conversations.ts",
+        "line": 46
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 48
+          },
+          "default": null,
+          "doc": "The Claude session id: what's sent to and saved.",
+          "name": "id",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 50
+          },
+          "default": null,
+          "doc": "The tmux session name a person reads. A name can pass to a different Claude, so it's never the address.",
+          "name": "label",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 51
+          },
+          "default": null,
+          "name": "paneId",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 53
+          },
+          "default": null,
+          "doc": "As Claude Code reports it.",
+          "name": "status",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 55
+          },
+          "default": null,
+          "doc": "The working folder, which also locates the transcript.",
+          "name": "cwd",
+          "type": "z.string().nullable()"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 57
+          },
+          "default": null,
+          "doc": "True only when a send would be allowed now.",
+          "name": "atPrompt",
+          "type": "z.boolean()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.LiveConversation",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 66
+          },
+          "name": "ConversationList"
+        }
+      ],
+      "anchor": {
+        "end_line": 65,
+        "file": "src/conversations.ts",
+        "line": 61
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 62
+          },
+          "default": null,
+          "name": "conversations",
+          "type": "z.array(LiveConversation) \u2192 src/conversations.LiveConversation"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 64
+          },
+          "default": null,
+          "doc": "Why the list is empty, when it is.",
+          "name": "reason",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.ConversationList",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 96,
+        "file": "src/conversations.ts",
+        "line": 91
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 92
+          },
+          "default": null,
+          "name": "kind",
+          "type": "?: unknown"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 93
+          },
+          "default": null,
+          "name": "sessionId",
+          "type": "?: unknown"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 94
+          },
+          "default": null,
+          "name": "status",
+          "type": "?: unknown"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 95
+          },
+          "default": null,
+          "name": "cwd",
+          "type": "?: unknown"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.SessionFile",
+      "kind": "interface"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 195
+          },
+          "name": "SendResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 194,
+        "file": "src/conversations.ts",
+        "line": 186
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 187
+          },
+          "default": null,
+          "name": "z.object",
+          "type": "z.object({ outcome: z.enum(['confirmed', 'typed-unconfirmed']), conversation: z.string(), label: z.string(), sent: z.int().min(0) })"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 193
+          },
+          "default": null,
+          "name": "z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() })",
+          "type": "z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() }) \u2192 src/conversations.ConversationRefusal"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.SendResult",
+      "kind": "zod-union"
+    },
+    {
+      "anchor": {
+        "end_line": 192,
+        "file": "src/conversations.ts",
+        "line": 187
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 188
+          },
+          "default": null,
+          "name": "outcome",
+          "type": "z.enum(['confirmed', 'typed-unconfirmed'])"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 189
+          },
+          "default": null,
+          "name": "conversation",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 190
+          },
+          "default": null,
+          "name": "label",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 191
+          },
+          "default": null,
+          "name": "sent",
+          "type": "z.int().min(0)"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.SendResult[0]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/conversations.ts",
+        "line": 193
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 193
+          },
+          "default": null,
+          "name": "outcome",
+          "type": "z.literal('refused')"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 193
+          },
+          "default": null,
+          "name": "reason",
+          "type": "ConversationRefusal \u2192 src/conversations.ConversationRefusal"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 193
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.SendResult[1]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 210,
+        "file": "src/conversations.ts",
+        "line": 205
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 207
+          },
+          "default": null,
+          "doc": "How long to look for the text in the transcript. Default 5 s.",
+          "name": "confirmMs",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 209
+          },
+          "default": null,
+          "doc": "Most text this door takes. Default `CONVERSATION_MAX_CHARS`.",
+          "name": "maxChars",
+          "type": "?: number"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.SendOptions",
+      "kind": "interface"
+    },
+    {
+      "anchor": {
+        "end_line": 316,
+        "file": "src/conversations.ts",
+        "line": 310
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 311
+          },
+          "default": null,
+          "name": "type",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 312
+          },
+          "default": null,
+          "name": "isMeta",
+          "type": "?: boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 313
+          },
+          "default": null,
+          "name": "isCompactSummary",
+          "type": "?: boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 314
+          },
+          "default": null,
+          "name": "timestamp",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 315
+          },
+          "default": null,
+          "name": "message",
+          "type": "?: { content?: unknown }"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.TranscriptRow",
+      "kind": "interface"
+    },
+    {
+      "anchor": {
+        "file": "src/conversations.ts",
+        "line": 315
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 315
+          },
+          "default": null,
+          "name": "content",
+          "type": "?: unknown"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.TranscriptRow.message",
+      "kind": "type"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 352
+          },
+          "name": "ConversationMessage"
+        }
+      ],
+      "anchor": {
+        "end_line": 351,
+        "file": "src/conversations.ts",
+        "line": 347
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 348
+          },
+          "default": null,
+          "name": "role",
+          "type": "z.enum(['user', 'assistant'])"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 349
+          },
+          "default": null,
+          "name": "text",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 350
+          },
+          "default": null,
+          "name": "at",
+          "type": "z.string().nullable()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.ConversationMessage",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 360
+          },
+          "name": "ConversationTail"
+        }
+      ],
+      "anchor": {
+        "end_line": 359,
+        "file": "src/conversations.ts",
+        "line": 354
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 355
+          },
+          "default": null,
+          "name": "conversation",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 356
+          },
+          "default": null,
+          "name": "messages",
+          "type": "z.array(ConversationMessage) \u2192 src/conversations.ConversationMessage"
+        },
+        {
+          "anchor": {
+            "file": "src/conversations.ts",
+            "line": 358
+          },
+          "default": null,
+          "doc": "Why there's nothing to show, when there isn't.",
+          "name": "note",
+          "type": "z.string().nullable()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/conversations.ConversationTail",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
         "end_line": 27,
         "file": "src/estate.ts",
         "line": 17
@@ -9119,6 +10300,486 @@
       "grade": "declared",
       "id": "src/gitignore.GitignoreResult",
       "kind": "zod-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/guide-doc.ts",
+        "line": 20
+      },
+      "fields": [],
+      "grade": "declared",
+      "id": "src/guide-doc.GUIDE_SCHEMA",
+      "kind": "constant",
+      "note": "declared in code; compare against what is actually on disk",
+      "value": "storypilot.guide/1"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 42
+          },
+          "name": "GuideDocAppliesTo"
+        }
+      ],
+      "anchor": {
+        "end_line": 41,
+        "file": "src/guide-doc.ts",
+        "line": 36
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 38
+          },
+          "default": null,
+          "name": "form",
+          "type": "z.enum(['story', 'tutorial', 'sales']).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 39
+          },
+          "default": null,
+          "name": "length",
+          "type": "z.enum(['short', 'long']).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/guide-doc.GuideDocAppliesTo",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/guide-doc.ts",
+        "line": 67
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/guide-doc.OptText",
+      "kind": "zod-scalar",
+      "value": "z.string().trim().min(1).nullable().optional()"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 95
+          },
+          "name": "GuideDoc"
+        }
+      ],
+      "anchor": {
+        "end_line": 94,
+        "file": "src/guide-doc.ts",
+        "line": 72
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "schema",
+          "type": "z.literal(GUIDE_SCHEMA) \u2192 src/guide-doc.GUIDE_SCHEMA"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 74
+          },
+          "default": null,
+          "name": "id",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 75
+          },
+          "default": null,
+          "name": "label",
+          "type": "z.string().trim().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 76
+          },
+          "default": null,
+          "name": "type",
+          "type": "z.preprocess(normaliseGuideType, GuideDocType) \u2192 src/guide-doc.normaliseGuideType, src/guide-doc.GuideDocType"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 77
+          },
+          "default": null,
+          "name": "level",
+          "type": "GuideDocLevel \u2192 src/guide-doc.GuideDocLevel"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 79
+          },
+          "default": null,
+          "doc": "ONE line: what this guide tells the writer. Shown as the card's one-liner.",
+          "name": "gist",
+          "type": "z.string().trim().min(1).refine((s) => !/[\\r\\n]/.test(s), 'must be one line')"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 84
+          },
+          "default": null,
+          "name": "appliesTo",
+          "type": "GuideDocAppliesTo.optional() \u2192 src/guide-doc.GuideDocAppliesTo"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 85
+          },
+          "default": null,
+          "name": "brands",
+          "type": "z.array(z.string().min(1)).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 86
+          },
+          "default": null,
+          "name": "part",
+          "type": "OptText \u2192 src/guide-doc.OptText"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 87
+          },
+          "default": null,
+          "name": "style",
+          "type": "OptText \u2192 src/guide-doc.OptText"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 88
+          },
+          "default": null,
+          "name": "narrator",
+          "type": "OptText \u2192 src/guide-doc.OptText"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 89
+          },
+          "default": null,
+          "name": "author",
+          "type": "OptText \u2192 src/guide-doc.OptText"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 90
+          },
+          "default": null,
+          "name": "layer",
+          "type": "GuideDocLayer.optional() \u2192 src/guide-doc.GuideDocLayer"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 91
+          },
+          "default": null,
+          "name": "canonical_source",
+          "type": "OptText \u2192 src/guide-doc.OptText"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 92
+          },
+          "default": null,
+          "name": "owner",
+          "type": "OptText \u2192 src/guide-doc.OptText"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 93
+          },
+          "default": null,
+          "name": "promotedTo",
+          "type": "z.array(z.string().min(1)).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/guide-doc.GuideDoc",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 108,
+        "file": "src/guide-doc.ts",
+        "line": 97
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 98
+          },
+          "default": null,
+          "name": "header",
+          "type": "{ header: GuideDoc; body: string }"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 101
+          },
+          "default": null,
+          "name": "error",
+          "type": "{ /** One short reason, for the card: `no guide header`, `invalid: missing gist`, `invalid: type must be \u2026`. */ error: string; /** Every pr\u2026"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/guide-doc.ParsedGuide",
+      "kind": "type-union"
+    },
+    {
+      "anchor": {
+        "file": "src/guide-doc.ts",
+        "line": 98
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 98
+          },
+          "default": null,
+          "name": "header",
+          "type": "GuideDoc \u2192 src/guide-doc.GuideDoc"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 98
+          },
+          "default": null,
+          "name": "body",
+          "type": "string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/guide-doc.ParsedGuide[0]",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "end_line": 108,
+        "file": "src/guide-doc.ts",
+        "line": 99
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 101
+          },
+          "default": null,
+          "doc": "One short reason, for the card: `no guide header`, `invalid: missing gist`, `invalid: type must be \u2026`.",
+          "name": "error",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 103
+          },
+          "default": null,
+          "doc": "Every problem found (each `key: message`); empty for a file with no header.",
+          "name": "issues",
+          "type": "string[]"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 105
+          },
+          "default": null,
+          "doc": "The file's text after any frontmatter, so a reader can still show or summarise it.",
+          "name": "body",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 107
+          },
+          "default": null,
+          "doc": "The header as read, when there was one.",
+          "name": "raw",
+          "type": "Record<string, unknown> | null"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/guide-doc.ParsedGuide[1]",
+      "kind": "type"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 20
+          },
+          "name": "HelpRow"
+        }
+      ],
+      "anchor": {
+        "file": "src/help.ts",
+        "line": 19
+      },
+      "bases": [],
+      "doc": "One row of the sheet: the key(s) and what they do.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 19
+          },
+          "default": null,
+          "name": "keys",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 19
+          },
+          "default": null,
+          "name": "what",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/help.HelpRow",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 23
+          },
+          "name": "HelpGroup"
+        }
+      ],
+      "anchor": {
+        "file": "src/help.ts",
+        "line": 22
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 22
+          },
+          "default": null,
+          "name": "group",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 22
+          },
+          "default": null,
+          "name": "rows",
+          "type": "z.array(HelpRow) \u2192 src/help.HelpRow"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/help.HelpGroup",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 26
+          },
+          "name": "HelpScreen"
+        }
+      ],
+      "anchor": {
+        "file": "src/help.ts",
+        "line": 25
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 25
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/help.ts",
+            "line": 25
+          },
+          "default": null,
+          "name": "groups",
+          "type": "z.array(HelpGroup) \u2192 src/help.HelpGroup"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/help.HelpScreen",
+      "kind": "zod-object"
     },
     {
       "anchor": {
@@ -14369,24 +16030,24 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 711
+            "line": 716
           },
           "name": "PublishedVideo"
         }
       ],
       "anchor": {
-        "end_line": 710,
+        "end_line": 715,
         "file": "src/publish.ts",
-        "line": 702
+        "line": 705
       },
       "bases": [],
-      "doc": "The hook for whatever comes after publishing (post-publish posts, YLO's related-videos linking): every published",
+      "doc": null,
       "exported": true,
       "fields": [
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 703
+            "line": 706
           },
           "default": null,
           "name": "resourceId",
@@ -14395,7 +16056,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 704
+            "line": 707
           },
           "default": null,
           "name": "video",
@@ -14404,7 +16065,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 705
+            "line": 708
           },
           "default": null,
           "name": "path",
@@ -14413,16 +16074,26 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 706
+            "line": 710
           },
           "default": null,
+          "doc": "Only for YouTube publishes; a platform-URL publish (Skool, other) has none.",
           "name": "youtubeId",
-          "type": "z.string()"
+          "type": "z.string().optional()"
         },
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 707
+            "line": 711
+          },
+          "default": null,
+          "name": "platform",
+          "type": "z.enum(PUBLISH_PLATFORMS) \u2192 src/publish.PUBLISH_PLATFORMS"
+        },
+        {
+          "anchor": {
+            "file": "src/publish.ts",
+            "line": 712
           },
           "default": null,
           "name": "url",
@@ -14431,7 +16102,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 708
+            "line": 713
           },
           "default": null,
           "name": "publishedAt",
@@ -14440,7 +16111,7 @@
         {
           "anchor": {
             "file": "src/publish.ts",
-            "line": 709
+            "line": 714
           },
           "default": null,
           "name": "by",
@@ -16716,6 +18387,577 @@
       "kind": "zod-object"
     },
     {
+      "anchor": {
+        "file": "src/tell.ts",
+        "line": 22
+      },
+      "bases": [],
+      "doc": "Point and tell: a person marks a moment in an app, says what's wrong and sends it to a conversation they choose.",
+      "exported": false,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/tell.Name",
+      "kind": "zod-scalar",
+      "value": "z.string().trim().min(1)"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 30
+          },
+          "name": "TellOpen"
+        }
+      ],
+      "anchor": {
+        "end_line": 29,
+        "file": "src/tell.ts",
+        "line": 25
+      },
+      "bases": [],
+      "doc": "What's open in the app: `{ kind: 'document', id: 'chapter-2.md' }`.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 26
+          },
+          "default": null,
+          "name": "kind",
+          "type": "Name \u2192 src/tell.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 27
+          },
+          "default": null,
+          "name": "id",
+          "type": "Name \u2192 src/tell.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 28
+          },
+          "default": null,
+          "name": "label",
+          "type": "Name.optional() \u2192 src/tell.Name"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/tell.TellOpen",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 38
+          },
+          "name": "TellPosition"
+        }
+      ],
+      "anchor": {
+        "end_line": 37,
+        "file": "src/tell.ts",
+        "line": 33
+      },
+      "bases": [],
+      "doc": "Where the moment sits on the thing being reviewed: `{ unit: 'line', value: 42 }`.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 34
+          },
+          "default": null,
+          "name": "unit",
+          "type": "Name \u2192 src/tell.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 35
+          },
+          "default": null,
+          "name": "value",
+          "type": "z.number()"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 36
+          },
+          "default": null,
+          "name": "label",
+          "type": "Name.optional() \u2192 src/tell.Name"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/tell.TellPosition",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 51
+          },
+          "name": "TellMoment"
+        }
+      ],
+      "anchor": {
+        "end_line": 50,
+        "file": "src/tell.ts",
+        "line": 40
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 42
+          },
+          "default": null,
+          "doc": "The instant of the person's action, not of finishing typing.",
+          "name": "capturedAt",
+          "type": "z.iso.datetime({ offset: true })"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 44
+          },
+          "default": null,
+          "doc": "How it was marked: `key` or `pointer` today. Open, so a later way of marking fits.",
+          "name": "origin",
+          "type": "Name \u2192 src/tell.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 45
+          },
+          "default": null,
+          "name": "position",
+          "type": "TellPosition \u2192 src/tell.TellPosition"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 47
+          },
+          "default": null,
+          "doc": "The thing pointed at, when the person pointed at one.",
+          "name": "pointedAt",
+          "type": "z.looseObject({ entityType: Name, entityId: Name, label: z.string().optional() }).optional() \u2192 src/tell.Name"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/tell.TellMoment",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/tell.ts",
+        "line": 47
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 48
+          },
+          "default": null,
+          "name": "entityType",
+          "type": "Name \u2192 src/tell.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 48
+          },
+          "default": null,
+          "name": "entityId",
+          "type": "Name \u2192 src/tell.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 48
+          },
+          "default": null,
+          "name": "label",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/tell.TellMoment.pointedAt",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 58
+          },
+          "name": "TellSaid"
+        }
+      ],
+      "anchor": {
+        "end_line": 57,
+        "file": "src/tell.ts",
+        "line": 54
+      },
+      "bases": [],
+      "doc": "The person's words. Optional so a voice-only moment can be added later; a text box always fills it.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 55
+          },
+          "default": null,
+          "name": "text",
+          "type": "z.string().min(1).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 56
+          },
+          "default": null,
+          "name": "channel",
+          "type": "NoteChannel \u2192 src/note-record.NoteChannel"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/tell.TellSaid",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 66
+          },
+          "name": "TellTo"
+        }
+      ],
+      "anchor": {
+        "end_line": 65,
+        "file": "src/tell.ts",
+        "line": 61
+      },
+      "bases": [],
+      "doc": "Where it went. For a conversation: `kind: 'conversation'`, `id` the session id, `label` the name a person reads.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 62
+          },
+          "default": null,
+          "name": "kind",
+          "type": "Name \u2192 src/tell.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 63
+          },
+          "default": null,
+          "name": "id",
+          "type": "Name \u2192 src/tell.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 64
+          },
+          "default": null,
+          "name": "label",
+          "type": "Name.optional() \u2192 src/tell.Name"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/tell.TellTo",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 91
+          },
+          "name": "TellMessage"
+        }
+      ],
+      "anchor": {
+        "end_line": 90,
+        "file": "src/tell.ts",
+        "line": 68
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 70
+          },
+          "default": null,
+          "name": "v",
+          "type": "z.literal(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 71
+          },
+          "default": null,
+          "name": "app",
+          "type": "Name \u2192 src/tell.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 72
+          },
+          "default": null,
+          "name": "open",
+          "type": "TellOpen \u2192 src/tell.TellOpen"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "moment",
+          "type": "TellMoment \u2192 src/tell.TellMoment"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 74
+          },
+          "default": null,
+          "name": "said",
+          "type": "TellSaid \u2192 src/tell.TellSaid"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 75
+          },
+          "default": null,
+          "name": "from",
+          "type": "PrincipalName \u2192 src/capability.PrincipalName"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 77
+          },
+          "default": null,
+          "doc": "Null when it was only kept.",
+          "name": "to",
+          "type": "TellTo.nullable() \u2192 src/tell.TellTo"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 79
+          },
+          "default": null,
+          "doc": "The app-owned block: exactly one key, equal to `app`.",
+          "name": "detail",
+          "type": "z.record(z.string(), z.unknown())"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/tell.TellMessage",
+      "kind": "zod-object",
+      "refinements": [
+        "superRefine at line 81"
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 110
+          },
+          "name": "TellDelivery"
+        }
+      ],
+      "anchor": {
+        "end_line": 109,
+        "file": "src/tell.ts",
+        "line": 103
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 104
+          },
+          "default": null,
+          "name": "outcome",
+          "type": "TellOutcome \u2192 src/tell.TellOutcome"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 105
+          },
+          "default": null,
+          "name": "conversation",
+          "type": "Name \u2192 src/tell.Name"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 106
+          },
+          "default": null,
+          "name": "at",
+          "type": "z.iso.datetime({ offset: true })"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 108
+          },
+          "default": null,
+          "doc": "Why, on a refusal.",
+          "name": "error",
+          "type": "z.string().optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/tell.TellDelivery",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 118,
+        "file": "src/tell.ts",
+        "line": 112
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 114
+          },
+          "default": null,
+          "doc": "`note` by default.",
+          "name": "kind",
+          "type": "?: 'note' | 'ask'"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 115
+          },
+          "default": null,
+          "name": "where",
+          "type": "?: NoteWhere \u2192 src/note-record.NoteWhere"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 117
+          },
+          "default": null,
+          "doc": "What goes in `note.text` when the message has no words of its own (a voice-only moment).",
+          "name": "standIn",
+          "type": "?: string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/tell.TellNoteOptions",
+      "kind": "interface"
+    },
+    {
+      "anchor": {
+        "end_line": 171,
+        "file": "src/tell.ts",
+        "line": 164
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 166
+          },
+          "default": null,
+          "doc": "The saved note, always named, so a reader can get the whole record however much was dropped here.",
+          "name": "noteId",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 167
+          },
+          "default": null,
+          "name": "notesFile",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 168
+          },
+          "default": null,
+          "name": "maxChars",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/tell.ts",
+            "line": 170
+          },
+          "default": null,
+          "doc": "`detail.<app>` keys to drop, first to go first, when the line is over the limit.",
+          "name": "dropOrder",
+          "type": "?: readonly string[]"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/tell.TellLineOptions",
+      "kind": "interface"
+    },
+    {
       "aliases": [
         {
           "anchor": {
@@ -16756,6 +18998,251 @@
       "grade": "declared",
       "id": "src/transport.ShuttleState",
       "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 91,
+        "file": "src/transport.ts",
+        "line": 78
+      },
+      "bases": [],
+      "doc": "Where the speed control's window sits on a ladder (v0.32.0).",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 80
+          },
+          "default": null,
+          "doc": "The rungs on show: `visible` consecutive rungs, the window pinned (not shrunk) at either end of the ladder.",
+          "name": "rates",
+          "type": "number[]"
+        },
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 82
+          },
+          "default": null,
+          "doc": "Index in `ladder` of the first rung shown.",
+          "name": "start",
+          "type": "number"
+        },
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 84
+          },
+          "default": null,
+          "doc": "Index in `ladder` of the rung nearest the current rate.",
+          "name": "index",
+          "type": "number"
+        },
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 86
+          },
+          "default": null,
+          "doc": "True when the current rate is exactly that rung; false for an off-ladder rate (no rung is lit).",
+          "name": "exact",
+          "type": "boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 88
+          },
+          "default": null,
+          "doc": "False at the first rung: the slower chevron greys out.",
+          "name": "canBack",
+          "type": "boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/transport.ts",
+            "line": 90
+          },
+          "default": null,
+          "doc": "False at the last rung: the faster chevron greys out.",
+          "name": "canForward",
+          "type": "boolean"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/transport.SpeedWindow",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "end_line": 29,
+        "file": "src/ui/SpeedControl.tsx",
+        "line": 12
+      },
+      "bases": [],
+      "doc": "The shared speed control (v0.32.0): `[\u2039] [0.75x] [1x] [1.5x] [\u203a]`. Three rungs of the ladder are visible, centred on",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/ui/SpeedControl.tsx",
+            "line": 14
+          },
+          "default": null,
+          "doc": "The current playback rate.",
+          "name": "value",
+          "type": "number"
+        },
+        {
+          "anchor": {
+            "file": "src/ui/SpeedControl.tsx",
+            "line": 16
+          },
+          "default": null,
+          "doc": "The user picked a rung or a chevron.",
+          "name": "onChange",
+          "type": "(rate: number) => void"
+        },
+        {
+          "anchor": {
+            "file": "src/ui/SpeedControl.tsx",
+            "line": 18
+          },
+          "default": null,
+          "doc": "Rungs on show (default 3).",
+          "name": "visible",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/ui/SpeedControl.tsx",
+            "line": 20
+          },
+          "default": null,
+          "doc": "The ladder (default `FORWARD_SPEEDS`).",
+          "name": "ladder",
+          "type": "?: readonly number[]"
+        },
+        {
+          "anchor": {
+            "file": "src/ui/SpeedControl.tsx",
+            "line": 22
+          },
+          "default": null,
+          "doc": "No media loaded: everything greys out.",
+          "name": "disabled",
+          "type": "?: boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/ui/SpeedControl.tsx",
+            "line": 24
+          },
+          "default": null,
+          "doc": "Footage triage: K keeps there, so the tooltip drops \"K 1x\".",
+          "name": "triage",
+          "type": "?: boolean"
+        },
+        {
+          "anchor": {
+            "file": "src/ui/SpeedControl.tsx",
+            "line": 26
+          },
+          "default": null,
+          "doc": "Extra content after the right chevron (FliCut's reverse badge).",
+          "name": "trailing",
+          "type": "?: ReactElement | null \u2192 ReactElement (react)"
+        },
+        {
+          "anchor": {
+            "file": "src/ui/SpeedControl.tsx",
+            "line": 27
+          },
+          "default": null,
+          "name": "className",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/ui/SpeedControl.tsx",
+            "line": 28
+          },
+          "default": null,
+          "name": "data-testid",
+          "type": "?: string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/ui/SpeedControl.SpeedControlProps",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "end_line": 11,
+        "file": "src/ui/remembered-speed.ts",
+        "line": 6
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/ui/remembered-speed.ts",
+            "line": 8
+          },
+          "default": null,
+          "doc": "Old keys read once: the first one holding a number is copied to the new key, then every old key is removed.",
+          "name": "migrateFrom",
+          "type": "?: string[]"
+        },
+        {
+          "anchor": {
+            "file": "src/ui/remembered-speed.ts",
+            "line": 10
+          },
+          "default": null,
+          "doc": "Defaults to `globalThis.localStorage`; blocked or absent storage just means \"no memory\".",
+          "name": "storage",
+          "type": "?: SpeedStorage | null \u2192 src/ui/remembered-speed.SpeedStorage"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/ui/remembered-speed.RememberedSpeedOptions",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "file": "src/ui/remembered-speed.ts",
+        "line": 13
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/ui/remembered-speed.ts",
+            "line": 13
+          },
+          "default": null,
+          "name": "get",
+          "type": "(): number"
+        },
+        {
+          "anchor": {
+            "file": "src/ui/remembered-speed.ts",
+            "line": 13
+          },
+          "default": null,
+          "name": "set",
+          "type": "(rate: number): void"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/ui/remembered-speed.RememberedSpeed",
+      "kind": "type"
     },
     {
       "anchor": {
@@ -20000,7 +22487,7 @@
     }
   ],
   "target": {
-    "commit": "00bc4bb56b08cb39f6ed6166b8d49fb7df408cc4",
+    "commit": "376e8872a56b647ce2399593ad89ccf7ad68695d",
     "root": "..",
     "stack": "typescript"
   },
@@ -20117,6 +22604,42 @@
       "census": true,
       "family": "array constant",
       "looked_at": [
+        "src/guide-doc.ts:26"
+      ],
+      "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/guide-doc.GUIDE_DOC_TYPES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "array constant",
+      "looked_at": [
+        "src/guide-doc.ts:52"
+      ],
+      "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/guide-doc.GUIDE_META_KEYS` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "object constant",
+      "looked_at": [
+        "src/guide-doc.ts:30"
+      ],
+      "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/guide-doc.GUIDE_TYPE_ALIASES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "object constant",
+      "looked_at": [
+        "src/help.ts:34"
+      ],
+      "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/help.HELP_SCREENS` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "array constant",
+      "looked_at": [
         "src/identity.ts:29"
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
@@ -20171,7 +22694,7 @@
       "census": true,
       "family": "class",
       "looked_at": [
-        "src/publish.ts:811"
+        "src/publish.ts:819"
       ],
       "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/publish.NoFinalVideo` - declared but not read"
@@ -20283,6 +22806,15 @@
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/transport.FORWARD_SPEEDS` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "utility-type alias (`Pick` / `Omit` / `Record` / generic instance)",
+      "looked_at": [
+        "src/ui/remembered-speed.ts:4"
+      ],
+      "reason": "declared but not read: utility-type alias (`Pick` / `Omit` / `Record` / generic instance). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/ui/remembered-speed.SpeedStorage` - declared but not read"
     },
     {
       "census": true,
@@ -20400,7 +22932,7 @@
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 36,
+    "import": 40,
     "re-export": 0
   }
 }

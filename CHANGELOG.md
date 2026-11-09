@@ -2,6 +2,18 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## Unreleased
+
+Point and tell: a person marks a moment in an app, says what's wrong and sends it to a live Claude conversation.
+
+### Added
+
+- `TellMessage`, saved on an ordinary note at `meta.tell`, with `tellNoteInput`, `tellLine` and `tellDeliveryChange`. App-neutral; an
+  app's own data goes in `detail.<app>`.
+- `listLiveConversations`, `sendToConversation`, `readConversationTail`, `isLocalRequest`. Only live interactive Claude sessions, only
+  at their prompt, never a slash or shell command. Delivered as a bracketed paste, then read back from the transcript.
+- `docs/point-and-tell.md`: how another app adopts it.
+
 ## v0.34.0 — 2026-11-06
 
 Guide parts: split the old `structure` type, a `sales` form, typed who-for header keys.

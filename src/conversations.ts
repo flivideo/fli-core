@@ -361,6 +361,12 @@ export type ConversationTail = z.infer<typeof ConversationTail>;
 
 const CLIP_CHARS = 1500;
 
+/** A paste reaches the transcript wrapped in an envelope. A person's paste is theirs, so it's shown without it. */
+function unwrapPaste(text: string): string {
+  const paste = /^<pasted_content\b[^>]*>\s*([\s\S]*?)\s*<\/pasted_content\b[^>]*>$/.exec(text);
+  return paste?.[1] ?? text;
+}
+
 /** The last `n` messages of a transcript's text: typed turns and replies, never tool output or harness text. Pure. */
 export function lastConversationMessages(jsonl: string, n: number): ConversationMessage[] {
   const out: ConversationMessage[] = [];
@@ -371,7 +377,8 @@ export function lastConversationMessages(jsonl: string, n: number): Conversation
     const row = parseRow(raw);
     if (!row || row.isMeta || row.isCompactSummary) continue;
     if (row.type !== 'user' && row.type !== 'assistant') continue;
-    const text = textOf(row.message?.content).trim();
+    const body = textOf(row.message?.content).trim();
+    const text = row.type === 'user' ? unwrapPaste(body) : body;
     if (!text || (row.type === 'user' && text.startsWith('<'))) continue;
     out.push({ role: row.type, text: text.slice(0, CLIP_CHARS), at: row.timestamp ?? null });
   }

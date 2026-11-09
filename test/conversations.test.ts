@@ -299,6 +299,19 @@ describe('reading a conversation back', () => {
     ]);
   });
 
+  it('shows a pasted message without its envelope', () => {
+    const line = JSON.stringify({
+      type: 'user',
+      message: {
+        content:
+          '\n\n<pasted_content id="ab12">\n[app moment] hello\n</pasted_content id="ab12">\n',
+      },
+    });
+    expect(lastConversationMessages(line, 1)).toEqual([
+      { role: 'user', text: '[app moment] hello', at: null },
+    ]);
+  });
+
   it('reads the live conversation', async () => {
     const { home, deps } = await machine(one);
     const dir = path.join(home, 'projects', '-work-my-app');

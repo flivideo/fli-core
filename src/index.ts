@@ -390,7 +390,7 @@ export {
 
 export { cloneFile, takeLock } from './fs-utils.js';
 
-// Point and tell (v0.35.0): the message saved on a note and the door for typing into a live conversation.
+// Point and tell: the message saved on a note and the door for typing into a live conversation.
 // Browser-safe half also in ./contracts. How an app adopts it: docs/point-and-tell.md.
 export {
   TELL_DELIVERY_FIELD,
