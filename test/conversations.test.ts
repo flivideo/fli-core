@@ -71,7 +71,8 @@ const session = (over: object = {}) => ({
 const pane: Pane = { label: 'writing-desk', paneId: '%7', tty: 'ttys001' };
 const one = { panes: [pane], pids: { ttys001: ['100', '101'] }, sessions: { '101': session() } };
 
-const typed = (calls: string[][]) => calls.filter((c) => c[1] === 'send-keys');
+const typed = (calls: string[][]) =>
+  calls.filter((c) => ['set-buffer', 'paste-buffer', 'send-keys'].includes(String(c[1])));
 
 describe('listLiveConversations', () => {
   it('finds a Claude on the pane by its terminal, not its parent or command name', async () => {
@@ -164,7 +165,7 @@ describe('sendToConversation', () => {
     );
   };
 
-  it('types the line literally into the pane, presses Enter, and reports confirmed on read-back', async () => {
+  it('pastes the line into the pane, presses Enter, and reports confirmed on read-back', async () => {
     const { deps, calls } = await machine({ ...one, onEnter: heard('sid-1', 'hello n_x') });
     expect(await sendToConversation('sid-1', 'hello n_x', 'n_x', deps)).toEqual({
       outcome: 'confirmed',
@@ -172,8 +173,10 @@ describe('sendToConversation', () => {
       label: 'writing-desk',
       sent: 9,
     });
+    const buffer = `fli-tell-${process.pid}`;
     expect(typed(calls)).toEqual([
-      ['tmux', 'send-keys', '-t', '%7', '-l', '--', 'hello n_x'],
+      ['tmux', 'set-buffer', '-b', buffer, '--', 'hello n_x'],
+      ['tmux', 'paste-buffer', '-p', '-d', '-b', buffer, '-t', '%7'],
       ['tmux', 'send-keys', '-t', '%7', 'Enter'],
     ]);
   });

@@ -210,13 +210,14 @@ export interface SendOptions {
 }
 
 const CONFIRM_POLL_MS = 250;
+const PASTE_SETTLE_MS = 250;
 const defaultSleep = (ms: number) =>
   new Promise<void>((resolve) => {
     setTimeout(resolve, ms);
   });
 
 /**
- * Type one line into a live conversation and press Enter, then look for `marker` in its transcript. `confirmed` means a
+ * Paste one line into a live conversation and press Enter, then look for `marker` in its transcript. `confirmed` means a
  * user turn holding the marker was read back; `typed-unconfirmed` means tmux took it and that wasn't seen in time.
  */
 export async function sendToConversation(
@@ -249,10 +250,15 @@ export async function sendToConversation(
 
   const run = runOf(deps);
   const tmux = await tmuxOf(deps);
+  // A real paste, not keystrokes: a long line typed as keys loses its start in Claude Code's input handling.
   // tmux parses a final `;` as its own separator, even after `--`.
-  const typed = line.endsWith(';') ? `${line.slice(0, -1)}\\;` : line;
+  const buffer = `fli-tell-${process.pid}`;
+  const pasted = line.endsWith(';') ? `${line.slice(0, -1)}\\;` : line;
+  const sleep = deps.sleep ?? defaultSleep;
   try {
-    await run(tmux, ['send-keys', '-t', target.paneId, '-l', '--', typed]);
+    await run(tmux, ['set-buffer', '-b', buffer, '--', pasted]);
+    await run(tmux, ['paste-buffer', '-p', '-d', '-b', buffer, '-t', target.paneId]);
+    await sleep(PASTE_SETTLE_MS); // Enter sent straight after a paste lands inside it
     await run(tmux, ['send-keys', '-t', target.paneId, 'Enter']);
   } catch (e) {
     return refuse('delivery-failed', message(e));
@@ -265,7 +271,6 @@ export async function sendToConversation(
   };
   const file = transcriptPath(homeOf(deps), target);
   if (file) {
-    const sleep = deps.sleep ?? defaultSleep;
     const waited = options.confirmMs ?? 5000;
     for (let spent = 0; spent <= waited; spent += CONFIRM_POLL_MS) {
       if (await transcriptHasUserTurn(file, marker)) return { outcome: 'confirmed', ...done };
