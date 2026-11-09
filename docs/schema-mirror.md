@@ -3,7 +3,7 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `376e8872a56b` · **generated** 2026-11-09T12:26:06+00:00
+- **commit** `20e202850a27` · **generated** 2026-11-09T12:37:49+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 40 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
@@ -24,7 +24,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
 - `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :67 · `LEGACY_FOLDERS` (set) :70 · `MOTION_MACHINERY` (set) :126 · `ProjectTier` (set) :140 · `OverlayRole` (set) :151 · `ProjectEntry` :154 · `OverlayPaths` :201 · `ProjectLayout` (set) :296 · `ProjectLayoutPaths` :299
 - `src/control-file.ts` — `ControlFile` :18 · `ControlFileRead` :30 · `ControlFileOptions` :39
-- `src/conversations.ts` — `ConversationOptions` :36 · `LiveConversation` :46 · `ConversationList` :61 · `SessionFile` :91 · `ConversationRefusal` (set) :176 · `SendResult` :186 · `SendOptions` :205 · `TranscriptRow` :310 · `ConversationMessage` :347 · `ConversationTail` :354
+- `src/conversations.ts` — `ConversationOptions` :37 · `LiveConversation` :47 · `ConversationList` :62 · `SessionFile` :92 · `ConversationRefusal` (set) :178 · `SendResult` :188 · `SendOptions` :207 · `TranscriptRow` :310 · `ConversationMessage` :347 · `ConversationTail` :354
 - `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
 - `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
@@ -305,29 +305,29 @@ What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are 
 | `absent` | `src/control-file.ts:34` |
 | `invalid` | `src/control-file.ts:35` |
 
-### `src/conversations.ConversationRefusal` — `src/conversations.ts:176-183`
+### `src/conversations.ConversationRefusal` — `src/conversations.ts:178-185`
 
 *`z.enum` `ConversationRefusal` - a single declaring symbol*
 
-*aliases* `ConversationRefusal` `src/conversations.ts:184`
+*aliases* `ConversationRefusal` `src/conversations.ts:186`
 
 | value | declared at |
 |---|---|
-| `no-such-conversation` | `src/conversations.ts:177` |
-| `not-at-prompt` | `src/conversations.ts:178` |
-| `nothing-to-send` | `src/conversations.ts:179` |
-| `too-long` | `src/conversations.ts:180` |
-| `unsafe-start` | `src/conversations.ts:181` |
-| `delivery-failed` | `src/conversations.ts:182` |
+| `no-such-conversation` | `src/conversations.ts:179` |
+| `not-at-prompt` | `src/conversations.ts:180` |
+| `nothing-to-send` | `src/conversations.ts:181` |
+| `too-long` | `src/conversations.ts:182` |
+| `unsafe-start` | `src/conversations.ts:183` |
+| `delivery-failed` | `src/conversations.ts:184` |
 
-### `src/conversations.SendResult[0].outcome` — `src/conversations.ts:188`
+### `src/conversations.SendResult[0].outcome` — `src/conversations.ts:190`
 
 *`z.enum` `outcome` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `confirmed` | `src/conversations.ts:188` |
-| `typed-unconfirmed` | `src/conversations.ts:188` |
+| `confirmed` | `src/conversations.ts:190` |
+| `typed-unconfirmed` | `src/conversations.ts:190` |
 
 ### `src/conversations.ConversationMessage.role` — `src/conversations.ts:348`
 
@@ -1914,78 +1914,78 @@ Control-file discovery (agent-drivable step 2, David 2026-09-23): a running app 
 |---|---|---|---|---|
 | `home` | `?: string` | — | `src/control-file.ts:41` | Defaults to `os.homedir()`; tests pass a temp home. |
 
-### `src/conversations.ConversationOptions` — interface — `src/conversations.ts:36-44`
+### `src/conversations.ConversationOptions` — interface — `src/conversations.ts:37-45`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `run` | `?: ConversationRun → src/conversations.ConversationRun` | — | `src/conversations.ts:37` |  |
-| `claudeHome` | `?: string` | — | `src/conversations.ts:39` | Claude Code's folder. Default `~/.claude`. |
-| `tmux` | `?: string` | — | `src/conversations.ts:41` | The tmux binary. Default: the usual install places (an app started from the Finder has a short PATH), then PATH. |
-| `sleep` | `?: (ms: number) => Promise<void>` | — | `src/conversations.ts:43` | Pause while waiting for a read-back. Tests pass a fake. |
+| `run` | `?: ConversationRun → src/conversations.ConversationRun` | — | `src/conversations.ts:38` |  |
+| `claudeHome` | `?: string` | — | `src/conversations.ts:40` | Claude Code's folder. Default `~/.claude`. |
+| `tmux` | `?: string` | — | `src/conversations.ts:42` | The tmux binary. Default: the usual install places (an app started from the Finder has a short PATH), then PATH. |
+| `sleep` | `?: (ms: number) => Promise<void>` | — | `src/conversations.ts:44` | Pause while waiting for a read-back. Tests pass a fake. |
 
-### `src/conversations.LiveConversation` — zod-object — `src/conversations.ts:46-58`
+### `src/conversations.LiveConversation` — zod-object — `src/conversations.ts:47-59`
 
-*aliases* `LiveConversation` `src/conversations.ts:59`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `id` | `z.string()` | — | `src/conversations.ts:48` | The Claude session id: what's sent to and saved. |
-| `label` | `z.string()` | — | `src/conversations.ts:50` | The tmux session name a person reads. A name can pass to a different Claude, so it's never the address. |
-| `paneId` | `z.string()` | — | `src/conversations.ts:51` |  |
-| `status` | `z.string().nullable()` | — | `src/conversations.ts:53` | As Claude Code reports it. |
-| `cwd` | `z.string().nullable()` | — | `src/conversations.ts:55` | The working folder, which also locates the transcript. |
-| `atPrompt` | `z.boolean()` | — | `src/conversations.ts:57` | True only when a send would be allowed now. |
-
-### `src/conversations.ConversationList` — zod-object — `src/conversations.ts:61-65`
-
-*aliases* `ConversationList` `src/conversations.ts:66`
+*aliases* `LiveConversation` `src/conversations.ts:60`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `conversations` | `z.array(LiveConversation) → src/conversations.LiveConversation` | — | `src/conversations.ts:62` |  |
-| `reason` | `z.string().optional()` | — | `src/conversations.ts:64` | Why the list is empty, when it is. |
+| `id` | `z.string()` | — | `src/conversations.ts:49` | The Claude session id: what's sent to and saved. |
+| `label` | `z.string()` | — | `src/conversations.ts:51` | The tmux session name a person reads. A name can pass to a different Claude, so it's never the address. |
+| `paneId` | `z.string()` | — | `src/conversations.ts:52` |  |
+| `status` | `z.string().nullable()` | — | `src/conversations.ts:54` | As Claude Code reports it. |
+| `cwd` | `z.string().nullable()` | — | `src/conversations.ts:56` | The working folder, which also locates the transcript. |
+| `atPrompt` | `z.boolean()` | — | `src/conversations.ts:58` | True only when a send would be allowed now: idle, not in copy mode, and in the foreground of its terminal. |
 
-### `src/conversations.SessionFile` — interface — `src/conversations.ts:91-96`
+### `src/conversations.ConversationList` — zod-object — `src/conversations.ts:62-66`
+
+*aliases* `ConversationList` `src/conversations.ts:67`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `conversations` | `z.array(LiveConversation) → src/conversations.LiveConversation` | — | `src/conversations.ts:63` |  |
+| `reason` | `z.string().optional()` | — | `src/conversations.ts:65` | Why the list is empty, when it is. |
+
+### `src/conversations.SessionFile` — interface — `src/conversations.ts:92-97`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `?: unknown` | — | `src/conversations.ts:92` |
-| `sessionId` | `?: unknown` | — | `src/conversations.ts:93` |
-| `status` | `?: unknown` | — | `src/conversations.ts:94` |
-| `cwd` | `?: unknown` | — | `src/conversations.ts:95` |
+| `kind` | `?: unknown` | — | `src/conversations.ts:93` |
+| `sessionId` | `?: unknown` | — | `src/conversations.ts:94` |
+| `status` | `?: unknown` | — | `src/conversations.ts:95` |
+| `cwd` | `?: unknown` | — | `src/conversations.ts:96` |
 
-### `src/conversations.SendResult` — zod-union — `src/conversations.ts:186-194`
+### `src/conversations.SendResult` — zod-union — `src/conversations.ts:188-196`
 
-*aliases* `SendResult` `src/conversations.ts:195`
+*aliases* `SendResult` `src/conversations.ts:197`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `z.object` | `z.object({ outcome: z.enum(['confirmed', 'typed-unconfirmed']), conversation: z.string(), label: z.string(), sent: z.int().min(0) })` | — | `src/conversations.ts:187` |
-| `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() })` | `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() }) → src/conversations.ConversationRefusal` | — | `src/conversations.ts:193` |
+| `z.object` | `z.object({ outcome: z.enum(['confirmed', 'typed-unconfirmed']), conversation: z.string(), label: z.string(), sent: z.int().min(0) })` | — | `src/conversations.ts:189` |
+| `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() })` | `z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() }) → src/conversations.ConversationRefusal` | — | `src/conversations.ts:195` |
 
-### `src/conversations.SendResult[0]` — zod-object — `src/conversations.ts:187-192`
-
-| field | type | default | at |
-|---|---|---|---|
-| `outcome` | `z.enum(['confirmed', 'typed-unconfirmed'])` | — | `src/conversations.ts:188` |
-| `conversation` | `z.string()` | — | `src/conversations.ts:189` |
-| `label` | `z.string()` | — | `src/conversations.ts:190` |
-| `sent` | `z.int().min(0)` | — | `src/conversations.ts:191` |
-
-### `src/conversations.SendResult[1]` — zod-object — `src/conversations.ts:193`
+### `src/conversations.SendResult[0]` — zod-object — `src/conversations.ts:189-194`
 
 | field | type | default | at |
 |---|---|---|---|
-| `outcome` | `z.literal('refused')` | — | `src/conversations.ts:193` |
-| `reason` | `ConversationRefusal → src/conversations.ConversationRefusal` | — | `src/conversations.ts:193` |
-| `message` | `z.string()` | — | `src/conversations.ts:193` |
+| `outcome` | `z.enum(['confirmed', 'typed-unconfirmed'])` | — | `src/conversations.ts:190` |
+| `conversation` | `z.string()` | — | `src/conversations.ts:191` |
+| `label` | `z.string()` | — | `src/conversations.ts:192` |
+| `sent` | `z.int().min(0)` | — | `src/conversations.ts:193` |
 
-### `src/conversations.SendOptions` — interface — `src/conversations.ts:205-210`
+### `src/conversations.SendResult[1]` — zod-object — `src/conversations.ts:195`
+
+| field | type | default | at |
+|---|---|---|---|
+| `outcome` | `z.literal('refused')` | — | `src/conversations.ts:195` |
+| `reason` | `ConversationRefusal → src/conversations.ConversationRefusal` | — | `src/conversations.ts:195` |
+| `message` | `z.string()` | — | `src/conversations.ts:195` |
+
+### `src/conversations.SendOptions` — interface — `src/conversations.ts:207-212`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `confirmMs` | `?: number` | — | `src/conversations.ts:207` | How long to look for the text in the transcript. Default 5 s. |
-| `maxChars` | `?: number` | — | `src/conversations.ts:209` | Most text this door takes. Default `CONVERSATION_MAX_CHARS`. |
+| `confirmMs` | `?: number` | — | `src/conversations.ts:209` | How long to look for the text in the transcript. Default 5 s. |
+| `maxChars` | `?: number` | — | `src/conversations.ts:211` | Most text this door takes. Default `CONVERSATION_MAX_CHARS`. |
 
 ### `src/conversations.TranscriptRow` — interface — `src/conversations.ts:310-316`
 

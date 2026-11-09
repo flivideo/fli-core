@@ -1124,15 +1124,15 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 184
+            "line": 186
           },
           "name": "ConversationRefusal"
         }
       ],
       "anchor": {
-        "end_line": 183,
+        "end_line": 185,
         "file": "src/conversations.ts",
-        "line": 176
+        "line": 178
       },
       "authority": "`z.enum` `ConversationRefusal` - a single declaring symbol",
       "grade": "declared",
@@ -1141,42 +1141,42 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 177
+            "line": 179
           },
           "value": "no-such-conversation"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 178
+            "line": 180
           },
           "value": "not-at-prompt"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 179
+            "line": 181
           },
           "value": "nothing-to-send"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 180
+            "line": 182
           },
           "value": "too-long"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 181
+            "line": 183
           },
           "value": "unsafe-start"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 182
+            "line": 184
           },
           "value": "delivery-failed"
         }
@@ -1185,7 +1185,7 @@
     {
       "anchor": {
         "file": "src/conversations.ts",
-        "line": 188
+        "line": 190
       },
       "authority": "`z.enum` `outcome` - a single declaring symbol",
       "grade": "declared",
@@ -1194,14 +1194,14 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 188
+            "line": 190
           },
           "value": "confirmed"
         },
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 188
+            "line": 190
           },
           "value": "typed-unconfirmed"
         }
@@ -4788,7 +4788,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-11-09T12:26:06+00:00",
+  "generated": "2026-11-09T12:37:49+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -7263,9 +7263,9 @@
     },
     {
       "anchor": {
-        "end_line": 44,
+        "end_line": 45,
         "file": "src/conversations.ts",
-        "line": 36
+        "line": 37
       },
       "bases": [],
       "doc": null,
@@ -7274,7 +7274,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 37
+            "line": 38
           },
           "default": null,
           "name": "run",
@@ -7283,7 +7283,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 39
+            "line": 40
           },
           "default": null,
           "doc": "Claude Code's folder. Default `~/.claude`.",
@@ -7293,7 +7293,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 41
+            "line": 42
           },
           "default": null,
           "doc": "The tmux binary. Default: the usual install places (an app started from the Finder has a short PATH), then PATH.",
@@ -7303,7 +7303,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 43
+            "line": 44
           },
           "default": null,
           "doc": "Pause while waiting for a read-back. Tests pass a fake.",
@@ -7320,15 +7320,15 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 59
+            "line": 60
           },
           "name": "LiveConversation"
         }
       ],
       "anchor": {
-        "end_line": 58,
+        "end_line": 59,
         "file": "src/conversations.ts",
-        "line": 46
+        "line": 47
       },
       "bases": [],
       "doc": null,
@@ -7337,7 +7337,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 48
+            "line": 49
           },
           "default": null,
           "doc": "The Claude session id: what's sent to and saved.",
@@ -7347,7 +7347,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 50
+            "line": 51
           },
           "default": null,
           "doc": "The tmux session name a person reads. A name can pass to a different Claude, so it's never the address.",
@@ -7357,7 +7357,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 51
+            "line": 52
           },
           "default": null,
           "name": "paneId",
@@ -7366,7 +7366,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 53
+            "line": 54
           },
           "default": null,
           "doc": "As Claude Code reports it.",
@@ -7376,7 +7376,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 55
+            "line": 56
           },
           "default": null,
           "doc": "The working folder, which also locates the transcript.",
@@ -7386,10 +7386,10 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 57
+            "line": 58
           },
           "default": null,
-          "doc": "True only when a send would be allowed now.",
+          "doc": "True only when a send would be allowed now: idle, not in copy mode, and in the foreground of its terminal.",
           "name": "atPrompt",
           "type": "z.boolean()"
         }
@@ -7403,15 +7403,15 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 66
+            "line": 67
           },
           "name": "ConversationList"
         }
       ],
       "anchor": {
-        "end_line": 65,
+        "end_line": 66,
         "file": "src/conversations.ts",
-        "line": 61
+        "line": 62
       },
       "bases": [],
       "doc": null,
@@ -7420,7 +7420,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 62
+            "line": 63
           },
           "default": null,
           "name": "conversations",
@@ -7429,7 +7429,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 64
+            "line": 65
           },
           "default": null,
           "doc": "Why the list is empty, when it is.",
@@ -7443,9 +7443,9 @@
     },
     {
       "anchor": {
-        "end_line": 96,
+        "end_line": 97,
         "file": "src/conversations.ts",
-        "line": 91
+        "line": 92
       },
       "bases": [],
       "doc": null,
@@ -7454,7 +7454,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 92
+            "line": 93
           },
           "default": null,
           "name": "kind",
@@ -7463,7 +7463,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 93
+            "line": 94
           },
           "default": null,
           "name": "sessionId",
@@ -7472,7 +7472,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 94
+            "line": 95
           },
           "default": null,
           "name": "status",
@@ -7481,7 +7481,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 95
+            "line": 96
           },
           "default": null,
           "name": "cwd",
@@ -7497,15 +7497,15 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 195
+            "line": 197
           },
           "name": "SendResult"
         }
       ],
       "anchor": {
-        "end_line": 194,
+        "end_line": 196,
         "file": "src/conversations.ts",
-        "line": 186
+        "line": 188
       },
       "bases": [],
       "doc": null,
@@ -7514,7 +7514,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 187
+            "line": 189
           },
           "default": null,
           "name": "z.object",
@@ -7523,7 +7523,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 193
+            "line": 195
           },
           "default": null,
           "name": "z.object({ outcome: z.literal('refused'), reason: ConversationRefusal, message: z.string() })",
@@ -7536,9 +7536,9 @@
     },
     {
       "anchor": {
-        "end_line": 192,
+        "end_line": 194,
         "file": "src/conversations.ts",
-        "line": 187
+        "line": 189
       },
       "bases": [],
       "doc": null,
@@ -7546,7 +7546,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 188
+            "line": 190
           },
           "default": null,
           "name": "outcome",
@@ -7555,7 +7555,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 189
+            "line": 191
           },
           "default": null,
           "name": "conversation",
@@ -7564,7 +7564,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 190
+            "line": 192
           },
           "default": null,
           "name": "label",
@@ -7573,7 +7573,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 191
+            "line": 193
           },
           "default": null,
           "name": "sent",
@@ -7587,7 +7587,7 @@
     {
       "anchor": {
         "file": "src/conversations.ts",
-        "line": 193
+        "line": 195
       },
       "bases": [],
       "doc": null,
@@ -7595,7 +7595,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 193
+            "line": 195
           },
           "default": null,
           "name": "outcome",
@@ -7604,7 +7604,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 193
+            "line": 195
           },
           "default": null,
           "name": "reason",
@@ -7613,7 +7613,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 193
+            "line": 195
           },
           "default": null,
           "name": "message",
@@ -7626,9 +7626,9 @@
     },
     {
       "anchor": {
-        "end_line": 210,
+        "end_line": 212,
         "file": "src/conversations.ts",
-        "line": 205
+        "line": 207
       },
       "bases": [],
       "doc": null,
@@ -7637,7 +7637,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 207
+            "line": 209
           },
           "default": null,
           "doc": "How long to look for the text in the transcript. Default 5 s.",
@@ -7647,7 +7647,7 @@
         {
           "anchor": {
             "file": "src/conversations.ts",
-            "line": 209
+            "line": 211
           },
           "default": null,
           "doc": "Most text this door takes. Default `CONVERSATION_MAX_CHARS`.",
@@ -22487,7 +22487,7 @@
     }
   ],
   "target": {
-    "commit": "376e8872a56b647ce2399593ad89ccf7ad68695d",
+    "commit": "20e202850a27156f5098c7f575c346e745484dea",
     "root": "..",
     "stack": "typescript"
   },

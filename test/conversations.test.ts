@@ -22,6 +22,7 @@ async function machine(opts: {
   sessions?: Record<string, object | string>;
   tmuxFails?: boolean;
   psFails?: boolean;
+  background?: string[];
   noSessionsDir?: boolean;
   sendFails?: boolean;
   onEnter?: (home: string) => Promise<void>;
@@ -44,7 +45,9 @@ async function machine(opts: {
       if (file === '/bin/ps') {
         if (opts.psFails) throw new Error('ps failed');
         return Object.entries(opts.pids ?? {})
-          .flatMap(([tty, pids]) => pids.map((p) => `  ${p} ${tty}`))
+          .flatMap(([tty, pids]) =>
+            pids.map((p) => `  ${p} ${tty} ${opts.background?.includes(p) ? 'T' : 'S+'}`),
+          )
           .join('\n');
       }
       if (args[0] === 'list-panes') {
@@ -251,6 +254,14 @@ describe('sendToConversation', () => {
       outcome: 'refused',
       reason: 'not-at-prompt',
       message: why,
+    });
+    expect(typed(calls)).toEqual([]);
+  });
+
+  it('refuses a Claude that is not in the foreground of its terminal, and types nothing', async () => {
+    const { deps, calls } = await machine({ ...one, background: ['101'] });
+    expect(await sendToConversation('sid-1', 'hi', 'n_x', deps)).toMatchObject({
+      reason: 'not-at-prompt',
     });
     expect(typed(calls)).toEqual([]);
   });

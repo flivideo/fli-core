@@ -11,8 +11,9 @@ import { z } from 'zod';
  *  - only a real live Claude session can be chosen: a tmux pane with a process that has a `sessions/<pid>.json` of kind
  *    `interactive`. A pane's command name can't tell you (it's often a version number), and a pane's shell needn't be the
  *    parent, so panes are matched by terminal;
- *  - a send goes only when that session is at its prompt: status `idle` and the pane not in copy mode. Text and Enter
- *    given to a permission prompt could answer it with nobody seeing. An unknown status refuses;
+ *  - a send goes only when that session is at its prompt: status `idle`, the pane not in copy mode, and Claude the
+ *    foreground process on its terminal. Text and Enter given to a permission prompt could answer it with nobody seeing,
+ *    and given to a shell would run there. An unknown status refuses;
  *  - text is flattened to one line and can't start with `/` or `!`, which Claude Code reads as commands;
  *  - programs are run with an args array, never a shell string.
  *
@@ -53,7 +54,7 @@ export const LiveConversation = z.object({
   status: z.string().nullable(),
   /** The working folder, which also locates the transcript. */
   cwd: z.string().nullable(),
-  /** True only when a send would be allowed now. */
+  /** True only when a send would be allowed now: idle, not in copy mode, and in the foreground of its terminal. */
   atPrompt: z.boolean(),
 });
 export type LiveConversation = z.infer<typeof LiveConversation>;
@@ -123,15 +124,16 @@ export async function listLiveConversations(
 
   let processes: string;
   try {
-    processes = await run('/bin/ps', ['-A', '-o', 'pid=,tty=']);
+    processes = await run('/bin/ps', ['-A', '-o', 'pid=,tty=,stat=']);
   } catch (e) {
     return { conversations: [], reason: `Can't list processes: ${message(e)}` };
   }
-  const pidsByTty = new Map<string, string[]>();
+  const pidsByTty = new Map<string, Array<{ pid: string; foreground: boolean }>>();
   for (const line of processes.split('\n')) {
-    const [pid, tty] = line.trim().split(/\s+/);
+    const [pid, tty, stat = ''] = line.trim().split(/\s+/);
     if (!pid || !tty) continue;
-    pidsByTty.set(tty, [...(pidsByTty.get(tty) ?? []), pid]);
+    const row = { pid, foreground: stat.includes('+') };
+    pidsByTty.set(tty, [...(pidsByTty.get(tty) ?? []), row]);
   }
 
   let files: Set<string>;
@@ -143,7 +145,7 @@ export async function listLiveConversations(
 
   const conversations: LiveConversation[] = [];
   for (const pane of panes) {
-    for (const pid of pidsByTty.get(pane.tty) ?? []) {
+    for (const { pid, foreground } of pidsByTty.get(pane.tty) ?? []) {
       if (!files.has(`${pid}.json`)) continue;
       let session: SessionFile;
       try {
@@ -161,7 +163,7 @@ export async function listLiveConversations(
         paneId: pane.paneId,
         status,
         cwd: typeof session.cwd === 'string' ? session.cwd : null,
-        atPrompt: status === AT_PROMPT_STATUS && !pane.inMode,
+        atPrompt: status === AT_PROMPT_STATUS && !pane.inMode && foreground,
       });
     }
   }
@@ -290,20 +292,18 @@ function transcriptPath(home: string, c: Pick<LiveConversation, 'id' | 'cwd'>): 
 export const CONVERSATION_TAIL_BYTES = 600_000;
 
 async function tailOf(file: string): Promise<string | null> {
-  let handle: fs.FileHandle;
+  let handle: fs.FileHandle | undefined;
   try {
     handle = await fs.open(file, 'r');
-  } catch {
-    return null;
-  }
-  try {
     const { size } = await handle.stat();
     const start = Math.max(0, size - CONVERSATION_TAIL_BYTES);
     const buf = Buffer.alloc(size - start);
     await handle.read(buf, 0, buf.length, start);
     return buf.toString('utf8');
+  } catch {
+    return null;
   } finally {
-    await handle.close();
+    await handle?.close().catch(() => undefined);
   }
 }
 
