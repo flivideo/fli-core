@@ -271,6 +271,14 @@ export async function sendToConversation(
     await run(tmux, ['set-buffer', '-b', buffer, '--', pasted]);
     await run(tmux, ['paste-buffer', '-p', '-d', '-b', buffer, '-t', target.paneId]);
     await sleep(PASTE_SETTLE_MS); // Enter sent straight after a paste lands inside it
+    // Enter is what would answer a dialog, so look once more right before it. The pasted text stays unsent in the prompt.
+    const now = (await listLiveConversations(deps)).conversations.find((c) => c.id === id);
+    if (!now?.atPrompt) {
+      return refuse(
+        'not-at-prompt',
+        `${target.label} stopped being ready. Your text is in its prompt, not sent.`,
+      );
+    }
     await run(tmux, ['send-keys', '-t', target.paneId, 'Enter']);
   } catch (e) {
     return refuse('delivery-failed', message(e));

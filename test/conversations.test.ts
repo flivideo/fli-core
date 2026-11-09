@@ -285,6 +285,28 @@ describe('sendToConversation', () => {
     expect(typed(calls)).toEqual([]);
   });
 
+  it('does not press Enter if the session stopped being ready after the paste', async () => {
+    const m = await machine(one);
+    let lists = 0;
+    const real = m.deps.run!;
+    m.deps.run = async (file, args) => {
+      if (args[0] === 'list-panes') {
+        lists += 1;
+        if (lists === 2)
+          await fs.writeFile(
+            path.join(m.home, 'sessions', '101.json'),
+            JSON.stringify(session({ status: 'waiting', waitingFor: 'permission prompt' })),
+          );
+      }
+      return real(file, args);
+    };
+    expect(await sendToConversation('sid-1', 'hi', 'n_x', m.deps)).toMatchObject({
+      outcome: 'refused',
+      reason: 'not-at-prompt',
+    });
+    expect(typed(m.calls).some((c) => c.includes('Enter'))).toBe(false);
+  });
+
   it('refuses a pane in copy mode', async () => {
     const { deps, calls } = await machine({ ...one, panes: [{ ...pane, inMode: true }] });
     expect(await sendToConversation('sid-1', 'hi', 'n_x', deps)).toMatchObject({

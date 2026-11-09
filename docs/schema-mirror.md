@@ -3,7 +3,7 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `a5aaaf64f5eb` · **generated** 2026-11-09T14:57:54+00:00
+- **commit** `81319bdb7d73` · **generated** 2026-11-09T15:10:42+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
 - **zod bound** in 40 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
@@ -24,7 +24,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
 - `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :67 · `LEGACY_FOLDERS` (set) :70 · `MOTION_MACHINERY` (set) :126 · `ProjectTier` (set) :140 · `OverlayRole` (set) :151 · `ProjectEntry` :154 · `OverlayPaths` :201 · `ProjectLayout` (set) :296 · `ProjectLayoutPaths` :299
 - `src/control-file.ts` — `ControlFile` :18 · `ControlFileRead` :30 · `ControlFileOptions` :39
-- `src/conversations.ts` — `ConversationOptions` :37 · `LiveConversation` :47 · `ConversationList` :62 · `AT_PROMPT_STATUSES` (set) :94 · `SessionFile` :96 · `ConversationRefusal` (set) :188 · `SendResult` :198 · `SendOptions` :217 · `TranscriptRow` :320 · `ConversationMessage` :357 · `ConversationTail` :364
+- `src/conversations.ts` — `ConversationOptions` :37 · `LiveConversation` :47 · `ConversationList` :62 · `AT_PROMPT_STATUSES` (set) :94 · `SessionFile` :96 · `ConversationRefusal` (set) :188 · `SendResult` :198 · `SendOptions` :217 · `TranscriptRow` :328 · `ConversationMessage` :365 · `ConversationTail` :372
 - `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
 - `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
@@ -329,14 +329,14 @@ What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are 
 | `confirmed` | `src/conversations.ts:200` |
 | `typed-unconfirmed` | `src/conversations.ts:200` |
 
-### `src/conversations.ConversationMessage.role` — `src/conversations.ts:358`
+### `src/conversations.ConversationMessage.role` — `src/conversations.ts:366`
 
 *`z.enum` `role` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `user` | `src/conversations.ts:358` |
-| `assistant` | `src/conversations.ts:358` |
+| `user` | `src/conversations.ts:366` |
+| `assistant` | `src/conversations.ts:366` |
 
 ### `src/estate.scanned().state` — `src/estate.ts:17-27`
 
@@ -1999,41 +1999,41 @@ Control-file discovery (agent-drivable step 2, David 2026-09-23): a running app 
 | `confirmMs` | `?: number` | — | `src/conversations.ts:219` | How long to look for the text in the transcript. Default 5 s. |
 | `maxChars` | `?: number` | — | `src/conversations.ts:221` | Most text this door takes. Default `CONVERSATION_MAX_CHARS`. |
 
-### `src/conversations.TranscriptRow` — interface — `src/conversations.ts:320-326`
+### `src/conversations.TranscriptRow` — interface — `src/conversations.ts:328-334`
 
 | field | type | default | at |
 |---|---|---|---|
-| `type` | `?: string` | — | `src/conversations.ts:321` |
-| `isMeta` | `?: boolean` | — | `src/conversations.ts:322` |
-| `isCompactSummary` | `?: boolean` | — | `src/conversations.ts:323` |
-| `timestamp` | `?: string` | — | `src/conversations.ts:324` |
-| `message` | `?: { content?: unknown }` | — | `src/conversations.ts:325` |
+| `type` | `?: string` | — | `src/conversations.ts:329` |
+| `isMeta` | `?: boolean` | — | `src/conversations.ts:330` |
+| `isCompactSummary` | `?: boolean` | — | `src/conversations.ts:331` |
+| `timestamp` | `?: string` | — | `src/conversations.ts:332` |
+| `message` | `?: { content?: unknown }` | — | `src/conversations.ts:333` |
 
-### `src/conversations.TranscriptRow.message` — type — `src/conversations.ts:325`
-
-| field | type | default | at |
-|---|---|---|---|
-| `content` | `?: unknown` | — | `src/conversations.ts:325` |
-
-### `src/conversations.ConversationMessage` — zod-object — `src/conversations.ts:357-361`
-
-*aliases* `ConversationMessage` `src/conversations.ts:362`
+### `src/conversations.TranscriptRow.message` — type — `src/conversations.ts:333`
 
 | field | type | default | at |
 |---|---|---|---|
-| `role` | `z.enum(['user', 'assistant'])` | — | `src/conversations.ts:358` |
-| `text` | `z.string()` | — | `src/conversations.ts:359` |
-| `at` | `z.string().nullable()` | — | `src/conversations.ts:360` |
+| `content` | `?: unknown` | — | `src/conversations.ts:333` |
 
-### `src/conversations.ConversationTail` — zod-object — `src/conversations.ts:364-369`
+### `src/conversations.ConversationMessage` — zod-object — `src/conversations.ts:365-369`
 
-*aliases* `ConversationTail` `src/conversations.ts:370`
+*aliases* `ConversationMessage` `src/conversations.ts:370`
+
+| field | type | default | at |
+|---|---|---|---|
+| `role` | `z.enum(['user', 'assistant'])` | — | `src/conversations.ts:366` |
+| `text` | `z.string()` | — | `src/conversations.ts:367` |
+| `at` | `z.string().nullable()` | — | `src/conversations.ts:368` |
+
+### `src/conversations.ConversationTail` — zod-object — `src/conversations.ts:372-377`
+
+*aliases* `ConversationTail` `src/conversations.ts:378`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `conversation` | `z.string()` | — | `src/conversations.ts:365` |  |
-| `messages` | `z.array(ConversationMessage) → src/conversations.ConversationMessage` | — | `src/conversations.ts:366` |  |
-| `note` | `z.string().nullable()` | — | `src/conversations.ts:368` | Why there's nothing to show, when there isn't. |
+| `conversation` | `z.string()` | — | `src/conversations.ts:373` |  |
+| `messages` | `z.array(ConversationMessage) → src/conversations.ConversationMessage` | — | `src/conversations.ts:374` |  |
+| `note` | `z.string().nullable()` | — | `src/conversations.ts:376` | Why there's nothing to show, when there isn't. |
 
 ### `src/estate.scanned()` — zod-factory (zod-discriminated-union) on `state` — `src/estate.ts:17-27`
 
