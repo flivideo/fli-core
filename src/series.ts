@@ -2,7 +2,8 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { z } from 'zod';
 import { defineCapabilities, defineCapability } from './capability.js';
-import { atomicWrite, errorCode, errorMessage, readJsonFile, takeLock } from './fs-utils.js';
+import { errorCode, errorMessage, readJsonFile } from './fs-utils.js';
+import { lockedChange } from './locked-change.js';
 import { KebabSlug, ProjectCode } from './project-folder.js';
 import { issuesOf, readFileResult } from './results.js';
 
@@ -172,7 +173,7 @@ export async function createSeries(
   return { kind: 'written', path: file, series: parsed.data };
 }
 
-function duplicateIds(members: readonly SeriesMember[]): string[] {
+export function duplicateIds(members: readonly SeriesMember[]): string[] {
   const seen = new Set<string>();
   const dupes = new Set<string>();
   for (const m of members) (seen.has(m.id) ? dupes : seen).add(m.id);
@@ -198,56 +199,27 @@ export async function changeSeries(
     );
   }
   const file = seriesFilePath(brandRoot, id);
-  const lock = `${file}.lock`;
-  try {
-    if (
-      !(await fs.stat(path.dirname(file)).then(
-        (s) => s.isDirectory(),
-        () => false,
-      ))
-    ) {
-      return refuse(file, 'series-not-found', `There is no series "${id}" in ${brandRoot}.`);
-    }
-    if (!(await takeLock(lock, options.waitMs ?? 3000, options.staleMs ?? 10_000))) {
-      return refuse(
-        file,
-        'busy',
-        `${file} is being changed by another writer (${lock}); try again.`,
-      );
-    }
-  } catch (error) {
-    return refuse(file, 'io-error', errorMessage(error));
-  }
-  try {
-    const read = await readSeries(brandRoot, id);
-    if (read === null)
-      return refuse(file, 'series-not-found', `There is no ${SERIES_FILE} for series "${id}".`);
-    if (read.kind === 'invalid') {
-      return refuse(
-        file,
-        'unusable-file',
-        `${file} is not a usable series (${read.reason}: ${read.message}); fix it by hand first.`,
-      );
-    }
-    let next: SeriesFile | null;
-    try {
-      next = change(read.value);
-    } catch (error) {
-      return refuse(file, 'invalid-input', errorMessage(error));
-    }
-    if (next === null) return refuse(file, 'member-not-found', `Nothing to change in ${file}.`);
-    const parsed = SeriesFile.safeParse(next);
-    if (!parsed.success) return refuse(file, 'invalid-input', issuesOf(parsed.error).join('; '));
-    const dupes = duplicateIds(parsed.data.members);
-    if (dupes.length > 0)
-      return refuse(file, 'invalid-input', `a project is listed twice: ${dupes.join(', ')}`);
-    await atomicWrite(file, `${JSON.stringify(parsed.data, null, 2)}\n`);
-    return { kind: 'written', path: file, series: parsed.data };
-  } catch (error) {
-    return refuse(file, 'io-error', errorMessage(error));
-  } finally {
-    await fs.rm(lock, { force: true });
-  }
+  const result = await lockedChange<SeriesFile>({
+    file,
+    noun: 'series',
+    id,
+    brandRoot,
+    fileName: SERIES_FILE,
+    read: () => readSeries(brandRoot, id),
+    schema: SeriesFile,
+    check: (s) => {
+      const dupes = duplicateIds(s.members);
+      return dupes.length > 0 ? `a project is listed twice: ${dupes.join(', ')}` : null;
+    },
+    change,
+    ...options,
+  });
+  if (result.kind === 'written') return { kind: 'written', path: file, series: result.value };
+  return refuse(
+    file,
+    result.reason === 'not-found' ? 'series-not-found' : result.reason,
+    result.message,
+  );
 }
 
 /**
@@ -278,12 +250,15 @@ const modes = [
   'busy',
 ] as const;
 
-/** `series.*`: brand-level series over `<brand root>/series/<id>/fli.series.json`. FliStudio binds the handlers. */
+/**
+ * `series.*`: the older names of `group.*` (an ordered group is what a series was). Kept as thin aliases while their
+ * callers move; FliStudio binds them over the group handlers. The shapes are today's, unchanged.
+ */
 export const SERIES_CAPABILITIES = defineCapabilities({
   'series.list': defineCapability({
     kind: 'query',
     description:
-      'The brand’s series, each with its member projects in order; folders with an unusable file are listed apart.',
+      'Older name for group.list, kept while callers move: the brand’s ordered groups in the series shape, each with its member projects in order; series/ folders with an unusable file are listed apart.',
     input: z.object({ brand: z.string().min(1) }),
     output: SeriesListing,
     sideEffects: 'read-only',
@@ -293,7 +268,8 @@ export const SERIES_CAPABILITIES = defineCapabilities({
   }),
   'series.get': defineCapability({
     kind: 'query',
-    description: 'One series and its members.',
+    description:
+      'Older name for group.get, kept while callers move: one ordered group, in the series shape.',
     input: SeriesRef,
     output: SeriesFile,
     sideEffects: 'read-only',
@@ -303,7 +279,8 @@ export const SERIES_CAPABILITIES = defineCapabilities({
   }),
   'series.create': defineCapability({
     kind: 'command',
-    description: 'Start a series under the brand. Refused when the id is taken; never overwrites.',
+    description:
+      'Older name for group.create with ordered: true, kept while callers move. Refused when the id is taken; never overwrites.',
     input: z.object({ brand: z.string().min(1), series: KebabSlug, title: z.string().min(1) }),
     output: Changed,
     sideEffects: 'reversible-write',
@@ -314,7 +291,7 @@ export const SERIES_CAPABILITIES = defineCapabilities({
   'series.add': defineCapability({
     kind: 'command',
     description:
-      'Add a project to a series (at the end, or at `at`). Adding it again moves it; it is never listed twice.',
+      'Older name for group.add on an ordered group, kept while callers move. Adding it again moves it; it is never listed twice.',
     input: SeriesRef.extend({
       project: z.string().min(1),
       label: z.string().min(1).optional(),
@@ -328,7 +305,8 @@ export const SERIES_CAPABILITIES = defineCapabilities({
   }),
   'series.remove': defineCapability({
     kind: 'command',
-    description: 'Take a project out of a series. The project itself is untouched.',
+    description:
+      'Older name for group.remove on an ordered group, kept while callers move. The project itself is untouched.',
     input: SeriesRef.extend({ project: z.string().min(1) }),
     output: Changed,
     sideEffects: 'reversible-write',

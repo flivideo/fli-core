@@ -336,6 +336,31 @@ export {
 } from './renders.js';
 
 export {
+  ChangeGroupResult,
+  GROUP_CAPABILITIES,
+  GROUP_FILE,
+  GROUPS_FOLDER,
+  Group,
+  GroupFile,
+  GroupHome,
+  GroupListing,
+  GroupMember,
+  GroupRefusalReason,
+  ReadGroupResult,
+  addGroupMember,
+  changeGroup,
+  createGroup,
+  groupAsSeries,
+  groupFilePath,
+  groupIdOf,
+  listGroups,
+  orderedGroupOf,
+  readGroup,
+  removeGroupMember,
+  type ChangeGroupOptions,
+} from './groups.js';
+
+export {
   ChangeSeriesResult,
   ReadSeriesResult,
   SERIES_CAPABILITIES,

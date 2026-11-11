@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `5a6d0d334e11` · **generated** 2026-11-09T18:08:20+00:00
+- **commit** `3644589d7244` · **generated** 2026-11-11T08:16:32+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 40 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 41 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 343 | 102 | 7 | 9 | 40 | 7 |
+| 367 | 111 | 7 | 9 | 43 | 7 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -27,15 +27,17 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/conversations.ts` — `ConversationOptions` :37 · `LiveConversation` :47 · `ConversationList` :62 · `AT_PROMPT_STATUSES` (set) :94 · `SessionFile` :96 · `ConversationRefusal` (set) :207 · `SendResult` :217 · `SendOptions` :236 · `TranscriptRow` :347 · `ConversationMessage` :384 · `ConversationTail` :391
 - `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
-- `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :58
+- `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :64 · `FliToolsEndpoint` :73
 - `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :44
 - `src/gitignore-rules.ts` — `GITIGNORE_BASE_VERSION` :19 · `Tag` :24 · `GitignoreOverlayRule` :38 · `GitignoreGroup` :45 · `GitignoreRenderOptions` :166 · `Located` :199 · `GitignoreRenderResult` :243 · `GitignoreCheckResult` :339
 - `src/gitignore.ts` — `TrackedIgnored` :23 · `GitignoreOptions` :31 · `GitignoreRefusal` :42 · `GitignoreRenderedFile` :49 · `GitignoreCheckedFile` :57 · `GitignoreResult` :63
+- `src/groups.ts` — `GroupMember` :37 · `GroupFile` :51 · `GroupHome` (set) :65 · `Group` :69 · `ReadGroupResult` :81 · `GroupListing` :93 · `GroupRefusalReason` (set) :230 · `GroupRefusal` :242 · `ChangeGroupResult` :251 · `ChangeGroupOptions` :257 · `GroupRef` :525 · `Changed` :526
 - `src/guide-doc.ts` — `GUIDE_SCHEMA` :20 · `GuideDocType` (set) :27 · `GuideDocLevel` (set) :34 · `GuideDocAppliesTo` :36 · `GuideDocLayer` (set) :45 · `OptText` :67 · `GUIDE_REQUIRED` (set) :70 · `GuideDoc` :72 · `ParsedGuide` :97
 - `src/help.ts` — `HelpScreenId` (set) :9 · `HelpRow` :19 · `HelpGroup` :22 · `HelpScreen` :25
 - `src/identity.ts` — `ProjectAspect` (set) :13 · `ProjectShape` (set) :23 · `ProjectLanguage` :28 · `ProjectIdentity` :31 · `Refused()` :57 · `WriteIdentityResult` :65 · `AdoptIdentityResult` :178 · `AdoptIdentityInput` :193
 - `src/lab-path.ts` — `PathSegment` :8 · `LabPathInput` :16 · `ResolvedLabPath` :84
 - `src/lifecycle.ts` — `LifecycleVerb` (set) :18 · `SystemStatus` :21 · `SystemQuitInput` :34 · `SystemQuitOutput` :40 · `AppScriptOpen` :84
+- `src/locked-change.ts` — `LockedRefusalReason` (set) :13 · `LockedChangeResult` :16 · `LockedChangeOptions` :19
 - `src/machine.ts` — `AbsolutePath` :7 · `MachineSettings` :12 · `ResolvedMachineSettings` :24 · `MachineSettingsOptions` :27 · `MachineSettingsResult` :32
 - `src/note-record.ts` — `NoteKind` (set) :30 · `NoteChannel` (set) :34 · `NoteStatus` (set) :38 · `LifeState` (set) :45 · `NoteScope` (set) :49 · `Name` :52 · `NoteTarget` :58 · `NoteWhere` :88 · `NoteProducer` :98 · `NoteLinks` :106 · `NoteForm` (set) :129 · `NoteExcerpt` :133 · `NoteRecord` :147 · `NoteInput` :194 · `ChangeInput` :211 · `SettleInput` :234 · `ResolveAskInput` :270 · `SnapshotOptions` :318 · `ChangeSnapshot` :325 · `NoteState` :411 · `NoteRefusal` (set) :484 · `NoteFilter` :488
 - `src/notes.ts` — `AddNoteResult` :44 · `AddNoteOptions` :57 · `NoteLineProblem` :292 · `NotesRead` :295 · `ScannedNote` :356 · `NotesScan` :365 · `ScanNotesOptions` :376
@@ -50,7 +52,8 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/resources.ts` — `Text` :25 · `Key` :26 · `ResourceValue` (set) :31 · `ResourceChoose` (set) :47 · `ResourceStatus` (set) :50 · `ResourceAudience` (set) :53 · `ResourceGroup` :56 · `ResourceKind` :64 · `ResourceOff` :79 · `ResourceVideo` :85 · `ResourceRef` :90 · `Resource` :97 · `ResourcesFile` :118 · `ResourceRegistry` :147 · `ReadResourcesOptions` :156 · `ResourcesRead` :162 · `ResourceInput` :285 · `ResourceChange` :309 · `ResourcePatch` :387 · `WriteResourcesResult` :531
 - `src/results.ts` — `InvalidFile` :4 · `validFile()` :13 · `readFileResult()` :19
 - `src/reveal.ts` — `RevealResult` :13 · `RevealOptions` :24
-- `src/series.ts` — `SeriesMember` :22 · `SeriesFile` :32 · `SeriesListing` :74 · `Refusal` :102 · `ChangeSeriesResult` :117 · `ChangeSeriesOptions` :123 · `SeriesRef` :271 · `Changed` :272
+- `src/series.ts` — `SeriesMember` :23 · `SeriesFile` :33 · `SeriesListing` :75 · `Refusal` :103 · `ChangeSeriesResult` :118 · `ChangeSeriesOptions` :124 · `SeriesRef` :243 · `Changed` :244
+- `src/serve.ts` — `ServeCaller` :100
 - `src/stamp.ts` — `Stamp` :9
 - `src/tell.ts` — `Name` :22 · `TellOpen` :25 · `TellPosition` :33 · `TellMoment` :40 · `TellSaid` :54 · `TellTo` :61 · `TellMessage` :68 · `TellOutcome` (set) :100 · `TellDelivery` :103 · `TellNoteOptions` :112 · `TellLineOptions` :164
 - `src/transport.ts` — `ShuttleState` :15 · `JklKey` (set) :27 · `ShuttleAction` (set) :45 · `SpeedWindow` :78
@@ -81,10 +84,10 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**534** top-level declarations counted = **472** mirrored + **22** listed as gaps + **40** declared but not read.
+**559** top-level declarations counted = **494** mirrored + **22** listed as gaps + **43** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 6 functions, 2 function types, 42 literal constants.
+Not counted, as not schema-bearing: 6 functions, 2 function types, 44 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
@@ -93,6 +96,7 @@ Not counted, as not schema-bearing: 6 functions, 2 function types, 42 literal co
 | `src/estate.ts` | 15 | 14 | 0 | **1** |
 | `src/failure-codes.ts` | 18 | 12 | 0 | **6** |
 | `src/gitignore-rules.ts` | 13 | 10 | 0 | **3** |
+| `src/groups.ts` | 19 | 17 | 0 | **2** |
 | `src/guide-doc.ts` | 15 | 12 | 0 | **3** |
 | `src/help.ts` | 9 | 8 | 0 | **1** |
 | `src/identity.ts` | 15 | 12 | 2 | **1** |
@@ -105,6 +109,7 @@ Not counted, as not schema-bearing: 6 functions, 2 function types, 42 literal co
 | `src/resources.ts` | 44 | 33 | 8 | **3** |
 | `src/results.ts` | 5 | 2 | 0 | **3** |
 | `src/series.ts` | 12 | 9 | 2 | **1** |
+| `src/serve.ts` | 2 | 1 | 0 | **1** |
 | `src/transport.ts` | 6 | 5 | 0 | **1** |
 | `src/ui/remembered-speed.ts` | 3 | 2 | 0 | **1** |
 | `src/words.ts` | 31 | 28 | 2 | **1** |
@@ -494,6 +499,62 @@ What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are 
 | `checked` | `src/gitignore.ts:58` |
 | `refused` | `src/gitignore.ts:43` |
 
+### `src/groups.GroupHome` — `src/groups.ts:65`
+
+*`z.enum` `GroupHome` - a single declaring symbol*
+
+*aliases* `GroupHome` `src/groups.ts:66`
+
+| value | declared at |
+|---|---|
+| `groups` | `src/groups.ts:65` |
+| `series` | `src/groups.ts:65` |
+
+### `src/groups.ReadGroupResult.kind` — `src/groups.ts:81-90`
+
+*the `kind` discriminator of the union `ReadGroupResult` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `valid` | `src/groups.ts:82` |
+| `invalid` | `src/groups.ts:84` |
+
+### `src/groups.ReadGroupResult[kind=invalid].reason` — `src/groups.ts:86`
+
+*`z.enum` `reason` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `unreadable` | `src/groups.ts:86` |
+| `not-json` | `src/groups.ts:86` |
+| `schema` | `src/groups.ts:86` |
+
+### `src/groups.GroupRefusalReason` — `src/groups.ts:230-239`
+
+*`z.enum` `GroupRefusalReason` - a single declaring symbol*
+
+*aliases* `GroupRefusalReason` `src/groups.ts:240`
+
+| value | declared at |
+|---|---|
+| `invalid-input` | `src/groups.ts:231` |
+| `group-exists` | `src/groups.ts:232` |
+| `group-not-found` | `src/groups.ts:233` |
+| `member-not-found` | `src/groups.ts:234` |
+| `in-another-ordered-group` | `src/groups.ts:235` |
+| `unusable-file` | `src/groups.ts:236` |
+| `busy` | `src/groups.ts:237` |
+| `io-error` | `src/groups.ts:238` |
+
+### `src/groups.ChangeGroupResult.kind` — `src/groups.ts:251-254`
+
+*the `kind` discriminator of the union `ChangeGroupResult` - each value declared by a `z.literal` in one variant*
+
+| value | declared at |
+|---|---|
+| `written` | `src/groups.ts:252` |
+| `refused` | `src/groups.ts:243` |
+
 ### `src/guide-doc.GuideDocType` — `src/guide-doc.ts:27`
 
 *`z.enum` `GuideDocType` - members read through `GUIDE_DOC_TYPES` (src/guide-doc.GUIDE_DOC_TYPES) - a single declaring symbol*
@@ -644,6 +705,30 @@ The lifecycle verb contract (agent-drivable step 2, David 2026-09-23: "Do we hav
 | `start` | `src/lifecycle.ts:18` |
 | `stop` | `src/lifecycle.ts:18` |
 | `restart` | `src/lifecycle.ts:18` |
+
+### `src/locked-change.LockedRefusalReason` — `src/locked-change.ts:13-14`
+
+The one locked read-modify-write behind a brand-level list file (a series, a group): under a lock beside the file,
+
+*literal union type alias `LockedRefusalReason` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `invalid-input` | `src/locked-change.ts:14` |
+| `not-found` | `src/locked-change.ts:14` |
+| `member-not-found` | `src/locked-change.ts:14` |
+| `unusable-file` | `src/locked-change.ts:14` |
+| `busy` | `src/locked-change.ts:14` |
+| `io-error` | `src/locked-change.ts:14` |
+
+### `src/locked-change.LockedChangeResult.kind` — `src/locked-change.ts:16-17`
+
+*the `kind` discriminator of union type `LockedChangeResult` - each value declared by a literal type in one variant*
+
+| value | declared at |
+|---|---|
+| `written` | `src/locked-change.ts:17` |
+| `refused` | `src/locked-change.ts:17` |
 
 ### `src/machine.MachineSettingsResult.kind` — `src/machine.ts:32-40`
 
@@ -1076,28 +1161,48 @@ How candidates of a kind are chosen: `one` — at most one `chosen` per video; `
 | `not-absolute` | `src/reveal.ts:18` |
 | `failed` | `src/reveal.ts:18` |
 
-### `src/series.Refusal.reason` — `src/series.ts:104`
+### `src/series.Refusal.reason` — `src/series.ts:105`
 
 *`z.enum` `reason` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `invalid-input` | `src/series.ts:105` |
-| `series-exists` | `src/series.ts:106` |
-| `series-not-found` | `src/series.ts:107` |
-| `member-not-found` | `src/series.ts:108` |
-| `unusable-file` | `src/series.ts:109` |
-| `busy` | `src/series.ts:110` |
-| `io-error` | `src/series.ts:111` |
+| `invalid-input` | `src/series.ts:106` |
+| `series-exists` | `src/series.ts:107` |
+| `series-not-found` | `src/series.ts:108` |
+| `member-not-found` | `src/series.ts:109` |
+| `unusable-file` | `src/series.ts:110` |
+| `busy` | `src/series.ts:111` |
+| `io-error` | `src/series.ts:112` |
 
-### `src/series.ChangeSeriesResult.kind` — `src/series.ts:117-120`
+### `src/series.ChangeSeriesResult.kind` — `src/series.ts:118-121`
 
 *the `kind` discriminator of the union `ChangeSeriesResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `written` | `src/series.ts:118` |
-| `refused` | `src/series.ts:103` |
+| `written` | `src/series.ts:119` |
+| `refused` | `src/series.ts:104` |
+
+### `src/serve.ServeCaller.kind` — `src/serve.ts:100-112`
+
+*the `kind` discriminator of union type `ServeCaller` - each value declared by a literal type in one variant*
+
+| value | declared at |
+|---|---|
+| `direct` | `src/serve.ts:102` |
+| `serve` | `src/serve.ts:104` |
+| `refused` | `src/serve.ts:107` |
+
+### `src/serve.ServeCaller[kind=refused].reason` — `src/serve.ts:108`
+
+*literal union type of `reason` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `funnel` | `src/serve.ts:108` |
+| `no-login` | `src/serve.ts:108` |
+| `not-listed` | `src/serve.ts:108` |
 
 ### `src/tell.TellOutcome` — `src/tell.ts:100`
 
@@ -2377,25 +2482,36 @@ One FliTools job (`transcribe.jobs`, or `transcribe.run { wait: false }`).
 | `kind` | `'unavailable'` | — | `src/flitools.ts:47` |
 | `reason` | `string` | — | `src/flitools.ts:47` |
 
-### `src/flitools.FliToolsOptions` — interface — `src/flitools.ts:49-56`
+### `src/flitools.FliToolsOptions` — interface — `src/flitools.ts:49-62`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
 | `app` | `string` | — | `src/flitools.ts:51` | The calling app; FliTools records it and scopes its queue by it. Sent as `agent:<app>`. |
-| `controlFile` | `?: string` | — | `src/flitools.ts:53` | FliTools' control file. Default `<home>/Library/Application Support/flitools/control.json`. |
-| `home` | `?: string` | — | `src/flitools.ts:54` |  |
-| `timeoutMs` | `?: number` | — | `src/flitools.ts:55` |  |
+| `url` | `?: string` | — | `src/flitools.ts:57` | A shared FliTools on another machine, reached through Tailscale Serve (e.g. `https://<host>.<tailnet>.ts.net:8443`). |
+| `controlFile` | `?: string` | — | `src/flitools.ts:59` | FliTools' control file. Default `<home>/Library/Application Support/flitools/control.json`. |
+| `home` | `?: string` | — | `src/flitools.ts:60` |  |
+| `timeoutMs` | `?: number` | — | `src/flitools.ts:61` |  |
 
-### `src/flitools.TranscribeOptions` — interface — `src/flitools.ts:58-64`
+### `src/flitools.TranscribeOptions` — interface — `src/flitools.ts:64-70`
 
 *extends* `FliToolsOptions`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `project` | `?: string` | — | `src/flitools.ts:59` |  |
-| `wait` | `?: boolean` | — | `src/flitools.ts:61` | Default true: answer with the transcript. false: answer with the queued job. |
-| `language` | `?: string` | — | `src/flitools.ts:62` |  |
-| `vocabulary` | `?: string[]` | — | `src/flitools.ts:63` |  |
+| `project` | `?: string` | — | `src/flitools.ts:65` |  |
+| `wait` | `?: boolean` | — | `src/flitools.ts:67` | Default true: answer with the transcript. false: answer with the queued job. |
+| `language` | `?: string` | — | `src/flitools.ts:68` |  |
+| `vocabulary` | `?: string[]` | — | `src/flitools.ts:69` |  |
+
+### `src/flitools.FliToolsEndpoint` — type — `src/flitools.ts:73`
+
+Where a FliTools door is, and the token it wants (none for a shared FliTools behind Serve).
+
+| field | type | default | at |
+|---|---|---|---|
+| `base` | `string` | — | `src/flitools.ts:73` |
+| `token` | `string \| null` | — | `src/flitools.ts:73` |
+| `remote` | `boolean` | — | `src/flitools.ts:73` |
 
 ### `src/gitignore-rules.Tag` — zod-scalar — `src/gitignore-rules.ts:24`
 
@@ -2522,6 +2638,148 @@ A brand's own rule, kept in its `fli.brand.json` (`gitignore: [...]`) so it trav
 | `GitignoreRenderedFile` | `GitignoreRenderedFile → src/gitignore.GitignoreRenderedFile` | — | `src/gitignore.ts:64` |
 | `GitignoreCheckedFile` | `GitignoreCheckedFile → src/gitignore.GitignoreCheckedFile` | — | `src/gitignore.ts:65` |
 | `GitignoreRefusal` | `GitignoreRefusal → src/gitignore.GitignoreRefusal` | — | `src/gitignore.ts:66` |
+
+### `src/groups.GroupMember` — zod-object — `src/groups.ts:37-44`
+
+*aliases* `GroupMember` `src/groups.ts:45`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `z.uuid()` | — | `src/groups.ts:39` | The project's identity `id`. |
+| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/groups.ts:41` | The project's code when it was added; display only. |
+| `label` | `z.string().min(1).optional()` | — | `src/groups.ts:43` | A label for the member in an ordered group ("Day 5"); absent → the project's name. |
+
+### `src/groups.GroupFile` — zod-object — `src/groups.ts:51-62`
+
+`groups/<id>/fli.group.json`. Loose on purpose: a field written by a newer copy survives a write by this one (the
+
+*aliases* `GroupFile` `src/groups.ts:63`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `schema` | `z.literal(1)` | — | `src/groups.ts:52` |  |
+| `id` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/groups.ts:54` | The folder name under `groups/`. |
+| `brand` | `z.string().min(1)` | — | `src/groups.ts:55` |  |
+| `title` | `z.string().min(1)` | — | `src/groups.ts:56` |  |
+| `ordered` | `z.boolean()` | — | `src/groups.ts:58` | true: numbered in `members` order. false: no order (shown by code). |
+| `note` | `z.string().min(1).optional()` | — | `src/groups.ts:59` |  |
+| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/groups.ts:60` |  |
+| `members` | `z.array(GroupMember) → src/groups.GroupMember` | — | `src/groups.ts:61` |  |
+
+### `src/groups.Group` — zod-object — `src/groups.ts:69-78`
+
+A group as readers see it, from either folder. `home: 'series'` is an older series file (always ordered, no note).
+
+*aliases* `Group` `src/groups.ts:79`
+
+| field | type | default | at |
+|---|---|---|---|
+| `id` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/groups.ts:70` |
+| `brand` | `z.string().min(1)` | — | `src/groups.ts:71` |
+| `title` | `z.string().min(1)` | — | `src/groups.ts:72` |
+| `ordered` | `z.boolean()` | — | `src/groups.ts:73` |
+| `note` | `z.string().min(1).optional()` | — | `src/groups.ts:74` |
+| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/groups.ts:75` |
+| `members` | `z.array(GroupMember) → src/groups.GroupMember` | — | `src/groups.ts:76` |
+| `home` | `GroupHome → src/groups.GroupHome` | — | `src/groups.ts:77` |
+
+### `src/groups.ReadGroupResult` — zod-union on `kind` — `src/groups.ts:81-90`
+
+*aliases* `ReadGroupResult` `src/groups.ts:91`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `valid` | `z.object({ kind: z.literal('valid'), path: z.string(), value: Group }) → src/groups.Group` | — | `src/groups.ts:82` |
+| `invalid` | `z.object({ kind: z.literal('invalid'), path: z.string(), reason: z.enum(['unreadable', 'not-json', 'schema']), message: z.string() })` | — | `src/groups.ts:84` |
+| `null` | `z.null()` | — | `src/groups.ts:89` |
+
+### `src/groups.ReadGroupResult[kind=valid]` — zod-object — `src/groups.ts:82`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('valid')` | — | `src/groups.ts:82` |
+| `path` | `z.string()` | — | `src/groups.ts:82` |
+| `value` | `Group → src/groups.Group` | — | `src/groups.ts:82` |
+
+### `src/groups.ReadGroupResult[kind=invalid]` — zod-object — `src/groups.ts:83-88`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('invalid')` | — | `src/groups.ts:84` |
+| `path` | `z.string()` | — | `src/groups.ts:85` |
+| `reason` | `z.enum(['unreadable', 'not-json', 'schema'])` | — | `src/groups.ts:86` |
+| `message` | `z.string()` | — | `src/groups.ts:87` |
+
+### `src/groups.GroupListing` — zod-object — `src/groups.ts:93-97`
+
+*aliases* `GroupListing` `src/groups.ts:98`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `groups` | `z.array(Group) → src/groups.Group` | — | `src/groups.ts:94` |  |
+| `invalid` | `z.array(z.object({ folder: z.string(), message: z.string() }))` | — | `src/groups.ts:96` | Folders (`groups/<id>` or `series/<id>`) whose file is missing or unusable: listed, never hidden. |
+
+### `src/groups.GroupListing.invalid[]` — zod-object — `src/groups.ts:96`
+
+| field | type | default | at |
+|---|---|---|---|
+| `folder` | `z.string()` | — | `src/groups.ts:96` |
+| `message` | `z.string()` | — | `src/groups.ts:96` |
+
+### `src/groups.GroupRefusal` — zod-object — `src/groups.ts:242-249`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `kind` | `z.literal('refused')` | — | `src/groups.ts:243` |  |
+| `reason` | `GroupRefusalReason → src/groups.GroupRefusalReason` | — | `src/groups.ts:244` |  |
+| `path` | `z.string()` | — | `src/groups.ts:245` |  |
+| `message` | `z.string()` | — | `src/groups.ts:246` |  |
+| `holder` | `z.object({ id: z.string(), title: z.string() }).optional()` | — | `src/groups.ts:248` | For `in-another-ordered-group`: the ordered group the project is already in. |
+
+### `src/groups.GroupRefusal.holder` — zod-object — `src/groups.ts:248`
+
+| field | type | default | at |
+|---|---|---|---|
+| `id` | `z.string()` | — | `src/groups.ts:248` |
+| `title` | `z.string()` | — | `src/groups.ts:248` |
+
+### `src/groups.ChangeGroupResult` — zod-union on `kind` — `src/groups.ts:251-254`
+
+*aliases* `ChangeGroupResult` `src/groups.ts:255`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `written` | `z.object({ kind: z.literal('written'), path: z.string(), group: Group }) → src/groups.Group` | — | `src/groups.ts:252` |
+| `GroupRefusal` | `GroupRefusal → src/groups.GroupRefusal` | — | `src/groups.ts:253` |
+
+### `src/groups.ChangeGroupResult[kind=written]` — zod-object — `src/groups.ts:252`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('written')` | — | `src/groups.ts:252` |
+| `path` | `z.string()` | — | `src/groups.ts:252` |
+| `group` | `Group → src/groups.Group` | — | `src/groups.ts:252` |
+
+### `src/groups.ChangeGroupOptions` — interface — `src/groups.ts:257-262`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `waitMs` | `?: number` | — | `src/groups.ts:259` | How long to wait for another writer's lock (default 3 s). |
+| `staleMs` | `?: number` | — | `src/groups.ts:261` | A lock older than this is a crashed writer's and is broken (default 10 s). |
+
+### `src/groups.GroupRef` — zod-object — `src/groups.ts:525`
+
+| field | type | default | at |
+|---|---|---|---|
+| `brand` | `z.string().min(1)` | — | `src/groups.ts:525` |
+| `group` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/groups.ts:525` |
+
+### `src/groups.Changed` — zod-object — `src/groups.ts:526`
+
+| field | type | default | at |
+|---|---|---|---|
+| `path` | `z.string()` | — | `src/groups.ts:526` |
+| `group` | `Group → src/groups.Group` | — | `src/groups.ts:526` |
 
 ### `src/guide-doc.GuideDocAppliesTo` — zod-object — `src/guide-doc.ts:36-41`
 
@@ -2797,6 +3055,44 @@ Where a project's lab is after `resolveLabPath`: the path, and what (if anything
 | `brand` | `z.string().min(1)` | — | `src/lifecycle.ts:85` |
 | `project` | `z.string().min(1)` | — | `src/lifecycle.ts:86` |
 | `video` | `z.string().min(1).optional()` | — | `src/lifecycle.ts:87` |
+
+### `src/locked-change.LockedChangeResult` — type-union on `kind` — `src/locked-change.ts:16-17`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `written` | `{ kind: 'written'; value: T }` | — | `src/locked-change.ts:17` |
+| `refused` | `{ kind: 'refused'; reason: LockedRefusalReason; message: string }` | — | `src/locked-change.ts:17` |
+
+### `src/locked-change.LockedChangeResult[kind=refused]` — type — `src/locked-change.ts:17`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `'refused'` | — | `src/locked-change.ts:17` |
+| `reason` | `LockedRefusalReason → src/locked-change.LockedRefusalReason` | — | `src/locked-change.ts:17` |
+| `message` | `string` | — | `src/locked-change.ts:17` |
+
+### `src/locked-change.LockedChangeResult[kind=written]` — type — `src/locked-change.ts:17`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `'written'` | — | `src/locked-change.ts:17` |
+| `value` | `T` | — | `src/locked-change.ts:17` |
+
+### `src/locked-change.LockedChangeOptions` — interface — `src/locked-change.ts:19-33`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `file` | `string` | — | `src/locked-change.ts:20` |  |
+| `noun` | `string` | — | `src/locked-change.ts:22` | What the thing is called in messages ("series", "group"). |
+| `id` | `string` | — | `src/locked-change.ts:23` |  |
+| `brandRoot` | `string` | — | `src/locked-change.ts:24` |  |
+| `fileName` | `string` | — | `src/locked-change.ts:25` |  |
+| `read` | `() => Promise<ReadFileResult<T>> → src/results.ReadFileResult` | — | `src/locked-change.ts:26` |  |
+| `schema` | `z.ZodType<T> → z (zod), ZodType (zod)` | — | `src/locked-change.ts:27` |  |
+| `check` | `?: (value: T) => string \| null` | — | `src/locked-change.ts:29` | Extra checks on the parsed result (duplicate members…): a message refuses as `invalid-input`. |
+| `change` | `(value: T) => T \| null` | — | `src/locked-change.ts:30` |  |
+| `waitMs` | `?: number` | — | `src/locked-change.ts:31` |  |
+| `staleMs` | `?: number` | — | `src/locked-change.ts:32` |  |
 
 ### `src/machine.AbsolutePath` — zod-scalar — `src/machine.ts:7-9`
 
@@ -3969,91 +4265,125 @@ Open a location in Finder (David 2026-09-24, folder access — "Open in Finder" 
 | `roots` | `readonly string[]` | — | `src/reveal.ts:26` | Absolute folders the path must be inside (after resolving links). |
 | `run` | `?: (args: string[]) => Promise<void>` | — | `src/reveal.ts:28` | Runs `open`; tests pass a stub so no window is ever raised. |
 
-### `src/series.SeriesMember` — zod-object — `src/series.ts:22-29`
+### `src/series.SeriesMember` — zod-object — `src/series.ts:23-30`
 
-*aliases* `SeriesMember` `src/series.ts:30`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `id` | `z.uuid()` | — | `src/series.ts:24` | The project's identity `id`. |
-| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/series.ts:26` | The project's code when it was added; display only. |
-| `label` | `z.string().min(1).optional()` | — | `src/series.ts:28` | A label for the member in this series ("Day 5"); absent → the project's name. |
-
-### `src/series.SeriesFile` — zod-object — `src/series.ts:32-40`
-
-*aliases* `SeriesFile` `src/series.ts:41`
+*aliases* `SeriesMember` `src/series.ts:31`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `schema` | `z.literal(1)` | — | `src/series.ts:33` |  |
-| `id` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/series.ts:35` | The folder name under `series/`. |
-| `brand` | `z.string().min(1)` | — | `src/series.ts:36` |  |
-| `title` | `z.string().min(1)` | — | `src/series.ts:37` |  |
-| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/series.ts:38` |  |
-| `members` | `z.array(SeriesMember) → src/series.SeriesMember` | — | `src/series.ts:39` |  |
+| `id` | `z.uuid()` | — | `src/series.ts:25` | The project's identity `id`. |
+| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/series.ts:27` | The project's code when it was added; display only. |
+| `label` | `z.string().min(1).optional()` | — | `src/series.ts:29` | A label for the member in this series ("Day 5"); absent → the project's name. |
 
-### `src/series.SeriesListing` — zod-object — `src/series.ts:74-78`
+### `src/series.SeriesFile` — zod-object — `src/series.ts:33-41`
 
-*aliases* `SeriesListing` `src/series.ts:79`
+*aliases* `SeriesFile` `src/series.ts:42`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `series` | `z.array(SeriesFile) → src/series.SeriesFile` | — | `src/series.ts:75` |  |
-| `invalid` | `z.array(z.object({ folder: z.string(), message: z.string() }))` | — | `src/series.ts:77` | Folders under `series/` whose file is missing or unusable: listed, never hidden. |
+| `schema` | `z.literal(1)` | — | `src/series.ts:34` |  |
+| `id` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/series.ts:36` | The folder name under `series/`. |
+| `brand` | `z.string().min(1)` | — | `src/series.ts:37` |  |
+| `title` | `z.string().min(1)` | — | `src/series.ts:38` |  |
+| `createdAt` | `z.iso.datetime({ offset: true })` | — | `src/series.ts:39` |  |
+| `members` | `z.array(SeriesMember) → src/series.SeriesMember` | — | `src/series.ts:40` |  |
 
-### `src/series.SeriesListing.invalid[]` — zod-object — `src/series.ts:77`
+### `src/series.SeriesListing` — zod-object — `src/series.ts:75-79`
+
+*aliases* `SeriesListing` `src/series.ts:80`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `series` | `z.array(SeriesFile) → src/series.SeriesFile` | — | `src/series.ts:76` |  |
+| `invalid` | `z.array(z.object({ folder: z.string(), message: z.string() }))` | — | `src/series.ts:78` | Folders under `series/` whose file is missing or unusable: listed, never hidden. |
+
+### `src/series.SeriesListing.invalid[]` — zod-object — `src/series.ts:78`
 
 | field | type | default | at |
 |---|---|---|---|
-| `folder` | `z.string()` | — | `src/series.ts:77` |
-| `message` | `z.string()` | — | `src/series.ts:77` |
+| `folder` | `z.string()` | — | `src/series.ts:78` |
+| `message` | `z.string()` | — | `src/series.ts:78` |
 
-### `src/series.Refusal` — zod-object — `src/series.ts:102-115`
+### `src/series.Refusal` — zod-object — `src/series.ts:103-116`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/series.ts:103` |
-| `reason` | `z.enum(['invalid-input', 'series-exists', 'series-not-found', 'member-not-found', 'unusable-file', 'busy', 'io-error'])` | — | `src/series.ts:104` |
-| `path` | `z.string()` | — | `src/series.ts:113` |
-| `message` | `z.string()` | — | `src/series.ts:114` |
+| `kind` | `z.literal('refused')` | — | `src/series.ts:104` |
+| `reason` | `z.enum(['invalid-input', 'series-exists', 'series-not-found', 'member-not-found', 'unusable-file', 'busy', 'io-error'])` | — | `src/series.ts:105` |
+| `path` | `z.string()` | — | `src/series.ts:114` |
+| `message` | `z.string()` | — | `src/series.ts:115` |
 
-### `src/series.ChangeSeriesResult` — zod-union on `kind` — `src/series.ts:117-120`
+### `src/series.ChangeSeriesResult` — zod-union on `kind` — `src/series.ts:118-121`
 
-*aliases* `ChangeSeriesResult` `src/series.ts:121`
+*aliases* `ChangeSeriesResult` `src/series.ts:122`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `written` | `z.object({ kind: z.literal('written'), path: z.string(), series: SeriesFile }) → src/series.SeriesFile` | — | `src/series.ts:118` |
-| `Refusal` | `Refusal → src/series.Refusal` | — | `src/series.ts:119` |
+| `written` | `z.object({ kind: z.literal('written'), path: z.string(), series: SeriesFile }) → src/series.SeriesFile` | — | `src/series.ts:119` |
+| `Refusal` | `Refusal → src/series.Refusal` | — | `src/series.ts:120` |
 
-### `src/series.ChangeSeriesResult[kind=written]` — zod-object — `src/series.ts:118`
+### `src/series.ChangeSeriesResult[kind=written]` — zod-object — `src/series.ts:119`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('written')` | — | `src/series.ts:118` |
-| `path` | `z.string()` | — | `src/series.ts:118` |
-| `series` | `SeriesFile → src/series.SeriesFile` | — | `src/series.ts:118` |
+| `kind` | `z.literal('written')` | — | `src/series.ts:119` |
+| `path` | `z.string()` | — | `src/series.ts:119` |
+| `series` | `SeriesFile → src/series.SeriesFile` | — | `src/series.ts:119` |
 
-### `src/series.ChangeSeriesOptions` — interface — `src/series.ts:123-128`
+### `src/series.ChangeSeriesOptions` — interface — `src/series.ts:124-129`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `waitMs` | `?: number` | — | `src/series.ts:125` | How long to wait for another writer's lock (default 3 s). |
-| `staleMs` | `?: number` | — | `src/series.ts:127` | A lock older than this is a crashed writer's and is broken (default 10 s). |
+| `waitMs` | `?: number` | — | `src/series.ts:126` | How long to wait for another writer's lock (default 3 s). |
+| `staleMs` | `?: number` | — | `src/series.ts:128` | A lock older than this is a crashed writer's and is broken (default 10 s). |
 
-### `src/series.SeriesRef` — zod-object — `src/series.ts:271`
-
-| field | type | default | at |
-|---|---|---|---|
-| `brand` | `z.string().min(1)` | — | `src/series.ts:271` |
-| `series` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/series.ts:271` |
-
-### `src/series.Changed` — zod-object — `src/series.ts:272`
+### `src/series.SeriesRef` — zod-object — `src/series.ts:243`
 
 | field | type | default | at |
 |---|---|---|---|
-| `path` | `z.string()` | — | `src/series.ts:272` |
-| `series` | `SeriesFile → src/series.SeriesFile` | — | `src/series.ts:272` |
+| `brand` | `z.string().min(1)` | — | `src/series.ts:243` |
+| `series` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/series.ts:243` |
+
+### `src/series.Changed` — zod-object — `src/series.ts:244`
+
+| field | type | default | at |
+|---|---|---|---|
+| `path` | `z.string()` | — | `src/series.ts:244` |
+| `series` | `SeriesFile → src/series.SeriesFile` | — | `src/series.ts:244` |
+
+### `src/serve.ServeCaller` — type-union on `kind` — `src/serve.ts:100-112`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `direct` | `{ kind: 'direct'; loopback: boolean }` | — | `src/serve.ts:102` |
+| `serve` | `{ kind: 'serve'; login: string; name: string; ip: string }` | — | `src/serve.ts:104` |
+| `refused` | `{ kind: 'refused'; reason: 'funnel' \| 'no-login' \| 'not-listed'; why: string; login?: string; ip: string; }` | — | `src/serve.ts:107` |
+
+### `src/serve.ServeCaller[kind=direct]` — type — `src/serve.ts:102`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `'direct'` | — | `src/serve.ts:102` |
+| `loopback` | `boolean` | — | `src/serve.ts:102` |
+
+### `src/serve.ServeCaller[kind=serve]` — type — `src/serve.ts:104`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `'serve'` | — | `src/serve.ts:104` |
+| `login` | `string` | — | `src/serve.ts:104` |
+| `name` | `string` | — | `src/serve.ts:104` |
+| `ip` | `string` | — | `src/serve.ts:104` |
+
+### `src/serve.ServeCaller[kind=refused]` — type — `src/serve.ts:106-112`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `'refused'` | — | `src/serve.ts:107` |
+| `reason` | `'funnel' \| 'no-login' \| 'not-listed'` | — | `src/serve.ts:108` |
+| `why` | `string` | — | `src/serve.ts:109` |
+| `login` | `?: string` | — | `src/serve.ts:110` |
+| `ip` | `string` | — | `src/serve.ts:111` |
 
 ### `src/stamp.Stamp` — zod-object — `src/stamp.ts:9-12`
 
@@ -4857,7 +5187,7 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 | schemas built by `OneLine(...)` (1 use) | built by calling `OneLine(...)`, which does not return a single zod expression this reader can follow | `OneLine('a note').optional() (src/gitignore-rules.ts:41)` |
 | schemas built by `Refused(...)` (6 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:67)`<br>`Refused('existing-invalid') (src/identity.ts:69)`<br>`Refused('io-error') (src/identity.ts:70)`<br>`Refused('invalid-input') (src/identity.ts:185)`<br>`Refused('existing-invalid') (src/identity.ts:187)`<br>`Refused('io-error') (src/identity.ts:188)` |
 | schemas built by `promisify(...)` (1 use) | built by calling `promisify(...)` imported from `node:util`; package helpers are not expanded - see that package's own mirror | `promisify(execFile) (src/gitignore.ts:17)` |
-| schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:107)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:43)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:126)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:130)` |
+| schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:107)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:44)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:126)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:130)` |
 | schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
 | src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:460)` |
@@ -4872,10 +5202,10 @@ The census found these top-level declarations and the extractor did not mirror t
 |---|---|---|
 | object constant | 10 | `src/classify.LAYOUT_DIRS` `src/classify.ts:310`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/guide-doc.GUIDE_TYPE_ALIASES` `src/guide-doc.ts:30`<br>`src/help.HELP_SCREENS` `src/help.ts:34`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
 | array constant | 9 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/guide-doc.GUIDE_DOC_TYPES` `src/guide-doc.ts:26`<br>`src/guide-doc.GUIDE_META_KEYS` `src/guide-doc.ts:52`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/note-record.NOTE_REFUSALS` `src/note-record.ts:476`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:33`<br>`src/publish.READY_STATES` `src/publish.ts:68`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:70`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
-| class | 6 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/publish.NoFinalVideo` `src/publish.ts:819`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:220`<br>`src/youtube.YouTubeReader` `src/youtube.ts:236` |
-| const built by a call (helper or non-zod call) | 6 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:187`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:282` |
+| class | 7 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/groups.RuleError` `src/groups.ts:483`<br>`src/publish.NoFinalVideo` `src/publish.ts:819`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:220`<br>`src/youtube.YouTubeReader` `src/youtube.ts:236` |
+| const built by a call (helper or non-zod call) | 7 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/groups.GROUP_CAPABILITIES` `src/groups.ts:536`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:187`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:257` |
 | generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
-| utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 3 | `src/notes.Refused` `src/notes.ts:55`<br>`src/ui/remembered-speed.SpeedStorage` `src/ui/remembered-speed.ts:4`<br>`src/youtube.Thumbs` `src/youtube.ts:231` |
+| utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 4 | `src/notes.Refused` `src/notes.ts:55`<br>`src/serve.ServeHeaders` `src/serve.ts:18`<br>`src/ui/remembered-speed.SpeedStorage` `src/ui/remembered-speed.ts:4`<br>`src/youtube.Thumbs` `src/youtube.ts:231` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 | union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:206` |
 

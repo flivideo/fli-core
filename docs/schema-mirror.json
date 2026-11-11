@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 534,
+    "declared": 559,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -73,9 +73,9 @@
         "not_schema_bearing": 0
       },
       "src/flitools.ts": {
-        "declared": 11,
+        "declared": 12,
         "gaps": 0,
-        "mirrored": 11,
+        "mirrored": 12,
         "not_read": 0,
         "not_schema_bearing": 0
       },
@@ -92,6 +92,13 @@
         "mirrored": 8,
         "not_read": 0,
         "not_schema_bearing": 1
+      },
+      "src/groups.ts": {
+        "declared": 19,
+        "gaps": 0,
+        "mirrored": 17,
+        "not_read": 2,
+        "not_schema_bearing": 2
       },
       "src/guide-doc.ts": {
         "declared": 15,
@@ -126,6 +133,13 @@
         "gaps": 0,
         "mirrored": 10,
         "not_read": 1,
+        "not_schema_bearing": 0
+      },
+      "src/locked-change.ts": {
+        "declared": 3,
+        "gaps": 0,
+        "mirrored": 3,
+        "not_read": 0,
         "not_schema_bearing": 0
       },
       "src/machine.ts": {
@@ -233,6 +247,13 @@
         "not_read": 1,
         "not_schema_bearing": 2
       },
+      "src/serve.ts": {
+        "declared": 2,
+        "gaps": 0,
+        "mirrored": 1,
+        "not_read": 1,
+        "not_schema_bearing": 0
+      },
       "src/stamp.ts": {
         "declared": 2,
         "gaps": 0,
@@ -305,13 +326,13 @@
       }
     },
     "gaps": 22,
-    "mirrored": 472,
-    "not_read": 40,
-    "not_schema_bearing": 50,
+    "mirrored": 494,
+    "not_read": 43,
+    "not_schema_bearing": 52,
     "not_schema_bearing_by_family": {
       "function": 6,
       "function type": 2,
-      "literal constant": 42
+      "literal constant": 44
     }
   },
   "closed_sets": [
@@ -1833,6 +1854,201 @@
       "aliases": [
         {
           "anchor": {
+            "file": "src/groups.ts",
+            "line": 66
+          },
+          "name": "GroupHome"
+        }
+      ],
+      "anchor": {
+        "file": "src/groups.ts",
+        "line": 65
+      },
+      "authority": "`z.enum` `GroupHome` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/groups.GroupHome",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 65
+          },
+          "value": "groups"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 65
+          },
+          "value": "series"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 90,
+        "file": "src/groups.ts",
+        "line": 81
+      },
+      "authority": "the `kind` discriminator of the union `ReadGroupResult` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/groups.ReadGroupResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 82
+          },
+          "value": "valid"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 84
+          },
+          "value": "invalid"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/groups.ts",
+        "line": 86
+      },
+      "authority": "`z.enum` `reason` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/groups.ReadGroupResult[kind=invalid].reason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 86
+          },
+          "value": "unreadable"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 86
+          },
+          "value": "not-json"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 86
+          },
+          "value": "schema"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 240
+          },
+          "name": "GroupRefusalReason"
+        }
+      ],
+      "anchor": {
+        "end_line": 239,
+        "file": "src/groups.ts",
+        "line": 230
+      },
+      "authority": "`z.enum` `GroupRefusalReason` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/groups.GroupRefusalReason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 231
+          },
+          "value": "invalid-input"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 232
+          },
+          "value": "group-exists"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 233
+          },
+          "value": "group-not-found"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 234
+          },
+          "value": "member-not-found"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 235
+          },
+          "value": "in-another-ordered-group"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 236
+          },
+          "value": "unusable-file"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 237
+          },
+          "value": "busy"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 238
+          },
+          "value": "io-error"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 254,
+        "file": "src/groups.ts",
+        "line": 251
+      },
+      "authority": "the `kind` discriminator of the union `ChangeGroupResult` - each value declared by a `z.literal` in one variant",
+      "grade": "declared",
+      "id": "src/groups.ChangeGroupResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 252
+          },
+          "value": "written"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 243
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
             "file": "src/guide-doc.ts",
             "line": 28
           },
@@ -2329,6 +2545,87 @@
             "line": 18
           },
           "value": "restart"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 14,
+        "file": "src/locked-change.ts",
+        "line": 13
+      },
+      "authority": "literal union type alias `LockedRefusalReason` - a single declaring symbol",
+      "doc": "The one locked read-modify-write behind a brand-level list file (a series, a group): under a lock beside the file,",
+      "grade": "declared",
+      "id": "src/locked-change.LockedRefusalReason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 14
+          },
+          "value": "invalid-input"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 14
+          },
+          "value": "not-found"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 14
+          },
+          "value": "member-not-found"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 14
+          },
+          "value": "unusable-file"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 14
+          },
+          "value": "busy"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 14
+          },
+          "value": "io-error"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 17,
+        "file": "src/locked-change.ts",
+        "line": 16
+      },
+      "authority": "the `kind` discriminator of union type `LockedChangeResult` - each value declared by a literal type in one variant",
+      "grade": "declared",
+      "id": "src/locked-change.LockedChangeResult.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 17
+          },
+          "value": "written"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 17
+          },
+          "value": "refused"
         }
       ]
     },
@@ -3881,7 +4178,7 @@
     {
       "anchor": {
         "file": "src/series.ts",
-        "line": 104
+        "line": 105
       },
       "authority": "`z.enum` `reason` - a single declaring symbol",
       "grade": "declared",
@@ -3890,49 +4187,49 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 105
+            "line": 106
           },
           "value": "invalid-input"
         },
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 106
+            "line": 107
           },
           "value": "series-exists"
         },
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 107
+            "line": 108
           },
           "value": "series-not-found"
         },
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 108
+            "line": 109
           },
           "value": "member-not-found"
         },
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 109
+            "line": 110
           },
           "value": "unusable-file"
         },
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 110
+            "line": 111
           },
           "value": "busy"
         },
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 111
+            "line": 112
           },
           "value": "io-error"
         }
@@ -3940,9 +4237,9 @@
     },
     {
       "anchor": {
-        "end_line": 120,
+        "end_line": 121,
         "file": "src/series.ts",
-        "line": 117
+        "line": 118
       },
       "authority": "the `kind` discriminator of the union `ChangeSeriesResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -3951,16 +4248,81 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 118
+            "line": 119
           },
           "value": "written"
         },
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 103
+            "line": 104
           },
           "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 112,
+        "file": "src/serve.ts",
+        "line": 100
+      },
+      "authority": "the `kind` discriminator of union type `ServeCaller` - each value declared by a literal type in one variant",
+      "grade": "declared",
+      "id": "src/serve.ServeCaller.kind",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 102
+          },
+          "value": "direct"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 104
+          },
+          "value": "serve"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 107
+          },
+          "value": "refused"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "file": "src/serve.ts",
+        "line": 108
+      },
+      "authority": "literal union type of `reason` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/serve.ServeCaller[kind=refused].reason",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 108
+          },
+          "value": "funnel"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 108
+          },
+          "value": "no-login"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 108
+          },
+          "value": "not-listed"
         }
       ]
     },
@@ -4823,7 +5185,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-11-09T18:08:20+00:00",
+  "generated": "2026-11-11T08:16:32+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -9544,7 +9906,7 @@
     },
     {
       "anchor": {
-        "end_line": 56,
+        "end_line": 62,
         "file": "src/flitools.ts",
         "line": 49
       },
@@ -9565,7 +9927,17 @@
         {
           "anchor": {
             "file": "src/flitools.ts",
-            "line": 53
+            "line": 57
+          },
+          "default": null,
+          "doc": "A shared FliTools on another machine, reached through Tailscale Serve (e.g. `https://<host>.<tailnet>.ts.net:8443`).",
+          "name": "url",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 59
           },
           "default": null,
           "doc": "FliTools' control file. Default `<home>/Library/Application Support/flitools/control.json`.",
@@ -9575,7 +9947,7 @@
         {
           "anchor": {
             "file": "src/flitools.ts",
-            "line": 54
+            "line": 60
           },
           "default": null,
           "name": "home",
@@ -9584,7 +9956,7 @@
         {
           "anchor": {
             "file": "src/flitools.ts",
-            "line": 55
+            "line": 61
           },
           "default": null,
           "name": "timeoutMs",
@@ -9597,9 +9969,9 @@
     },
     {
       "anchor": {
-        "end_line": 64,
+        "end_line": 70,
         "file": "src/flitools.ts",
-        "line": 58
+        "line": 64
       },
       "bases": [
         "FliToolsOptions"
@@ -9610,7 +9982,7 @@
         {
           "anchor": {
             "file": "src/flitools.ts",
-            "line": 59
+            "line": 65
           },
           "default": null,
           "name": "project",
@@ -9619,7 +9991,7 @@
         {
           "anchor": {
             "file": "src/flitools.ts",
-            "line": 61
+            "line": 67
           },
           "default": null,
           "doc": "Default true: answer with the transcript. false: answer with the queued job.",
@@ -9629,7 +10001,7 @@
         {
           "anchor": {
             "file": "src/flitools.ts",
-            "line": 62
+            "line": 68
           },
           "default": null,
           "name": "language",
@@ -9638,7 +10010,7 @@
         {
           "anchor": {
             "file": "src/flitools.ts",
-            "line": 63
+            "line": 69
           },
           "default": null,
           "name": "vocabulary",
@@ -9648,6 +10020,47 @@
       "grade": "declared",
       "id": "src/flitools.TranscribeOptions",
       "kind": "interface"
+    },
+    {
+      "anchor": {
+        "file": "src/flitools.ts",
+        "line": 73
+      },
+      "bases": [],
+      "doc": "Where a FliTools door is, and the token it wants (none for a shared FliTools behind Serve).",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "base",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "token",
+          "type": "string | null"
+        },
+        {
+          "anchor": {
+            "file": "src/flitools.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "remote",
+          "type": "boolean"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/flitools.FliToolsEndpoint",
+      "kind": "type"
     },
     {
       "anchor": {
@@ -10362,6 +10775,742 @@
       "grade": "declared",
       "id": "src/gitignore.GitignoreResult",
       "kind": "zod-union on `kind`"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 45
+          },
+          "name": "GroupMember"
+        }
+      ],
+      "anchor": {
+        "end_line": 44,
+        "file": "src/groups.ts",
+        "line": 37
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 39
+          },
+          "default": null,
+          "doc": "The project's identity `id`.",
+          "name": "id",
+          "type": "z.uuid()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 41
+          },
+          "default": null,
+          "doc": "The project's code when it was added; display only.",
+          "name": "code",
+          "type": "ProjectCode \u2192 src/project-folder.ProjectCode"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 43
+          },
+          "default": null,
+          "doc": "A label for the member in an ordered group (\"Day 5\"); absent \u2192 the project's name.",
+          "name": "label",
+          "type": "z.string().min(1).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.GroupMember",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 63
+          },
+          "name": "GroupFile"
+        }
+      ],
+      "anchor": {
+        "end_line": 62,
+        "file": "src/groups.ts",
+        "line": 51
+      },
+      "bases": [],
+      "doc": "`groups/<id>/fli.group.json`. Loose on purpose: a field written by a newer copy survives a write by this one (the",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 52
+          },
+          "default": null,
+          "name": "schema",
+          "type": "z.literal(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 54
+          },
+          "default": null,
+          "doc": "The folder name under `groups/`.",
+          "name": "id",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 55
+          },
+          "default": null,
+          "name": "brand",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 56
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 58
+          },
+          "default": null,
+          "doc": "true: numbered in `members` order. false: no order (shown by code).",
+          "name": "ordered",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 59
+          },
+          "default": null,
+          "name": "note",
+          "type": "z.string().min(1).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 60
+          },
+          "default": null,
+          "name": "createdAt",
+          "type": "z.iso.datetime({ offset: true })"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 61
+          },
+          "default": null,
+          "name": "members",
+          "type": "z.array(GroupMember) \u2192 src/groups.GroupMember"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.GroupFile",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 79
+          },
+          "name": "Group"
+        }
+      ],
+      "anchor": {
+        "end_line": 78,
+        "file": "src/groups.ts",
+        "line": 69
+      },
+      "bases": [],
+      "doc": "A group as readers see it, from either folder. `home: 'series'` is an older series file (always ordered, no note).",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 70
+          },
+          "default": null,
+          "name": "id",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 71
+          },
+          "default": null,
+          "name": "brand",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 72
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 73
+          },
+          "default": null,
+          "name": "ordered",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 74
+          },
+          "default": null,
+          "name": "note",
+          "type": "z.string().min(1).optional()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 75
+          },
+          "default": null,
+          "name": "createdAt",
+          "type": "z.iso.datetime({ offset: true })"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 76
+          },
+          "default": null,
+          "name": "members",
+          "type": "z.array(GroupMember) \u2192 src/groups.GroupMember"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 77
+          },
+          "default": null,
+          "name": "home",
+          "type": "GroupHome \u2192 src/groups.GroupHome"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.Group",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 91
+          },
+          "name": "ReadGroupResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 90,
+        "file": "src/groups.ts",
+        "line": 81
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 82
+          },
+          "default": null,
+          "name": "valid",
+          "type": "z.object({ kind: z.literal('valid'), path: z.string(), value: Group }) \u2192 src/groups.Group"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 84
+          },
+          "default": null,
+          "name": "invalid",
+          "type": "z.object({ kind: z.literal('invalid'), path: z.string(), reason: z.enum(['unreadable', 'not-json', 'schema']), message: z.string() })"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 89
+          },
+          "default": null,
+          "name": "null",
+          "type": "z.null()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.ReadGroupResult",
+      "kind": "zod-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/groups.ts",
+        "line": 82
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 82
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('valid')"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 82
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 82
+          },
+          "default": null,
+          "name": "value",
+          "type": "Group \u2192 src/groups.Group"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.ReadGroupResult[kind=valid]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 88,
+        "file": "src/groups.ts",
+        "line": 83
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 84
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('invalid')"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 85
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 86
+          },
+          "default": null,
+          "name": "reason",
+          "type": "z.enum(['unreadable', 'not-json', 'schema'])"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 87
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.ReadGroupResult[kind=invalid]",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 98
+          },
+          "name": "GroupListing"
+        }
+      ],
+      "anchor": {
+        "end_line": 97,
+        "file": "src/groups.ts",
+        "line": 93
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 94
+          },
+          "default": null,
+          "name": "groups",
+          "type": "z.array(Group) \u2192 src/groups.Group"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 96
+          },
+          "default": null,
+          "doc": "Folders (`groups/<id>` or `series/<id>`) whose file is missing or unusable: listed, never hidden.",
+          "name": "invalid",
+          "type": "z.array(z.object({ folder: z.string(), message: z.string() }))"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.GroupListing",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/groups.ts",
+        "line": 96
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 96
+          },
+          "default": null,
+          "name": "folder",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 96
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.GroupListing.invalid[]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 249,
+        "file": "src/groups.ts",
+        "line": 242
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 243
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('refused')"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 244
+          },
+          "default": null,
+          "name": "reason",
+          "type": "GroupRefusalReason \u2192 src/groups.GroupRefusalReason"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 245
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 246
+          },
+          "default": null,
+          "name": "message",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 248
+          },
+          "default": null,
+          "doc": "For `in-another-ordered-group`: the ordered group the project is already in.",
+          "name": "holder",
+          "type": "z.object({ id: z.string(), title: z.string() }).optional()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.GroupRefusal",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/groups.ts",
+        "line": 248
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 248
+          },
+          "default": null,
+          "name": "id",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 248
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.GroupRefusal.holder",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 255
+          },
+          "name": "ChangeGroupResult"
+        }
+      ],
+      "anchor": {
+        "end_line": 254,
+        "file": "src/groups.ts",
+        "line": 251
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 252
+          },
+          "default": null,
+          "name": "written",
+          "type": "z.object({ kind: z.literal('written'), path: z.string(), group: Group }) \u2192 src/groups.Group"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 253
+          },
+          "default": null,
+          "name": "GroupRefusal",
+          "type": "GroupRefusal \u2192 src/groups.GroupRefusal"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.ChangeGroupResult",
+      "kind": "zod-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/groups.ts",
+        "line": 252
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 252
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('written')"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 252
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 252
+          },
+          "default": null,
+          "name": "group",
+          "type": "Group \u2192 src/groups.Group"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.ChangeGroupResult[kind=written]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 262,
+        "file": "src/groups.ts",
+        "line": 257
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 259
+          },
+          "default": null,
+          "doc": "How long to wait for another writer's lock (default 3 s).",
+          "name": "waitMs",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 261
+          },
+          "default": null,
+          "doc": "A lock older than this is a crashed writer's and is broken (default 10 s).",
+          "name": "staleMs",
+          "type": "?: number"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.ChangeGroupOptions",
+      "kind": "interface"
+    },
+    {
+      "anchor": {
+        "file": "src/groups.ts",
+        "line": 525
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 525
+          },
+          "default": null,
+          "name": "brand",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 525
+          },
+          "default": null,
+          "name": "group",
+          "type": "KebabSlug \u2192 src/project-folder.KebabSlug"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.GroupRef",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/groups.ts",
+        "line": 526
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 526
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/groups.ts",
+            "line": 526
+          },
+          "default": null,
+          "name": "group",
+          "type": "Group \u2192 src/groups.Group"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/groups.Changed",
+      "kind": "zod-object"
     },
     {
       "anchor": {
@@ -11853,6 +13002,228 @@
       "grade": "declared",
       "id": "src/lifecycle.AppScriptOpen",
       "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 17,
+        "file": "src/locked-change.ts",
+        "line": 16
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 17
+          },
+          "default": null,
+          "name": "written",
+          "type": "{ kind: 'written'; value: T }"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 17
+          },
+          "default": null,
+          "name": "refused",
+          "type": "{ kind: 'refused'; reason: LockedRefusalReason; message: string }"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/locked-change.LockedChangeResult",
+      "kind": "type-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/locked-change.ts",
+        "line": 17
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 17
+          },
+          "default": null,
+          "name": "kind",
+          "type": "'refused'"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 17
+          },
+          "default": null,
+          "name": "reason",
+          "type": "LockedRefusalReason \u2192 src/locked-change.LockedRefusalReason"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 17
+          },
+          "default": null,
+          "name": "message",
+          "type": "string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/locked-change.LockedChangeResult[kind=refused]",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "file": "src/locked-change.ts",
+        "line": 17
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 17
+          },
+          "default": null,
+          "name": "kind",
+          "type": "'written'"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 17
+          },
+          "default": null,
+          "name": "value",
+          "type": "T"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/locked-change.LockedChangeResult[kind=written]",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "end_line": 33,
+        "file": "src/locked-change.ts",
+        "line": 19
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 20
+          },
+          "default": null,
+          "name": "file",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 22
+          },
+          "default": null,
+          "doc": "What the thing is called in messages (\"series\", \"group\").",
+          "name": "noun",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 23
+          },
+          "default": null,
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 24
+          },
+          "default": null,
+          "name": "brandRoot",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 25
+          },
+          "default": null,
+          "name": "fileName",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 26
+          },
+          "default": null,
+          "name": "read",
+          "type": "() => Promise<ReadFileResult<T>> \u2192 src/results.ReadFileResult"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 27
+          },
+          "default": null,
+          "name": "schema",
+          "type": "z.ZodType<T> \u2192 z (zod), ZodType (zod)"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 29
+          },
+          "default": null,
+          "doc": "Extra checks on the parsed result (duplicate members\u2026): a message refuses as `invalid-input`.",
+          "name": "check",
+          "type": "?: (value: T) => string | null"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 30
+          },
+          "default": null,
+          "name": "change",
+          "type": "(value: T) => T | null"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 31
+          },
+          "default": null,
+          "name": "waitMs",
+          "type": "?: number"
+        },
+        {
+          "anchor": {
+            "file": "src/locked-change.ts",
+            "line": 32
+          },
+          "default": null,
+          "name": "staleMs",
+          "type": "?: number"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/locked-change.LockedChangeOptions",
+      "kind": "interface"
     },
     {
       "anchor": {
@@ -17972,15 +19343,15 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 30
+            "line": 31
           },
           "name": "SeriesMember"
         }
       ],
       "anchor": {
-        "end_line": 29,
+        "end_line": 30,
         "file": "src/series.ts",
-        "line": 22
+        "line": 23
       },
       "bases": [],
       "doc": null,
@@ -17989,7 +19360,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 24
+            "line": 25
           },
           "default": null,
           "doc": "The project's identity `id`.",
@@ -17999,7 +19370,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 26
+            "line": 27
           },
           "default": null,
           "doc": "The project's code when it was added; display only.",
@@ -18009,7 +19380,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 28
+            "line": 29
           },
           "default": null,
           "doc": "A label for the member in this series (\"Day 5\"); absent \u2192 the project's name.",
@@ -18026,15 +19397,15 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 41
+            "line": 42
           },
           "name": "SeriesFile"
         }
       ],
       "anchor": {
-        "end_line": 40,
+        "end_line": 41,
         "file": "src/series.ts",
-        "line": 32
+        "line": 33
       },
       "bases": [],
       "doc": null,
@@ -18043,7 +19414,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 33
+            "line": 34
           },
           "default": null,
           "name": "schema",
@@ -18052,7 +19423,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 35
+            "line": 36
           },
           "default": null,
           "doc": "The folder name under `series/`.",
@@ -18062,7 +19433,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 36
+            "line": 37
           },
           "default": null,
           "name": "brand",
@@ -18071,7 +19442,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 37
+            "line": 38
           },
           "default": null,
           "name": "title",
@@ -18080,7 +19451,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 38
+            "line": 39
           },
           "default": null,
           "name": "createdAt",
@@ -18089,7 +19460,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 39
+            "line": 40
           },
           "default": null,
           "name": "members",
@@ -18105,15 +19476,15 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 79
+            "line": 80
           },
           "name": "SeriesListing"
         }
       ],
       "anchor": {
-        "end_line": 78,
+        "end_line": 79,
         "file": "src/series.ts",
-        "line": 74
+        "line": 75
       },
       "bases": [],
       "doc": null,
@@ -18122,7 +19493,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 75
+            "line": 76
           },
           "default": null,
           "name": "series",
@@ -18131,7 +19502,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 77
+            "line": 78
           },
           "default": null,
           "doc": "Folders under `series/` whose file is missing or unusable: listed, never hidden.",
@@ -18146,7 +19517,7 @@
     {
       "anchor": {
         "file": "src/series.ts",
-        "line": 77
+        "line": 78
       },
       "bases": [],
       "doc": null,
@@ -18154,7 +19525,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 77
+            "line": 78
           },
           "default": null,
           "name": "folder",
@@ -18163,7 +19534,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 77
+            "line": 78
           },
           "default": null,
           "name": "message",
@@ -18176,9 +19547,9 @@
     },
     {
       "anchor": {
-        "end_line": 115,
+        "end_line": 116,
         "file": "src/series.ts",
-        "line": 102
+        "line": 103
       },
       "bases": [],
       "doc": null,
@@ -18187,7 +19558,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 103
+            "line": 104
           },
           "default": null,
           "name": "kind",
@@ -18196,7 +19567,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 104
+            "line": 105
           },
           "default": null,
           "name": "reason",
@@ -18205,7 +19576,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 113
+            "line": 114
           },
           "default": null,
           "name": "path",
@@ -18214,7 +19585,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 114
+            "line": 115
           },
           "default": null,
           "name": "message",
@@ -18230,15 +19601,15 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 121
+            "line": 122
           },
           "name": "ChangeSeriesResult"
         }
       ],
       "anchor": {
-        "end_line": 120,
+        "end_line": 121,
         "file": "src/series.ts",
-        "line": 117
+        "line": 118
       },
       "bases": [],
       "doc": null,
@@ -18247,7 +19618,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 118
+            "line": 119
           },
           "default": null,
           "name": "written",
@@ -18256,7 +19627,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 119
+            "line": 120
           },
           "default": null,
           "name": "Refusal",
@@ -18270,7 +19641,7 @@
     {
       "anchor": {
         "file": "src/series.ts",
-        "line": 118
+        "line": 119
       },
       "bases": [],
       "doc": null,
@@ -18278,7 +19649,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 118
+            "line": 119
           },
           "default": null,
           "name": "kind",
@@ -18287,7 +19658,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 118
+            "line": 119
           },
           "default": null,
           "name": "path",
@@ -18296,7 +19667,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 118
+            "line": 119
           },
           "default": null,
           "name": "series",
@@ -18309,9 +19680,9 @@
     },
     {
       "anchor": {
-        "end_line": 128,
+        "end_line": 129,
         "file": "src/series.ts",
-        "line": 123
+        "line": 124
       },
       "bases": [],
       "doc": null,
@@ -18320,7 +19691,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 125
+            "line": 126
           },
           "default": null,
           "doc": "How long to wait for another writer's lock (default 3 s).",
@@ -18330,7 +19701,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 127
+            "line": 128
           },
           "default": null,
           "doc": "A lock older than this is a crashed writer's and is broken (default 10 s).",
@@ -18345,7 +19716,7 @@
     {
       "anchor": {
         "file": "src/series.ts",
-        "line": 271
+        "line": 243
       },
       "bases": [],
       "doc": null,
@@ -18354,7 +19725,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 271
+            "line": 243
           },
           "default": null,
           "name": "brand",
@@ -18363,7 +19734,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 271
+            "line": 243
           },
           "default": null,
           "name": "series",
@@ -18377,7 +19748,7 @@
     {
       "anchor": {
         "file": "src/series.ts",
-        "line": 272
+        "line": 244
       },
       "bases": [],
       "doc": null,
@@ -18386,7 +19757,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 272
+            "line": 244
           },
           "default": null,
           "name": "path",
@@ -18395,7 +19766,7 @@
         {
           "anchor": {
             "file": "src/series.ts",
-            "line": 272
+            "line": 244
           },
           "default": null,
           "name": "series",
@@ -18405,6 +19776,190 @@
       "grade": "declared",
       "id": "src/series.Changed",
       "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 112,
+        "file": "src/serve.ts",
+        "line": 100
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 102
+          },
+          "default": null,
+          "name": "direct",
+          "type": "{ kind: 'direct'; loopback: boolean }"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 104
+          },
+          "default": null,
+          "name": "serve",
+          "type": "{ kind: 'serve'; login: string; name: string; ip: string }"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 107
+          },
+          "default": null,
+          "name": "refused",
+          "type": "{ kind: 'refused'; reason: 'funnel' | 'no-login' | 'not-listed'; why: string; login?: string; ip: string; }"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/serve.ServeCaller",
+      "kind": "type-union on `kind`"
+    },
+    {
+      "anchor": {
+        "file": "src/serve.ts",
+        "line": 102
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 102
+          },
+          "default": null,
+          "name": "kind",
+          "type": "'direct'"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 102
+          },
+          "default": null,
+          "name": "loopback",
+          "type": "boolean"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/serve.ServeCaller[kind=direct]",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "file": "src/serve.ts",
+        "line": 104
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 104
+          },
+          "default": null,
+          "name": "kind",
+          "type": "'serve'"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 104
+          },
+          "default": null,
+          "name": "login",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 104
+          },
+          "default": null,
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 104
+          },
+          "default": null,
+          "name": "ip",
+          "type": "string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/serve.ServeCaller[kind=serve]",
+      "kind": "type"
+    },
+    {
+      "anchor": {
+        "end_line": 112,
+        "file": "src/serve.ts",
+        "line": 106
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 107
+          },
+          "default": null,
+          "name": "kind",
+          "type": "'refused'"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 108
+          },
+          "default": null,
+          "name": "reason",
+          "type": "'funnel' | 'no-login' | 'not-listed'"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 109
+          },
+          "default": null,
+          "name": "why",
+          "type": "string"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 110
+          },
+          "default": null,
+          "name": "login",
+          "type": "?: string"
+        },
+        {
+          "anchor": {
+            "file": "src/serve.ts",
+            "line": 111
+          },
+          "default": null,
+          "name": "ip",
+          "type": "string"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/serve.ServeCaller[kind=refused]",
+      "kind": "type"
     },
     {
       "aliases": [
@@ -22549,7 +24104,7 @@
     }
   ],
   "target": {
-    "commit": "5a6d0d334e11ab596c5113ff739814bd1ee36ac4",
+    "commit": "3644589d72447792cc6fdbe32f078372e1458b45",
     "root": "..",
     "stack": "typescript"
   },
@@ -22661,6 +24216,24 @@
       ],
       "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/gitignore-rules.GitignorePattern` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "const built by a call (helper or non-zod call)",
+      "looked_at": [
+        "src/groups.ts:536"
+      ],
+      "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/groups.GROUP_CAPABILITIES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "class",
+      "looked_at": [
+        "src/groups.ts:483"
+      ],
+      "reason": "declared but not read: class. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/groups.RuleError` - declared but not read"
     },
     {
       "census": true,
@@ -22855,10 +24428,19 @@
       "census": true,
       "family": "const built by a call (helper or non-zod call)",
       "looked_at": [
-        "src/series.ts:282"
+        "src/series.ts:257"
       ],
       "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/series.SERIES_CAPABILITIES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "utility-type alias (`Pick` / `Omit` / `Record` / generic instance)",
+      "looked_at": [
+        "src/serve.ts:18"
+      ],
+      "reason": "declared but not read: utility-type alias (`Pick` / `Omit` / `Record` / generic instance). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/serve.ServeHeaders` - declared but not read"
     },
     {
       "census": true,
@@ -22945,7 +24527,7 @@
         "readFileResult(BrandSettings) (src/brand-settings.ts:107)",
         "readFileResult(ProjectIdentity) (src/identity.ts:49)",
         "readFileResult(ResourcesFile) (src/resources.ts:135)",
-        "readFileResult(SeriesFile) (src/series.ts:43)",
+        "readFileResult(SeriesFile) (src/series.ts:44)",
         "readFileResult(WordsFile) (src/words.ts:68)",
         "readFileResult(YouTubeChannel) (src/youtube.ts:126)",
         "readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)",
@@ -22994,7 +24576,7 @@
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 40,
+    "import": 41,
     "re-export": 0
   }
 }

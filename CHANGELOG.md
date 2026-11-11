@@ -2,6 +2,26 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.37.0 — 2026-11-11
+
+Groups: a named list of projects in one brand, ordered or not. A series is an ordered group.
+
+### Added
+
+- `groups.ts`: `GroupFile` at `<brand root>/groups/<id>/fli.group.json` (`ordered`, optional `note`, members by
+  project id with an optional label in an ordered group), `listGroups` / `readGroup` over both `groups/` and the older
+  `series/` folder (read in place as ordered groups, `home: "series"`), `createGroup`, `changeGroup`,
+  `addGroupMember`, `removeGroupMember`, `orderedGroupOf`, `groupIdOf`, `groupAsSeries`, and `GROUP_CAPABILITIES`
+  (`group.list/get/create/add/remove/update`).
+- Refusals `group-exists`, `group-not-found` and `in-another-ordered-group` (a project is in at most one ordered
+  group; kept from the series design so "the series a project is in" never needs a guess).
+- `locked-change.ts`: the one locked read-modify-write, now behind both `changeSeries` and `changeGroup`.
+
+### Changed
+
+- `series.*` contracts are described as the older names of `group.*`. Their shapes are unchanged, and a series file
+  is never given a field it did not have.
+
 ## v0.36.0 — 2026-11-11
 
 A shared FliTools behind Tailscale Serve: the login check every Fli app uses, and a FliTools client that takes a URL.
