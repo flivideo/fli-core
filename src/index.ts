@@ -96,6 +96,10 @@ export {
   ProjectTier,
   ProjectZone,
   RENDERS_FOLDER,
+  SETS_FILE,
+  SETS_FOLDER,
+  SET_DIRS,
+  SET_ID,
   TRASH_FOLDER,
   classifyProjectEntry,
   describeProjectEntry,
@@ -105,6 +109,27 @@ export {
   projectLayoutPathsSync,
   projectLayoutSync,
 } from './classify.js';
+
+export {
+  MediaLocation,
+  ProjectSet,
+  SetEntry,
+  SetId,
+  SetRole,
+  SetsFile,
+  addSet,
+  hasSets,
+  hasSetsSync,
+  listSets,
+  listSetsSync,
+  projectDirFromRecordingPath,
+  readSetsFileSync,
+  recordingLocation,
+  setPaths,
+  setsDir,
+  setsFilePath,
+  transcriptLocation,
+} from './recording-sets.js';
 
 export {
   ARCHIVED_FOLDER,

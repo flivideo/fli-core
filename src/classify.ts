@@ -36,6 +36,11 @@ export const ProjectZone = z.enum([
   'legacy',
   /** A project's top-level `-trash/` (FliHub's delete target): always shown with its size, emptied on request (David 2026-09-23). */
   'trash',
+  /**
+   * Recording sets (v0.38.0): `hub/sets.json` and each `hub/sets/<set>/` folder with the FliHub files kept in it. The
+   * takes and transcripts inside a set stay `recordings` / `transcripts`.
+   */
+  'sets',
   'other',
 ]);
 /** FliHub moves deleted takes here (`getProjectPaths().trash`); a zone of its own, not legacy. */
@@ -107,6 +112,9 @@ export function classifyProjectEntry(relPath: string, isDirectory?: boolean): Pr
   // container itself, and anything else under it, is not a zone.
   if (top === HUB_FOLDER) {
     if (topIsFile || !nested) return 'other';
+    if (segments[1] === SETS_FILE && segments.length === 2)
+      return directory === true ? 'other' : 'sets';
+    if (segments[1] === SETS_FOLDER) return setsEntry(segments.slice(2), directory);
     const inner = HUB_ZONES[segments[1] as string];
     if (inner === undefined) return 'other';
     if (segments.length === 2 && directory === false) return 'other';
@@ -120,6 +128,18 @@ export function classifyProjectEntry(relPath: string, isDirectory?: boolean): Pr
   // Chapter previews are deprecated (D8); FliHub's live `-safe/` and `-trash/` stay recordings.
   if (zone === 'recordings' && segments[1] === '-chapters') return 'legacy';
   return zone;
+}
+
+/** `hub/sets/<rest…>`: the set folders are `sets`; a set's `recordings/` and `transcripts/` are those zones. */
+function setsEntry(rest: string[], directory: boolean | undefined): ProjectZone {
+  if (rest.length === 0) return directory === false ? 'other' : 'sets';
+  if (!SET_ID.test(rest[0] as string)) return 'other';
+  if (rest.length === 1) return directory === false ? 'other' : 'sets';
+  const inner = SET_ZONES[rest[1] as string];
+  if (inner === undefined) return 'sets';
+  if (rest.length === 2 && directory === false) return 'sets';
+  if (inner === 'recordings' && rest[2] === '-chapters') return 'legacy';
+  return inner;
 }
 
 /** Folders inside `motion/**` that are machinery, not source: regenerable, never in git (gitignore `TIER-CACHE`). */
@@ -240,6 +260,7 @@ function tierOf(
   switch (zone) {
     case 'identity':
     case 'app-decisions':
+    case 'sets':
     case 'script':
     case 'framing':
       return { tier: 'authored', ...none };
@@ -293,6 +314,19 @@ const HUB_ZONES: Record<string, ProjectZone> = {
   transcripts: 'transcripts',
 };
 
+/** `hub/sets/`: one folder per recording set (v0.38.0). */
+export const SETS_FOLDER = 'sets';
+/** `hub/sets.json`: the order, display title and role of each set. */
+export const SETS_FILE = 'sets.json';
+/** A set id is its folder name: kebab-case. */
+export const SET_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+/** Inside one set: `hub/sets/<set>/recordings/` and `hub/sets/<set>/transcripts/`. */
+export const SET_DIRS = { recordings: 'recordings', transcripts: 'transcripts' } as const;
+const SET_ZONES: Record<string, ProjectZone> = {
+  recordings: 'recordings',
+  transcripts: 'transcripts',
+};
+
 export const ProjectLayout = z.enum(['hub', 'legacy']);
 export type ProjectLayout = z.infer<typeof ProjectLayout>;
 
@@ -334,13 +368,14 @@ const LEGACY_EVIDENCE = [
 /**
  * Which layout one project uses (D14). Self-healing (David 2026-09-23, option A): a project with no recordings anywhere
  * is `hub`, so a new or empty project needs no marker folder and FliHub writes `hub/recordings/` on the first take.
- *   1. `hub/recordings/` exists                                          → `hub`
+ *   1. `hub/recordings/` or `hub/sets/` exists                            → `hub`
  *   2. a top-level `recordings/`, `recording-transcripts/` or `transcripts/` → `legacy` (a stray `hub/` never hides them)
  *   3. anything else (new, empty, a missing folder, a hub project whose media is held elsewhere) → `hub`
  * The two layouts are never merged. Never throws.
  */
 export async function projectLayout(projectDir: string): Promise<ProjectLayout> {
   if (await isDirectory(path.join(projectDir, LAYOUT_DIRS.hub.recordings))) return 'hub';
+  if (await isDirectory(path.join(projectDir, HUB_FOLDER, SETS_FOLDER))) return 'hub';
   for (const dir of LEGACY_EVIDENCE)
     if (await isDirectory(path.join(projectDir, dir))) return 'legacy';
   return 'hub';
@@ -372,6 +407,7 @@ function isDirectorySync(p: string): boolean {
 /** `projectLayout`, synchronously — for callers that cannot await (FliHub's `getProjectPaths`). Same rule. */
 export function projectLayoutSync(projectDir: string): ProjectLayout {
   if (isDirectorySync(path.join(projectDir, LAYOUT_DIRS.hub.recordings))) return 'hub';
+  if (isDirectorySync(path.join(projectDir, HUB_FOLDER, SETS_FOLDER))) return 'hub';
   for (const dir of LEGACY_EVIDENCE)
     if (isDirectorySync(path.join(projectDir, dir))) return 'legacy';
   return 'hub';

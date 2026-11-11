@@ -2,6 +2,28 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.38.0 — 2026-11-11
+
+Recording sets: one project can hold several sets of takes (`hub/sets/<set>/{recordings,transcripts}/`, ordered and
+titled by `hub/sets.json`). A project without `hub/sets/` reads exactly as before.
+
+### Added
+
+- `recording-sets.ts`: `SetsFile` / `SetEntry` (`id` = folder name, `title`, `role` `video` | `part`), `listSets` /
+  `listSetsSync` (a project without sets → one implicit set, `id: null, legacy: true`; with sets → `sets.json` order,
+  then unlisted set folders by name), `readSetsFileSync` (drops a bad or repeated entry, never throws), `setPaths`,
+  `hasSets` / `hasSetsSync`, `setsDir`, `setsFilePath`, and `addSet` (creates the folders and appends the entry;
+  refuses a project without sets, since moving one into sets is a migration).
+- `recordingLocation` / `transcriptLocation`: the real project folder, set and layout from a take or transcript path
+  (`-safe/`, `-chapters/`, FliTools `engines/` included), and `projectDirFromRecordingPath` on top of it.
+- Constants `SETS_FOLDER`, `SETS_FILE`, `SET_DIRS`, `SET_ID`.
+- Zone `sets`: `hub/sets.json` and the set folders (tier `authored`). A set's `recordings/` and `transcripts/` keep
+  those zones; its `recordings/-chapters/` is `legacy`, as elsewhere.
+
+### Changed
+
+- `projectLayout` / `projectLayoutSync`: `hub/sets/` makes a project `hub`, like `hub/recordings/`.
+
 ## v0.37.0 — 2026-11-11
 
 Groups: a named list of projects in one brand, ordered or not. A series is an ordered group.
