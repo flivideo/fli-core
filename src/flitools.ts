@@ -49,6 +49,12 @@ export type FliToolsAnswer<T> =
 export interface FliToolsOptions {
   /** The calling app; FliTools records it and scopes its queue by it. Sent as `agent:<app>`. */
   app: string;
+  /**
+   * A shared FliTools on another machine, reached through Tailscale Serve (e.g. `https://<host>.<tailnet>.ts.net:8443`).
+   * Set: the control file is not read and no token is sent; that FliTools names the caller by its Tailscale login and
+   * ignores `x-fli-principal`. Unset: this machine's FliTools, through its control file.
+   */
+  url?: string;
   /** FliTools' control file. Default `<home>/Library/Application Support/flitools/control.json`. */
   controlFile?: string;
   home?: string;
@@ -63,12 +69,19 @@ export interface TranscribeOptions extends FliToolsOptions {
   vocabulary?: string[];
 }
 
-/** Call one FliTools verb over its JSON-RPC door. */
-export async function flitoolsCall(
-  method: string,
-  params: Record<string, unknown>,
-  options: FliToolsOptions,
-): Promise<FliToolsAnswer<unknown>> {
+/** Where a FliTools door is, and the token it wants (none for a shared FliTools behind Serve). */
+export type FliToolsEndpoint = { base: string; token: string | null; remote: boolean };
+
+/** `https://host:8443/` → `https://host:8443`. */
+const trimmed = (url: string) => url.trim().replace(/\/+$/, '');
+
+/** Find FliTools: the shared URL when one is set, else the local control file. Never throws. */
+export async function flitoolsEndpoint(
+  options: Pick<FliToolsOptions, 'url' | 'controlFile' | 'home'>,
+): Promise<{ kind: 'ok'; endpoint: FliToolsEndpoint } | { kind: 'unavailable'; reason: string }> {
+  if (options.url !== undefined && options.url.trim() !== '') {
+    return { kind: 'ok', endpoint: { base: trimmed(options.url), token: null, remote: true } };
+  }
   const file =
     options.controlFile ??
     controlFilePath('flitools', options.home === undefined ? {} : { home: options.home });
@@ -82,16 +95,31 @@ export async function flitoolsCall(
     return { kind: 'unavailable', reason: `${why}: ${file}` };
   }
   const { port, token } = read.control;
+  return {
+    kind: 'ok',
+    endpoint: { base: `http://127.0.0.1:${port}`, token: token ?? null, remote: false },
+  };
+}
+
+/** Call one FliTools verb over its JSON-RPC door (this machine's, or the shared one at `options.url`). */
+export async function flitoolsCall(
+  method: string,
+  params: Record<string, unknown>,
+  options: FliToolsOptions,
+): Promise<FliToolsAnswer<unknown>> {
+  const found = await flitoolsEndpoint(options);
+  if (found.kind !== 'ok') return found;
+  const { base, token, remote } = found.endpoint;
   let body: {
     result?: unknown;
     error?: { message?: string; data?: { failureMode?: string; details?: unknown } };
   };
   try {
-    const res = await fetch(`http://127.0.0.1:${port}/api/rpc`, {
+    const res = await fetch(`${base}/api/rpc`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        authorization: `Bearer ${token}`,
+        ...(token ? { authorization: `Bearer ${token}` } : {}),
         [PRINCIPAL_HEADER]: `agent:${options.app}`,
       },
       body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }),
@@ -99,9 +127,12 @@ export async function flitoolsCall(
     });
     body = (await res.json()) as typeof body;
   } catch (error) {
+    const why = error instanceof Error ? error.message : String(error);
     return {
       kind: 'unavailable',
-      reason: `FliTools did not answer on port ${port}: ${error instanceof Error ? error.message : String(error)}`,
+      reason: remote
+        ? `The shared FliTools at ${base} did not answer: ${why}`
+        : `FliTools did not answer on ${base.replace('http://127.0.0.1:', 'port ')}: ${why}`,
     };
   }
   if (body.error) {

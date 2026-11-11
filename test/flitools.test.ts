@@ -6,6 +6,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import {
   controlFilePath,
   flitoolsCall,
+  flitoolsEndpoint,
   transcribe,
   transcribeQueued,
   transcriptFor,
@@ -184,6 +185,45 @@ describe('the FliTools client', () => {
     expect(silent).toMatchObject({
       kind: 'unavailable',
       reason: expect.stringContaining('did not answer on port 1'),
+    });
+  });
+
+  it('calls a shared FliTools at a URL: no control file read, no token sent', async () => {
+    const home = await tempDir(); // no control file here at all
+    await fakeFlitools(home, () => ({ result: JOB }));
+    await fs.rm(controlFilePath('flitools', { home }));
+    const port = (server?.address() as AddressInfo).port;
+    const job = await transcribeQueued('/p/footage/a.mp4', {
+      app: 'flistudio',
+      home,
+      url: `http://127.0.0.1:${port}/`,
+    });
+    expect(job).toEqual({ kind: 'ok', value: JOB });
+    expect(seen[0]?.auth).toBeUndefined();
+    expect(seen[0]?.principal).toBe('agent:flistudio');
+  });
+
+  it('says which shared FliTools did not answer', async () => {
+    const answer = await flitoolsCall(
+      'queue.status',
+      {},
+      { app: 'flistudio', url: 'http://127.0.0.1:1', timeoutMs: 500 },
+    );
+    expect(answer).toMatchObject({
+      kind: 'unavailable',
+      reason: expect.stringContaining('The shared FliTools at http://127.0.0.1:1 did not answer'),
+    });
+  });
+
+  it('finds the endpoint: a blank URL falls back to the control file', async () => {
+    const home = await tempDir();
+    expect(await flitoolsEndpoint({ url: '  ', home })).toMatchObject({
+      kind: 'unavailable',
+      reason: expect.stringContaining('no control file'),
+    });
+    expect(await flitoolsEndpoint({ url: 'https://host.example:8443//' })).toEqual({
+      kind: 'ok',
+      endpoint: { base: 'https://host.example:8443', token: null, remote: true },
     });
   });
 });

@@ -540,16 +540,32 @@ export {
 export { renderApiPage, type ApiPageOptions } from './api-page.js';
 
 export {
+  cameThroughServe,
+  decodeTailscaleValue,
+  hopsOf,
+  isLoopback,
+  isTailscaleHeader,
+  plainAddress,
+  serveCallerOf,
+  serveLoginsFrom,
+  servePrincipalOf,
+  type ServeCaller,
+  type ServeHeaders,
+} from './serve.js';
+
+export {
   TranscriptFiles,
   TranscriptFound,
   TranscriptJob,
   TranscriptJobStatus,
   flitoolsCall,
+  flitoolsEndpoint,
   transcribe,
   transcribeQueued,
   transcriptFor,
   transcriptJobs,
   type FliToolsAnswer,
+  type FliToolsEndpoint,
   type FliToolsOptions,
   type TranscribeOptions,
 } from './flitools.js';

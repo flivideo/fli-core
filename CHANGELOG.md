@@ -2,6 +2,20 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.36.0 — 2026-11-11
+
+A shared FliTools behind Tailscale Serve: the login check every Fli app uses, and a FliTools client that takes a URL.
+
+### Added
+
+- `serveCallerOf(socketAddress, headers, logins)`: who is really calling. Identity headers count only on a loopback
+  connection that came through Serve; Funnel, no login and a login not on the list are refused with a reason. Also
+  `serveLoginsFrom` (unset = nobody), `servePrincipalOf` (`human:<first name>`), `cameThroughServe`,
+  `decodeTailscaleValue`, `isTailscaleHeader`, `plainAddress`, `isLoopback`, `hopsOf`. Browser-safe, also at
+  `@flivideo/core/serve`.
+- `FliToolsOptions.url`: call a shared FliTools at a URL. No control file is read and no token is sent.
+  `flitoolsEndpoint` says where a call will go.
+
 ## v0.35.0 — 2026-11-10
 
 Point and tell: a person marks a moment in an app, says what's wrong and sends it to a live Claude conversation.
