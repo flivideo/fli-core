@@ -1,5 +1,6 @@
 import { promises as fs, type Dirent } from 'node:fs';
 import path from 'node:path';
+import { isBrandSettingsFolder } from './brand-folders.js';
 import { errorCode, errorMessage } from './fs-utils.js';
 import { z } from 'zod';
 import { ProjectIdentity, readIdentity } from './identity.js';
@@ -160,7 +161,8 @@ export async function listProjects(brandRoot: string): Promise<ProjectListing> {
   const members: MemberProject[] = [];
   const otherFolders: OtherFolder[] = [];
   for (const folder of folders) {
-    if (folder === ARCHIVED_FOLDER || folder.startsWith('.') || folder.startsWith('-')) continue;
+    if (folder === ARCHIVED_FOLDER || folder.startsWith('.') || isBrandSettingsFolder(folder))
+      continue;
     const dir = path.join(brandRoot, folder);
     const parsed = parseProjectFolder(folder);
     const identity = await readIdentity(dir);

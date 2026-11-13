@@ -2,6 +2,23 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.39.0 — 2026-11-13
+
+Brand settings folders as one contract: a top-level `-` folder in a brand repo is brand settings, never a project.
+Contract: `docs/brand-settings-folders.md`.
+
+### Added
+
+- `brand-folders.ts`: `isBrandSettingsFolder`, the register `BRAND_SETTINGS_FOLDERS` (`-theme`, `-storypilot`,
+  `-reference`, `-thumbnails`, each with its owner and contents), and the thumbnail-rules lookup
+  `brandPackCandidates({ brandRoot?, home? })`: the brand repo's `-thumbnails/brand-pack.md` / `brand.yaml`, then
+  `~/.config/creator-skills/brand.yaml` (`BRAND_PACK_FILES`, `BRAND_PACK_USER_CONFIG`, `THUMBNAILS_SETTINGS_FOLDER`).
+  Pure; no FliStudio needed.
+
+### Changed
+
+- `listProjects` skips settings folders through `isBrandSettingsFolder` (same behaviour as before).
+
 ## v0.38.0 — 2026-11-11
 
 Recording sets: one project can hold several sets of takes (`hub/sets/<set>/{recordings,transcripts}/`, ordered and

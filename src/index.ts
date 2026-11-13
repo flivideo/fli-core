@@ -166,6 +166,17 @@ export {
 } from './brand-settings.js';
 
 export {
+  BRAND_PACK_FILES,
+  BRAND_PACK_USER_CONFIG,
+  BRAND_SETTINGS_FOLDERS,
+  THUMBNAILS_SETTINGS_FOLDER,
+  brandPackCandidates,
+  isBrandSettingsFolder,
+  BrandPackCandidate,
+  BrandSettingsFolder,
+} from './brand-folders.js';
+
+export {
   MachineSettings,
   MachineSettingsResult,
   ResolvedMachineSettings,
