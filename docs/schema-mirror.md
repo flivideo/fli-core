@@ -3,13 +3,13 @@
 > Generated from the code, not written about it. Do not hand-edit — every line below is anchored to a `file:line` and is re-derived on every run. `verify_mirror.py` fails when this page no longer matches its JSON. To record a gap the extractor cannot find, use `docs/schema-mirror.known-gaps.json`.
 
 - **stack** `typescript` · **extractor** `extract_typescript.py`
-- **commit** `3644589d7244` · **generated** 2026-11-11T08:16:32+00:00
+- **commit** `bca41cb61ec9` · **generated** 2026-11-14T15:36:41+00:00
 - **scope** include `*.ts`, `*.tsx` · exclude `*.test.ts`, `*.test.tsx`, `*.spec.ts`, `*.spec.tsx`, `*.stories.tsx`, `*.config.ts`, `*/test/*`, `*/tests/*`, `*/__tests__/*`, `*/e2e/*`, `*/__mocks__/*`, `*/fixtures/*`, `*.d.ts`, `*/dist/*`, `*/build/*`, `*/out/*`
-- **zod bound** in 41 file(s) by a direct import, 0 through a re-export, 0 by call shape only
+- **zod bound** in 43 file(s) by a direct import, 0 through a re-export, 0 by call shape only
 
 | shapes | declared sets | derived sets | gaps | declared but not read | findings |
 |---|---|---|---|---|---|
-| 367 | 111 | 7 | 9 | 43 | 7 |
+| 375 | 112 | 7 | 10 | 49 | 7 |
 
 > **Read the gaps, the census and the never-read list before trusting the shape.** Derived sets have no declaring symbol and will drift silently. Gaps are things this mirror could not reach — they are not absences in the code.
 
@@ -19,20 +19,21 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 
 - `src/api-page.ts` — `ApiPageOptions` :16
 - `src/app-file.ts` — `AppName` :15 · `AppSubject` :19 · `AppFile` :26
+- `src/brand-folders.ts` — `BrandSettingsFolder` :19 · `BrandPackCandidate` :61
 - `src/brand-settings.ts` — `TranscriptionChoice` :16 · `BrandPublishSettings` :30 · `BrandYouTubeSettings` :47 · `BrandStudioDefaults` :59 · `BrandResearchSettings` :75 · `BrandSettings` :83 · `WriteBrandSettingsResult` :118 · `UpdateBrandSettingsResult` :152 · `UpdateBrandSettingsOptions` :173
 - `src/brands.ts` — `Brand` :9 · `RegistryEntry` :20 · `BrandsFile` :28 · `SkippedBrand` :32 · `BrandsRead` :35 · `ReadBrandsResult` :45 · `ReadBrandsOptions` :48 · `ResolveBrandRootOptions` :92
 - `src/capability.ts` — `PrincipalKind` (set) :17 · `PrincipalName` :20 · `CapabilityKind` (set) :35 · `SideEffects` (set) :39 · `ExpectedDuration` (set) :47 · `CapabilityName` :51 · `HumanOnlyWhen` :59 · `CapabilityContract` :61 · `Authorization` :122 · `CapabilityMeta` :187
-- `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :67 · `LEGACY_FOLDERS` (set) :70 · `MOTION_MACHINERY` (set) :126 · `ProjectTier` (set) :140 · `OverlayRole` (set) :151 · `ProjectEntry` :154 · `OverlayPaths` :201 · `ProjectLayout` (set) :296 · `ProjectLayoutPaths` :299
+- `src/classify.ts` — `ProjectZone` (set) :11 · `ASSEMBLY_FOLDERS` (set) :72 · `LEGACY_FOLDERS` (set) :75 · `MOTION_MACHINERY` (set) :146 · `ProjectTier` (set) :160 · `OverlayRole` (set) :171 · `ProjectEntry` :174 · `OverlayPaths` :221 · `ProjectLayout` (set) :330 · `ProjectLayoutPaths` :333
 - `src/control-file.ts` — `ControlFile` :18 · `ControlFileRead` :30 · `ControlFileOptions` :39
 - `src/conversations.ts` — `ConversationOptions` :37 · `LiveConversation` :47 · `ConversationList` :62 · `AT_PROMPT_STATUSES` (set) :94 · `SessionFile` :96 · `ConversationRefusal` (set) :207 · `SendResult` :217 · `SendOptions` :236 · `TranscriptRow` :347 · `ConversationMessage` :384 · `ConversationTail` :391
-- `src/estate.ts` — `scanned()` :17 · `MemberProject` :31 · `OtherFolder` :41 · `ArchivedEntry` :53 · `ProjectListing` :66 · `ProjectFound` :189 · `ProjectAmbiguous` :195 · `ProjectNotAProject` :201 · `ProjectNotFound` :206 · `ProjectUnscanned` :207 · `ProjectRefusal` :215 · `ResolveProjectResult` :223 · `NextCodeResult` :280
+- `src/estate.ts` — `scanned()` :18 · `MemberProject` :32 · `OtherFolder` :42 · `ArchivedEntry` :54 · `ProjectListing` :67 · `ProjectFound` :191 · `ProjectAmbiguous` :197 · `ProjectNotAProject` :203 · `ProjectNotFound` :208 · `ProjectUnscanned` :209 · `ProjectRefusal` :217 · `ResolveProjectResult` :225 · `NextCodeResult` :282
 - `src/failure-codes.ts` — `FailureCodeTable` :52 · `Refusal` :132 · `ForbiddenDetails` :140 · `MissingDetails` :149 · `BusyWork` :153 · `AppBusyDetails` :160
 - `src/flitools.ts` — `TranscriptFiles` :13 · `TranscriptJobStatus` (set) :16 · `TranscriptJob` :20 · `TranscriptFound` :35 · `FliToolsAnswer` :44 · `FliToolsOptions` :49 · `TranscribeOptions` :64 · `FliToolsEndpoint` :73
 - `src/fs-utils.ts` — `NO_HARD_LINKS` (set) :44
 - `src/gitignore-rules.ts` — `GITIGNORE_BASE_VERSION` :19 · `Tag` :24 · `GitignoreOverlayRule` :38 · `GitignoreGroup` :45 · `GitignoreRenderOptions` :166 · `Located` :199 · `GitignoreRenderResult` :243 · `GitignoreCheckResult` :339
 - `src/gitignore.ts` — `TrackedIgnored` :23 · `GitignoreOptions` :31 · `GitignoreRefusal` :42 · `GitignoreRenderedFile` :49 · `GitignoreCheckedFile` :57 · `GitignoreResult` :63
 - `src/groups.ts` — `GroupMember` :37 · `GroupFile` :51 · `GroupHome` (set) :65 · `Group` :69 · `ReadGroupResult` :81 · `GroupListing` :93 · `GroupRefusalReason` (set) :230 · `GroupRefusal` :242 · `ChangeGroupResult` :251 · `ChangeGroupOptions` :257 · `GroupRef` :525 · `Changed` :526
-- `src/guide-doc.ts` — `GUIDE_SCHEMA` :20 · `GuideDocType` (set) :27 · `GuideDocLevel` (set) :34 · `GuideDocAppliesTo` :36 · `GuideDocLayer` (set) :45 · `OptText` :67 · `GUIDE_REQUIRED` (set) :70 · `GuideDoc` :72 · `ParsedGuide` :97
+- `src/guide-doc.ts` — `GUIDE_SCHEMA` :20 · `GuideDocLevel` (set) :42 · `GuideDocAppliesTo` :44 · `GuideDocLayer` (set) :53 · `OptText` :75 · `GUIDE_REQUIRED` (set) :78 · `guideDocWith()` :90 · `ParsedGuide` :121 · `ParseGuideOptions` :147
 - `src/help.ts` — `HelpScreenId` (set) :9 · `HelpRow` :19 · `HelpGroup` :22 · `HelpScreen` :25
 - `src/identity.ts` — `ProjectAspect` (set) :13 · `ProjectShape` (set) :23 · `ProjectLanguage` :28 · `ProjectIdentity` :31 · `Refused()` :57 · `WriteIdentityResult` :65 · `AdoptIdentityResult` :178 · `AdoptIdentityInput` :193
 - `src/lab-path.ts` — `PathSegment` :8 · `LabPathInput` :16 · `ResolvedLabPath` :84
@@ -47,6 +48,7 @@ Top-level entries by file, with the line each is declared on. Search the page fo
 - `src/project-folder.ts` — `ProjectCode` :5 · `KebabSlug` :11 · `ProjectFolder` :15
 - `src/publish.ts` — `PublishPiece` (set) :44 · `PublishState` (set) :64 · `PUBLISH_RULES` (set) :78 · `EditApp` (set) :91 · `Iso` :94 · `PublishExport` :97 · `PublishEdit` :122 · `PublishLaunch` :126 · `PublishFacts` :138 · `PublishRow` :149 · `PublishReadiness` :170 · `LIVE` (set) :216 · `PUBLISH_PLATFORMS` (set) :702 · `PublishedVideo` :705
 - `src/recipe-paths.ts` — `RecipePathProblem` (set) :15 · `RecipePathWarning` :18 · `SKIP` (set) :77
+- `src/recording-sets.ts` — `SetRole` (set) :28 · `SetId` :31 · `SetEntry` :36 · `SetsFile` :44 · `ProjectSet` :47 · `MediaLocation` :227
 - `src/recording.ts` — `RecordingTag` :14 · `Recording` :18
 - `src/renders.ts` — `PathSegment` :15 · `RendersPathInput` :23 · `RendersTool` :52 · `RendersTally` :59 · `ClearRendersResult` :121
 - `src/resources.ts` — `Text` :25 · `Key` :26 · `ResourceValue` (set) :31 · `ResourceChoose` (set) :47 · `ResourceStatus` (set) :50 · `ResourceAudience` (set) :53 · `ResourceGroup` :56 · `ResourceKind` :64 · `ResourceOff` :79 · `ResourceVideo` :85 · `ResourceRef` :90 · `Resource` :97 · `ResourcesFile` :118 · `ResourceRegistry` :147 · `ReadResourcesOptions` :156 · `ResourcesRead` :162 · `ResourceInput` :285 · `ResourceChange` :309 · `ResourcePatch` :387 · `WriteResourcesResult` :531
@@ -84,20 +86,21 @@ These constructs are outside what this extractor reads **on every run, in every 
 
 ## Coverage census
 
-**559** top-level declarations counted = **494** mirrored + **22** listed as gaps + **43** declared but not read.
+**579** top-level declarations counted = **506** mirrored + **24** listed as gaps + **49** declared but not read.
 
 Counted: every top-level interface, enum, class and type alias (exported or not) and every exported constant, in the files in scope.
-Not counted, as not schema-bearing: 6 functions, 2 function types, 44 literal constants.
+Not counted, as not schema-bearing: 7 functions, 2 function types, 48 literal constants.
 
 | file | declared | mirrored | gaps | not read |
 |---|---|---|---|---|
+| `src/brand-folders.ts` | 7 | 4 | 0 | **3** |
 | `src/capability.ts` | 17 | 16 | 0 | **1** |
-| `src/classify.ts` | 18 | 17 | 0 | **1** |
+| `src/classify.ts` | 19 | 17 | 0 | **2** |
 | `src/estate.ts` | 15 | 14 | 0 | **1** |
 | `src/failure-codes.ts` | 18 | 12 | 0 | **6** |
 | `src/gitignore-rules.ts` | 13 | 10 | 0 | **3** |
 | `src/groups.ts` | 19 | 17 | 0 | **2** |
-| `src/guide-doc.ts` | 15 | 12 | 0 | **3** |
+| `src/guide-doc.ts` | 16 | 9 | 2 | **5** |
 | `src/help.ts` | 9 | 8 | 0 | **1** |
 | `src/identity.ts` | 15 | 12 | 2 | **1** |
 | `src/lifecycle.ts` | 11 | 10 | 0 | **1** |
@@ -118,6 +121,15 @@ Not counted, as not schema-bearing: 6 functions, 2 function types, 44 literal co
 ## Closed sets — declared
 
 One symbol states each set. Adding a member changes that symbol, so these cannot drift.
+
+### `src/brand-folders.BrandPackCandidate.from` — `src/brand-folders.ts:63`
+
+*`z.enum` `from` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `brand-repo` | `src/brand-folders.ts:63` |
+| `user-config` | `src/brand-folders.ts:63` |
 
 ### `src/brand-settings.WriteBrandSettingsResult.kind` — `src/brand-settings.ts:118-126`
 
@@ -228,13 +240,13 @@ What calling it does to the world: nothing, an edit that can be taken back, one 
 | `true` | `src/capability.ts:122` |
 | `false` | `src/capability.ts:122` |
 
-### `src/classify.ProjectZone` — `src/classify.ts:11-40`
+### `src/classify.ProjectZone` — `src/classify.ts:11-45`
 
 Which zone of the project layout (spec §3, roadmap §1) a path inside a project belongs to.
 
 *`z.enum` `ProjectZone` - a single declaring symbol*
 
-*aliases* `ProjectZone` `src/classify.ts:45`
+*aliases* `ProjectZone` `src/classify.ts:50`
 
 | value | declared at |
 |---|---|
@@ -254,50 +266,51 @@ Which zone of the project layout (spec §3, roadmap §1) a path inside a project
 | `videos` | `src/classify.ts:35` |
 | `legacy` | `src/classify.ts:36` |
 | `trash` | `src/classify.ts:38` |
-| `other` | `src/classify.ts:39` |
+| `sets` | `src/classify.ts:43` |
+| `other` | `src/classify.ts:44` |
 
-### `src/classify.ProjectTier` — `src/classify.ts:140-147`
+### `src/classify.ProjectTier` — `src/classify.ts:160-167`
 
 How much a path matters (the plan §1.1 tier test: "if you deleted it, could you get it back by re-running a tool?"):
 
 *`z.enum` `ProjectTier` - a single declaring symbol*
 
-*aliases* `ProjectTier` `src/classify.ts:148`
+*aliases* `ProjectTier` `src/classify.ts:168`
 
 | value | declared at |
 |---|---|
-| `authored` | `src/classify.ts:141` |
-| `input` | `src/classify.ts:142` |
-| `generated` | `src/classify.ts:143` |
-| `regenerable` | `src/classify.ts:144` |
-| `output` | `src/classify.ts:145` |
-| `other` | `src/classify.ts:146` |
+| `authored` | `src/classify.ts:161` |
+| `input` | `src/classify.ts:162` |
+| `generated` | `src/classify.ts:163` |
+| `regenerable` | `src/classify.ts:164` |
+| `output` | `src/classify.ts:165` |
+| `other` | `src/classify.ts:166` |
 
-### `src/classify.OverlayRole` — `src/classify.ts:151`
+### `src/classify.OverlayRole` — `src/classify.ts:171`
 
 What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are authored, `spec.json` is generated.
 
 *`z.enum` `OverlayRole` - a single declaring symbol*
 
-*aliases* `OverlayRole` `src/classify.ts:152`
+*aliases* `OverlayRole` `src/classify.ts:172`
 
 | value | declared at |
 |---|---|
-| `beats` | `src/classify.ts:151` |
-| `framing` | `src/classify.ts:151` |
-| `spec` | `src/classify.ts:151` |
-| `variant-file` | `src/classify.ts:151` |
+| `beats` | `src/classify.ts:171` |
+| `framing` | `src/classify.ts:171` |
+| `spec` | `src/classify.ts:171` |
+| `variant-file` | `src/classify.ts:171` |
 
-### `src/classify.ProjectLayout` — `src/classify.ts:296`
+### `src/classify.ProjectLayout` — `src/classify.ts:330`
 
 *`z.enum` `ProjectLayout` - a single declaring symbol*
 
-*aliases* `ProjectLayout` `src/classify.ts:297`
+*aliases* `ProjectLayout` `src/classify.ts:331`
 
 | value | declared at |
 |---|---|
-| `hub` | `src/classify.ts:296` |
-| `legacy` | `src/classify.ts:296` |
+| `hub` | `src/classify.ts:330` |
+| `legacy` | `src/classify.ts:330` |
 
 ### `src/control-file.ControlFileRead.kind` — `src/control-file.ts:30-36`
 
@@ -343,85 +356,85 @@ What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are 
 | `user` | `src/conversations.ts:385` |
 | `assistant` | `src/conversations.ts:385` |
 
-### `src/estate.scanned().state` — `src/estate.ts:17-27`
+### `src/estate.scanned().state` — `src/estate.ts:18-28`
 
 *the `state` discriminator of `z.discriminatedUnion` `scanned()` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `scanned` | `src/estate.ts:19` |
-| `unscanned` | `src/estate.ts:21` |
+| `scanned` | `src/estate.ts:20` |
+| `unscanned` | `src/estate.ts:22` |
 
-### `src/estate.ArchivedEntry.kind` — `src/estate.ts:53-63`
+### `src/estate.ArchivedEntry.kind` — `src/estate.ts:54-64`
 
 *the `kind` discriminator of `z.discriminatedUnion` `ArchivedEntry` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `range` | `src/estate.ts:55` |
-| `project` | `src/estate.ts:61` |
-| `other` | `src/estate.ts:62` |
+| `range` | `src/estate.ts:56` |
+| `project` | `src/estate.ts:62` |
+| `other` | `src/estate.ts:63` |
 
-### `src/estate.ProjectFound.matchedBy` — `src/estate.ts:192`
-
-*`z.enum` `matchedBy` - a single declaring symbol*
-
-| value | declared at |
-|---|---|
-| `folder` | `src/estate.ts:192` |
-| `id` | `src/estate.ts:192` |
-| `code` | `src/estate.ts:192` |
-
-### `src/estate.ProjectAmbiguous.matchedBy` — `src/estate.ts:198`
+### `src/estate.ProjectFound.matchedBy` — `src/estate.ts:194`
 
 *`z.enum` `matchedBy` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `id` | `src/estate.ts:198` |
-| `code` | `src/estate.ts:198` |
+| `folder` | `src/estate.ts:194` |
+| `id` | `src/estate.ts:194` |
+| `code` | `src/estate.ts:194` |
 
-### `src/estate.ProjectRefusal.kind` — `src/estate.ts:215-220`
+### `src/estate.ProjectAmbiguous.matchedBy` — `src/estate.ts:200`
+
+*`z.enum` `matchedBy` - a single declaring symbol*
+
+| value | declared at |
+|---|---|
+| `id` | `src/estate.ts:200` |
+| `code` | `src/estate.ts:200` |
+
+### `src/estate.ProjectRefusal.kind` — `src/estate.ts:217-222`
 
 *the `kind` discriminator of `z.discriminatedUnion` `ProjectRefusal` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `ambiguous` | `src/estate.ts:196` |
-| `not-a-project` | `src/estate.ts:202` |
-| `not-found` | `src/estate.ts:206` |
-| `unscanned` | `src/estate.ts:208` |
+| `ambiguous` | `src/estate.ts:198` |
+| `not-a-project` | `src/estate.ts:204` |
+| `not-found` | `src/estate.ts:208` |
+| `unscanned` | `src/estate.ts:210` |
 
-### `src/estate.ResolveProjectResult.kind` — `src/estate.ts:223-229`
+### `src/estate.ResolveProjectResult.kind` — `src/estate.ts:225-231`
 
 *the `kind` discriminator of `z.discriminatedUnion` `ResolveProjectResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `found` | `src/estate.ts:190` |
-| `ambiguous` | `src/estate.ts:196` |
-| `not-a-project` | `src/estate.ts:202` |
-| `not-found` | `src/estate.ts:206` |
-| `unscanned` | `src/estate.ts:208` |
+| `found` | `src/estate.ts:192` |
+| `ambiguous` | `src/estate.ts:198` |
+| `not-a-project` | `src/estate.ts:204` |
+| `not-found` | `src/estate.ts:208` |
+| `unscanned` | `src/estate.ts:210` |
 
-### `src/estate.NextCodeResult.kind` — `src/estate.ts:280-287`
+### `src/estate.NextCodeResult.kind` — `src/estate.ts:282-289`
 
 *the `kind` discriminator of `z.discriminatedUnion` `NextCodeResult` - each value declared by a `z.literal` in one variant*
 
 | value | declared at |
 |---|---|
-| `allocated` | `src/estate.ts:281` |
-| `refused` | `src/estate.ts:283` |
+| `allocated` | `src/estate.ts:283` |
+| `refused` | `src/estate.ts:285` |
 
-### `src/estate.NextCodeResult[kind=refused].reason` — `src/estate.ts:284`
+### `src/estate.NextCodeResult[kind=refused].reason` — `src/estate.ts:286`
 
 *`z.enum` `reason` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `invalid-letter` | `src/estate.ts:284` |
-| `unscanned` | `src/estate.ts:284` |
-| `exhausted` | `src/estate.ts:284` |
+| `invalid-letter` | `src/estate.ts:286` |
+| `unscanned` | `src/estate.ts:286` |
+| `exhausted` | `src/estate.ts:286` |
 
 ### `src/failure-codes.ForbiddenDetails.allowed[]` — `src/failure-codes.ts:143`
 
@@ -555,78 +568,63 @@ What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are 
 | `written` | `src/groups.ts:252` |
 | `refused` | `src/groups.ts:243` |
 
-### `src/guide-doc.GuideDocType` — `src/guide-doc.ts:27`
-
-*`z.enum` `GuideDocType` - members read through `GUIDE_DOC_TYPES` (src/guide-doc.GUIDE_DOC_TYPES) - a single declaring symbol*
-
-*aliases* `GuideDocType` `src/guide-doc.ts:28`
-
-| value | declared at |
-|---|---|
-| `voice` | `src/guide-doc.ts:26` |
-| `verbal` | `src/guide-doc.ts:26` |
-| `build` | `src/guide-doc.ts:26` |
-| `video` | `src/guide-doc.ts:26` |
-| `lens` | `src/guide-doc.ts:26` |
-| `other` | `src/guide-doc.ts:26` |
-
-### `src/guide-doc.GuideDocLevel` — `src/guide-doc.ts:34`
+### `src/guide-doc.GuideDocLevel` — `src/guide-doc.ts:42`
 
 *`z.enum` `GuideDocLevel` - a single declaring symbol*
 
-*aliases* `GuideDocLevel` `src/guide-doc.ts:35`
+*aliases* `GuideDocLevel` `src/guide-doc.ts:43`
 
 | value | declared at |
 |---|---|
-| `global` | `src/guide-doc.ts:34` |
-| `brand` | `src/guide-doc.ts:34` |
-| `series` | `src/guide-doc.ts:34` |
-| `video` | `src/guide-doc.ts:34` |
+| `global` | `src/guide-doc.ts:42` |
+| `brand` | `src/guide-doc.ts:42` |
+| `series` | `src/guide-doc.ts:42` |
+| `video` | `src/guide-doc.ts:42` |
 
-### `src/guide-doc.GuideDocAppliesTo.form` — `src/guide-doc.ts:38`
+### `src/guide-doc.GuideDocAppliesTo.form` — `src/guide-doc.ts:46`
 
 *`z.enum` `form` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `story` | `src/guide-doc.ts:38` |
-| `tutorial` | `src/guide-doc.ts:38` |
-| `sales` | `src/guide-doc.ts:38` |
+| `story` | `src/guide-doc.ts:46` |
+| `tutorial` | `src/guide-doc.ts:46` |
+| `sales` | `src/guide-doc.ts:46` |
 
-### `src/guide-doc.GuideDocAppliesTo.length` — `src/guide-doc.ts:39`
+### `src/guide-doc.GuideDocAppliesTo.length` — `src/guide-doc.ts:47`
 
 *`z.enum` `length` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `short` | `src/guide-doc.ts:39` |
-| `long` | `src/guide-doc.ts:39` |
+| `short` | `src/guide-doc.ts:47` |
+| `long` | `src/guide-doc.ts:47` |
 
-### `src/guide-doc.GuideDocLayer` — `src/guide-doc.ts:45`
+### `src/guide-doc.GuideDocLayer` — `src/guide-doc.ts:53`
 
 `canonical` = the owner's own words or rulings; `synthesis` = distilled from a corpus.
 
 *`z.enum` `GuideDocLayer` - a single declaring symbol*
 
-*aliases* `GuideDocLayer` `src/guide-doc.ts:46`
+*aliases* `GuideDocLayer` `src/guide-doc.ts:54`
 
 | value | declared at |
 |---|---|
-| `canonical` | `src/guide-doc.ts:45` |
-| `synthesis` | `src/guide-doc.ts:45` |
+| `canonical` | `src/guide-doc.ts:53` |
+| `synthesis` | `src/guide-doc.ts:53` |
 
-### `src/guide-doc.GUIDE_REQUIRED` — `src/guide-doc.ts:70`
+### `src/guide-doc.GUIDE_REQUIRED` — `src/guide-doc.ts:78`
 
 *`as const` array `GUIDE_REQUIRED`, typed from by `typeof GUIDE_REQUIRED[number]` - a single declaring symbol*
 
 | value | declared at |
 |---|---|
-| `schema` | `src/guide-doc.ts:70` |
-| `id` | `src/guide-doc.ts:70` |
-| `label` | `src/guide-doc.ts:70` |
-| `type` | `src/guide-doc.ts:70` |
-| `level` | `src/guide-doc.ts:70` |
-| `gist` | `src/guide-doc.ts:70` |
+| `schema` | `src/guide-doc.ts:78` |
+| `id` | `src/guide-doc.ts:78` |
+| `label` | `src/guide-doc.ts:78` |
+| `type` | `src/guide-doc.ts:78` |
+| `level` | `src/guide-doc.ts:78` |
+| `gist` | `src/guide-doc.ts:78` |
 
 ### `src/help.HelpScreenId` — `src/help.ts:9-15`
 
@@ -1024,6 +1022,19 @@ The ingest rule (workstream B ruling, 2026-10-05): **a recipe may only reference
 | `home` | `src/recipe-paths.ts:15` |
 | `file-url` | `src/recipe-paths.ts:15` |
 | `escapes-project` | `src/recipe-paths.ts:15` |
+
+### `src/recording-sets.SetRole` — `src/recording-sets.ts:28`
+
+Recording sets (v0.38.0): one project holds several sets of takes instead of faking videos as chapters.
+
+*`z.enum` `SetRole` - a single declaring symbol*
+
+*aliases* `SetRole` `src/recording-sets.ts:29`
+
+| value | declared at |
+|---|---|
+| `video` | `src/recording-sets.ts:28` |
+| `part` | `src/recording-sets.ts:28` |
 
 ### `src/renders.ClearRendersResult.kind` — `src/renders.ts:121-134`
 
@@ -1441,46 +1452,46 @@ Tags a file name may still carry from before a ruling retired them (R11: `-final
 
 Each set below was read out of the real authority — control flow, membership tests, dispatch tables — because nothing declares it. **Correct as of this commit and fragile after it.** Each carries the refactor that would make it declared.
 
-### `src/classify.ASSEMBLY_FOLDERS` — `src/classify.ts:67`
+### `src/classify.ASSEMBLY_FOLDERS` — `src/classify.ts:72`
 
 *module constant `ASSEMBLY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `first-edit` | `src/classify.ts:67` |
-| `edit` | `src/classify.ts:67` |
+| `first-edit` | `src/classify.ts:72` |
+| `edit` | `src/classify.ts:72` |
 
-> **REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:67 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:72 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
 
-### `src/classify.LEGACY_FOLDERS` — `src/classify.ts:70-77`
+### `src/classify.LEGACY_FOLDERS` — `src/classify.ts:75-82`
 
 *module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `first-edit` | `src/classify.ts:71` |
-| `edits` | `src/classify.ts:72` |
-| `edit-1st` | `src/classify.ts:73` |
-| `final` | `src/classify.ts:74` |
-| `pipeline` | `src/classify.ts:75` |
-| `animation` | `src/classify.ts:76` |
+| `first-edit` | `src/classify.ts:76` |
+| `edits` | `src/classify.ts:77` |
+| `edit-1st` | `src/classify.ts:78` |
+| `final` | `src/classify.ts:79` |
+| `pipeline` | `src/classify.ts:80` |
+| `animation` | `src/classify.ts:81` |
 
-> **REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:70 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:75 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.**
 
-### `src/classify.MOTION_MACHINERY` — `src/classify.ts:126-133`
+### `src/classify.MOTION_MACHINERY` — `src/classify.ts:146-153`
 
 *module constant `MOTION_MACHINERY` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it*
 
 | value | read from |
 |---|---|
-| `out` | `src/classify.ts:127` |
-| `.cache` | `src/classify.ts:128` |
-| `.transcode-cache` | `src/classify.ts:129` |
-| `dist` | `src/classify.ts:130` |
-| `build` | `src/classify.ts:131` |
-| `node_modules` | `src/classify.ts:132` |
+| `out` | `src/classify.ts:147` |
+| `.cache` | `src/classify.ts:148` |
+| `.transcode-cache` | `src/classify.ts:149` |
+| `dist` | `src/classify.ts:150` |
+| `build` | `src/classify.ts:151` |
+| `node_modules` | `src/classify.ts:152` |
 
-> **REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.**
+> **REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:146 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.**
 
 ### `src/conversations.AT_PROMPT_STATUSES` — `src/conversations.ts:94`
 
@@ -1594,6 +1605,25 @@ The self-describing surface as ONE served HTML page (agent-drivable step 2). Two
 |---|---|---|---|
 | `app` | `AppName → src/app-file.AppName` | — | `src/app-file.ts:27` |
 | `subject` | `AppSubject.optional() → src/app-file.AppSubject` | — | `src/app-file.ts:27` |
+
+### `src/brand-folders.BrandSettingsFolder` — zod-object — `src/brand-folders.ts:19-26`
+
+*aliases* `BrandSettingsFolder` `src/brand-folders.ts:27`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `folder` | `z.string().startsWith('-')` | — | `src/brand-folders.ts:21` | The folder name, with its leading `-`. |
+| `owner` | `z.string().min(1)` | — | `src/brand-folders.ts:23` | Who writes and reads it. |
+| `contents` | `z.string().min(1)` | — | `src/brand-folders.ts:25` | What it holds. |
+
+### `src/brand-folders.BrandPackCandidate` — zod-object — `src/brand-folders.ts:61-64`
+
+*aliases* `BrandPackCandidate` `src/brand-folders.ts:65`
+
+| field | type | default | at |
+|---|---|---|---|
+| `path` | `z.string()` | — | `src/brand-folders.ts:62` |
+| `from` | `z.enum(['brand-repo', 'user-config'])` | — | `src/brand-folders.ts:63` |
 
 ### `src/brand-settings.TranscriptionChoice` — zod-object — `src/brand-settings.ts:16-21`
 
@@ -1933,40 +1963,40 @@ One capability as data, for `GET …/capabilities`, a CLI's `list` and the OpenR
 |---|---|---|---|
 | `when` | `z.string()` | — | `src/capability.ts:199` |
 
-### `src/classify.ProjectEntry` — zod-object — `src/classify.ts:154-167`
+### `src/classify.ProjectEntry` — zod-object — `src/classify.ts:174-187`
 
-*aliases* `ProjectEntry` `src/classify.ts:168`
-
-| field | type | default | at | note |
-|---|---|---|---|---|
-| `zone` | `ProjectZone → src/classify.ProjectZone` | — | `src/classify.ts:155` |  |
-| `tier` | `ProjectTier → src/classify.ProjectTier` | — | `src/classify.ts:156` |  |
-| `video` | `z.string().nullable()` | — | `src/classify.ts:158` | `overlay/<video>/…` only (R9): the video the overlay work is for; null for a flat overlay and every other zone. |
-| `chapter` | `z.string().nullable()` | — | `src/classify.ts:163` |  |
-| `variant` | `z.string().nullable()` | — | `src/classify.ts:165` | `overlay/[<video>/]<variant>/…` only. |
-| `role` | `OverlayRole.nullable() → src/classify.OverlayRole` | — | `src/classify.ts:166` |  |
-
-### `src/classify.OverlayPaths` — zod-object — `src/classify.ts:201-210`
-
-*aliases* `OverlayPaths` `src/classify.ts:211`
+*aliases* `ProjectEntry` `src/classify.ts:188`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `dir` | `z.string()` | — | `src/classify.ts:203` | `<project>/overlay/<video>/` |
-| `beats` | `z.string()` | — | `src/classify.ts:204` |  |
-| `framing` | `z.string()` | — | `src/classify.ts:205` |  |
-| `variantDir` | `z.string().nullable()` | — | `src/classify.ts:207` | `<project>/overlay/<video>/<variant>/` — null when no variant was asked for. |
-| `spec` | `z.string().nullable()` | — | `src/classify.ts:209` | `<project>/overlay/<video>/<variant>/spec.json` — null when no variant was asked for. |
+| `zone` | `ProjectZone → src/classify.ProjectZone` | — | `src/classify.ts:175` |  |
+| `tier` | `ProjectTier → src/classify.ProjectTier` | — | `src/classify.ts:176` |  |
+| `video` | `z.string().nullable()` | — | `src/classify.ts:178` | `overlay/<video>/…` only (R9): the video the overlay work is for; null for a flat overlay and every other zone. |
+| `chapter` | `z.string().nullable()` | — | `src/classify.ts:183` |  |
+| `variant` | `z.string().nullable()` | — | `src/classify.ts:185` | `overlay/[<video>/]<variant>/…` only. |
+| `role` | `OverlayRole.nullable() → src/classify.OverlayRole` | — | `src/classify.ts:186` |  |
 
-### `src/classify.ProjectLayoutPaths` — zod-object — `src/classify.ts:299-306`
+### `src/classify.OverlayPaths` — zod-object — `src/classify.ts:221-230`
 
-*aliases* `ProjectLayoutPaths` `src/classify.ts:307`
+*aliases* `OverlayPaths` `src/classify.ts:231`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `layout` | `ProjectLayout → src/classify.ProjectLayout` | — | `src/classify.ts:301` | Detected by `projectLayout` (D14). |
-| `recordings` | `z.string()` | — | `src/classify.ts:303` | Absolute path of the recordings folder for this layout (it may not exist yet). |
-| `transcripts` | `z.string()` | — | `src/classify.ts:305` | Absolute path of the transcripts folder for this layout (it may not exist yet). |
+| `dir` | `z.string()` | — | `src/classify.ts:223` | `<project>/overlay/<video>/` |
+| `beats` | `z.string()` | — | `src/classify.ts:224` |  |
+| `framing` | `z.string()` | — | `src/classify.ts:225` |  |
+| `variantDir` | `z.string().nullable()` | — | `src/classify.ts:227` | `<project>/overlay/<video>/<variant>/` — null when no variant was asked for. |
+| `spec` | `z.string().nullable()` | — | `src/classify.ts:229` | `<project>/overlay/<video>/<variant>/spec.json` — null when no variant was asked for. |
+
+### `src/classify.ProjectLayoutPaths` — zod-object — `src/classify.ts:333-340`
+
+*aliases* `ProjectLayoutPaths` `src/classify.ts:341`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `layout` | `ProjectLayout → src/classify.ProjectLayout` | — | `src/classify.ts:335` | Detected by `projectLayout` (D14). |
+| `recordings` | `z.string()` | — | `src/classify.ts:337` | Absolute path of the recordings folder for this layout (it may not exist yet). |
+| `transcripts` | `z.string()` | — | `src/classify.ts:339` | Absolute path of the transcripts folder for this layout (it may not exist yet). |
 
 ### `src/control-file.ControlFile` — zod-object — `src/control-file.ts:18-27`
 
@@ -2142,206 +2172,206 @@ Control-file discovery (agent-drivable step 2, David 2026-09-23): a running app 
 | `messages` | `z.array(ConversationMessage) → src/conversations.ConversationMessage` | — | `src/conversations.ts:393` |  |
 | `note` | `z.string().nullable()` | — | `src/conversations.ts:395` | Why there's nothing to show, when there isn't. |
 
-### `src/estate.scanned()` — zod-factory (zod-discriminated-union) on `state` — `src/estate.ts:17-27`
+### `src/estate.scanned()` — zod-factory (zod-discriminated-union) on `state` — `src/estate.ts:18-28`
 
 A collection that was read, or one that could not be (R12): empty and unscanned are never the same thing.
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `scanned` | `z.object({ state: z.literal('scanned'), scannedAt: z.iso.datetime(), items: z.array(item) })` | — | `src/estate.ts:19` |
-| `unscanned` | `z.object({ state: z.literal('unscanned'), scannedAt: z.iso.datetime(), path: z.string(), message: z.string() })` | — | `src/estate.ts:21` |
+| `scanned` | `z.object({ state: z.literal('scanned'), scannedAt: z.iso.datetime(), items: z.array(item) })` | — | `src/estate.ts:20` |
+| `unscanned` | `z.object({ state: z.literal('unscanned'), scannedAt: z.iso.datetime(), path: z.string(), message: z.string() })` | — | `src/estate.ts:22` |
 
-### `src/estate.scanned()[state=scanned]` — zod-object — `src/estate.ts:19`
-
-| field | type | default | at |
-|---|---|---|---|
-| `state` | `z.literal('scanned')` | — | `src/estate.ts:19` |
-| `scannedAt` | `z.iso.datetime()` | — | `src/estate.ts:19` |
-| `items` | `z.array(item)` | — | `src/estate.ts:19` |
-
-### `src/estate.scanned()[state=unscanned]` — zod-object — `src/estate.ts:20-25`
+### `src/estate.scanned()[state=scanned]` — zod-object — `src/estate.ts:20`
 
 | field | type | default | at |
 |---|---|---|---|
-| `state` | `z.literal('unscanned')` | — | `src/estate.ts:21` |
-| `scannedAt` | `z.iso.datetime()` | — | `src/estate.ts:22` |
-| `path` | `z.string()` | — | `src/estate.ts:23` |
-| `message` | `z.string()` | — | `src/estate.ts:24` |
+| `state` | `z.literal('scanned')` | — | `src/estate.ts:20` |
+| `scannedAt` | `z.iso.datetime()` | — | `src/estate.ts:20` |
+| `items` | `z.array(item)` | — | `src/estate.ts:20` |
 
-### `src/estate.MemberProject` — zod-object — `src/estate.ts:31-37`
+### `src/estate.scanned()[state=unscanned]` — zod-object — `src/estate.ts:21-26`
+
+| field | type | default | at |
+|---|---|---|---|
+| `state` | `z.literal('unscanned')` | — | `src/estate.ts:22` |
+| `scannedAt` | `z.iso.datetime()` | — | `src/estate.ts:23` |
+| `path` | `z.string()` | — | `src/estate.ts:24` |
+| `message` | `z.string()` | — | `src/estate.ts:25` |
+
+### `src/estate.MemberProject` — zod-object — `src/estate.ts:32-38`
 
 A folder holding a valid `fli.studio.json` (R8).
 
-*aliases* `MemberProject` `src/estate.ts:38`
+*aliases* `MemberProject` `src/estate.ts:39`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `folder` | `z.string()` | — | `src/estate.ts:32` |  |
-| `path` | `z.string()` | — | `src/estate.ts:33` |  |
-| `parsed` | `ProjectFolder.nullable() → src/project-folder.ProjectFolder` | — | `src/estate.ts:35` | The folder name parsed as `<code>-<slug>`, or `null` when it does not follow that shape. |
-| `identity` | `ProjectIdentity → src/identity.ProjectIdentity` | — | `src/estate.ts:36` |  |
+| `folder` | `z.string()` | — | `src/estate.ts:33` |  |
+| `path` | `z.string()` | — | `src/estate.ts:34` |  |
+| `parsed` | `ProjectFolder.nullable() → src/project-folder.ProjectFolder` | — | `src/estate.ts:36` | The folder name parsed as `<code>-<slug>`, or `null` when it does not follow that shape. |
+| `identity` | `ProjectIdentity → src/identity.ProjectIdentity` | — | `src/estate.ts:37` |  |
 
-### `src/estate.OtherFolder` — zod-object — `src/estate.ts:41-49`
+### `src/estate.OtherFolder` — zod-object — `src/estate.ts:42-50`
 
 Any other top-level folder (R9): shown as *other folder*, never as an error.
 
-*aliases* `OtherFolder` `src/estate.ts:50`
+*aliases* `OtherFolder` `src/estate.ts:51`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `folder` | `z.string()` | — | `src/estate.ts:42` |  |
-| `path` | `z.string()` | — | `src/estate.ts:43` |  |
-| `looksLikeProject` | `z.boolean()` | — | `src/estate.ts:45` | Named like a project (`d02-cutty-audio-cleanup`) rather than a plain folder (`docs`). |
-| `parsed` | `ProjectFolder.nullable() → src/project-folder.ProjectFolder` | — | `src/estate.ts:46` |  |
-| `identity` | `z.union([z.literal('absent'), InvalidFile]) → src/results.InvalidFile` | — | `src/estate.ts:48` | `absent`, or the `invalid` result when a `fli.studio.json` is there but not valid. |
+| `folder` | `z.string()` | — | `src/estate.ts:43` |  |
+| `path` | `z.string()` | — | `src/estate.ts:44` |  |
+| `looksLikeProject` | `z.boolean()` | — | `src/estate.ts:46` | Named like a project (`d02-cutty-audio-cleanup`) rather than a plain folder (`docs`). |
+| `parsed` | `ProjectFolder.nullable() → src/project-folder.ProjectFolder` | — | `src/estate.ts:47` |  |
+| `identity` | `z.union([z.literal('absent'), InvalidFile]) → src/results.InvalidFile` | — | `src/estate.ts:49` | `absent`, or the `invalid` result when a `fli.studio.json` is there but not valid. |
 
-### `src/estate.OtherFolder.identity` — zod-union — `src/estate.ts:48`
+### `src/estate.OtherFolder.identity` — zod-union — `src/estate.ts:49`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `absent` | `z.literal('absent')` | — | `src/estate.ts:48` |
-| `InvalidFile` | `InvalidFile → src/results.InvalidFile` | — | `src/estate.ts:48` |
+| `absent` | `z.literal('absent')` | — | `src/estate.ts:49` |
+| `InvalidFile` | `InvalidFile → src/results.InvalidFile` | — | `src/estate.ts:49` |
 
-### `src/estate.ArchivedEntry` — zod-discriminated-union on `kind` — `src/estate.ts:53-63`
+### `src/estate.ArchivedEntry` — zod-discriminated-union on `kind` — `src/estate.ts:54-64`
 
 One folder directly under `<brandRoot>/archived/` (R13: listed, never descended into).
 
-*aliases* `ArchivedEntry` `src/estate.ts:64`
+*aliases* `ArchivedEntry` `src/estate.ts:65`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `range` | `z.object({ kind: z.literal('range'), name: z.string(), letter: z.string().regex(/^[a-z]$/), from: z.number().int().min(0).max(99), to: z.nu…` | — | `src/estate.ts:55` |
-| `project` | `z.object({ kind: z.literal('project'), name: z.string(), code: ProjectCode, slug: z.string() }) → src/project-folder.ProjectCode` | — | `src/estate.ts:61` |
-| `other` | `z.object({ kind: z.literal('other'), name: z.string() })` | — | `src/estate.ts:62` |
+| `range` | `z.object({ kind: z.literal('range'), name: z.string(), letter: z.string().regex(/^[a-z]$/), from: z.number().int().min(0).max(99), to: z.nu…` | — | `src/estate.ts:56` |
+| `project` | `z.object({ kind: z.literal('project'), name: z.string(), code: ProjectCode, slug: z.string() }) → src/project-folder.ProjectCode` | — | `src/estate.ts:62` |
+| `other` | `z.object({ kind: z.literal('other'), name: z.string() })` | — | `src/estate.ts:63` |
 
-### `src/estate.ArchivedEntry[kind=range]` — zod-object — `src/estate.ts:54-60`
-
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('range')` | — | `src/estate.ts:55` |
-| `name` | `z.string()` | — | `src/estate.ts:56` |
-| `letter` | `z.string().regex(/^[a-z]$/)` | — | `src/estate.ts:57` |
-| `from` | `z.number().int().min(0).max(99)` | — | `src/estate.ts:58` |
-| `to` | `z.number().int().min(0).max(99)` | — | `src/estate.ts:59` |
-
-### `src/estate.ArchivedEntry[kind=project]` — zod-object — `src/estate.ts:61`
+### `src/estate.ArchivedEntry[kind=range]` — zod-object — `src/estate.ts:55-61`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('project')` | — | `src/estate.ts:61` |
-| `name` | `z.string()` | — | `src/estate.ts:61` |
-| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/estate.ts:61` |
-| `slug` | `z.string()` | — | `src/estate.ts:61` |
+| `kind` | `z.literal('range')` | — | `src/estate.ts:56` |
+| `name` | `z.string()` | — | `src/estate.ts:57` |
+| `letter` | `z.string().regex(/^[a-z]$/)` | — | `src/estate.ts:58` |
+| `from` | `z.number().int().min(0).max(99)` | — | `src/estate.ts:59` |
+| `to` | `z.number().int().min(0).max(99)` | — | `src/estate.ts:60` |
 
-### `src/estate.ArchivedEntry[kind=other]` — zod-object — `src/estate.ts:62`
+### `src/estate.ArchivedEntry[kind=project]` — zod-object — `src/estate.ts:62`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('other')` | — | `src/estate.ts:62` |
+| `kind` | `z.literal('project')` | — | `src/estate.ts:62` |
 | `name` | `z.string()` | — | `src/estate.ts:62` |
+| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/estate.ts:62` |
+| `slug` | `z.string()` | — | `src/estate.ts:62` |
 
-### `src/estate.ProjectListing` — zod-object — `src/estate.ts:66-72`
-
-*aliases* `ProjectListing` `src/estate.ts:73`
-
-| field | type | default | at |
-|---|---|---|---|
-| `brandRoot` | `z.string()` | — | `src/estate.ts:67` |
-| `scannedAt` | `z.iso.datetime()` | — | `src/estate.ts:68` |
-| `members` | `scanned(MemberProject) → src/estate.scanned(), src/estate.MemberProject` | — | `src/estate.ts:69` |
-| `otherFolders` | `scanned(OtherFolder) → src/estate.scanned(), src/estate.OtherFolder` | — | `src/estate.ts:70` |
-| `archived` | `scanned(ArchivedEntry) → src/estate.scanned(), src/estate.ArchivedEntry` | — | `src/estate.ts:71` |
-
-### `src/estate.ProjectFound` — zod-object — `src/estate.ts:189-194`
+### `src/estate.ArchivedEntry[kind=other]` — zod-object — `src/estate.ts:63`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('found')` | — | `src/estate.ts:190` |
-| `ref` | `z.string()` | — | `src/estate.ts:191` |
-| `matchedBy` | `z.enum(['folder', 'id', 'code'])` | — | `src/estate.ts:192` |
-| `project` | `MemberProject → src/estate.MemberProject` | — | `src/estate.ts:193` |
+| `kind` | `z.literal('other')` | — | `src/estate.ts:63` |
+| `name` | `z.string()` | — | `src/estate.ts:63` |
 
-### `src/estate.ProjectAmbiguous` — zod-object — `src/estate.ts:195-200`
+### `src/estate.ProjectListing` — zod-object — `src/estate.ts:67-73`
 
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('ambiguous')` | — | `src/estate.ts:196` |
-| `ref` | `z.string()` | — | `src/estate.ts:197` |
-| `matchedBy` | `z.enum(['id', 'code'])` | — | `src/estate.ts:198` |
-| `candidates` | `z.array(MemberProject) → src/estate.MemberProject` | — | `src/estate.ts:199` |
-
-### `src/estate.ProjectNotAProject` — zod-object — `src/estate.ts:201-205`
+*aliases* `ProjectListing` `src/estate.ts:74`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('not-a-project')` | — | `src/estate.ts:202` |
-| `ref` | `z.string()` | — | `src/estate.ts:203` |
-| `folder` | `OtherFolder → src/estate.OtherFolder` | — | `src/estate.ts:204` |
+| `brandRoot` | `z.string()` | — | `src/estate.ts:68` |
+| `scannedAt` | `z.iso.datetime()` | — | `src/estate.ts:69` |
+| `members` | `scanned(MemberProject) → src/estate.scanned(), src/estate.MemberProject` | — | `src/estate.ts:70` |
+| `otherFolders` | `scanned(OtherFolder) → src/estate.scanned(), src/estate.OtherFolder` | — | `src/estate.ts:71` |
+| `archived` | `scanned(ArchivedEntry) → src/estate.scanned(), src/estate.ArchivedEntry` | — | `src/estate.ts:72` |
 
-### `src/estate.ProjectNotFound` — zod-object — `src/estate.ts:206`
-
-| field | type | default | at |
-|---|---|---|---|
-| `kind` | `z.literal('not-found')` | — | `src/estate.ts:206` |
-| `ref` | `z.string()` | — | `src/estate.ts:206` |
-
-### `src/estate.ProjectUnscanned` — zod-object — `src/estate.ts:207-212`
+### `src/estate.ProjectFound` — zod-object — `src/estate.ts:191-196`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('unscanned')` | — | `src/estate.ts:208` |
-| `ref` | `z.string()` | — | `src/estate.ts:209` |
-| `path` | `z.string()` | — | `src/estate.ts:210` |
-| `message` | `z.string()` | — | `src/estate.ts:211` |
+| `kind` | `z.literal('found')` | — | `src/estate.ts:192` |
+| `ref` | `z.string()` | — | `src/estate.ts:193` |
+| `matchedBy` | `z.enum(['folder', 'id', 'code'])` | — | `src/estate.ts:194` |
+| `project` | `MemberProject → src/estate.MemberProject` | — | `src/estate.ts:195` |
 
-### `src/estate.ProjectRefusal` — zod-discriminated-union on `kind` — `src/estate.ts:215-220`
+### `src/estate.ProjectAmbiguous` — zod-object — `src/estate.ts:197-202`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('ambiguous')` | — | `src/estate.ts:198` |
+| `ref` | `z.string()` | — | `src/estate.ts:199` |
+| `matchedBy` | `z.enum(['id', 'code'])` | — | `src/estate.ts:200` |
+| `candidates` | `z.array(MemberProject) → src/estate.MemberProject` | — | `src/estate.ts:201` |
+
+### `src/estate.ProjectNotAProject` — zod-object — `src/estate.ts:203-207`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('not-a-project')` | — | `src/estate.ts:204` |
+| `ref` | `z.string()` | — | `src/estate.ts:205` |
+| `folder` | `OtherFolder → src/estate.OtherFolder` | — | `src/estate.ts:206` |
+
+### `src/estate.ProjectNotFound` — zod-object — `src/estate.ts:208`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('not-found')` | — | `src/estate.ts:208` |
+| `ref` | `z.string()` | — | `src/estate.ts:208` |
+
+### `src/estate.ProjectUnscanned` — zod-object — `src/estate.ts:209-214`
+
+| field | type | default | at |
+|---|---|---|---|
+| `kind` | `z.literal('unscanned')` | — | `src/estate.ts:210` |
+| `ref` | `z.string()` | — | `src/estate.ts:211` |
+| `path` | `z.string()` | — | `src/estate.ts:212` |
+| `message` | `z.string()` | — | `src/estate.ts:213` |
+
+### `src/estate.ProjectRefusal` — zod-discriminated-union on `kind` — `src/estate.ts:217-222`
 
 Every `resolveProject` outcome except `found`: why a reference did not resolve (R31, C3).
 
-*aliases* `ProjectRefusal` `src/estate.ts:221`
+*aliases* `ProjectRefusal` `src/estate.ts:223`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `ProjectAmbiguous` | `ProjectAmbiguous → src/estate.ProjectAmbiguous` | — | `src/estate.ts:216` |
-| `ProjectNotAProject` | `ProjectNotAProject → src/estate.ProjectNotAProject` | — | `src/estate.ts:217` |
-| `ProjectNotFound` | `ProjectNotFound → src/estate.ProjectNotFound` | — | `src/estate.ts:218` |
-| `ProjectUnscanned` | `ProjectUnscanned → src/estate.ProjectUnscanned` | — | `src/estate.ts:219` |
+| `ProjectAmbiguous` | `ProjectAmbiguous → src/estate.ProjectAmbiguous` | — | `src/estate.ts:218` |
+| `ProjectNotAProject` | `ProjectNotAProject → src/estate.ProjectNotAProject` | — | `src/estate.ts:219` |
+| `ProjectNotFound` | `ProjectNotFound → src/estate.ProjectNotFound` | — | `src/estate.ts:220` |
+| `ProjectUnscanned` | `ProjectUnscanned → src/estate.ProjectUnscanned` | — | `src/estate.ts:221` |
 
-### `src/estate.ResolveProjectResult` — zod-discriminated-union on `kind` — `src/estate.ts:223-229`
+### `src/estate.ResolveProjectResult` — zod-discriminated-union on `kind` — `src/estate.ts:225-231`
 
-*aliases* `ResolveProjectResult` `src/estate.ts:230`
-
-| variant | shape | default | at |
-|---|---|---|---|
-| `ProjectFound` | `ProjectFound → src/estate.ProjectFound` | — | `src/estate.ts:224` |
-| `ProjectAmbiguous` | `ProjectAmbiguous → src/estate.ProjectAmbiguous` | — | `src/estate.ts:225` |
-| `ProjectNotAProject` | `ProjectNotAProject → src/estate.ProjectNotAProject` | — | `src/estate.ts:226` |
-| `ProjectNotFound` | `ProjectNotFound → src/estate.ProjectNotFound` | — | `src/estate.ts:227` |
-| `ProjectUnscanned` | `ProjectUnscanned → src/estate.ProjectUnscanned` | — | `src/estate.ts:228` |
-
-### `src/estate.NextCodeResult` — zod-discriminated-union on `kind` — `src/estate.ts:280-287`
-
-*aliases* `NextCodeResult` `src/estate.ts:288`
+*aliases* `ResolveProjectResult` `src/estate.ts:232`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `allocated` | `z.object({ kind: z.literal('allocated'), code: ProjectCode }) → src/project-folder.ProjectCode` | — | `src/estate.ts:281` |
-| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-letter', 'unscanned', 'exhausted']), message: z.string() })` | — | `src/estate.ts:283` |
+| `ProjectFound` | `ProjectFound → src/estate.ProjectFound` | — | `src/estate.ts:226` |
+| `ProjectAmbiguous` | `ProjectAmbiguous → src/estate.ProjectAmbiguous` | — | `src/estate.ts:227` |
+| `ProjectNotAProject` | `ProjectNotAProject → src/estate.ProjectNotAProject` | — | `src/estate.ts:228` |
+| `ProjectNotFound` | `ProjectNotFound → src/estate.ProjectNotFound` | — | `src/estate.ts:229` |
+| `ProjectUnscanned` | `ProjectUnscanned → src/estate.ProjectUnscanned` | — | `src/estate.ts:230` |
 
-### `src/estate.NextCodeResult[kind=allocated]` — zod-object — `src/estate.ts:281`
+### `src/estate.NextCodeResult` — zod-discriminated-union on `kind` — `src/estate.ts:282-289`
+
+*aliases* `NextCodeResult` `src/estate.ts:290`
+
+| variant | shape | default | at |
+|---|---|---|---|
+| `allocated` | `z.object({ kind: z.literal('allocated'), code: ProjectCode }) → src/project-folder.ProjectCode` | — | `src/estate.ts:283` |
+| `refused` | `z.object({ kind: z.literal('refused'), reason: z.enum(['invalid-letter', 'unscanned', 'exhausted']), message: z.string() })` | — | `src/estate.ts:285` |
+
+### `src/estate.NextCodeResult[kind=allocated]` — zod-object — `src/estate.ts:283`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('allocated')` | — | `src/estate.ts:281` |
-| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/estate.ts:281` |
+| `kind` | `z.literal('allocated')` | — | `src/estate.ts:283` |
+| `code` | `ProjectCode → src/project-folder.ProjectCode` | — | `src/estate.ts:283` |
 
-### `src/estate.NextCodeResult[kind=refused]` — zod-object — `src/estate.ts:282-286`
+### `src/estate.NextCodeResult[kind=refused]` — zod-object — `src/estate.ts:284-288`
 
 | field | type | default | at |
 |---|---|---|---|
-| `kind` | `z.literal('refused')` | — | `src/estate.ts:283` |
-| `reason` | `z.enum(['invalid-letter', 'unscanned', 'exhausted'])` | — | `src/estate.ts:284` |
-| `message` | `z.string()` | — | `src/estate.ts:285` |
+| `kind` | `z.literal('refused')` | — | `src/estate.ts:285` |
+| `reason` | `z.enum(['invalid-letter', 'unscanned', 'exhausted'])` | — | `src/estate.ts:286` |
+| `message` | `z.string()` | — | `src/estate.ts:287` |
 
 ### `src/failure-codes.FailureCodeTable` — zod-scalar — `src/failure-codes.ts:52`
 
@@ -2781,64 +2811,70 @@ A group as readers see it, from either folder. `home: 'series'` is an older seri
 | `path` | `z.string()` | — | `src/groups.ts:526` |
 | `group` | `Group → src/groups.Group` | — | `src/groups.ts:526` |
 
-### `src/guide-doc.GuideDocAppliesTo` — zod-object — `src/guide-doc.ts:36-41`
+### `src/guide-doc.GuideDocAppliesTo` — zod-object — `src/guide-doc.ts:44-49`
 
-*aliases* `GuideDocAppliesTo` `src/guide-doc.ts:42`
+*aliases* `GuideDocAppliesTo` `src/guide-doc.ts:50`
 
 | field | type | default | at |
 |---|---|---|---|
-| `form` | `z.enum(['story', 'tutorial', 'sales']).optional()` | — | `src/guide-doc.ts:38` |
-| `length` | `z.enum(['short', 'long']).optional()` | — | `src/guide-doc.ts:39` |
+| `form` | `z.enum(['story', 'tutorial', 'sales']).optional()` | — | `src/guide-doc.ts:46` |
+| `length` | `z.enum(['short', 'long']).optional()` | — | `src/guide-doc.ts:47` |
 
-### `src/guide-doc.OptText` — zod-scalar — `src/guide-doc.ts:67`
+### `src/guide-doc.OptText` — zod-scalar — `src/guide-doc.ts:75`
 
 `z.string().trim().min(1).nullable().optional()`
 
-### `src/guide-doc.GuideDoc` — zod-object — `src/guide-doc.ts:72-94`
-
-*aliases* `GuideDoc` `src/guide-doc.ts:95`
+### `src/guide-doc.guideDocWith()` — zod-factory — `src/guide-doc.ts:90-113`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `schema` | `z.literal(GUIDE_SCHEMA) → src/guide-doc.GUIDE_SCHEMA` | — | `src/guide-doc.ts:73` |  |
-| `id` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/guide-doc.ts:74` |  |
-| `label` | `z.string().trim().min(1)` | — | `src/guide-doc.ts:75` |  |
-| `type` | `z.preprocess(normaliseGuideType, GuideDocType) → src/guide-doc.normaliseGuideType, src/guide-doc.GuideDocType` | — | `src/guide-doc.ts:76` |  |
-| `level` | `GuideDocLevel → src/guide-doc.GuideDocLevel` | — | `src/guide-doc.ts:77` |  |
-| `gist` | `z.string().trim().min(1).refine((s) => !/[\r\n]/.test(s), 'must be one line')` | — | `src/guide-doc.ts:79` | ONE line: what this guide tells the writer. Shown as the card's one-liner. |
-| `appliesTo` | `GuideDocAppliesTo.optional() → src/guide-doc.GuideDocAppliesTo` | — | `src/guide-doc.ts:84` |  |
-| `brands` | `z.array(z.string().min(1)).optional()` | — | `src/guide-doc.ts:85` |  |
-| `part` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:86` |  |
-| `style` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:87` |  |
-| `narrator` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:88` |  |
-| `author` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:89` |  |
-| `layer` | `GuideDocLayer.optional() → src/guide-doc.GuideDocLayer` | — | `src/guide-doc.ts:90` |  |
-| `canonical_source` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:91` |  |
-| `owner` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:92` |  |
-| `promotedTo` | `z.array(z.string().min(1)).optional()` | — | `src/guide-doc.ts:93` |  |
+| `schema` | `z.literal(GUIDE_SCHEMA) → src/guide-doc.GUIDE_SCHEMA` | — | `src/guide-doc.ts:92` |  |
+| `id` | `KebabSlug → src/project-folder.KebabSlug` | — | `src/guide-doc.ts:93` |  |
+| `label` | `z.string().trim().min(1)` | — | `src/guide-doc.ts:94` |  |
+| `type` | `z.preprocess(normaliseGuideType, typeIn(types)) → src/guide-doc.normaliseGuideType, src/guide-doc.typeIn` | — | `src/guide-doc.ts:95` |  |
+| `level` | `GuideDocLevel → src/guide-doc.GuideDocLevel` | — | `src/guide-doc.ts:96` |  |
+| `gist` | `z.string().trim().min(1).refine((s) => !/[\r\n]/.test(s), 'must be one line')` | — | `src/guide-doc.ts:98` | ONE line: what this guide tells the writer. Shown as the card's one-liner. |
+| `appliesTo` | `GuideDocAppliesTo.optional() → src/guide-doc.GuideDocAppliesTo` | — | `src/guide-doc.ts:103` |  |
+| `brands` | `z.array(z.string().min(1)).optional()` | — | `src/guide-doc.ts:104` |  |
+| `part` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:105` |  |
+| `style` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:106` |  |
+| `narrator` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:107` |  |
+| `author` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:108` |  |
+| `layer` | `GuideDocLayer.optional() → src/guide-doc.GuideDocLayer` | — | `src/guide-doc.ts:109` |  |
+| `canonical_source` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:110` |  |
+| `owner` | `OptText → src/guide-doc.OptText` | — | `src/guide-doc.ts:111` |  |
+| `promotedTo` | `z.array(z.string().min(1)).optional()` | — | `src/guide-doc.ts:112` |  |
 
-### `src/guide-doc.ParsedGuide` — type-union — `src/guide-doc.ts:97-108`
+### `src/guide-doc.ParsedGuide` — type-union — `src/guide-doc.ts:121-132`
 
 | variant | shape | default | at |
 |---|---|---|---|
-| `header` | `{ header: GuideDoc; body: string }` | — | `src/guide-doc.ts:98` |
-| `error` | `{ /** One short reason, for the card: `no guide header`, `invalid: missing gist`, `invalid: type must be …`. */ error: string; /** Every pr…` | — | `src/guide-doc.ts:101` |
+| `header` | `{ header: GuideDoc; body: string }` | — | `src/guide-doc.ts:122` |
+| `error` | `{ /** One short reason, for the card: `no guide header`, `invalid: missing gist`, `invalid: type must be …`. */ error: string; /** Every pr…` | — | `src/guide-doc.ts:125` |
 
-### `src/guide-doc.ParsedGuide[0]` — type — `src/guide-doc.ts:98`
+### `src/guide-doc.ParsedGuide[0]` — type — `src/guide-doc.ts:122`
 
 | field | type | default | at |
 |---|---|---|---|
-| `header` | `GuideDoc → src/guide-doc.GuideDoc` | — | `src/guide-doc.ts:98` |
-| `body` | `string` | — | `src/guide-doc.ts:98` |
+| `header` | `GuideDoc → src/guide-doc.GuideDoc` | — | `src/guide-doc.ts:122` |
+| `body` | `string` | — | `src/guide-doc.ts:122` |
 
-### `src/guide-doc.ParsedGuide[1]` — type — `src/guide-doc.ts:99-108`
+### `src/guide-doc.ParsedGuide[1]` — type — `src/guide-doc.ts:123-132`
 
 | field | type | default | at | note |
 |---|---|---|---|---|
-| `error` | `string` | — | `src/guide-doc.ts:101` | One short reason, for the card: `no guide header`, `invalid: missing gist`, `invalid: type must be …`. |
-| `issues` | `string[]` | — | `src/guide-doc.ts:103` | Every problem found (each `key: message`); empty for a file with no header. |
-| `body` | `string` | — | `src/guide-doc.ts:105` | The file's text after any frontmatter, so a reader can still show or summarise it. |
-| `raw` | `Record<string, unknown> \| null` | — | `src/guide-doc.ts:107` | The header as read, when there was one. |
+| `error` | `string` | — | `src/guide-doc.ts:125` | One short reason, for the card: `no guide header`, `invalid: missing gist`, `invalid: type must be …`. |
+| `issues` | `string[]` | — | `src/guide-doc.ts:127` | Every problem found (each `key: message`); empty for a file with no header. |
+| `body` | `string` | — | `src/guide-doc.ts:129` | The file's text after any frontmatter, so a reader can still show or summarise it. |
+| `raw` | `Record<string, unknown> \| null` | — | `src/guide-doc.ts:131` | The header as read, when there was one. |
+
+### `src/guide-doc.ParseGuideOptions` — interface — `src/guide-doc.ts:147-149`
+
+What `parseGuide` may be told: the guide types it accepts (default `GUIDE_DOC_TYPES`).
+
+| field | type | default | at |
+|---|---|---|---|
+| `types` | `?: readonly string[]` | — | `src/guide-doc.ts:148` |
 
 ### `src/help.HelpRow` — zod-object — `src/help.ts:19`
 
@@ -3929,6 +3965,54 @@ What YLO's `launch.json` (the workshop) offers, reduced to what the rules need.
 | `value` | `z.string()` | — | `src/recipe-paths.ts:23` |  |
 | `problem` | `RecipePathProblem → src/recipe-paths.RecipePathProblem` | — | `src/recipe-paths.ts:24` |  |
 | `insideProject` | `z.boolean().nullable()` | — | `src/recipe-paths.ts:26` | An absolute path that is inside this project is still absolute (it breaks on another machine); null when unknown. |
+
+### `src/recording-sets.SetId` — zod-scalar — `src/recording-sets.ts:31-33`
+
+`z.string().regex(SET_ID, 'set id must be kebab-case (a-z, 0-9, single hyphens)')`
+
+### `src/recording-sets.SetEntry` — zod-object — `src/recording-sets.ts:36-41`
+
+One entry of `hub/sets.json`. `id` is the folder name; the array order is the set order.
+
+*aliases* `SetEntry` `src/recording-sets.ts:42`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `SetId → src/recording-sets.SetId` | — | `src/recording-sets.ts:37` |  |
+| `title` | `z.string().min(1)` | — | `src/recording-sets.ts:38` |  |
+| `role` | `SetRole → src/recording-sets.SetRole` | — | `src/recording-sets.ts:40` | `video`: the set is its own video. `part`: it is one part of a video made from several sets. |
+
+### `src/recording-sets.SetsFile` — zod-object — `src/recording-sets.ts:44`
+
+*aliases* `SetsFile` `src/recording-sets.ts:45`
+
+| field | type | default | at |
+|---|---|---|---|
+| `sets` | `z.array(SetEntry) → src/recording-sets.SetEntry` | — | `src/recording-sets.ts:44` |
+
+### `src/recording-sets.ProjectSet` — zod-object — `src/recording-sets.ts:47-60`
+
+*aliases* `ProjectSet` `src/recording-sets.ts:61`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `id` | `SetId.nullable() → src/recording-sets.SetId` | — | `src/recording-sets.ts:49` | The folder name; `null` for the one implicit set of a project without sets. |
+| `title` | `z.string()` | — | `src/recording-sets.ts:50` |  |
+| `role` | `SetRole → src/recording-sets.SetRole` | — | `src/recording-sets.ts:51` |  |
+| `legacy` | `z.boolean()` | — | `src/recording-sets.ts:53` | True for the implicit set of a project without `hub/sets/`: its folders are the project's own. |
+| `listed` | `z.boolean()` | — | `src/recording-sets.ts:55` | False when the folder exists but `sets.json` does not name it (shown after the listed sets, titled by id). |
+| `recordings` | `z.string()` | — | `src/recording-sets.ts:57` | Absolute recordings folder (it may not exist yet). |
+| `transcripts` | `z.string()` | — | `src/recording-sets.ts:59` | Absolute transcripts folder (it may not exist yet). |
+
+### `src/recording-sets.MediaLocation` — zod-object — `src/recording-sets.ts:227-233`
+
+*aliases* `MediaLocation` `src/recording-sets.ts:234`
+
+| field | type | default | at | note |
+|---|---|---|---|---|
+| `projectDir` | `z.string()` | — | `src/recording-sets.ts:229` | The project folder (never `<project>/hub`, never a set folder). |
+| `set` | `SetId.nullable() → src/recording-sets.SetId` | — | `src/recording-sets.ts:231` | The set the file is in; `null` in a project without sets. |
+| `layout` | `ProjectLayoutSchema → src/classify.ProjectLayout` | — | `src/recording-sets.ts:232` |  |
 
 ### `src/recording.RecordingTag` — zod-scalar — `src/recording.ts:14-16`
 
@@ -5186,9 +5270,10 @@ These were looked at and could not be resolved to an authority. **Nothing is gue
 |---|---|---|
 | schemas built by `OneLine(...)` (1 use) | built by calling `OneLine(...)`, which does not return a single zod expression this reader can follow | `OneLine('a note').optional() (src/gitignore-rules.ts:41)` |
 | schemas built by `Refused(...)` (6 uses) | built by calling the schema factory `Refused(...)`; the factory's own shape is mirrored as `src/identity.Refused()`, but each parameterised result is not expanded here | `Refused('invalid-input') (src/identity.ts:67)`<br>`Refused('existing-invalid') (src/identity.ts:69)`<br>`Refused('io-error') (src/identity.ts:70)`<br>`Refused('invalid-input') (src/identity.ts:185)`<br>`Refused('existing-invalid') (src/identity.ts:187)`<br>`Refused('io-error') (src/identity.ts:188)` |
+| schemas built by `guideDocWith(...)` (1 use) | built by calling the schema factory `guideDocWith(...)`; the factory's own shape is mirrored as `src/guide-doc.guideDocWith()`, but each parameterised result is not expanded here | `guideDocWith(GUIDE_DOC_TYPES) (src/guide-doc.ts:116)` |
 | schemas built by `promisify(...)` (1 use) | built by calling `promisify(...)` imported from `node:util`; package helpers are not expanded - see that package's own mirror | `promisify(execFile) (src/gitignore.ts:17)` |
 | schemas built by `readFileResult(...)` (8 uses) | built by calling the schema factory `readFileResult(...)`; the factory's own shape is mirrored as `src/results.readFileResult()`, but each parameterised result is not expanded here | `readFileResult(BrandSettings) (src/brand-settings.ts:107)`<br>`readFileResult(ProjectIdentity) (src/identity.ts:49)`<br>`readFileResult(ResourcesFile) (src/resources.ts:135)`<br>`readFileResult(SeriesFile) (src/series.ts:44)`<br>`readFileResult(WordsFile) (src/words.ts:68)`<br>`readFileResult(YouTubeChannel) (src/youtube.ts:126)`<br>`readFileResult(YouTubePlaylistsFile) (src/youtube.ts:128)`<br>`readFileResult(YouTubeSyncRecord) (src/youtube.ts:130)` |
-| schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:69)`<br>`scanned(OtherFolder) (src/estate.ts:70)`<br>`scanned(ArchivedEntry) (src/estate.ts:71)` |
+| schemas built by `scanned(...)` (3 uses) | built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here | `scanned(MemberProject) (src/estate.ts:70)`<br>`scanned(OtherFolder) (src/estate.ts:71)`<br>`scanned(ArchivedEntry) (src/estate.ts:72)` |
 | schemas built by `validFile(...)` (1 use) | built by calling the schema factory `validFile(...)`; the factory's own shape is mirrored as `src/results.validFile()`, but each parameterised result is not expanded here | `validFile(value) (src/results.ts:20)` |
 | src/resources.GroupInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceGroup.omit({ changed: true }) (src/resources.ts:460)` |
 | src/resources.KindInput | shape computed by `.omit(...)` - a transform of another schema, not expanded | `ResourceKind.omit({ changed: true }) (src/resources.ts:458)` |
@@ -5200,22 +5285,24 @@ The census found these top-level declarations and the extractor did not mirror t
 
 | family | count | declarations |
 |---|---|---|
-| object constant | 10 | `src/classify.LAYOUT_DIRS` `src/classify.ts:310`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/guide-doc.GUIDE_TYPE_ALIASES` `src/guide-doc.ts:30`<br>`src/help.HELP_SCREENS` `src/help.ts:34`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
-| array constant | 9 | `src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/guide-doc.GUIDE_DOC_TYPES` `src/guide-doc.ts:26`<br>`src/guide-doc.GUIDE_META_KEYS` `src/guide-doc.ts:52`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/note-record.NOTE_REFUSALS` `src/note-record.ts:476`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:33`<br>`src/publish.READY_STATES` `src/publish.ts:68`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:70`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
+| array constant | 11 | `src/brand-folders.BRAND_PACK_FILES` `src/brand-folders.ts:57`<br>`src/brand-folders.BRAND_SETTINGS_FOLDERS` `src/brand-folders.ts:30`<br>`src/gitignore-rules.GITIGNORE_BASE` `src/gitignore-rules.ts:55`<br>`src/guide-doc.GUIDE_DOC_TYPES` `src/guide-doc.ts:28`<br>`src/guide-doc.GUIDE_META_KEYS` `src/guide-doc.ts:60`<br>`src/identity.DEFAULT_LANGUAGES` `src/identity.ts:29`<br>`src/note-record.NOTE_REFUSALS` `src/note-record.ts:476`<br>`src/publish.PUBLISH_PIECES` `src/publish.ts:33`<br>`src/publish.READY_STATES` `src/publish.ts:68`<br>`src/publish.SUGGESTION_STATES` `src/publish.ts:70`<br>`src/transport.FORWARD_SPEEDS` `src/transport.ts:25` |
+| object constant | 11 | `src/classify.LAYOUT_DIRS` `src/classify.ts:344`<br>`src/classify.SET_DIRS` `src/classify.ts:324`<br>`src/failure-codes.FAILURE_CODE_RANGE` `src/failure-codes.ts:31`<br>`src/failure-codes.JSONRPC_CODES` `src/failure-codes.ts:22`<br>`src/guide-doc.GUIDE_TYPE_ALIASES` `src/guide-doc.ts:33`<br>`src/help.HELP_SCREENS` `src/help.ts:34`<br>`src/lifecycle.LIFECYCLE_CAPABILITIES` `src/lifecycle.ts:48`<br>`src/open-args.OPEN_ENV` `src/open-args.ts:47`<br>`src/renders.FOLDER_HEAVY` `src/renders.ts:47`<br>`src/resources.EMPTY_RESOURCES` `src/resources.ts:127`<br>`src/words.EMPTY_WORDS` `src/words.ts:151` |
+| const built by a call (helper or non-zod call) | 8 | `src/brand-folders.BRAND_PACK_USER_CONFIG` `src/brand-folders.ts:59`<br>`src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/groups.GROUP_CAPABILITIES` `src/groups.ts:536`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:187`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:257` |
 | class | 7 | `src/failure-codes.CapabilityRefusal` `src/failure-codes.ts:171`<br>`src/groups.RuleError` `src/groups.ts:483`<br>`src/publish.NoFinalVideo` `src/publish.ts:819`<br>`src/resources.ResourceNotFound` `src/resources.ts:381`<br>`src/results.FliCoreError` `src/results.ts:25`<br>`src/youtube.YouTubeApiError` `src/youtube.ts:220`<br>`src/youtube.YouTubeReader` `src/youtube.ts:236` |
-| const built by a call (helper or non-zod call) | 7 | `src/failure-codes.SUITE_FAILURE_CODES` `src/failure-codes.ts:34`<br>`src/failure-codes.SUITE_REFUSAL_DETAILS` `src/failure-codes.ts:164`<br>`src/gitignore-rules.GitignorePattern` `src/gitignore-rules.ts:32`<br>`src/groups.GROUP_CAPABILITIES` `src/groups.ts:536`<br>`src/publish.AUDIO_TREATMENTS` `src/publish.ts:187`<br>`src/resources.CORE_KINDS` `src/resources.ts:195`<br>`src/series.SERIES_CAPABILITIES` `src/series.ts:257` |
-| generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:28`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
+| generic type alias | 4 | `src/capability.ContractInput` `src/capability.ts:79`<br>`src/estate.Scanned` `src/estate.ts:29`<br>`src/results.ReadFileResult` `src/results.ts:22`<br>`src/results.ValidFile` `src/results.ts:16` |
 | utility-type alias (`Pick` / `Omit` / `Record` / generic instance) | 4 | `src/notes.Refused` `src/notes.ts:55`<br>`src/serve.ServeHeaders` `src/serve.ts:18`<br>`src/ui/remembered-speed.SpeedStorage` `src/ui/remembered-speed.ts:4`<br>`src/youtube.Thumbs` `src/youtube.ts:231` |
+| alias of another value (`X = Y`) | 1 | `src/guide-doc.GuideDocType` `src/guide-doc.ts:30` |
 | derived type (`keyof typeof`, indexed access, `typeof`) | 1 | `src/failure-codes.SuiteFailureMode` `src/failure-codes.ts:49` |
 | union of named or mixed types | 1 | `src/gitignore-rules.BlockLocation` `src/gitignore-rules.ts:206` |
+| z.infer alias | 1 | `src/guide-doc.GuideDocType` `src/guide-doc.ts:31` |
 
 ## Findings — changes needed in the target application
 
 These are refactors of the **application**, not of this mirror. Each one converts a derived section into a declared one.
 
-1. `src/classify.ts:67` — REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:67 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
-2. `src/classify.ts:70-77` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:70 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
-3. `src/classify.ts:126-133` — REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.
+1. `src/classify.ts:72` — REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:72 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
+2. `src/classify.ts:75-82` — REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:75 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.
+3. `src/classify.ts:146-153` — REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:146 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.
 4. `src/conversations.ts:94` — REFACTOR (minor): `AT_PROMPT_STATUSES` at src/conversations.ts:94 names the set but does not type it. A z.enum or `as const` + `typeof AT_PROMPT_STATUSES[number]` would make a wrong value a static error rather than a runtime miss.
 5. `src/fs-utils.ts:44` — REFACTOR (minor): `NO_HARD_LINKS` at src/fs-utils.ts:44 names the set but does not type it. A z.enum or `as const` + `typeof NO_HARD_LINKS[number]` would make a wrong value a static error rather than a runtime miss.
 6. `src/publish.ts:216` — REFACTOR (minor): `LIVE` at src/publish.ts:216 names the set but does not type it. A z.enum or `as const` + `typeof LIVE[number]` would make a wrong value a static error rather than a runtime miss.

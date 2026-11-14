@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import * as contracts from '../src/contracts.js';
 import {
   GUIDE_DOC_TYPES,
+  isGuideType,
   GUIDE_META_KEYS,
   GUIDE_REQUIRED,
   GUIDE_TYPE_ALIASES,
@@ -113,6 +114,49 @@ describe('parseGuide (storypilot.guide/1)', () => {
     expect(normaliseGuideType('structure')).toBe('build');
     expect(normaliseGuideType('voice')).toBe('voice');
     expect(GUIDE_DOC_TYPES).not.toContain('structure');
+  });
+
+  describe('guide types are data (v0.40.0)', () => {
+    it('a type not in the shipped list is invalid by default, with the same message as before', () => {
+      const p = parseGuide(file({ ...HEADER, type: 'thumbnail-rules' }));
+      expect(isGuide(p)).toBe(false);
+      if (isGuide(p)) return;
+      expect(p.error).toMatch(/^invalid: type: /);
+      expect(p.error).toContain('"voice"');
+    });
+
+    it('a type the caller lists (a brand row) is valid, and the shipped ones stay valid with it', () => {
+      const types = [...GUIDE_DOC_TYPES, 'thumbnail-rules'];
+      const p = parseGuide(file({ ...HEADER, type: 'thumbnail-rules' }), { types });
+      expect(isGuide(p) ? p.header.type : p.error).toBe('thumbnail-rules');
+      for (const t of GUIDE_DOC_TYPES) {
+        const q = parseGuide(file({ ...HEADER, type: t }), { types });
+        expect(isGuide(q) ? q.header.type : q.error).toBe(t);
+      }
+      const alias = parseGuide(file({ ...HEADER, type: 'structure' }), { types });
+      expect(isGuide(alias) ? alias.header.type : alias.error).toBe('build');
+    });
+
+    it('a listed id must still be kebab-case', () => {
+      const p = parseGuide(file({ ...HEADER, type: 'Thumb_Rules' }), { types: ['Thumb_Rules'] });
+      expect(isGuide(p)).toBe(false);
+      if (isGuide(p)) return;
+      expect(p.error).toMatch(/^invalid: type: must be kebab-case/);
+    });
+
+    it('an empty list accepts nothing', () => {
+      const p = parseGuide(file({ ...HEADER, type: 'voice' }), { types: [] });
+      expect(isGuide(p) ? null : p.error).toBe('invalid: type: no guide types are known');
+    });
+
+    it('isGuideType checks kebab + list, aliases included', () => {
+      expect(isGuideType('voice')).toBe(true);
+      expect(isGuideType('structure')).toBe(true);
+      expect(isGuideType('essay')).toBe(false);
+      expect(isGuideType('essay', ['essay'])).toBe(true);
+      expect(isGuideType('Essay', ['Essay'])).toBe(false);
+      expect(isGuideType(3)).toBe(false);
+    });
   });
 
   it('accepts form sales in appliesTo', () => {

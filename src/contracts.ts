@@ -191,7 +191,9 @@ export {
   GuideDocLayer,
   GuideDocLevel,
   GuideDocType,
+  guideDocSchema,
   GUIDE_DOC_TYPES,
+  isGuideType,
   GUIDE_META_KEYS,
   GUIDE_TYPE_ALIASES,
   normaliseGuideType,
@@ -199,4 +201,5 @@ export {
   parseGuide,
   splitFrontmatter,
   type ParsedGuide,
+  type ParseGuideOptions,
 } from './guide-doc.js';

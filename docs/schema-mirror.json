@@ -1,6 +1,6 @@
 {
   "census": {
-    "declared": 559,
+    "declared": 579,
     "files": {
       "src/api-page.ts": {
         "declared": 1,
@@ -14,6 +14,13 @@
         "gaps": 0,
         "mirrored": 4,
         "not_read": 0,
+        "not_schema_bearing": 1
+      },
+      "src/brand-folders.ts": {
+        "declared": 7,
+        "gaps": 0,
+        "mirrored": 4,
+        "not_read": 3,
         "not_schema_bearing": 1
       },
       "src/brand-settings.ts": {
@@ -38,11 +45,11 @@
         "not_schema_bearing": 2
       },
       "src/classify.ts": {
-        "declared": 18,
+        "declared": 19,
         "gaps": 0,
         "mirrored": 17,
-        "not_read": 1,
-        "not_schema_bearing": 4
+        "not_read": 2,
+        "not_schema_bearing": 7
       },
       "src/control-file.ts": {
         "declared": 5,
@@ -101,11 +108,11 @@
         "not_schema_bearing": 2
       },
       "src/guide-doc.ts": {
-        "declared": 15,
-        "gaps": 0,
-        "mirrored": 12,
-        "not_read": 3,
-        "not_schema_bearing": 3
+        "declared": 16,
+        "gaps": 2,
+        "mirrored": 9,
+        "not_read": 5,
+        "not_schema_bearing": 4
       },
       "src/help.ts": {
         "declared": 9,
@@ -202,6 +209,13 @@
         "declared": 4,
         "gaps": 0,
         "mirrored": 4,
+        "not_read": 0,
+        "not_schema_bearing": 0
+      },
+      "src/recording-sets.ts": {
+        "declared": 11,
+        "gaps": 0,
+        "mirrored": 11,
         "not_read": 0,
         "not_schema_bearing": 0
       },
@@ -325,17 +339,42 @@
         "not_schema_bearing": 9
       }
     },
-    "gaps": 22,
-    "mirrored": 494,
-    "not_read": 43,
-    "not_schema_bearing": 52,
+    "gaps": 24,
+    "mirrored": 506,
+    "not_read": 49,
+    "not_schema_bearing": 57,
     "not_schema_bearing_by_family": {
-      "function": 6,
+      "function": 7,
       "function type": 2,
-      "literal constant": 44
+      "literal constant": 48
     }
   },
   "closed_sets": [
+    {
+      "anchor": {
+        "file": "src/brand-folders.ts",
+        "line": 63
+      },
+      "authority": "`z.enum` `from` - a single declaring symbol",
+      "grade": "declared",
+      "id": "src/brand-folders.BrandPackCandidate.from",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/brand-folders.ts",
+            "line": 63
+          },
+          "value": "brand-repo"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-folders.ts",
+            "line": 63
+          },
+          "value": "user-config"
+        }
+      ]
+    },
     {
       "anchor": {
         "end_line": 126,
@@ -681,13 +720,13 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 45
+            "line": 50
           },
           "name": "ProjectZone"
         }
       ],
       "anchor": {
-        "end_line": 40,
+        "end_line": 45,
         "file": "src/classify.ts",
         "line": 11
       },
@@ -811,7 +850,14 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 39
+            "line": 43
+          },
+          "value": "sets"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 44
           },
           "value": "other"
         }
@@ -820,44 +866,17 @@
     {
       "anchor": {
         "file": "src/classify.ts",
-        "line": 67
+        "line": 72
       },
       "authority": "module constant `ASSEMBLY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:67 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "finding": "REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:72 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "grade": "derived",
       "id": "src/classify.ASSEMBLY_FOLDERS",
       "members": [
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 67
-          },
-          "value": "first-edit"
-        },
-        {
-          "anchor": {
-            "file": "src/classify.ts",
-            "line": 67
-          },
-          "value": "edit"
-        }
-      ]
-    },
-    {
-      "anchor": {
-        "end_line": 77,
-        "file": "src/classify.ts",
-        "line": 70
-      },
-      "authority": "module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:70 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
-      "grade": "derived",
-      "id": "src/classify.LEGACY_FOLDERS",
-      "members": [
-        {
-          "anchor": {
-            "file": "src/classify.ts",
-            "line": 71
+            "line": 72
           },
           "value": "first-edit"
         },
@@ -866,33 +885,60 @@
             "file": "src/classify.ts",
             "line": 72
           },
+          "value": "edit"
+        }
+      ]
+    },
+    {
+      "anchor": {
+        "end_line": 82,
+        "file": "src/classify.ts",
+        "line": 75
+      },
+      "authority": "module constant `LEGACY_FOLDERS` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
+      "finding": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:75 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "grade": "derived",
+      "id": "src/classify.LEGACY_FOLDERS",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 76
+          },
+          "value": "first-edit"
+        },
+        {
+          "anchor": {
+            "file": "src/classify.ts",
+            "line": 77
+          },
           "value": "edits"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 73
+            "line": 78
           },
           "value": "edit-1st"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 74
+            "line": 79
           },
           "value": "final"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 75
+            "line": 80
           },
           "value": "pipeline"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 76
+            "line": 81
           },
           "value": "animation"
         }
@@ -900,54 +946,54 @@
     },
     {
       "anchor": {
-        "end_line": 133,
+        "end_line": 153,
         "file": "src/classify.ts",
-        "line": 126
+        "line": 146
       },
       "authority": "module constant `MOTION_MACHINERY` used in a `.includes()` test - one place to change, but no z.enum or literal union, so nothing checks a value against it",
-      "finding": "REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.",
+      "finding": "REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:146 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.",
       "grade": "derived",
       "id": "src/classify.MOTION_MACHINERY",
       "members": [
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 127
+            "line": 147
           },
           "value": "out"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 128
+            "line": 148
           },
           "value": ".cache"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 129
+            "line": 149
           },
           "value": ".transcode-cache"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 130
+            "line": 150
           },
           "value": "dist"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 131
+            "line": 151
           },
           "value": "build"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 132
+            "line": 152
           },
           "value": "node_modules"
         }
@@ -958,15 +1004,15 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 148
+            "line": 168
           },
           "name": "ProjectTier"
         }
       ],
       "anchor": {
-        "end_line": 147,
+        "end_line": 167,
         "file": "src/classify.ts",
-        "line": 140
+        "line": 160
       },
       "authority": "`z.enum` `ProjectTier` - a single declaring symbol",
       "doc": "How much a path matters (the plan \u00a71.1 tier test: \"if you deleted it, could you get it back by re-running a tool?\"):",
@@ -976,42 +1022,42 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 141
+            "line": 161
           },
           "value": "authored"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 142
+            "line": 162
           },
           "value": "input"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 143
+            "line": 163
           },
           "value": "generated"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 144
+            "line": 164
           },
           "value": "regenerable"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 145
+            "line": 165
           },
           "value": "output"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 146
+            "line": 166
           },
           "value": "other"
         }
@@ -1022,14 +1068,14 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 152
+            "line": 172
           },
           "name": "OverlayRole"
         }
       ],
       "anchor": {
         "file": "src/classify.ts",
-        "line": 151
+        "line": 171
       },
       "authority": "`z.enum` `OverlayRole` - a single declaring symbol",
       "doc": "What a file under `overlay/` is (B ruling): `beats.json` and `framing.json` are authored, `spec.json` is generated.",
@@ -1039,28 +1085,28 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 151
+            "line": 171
           },
           "value": "beats"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 151
+            "line": 171
           },
           "value": "framing"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 151
+            "line": 171
           },
           "value": "spec"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 151
+            "line": 171
           },
           "value": "variant-file"
         }
@@ -1071,14 +1117,14 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 297
+            "line": 331
           },
           "name": "ProjectLayout"
         }
       ],
       "anchor": {
         "file": "src/classify.ts",
-        "line": 296
+        "line": 330
       },
       "authority": "`z.enum` `ProjectLayout` - a single declaring symbol",
       "grade": "declared",
@@ -1087,14 +1133,14 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 296
+            "line": 330
           },
           "value": "hub"
         },
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 296
+            "line": 330
           },
           "value": "legacy"
         }
@@ -1281,9 +1327,9 @@
     },
     {
       "anchor": {
-        "end_line": 27,
+        "end_line": 28,
         "file": "src/estate.ts",
-        "line": 17
+        "line": 18
       },
       "authority": "the `state` discriminator of `z.discriminatedUnion` `scanned()` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -1292,14 +1338,14 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 19
+            "line": 20
           },
           "value": "scanned"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 21
+            "line": 22
           },
           "value": "unscanned"
         }
@@ -1307,9 +1353,9 @@
     },
     {
       "anchor": {
-        "end_line": 63,
+        "end_line": 64,
         "file": "src/estate.ts",
-        "line": 53
+        "line": 54
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `ArchivedEntry` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -1318,21 +1364,21 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 55
+            "line": 56
           },
           "value": "range"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 61
+            "line": 62
           },
           "value": "project"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 62
+            "line": 63
           },
           "value": "other"
         }
@@ -1341,7 +1387,7 @@
     {
       "anchor": {
         "file": "src/estate.ts",
-        "line": 192
+        "line": 194
       },
       "authority": "`z.enum` `matchedBy` - a single declaring symbol",
       "grade": "declared",
@@ -1350,21 +1396,21 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 192
+            "line": 194
           },
           "value": "folder"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 192
+            "line": 194
           },
           "value": "id"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 192
+            "line": 194
           },
           "value": "code"
         }
@@ -1373,7 +1419,7 @@
     {
       "anchor": {
         "file": "src/estate.ts",
-        "line": 198
+        "line": 200
       },
       "authority": "`z.enum` `matchedBy` - a single declaring symbol",
       "grade": "declared",
@@ -1382,14 +1428,14 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 198
+            "line": 200
           },
           "value": "id"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 198
+            "line": 200
           },
           "value": "code"
         }
@@ -1397,9 +1443,9 @@
     },
     {
       "anchor": {
-        "end_line": 220,
+        "end_line": 222,
         "file": "src/estate.ts",
-        "line": 215
+        "line": 217
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `ProjectRefusal` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -1408,28 +1454,28 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 196
+            "line": 198
           },
           "value": "ambiguous"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 202
+            "line": 204
           },
           "value": "not-a-project"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 206
+            "line": 208
           },
           "value": "not-found"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 208
+            "line": 210
           },
           "value": "unscanned"
         }
@@ -1437,9 +1483,9 @@
     },
     {
       "anchor": {
-        "end_line": 229,
+        "end_line": 231,
         "file": "src/estate.ts",
-        "line": 223
+        "line": 225
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `ResolveProjectResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -1448,35 +1494,35 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 190
+            "line": 192
           },
           "value": "found"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 196
+            "line": 198
           },
           "value": "ambiguous"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 202
+            "line": 204
           },
           "value": "not-a-project"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 206
+            "line": 208
           },
           "value": "not-found"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 208
+            "line": 210
           },
           "value": "unscanned"
         }
@@ -1484,9 +1530,9 @@
     },
     {
       "anchor": {
-        "end_line": 287,
+        "end_line": 289,
         "file": "src/estate.ts",
-        "line": 280
+        "line": 282
       },
       "authority": "the `kind` discriminator of `z.discriminatedUnion` `NextCodeResult` - each value declared by a `z.literal` in one variant",
       "grade": "declared",
@@ -1495,14 +1541,14 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 281
+            "line": 283
           },
           "value": "allocated"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 283
+            "line": 285
           },
           "value": "refused"
         }
@@ -1511,7 +1557,7 @@
     {
       "anchor": {
         "file": "src/estate.ts",
-        "line": 284
+        "line": 286
       },
       "authority": "`z.enum` `reason` - a single declaring symbol",
       "grade": "declared",
@@ -1520,21 +1566,21 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 284
+            "line": 286
           },
           "value": "invalid-letter"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 284
+            "line": 286
           },
           "value": "unscanned"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 284
+            "line": 286
           },
           "value": "exhausted"
         }
@@ -2050,76 +2096,14 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 28
-          },
-          "name": "GuideDocType"
-        }
-      ],
-      "anchor": {
-        "file": "src/guide-doc.ts",
-        "line": 27
-      },
-      "authority": "`z.enum` `GuideDocType` - members read through `GUIDE_DOC_TYPES` (src/guide-doc.GUIDE_DOC_TYPES) - a single declaring symbol",
-      "grade": "declared",
-      "id": "src/guide-doc.GuideDocType",
-      "members": [
-        {
-          "anchor": {
-            "file": "src/guide-doc.ts",
-            "line": 26
-          },
-          "value": "voice"
-        },
-        {
-          "anchor": {
-            "file": "src/guide-doc.ts",
-            "line": 26
-          },
-          "value": "verbal"
-        },
-        {
-          "anchor": {
-            "file": "src/guide-doc.ts",
-            "line": 26
-          },
-          "value": "build"
-        },
-        {
-          "anchor": {
-            "file": "src/guide-doc.ts",
-            "line": 26
-          },
-          "value": "video"
-        },
-        {
-          "anchor": {
-            "file": "src/guide-doc.ts",
-            "line": 26
-          },
-          "value": "lens"
-        },
-        {
-          "anchor": {
-            "file": "src/guide-doc.ts",
-            "line": 26
-          },
-          "value": "other"
-        }
-      ]
-    },
-    {
-      "aliases": [
-        {
-          "anchor": {
-            "file": "src/guide-doc.ts",
-            "line": 35
+            "line": 43
           },
           "name": "GuideDocLevel"
         }
       ],
       "anchor": {
         "file": "src/guide-doc.ts",
-        "line": 34
+        "line": 42
       },
       "authority": "`z.enum` `GuideDocLevel` - a single declaring symbol",
       "grade": "declared",
@@ -2128,28 +2112,28 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 34
+            "line": 42
           },
           "value": "global"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 34
+            "line": 42
           },
           "value": "brand"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 34
+            "line": 42
           },
           "value": "series"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 34
+            "line": 42
           },
           "value": "video"
         }
@@ -2158,7 +2142,7 @@
     {
       "anchor": {
         "file": "src/guide-doc.ts",
-        "line": 38
+        "line": 46
       },
       "authority": "`z.enum` `form` - a single declaring symbol",
       "grade": "declared",
@@ -2167,21 +2151,21 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 38
+            "line": 46
           },
           "value": "story"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 38
+            "line": 46
           },
           "value": "tutorial"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 38
+            "line": 46
           },
           "value": "sales"
         }
@@ -2190,7 +2174,7 @@
     {
       "anchor": {
         "file": "src/guide-doc.ts",
-        "line": 39
+        "line": 47
       },
       "authority": "`z.enum` `length` - a single declaring symbol",
       "grade": "declared",
@@ -2199,14 +2183,14 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 39
+            "line": 47
           },
           "value": "short"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 39
+            "line": 47
           },
           "value": "long"
         }
@@ -2217,14 +2201,14 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 46
+            "line": 54
           },
           "name": "GuideDocLayer"
         }
       ],
       "anchor": {
         "file": "src/guide-doc.ts",
-        "line": 45
+        "line": 53
       },
       "authority": "`z.enum` `GuideDocLayer` - a single declaring symbol",
       "doc": "`canonical` = the owner's own words or rulings; `synthesis` = distilled from a corpus.",
@@ -2234,14 +2218,14 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 45
+            "line": 53
           },
           "value": "canonical"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 45
+            "line": 53
           },
           "value": "synthesis"
         }
@@ -2250,7 +2234,7 @@
     {
       "anchor": {
         "file": "src/guide-doc.ts",
-        "line": 70
+        "line": 78
       },
       "authority": "`as const` array `GUIDE_REQUIRED`, typed from by `typeof GUIDE_REQUIRED[number]` - a single declaring symbol",
       "grade": "declared",
@@ -2259,42 +2243,42 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 70
+            "line": 78
           },
           "value": "schema"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 70
+            "line": 78
           },
           "value": "id"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 70
+            "line": 78
           },
           "value": "label"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 70
+            "line": 78
           },
           "value": "type"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 70
+            "line": 78
           },
           "value": "level"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 70
+            "line": 78
           },
           "value": "gist"
         }
@@ -3721,6 +3705,41 @@
       ]
     },
     {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 29
+          },
+          "name": "SetRole"
+        }
+      ],
+      "anchor": {
+        "file": "src/recording-sets.ts",
+        "line": 28
+      },
+      "authority": "`z.enum` `SetRole` - a single declaring symbol",
+      "doc": "Recording sets (v0.38.0): one project holds several sets of takes instead of faking videos as chapters.",
+      "grade": "declared",
+      "id": "src/recording-sets.SetRole",
+      "members": [
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 28
+          },
+          "value": "video"
+        },
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 28
+          },
+          "value": "part"
+        }
+      ]
+    },
+    {
       "anchor": {
         "end_line": 134,
         "file": "src/renders.ts",
@@ -5122,30 +5141,30 @@
     {
       "anchor": {
         "file": "src/classify.ts",
-        "line": 67
+        "line": 72
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:67 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `ASSEMBLY_FOLDERS` at src/classify.ts:72 names the set but does not type it. A z.enum or `as const` + `typeof ASSEMBLY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/classify.ASSEMBLY_FOLDERS"
     },
     {
       "anchor": {
-        "end_line": 77,
+        "end_line": 82,
         "file": "src/classify.ts",
-        "line": 70
+        "line": 75
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:70 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `LEGACY_FOLDERS` at src/classify.ts:75 names the set but does not type it. A z.enum or `as const` + `typeof LEGACY_FOLDERS[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/classify.LEGACY_FOLDERS"
     },
     {
       "anchor": {
-        "end_line": 133,
+        "end_line": 153,
         "file": "src/classify.ts",
-        "line": 126
+        "line": 146
       },
       "kind": "refactor_required",
-      "message": "REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:126 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.",
+      "message": "REFACTOR (minor): `MOTION_MACHINERY` at src/classify.ts:146 names the set but does not type it. A z.enum or `as const` + `typeof MOTION_MACHINERY[number]` would make a wrong value a static error rather than a runtime miss.",
       "target": "src/classify.MOTION_MACHINERY"
     },
     {
@@ -5185,7 +5204,7 @@
       "target": "src/recipe-paths.SKIP"
     }
   ],
-  "generated": "2026-11-11T08:16:32+00:00",
+  "generated": "2026-11-14T15:36:41+00:00",
   "ignored_derived": [],
   "mirror_version": 1,
   "never_read": [
@@ -5486,6 +5505,102 @@
       "refinements": [
         "refine at line 28"
       ]
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/brand-folders.ts",
+            "line": 27
+          },
+          "name": "BrandSettingsFolder"
+        }
+      ],
+      "anchor": {
+        "end_line": 26,
+        "file": "src/brand-folders.ts",
+        "line": 19
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/brand-folders.ts",
+            "line": 21
+          },
+          "default": null,
+          "doc": "The folder name, with its leading `-`.",
+          "name": "folder",
+          "type": "z.string().startsWith('-')"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-folders.ts",
+            "line": 23
+          },
+          "default": null,
+          "doc": "Who writes and reads it.",
+          "name": "owner",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-folders.ts",
+            "line": 25
+          },
+          "default": null,
+          "doc": "What it holds.",
+          "name": "contents",
+          "type": "z.string().min(1)"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/brand-folders.BrandSettingsFolder",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/brand-folders.ts",
+            "line": 65
+          },
+          "name": "BrandPackCandidate"
+        }
+      ],
+      "anchor": {
+        "end_line": 64,
+        "file": "src/brand-folders.ts",
+        "line": 61
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/brand-folders.ts",
+            "line": 62
+          },
+          "default": null,
+          "name": "path",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/brand-folders.ts",
+            "line": 63
+          },
+          "default": null,
+          "name": "from",
+          "type": "z.enum(['brand-repo', 'user-config'])"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/brand-folders.BrandPackCandidate",
+      "kind": "zod-object"
     },
     {
       "aliases": [
@@ -7149,15 +7264,15 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 168
+            "line": 188
           },
           "name": "ProjectEntry"
         }
       ],
       "anchor": {
-        "end_line": 167,
+        "end_line": 187,
         "file": "src/classify.ts",
-        "line": 154
+        "line": 174
       },
       "bases": [],
       "doc": null,
@@ -7166,7 +7281,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 155
+            "line": 175
           },
           "default": null,
           "name": "zone",
@@ -7175,7 +7290,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 156
+            "line": 176
           },
           "default": null,
           "name": "tier",
@@ -7184,7 +7299,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 158
+            "line": 178
           },
           "default": null,
           "doc": "`overlay/<video>/\u2026` only (R9): the video the overlay work is for; null for a flat overlay and every other zone.",
@@ -7194,7 +7309,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 163
+            "line": 183
           },
           "default": null,
           "name": "chapter",
@@ -7203,7 +7318,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 165
+            "line": 185
           },
           "default": null,
           "doc": "`overlay/[<video>/]<variant>/\u2026` only.",
@@ -7213,7 +7328,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 166
+            "line": 186
           },
           "default": null,
           "name": "role",
@@ -7229,15 +7344,15 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 211
+            "line": 231
           },
           "name": "OverlayPaths"
         }
       ],
       "anchor": {
-        "end_line": 210,
+        "end_line": 230,
         "file": "src/classify.ts",
-        "line": 201
+        "line": 221
       },
       "bases": [],
       "doc": null,
@@ -7246,7 +7361,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 203
+            "line": 223
           },
           "default": null,
           "doc": "`<project>/overlay/<video>/`",
@@ -7256,7 +7371,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 204
+            "line": 224
           },
           "default": null,
           "name": "beats",
@@ -7265,7 +7380,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 205
+            "line": 225
           },
           "default": null,
           "name": "framing",
@@ -7274,7 +7389,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 207
+            "line": 227
           },
           "default": null,
           "doc": "`<project>/overlay/<video>/<variant>/` \u2014 null when no variant was asked for.",
@@ -7284,7 +7399,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 209
+            "line": 229
           },
           "default": null,
           "doc": "`<project>/overlay/<video>/<variant>/spec.json` \u2014 null when no variant was asked for.",
@@ -7301,15 +7416,15 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 307
+            "line": 341
           },
           "name": "ProjectLayoutPaths"
         }
       ],
       "anchor": {
-        "end_line": 306,
+        "end_line": 340,
         "file": "src/classify.ts",
-        "line": 299
+        "line": 333
       },
       "bases": [],
       "doc": null,
@@ -7318,7 +7433,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 301
+            "line": 335
           },
           "default": null,
           "doc": "Detected by `projectLayout` (D14).",
@@ -7328,7 +7443,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 303
+            "line": 337
           },
           "default": null,
           "doc": "Absolute path of the recordings folder for this layout (it may not exist yet).",
@@ -7338,7 +7453,7 @@
         {
           "anchor": {
             "file": "src/classify.ts",
-            "line": 305
+            "line": 339
           },
           "default": null,
           "doc": "Absolute path of the transcripts folder for this layout (it may not exist yet).",
@@ -8270,9 +8385,9 @@
     },
     {
       "anchor": {
-        "end_line": 27,
+        "end_line": 28,
         "file": "src/estate.ts",
-        "line": 17
+        "line": 18
       },
       "bases": [],
       "doc": "A collection that was read, or one that could not be (R12): empty and unscanned are never the same thing.",
@@ -8281,7 +8396,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 19
+            "line": 20
           },
           "default": null,
           "name": "scanned",
@@ -8290,7 +8405,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 21
+            "line": 22
           },
           "default": null,
           "name": "unscanned",
@@ -8304,7 +8419,7 @@
     {
       "anchor": {
         "file": "src/estate.ts",
-        "line": 19
+        "line": 20
       },
       "bases": [],
       "doc": null,
@@ -8312,7 +8427,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 19
+            "line": 20
           },
           "default": null,
           "name": "state",
@@ -8321,7 +8436,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 19
+            "line": 20
           },
           "default": null,
           "name": "scannedAt",
@@ -8330,7 +8445,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 19
+            "line": 20
           },
           "default": null,
           "name": "items",
@@ -8343,9 +8458,9 @@
     },
     {
       "anchor": {
-        "end_line": 25,
+        "end_line": 26,
         "file": "src/estate.ts",
-        "line": 20
+        "line": 21
       },
       "bases": [],
       "doc": null,
@@ -8353,7 +8468,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 21
+            "line": 22
           },
           "default": null,
           "name": "state",
@@ -8362,7 +8477,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 22
+            "line": 23
           },
           "default": null,
           "name": "scannedAt",
@@ -8371,7 +8486,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 23
+            "line": 24
           },
           "default": null,
           "name": "path",
@@ -8380,7 +8495,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 24
+            "line": 25
           },
           "default": null,
           "name": "message",
@@ -8396,15 +8511,15 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 38
+            "line": 39
           },
           "name": "MemberProject"
         }
       ],
       "anchor": {
-        "end_line": 37,
+        "end_line": 38,
         "file": "src/estate.ts",
-        "line": 31
+        "line": 32
       },
       "bases": [],
       "doc": "A folder holding a valid `fli.studio.json` (R8).",
@@ -8413,7 +8528,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 32
+            "line": 33
           },
           "default": null,
           "name": "folder",
@@ -8422,7 +8537,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 33
+            "line": 34
           },
           "default": null,
           "name": "path",
@@ -8431,7 +8546,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 35
+            "line": 36
           },
           "default": null,
           "doc": "The folder name parsed as `<code>-<slug>`, or `null` when it does not follow that shape.",
@@ -8441,7 +8556,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 36
+            "line": 37
           },
           "default": null,
           "name": "identity",
@@ -8457,15 +8572,15 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 50
+            "line": 51
           },
           "name": "OtherFolder"
         }
       ],
       "anchor": {
-        "end_line": 49,
+        "end_line": 50,
         "file": "src/estate.ts",
-        "line": 41
+        "line": 42
       },
       "bases": [],
       "doc": "Any other top-level folder (R9): shown as *other folder*, never as an error.",
@@ -8474,7 +8589,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 42
+            "line": 43
           },
           "default": null,
           "name": "folder",
@@ -8483,7 +8598,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 43
+            "line": 44
           },
           "default": null,
           "name": "path",
@@ -8492,7 +8607,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 45
+            "line": 46
           },
           "default": null,
           "doc": "Named like a project (`d02-cutty-audio-cleanup`) rather than a plain folder (`docs`).",
@@ -8502,7 +8617,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 46
+            "line": 47
           },
           "default": null,
           "name": "parsed",
@@ -8511,7 +8626,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 48
+            "line": 49
           },
           "default": null,
           "doc": "`absent`, or the `invalid` result when a `fli.studio.json` is there but not valid.",
@@ -8526,7 +8641,7 @@
     {
       "anchor": {
         "file": "src/estate.ts",
-        "line": 48
+        "line": 49
       },
       "bases": [],
       "doc": null,
@@ -8534,7 +8649,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 48
+            "line": 49
           },
           "default": null,
           "name": "absent",
@@ -8543,7 +8658,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 48
+            "line": 49
           },
           "default": null,
           "name": "InvalidFile",
@@ -8559,15 +8674,15 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 64
+            "line": 65
           },
           "name": "ArchivedEntry"
         }
       ],
       "anchor": {
-        "end_line": 63,
+        "end_line": 64,
         "file": "src/estate.ts",
-        "line": 53
+        "line": 54
       },
       "bases": [],
       "doc": "One folder directly under `<brandRoot>/archived/` (R13: listed, never descended into).",
@@ -8576,7 +8691,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 55
+            "line": 56
           },
           "default": null,
           "name": "range",
@@ -8585,7 +8700,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 61
+            "line": 62
           },
           "default": null,
           "name": "project",
@@ -8594,7 +8709,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 62
+            "line": 63
           },
           "default": null,
           "name": "other",
@@ -8607,9 +8722,9 @@
     },
     {
       "anchor": {
-        "end_line": 60,
+        "end_line": 61,
         "file": "src/estate.ts",
-        "line": 54
+        "line": 55
       },
       "bases": [],
       "doc": null,
@@ -8617,7 +8732,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 55
+            "line": 56
           },
           "default": null,
           "name": "kind",
@@ -8626,7 +8741,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 56
+            "line": 57
           },
           "default": null,
           "name": "name",
@@ -8635,7 +8750,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 57
+            "line": 58
           },
           "default": null,
           "name": "letter",
@@ -8644,7 +8759,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 58
+            "line": 59
           },
           "default": null,
           "name": "from",
@@ -8653,7 +8768,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 59
+            "line": 60
           },
           "default": null,
           "name": "to",
@@ -8662,55 +8777,6 @@
       ],
       "grade": "declared",
       "id": "src/estate.ArchivedEntry[kind=range]",
-      "kind": "zod-object"
-    },
-    {
-      "anchor": {
-        "file": "src/estate.ts",
-        "line": 61
-      },
-      "bases": [],
-      "doc": null,
-      "fields": [
-        {
-          "anchor": {
-            "file": "src/estate.ts",
-            "line": 61
-          },
-          "default": null,
-          "name": "kind",
-          "type": "z.literal('project')"
-        },
-        {
-          "anchor": {
-            "file": "src/estate.ts",
-            "line": 61
-          },
-          "default": null,
-          "name": "name",
-          "type": "z.string()"
-        },
-        {
-          "anchor": {
-            "file": "src/estate.ts",
-            "line": 61
-          },
-          "default": null,
-          "name": "code",
-          "type": "ProjectCode \u2192 src/project-folder.ProjectCode"
-        },
-        {
-          "anchor": {
-            "file": "src/estate.ts",
-            "line": 61
-          },
-          "default": null,
-          "name": "slug",
-          "type": "z.string()"
-        }
-      ],
-      "grade": "declared",
-      "id": "src/estate.ArchivedEntry[kind=project]",
       "kind": "zod-object"
     },
     {
@@ -8728,12 +8794,61 @@
           },
           "default": null,
           "name": "kind",
-          "type": "z.literal('other')"
+          "type": "z.literal('project')"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
             "line": 62
+          },
+          "default": null,
+          "name": "name",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/estate.ts",
+            "line": 62
+          },
+          "default": null,
+          "name": "code",
+          "type": "ProjectCode \u2192 src/project-folder.ProjectCode"
+        },
+        {
+          "anchor": {
+            "file": "src/estate.ts",
+            "line": 62
+          },
+          "default": null,
+          "name": "slug",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/estate.ArchivedEntry[kind=project]",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "file": "src/estate.ts",
+        "line": 63
+      },
+      "bases": [],
+      "doc": null,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/estate.ts",
+            "line": 63
+          },
+          "default": null,
+          "name": "kind",
+          "type": "z.literal('other')"
+        },
+        {
+          "anchor": {
+            "file": "src/estate.ts",
+            "line": 63
           },
           "default": null,
           "name": "name",
@@ -8749,15 +8864,15 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 73
+            "line": 74
           },
           "name": "ProjectListing"
         }
       ],
       "anchor": {
-        "end_line": 72,
+        "end_line": 73,
         "file": "src/estate.ts",
-        "line": 66
+        "line": 67
       },
       "bases": [],
       "doc": null,
@@ -8766,7 +8881,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 67
+            "line": 68
           },
           "default": null,
           "name": "brandRoot",
@@ -8775,7 +8890,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 68
+            "line": 69
           },
           "default": null,
           "name": "scannedAt",
@@ -8784,7 +8899,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 69
+            "line": 70
           },
           "default": null,
           "name": "members",
@@ -8793,7 +8908,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 70
+            "line": 71
           },
           "default": null,
           "name": "otherFolders",
@@ -8802,7 +8917,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 71
+            "line": 72
           },
           "default": null,
           "name": "archived",
@@ -8815,9 +8930,9 @@
     },
     {
       "anchor": {
-        "end_line": 194,
+        "end_line": 196,
         "file": "src/estate.ts",
-        "line": 189
+        "line": 191
       },
       "bases": [],
       "doc": null,
@@ -8826,7 +8941,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 190
+            "line": 192
           },
           "default": null,
           "name": "kind",
@@ -8835,7 +8950,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 191
+            "line": 193
           },
           "default": null,
           "name": "ref",
@@ -8844,7 +8959,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 192
+            "line": 194
           },
           "default": null,
           "name": "matchedBy",
@@ -8853,7 +8968,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 193
+            "line": 195
           },
           "default": null,
           "name": "project",
@@ -8866,9 +8981,9 @@
     },
     {
       "anchor": {
-        "end_line": 200,
+        "end_line": 202,
         "file": "src/estate.ts",
-        "line": 195
+        "line": 197
       },
       "bases": [],
       "doc": null,
@@ -8877,7 +8992,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 196
+            "line": 198
           },
           "default": null,
           "name": "kind",
@@ -8886,7 +9001,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 197
+            "line": 199
           },
           "default": null,
           "name": "ref",
@@ -8895,7 +9010,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 198
+            "line": 200
           },
           "default": null,
           "name": "matchedBy",
@@ -8904,7 +9019,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 199
+            "line": 201
           },
           "default": null,
           "name": "candidates",
@@ -8917,9 +9032,9 @@
     },
     {
       "anchor": {
-        "end_line": 205,
+        "end_line": 207,
         "file": "src/estate.ts",
-        "line": 201
+        "line": 203
       },
       "bases": [],
       "doc": null,
@@ -8928,7 +9043,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 202
+            "line": 204
           },
           "default": null,
           "name": "kind",
@@ -8937,7 +9052,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 203
+            "line": 205
           },
           "default": null,
           "name": "ref",
@@ -8946,7 +9061,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 204
+            "line": 206
           },
           "default": null,
           "name": "folder",
@@ -8960,40 +9075,7 @@
     {
       "anchor": {
         "file": "src/estate.ts",
-        "line": 206
-      },
-      "bases": [],
-      "doc": null,
-      "exported": false,
-      "fields": [
-        {
-          "anchor": {
-            "file": "src/estate.ts",
-            "line": 206
-          },
-          "default": null,
-          "name": "kind",
-          "type": "z.literal('not-found')"
-        },
-        {
-          "anchor": {
-            "file": "src/estate.ts",
-            "line": 206
-          },
-          "default": null,
-          "name": "ref",
-          "type": "z.string()"
-        }
-      ],
-      "grade": "declared",
-      "id": "src/estate.ProjectNotFound",
-      "kind": "zod-object"
-    },
-    {
-      "anchor": {
-        "end_line": 212,
-        "file": "src/estate.ts",
-        "line": 207
+        "line": 208
       },
       "bases": [],
       "doc": null,
@@ -9006,12 +9088,45 @@
           },
           "default": null,
           "name": "kind",
+          "type": "z.literal('not-found')"
+        },
+        {
+          "anchor": {
+            "file": "src/estate.ts",
+            "line": 208
+          },
+          "default": null,
+          "name": "ref",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/estate.ProjectNotFound",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 214,
+        "file": "src/estate.ts",
+        "line": 209
+      },
+      "bases": [],
+      "doc": null,
+      "exported": false,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/estate.ts",
+            "line": 210
+          },
+          "default": null,
+          "name": "kind",
           "type": "z.literal('unscanned')"
         },
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 209
+            "line": 211
           },
           "default": null,
           "name": "ref",
@@ -9020,7 +9135,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 210
+            "line": 212
           },
           "default": null,
           "name": "path",
@@ -9029,7 +9144,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 211
+            "line": 213
           },
           "default": null,
           "name": "message",
@@ -9045,15 +9160,15 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 221
+            "line": 223
           },
           "name": "ProjectRefusal"
         }
       ],
       "anchor": {
-        "end_line": 220,
+        "end_line": 222,
         "file": "src/estate.ts",
-        "line": 215
+        "line": 217
       },
       "bases": [],
       "doc": "Every `resolveProject` outcome except `found`: why a reference did not resolve (R31, C3).",
@@ -9062,7 +9177,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 216
+            "line": 218
           },
           "default": null,
           "name": "ProjectAmbiguous",
@@ -9071,7 +9186,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 217
+            "line": 219
           },
           "default": null,
           "name": "ProjectNotAProject",
@@ -9080,7 +9195,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 218
+            "line": 220
           },
           "default": null,
           "name": "ProjectNotFound",
@@ -9089,7 +9204,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 219
+            "line": 221
           },
           "default": null,
           "name": "ProjectUnscanned",
@@ -9105,15 +9220,15 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 230
+            "line": 232
           },
           "name": "ResolveProjectResult"
         }
       ],
       "anchor": {
-        "end_line": 229,
+        "end_line": 231,
         "file": "src/estate.ts",
-        "line": 223
+        "line": 225
       },
       "bases": [],
       "doc": null,
@@ -9122,7 +9237,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 224
+            "line": 226
           },
           "default": null,
           "name": "ProjectFound",
@@ -9131,7 +9246,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 225
+            "line": 227
           },
           "default": null,
           "name": "ProjectAmbiguous",
@@ -9140,7 +9255,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 226
+            "line": 228
           },
           "default": null,
           "name": "ProjectNotAProject",
@@ -9149,7 +9264,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 227
+            "line": 229
           },
           "default": null,
           "name": "ProjectNotFound",
@@ -9158,7 +9273,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 228
+            "line": 230
           },
           "default": null,
           "name": "ProjectUnscanned",
@@ -9174,15 +9289,15 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 288
+            "line": 290
           },
           "name": "NextCodeResult"
         }
       ],
       "anchor": {
-        "end_line": 287,
+        "end_line": 289,
         "file": "src/estate.ts",
-        "line": 280
+        "line": 282
       },
       "bases": [],
       "doc": null,
@@ -9191,7 +9306,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 281
+            "line": 283
           },
           "default": null,
           "name": "allocated",
@@ -9200,7 +9315,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 283
+            "line": 285
           },
           "default": null,
           "name": "refused",
@@ -9214,7 +9329,7 @@
     {
       "anchor": {
         "file": "src/estate.ts",
-        "line": 281
+        "line": 283
       },
       "bases": [],
       "doc": null,
@@ -9222,7 +9337,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 281
+            "line": 283
           },
           "default": null,
           "name": "kind",
@@ -9231,7 +9346,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 281
+            "line": 283
           },
           "default": null,
           "name": "code",
@@ -9244,9 +9359,9 @@
     },
     {
       "anchor": {
-        "end_line": 286,
+        "end_line": 288,
         "file": "src/estate.ts",
-        "line": 282
+        "line": 284
       },
       "bases": [],
       "doc": null,
@@ -9254,7 +9369,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 283
+            "line": 285
           },
           "default": null,
           "name": "kind",
@@ -9263,7 +9378,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 284
+            "line": 286
           },
           "default": null,
           "name": "reason",
@@ -9272,7 +9387,7 @@
         {
           "anchor": {
             "file": "src/estate.ts",
-            "line": 285
+            "line": 287
           },
           "default": null,
           "name": "message",
@@ -11529,15 +11644,15 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 42
+            "line": 50
           },
           "name": "GuideDocAppliesTo"
         }
       ],
       "anchor": {
-        "end_line": 41,
+        "end_line": 49,
         "file": "src/guide-doc.ts",
-        "line": 36
+        "line": 44
       },
       "bases": [],
       "doc": null,
@@ -11546,7 +11661,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 38
+            "line": 46
           },
           "default": null,
           "name": "form",
@@ -11555,7 +11670,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 39
+            "line": 47
           },
           "default": null,
           "name": "length",
@@ -11569,7 +11684,7 @@
     {
       "anchor": {
         "file": "src/guide-doc.ts",
-        "line": 67
+        "line": 75
       },
       "bases": [],
       "doc": null,
@@ -11581,28 +11696,19 @@
       "value": "z.string().trim().min(1).nullable().optional()"
     },
     {
-      "aliases": [
-        {
-          "anchor": {
-            "file": "src/guide-doc.ts",
-            "line": 95
-          },
-          "name": "GuideDoc"
-        }
-      ],
       "anchor": {
-        "end_line": 94,
+        "end_line": 113,
         "file": "src/guide-doc.ts",
-        "line": 72
+        "line": 90
       },
       "bases": [],
       "doc": null,
-      "exported": true,
+      "exported": false,
       "fields": [
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 73
+            "line": 92
           },
           "default": null,
           "name": "schema",
@@ -11611,7 +11717,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 74
+            "line": 93
           },
           "default": null,
           "name": "id",
@@ -11620,7 +11726,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 75
+            "line": 94
           },
           "default": null,
           "name": "label",
@@ -11629,16 +11735,16 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 76
+            "line": 95
           },
           "default": null,
           "name": "type",
-          "type": "z.preprocess(normaliseGuideType, GuideDocType) \u2192 src/guide-doc.normaliseGuideType, src/guide-doc.GuideDocType"
+          "type": "z.preprocess(normaliseGuideType, typeIn(types)) \u2192 src/guide-doc.normaliseGuideType, src/guide-doc.typeIn"
         },
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 77
+            "line": 96
           },
           "default": null,
           "name": "level",
@@ -11647,7 +11753,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 79
+            "line": 98
           },
           "default": null,
           "doc": "ONE line: what this guide tells the writer. Shown as the card's one-liner.",
@@ -11657,7 +11763,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 84
+            "line": 103
           },
           "default": null,
           "name": "appliesTo",
@@ -11666,7 +11772,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 85
+            "line": 104
           },
           "default": null,
           "name": "brands",
@@ -11675,7 +11781,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 86
+            "line": 105
           },
           "default": null,
           "name": "part",
@@ -11684,7 +11790,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 87
+            "line": 106
           },
           "default": null,
           "name": "style",
@@ -11693,7 +11799,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 88
+            "line": 107
           },
           "default": null,
           "name": "narrator",
@@ -11702,7 +11808,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 89
+            "line": 108
           },
           "default": null,
           "name": "author",
@@ -11711,7 +11817,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 90
+            "line": 109
           },
           "default": null,
           "name": "layer",
@@ -11720,7 +11826,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 91
+            "line": 110
           },
           "default": null,
           "name": "canonical_source",
@@ -11729,7 +11835,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 92
+            "line": 111
           },
           "default": null,
           "name": "owner",
@@ -11738,7 +11844,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 93
+            "line": 112
           },
           "default": null,
           "name": "promotedTo",
@@ -11746,14 +11852,14 @@
         }
       ],
       "grade": "declared",
-      "id": "src/guide-doc.GuideDoc",
-      "kind": "zod-object"
+      "id": "src/guide-doc.guideDocWith()",
+      "kind": "zod-factory"
     },
     {
       "anchor": {
-        "end_line": 108,
+        "end_line": 132,
         "file": "src/guide-doc.ts",
-        "line": 97
+        "line": 121
       },
       "bases": [],
       "doc": null,
@@ -11762,7 +11868,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 98
+            "line": 122
           },
           "default": null,
           "name": "header",
@@ -11771,7 +11877,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 101
+            "line": 125
           },
           "default": null,
           "name": "error",
@@ -11785,7 +11891,7 @@
     {
       "anchor": {
         "file": "src/guide-doc.ts",
-        "line": 98
+        "line": 122
       },
       "bases": [],
       "doc": null,
@@ -11794,7 +11900,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 98
+            "line": 122
           },
           "default": null,
           "name": "header",
@@ -11803,7 +11909,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 98
+            "line": 122
           },
           "default": null,
           "name": "body",
@@ -11816,9 +11922,9 @@
     },
     {
       "anchor": {
-        "end_line": 108,
+        "end_line": 132,
         "file": "src/guide-doc.ts",
-        "line": 99
+        "line": 123
       },
       "bases": [],
       "doc": null,
@@ -11827,7 +11933,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 101
+            "line": 125
           },
           "default": null,
           "doc": "One short reason, for the card: `no guide header`, `invalid: missing gist`, `invalid: type must be \u2026`.",
@@ -11837,7 +11943,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 103
+            "line": 127
           },
           "default": null,
           "doc": "Every problem found (each `key: message`); empty for a file with no header.",
@@ -11847,7 +11953,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 105
+            "line": 129
           },
           "default": null,
           "doc": "The file's text after any frontmatter, so a reader can still show or summarise it.",
@@ -11857,7 +11963,7 @@
         {
           "anchor": {
             "file": "src/guide-doc.ts",
-            "line": 107
+            "line": 131
           },
           "default": null,
           "doc": "The header as read, when there was one.",
@@ -11868,6 +11974,30 @@
       "grade": "declared",
       "id": "src/guide-doc.ParsedGuide[1]",
       "kind": "type"
+    },
+    {
+      "anchor": {
+        "end_line": 149,
+        "file": "src/guide-doc.ts",
+        "line": 147
+      },
+      "bases": [],
+      "doc": "What `parseGuide` may be told: the guide types it accepts (default `GUIDE_DOC_TYPES`).",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/guide-doc.ts",
+            "line": 148
+          },
+          "default": null,
+          "name": "types",
+          "type": "?: readonly string[]"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/guide-doc.ParseGuideOptions",
+      "kind": "interface"
     },
     {
       "aliases": [
@@ -17625,6 +17755,250 @@
       ],
       "grade": "declared",
       "id": "src/recipe-paths.RecipePathWarning",
+      "kind": "zod-object"
+    },
+    {
+      "anchor": {
+        "end_line": 33,
+        "file": "src/recording-sets.ts",
+        "line": 31
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [],
+      "grade": "declared",
+      "id": "src/recording-sets.SetId",
+      "kind": "zod-scalar",
+      "value": "z.string().regex(SET_ID, 'set id must be kebab-case (a-z, 0-9, single hyphens)')"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 42
+          },
+          "name": "SetEntry"
+        }
+      ],
+      "anchor": {
+        "end_line": 41,
+        "file": "src/recording-sets.ts",
+        "line": 36
+      },
+      "bases": [],
+      "doc": "One entry of `hub/sets.json`. `id` is the folder name; the array order is the set order.",
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 37
+          },
+          "default": null,
+          "name": "id",
+          "type": "SetId \u2192 src/recording-sets.SetId"
+        },
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 38
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string().min(1)"
+        },
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 40
+          },
+          "default": null,
+          "doc": "`video`: the set is its own video. `part`: it is one part of a video made from several sets.",
+          "name": "role",
+          "type": "SetRole \u2192 src/recording-sets.SetRole"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/recording-sets.SetEntry",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 45
+          },
+          "name": "SetsFile"
+        }
+      ],
+      "anchor": {
+        "file": "src/recording-sets.ts",
+        "line": 44
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 44
+          },
+          "default": null,
+          "name": "sets",
+          "type": "z.array(SetEntry) \u2192 src/recording-sets.SetEntry"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/recording-sets.SetsFile",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 61
+          },
+          "name": "ProjectSet"
+        }
+      ],
+      "anchor": {
+        "end_line": 60,
+        "file": "src/recording-sets.ts",
+        "line": 47
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 49
+          },
+          "default": null,
+          "doc": "The folder name; `null` for the one implicit set of a project without sets.",
+          "name": "id",
+          "type": "SetId.nullable() \u2192 src/recording-sets.SetId"
+        },
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 50
+          },
+          "default": null,
+          "name": "title",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 51
+          },
+          "default": null,
+          "name": "role",
+          "type": "SetRole \u2192 src/recording-sets.SetRole"
+        },
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 53
+          },
+          "default": null,
+          "doc": "True for the implicit set of a project without `hub/sets/`: its folders are the project's own.",
+          "name": "legacy",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 55
+          },
+          "default": null,
+          "doc": "False when the folder exists but `sets.json` does not name it (shown after the listed sets, titled by id).",
+          "name": "listed",
+          "type": "z.boolean()"
+        },
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 57
+          },
+          "default": null,
+          "doc": "Absolute recordings folder (it may not exist yet).",
+          "name": "recordings",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 59
+          },
+          "default": null,
+          "doc": "Absolute transcripts folder (it may not exist yet).",
+          "name": "transcripts",
+          "type": "z.string()"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/recording-sets.ProjectSet",
+      "kind": "zod-object"
+    },
+    {
+      "aliases": [
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 234
+          },
+          "name": "MediaLocation"
+        }
+      ],
+      "anchor": {
+        "end_line": 233,
+        "file": "src/recording-sets.ts",
+        "line": 227
+      },
+      "bases": [],
+      "doc": null,
+      "exported": true,
+      "fields": [
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 229
+          },
+          "default": null,
+          "doc": "The project folder (never `<project>/hub`, never a set folder).",
+          "name": "projectDir",
+          "type": "z.string()"
+        },
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 231
+          },
+          "default": null,
+          "doc": "The set the file is in; `null` in a project without sets.",
+          "name": "set",
+          "type": "SetId.nullable() \u2192 src/recording-sets.SetId"
+        },
+        {
+          "anchor": {
+            "file": "src/recording-sets.ts",
+            "line": 232
+          },
+          "default": null,
+          "name": "layout",
+          "type": "ProjectLayoutSchema \u2192 src/classify.ProjectLayout"
+        }
+      ],
+      "grade": "declared",
+      "id": "src/recording-sets.MediaLocation",
       "kind": "zod-object"
     },
     {
@@ -24104,11 +24478,38 @@
     }
   ],
   "target": {
-    "commit": "3644589d72447792cc6fdbe32f078372e1458b45",
+    "commit": "bca41cb61ec9542e65a0c0435db984a98a14fdcf",
     "root": "..",
     "stack": "typescript"
   },
   "unresolved": [
+    {
+      "census": true,
+      "family": "array constant",
+      "looked_at": [
+        "src/brand-folders.ts:57"
+      ],
+      "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/brand-folders.BRAND_PACK_FILES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "const built by a call (helper or non-zod call)",
+      "looked_at": [
+        "src/brand-folders.ts:59"
+      ],
+      "reason": "declared but not read: const built by a call (helper or non-zod call). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/brand-folders.BRAND_PACK_USER_CONFIG` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "array constant",
+      "looked_at": [
+        "src/brand-folders.ts:30"
+      ],
+      "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/brand-folders.BRAND_SETTINGS_FOLDERS` - declared but not read"
+    },
     {
       "census": true,
       "family": "generic type alias",
@@ -24122,16 +24523,25 @@
       "census": true,
       "family": "object constant",
       "looked_at": [
-        "src/classify.ts:310"
+        "src/classify.ts:344"
       ],
       "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/classify.LAYOUT_DIRS` - declared but not read"
     },
     {
       "census": true,
+      "family": "object constant",
+      "looked_at": [
+        "src/classify.ts:324"
+      ],
+      "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/classify.SET_DIRS` - declared but not read"
+    },
+    {
+      "census": true,
       "family": "generic type alias",
       "looked_at": [
-        "src/estate.ts:28"
+        "src/estate.ts:29"
       ],
       "reason": "declared but not read: generic type alias. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/estate.Scanned` - declared but not read"
@@ -24239,7 +24649,7 @@
       "census": true,
       "family": "array constant",
       "looked_at": [
-        "src/guide-doc.ts:26"
+        "src/guide-doc.ts:28"
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/guide-doc.GUIDE_DOC_TYPES` - declared but not read"
@@ -24248,7 +24658,7 @@
       "census": true,
       "family": "array constant",
       "looked_at": [
-        "src/guide-doc.ts:52"
+        "src/guide-doc.ts:60"
       ],
       "reason": "declared but not read: array constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/guide-doc.GUIDE_META_KEYS` - declared but not read"
@@ -24257,10 +24667,28 @@
       "census": true,
       "family": "object constant",
       "looked_at": [
-        "src/guide-doc.ts:30"
+        "src/guide-doc.ts:33"
       ],
       "reason": "declared but not read: object constant. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
       "subject": "`src/guide-doc.GUIDE_TYPE_ALIASES` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "alias of another value (`X = Y`)",
+      "looked_at": [
+        "src/guide-doc.ts:30"
+      ],
+      "reason": "declared but not read: alias of another value (`X = Y`) (`= KebabSlug`). The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/guide-doc.GuideDocType` - declared but not read"
+    },
+    {
+      "census": true,
+      "family": "z.infer alias",
+      "looked_at": [
+        "src/guide-doc.ts:31"
+      ],
+      "reason": "declared but not read: z.infer alias. The extractor saw the declaration and did not mirror it; nothing else about it appears on this page.",
+      "subject": "`src/guide-doc.GuideDocType` - declared but not read"
     },
     {
       "census": true,
@@ -24517,6 +24945,13 @@
     },
     {
       "looked_at": [
+        "guideDocWith(GUIDE_DOC_TYPES) (src/guide-doc.ts:116)"
+      ],
+      "reason": "built by calling the schema factory `guideDocWith(...)`; the factory's own shape is mirrored as `src/guide-doc.guideDocWith()`, but each parameterised result is not expanded here",
+      "subject": "schemas built by `guideDocWith(...)` (1 use)"
+    },
+    {
+      "looked_at": [
         "promisify(execFile) (src/gitignore.ts:17)"
       ],
       "reason": "built by calling `promisify(...)` imported from `node:util`; package helpers are not expanded - see that package's own mirror",
@@ -24538,9 +24973,9 @@
     },
     {
       "looked_at": [
-        "scanned(MemberProject) (src/estate.ts:69)",
-        "scanned(OtherFolder) (src/estate.ts:70)",
-        "scanned(ArchivedEntry) (src/estate.ts:71)"
+        "scanned(MemberProject) (src/estate.ts:70)",
+        "scanned(OtherFolder) (src/estate.ts:71)",
+        "scanned(ArchivedEntry) (src/estate.ts:72)"
       ],
       "reason": "built by calling the schema factory `scanned(...)`; the factory's own shape is mirrored as `src/estate.scanned()`, but each parameterised result is not expanded here",
       "subject": "schemas built by `scanned(...)` (3 uses)"
@@ -24576,7 +25011,7 @@
   ],
   "zod_detection": {
     "call-shape": 0,
-    "import": 41,
+    "import": 43,
     "re-export": 0
   }
 }

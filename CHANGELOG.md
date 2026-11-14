@@ -2,6 +2,26 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.40.0 — 2026-11-14
+
+Guide types are data (Story Pilot target schema v2, step 3 part 1): a guide's `type` is a kebab id checked against a
+list the reader passes, not a fixed enum. A brand adds a guide type as a row in Story Pilot, with no change here.
+
+### Changed
+
+- `GuideDocType` is now a kebab string (`KebabSlug`), no longer `z.enum(GUIDE_DOC_TYPES)`. Its TypeScript type is
+  `string`, and `GuideDoc['type']` is `string` too.
+- `parseGuide(text, { types })`: `type` must be one of `types` (after the `structure` → `build` alias). Without
+  `types`, the list is `GUIDE_DOC_TYPES`, so every existing caller reads exactly as before, error messages included.
+- `GUIDE_TYPE_ALIASES` is typed `Record<string, string>`.
+
+### Added
+
+- `guideDocSchema(types)`: the header schema for a merged list. `GuideDoc` is `guideDocSchema(GUIDE_DOC_TYPES)`.
+- `isGuideType(t, types?)`: kebab id, aliases mapped, in the list. `ParseGuideOptions` type.
+- `GUIDE_DOC_TYPES` stays: it is the shipped default list, no longer the only one.
+- Schema mirror regenerated (it had drifted since v0.37.0).
+
 ## v0.39.0 — 2026-11-13
 
 Brand settings folders as one contract: a top-level `-` folder in a brand repo is brand settings, never a project.

@@ -20,17 +20,25 @@ import { KebabSlug } from './project-folder.js';
 export const GUIDE_SCHEMA = 'storypilot.guide/1';
 
 /**
- * The parts a script is told with (`voice` = who speaks, `verbal` = how, `build` = the spine, `video` = the package's
- * slots), plus `lens` (a review check) and `other`. v0.34.0: `structure` split into `build` and `video`.
+ * The guide types Story Pilot ships (`voice` = who speaks, `verbal` = how, `build` = the spine, `video` = the package's
+ * slots, `lens` = a review check, `other`). v0.40.0: a guide type is DATA, not this enum — a type is any kebab id, and a
+ * reader passes the merged list it knows (Story Pilot: its `guide-types` rows plus the brand's) to `parseGuide`. This
+ * list is only the default when a caller passes none, so every existing caller reads exactly as before.
  */
 export const GUIDE_DOC_TYPES = ['voice', 'verbal', 'build', 'video', 'lens', 'other'] as const;
-export const GuideDocType = z.enum(GUIDE_DOC_TYPES);
+/** A guide type id: a kebab string (v0.40.0; was an enum of `GUIDE_DOC_TYPES`). Checked against a list by `parseGuide`. */
+export const GuideDocType = KebabSlug;
 export type GuideDocType = z.infer<typeof GuideDocType>;
 /** Old type names still read: a file saying `type: structure` reads as `build` (its spine is what most such files held). */
-export const GUIDE_TYPE_ALIASES: Readonly<Record<string, GuideDocType>> = { structure: 'build' };
+export const GUIDE_TYPE_ALIASES: Readonly<Record<string, string>> = { structure: 'build' };
 /** A header's `type` value with old names mapped (`structure` → `build`); anything else is returned as given. */
 export const normaliseGuideType = (t: unknown): unknown =>
   typeof t === 'string' && Object.hasOwn(GUIDE_TYPE_ALIASES, t) ? GUIDE_TYPE_ALIASES[t] : t;
+/** True when `t` (after the old-name aliases) is a kebab id in `types` (default: the shipped `GUIDE_DOC_TYPES`). */
+export function isGuideType(t: unknown, types: readonly string[] = GUIDE_DOC_TYPES): boolean {
+  const n = normaliseGuideType(t);
+  return typeof n === 'string' && GuideDocType.safeParse(n).success && types.includes(n);
+}
 export const GuideDocLevel = z.enum(['global', 'brand', 'series', 'video']);
 export type GuideDocLevel = z.infer<typeof GuideDocLevel>;
 export const GuideDocAppliesTo = z
@@ -69,29 +77,45 @@ const OptText = z.string().trim().min(1).nullable().optional();
 /** The keys every guide header must carry, in the order the reasons name them. */
 export const GUIDE_REQUIRED = ['schema', 'id', 'label', 'type', 'level', 'gist'] as const;
 
-export const GuideDoc = z.looseObject({
-  schema: z.literal(GUIDE_SCHEMA),
-  id: KebabSlug,
-  label: z.string().trim().min(1),
-  type: z.preprocess(normaliseGuideType, GuideDocType),
-  level: GuideDocLevel,
-  /** ONE line: what this guide tells the writer. Shown as the card's one-liner. */
-  gist: z
-    .string()
-    .trim()
-    .min(1)
-    .refine((s) => !/[\r\n]/.test(s), 'must be one line'),
-  appliesTo: GuideDocAppliesTo.optional(),
-  brands: z.array(z.string().min(1)).optional(),
-  part: OptText,
-  style: OptText,
-  narrator: OptText,
-  author: OptText,
-  layer: GuideDocLayer.optional(),
-  canonical_source: OptText,
-  owner: OptText,
-  promotedTo: z.array(z.string().min(1)).optional(),
-});
+/**
+ * A type checked against a list: a kebab id first (any reader), then one of `types`. The message for an id not in the
+ * list is zod's enum message, so a caller passing `GUIDE_DOC_TYPES` sees exactly what v0.39.0 said.
+ */
+function typeIn(types: readonly string[]) {
+  const [first, ...rest] = types;
+  if (first === undefined) return GuideDocType.refine(() => false, 'no guide types are known');
+  return GuideDocType.pipe(z.enum([first, ...rest]));
+}
+
+const guideDocWith = (types: readonly string[]) =>
+  z.looseObject({
+    schema: z.literal(GUIDE_SCHEMA),
+    id: KebabSlug,
+    label: z.string().trim().min(1),
+    type: z.preprocess(normaliseGuideType, typeIn(types)),
+    level: GuideDocLevel,
+    /** ONE line: what this guide tells the writer. Shown as the card's one-liner. */
+    gist: z
+      .string()
+      .trim()
+      .min(1)
+      .refine((s) => !/[\r\n]/.test(s), 'must be one line'),
+    appliesTo: GuideDocAppliesTo.optional(),
+    brands: z.array(z.string().min(1)).optional(),
+    part: OptText,
+    style: OptText,
+    narrator: OptText,
+    author: OptText,
+    layer: GuideDocLayer.optional(),
+    canonical_source: OptText,
+    owner: OptText,
+    promotedTo: z.array(z.string().min(1)).optional(),
+  });
+
+/** The header schema checked against the shipped types (`GUIDE_DOC_TYPES`). Use `guideDocSchema(types)` for another list. */
+export const GuideDoc = guideDocWith(GUIDE_DOC_TYPES);
+/** The header schema for a merged type list (shipped rows plus a brand's): `type` must be one of `types`. */
+export const guideDocSchema = (types: readonly string[]) => guideDocWith(types);
 export type GuideDoc = z.infer<typeof GuideDoc>;
 
 export type ParsedGuide =
@@ -119,8 +143,16 @@ export function splitFrontmatter(
   return { data: readHeader(m[1] as string), body: src.slice(m[0].length) };
 }
 
-/** Parse a guide file: `{header, body}` when its header is a valid `storypilot.guide/1`, else `{error, …}`. */
-export function parseGuide(text: string): ParsedGuide {
+/** What `parseGuide` may be told: the guide types it accepts (default `GUIDE_DOC_TYPES`). */
+export interface ParseGuideOptions {
+  types?: readonly string[];
+}
+
+/**
+ * Parse a guide file: `{header, body}` when its header is a valid `storypilot.guide/1`, else `{error, …}`. `types` is
+ * the list a `type` must be in (v0.40.0); without it, the shipped six, as before.
+ */
+export function parseGuide(text: string, opts: ParseGuideOptions = {}): ParsedGuide {
   const split = splitFrontmatter(text);
   if (!split) {
     return {
@@ -134,7 +166,7 @@ export function parseGuide(text: string): ParsedGuide {
   if (data.schema === undefined && !GUIDE_REQUIRED.some((k) => k in data)) {
     return { error: 'no guide header', issues: [], body, raw: data };
   }
-  const parsed = GuideDoc.safeParse(data);
+  const parsed = (opts.types ? guideDocSchema(opts.types) : GuideDoc).safeParse(data);
   if (parsed.success) return { header: parsed.data, body };
   const missing = GUIDE_REQUIRED.filter((k) => data[k] === undefined || data[k] === '');
   const issues = parsed.error.issues.map((i) => {
