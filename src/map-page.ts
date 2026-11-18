@@ -73,12 +73,17 @@ h1 { font:600 26px/1.15 "Bebas Neue", "Oswald", -apple-system, sans-serif; text-
 .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:baseline; }
 .dot.read { background:var(--read); } .dot.write { background:var(--write); } .dot.long-job { background:var(--job); }
 main { padding-bottom:48px; }
-section.part { background:var(--card); border:1px solid var(--line); border-radius:10px; margin:16px 0 0; }
-section.part > summary { cursor:pointer; list-style:none; padding:14px 16px; display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; }
-section.part > summary::-webkit-details-marker { display:none; }
+details.part { background:var(--card); border:1px solid var(--line); border-radius:10px; margin:16px 0 0; }
+details.part > summary { cursor:pointer; list-style:none; padding:14px 16px; display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; }
+details.part > summary::-webkit-details-marker { display:none; }
 .pname { font:600 20px/1.1 "Bebas Neue", "Oswald", sans-serif; text-transform:uppercase; letter-spacing:.04em; }
 .pkind { font-size:11px; padding:1px 8px; border-radius:10px; border:1px solid var(--amber); color:var(--amber); font-weight:600; text-transform:uppercase; letter-spacing:.06em; }
 .pmeta { color:var(--muted); font-size:13px; }
+.psum { flex-basis:100%; color:var(--muted); font-size:13px; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+.part[open] > summary .psum { display:none; }
+.about { margin:6px 0 0; }
+.about > summary { cursor:pointer; color:var(--link); font-size:13px; }
+.fact code { word-break:break-all; }
 .pbody { padding:0 16px 14px; border-top:1px solid var(--line); }
 .ppurpose { margin:10px 0 6px; max-width:90ch; }
 .facts { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:10px; margin:8px 0 4px; }
@@ -272,19 +277,19 @@ a { color:var(--link); }
     tt.appendChild(chip('person-only', t.humanOnly));
     if (t.used !== undefined) { tt.appendChild(chip('used', t.used)); tt.appendChild(chip('unused', t.unused)); }
     $('since').textContent = doc.usageSince ? 'counting since ' + doc.usageSince.slice(0, 10) : '';
-    var main = $('map'); var first = !main.children.length;
-    var partOpen = {};
+    var main = $('map'); var partOpen = {};
     main.querySelectorAll('details[open]').forEach(function (d) { if (d.dataset.name) openState[d.dataset.name] = true; else if (d.dataset.part) partOpen[d.dataset.part] = true; });
     main.querySelectorAll('details.cmd:not([open])').forEach(function (d) { delete openState[d.dataset.name]; });
     main.textContent = '';
     doc.parts.forEach(function (p) {
       var sec = el('details', 'part'); sec.dataset.part = p.key;
-      sec.open = first || !!partOpen[p.key];
+      sec.open = !!partOpen[p.key];
       var s = el('summary');
       s.appendChild(el('span', 'pname', p.name));
       s.appendChild(el('span', 'pkind', p.kind === 'core' ? 'app core' : 'extension'));
       var used = p.commands.filter(function (c) { return c.usage && c.usage.calls > 0; }).length;
       s.appendChild(el('span', 'pmeta', p.commands.length + ' commands' + (doc.totals.used !== undefined ? ' \\u00b7 ' + used + ' used' : '') + ' \\u00b7 v' + p.version + ' \\u00b7 owner: ' + p.owner));
+      s.appendChild(el('span', 'psum', p.purpose));
       sec.appendChild(s);
       var body = el('div', 'pbody');
       body.appendChild(el('p', 'ppurpose', p.purpose));
@@ -294,7 +299,10 @@ a { color:var(--link); }
        factList('Settings', p.settings.map(function (e) { return [{ code: e.name }, { text: ' (' + e.where + ') \\u2014 ' + e.purpose }]; })),
        factList('Docs', p.docs.map(function (e) { return [{ text: e.label + ': ' }, { code: e.href }]; }))
       ].forEach(function (f) { if (f) facts.appendChild(f); });
-      body.appendChild(facts);
+      var about = el('details', 'about');
+      about.appendChild(el('summary', null, 'Data files, events, settings, docs (' + (p.dataFiles.length + p.events.length + p.settings.length + p.docs.length) + ')'));
+      about.appendChild(facts);
+      body.appendChild(about);
       var fams = {};
       p.commands.forEach(function (c) { (fams[c.family] = fams[c.family] || []).push(c); });
       Object.keys(fams).sort().forEach(function (f) {
@@ -319,7 +327,7 @@ a { color:var(--link); }
     document.querySelectorAll('#map [data-family]').forEach(function (g) {
       g.hidden = !g.querySelector('details.cmd:not([hidden])');
     });
-    if ((q || onlyUnused)) document.querySelectorAll('section.part, details.part').forEach(function (p) { if (shown) p.open = true; });
+    if ((q || onlyUnused)) document.querySelectorAll('details.part').forEach(function (p) { if (shown) p.open = true; });
     var old = document.getElementById('none'); if (old) old.remove();
     if (!shown) { var n = el('div', 'empty', 'No command matches.'); n.id = 'none'; $('map').appendChild(n); }
   }
