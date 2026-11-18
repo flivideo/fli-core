@@ -14,6 +14,7 @@ C4-02: one shared FliTools job helper, for every family.
   `flitoolsCall`. A failed job is `refused` with `failureMode: 'job-failed'`, a late one `'job-timeout'`; both carry the
   last job view in `details`. `pollMs`, `onProgress`, and an injected `sleep` / `now` for tests.
 - `FLITOOLS_JOB_FAMILIES` (the submit/status verb pair per family) and `FliToolsJobBase`.
+- `HelpScreenId` gains `'overlay-pilot'` and `'broll-pilot'`, each with its groups in `HELP_SCREENS` (audit B4-11), so FliStudio can show the `?` button on those screens.
 - Lets FliCut's `transcribeViaFlitools` / `flitools-audio` / `listen-client` and FliCast's private clients retire theirs.
 
 ## v0.42.0 — 2026-11-18

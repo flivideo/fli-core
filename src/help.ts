@@ -12,6 +12,8 @@ export const HelpScreenId = z.enum([
   'storypilot-listen',
   'storypilot-prep',
   'upload-wizard',
+  'overlay-pilot',
+  'broll-pilot',
 ]);
 export type HelpScreenId = z.infer<typeof HelpScreenId>;
 
@@ -85,6 +87,30 @@ export const HELP_SCREENS: Record<HelpScreenId, HelpScreen> = {
         rows: [
           row('J K L', 'While an angle plays: slower · 1x · faster'),
           row('Enter', 'Save the angle you are editing'),
+          row('Esc', 'Cancel the edit'),
+        ],
+      },
+      { group: 'Help', rows: [HELP_KEY] },
+    ],
+  },
+  // Overlay Pilot: the plan board's text edits (PlanBoard.tsx). Broll Pilot: its note and label edits (BrollPilot.tsx).
+  'overlay-pilot': {
+    title: 'Overlay Pilot',
+    groups: [
+      {
+        group: 'Edit',
+        rows: [row('Enter', 'Save the text you are editing'), row('Esc', 'Cancel the edit')],
+      },
+      { group: 'Help', rows: [HELP_KEY] },
+    ],
+  },
+  'broll-pilot': {
+    title: 'B-Roll Pilot',
+    groups: [
+      {
+        group: 'Edit',
+        rows: [
+          row('Enter', 'Save a label (in a note: ⌘/Ctrl Enter)'),
           row('Esc', 'Cancel the edit'),
         ],
       },
