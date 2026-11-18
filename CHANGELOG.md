@@ -2,6 +2,22 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.41.0 — 2026-11-18
+
+RPC Map, milestone 1: an app can describe itself, count its calls and draw the map.
+
+### Added
+
+- `describeApp({ app, parts, usage? })` → the `describe/1` document (`DescribeDocument`): who the app is (name, version,
+  git sha, machine, purpose), its parts (the core and each extension, each with its own purpose, version, owner, data
+  files, events, settings and docs) and every part's commands (access read / write / long-job, person-only fence, inputs,
+  output, one example request, refusals, usage). Browser-safe, in `@flivideo/core/contracts` too.
+- `UsageTelemetry` (`usage/1`): per verb calls, first / last used, last principal and last outcome, kept in
+  `usage.json` beside `control.json` (`usageFilePath`), written at most every 5 s and never blocking a call.
+  `countingCall` wraps any door's `call`. Nothing but the principal string is kept.
+- `renderMapPage({ describePath, rpcPath, tokenPath })`: the RPC Map page (app → part → family → command, used / unused,
+  inputs and outputs on expand, a Try it for READ commands only). `renderApiPage` is unchanged.
+
 ## v0.40.0 — 2026-11-14
 
 Guide types are data (Story Pilot target schema v2, step 3 part 1): a guide's `type` is a kebab id checked against a

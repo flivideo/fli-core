@@ -555,6 +555,25 @@ export {
 } from './capability.js';
 
 export {
+  CommandAccess,
+  CommandInput,
+  CommandUsage,
+  DESCRIBE_SCHEMA,
+  DescribeDocument,
+  DescribedCommand,
+  DescribedPart,
+  PartFacts,
+  UsageRecord,
+  accessOf,
+  commandOf,
+  describeApp,
+  exampleOf,
+  typeOfSchema,
+  type DescribeAppOptions,
+  type DescribePartOptions,
+} from './describe.js';
+
+export {
   AppBusyDetails,
   BusyWork,
   CapabilityRefusal,
@@ -599,6 +618,16 @@ export {
 } from './openrpc.js';
 
 export { renderApiPage, type ApiPageOptions } from './api-page.js';
+export { renderMapPage, type MapPageOptions } from './map-page.js';
+export {
+  USAGE_SCHEMA,
+  UsageFile,
+  UsageTelemetry,
+  countingCall,
+  failureModeOf,
+  usageFilePath,
+  type UsageTelemetryOptions,
+} from './usage.js';
 
 export {
   cameThroughServe,

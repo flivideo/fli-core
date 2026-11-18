@@ -111,6 +111,25 @@ export {
 } from './capability.js';
 
 export {
+  CommandAccess,
+  CommandInput,
+  CommandUsage,
+  DESCRIBE_SCHEMA,
+  DescribeDocument,
+  DescribedCommand,
+  DescribedPart,
+  PartFacts,
+  UsageRecord,
+  accessOf,
+  commandOf,
+  describeApp,
+  exampleOf,
+  typeOfSchema,
+  type DescribeAppOptions,
+  type DescribePartOptions,
+} from './describe.js';
+
+export {
   AppBusyDetails,
   BusyWork,
   CapabilityRefusal,
