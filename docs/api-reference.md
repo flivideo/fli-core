@@ -89,6 +89,11 @@ beside it), `transcriptFor(path, { app })` says whether a current transcript exi
 { app })` reads the app's own queue. Each answers `ok`, `refused` (FliTools' named refusal) or `unavailable` (not
 running) — never a throw. Node only: it reads FliTools' control file.
 
+**Waiting for a job (v0.43.0).** One helper for every family: `runJob('audio' | 'face' | 'listen' | 'transcribe',
+params, { app, timeoutMs?, pollMs?, onProgress? })` submits and polls until the job is done. `submitAndWait` and
+`waitForJob` take the verbs yourself. A failed job answers `refused` / `job-failed`; one that runs out of time
+`refused` / `job-timeout`; both carry the last job view in `details`.
+
 ## Folder access — one pattern for every app (v0.10.0)
 
 The maintainer approved it on 2026-09-24. Wherever an app shows a location, it shows two quiet icons right after it, in this

@@ -2,6 +2,20 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.43.0 — 2026-11-19
+
+C4-02: one shared FliTools job helper, for every family.
+
+### Added
+
+- `submitAndWait(submitVerb, params, statusVerb, options)`, `waitForJob(statusVerb, id, options)` and
+  `runJob('transcribe' | 'audio' | 'face' | 'listen', params, options)`: submit a FliTools job, poll its status verb,
+  stop on done, failed or `timeoutMs` (default 45 min). Never throws; same `ok` / `refused` / `unavailable` answer as
+  `flitoolsCall`. A failed job is `refused` with `failureMode: 'job-failed'`, a late one `'job-timeout'`; both carry the
+  last job view in `details`. `pollMs`, `onProgress`, and an injected `sleep` / `now` for tests.
+- `FLITOOLS_JOB_FAMILIES` (the submit/status verb pair per family) and `FliToolsJobBase`.
+- Lets FliCut's `transcribeViaFlitools` / `flitools-audio` / `listen-client` and FliCast's private clients retire theirs.
+
 ## v0.42.0 — 2026-11-18
 
 RPC Map, step 3: a command can say which files it touches.

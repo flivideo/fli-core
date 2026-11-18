@@ -646,18 +646,25 @@ export {
 } from './serve.js';
 
 export {
+  FLITOOLS_JOB_FAMILIES,
+  FliToolsJobBase,
   TranscriptFiles,
   TranscriptFound,
   TranscriptJob,
   TranscriptJobStatus,
   flitoolsCall,
   flitoolsEndpoint,
+  runJob,
+  submitAndWait,
+  waitForJob,
   transcribe,
   transcribeQueued,
   transcriptFor,
   transcriptJobs,
   type FliToolsAnswer,
   type FliToolsEndpoint,
+  type FliToolsJobFamily,
+  type WaitForJobOptions,
   type FliToolsOptions,
   type TranscribeOptions,
 } from './flitools.js';

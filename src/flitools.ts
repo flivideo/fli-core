@@ -208,3 +208,123 @@ export async function transcriptJobs(
     z.array(TranscriptJob),
   );
 }
+
+/* ---- One job-waiting helper, and a typed call for each family's job verb -------------------------------------- */
+
+/** The shape every FliTools job view shares (transcribe, audio, face, listen). Looser views pass through as `T`. */
+export const FliToolsJobBase = z.looseObject({
+  id: z.string(),
+  status: z.enum(['queued', 'running', 'done', 'failed']),
+  phase: z.string().optional(),
+  pct: z.number().optional(),
+  error: z.string().optional(),
+});
+export type FliToolsJobBase = z.infer<typeof FliToolsJobBase>;
+
+/** FliTools' job-starting verbs and the verb that reports on each, one per family. */
+export const FLITOOLS_JOB_FAMILIES = {
+  transcribe: { submit: 'transcribe.run', status: 'transcribe.job' },
+  audio: { submit: 'audio.clean', status: 'audio.job' },
+  face: { submit: 'face.track', status: 'face.job' },
+  listen: { submit: 'listen.transcribe', status: 'listen.job' },
+} as const;
+export type FliToolsJobFamily = keyof typeof FLITOOLS_JOB_FAMILIES;
+
+export interface WaitForJobOptions extends FliToolsOptions {
+  /** Poll gap. Default 1000. */
+  pollMs?: number;
+  /** Give up after this long and say so plainly. Default 45 minutes (one job at a time; a long file takes minutes). */
+  timeoutMs?: number;
+  /** Called on every poll with the job as FliTools reports it. */
+  onProgress?: (job: FliToolsJobBase) => void;
+  /** Injected so a test needs no real wait. */
+  sleep?: (ms: number) => Promise<void>;
+  now?: () => number;
+}
+
+/**
+ * Submit a job and wait for it: call `submit`, poll `status` with the job's id until it is done. Never throws.
+ * `ok` → the finished job. `refused` → FliTools said no (its own failureMode), or the job `failed`
+ * (failureMode `job-failed`, `details` = the job) or ran past `timeoutMs` (`job-timeout`, `details` = the last view).
+ * `unavailable` → FliTools is not running or stopped answering.
+ */
+export async function submitAndWait<T extends FliToolsJobBase = FliToolsJobBase>(
+  submit: string,
+  params: Record<string, unknown>,
+  status: string,
+  options: WaitForJobOptions,
+): Promise<FliToolsAnswer<T>> {
+  const started = await flitoolsCall(submit, params, options);
+  if (started.kind !== 'ok') return started;
+  const first = FliToolsJobBase.safeParse(started.value);
+  if (!first.success) {
+    return {
+      kind: 'refused',
+      failureMode: 'internal',
+      message: `FliTools answered ${submit} outside its contract: ${first.error.message}`,
+    };
+  }
+  return waitForJob<T>(status, first.data.id, options, started.value as T);
+}
+
+/** Poll an existing job (its id from an earlier submit) until it is done, failed or out of time. Never throws. */
+export async function waitForJob<T extends FliToolsJobBase = FliToolsJobBase>(
+  status: string,
+  id: string,
+  options: WaitForJobOptions,
+  firstView?: T,
+): Promise<FliToolsAnswer<T>> {
+  const sleep = options.sleep ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
+  const now = options.now ?? Date.now;
+  const timeoutMs = options.timeoutMs ?? 45 * 60_000;
+  const deadline = now() + timeoutMs;
+  let view: T | undefined = firstView;
+  for (;;) {
+    if (view !== undefined) {
+      const job = FliToolsJobBase.safeParse(view);
+      if (job.success) {
+        options.onProgress?.(job.data);
+        if (job.data.status === 'done') return { kind: 'ok', value: view };
+        if (job.data.status === 'failed') {
+          return {
+            kind: 'refused',
+            failureMode: 'job-failed',
+            message: `FliTools job ${id} failed: ${job.data.error ?? 'no reason given'}`,
+            details: view,
+          };
+        }
+      }
+    }
+    if (now() >= deadline) {
+      return {
+        kind: 'refused',
+        failureMode: 'job-timeout',
+        message: `FliTools job ${id} was still not done after ${Math.round(timeoutMs / 1000)}s.`,
+        ...(view === undefined ? {} : { details: view }),
+      };
+    }
+    await sleep(options.pollMs ?? 1000);
+    const polled = await flitoolsCall(status, { id }, options);
+    if (polled.kind !== 'ok') return polled;
+    view = polled.value as T;
+    if (!FliToolsJobBase.safeParse(view).success) {
+      return {
+        kind: 'refused',
+        failureMode: 'internal',
+        message: `FliTools answered ${status} outside its contract.`,
+      };
+    }
+  }
+}
+
+/** Submit one family's job (`transcribe`, `audio`, `face`, `listen`) and wait for it. */
+export function runJob<T extends FliToolsJobBase = FliToolsJobBase>(
+  family: FliToolsJobFamily,
+  params: Record<string, unknown>,
+  options: WaitForJobOptions,
+): Promise<FliToolsAnswer<T>> {
+  const verbs = FLITOOLS_JOB_FAMILIES[family];
+  // transcribe.run answers the transcript when it waits; the job path always asks for the queued job.
+  const sent = family === 'transcribe' ? { ...params, wait: false } : params;
+  return submitAndWait<T>(verbs.submit, { app: options.app, ...sent }, verbs.status, options);
+}
