@@ -5,6 +5,7 @@ import {
   DESCRIBE_SCHEMA,
   DescribeDocument,
   accessOf,
+  type CapabilityContract,
   defineCapability,
   describeApp,
   exampleOf,
@@ -217,5 +218,45 @@ describe('helpers', () => {
       }),
     ).toEqual({ a: '<a>' });
     expect(exampleOf({ type: 'object' })).toEqual({});
+  });
+});
+
+describe('per-command data files and events (RPC Map step 3)', () => {
+  const touching = defineCapability({
+    kind: 'command',
+    description: 'Write the script.',
+    input: z.object({}),
+    output: z.object({ ok: z.literal(true) }),
+    sideEffects: 'reversible-write',
+    idempotent: true,
+    confirmationRequired: false,
+    failureModes: [],
+    dataFiles: [
+      { path: '<project>/script.json', access: 'write' },
+      { path: '<project>/script.md', access: 'read' },
+    ],
+    events: [{ name: 'estate:changed', channel: 'socket.io' }],
+  });
+  const opts = (caps: Record<string, CapabilityContract>) => ({
+    app: { name: 'x', version: '1', machine: 'm', purpose: 'p' },
+    parts: [
+      {
+        facts: { key: 'core', name: 'Core', purpose: 'p', version: '1', owner: 'o' },
+        kind: 'core' as const,
+        capabilities: caps,
+      },
+    ],
+  });
+  it('carries what a capability declares and stays valid describe/1', () => {
+    const doc = describeApp(opts({ 'script.write': touching, 'thing.list': read }));
+    expect(DescribeDocument.parse(doc)).toEqual(doc);
+    const [write, list] = doc.parts[0]!.commands;
+    expect(write!.dataFiles).toEqual([
+      { path: '<project>/script.json', access: 'write' },
+      { path: '<project>/script.md', access: 'read' },
+    ]);
+    expect(write!.events).toEqual([{ name: 'estate:changed', channel: 'socket.io' }]);
+    expect(list).not.toHaveProperty('dataFiles');
+    expect(list).not.toHaveProperty('events');
   });
 });

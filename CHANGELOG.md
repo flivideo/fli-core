@@ -2,6 +2,16 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.42.0 — 2026-11-18
+
+RPC Map, step 3: a command can say which files it touches.
+
+### Added
+
+- `defineCapability` accepts optional `dataFiles: [{ path, access: 'read' | 'write' }]` and `events: [{ name, channel?, purpose? }]`.
+  `describeCapabilities` and `describeApp` carry them onto the command (`DescribedCommand.dataFiles` / `.events`), only when
+  declared. Still `describe/1`: the fields are optional, an older reader ignores them.
+
 ## v0.41.0 — 2026-11-18
 
 RPC Map, milestone 1: an app can describe itself, count its calls and draw the map.

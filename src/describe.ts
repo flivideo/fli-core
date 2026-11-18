@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { CapabilityMeta} from './capability.js';
-import { describeCapabilities, type CapabilityContract } from './capability.js';
+import { CapabilityDataFile, CapabilityEvent, describeCapabilities, type CapabilityContract } from './capability.js';
 
 /**
  * "Describe yourself" (RPC Map milestone 1): the ONE document every Fli app can answer with — who it is, what it is for,
@@ -56,6 +56,10 @@ export const DescribedCommand = z.object({
     params: z.record(z.string(), z.unknown()),
   }),
   failureModes: z.array(z.string()),
+  /** Files this command reads / writes (optional; absent = not established, `[]` is never written). */
+  dataFiles: z.array(CapabilityDataFile).optional(),
+  /** Events this command causes (optional). */
+  events: z.array(CapabilityEvent).optional(),
   /** Present when the app keeps call telemetry (`usage/1`); `calls: 0` is "never called since it began counting". */
   usage: CommandUsage.optional(),
 });
@@ -263,6 +267,8 @@ export function commandOf(
       params: (exampleOf(meta.input) as Record<string, unknown>) ?? {},
     },
     failureModes: meta.failureModes,
+    ...(meta.dataFiles ? { dataFiles: meta.dataFiles } : {}),
+    ...(meta.events ? { events: meta.events } : {}),
   };
 }
 

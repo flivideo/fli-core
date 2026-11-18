@@ -535,6 +535,8 @@ export {
 export {
   CapabilityKind,
   CapabilityMeta,
+  CapabilityDataFile,
+  CapabilityEvent,
   CapabilityName,
   ExpectedDuration,
   PRINCIPAL_HEADER,

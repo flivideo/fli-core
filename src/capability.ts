@@ -58,6 +58,21 @@ export const CapabilityName = z
  */
 export type HumanOnlyWhen<I> = { when(input: I): boolean; note: string };
 
+/** A file a capability reads or writes (RPC Map step 3). `path` may hold `<placeholders>`; optional on every contract. */
+export const CapabilityDataFile = z.object({
+  path: z.string(),
+  access: z.enum(['read', 'write']),
+});
+export type CapabilityDataFile = z.infer<typeof CapabilityDataFile>;
+
+/** An event a capability causes (a socket message, a file others watch). Optional on every contract. */
+export const CapabilityEvent = z.object({
+  name: z.string(),
+  channel: z.string().optional(),
+  purpose: z.string().optional(),
+});
+export type CapabilityEvent = z.infer<typeof CapabilityEvent>;
+
 export type CapabilityContract<I extends z.ZodType = z.ZodType, O extends z.ZodType = z.ZodType> = {
   kind: CapabilityKind;
   description: string;
@@ -74,6 +89,10 @@ export type CapabilityContract<I extends z.ZodType = z.ZodType, O extends z.ZodT
   principals: readonly PrincipalKind[];
   /** ★ `true`: never an agent or the CLI. An object: only for the inputs `when` picks out. */
   humanOnly: boolean | HumanOnlyWhen<z.infer<I>>;
+  /** Files it reads / writes, for the global map. Documentation only; absent = not established. */
+  dataFiles?: readonly CapabilityDataFile[];
+  /** Events it causes, for the global map. Documentation only. */
+  events?: readonly CapabilityEvent[];
 };
 
 type ContractInput<I extends z.ZodType, O extends z.ZodType> = Omit<
@@ -198,6 +217,8 @@ export const CapabilityMeta = z.object({
   /** `true`, `false`, or the note saying which inputs are human-only. */
   humanOnly: z.union([z.boolean(), z.object({ when: z.string() })]),
   required: z.array(z.string()),
+  dataFiles: z.array(CapabilityDataFile).optional(),
+  events: z.array(CapabilityEvent).optional(),
   input: z.unknown(),
   output: z.unknown(),
 });
@@ -223,6 +244,8 @@ export function describeCapabilities(set: Record<string, CapabilityContract>): C
         principals: [...c.principals],
         humanOnly: typeof c.humanOnly === 'boolean' ? c.humanOnly : { when: c.humanOnly.note },
         required: requiredFields(c),
+        ...(c.dataFiles && c.dataFiles.length > 0 ? { dataFiles: c.dataFiles.map((d) => ({ ...d })) } : {}),
+        ...(c.events && c.events.length > 0 ? { events: c.events.map((e) => ({ ...e })) } : {}),
         input: z.toJSONSchema(c.input, { unrepresentable: 'any' }),
         output: z.toJSONSchema(c.output, { unrepresentable: 'any', io: 'output' }),
       };
