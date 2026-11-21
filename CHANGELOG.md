@@ -2,6 +2,15 @@
 
 Releases before v0.26.0 are described in their tag's commit message (`git log --oneline`).
 
+## v0.44.0 — 2026-11-21
+
+### Fixed
+
+- A principal may be `agent:<seat>@<rig>` (an OpenRig seat name such as `agent:bruce-boss@exec`). One `@` at most, the
+  rig in the same character class as the name; the whole string stays the identity. `agent:a@b@c` and `agent:@x` are
+  still refused; human, human:surface and cli are unchanged. `~/bin/fli` names its caller from
+  `OPENRIG_SESSION_NAME`, so every seat was refused on every capability.
+
 ## v0.43.0 — 2026-11-19
 
 C4-02: one shared FliTools job helper, for every family.

@@ -13,13 +13,16 @@ import type { ForbiddenDetails, Refusal } from './failure-codes.js';
  * keeps other machines and web pages out; nothing keeps out a local process that chooses to lie about who it is.
  */
 
-/** Who is calling, by kind. The principal NAME is `human` or `human:<surface>`, `agent:<name>`, or `cli`. */
+/** Who is calling, by kind. The principal NAME is `human` or `human:<surface>`, `agent:<name>` (or `agent:<seat>@<rig>`, an OpenRig seat; the whole string is the identity), or `cli`. */
 export const PrincipalKind = z.enum(['human', 'agent', 'cli']);
 export type PrincipalKind = z.infer<typeof PrincipalKind>;
 
 export const PrincipalName = z
   .string()
-  .regex(/^(human(:[\w.-]+)?|cli|agent:[\w.-]+)$/, 'human[:surface], agent:<name> or cli');
+  .regex(
+    /^(human(:[\w.-]+)?|cli|agent:[\w.-]+(@[\w.-]+)?)$/,
+    'human[:surface], agent:<name>[@<rig>] or cli',
+  );
 export type PrincipalName = z.infer<typeof PrincipalName>;
 
 /** The header a caller names itself in, on every Fli door. */
@@ -163,7 +166,7 @@ export function authorize(
       ok: false,
       refusal: {
         failureMode: 'forbidden',
-        message: `"${principal}" is not a principal (human[:surface], agent:<name> or cli).`,
+        message: `"${principal}" is not a principal (human[:surface], agent:<name>[@<rig>] or cli).`,
         details: details(),
       },
     };
@@ -244,7 +247,9 @@ export function describeCapabilities(set: Record<string, CapabilityContract>): C
         principals: [...c.principals],
         humanOnly: typeof c.humanOnly === 'boolean' ? c.humanOnly : { when: c.humanOnly.note },
         required: requiredFields(c),
-        ...(c.dataFiles && c.dataFiles.length > 0 ? { dataFiles: c.dataFiles.map((d) => ({ ...d })) } : {}),
+        ...(c.dataFiles && c.dataFiles.length > 0
+          ? { dataFiles: c.dataFiles.map((d) => ({ ...d })) }
+          : {}),
         ...(c.events && c.events.length > 0 ? { events: c.events.map((e) => ({ ...e })) } : {}),
         input: z.toJSONSchema(c.input, { unrepresentable: 'any' }),
         output: z.toJSONSchema(c.output, { unrepresentable: 'any', io: 'output' }),
